@@ -1,0 +1,9 @@
+server:
+  port: 9999
+
+spring:
+  datasource:
+    url: (dev DB 엔드 포인트)
+    username: (dev DB username)
+    password: (dev DB password)
+    driver-class-name: com.mysql.cj.jdbc.Driver

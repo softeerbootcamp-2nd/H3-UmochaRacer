@@ -1,0 +1,10 @@
+server:
+  port: 8080
+
+
+spring:
+  datasource:
+    url: (dev DB ?? ???)
+    username: (dev DB username)
+    password: (dev DB password)
+    driver-class-name: com.mysql.cj.jdbc.Driver
