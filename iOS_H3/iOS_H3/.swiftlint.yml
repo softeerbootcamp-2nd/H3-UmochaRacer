@@ -1,0 +1,14 @@
+
+disabled_rules:
+  - blanket_disable_command
+  - block_based_kvo
+  - compiler_protocol_init
+  - void_function_in_ternary
+  - for_where
+  - file_length
+  - valid_ibinspectable
+  - unused_enumerated
+  - unused_control_flow_label
+  - unused_closure_parameter
+  - unneeded_break_in_switch
+  - trailing_semicolon

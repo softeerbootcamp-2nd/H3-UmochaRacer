@@ -5,6 +5,8 @@
 //  Created by KoJeongMin  on 2023/07/31.
 //
 
+// swiftlint:disable line_length
+
 import XCTest
 @testable import iOS_H3
 
@@ -34,3 +36,5 @@ final class IosH3Tests: XCTestCase {
     }
 
 }
+
+// swiftlint:enable line_length
