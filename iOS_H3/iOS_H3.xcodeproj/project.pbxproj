@@ -76,6 +76,145 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		478B26762A78FC5400598902 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */,
+				5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		478B26772A78FC5C00598902 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				478B26832A78FD4000598902 /* SelfMode */,
+				5F00FBF82A777BDE0055A4FA /* ViewController.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		478B26782A78FC6F00598902 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				478B26822A78FD3800598902 /* Model */,
+				478B26802A78FD3000598902 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		478B26792A78FC7400598902 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				478B267E2A78FD0E00598902 /* DTO */,
+				478B267D2A78FD0700598902 /* Network */,
+				478B267C2A78FD0100598902 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		478B267A2A78FC7A00598902 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				478B267B2A78FCDC00598902 /* App */,
+				478B26792A78FC7400598902 /* Data */,
+				478B26782A78FC6F00598902 /* Domain */,
+				478B26772A78FC5C00598902 /* Presentation */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		478B267B2A78FCDC00598902 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */,
+				5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		478B267C2A78FD0100598902 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				478B267F2A78FD2400598902 /* Protocol */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		478B267D2A78FD0700598902 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		478B267E2A78FD0E00598902 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		478B267F2A78FD2400598902 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		478B26802A78FD3000598902 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				478B26812A78FD3400598902 /* Protocol */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		478B26812A78FD3400598902 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		478B26822A78FD3800598902 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		478B26832A78FD4000598902 /* SelfMode */ = {
+			isa = PBXGroup;
+			children = (
+				478B26862A78FD8D00598902 /* View */,
+				478B26852A78FD8700598902 /* ViewModel */,
+				478B26842A78FD8200598902 /* ViewController */,
+			);
+			path = SelfMode;
+			sourceTree = "<group>";
+		};
+		478B26842A78FD8200598902 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		478B26852A78FD8700598902 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		478B26862A78FD8D00598902 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		5F00FBE82A777BDE0055A4FA = {
 			isa = PBXGroup;
 			children = (
@@ -99,11 +238,8 @@
 		5F00FBF32A777BDE0055A4FA /* iOS_H3 */ = {
 			isa = PBXGroup;
 			children = (
-				5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */,
-				5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */,
-				5F00FBF82A777BDE0055A4FA /* ViewController.swift */,
-				5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */,
-				5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */,
+				478B26762A78FC5400598902 /* Resource */,
+				478B267A2A78FC7A00598902 /* Source */,
 				5F00FC022A777BDF0055A4FA /* Info.plist */,
 				5F5E21122A78DD21003C1185 /* .swiftlint.yml */,
 			);
