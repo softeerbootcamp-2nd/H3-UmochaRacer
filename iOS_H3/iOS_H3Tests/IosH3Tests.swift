@@ -8,7 +8,7 @@
 import XCTest
 @testable import iOS_H3
 
-final class iOS_H3Tests: XCTestCase {
+final class IosH3Tests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
