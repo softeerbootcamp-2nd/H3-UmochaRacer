@@ -29,6 +29,8 @@ enum Fonts {
     static let regularBody2 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 14)
     static let regularBody3 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 12)
 
+    static let popup = UIFont(name: "HyundaiSansTextKROTFRegular", size: 14)
+
     // MARK: - Onboarding
     static let regularOnboardingTitle1 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 26)
     static let mediumOnboardingTitle2 = UIFont(name: "HyundaiSansTextKROTFMedium", size: 26)
