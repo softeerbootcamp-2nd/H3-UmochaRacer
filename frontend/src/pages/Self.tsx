@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Header from '../component/Header';
+import Header from '../component/header/Header';
 import Progress from '../component/Progress';
 import Content from '../component/Content';
 
