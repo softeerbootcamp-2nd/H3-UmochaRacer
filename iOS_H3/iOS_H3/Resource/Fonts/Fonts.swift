@@ -8,10 +8,10 @@
 import UIKit
 
 enum FontName {
-    static let HyundaiSansHeadKRMedium = FontName.HyundaiSansHeadKRMedium
-    static let HyundaiSansHeadKRRegular = FontName.HyundaiSansHeadKRRegular
-    static let HyundaiSansTextKROTFMedium = FontName.HyundaiSansTextKROTFMedium
-    static let HyundaiSansTextKROTFRegular = FontName.HyundaiSansTextKROTFRegular
+    static let HyundaiSansHeadKRMedium = "HyundaiSansHeadKRMedium"
+    static let HyundaiSansHeadKRRegular = "HyundaiSansHeadKRRegular"
+    static let HyundaiSansTextKROTFMedium = "HyundaiSansTextKROTFMedium"
+    static let HyundaiSansTextKROTFRegular = "HyundaiSansTextKROTFRegular"
 }
 
 enum Fonts {
