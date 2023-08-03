@@ -5,8 +5,8 @@ const colors = {
   Tag_Sky_Blue: '#DEEBFF',
   Cool_Grey: '#202732',
   Cool_Grey_004: '#595C61',
-  Cool_Grey_003: '#A5ACB8',
-  Cool_Grey_002: '#D1D9E3',
-  Cool_Grey_001: '#EDF2FA',
+  Cool_Grey_003: '#AEB1B7',
+  Cool_Grey_002: '#DBDEE3',
+  Cool_Grey_001: '#F2F4F7',
 };
 export {colors};
