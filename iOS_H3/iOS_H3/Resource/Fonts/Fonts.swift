@@ -67,3 +67,34 @@ enum FontLineHeights {
     static let mediumOnboardingTitle2 = 36.4
     static let mediumOnboardingSub = 24.0
 }
+
+enum FontLetterSpacings {
+
+    // MARK: - Title
+    static let mediumTitle1 = 0.03
+    static let mediumTitle2 = 0.03
+    static let mediumTitle3 = 0.03
+    static let mediumTitle4 = 0.03
+    static let mediumTitle5 = 0.03
+
+    static let regularTitle3 = 0.03
+    static let regularTitle4 = 0.03
+    static let regularTitle5 = 0.03
+    static let regularTitle6 = 0.03
+
+    // MARK: - Body
+    static let mediumBody1 = 0.03
+    static let mediumBody2 = 0.03
+    static let mediumBody3 = 0.03
+
+    static let regularBody1 = 0.03
+    static let regularBody2 = 0.03
+    static let regularBody3 = 0.03
+
+    static let popup = 0.03
+
+    // MARK: - Onboarding
+    static let regularOnboardingTitle1 = 0.03
+    static let mediumOnboardingTitle2 = 0.03
+    static let mediumOnboardingSub = 0.03
+}
