@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
+		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
+		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
+		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
+		47CB8CB72A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB62A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf */; };
+		47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB8CB82A79F1DE004B24AD /* Fonts.swift */; };
 		5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */; };
 		5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */; };
 		5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF82A777BDE0055A4FA /* ViewController.swift */; };
@@ -38,6 +44,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
+		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
+		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
+		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
+		47CB8CB62A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFRegular.otf; sourceTree = "<group>"; };
+		47CB8CB82A79F1DE004B24AD /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		5F00FBF12A777BDE0055A4FA /* iOS_H3.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_H3.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +97,8 @@
 			children = (
 				5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */,
 				5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */,
+				47CB8CAB2A79EC7E004B24AD /* Fonts */,
+				477620C42A7B80B900D60B59 /* UILabel+.swift */,
 				5F3B50B82A79EDA900158E96 /* Colors.swift */,
 				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 			);
@@ -219,6 +233,18 @@
 			children = (
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		47CB8CAB2A79EC7E004B24AD /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */,
+				47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */,
+				47CB8CB62A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf */,
+				47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */,
+				47CB8CB82A79F1DE004B24AD /* Fonts.swift */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		5F00FBE82A777BDE0055A4FA = {
@@ -374,9 +400,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */,
 				5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */,
 				5F00FC012A777BDF0055A4FA /* LaunchScreen.storyboard in Resources */,
+				47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				5F00FBFE2A777BDF0055A4FA /* Assets.xcassets in Resources */,
+				47CB8CB72A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf in Resources */,
+				47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,7 +452,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */,
 				5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */,
+				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
