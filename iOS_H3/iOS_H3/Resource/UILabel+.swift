@@ -26,14 +26,14 @@ extension UILabel {
 
         attributedText = attributedString
     }
-    
+
     func setupLetterSpacing(_ spacing: CGFloat) {
         guard let text else { return }
-        
+
         let letterSpacing = font.pointSize * spacing
-        
+
         let attributes: [NSAttributedString.Key: Any] = [
-            .kern: letterSpacing,
+            .kern: letterSpacing
         ]
         let attributedString = NSAttributedString(
             string: text,
