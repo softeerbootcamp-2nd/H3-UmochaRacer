@@ -42,4 +42,9 @@ extension UILabel {
 
         attributedText = attributedString
     }
+
+    func setupFontProperty(lineHeight: CGFloat, letterSpacing: CGFloat) {
+        setupLineHeight(lineHeight)
+        setupLetterSpacing(letterSpacing)
+    }
 }
