@@ -4,6 +4,7 @@
 //
 //  Created by KoJeongMin  on 2023/08/03.
 //
+// swiftlint:disable line_length type_name
 
 import XCTest
 
@@ -39,3 +40,4 @@ final class iOS_H3_UIUITests: XCTestCase {
         }
     }
 }
+// swiftlint:enable line_length type_name

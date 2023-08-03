@@ -5,6 +5,8 @@
 //  Created by KoJeongMin  on 2023/08/03.
 //
 
+// swiftlint:disable type_name
+
 import XCTest
 
 final class iOS_H3_UIUITestsLaunchTests: XCTestCase {
@@ -30,3 +32,5 @@ final class iOS_H3_UIUITestsLaunchTests: XCTestCase {
         add(attachment)
     }
 }
+
+// swiftlint:enable type_name
