@@ -7,34 +7,41 @@
 
 import UIKit
 
+enum FontName {
+    static let HyundaiSansHeadKRMedium = FontName.HyundaiSansHeadKRMedium
+    static let HyundaiSansHeadKRRegular = FontName.HyundaiSansHeadKRRegular
+    static let HyundaiSansTextKROTFMedium = FontName.HyundaiSansTextKROTFMedium
+    static let HyundaiSansTextKROTFRegular = FontName.HyundaiSansTextKROTFRegular
+}
+
 enum Fonts {
     // MARK: - Title
-    static let mediumTitle1 = UIFont(name: "HyundaiSansHeadKRMedium", size: 22)
-    static let mediumTitle2 = UIFont(name: "HyundaiSansHeadKRMedium", size: 20)
-    static let mediumTitle3 = UIFont(name: "HyundaiSansHeadKRMedium", size: 18)
-    static let mediumTitle4 = UIFont(name: "HyundaiSansHeadKRMedium", size: 16)
-    static let mediumTitle5 = UIFont(name: "HyundaiSansHeadKRMedium", size: 14)
+    static let mediumTitle1 = UIFont(name: FontName.HyundaiSansHeadKRMedium, size: 22)
+    static let mediumTitle2 = UIFont(name: FontName.HyundaiSansHeadKRMedium, size: 20)
+    static let mediumTitle3 = UIFont(name: FontName.HyundaiSansHeadKRMedium, size: 18)
+    static let mediumTitle4 = UIFont(name: FontName.HyundaiSansHeadKRMedium, size: 16)
+    static let mediumTitle5 = UIFont(name: FontName.HyundaiSansHeadKRMedium, size: 14)
 
-    static let regularTitle3 = UIFont(name: "HyundaiSansHeadKRRegular", size: 18)
-    static let regularTitle4 = UIFont(name: "HyundaiSansHeadKRRegular", size: 16)
-    static let regularTitle5 = UIFont(name: "HyundaiSansHeadKRRegular", size: 14)
-    static let regularTitle6 = UIFont(name: "HyundaiSansHeadKRRegular", size: 12)
+    static let regularTitle3 = UIFont(name: FontName.HyundaiSansHeadKRRegular, size: 18)
+    static let regularTitle4 = UIFont(name: FontName.HyundaiSansHeadKRRegular, size: 16)
+    static let regularTitle5 = UIFont(name: FontName.HyundaiSansHeadKRRegular, size: 14)
+    static let regularTitle6 = UIFont(name: FontName.HyundaiSansHeadKRRegular, size: 12)
 
     // MARK: - Body
-    static let mediumBody1 = UIFont(name: "HyundaiSansTextKROTFMedium", size: 16)
-    static let mediumBody2 = UIFont(name: "HyundaiSansTextKROTFMedium", size: 14)
-    static let mediumBody3 = UIFont(name: "HyundaiSansTextKROTFMedium", size: 12)
+    static let mediumBody1 = UIFont(name: FontName.HyundaiSansTextKROTFMedium, size: 16)
+    static let mediumBody2 = UIFont(name: FontName.HyundaiSansTextKROTFMedium, size: 14)
+    static let mediumBody3 = UIFont(name: FontName.HyundaiSansTextKROTFMedium, size: 12)
 
-    static let regularBody1 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 16)
-    static let regularBody2 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 14)
-    static let regularBody3 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 12)
+    static let regularBody1 = UIFont(name: FontName.HyundaiSansTextKROTFRegular, size: 16)
+    static let regularBody2 = UIFont(name: FontName.HyundaiSansTextKROTFRegular, size: 14)
+    static let regularBody3 = UIFont(name: FontName.HyundaiSansTextKROTFRegular, size: 12)
 
-    static let popup = UIFont(name: "HyundaiSansTextKROTFRegular", size: 14)
+    static let popup = UIFont(name: FontName.HyundaiSansTextKROTFRegular, size: 14)
 
     // MARK: - Onboarding
-    static let regularOnboardingTitle1 = UIFont(name: "HyundaiSansTextKROTFRegular", size: 26)
-    static let mediumOnboardingTitle2 = UIFont(name: "HyundaiSansTextKROTFMedium", size: 26)
-    static let mediumOnboardingSub = UIFont(name: "HyundaiSansTextKROTFMedium", size: 16)
+    static let regularOnboardingTitle1 = UIFont(name: FontName.HyundaiSansTextKROTFRegular, size: 26)
+    static let mediumOnboardingTitle2 = UIFont(name: FontName.HyundaiSansTextKROTFMedium, size: 26)
+    static let mediumOnboardingSub = UIFont(name: FontName.HyundaiSansTextKROTFMedium, size: 16)
 }
 
 enum FontLineHeights {
