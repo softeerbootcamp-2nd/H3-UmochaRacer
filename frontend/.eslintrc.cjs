@@ -17,7 +17,6 @@ module.exports = {
     eqeqeq: 'error',
     'no-var': 'error',
     'no-unused-vars': 'warn',
-    'no-trailing-spaces': 'error',
     'no-extra-semi': 'error',
   },
 };
