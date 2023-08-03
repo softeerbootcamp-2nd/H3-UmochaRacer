@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 extension UIColor {
-    convenience init?(hex: String, alpha: Double=1) {
+    convenience init?(hex: String, alpha: Double = 1) {
         var string = ""
 
         if hex.lowercased().hasPrefix("0x") {
