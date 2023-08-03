@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Header from '../component/header/Header';
-import Progress from '../component/Progress';
+import Progress from '../component/progress/Progress';
 import Content from '../component/Content';
 
 function Self() {
