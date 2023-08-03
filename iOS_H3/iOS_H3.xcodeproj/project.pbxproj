@@ -21,6 +21,8 @@
 		5F00FC0C2A777BDF0055A4FA /* IosH3Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FC0B2A777BDF0055A4FA /* IosH3Tests.swift */; };
 		5F00FC162A777BDF0055A4FA /* IosH3UiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FC152A777BDF0055A4FA /* IosH3UiTests.swift */; };
 		5F00FC182A777BDF0055A4FA /* IosH3UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FC172A777BDF0055A4FA /* IosH3UITestsLaunchTests.swift */; };
+		5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50B82A79EDA900158E96 /* Colors.swift */; };
+		5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50BA2A79EDE900158E96 /* UIColor+.swift */; };
 		5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,8 @@
 		5F00FC112A777BDF0055A4FA /* iOS_H3UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_H3UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F00FC152A777BDF0055A4FA /* IosH3UiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosH3UiTests.swift; sourceTree = "<group>"; };
 		5F00FC172A777BDF0055A4FA /* IosH3UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IosH3UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5F3B50B82A79EDA900158E96 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		5F3B50BA2A79EDE900158E96 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		5F5E21122A78DD21003C1185 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -95,6 +99,8 @@
 				5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */,
 				47CB8CAB2A79EC7E004B24AD /* Fonts */,
 				477620C42A7B80B900D60B59 /* UILabel+.swift */,
+				5F3B50B82A79EDA900158E96 /* Colors.swift */,
+				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -449,8 +455,10 @@
 				47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */,
 				5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
+				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
+				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

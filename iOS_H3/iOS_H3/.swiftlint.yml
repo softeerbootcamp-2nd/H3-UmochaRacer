@@ -12,3 +12,7 @@ disabled_rules:
   - unused_closure_parameter
   - unneeded_break_in_switch
   - trailing_semicolon
+ 
+opt_in_rules: # 일부 룰은 옵트 인 형태로 제공
+  - operator_usage_whitespace
+
