@@ -92,15 +92,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		477620C62A7B8F5300D60B59 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
+				477620C42A7B80B900D60B59 /* UILabel+.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		478B26762A78FC5400598902 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
 				5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */,
 				5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */,
 				47CB8CAB2A79EC7E004B24AD /* Fonts */,
-				477620C42A7B80B900D60B59 /* UILabel+.swift */,
 				5F3B50B82A79EDA900158E96 /* Colors.swift */,
-				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -140,6 +147,7 @@
 				478B26792A78FC7400598902 /* Data */,
 				478B26782A78FC6F00598902 /* Domain */,
 				478B26772A78FC5C00598902 /* Presentation */,
+				477620C62A7B8F5300D60B59 /* Extensions */,
 			);
 			path = Source;
 			sourceTree = "<group>";
