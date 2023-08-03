@@ -51,20 +51,20 @@ final class OhMyCarSetButton: UIButton {
 
     init(colorType: ColorType, title: String) {
         super.init(frame: .zero)
-        
+
         setupViews(for: colorType)
         setTitle(title, for: .normal)
     }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         setupViews(for: .mainHyundaiBlue)
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
+
         setupViews(for: .mainHyundaiBlue)
     }
 
