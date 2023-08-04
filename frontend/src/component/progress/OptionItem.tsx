@@ -44,7 +44,7 @@ const Option = styled.p<{selected: boolean}>`
 `;
 const SelectedIcon = styled.img`
   position: absolute;
-  bottom: -px;
+  bottom: -2px;
   left: 50%;
   transform: translateX(-50%);
 `;
