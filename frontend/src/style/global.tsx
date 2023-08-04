@@ -5,7 +5,7 @@ const fontPaths = {
   headMedium: '/src/assets/fonts/HyundaiSansHeadKROTFMedium.woff2',
   headRegular: '/src/assets/fonts/HyundaiSansHeadKROTFRegular.woff2',
   textMedium: '/src/assets/fonts/HyundaiSansTextKROTFMedium.woff2',
-  textRegular: '/src/assets/sfonts/HyundaiSansTextKROTFRegular.woff2',
+  textRegular: '/src/assets/fonts/HyundaiSansTextKROTFRegular.woff2',
 };
 /* 공통 폰트 스타일 */
 const commonFontStyle = css`
