@@ -6,11 +6,16 @@ interface OptionItemProps {
   idx: number;
   menuName: string;
   selected: boolean;
+  onClick: () => void;
 }
 
-function OptionItem({idx, menuName, selected}: OptionItemProps) {
+function OptionItem({idx, menuName, selected, onClick}: OptionItemProps) {
+  const handleClick = () => {
+    onClick();
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={handleClick}>
       <Option selected={selected}>
         0{idx + 1} {menuName}
       </Option>
@@ -23,6 +28,7 @@ export default OptionItem;
 
 const Wrapper = styled.div`
   position: relative;
+  height: 100%;
 `;
 const Option = styled.p<{selected: boolean}>`
   color: ${(props) =>
@@ -34,10 +40,11 @@ const Option = styled.p<{selected: boolean}>`
   letter-spacing: -3%;
   font-size: 14px;
   font-weight: 500;
+  cursor: pointer;
 `;
 const SelectedIcon = styled.img`
   position: absolute;
-  bottom: -18px;
+  bottom: -16.5px;
   left: 50%;
   transform: translateX(-50%);
 `;
