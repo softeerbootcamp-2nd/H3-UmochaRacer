@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {flexCenter} from '../../../style/common';
-import dictionary from '../../../assets/icons/dictionary.svg';
-import {colors} from '../../../style/theme';
+import {flexCenter} from '@/style/common';
+import dictionary from '@/assets/icons/dictionary.svg';
+import {colors} from '@/style/theme';
 function Dictionary() {
   return (
     <Wrapper>

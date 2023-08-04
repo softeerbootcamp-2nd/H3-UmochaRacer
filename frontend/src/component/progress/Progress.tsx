@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
+import {flexCenter} from '@/style/common';
 import OptionItem from './OptionItem';
-import {flexCenter} from '../../style/common';
 import ProgressBar from './ProgressBar';
 function Progress() {
   const [selectedOption, setSelectedOption] = useState(0);
@@ -33,10 +33,8 @@ function Progress() {
   return (
     <>
       <Wrapper>
-        <OptionItemWrapper>
-          <ProgressBar />
-          {menuItemController()}
-        </OptionItemWrapper>
+        <OptionItemWrapper>{menuItemController()}</OptionItemWrapper>
+        <ProgressBar />
       </Wrapper>
     </>
   );
@@ -48,6 +46,7 @@ const Wrapper = styled.div`
   ${flexCenter}
   width: 100%;
   height: 26px;
+  flex-direction: column;
 `;
 
 const OptionItemWrapper = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {colors} from '../../../style/theme';
-import selector from '../../../assets/icons/selector.svg';
+import {colors} from '@/style/theme';
+import selector from '@/assets/icons/selector.svg';
 function ModeSelector() {
   return (
     <Wrapper>

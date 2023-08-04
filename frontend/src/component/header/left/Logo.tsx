@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Hyundai_Logo from '../../../assets/logo/Hyundai_Logo.png';
+import Hyundai_Logo from '@/assets/logo/Hyundai_Logo.png';
 function Logo() {
   return (
     <Wrapper>

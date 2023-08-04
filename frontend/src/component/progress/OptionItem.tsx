@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {colors} from '../../style/theme';
-import progress_selected from '../../assets/icons/progress_selected.svg';
+import {colors} from '@/style/theme';
+import progress_selected from '@/assets/icons/progress_selected.svg';
 interface OptionItemProps {
   idx: number;
   menuName: string;
@@ -44,7 +44,7 @@ const Option = styled.p<{selected: boolean}>`
 `;
 const SelectedIcon = styled.img`
   position: absolute;
-  bottom: -16.5px;
+  bottom: -px;
   left: 50%;
   transform: translateX(-50%);
 `;
