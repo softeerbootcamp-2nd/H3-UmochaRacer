@@ -14,4 +14,7 @@ export default ProgressBar;
 const Wrapper = styled.div``;
 const Progress = styled.img`
   width: 100%;
+  position: absolute;
+  bottom: -16.5px;
+  left: 0;
 `;

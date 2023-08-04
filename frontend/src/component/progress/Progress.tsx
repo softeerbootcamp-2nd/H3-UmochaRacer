@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import OptionItem from './OptionItem';
 import {flexCenter} from '../../style/common';
 import ProgressBar from './ProgressBar';
 function Progress() {
+  const [selectedOption, setSelectedOption] = useState(0);
   const menuItems = [
     '파워트레인',
     '구동 방식',
@@ -14,14 +15,17 @@ function Progress() {
     '옵션 선택',
     '견적 내기',
   ];
-
+  const handleOptionClick = (index: number) => {
+    setSelectedOption(index);
+  };
   const menuItemController = () => {
     return menuItems.map((menuItem: string, index: number) => (
       <OptionItem
         key={index}
         idx={index}
         menuName={menuItem}
-        selected={index === 0}
+        selected={index === selectedOption}
+        onClick={() => handleOptionClick(index)}
       />
     ));
   };
@@ -29,9 +33,11 @@ function Progress() {
   return (
     <>
       <Wrapper>
-        <OptionItemWrapper>{menuItemController()}</OptionItemWrapper>
+        <OptionItemWrapper>
+          <ProgressBar />
+          {menuItemController()}
+        </OptionItemWrapper>
       </Wrapper>
-      <ProgressBar />
     </>
   );
 }
@@ -45,6 +51,9 @@ const Wrapper = styled.div`
 `;
 
 const OptionItemWrapper = styled.div`
+  width: 100%;
+  height: 100%;
   ${flexCenter}
   gap: 60px;
+  position: relative;
 `;
