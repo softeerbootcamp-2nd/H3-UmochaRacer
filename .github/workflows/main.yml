@@ -23,7 +23,7 @@ jobs:
     
   build:
     needs: changes
-    if: ${{ needs.changes.outputs.backend == 'true' }}
+    if: ${{ needs.changes.outputs.backend }}
 
     runs-on: ubuntu-20.04
     env:
