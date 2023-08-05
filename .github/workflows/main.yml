@@ -11,6 +11,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-20.04
+    env:
+      working-directory: ./backend
 
     steps:
     - uses: actions/checkout@v3
@@ -21,8 +23,14 @@ jobs:
         java-version: 11
 
     - name: Setup And run Test
-      working-directory: ./backend
       run: |
         chmod +x gradlew
         ./gradlew --info test
+
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v1
+      if: ${{always() }}
+      with:
+        files: build/test-results/**/*.xml
+      
       
