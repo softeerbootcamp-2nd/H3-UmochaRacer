@@ -1,5 +1,5 @@
 # workflow 이름
-name: PRTestTest
+name: Backend Spring Build And Test
 
 #develop-be로 push하거나, PR을 할 때 workflow 실행
 on:
@@ -9,28 +9,49 @@ on:
     branches: [ "develop-be" ]
 
 jobs:
-  test:
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend: ${{ steps.filter.outputs.backed }}
+    steps:
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            backend:
+              - 'backend/**'
+    
+  build:
+    needs: changes
+    if: ${{ needs.changes.outputs.backend == 'true' }}
+
     runs-on: ubuntu-20.04
     env:
       working-directory: ./backend
 
     steps:
-    - uses: actions/checkout@v3
+      - name: Checkout the code
+        uses: actions/checkout@v3
 
-    - name: Set up JDK 11
-      uses: actions/setup-java@v1
-      with:
-        java-version: 11
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+          cache: 'gradle'
 
-    - name: Setup And run Test
-      run: |
-        chmod +x gradlew
-        ./gradlew --info test
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
-    - name: Publish Test Results
-      uses: EnricoMi/publish-unit-test-result-action@v1
-      if: ${{always() }}
-      with:
-        files: build/test-results/**/*.xml
+      - name: Build with Gradle
+        run: ./gradlew clean build --debug
+
+      - name: Run Test with Gradle
+        run: ./gradlew --info test
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: ${{always() }}
+        with:
+          files: build/test-results/**/*.xml
       
       
