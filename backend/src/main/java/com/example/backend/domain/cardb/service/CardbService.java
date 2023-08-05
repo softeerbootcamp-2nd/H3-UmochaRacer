@@ -17,6 +17,6 @@ public class CardbService {
     public CardbResponseDto getDescriptionByKeyword(String keyword) throws ClassNotFoundException {
         Optional<Cardb> target = repository.findByKeyword(keyword);
         if(target.isEmpty()) throw new ClassNotFoundException();
-        return new CardbResponseDto(target);
+        return new CardbResponseDto(target.get());
     }
 }
