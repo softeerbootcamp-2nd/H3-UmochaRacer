@@ -51,6 +51,16 @@ final class OhMyCarSetButton: UIButton {
 
     var colorType: ColorType
 
+    override var isEnabled: Bool {
+        didSet {
+            if isEnabled {
+                setupViewsForColorType()
+            } else {
+                setupDisabledView()
+            }
+        }
+    }
+
     // MARK: - Lifecycles
 
     init(colorType: ColorType, title: String) {
