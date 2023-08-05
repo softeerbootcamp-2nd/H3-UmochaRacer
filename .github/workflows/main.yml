@@ -4,33 +4,21 @@ name: Backend Spring Build And Test
 #develop-be로 push하거나, PR을 할 때 workflow 실행
 on:
   push:
-    branches: [ "develop-be-test" ]
+    branches:
+      - develop-be-test
+    paths: 'backend/**'
   pull_request:
-    branches: [ "develop-be-test" ]
+    branches:
+      - develop-be-test
+    paths: 'backend/**'
+
+defaults:
+  run:
+    working-directory: backend
 
 jobs:
-  changes:
-    runs-on: ubuntu-20.04
-    outputs:
-      backend: ${{ steps.filter.outputs.backend }}
-    steps:
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            backend:
-              - 'backend/**'
-  
   build:
-    needs: changes
-    if: ${{ needs.changes.outputs.backend }}
-
     runs-on: ubuntu-20.04
-    env:
-      working-directory: ./backend
-    defaults:
-      run:
-        working-directory: ./backend
 
     steps:
       - name: Checkout the code
@@ -40,7 +28,7 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-          cache: 'gradle'
+          # cache: 'gradle'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -52,6 +40,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: build/test-results/**/*.xml
+          files: '**/build/test-results/test/TEST-*.xml'
       
       
