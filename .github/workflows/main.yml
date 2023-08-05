@@ -12,7 +12,7 @@ jobs:
   changes:
     runs-on: ubuntu-20.04
     outputs:
-      backend: ${{ steps.filter.outputs.backed }}
+      backend: ${{ steps.filter.outputs.backend }}
     steps:
       - uses: dorny/paths-filter@v2
         id: filter
@@ -20,13 +20,6 @@ jobs:
           filters: |
             backend:
               - 'backend/**'
-  check:
-    needs: changes
-    runs-on: ubuntu-20.04
-    steps:
-      - run: echo ${{ needs.changes.outputs.backend }}
-      - run: echo ${{ needs.changes.outputs.backend == 'true }}
-      
   
   build:
     needs: changes
