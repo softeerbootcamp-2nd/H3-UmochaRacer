@@ -1,0 +1,75 @@
+name: deploy-when-merged
+
+on:
+  pull_request:
+    branches:
+      - develop-be-test
+    types:
+      - closed
+    paths: 'backend/**'
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  if_merged:
+    if: github.event.pull_request.merged == true
+
+    build:
+      runs-on: ubuntu-20.04
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: Set up JDK
+          uses: actions/setup-java@v1
+          with:
+            java-version: 11
+
+        #  캐싱...?
+#        - name: Gradle Caching
+#          uses: actions/cache@v3
+#          with:
+#            path: |
+#              ~/.gradle/caches
+#              ~/.gradle/wrapper
+#            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#            restore-keys: |
+#              ${{ runner.os }}-gradle-
+
+        # yaml 파일 secret 설정 시
+#        - name: Make application.yml
+#          run: |
+#            cd ./src/main
+#            mkdir resources
+#            cd ./resources
+#            touch ./application.yml
+#            echo "${{ secrets.APPLICATION }}" > ./application.yml
+#          shell: bash
+
+        - name: Grant exec permission for gradlew
+          run: chmod +x gradlew
+
+        - name: Build with Gradle
+          run: ./gradlew build
+
+        - name: Make zip file
+          run: |
+            mkdir deploy
+            cp ./build/libs/*.jav ./deploy/
+            zip -r -qq -j ./spring-build.zip ./deploy
+
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v1
+          with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+            aws-region: ap-northeast-2
+
+        - name: Upload to S3
+          run: |
+            aws s3 cp \
+              --region ap-northeast-2 \
+             ./spring-build.zip s3://umocharacerjar
