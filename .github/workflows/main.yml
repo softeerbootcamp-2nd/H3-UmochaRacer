@@ -1,0 +1,27 @@
+# workflow 이름
+name: PRTestTest
+
+#develop-be로 push하거나, PR을 할 때 workflow 실행
+on:
+  push:
+    branches: [ "develop-be" ]
+  pull_request:
+    branches: [ "develop-be" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v1
+      with:
+        java-version: 11
+
+    - name: Granct execute permission for gradlew
+      run: chmod +x gradlew
+
+    - name: Test with Gradle
+      run: ./gradlew --info test
