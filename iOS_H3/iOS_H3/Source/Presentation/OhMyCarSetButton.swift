@@ -47,25 +47,32 @@ final class OhMyCarSetButton: UIButton {
         static let cornerRadius = 6.0
     }
 
+    // MARK: - Properties
+
+    var colorType: ColorType
+
     // MARK: - Lifecycles
 
     init(colorType: ColorType, title: String) {
+        self.colorType = colorType
         super.init(frame: .zero)
 
-        setupViews(for: colorType)
+        setupViews()
         setTitle(title, for: .normal)
     }
 
     override init(frame: CGRect) {
+        self.colorType = .mainHyundaiBlue
         super.init(frame: frame)
 
-        setupViews(for: .mainHyundaiBlue)
+        setupViews()
     }
 
     required init?(coder: NSCoder) {
+        self.colorType = .mainHyundaiBlue
         super.init(coder: coder)
 
-        setupViews(for: .mainHyundaiBlue)
+        setupViews()
     }
 
     // MARK: - Helpers
@@ -86,10 +93,10 @@ final class OhMyCarSetButton: UIButton {
 }
 
 extension OhMyCarSetButton {
-    private func setupViews(for colorType: ColorType) {
+    private func setupViews() {
         setupRadius()
         setupLabelFont()
-        setupViewsForType(colorType)
+        setupViewsForColorType()
     }
 
     private func setupRadius() {
@@ -102,7 +109,7 @@ extension OhMyCarSetButton {
         titleLabel?.setupLetterSpacing(FontLetterSpacings.mediumBody2)
     }
 
-    private func setupViewsForType(_ colorType: ColorType) {
+    private func setupViewsForColorType() {
         backgroundColor = colorType.backgroundColor
         setTitleColor(colorType.titleColor, for: .normal)
         if colorType.hasBorder {
