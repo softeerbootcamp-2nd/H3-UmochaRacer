@@ -26,8 +26,9 @@ jobs:
     if: ${{ needs.changes.outputs.backend }}
 
     runs-on: ubuntu-20.04
-    env:
-      working-directory: ./backend
+    defaults:
+      run:
+        working-directory: ./backend
 
     steps:
       - name: Checkout the code
