@@ -10,7 +10,7 @@ on:
 
 jobs:
   changes:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     outputs:
       backend: ${{ steps.filter.outputs.backed }}
     steps:
@@ -20,7 +20,14 @@ jobs:
           filters: |
             backend:
               - 'backend/**'
-    
+  check:
+    needs: changes
+    runs-on: ubuntu-20.04
+    steps:
+      - run: echo $${ needs.changes.outputs.backend }}
+      - run: echo $${ needs.changes.outputs.backend == 'true }}
+      
+  
   build:
     needs: changes
     if: ${{ needs.changes.outputs.backend }}
