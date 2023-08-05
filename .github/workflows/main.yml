@@ -4,9 +4,9 @@ name: Backend Spring Build And Test
 #develop-be로 push하거나, PR을 할 때 workflow 실행
 on:
   push:
-    branches: [ "develop-be" ]
+    branches: [ "develop-be-test" ]
   pull_request:
-    branches: [ "develop-be" ]
+    branches: [ "develop-be-test" ]
 
 jobs:
   changes:
@@ -45,9 +45,6 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew clean build --debug
-
       - name: Run Test with Gradle
         run: ./gradlew --info test
 
@@ -55,6 +52,6 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v1
         if: always()
         with:
-          files: test-results/**/*.xml
+          files: build/test-results/**/*.xml
       
       
