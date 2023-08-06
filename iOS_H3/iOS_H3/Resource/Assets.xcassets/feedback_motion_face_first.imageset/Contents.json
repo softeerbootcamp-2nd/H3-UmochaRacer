@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "feedback_motion_face_first.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
