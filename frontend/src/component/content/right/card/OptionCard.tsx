@@ -1,5 +1,5 @@
 import React from 'react';
-import {useState, useRef, useEffect, useCallback} from 'react';
+import {useState, useRef, useCallback} from 'react';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
@@ -20,8 +20,6 @@ const Icon = () => {
     </svg>
   );
 };
-
-let detailHeight = 0;
 
 function OptionCard() {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
@@ -109,7 +107,6 @@ const Price = styled.div`
 
 const DetailBox = styled.div<{toggle: boolean}>`
   height: 0;
-  overflow: hidden;
   opacity: ${(props) => (props.toggle ? '1' : '0')};
   border-top: 1px solid ${colors.Cool_Grey_001};
   transition:
