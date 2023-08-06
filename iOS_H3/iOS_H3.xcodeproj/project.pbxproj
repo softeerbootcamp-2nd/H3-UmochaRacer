@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
+		471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
 		471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */; };
+		471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */; };
 		471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C92A7FA02000B67D54 /* CarMakingStep.swift */; };
 		471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
@@ -90,6 +92,7 @@
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
 		471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBar.swift; sourceTree = "<group>"; };
 		471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarButton.swift; sourceTree = "<group>"; };
+		471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarViewController.swift; sourceTree = "<group>"; };
 		471917C92A7FA02000B67D54 /* CarMakingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStep.swift; sourceTree = "<group>"; };
 		471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarSpacingView.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
@@ -206,6 +209,7 @@
 				471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */,
 				471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */,
 				471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */,
+				471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -697,6 +701,7 @@
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
+				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
 				5F62039B2A7BC86900D09531 /* OhMyCarSetNavigationBar.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
