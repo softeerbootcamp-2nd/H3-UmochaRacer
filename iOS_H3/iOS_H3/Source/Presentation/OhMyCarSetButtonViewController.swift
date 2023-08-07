@@ -8,38 +8,37 @@
 import UIKit
 
 final class OhMyCarSetButtonViewController: UIViewController {
-    
+
     let mainBlueButton: OhMyCarSetButton = {
         let button = OhMyCarSetButton(colorType: .mainHyundaiBlue, title: "선택완료")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let whiteButton: OhMyCarSetButton = {
         let button = OhMyCarSetButton(colorType: .white, title: "시승 신청하기")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let coolGreyButton: OhMyCarSetButton = {
         let button = OhMyCarSetButton(colorType: .coolGrey1, title: "변경할래요!")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let greyButton: OhMyCarSetButton = {
         let button = OhMyCarSetButton(colorType: .grey, title: "공유하기")
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     let disabledButton: OhMyCarSetButton = {
         let button = OhMyCarSetButton(colorType: .mainHyundaiBlue, title: "선택완료")
         button.isEnabled = false
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,7 +47,7 @@ final class OhMyCarSetButtonViewController: UIViewController {
         addSubviews()
         setupConstraints()
     }
-    
+
     private func addSubviews() {
         view.addSubview(mainBlueButton)
         view.addSubview(whiteButton)
@@ -56,7 +55,7 @@ final class OhMyCarSetButtonViewController: UIViewController {
         view.addSubview(greyButton)
         view.addSubview(disabledButton)
     }
-    
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             mainBlueButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
