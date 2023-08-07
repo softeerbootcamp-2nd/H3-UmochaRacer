@@ -7,11 +7,11 @@ if [ -z $BACKEND_PID ]
 then
   echo "> 현재 구동중인 서버 Docker 컨테이너가 없으므로 종료하지 않습니다." >> /home/ubuntu/deploy.log
 else
-  echo "> sudo docker stop $BACKEND_PID" # 현재 구동중인 서버 Docker 컨테이너 중지
+  echo "> sudo docker stop $BACKEND_PID" >> /home/ubuntu/deploy.log
   sudo docker stop $BACKEND_PID
   sleep 5
   sudo docker rm $BACKEND_PID
-  sudo docker rmi $(docker images --filter=reference="h3-umocharacer-back" -q)
+  sudo docker rmi $(sudo docker images --filter=reference="h3-umocharacer-back" -q)
 fi
 
 cd /home/ubuntu/backend
