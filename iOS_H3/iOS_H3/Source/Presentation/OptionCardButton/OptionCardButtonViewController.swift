@@ -88,12 +88,14 @@ class OptionCardButtonViewController: UIViewController {
             guideModeBasicButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             guideModeBasicButton.heightAnchor.constraint(equalToConstant: 150),
 
-            selfModeInnerColorButton.topAnchor.constraint(equalTo: self.guideModeBasicButton.bottomAnchor, constant: 16),
+            selfModeInnerColorButton.topAnchor.constraint(equalTo: self.guideModeBasicButton.bottomAnchor,
+                                                          constant: 16),
             selfModeInnerColorButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             selfModeInnerColorButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             selfModeInnerColorButton.heightAnchor.constraint(equalToConstant: 150),
 
-            guideModeOuterColorButton.topAnchor.constraint(equalTo: self.selfModeInnerColorButton.bottomAnchor, constant: 16),
+            guideModeOuterColorButton.topAnchor.constraint(equalTo: self.selfModeInnerColorButton.bottomAnchor,
+                                                           constant: 16),
             guideModeOuterColorButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             guideModeOuterColorButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             guideModeOuterColorButton.heightAnchor.constraint(equalToConstant: 150)
