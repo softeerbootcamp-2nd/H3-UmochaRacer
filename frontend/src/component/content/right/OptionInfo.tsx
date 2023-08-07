@@ -30,6 +30,22 @@ const Container = styled.div`
   width: 375px;
   height: 565px;
   padding-top: 27px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 284px;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0) 38.32%,
+      rgba(255, 255, 255, 0.53) 50.05%,
+      #fff 75.57%
+    );
+    z-index: 3;
+    pointer-events: none;
+  }
 `;
 
 const OptionTitle = styled.span`

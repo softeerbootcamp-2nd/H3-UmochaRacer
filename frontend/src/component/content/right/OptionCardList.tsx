@@ -21,24 +21,11 @@ const Wrapper = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
-  
+
   width: 100%;
   height: 375px;
   margin-top: 32px;
   overflow-y: scroll;
-
-  &::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 284px;
-    background: linear-gradient(
-      -180deg,
-      rgba(255, 255, 255, 0) 38.32%,
-      rgba(255, 255, 255, 0.53) 50.05%,
-      #fff 60.57%
-    );
 `;
 
 const Container = styled.ul`

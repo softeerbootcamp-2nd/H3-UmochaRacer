@@ -42,6 +42,7 @@ export default DetailToggle;
 const Wrapper = styled.button`
   display: inline-flex;
   align-items: center;
+  position: relative;
   height: 16px;
   font-size: 12px;
   font-style: normal;
@@ -49,5 +50,6 @@ const Wrapper = styled.button`
   line-height: 130%; /* 15.6px */
   letter-spacing: -0.36px;
   color: ${colors.Cool_Grey_003};
+  z-index: 1;
   gap: 2px;
 `;
