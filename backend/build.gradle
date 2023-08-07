@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.14'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
 }
 
 group = 'com.example'
@@ -12,6 +14,7 @@ java {
 }
 
 configurations {
+    asciidoctorExtension
     compileOnly {
         extendsFrom annotationProcessor
     }
@@ -21,8 +24,13 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
     runtimeOnly 'com.h2database:h2:1.4.197'
 
@@ -32,8 +40,40 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    asciidoctorExtension 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 }
 
-tasks.named('test') {
+test {
+    outputs.dir snippetsDir
     useJUnitPlatform()
+}
+
+asciidoctor.doFirst {
+    delete file('src/main/resources/static/docs')
+}
+
+asciidoctor { // index.adoc -> html 변환 도구
+    dependsOn test
+    configurations 'asciidoctorExtension'
+    inputs.dir snippetsDir
+}
+
+task copyDocument(type: Copy){
+    dependsOn asciidoctor
+    from file('build/docs/asciidoc')
+    into file('src/main/resources/static/docs')
+}
+
+build {
+    // build 시 copyDocument 실행
+    dependsOn copyDocument
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from("${asciidoctor.outputDir}") {
+        into 'static/docs'
+    }
 }

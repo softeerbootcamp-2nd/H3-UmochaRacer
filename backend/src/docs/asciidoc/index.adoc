@@ -1,0 +1,17 @@
+= Umocha Racer API 문서
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left // 문서의 목차를 왼쪽에 부여한다.
+:toclevels: 3
+:sectlinks:
+
+[[API-LIST]]
+= 백카사전
+
+== Request
+include::{snippets}/cardb-controller-test/should-return200-response/http-request.adoc[]
+include::{snippets}/cardb-controller-test/should-return200-response/request-parameters.adoc[]
+
+== Response
+include::{snippets}/cardb-controller-test/should-return200-response/http-response.adoc[]
