@@ -16,4 +16,4 @@ fi
 
 cd /home/ubuntu/frontend/nginx
 sudo docker build -t h3-umocharacer-front .
-sudo docker run -d --name h3-umocharacer-front -v ../dist:/usr/share/nginx/html -p 80:80 h3-umocharacer-front
+sudo docker run -d --name h3-umocharacer-front -v /home/ubuntu/frontend/dist:/usr/share/nginx/html -p 80:80 h3-umocharacer-front
