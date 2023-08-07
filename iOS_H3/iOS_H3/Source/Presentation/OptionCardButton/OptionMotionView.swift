@@ -11,13 +11,13 @@ class OptionMotionView: UIView {
 
     private let smileImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "feedback_motion_face_first")
+        imageView.image = UIImage(named: "feedback_motion_face_first") ?? .remove
         return imageView
     }()
 
     private let goodImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "feedback_motion_good_img")
+        imageView.image = UIImage(named: "feedback_motion_good_img") ?? .remove
         imageView.isHidden = true
         return imageView
     }()
@@ -85,7 +85,7 @@ class OptionMotionView: UIView {
     func showWithAnimation(title: String, description: String) {
         self.goodImageView.isHidden = true
         self.backgroundColor = Colors.mainHyundaiBlue
-        smileImageView.image = UIImage(named: "feedback_motion_face_first")
+        smileImageView.image = UIImage(named: "feedback_motion_face_first") ?? .remove
         feedbackTitleLabel.text = title
         feedbackDescriptionLabel.text = description
 
@@ -95,7 +95,7 @@ class OptionMotionView: UIView {
             self.alpha = 1.0
         }, completion: { _ in
             UIView.animate(withDuration: 0.8, animations: {
-                self.smileImageView.image = UIImage(named: "feedback_motion_face_second")
+                self.smileImageView.image = UIImage(named: "feedback_motion_face_second") ?? .remove
                 self.goodImageView.isHidden = false
             })
         })
