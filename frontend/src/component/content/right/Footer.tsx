@@ -4,6 +4,10 @@ import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Body2_Medium, Title1_Medium} from '@/style/fonts';
 
+interface props {
+  onClick: () => void;
+  isOpen: boolean;
+}
 const upperButton = (isModalOpen: boolean) => {
   return (
     <svg
@@ -25,19 +29,13 @@ const upperButton = (isModalOpen: boolean) => {
   );
 };
 
-function Footer() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleClickModalToggle = () => {
-    setIsModalOpen((prev) => !prev);
-  };
-
+function Footer({onClick, isOpen}: props) {
   return (
     <Wrapper>
       <Total>
-        <ModalToggle onClick={handleClickModalToggle}>
+        <ModalToggle onClick={onClick}>
           총 견적금액
-          <IconBox>{upperButton(isModalOpen)}</IconBox>
+          <IconBox>{upperButton(isOpen)}</IconBox>
         </ModalToggle>
         <TotalPrice>47,270,000 원</TotalPrice>
       </Total>

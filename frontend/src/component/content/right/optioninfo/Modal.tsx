@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {RefObject} from 'react';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import {Title2_Medium, Title3_Medium} from '@/style/fonts';
 import Estimate from './Estimate';
+
+interface props {
+  onClick: () => void;
+}
 
 const IconClose = () => {
   return (
@@ -20,10 +24,11 @@ const IconClose = () => {
     </svg>
   );
 };
-function Modal() {
+
+function Modal({onClick}: props) {
   return (
-    <Wrapper>
-      <IconBox>{IconClose()}</IconBox>
+    <>
+      <IconBox onClick={onClick}>{IconClose()}</IconBox>
       <Title>
         <SummaryText>견적요약</SummaryText>
         <SummaryPrice>46,030,000원</SummaryPrice>
@@ -35,24 +40,11 @@ function Modal() {
           <Estimate></Estimate>
         </EstimateList>
       </Container>
-    </Wrapper>
+    </>
   );
 }
 
 export default Modal;
-
-const Wrapper = styled.div`
-  position: absolute;
-  top: 26px;
-  width: 375px;
-  height: 436px;
-  padding: 50px 0px;
-  border-radius: 6px;
-  border: 2px solid ${colors.Cool_Grey_001};
-  background: #fff;
-  box-shadow: 0px 4px 14px 0px rgba(104, 104, 104, 0.1);
-  z-index: 2;
-`;
 
 const Title = styled.div`
   display: flex;
