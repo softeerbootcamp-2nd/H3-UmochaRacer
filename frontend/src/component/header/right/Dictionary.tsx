@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
 import dictionary from '@/assets/icons/dictionary.svg';
 import {colors} from '@/style/theme';
+import {Title5_Regular} from '@/style/fonts';
 function Dictionary() {
   return (
     <Wrapper>
@@ -16,10 +17,11 @@ export default Dictionary;
 const Wrapper = styled.div`
   ${flexCenter}
   gap : 4px;
+  cursor: pointer;
 `;
 
 const DLogo = styled.img``;
 const DictionaryP = styled.p`
-  font-family: 'Title5_Regular';
+  ${Title5_Regular};
   color: ${colors.Cool_Grey};
 `;

@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import SelectedOptionImage from './Content/SelectedOptionImage';
-import SelectedOptionInfo from './Content/SelectedOptionInfo';
+import OptionImage from './left/OptionImage';
+import OptionInfo from './right/OptionInfo';
 
 function Content() {
   return (
     <Wrapper>
       <Container>
-        <SelectedOptionImage />
-        <SelectedOptionInfo />
+        <OptionImage />
+        <OptionInfo />
       </Container>
     </Wrapper>
   );

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import selector from '@/assets/icons/selector.svg';
+import {Title3_Medium} from '@/style/fonts';
 function ModeSelector() {
   return (
     <Wrapper>
@@ -14,9 +15,10 @@ function ModeSelector() {
 export default ModeSelector;
 const Wrapper = styled.div`
   display: flex;
+  cursor: pointer;
 `;
 const ModeName = styled.p`
-  font-family: 'Title3_Medium';
+  ${Title3_Medium};
   color: ${colors.Cool_Grey};
 `;
 const ModeSelect = styled.img``;

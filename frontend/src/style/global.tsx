@@ -1,19 +1,12 @@
-import {css, createGlobalStyle} from 'styled-components';
+import {createGlobalStyle} from 'styled-components';
 
 /* 폰트 파일 경로 */
 const fontPaths = {
-  headMedium: '@/assets/fonts/HyundaiSansHeadKROTFMedium.woff2',
-  headRegular: '@/assets/fonts/HyundaiSansHeadKROTFRegular.woff2',
-  textMedium: '@/assets/fonts/HyundaiSansTextKROTFMedium.woff2',
-  textRegular: '@/assets/fonts/HyundaiSansTextKROTFRegular.woff2',
+  headMedium: 'src/assets/fonts/HyundaiSansHeadKROTFMedium.woff2',
+  headRegular: 'src/assets/fonts/HyundaiSansHeadKROTFRegular.woff2',
+  textMedium: 'src/assets/fonts/HyundaiSansTextKROTFMedium.woff2',
+  textRegular: 'src/assets/fonts/HyundaiSansTextKROTFRegular.woff2',
 };
-/* 공통 폰트 스타일 */
-const commonFontStyle = css`
-  font-style: normal;
-  font-display: swap;
-  line-height: 130%;
-  letter-spacing: -3%;
-`;
 const GlobalStyle = createGlobalStyle`
   html,
   body,
@@ -151,119 +144,24 @@ const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
-  @font-face {
-    font-family: 'Title1_Medium';
-    font-size: 22px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.headMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title2_Medium';
-    font-size: 20px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.headMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title3_Medium';
-    font-size: 18px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.headMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title3_Regular';
-    font-size: 18px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.headRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title4_Medium';
-    font-size: 16px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.headMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title4_Regular';
-    font-size: 16px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.headRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title5_Medium';
-    font-size: 14px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.headMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title5_Regular';
-    font-size: 14px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.headRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Title6_Regular';
-    font-size: 12px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.headRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body1_Medium';
-    font-size: 16px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.textMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body1_Regular';
-    font-size: 16px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.textRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body2_Medium';
-    font-size: 14px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.textMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body2_Regular';
-    font-size: 14px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.textRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body3_Medium';
-    font-size: 12px;
-    font-weight: 500;
-    ${commonFontStyle}
-    src: url(${fontPaths.textMedium}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Body3_Regular';
-    font-size: 12px;
-    font-weight: 400;
-    ${commonFontStyle}
-    src: url(${fontPaths.textRegular}) format('woff2'); 
-  }
-  @font-face {
-    font-family: 'Popup_Regular';
-    font-size: 14px;
-    font-weight: 400;
+   @font-face {
+    font-family: 'Hyundai Sans Head Medium';
     font-style: normal;
-    font-display: swap;
-    line-height: 150%;
-    letter-spacing: -3%;
+    src: url(${fontPaths.headMedium}) format('woff2'); 
+  }
+  @font-face {
+    font-family: 'Hyundai Sans Head Regular';
+    font-style: normal;
+    src: url(${fontPaths.headRegular}) format('woff2'); 
+  }
+  @font-face {
+    font-family: 'Hyundai Sans Text Medium';
+    font-style: normal;
+    src: url(${fontPaths.textMedium}) format('woff2'); 
+  }  
+  @font-face {
+    font-family: 'Hyundai Sans Text Regular';
+    font-style: normal;
     src: url(${fontPaths.textRegular}) format('woff2'); 
   }
 `;

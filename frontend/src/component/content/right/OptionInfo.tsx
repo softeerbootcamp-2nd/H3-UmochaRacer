@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import OptionCardList from './SelectedOptionInfo/OptionCardList';
-import Footer from './SelectedOptionInfo/Footer';
-import {flexCenter} from '../../style/common';
-import {colors} from '../../style/theme';
+import OptionCardList from './OptionCardList';
+import Footer from './Footer';
+import {flexCenter} from '../../../style/common';
+import {colors} from '../../../style/theme';
 
 function SelectedOptionInfo() {
   return (
@@ -31,7 +31,7 @@ const Container = styled.div`
 `;
 
 const OptionTitle = styled.span`
-  font-family: Title1_Medium;
+  font-family: 'Title1_Medium';
   font-size: 24px;
 `;
 
