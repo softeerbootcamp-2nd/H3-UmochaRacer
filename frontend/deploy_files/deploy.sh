@@ -7,7 +7,7 @@ if [ -z $FRONTEND_PID ]
 then
   echo "> 현재 구동중인 웹 Docker 컨테이너가 없으므로 종료하지 않습니다." >> /home/ubuntu/deploy.log
 else
-  echo "> sudo docker stop $FRONTEND_PID" # 현재 구동중인 서버 Docker 컨테이너 중지
+  echo "> sudo docker stop $FRONTEND_PID" >> /home/ubuntu/deploy.log
   sudo docker stop $FRONTEND_PID
   sleep 5
   sudo docker rm $FRONTEND_PID
