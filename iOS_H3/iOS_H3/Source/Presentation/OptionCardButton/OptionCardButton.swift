@@ -35,7 +35,7 @@ class OptionCardButton: UIButton {
 
     private let checkImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "icon_uncheck_img")
+        imageView.image = UIImage(named: "icon_uncheck_img") ?? .remove
         imageView.isUserInteractionEnabled = false
         return imageView
     }()
@@ -140,7 +140,7 @@ class OptionCardButton: UIButton {
                                backgroundColor: UIColor,
                                textColor: UIColor) {
         self.layer.borderWidth = borderWidth
-        checkImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate)
+        checkImageView.image = UIImage(named: imageName)?.withRenderingMode(.alwaysTemplate) ?? .remove
         checkImageView.tintColor = tintColor
         self.layer.borderColor = tintColor?.cgColor
         self.backgroundColor = backgroundColor
