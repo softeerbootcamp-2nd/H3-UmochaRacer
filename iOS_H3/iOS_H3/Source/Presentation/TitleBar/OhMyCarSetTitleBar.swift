@@ -38,6 +38,8 @@ class OhMyCarSetTitleBar: UIView {
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.mediumTitle2
+        label.setupLineHeight(FontLineHeights.mediumBody2)
+        label.setupLetterSpacing(FontLetterSpacings.mediumBody2)
         return label
     }()
 
@@ -73,6 +75,8 @@ class OhMyCarSetTitleBar: UIView {
         button.tintColor = Colors.coolGreyBlack
         button.setImage(image, for: .normal)
         button.titleLabel?.font = Fonts.mediumTitle2
+        button.titleLabel?.setupLineHeight(FontLineHeights.mediumTitle2)
+        button.titleLabel?.setupLetterSpacing(FontLetterSpacings.mediumTitle2)
         return button
     }()
 
@@ -151,7 +155,11 @@ class OhMyCarSetTitleBar: UIView {
         let button = UIButton()
         button.setTitle("건너뛰기", for: .normal)
         button.setTitleColor(Colors.coolGrey3, for: .normal)
+
         button.titleLabel?.font = Fonts.regularBody2
+        button.titleLabel?.setupLineHeight(FontLineHeights.regularBody2)
+        button.titleLabel?.setupLetterSpacing(FontLetterSpacings.regularBody2)
+
         button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
         return button
     }
