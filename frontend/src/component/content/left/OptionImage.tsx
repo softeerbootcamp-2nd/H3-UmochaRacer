@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import {flexCenter} from '../../style/common';
+import {flexCenter} from '../../../style/common';
 
-function SelectedOptionImage() {
+function OptionImage() {
   return (
     <Wrapper>
       <img src="image 103.png"></img>
@@ -10,7 +10,7 @@ function SelectedOptionImage() {
   );
 }
 
-export default SelectedOptionImage;
+export default OptionImage;
 
 const Wrapper = styled.div`
   ${flexCenter}
