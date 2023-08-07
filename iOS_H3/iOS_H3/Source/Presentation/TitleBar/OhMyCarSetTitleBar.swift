@@ -92,11 +92,6 @@ class OhMyCarSetTitleBar: UIView {
         }
     }
 
-    convenience init() {
-        self.init(type: .onBoarding)
-
-    }
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         setTitleLabel()
