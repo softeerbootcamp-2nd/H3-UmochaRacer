@@ -14,6 +14,6 @@ else
   sudo docker rmi $(docker images --filter=reference="h3-umocharacer-front" -q)
 fi
 
-cd /home/ubuntu/app/frontend/nginx
+cd /home/ubuntu/frontend/nginx
 sudo docker build -t h3-umocharacer-front .
 sudo docker run -d --name h3-umocharacer-front -v ../dist:/usr/share/nginx/html -p 80:80 h3-umocharacer-front
