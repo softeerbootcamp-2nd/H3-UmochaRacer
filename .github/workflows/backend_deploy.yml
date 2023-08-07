@@ -1,12 +1,6 @@
 name: Backend Deploy When Merged Or Pushed
 
 on:
-  pull_request:
-    branches:
-      - develop-be
-    types:
-      - closed
-    paths: 'backend/**'
   push:
     branches:
       - develop-be
@@ -18,7 +12,6 @@ defaults:
 
 jobs:
   deploy:
-    if: (github.event_name == 'push' || github.event.pull_request.merged == true)
     runs-on: ubuntu-20.04
 
     steps:
