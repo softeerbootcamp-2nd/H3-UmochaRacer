@@ -238,7 +238,6 @@ class OptionCardButton: UIButton {
         animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         animatedView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
         animatedView.showWithAnimation(title: title, description: description)
     }
