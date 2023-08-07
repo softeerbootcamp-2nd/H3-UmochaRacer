@@ -30,7 +30,6 @@ jobs:
           cp -r ./dist ./deploy/
           cp -r ../nginx ./deploy/
           cp ./deploy_files/* ./deploy/
-          cp ./docker-compose.yml ./deploy/
           zip -r -qq -j ./frontend-build.zip ./deploy
 
       - name: Configure AWS credentials
