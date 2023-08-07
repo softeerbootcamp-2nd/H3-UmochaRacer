@@ -80,13 +80,13 @@ class OhMyCarSetTitleBar: UIView {
         return button
     }()
 
-    var leftItems: [UIView] = [] {
+    private var leftItems: [UIView] = [] {
         didSet {
             setLeftItems()
         }
     }
 
-    var rightItems: [UIView] = [] {
+    private var rightItems: [UIView] = [] {
         didSet {
             setRightItems()
         }
