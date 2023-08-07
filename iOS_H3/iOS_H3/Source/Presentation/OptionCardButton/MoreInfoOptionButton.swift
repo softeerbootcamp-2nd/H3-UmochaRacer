@@ -28,9 +28,6 @@ class MoreInfoOptionButton: OptionCardButton {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func attribute() {
-    }
-
     private func layout() {
         self.addSubview(moreInfoButton)
         moreInfoButton.translatesAutoresizingMaskIntoConstraints = false
