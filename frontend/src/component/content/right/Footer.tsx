@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useCallback, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Body2_Medium, Title1_Medium} from '@/style/fonts';
 
-const upperButton = () => {
+const upperButton = (isModalOpen: boolean) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,6 +12,10 @@ const upperButton = () => {
       height="16"
       viewBox="0 0 16 16"
       fill="none"
+      style={{
+        transform: isModalOpen ? 'rotate(-180deg)' : '',
+        transition: '0.5s',
+      }}
     >
       <path
         d="M7.99952 7.21865L4.69952 10.5186L3.75685 9.57598L7.99952 5.33331L12.2422 9.57598L11.2995 10.5186L7.99952 7.21865Z"
@@ -20,13 +24,20 @@ const upperButton = () => {
     </svg>
   );
 };
+
 function Footer() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleClickModalToggle = useCallback(() => {
+    setIsModalOpen((prev) => !prev);
+  }, []);
+
   return (
     <Wrapper>
       <Total>
-        <ModalToggle>
+        <ModalToggle onClick={handleClickModalToggle}>
           총 견적금액
-          <IconBox>{upperButton()}</IconBox>
+          <IconBox>{upperButton(isModalOpen)}</IconBox>
         </ModalToggle>
         <TotalPrice>47,270,000 원</TotalPrice>
       </Total>
@@ -38,7 +49,7 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default React.memo(Footer);
 
 const Wrapper = styled.div`
   display: flex;
