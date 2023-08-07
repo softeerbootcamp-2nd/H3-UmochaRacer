@@ -1,4 +1,4 @@
-package com.example.backend.domain.Information.model.option.entity;
+package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
 import org.springframework.data.relational.core.mapping.Embedded;
