@@ -213,8 +213,11 @@ class OhMyCarSetTitleBar: UIView {
         titleLogoButton.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         titleLogoButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
 
-        let titleSize = title.size(withAttributes: [NSAttributedString.Key.font: titleLogoButton.titleLabel!.font!])
-        let imageSize: CGFloat = titleLogoButton.imageView!.frame.size.width
+        guard let titleLabelFont = titleLogoButton.titleLabel?.font,
+              let imageViewWidth = titleLogoButton.imageView?.frame.size.width else { return }
+
+        let titleSize = title.size(withAttributes: [NSAttributedString.Key.font: titleLabelFont])
+        let imageSize: CGFloat = imageViewWidth
         let spacing: CGFloat = 4
         titleLogoButton.titleEdgeInsets = UIEdgeInsets(top: 0, left: -(imageSize + spacing / 2),
                                               bottom: 0, right: imageSize + spacing / 2)
