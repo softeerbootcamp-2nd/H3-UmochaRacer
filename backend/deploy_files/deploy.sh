@@ -16,4 +16,4 @@ fi
 
 cd /home/ubuntu/app/backend
 sudo docker build -t h3-umocharacer-back .
-sudo docker run -d --name h3-umocharacer-back --restart=always -p 8080:8080 h3-umocharacer-back
+sudo docker run -d --name h3-umocharacer-back --restart=always -p 9999:9999 h3-umocharacer-back
