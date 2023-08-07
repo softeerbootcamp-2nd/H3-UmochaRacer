@@ -3,6 +3,7 @@ import {useState, useRef, useCallback} from 'react';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
+import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 
 const Icon = () => {
   return (
@@ -74,20 +75,18 @@ const Wrapper = styled.div`
 `;
 
 const Text1 = styled.div`
+  ${Popup_Regular}
+  font-size: 12px;
+  line-height: 130%;
   margin-top: 10px;
   height: 16px;
-  line-height: 130%;
-  font-family: Body3_Regular;
-  font-size: 12px;
   color: ${colors.Main_Hyundai_Blue};
 `;
 
 const Text2 = styled.div`
+  ${Title2_Medium}
   margin-top: 4px;
   height: 26px;
-  line-height: 130%;
-  font-family: Title2_Medium;
-  font-size: 20px;
   color: ${colors.Cool_Grey};
 `;
 
@@ -99,9 +98,7 @@ const Footer = styled.div`
 `;
 
 const Price = styled.div`
-  line-height: 130%;
-  font-family: Body2_Regular;
-  font-size: 14px;
+  ${Body2_Regular}
   color: ${colors.Main_Hyundai_Blue};
 `;
 

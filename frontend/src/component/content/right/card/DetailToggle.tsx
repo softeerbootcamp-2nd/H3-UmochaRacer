@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Popup_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 
 interface props {
@@ -44,10 +45,10 @@ const Wrapper = styled.button`
   align-items: center;
   position: relative;
   height: 16px;
+  ${Popup_Regular}
   font-size: 12px;
-  font-style: normal;
   font-weight: 500;
-  line-height: 130%; /* 15.6px */
+  line-height: 130%;
   letter-spacing: -0.36px;
   color: ${colors.Cool_Grey_003};
   z-index: 1;

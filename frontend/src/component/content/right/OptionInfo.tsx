@@ -5,6 +5,7 @@ import Modal from './optioninfo/Modal';
 import Footer from './Footer';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
+import {Title1_Medium, Title3_Medium, Title3_Regular} from '@/style/fonts';
 
 function SelectedOptionInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +41,7 @@ const ModalWrapper = styled.div<{isOpen: boolean}>`
   position: absolute;
   top: 26px;
   width: 375px;
-  height: 436px;
+  height: 440px;
   margin-top: ${(props) => (props.isOpen ? '0px' : '130%')};
   padding: 50px 0px;
   border-radius: 6px;
@@ -75,11 +76,11 @@ const Container = styled.div`
 `;
 
 const OptionTitle = styled.span`
-  font-family: 'Title1_Medium';
+  ${Title1_Medium}
   font-size: 24px;
 `;
 
 const Text = styled.span`
-  font-family: Title3_Regular;
+  ${Title3_Regular}
   font-size: 24px;
 `;
