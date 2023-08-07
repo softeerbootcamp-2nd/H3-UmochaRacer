@@ -28,9 +28,9 @@ const upperButton = (isModalOpen: boolean) => {
 function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleClickModalToggle = useCallback(() => {
+  const handleClickModalToggle = () => {
     setIsModalOpen((prev) => !prev);
-  }, []);
+  };
 
   return (
     <Wrapper>
@@ -49,7 +49,7 @@ function Footer() {
   );
 }
 
-export default React.memo(Footer);
+export default Footer;
 
 const Wrapper = styled.div`
   display: flex;

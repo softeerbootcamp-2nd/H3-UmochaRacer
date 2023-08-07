@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
+import Modal from './optioninfo/Modal';
 import Footer from './Footer';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
@@ -12,6 +13,7 @@ function SelectedOptionInfo() {
         <OptionTitle>파워트레인</OptionTitle>
         <Text>을 선택해주세요.</Text>
         <OptionCardList></OptionCardList>
+        <Modal></Modal>
         <Footer></Footer>
       </Container>
     </Wrapper>
