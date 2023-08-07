@@ -4,6 +4,7 @@ import {flexCenter} from '@/style/common';
 import car from '@/assets/icons/car.svg';
 import selector from '@/assets/icons/selector.svg';
 import {colors} from '@/style/theme';
+import {Title5_Regular} from '@/style/fonts';
 function CarMode() {
   return (
     <Wrapper>
@@ -29,6 +30,6 @@ const CarWrapper = styled.div`
 `;
 const CarSelect = styled.img``;
 const CarP = styled.p`
-  font-family: 'Title5_Regular';
+  ${Title5_Regular};
   color: ${colors.Cool_Grey};
 `;
