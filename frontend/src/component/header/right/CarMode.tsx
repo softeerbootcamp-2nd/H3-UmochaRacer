@@ -26,6 +26,7 @@ const CLogo = styled.img``;
 
 const CarWrapper = styled.div`
   display: flex;
+  cursor: pointer;
 `;
 const CarSelect = styled.img``;
 const CarP = styled.p`

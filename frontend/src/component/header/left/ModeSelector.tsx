@@ -14,6 +14,7 @@ function ModeSelector() {
 export default ModeSelector;
 const Wrapper = styled.div`
   display: flex;
+  cursor: pointer;
 `;
 const ModeName = styled.p`
   font-family: 'Title3_Medium';

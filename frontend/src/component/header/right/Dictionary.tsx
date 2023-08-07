@@ -16,6 +16,7 @@ export default Dictionary;
 const Wrapper = styled.div`
   ${flexCenter}
   gap : 4px;
+  cursor: pointer;
 `;
 
 const DLogo = styled.img``;
