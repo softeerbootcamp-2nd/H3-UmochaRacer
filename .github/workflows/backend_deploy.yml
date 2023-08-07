@@ -1,0 +1,85 @@
+name: Backend Deploy When Merged Or Pushed
+
+on:
+  pull_request:
+    branches:
+      - develop-be
+    types:
+      - closed
+    paths: 'backend/**'
+  push:
+    branches:
+      - develop-be
+    paths: 'backend/**'
+
+defaults:
+  run:
+    working-directory: backend
+
+jobs:
+  deploy:
+    if: (github.event_name == 'push' || github.event.pull_request.merged == true)
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+        #  캐싱 관련 코드입니다. 공부 후 주석 처리 예정
+#        - name: Gradle Caching
+#          uses: actions/cache@v3
+#          with:
+#            path: |
+#              ~/.gradle/caches
+#              ~/.gradle/wrapper
+#            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+#            restore-keys: |
+#              ${{ runner.os }}-gradle-
+
+        # yaml 파일 secret 설정 시 설정 예정
+#        - name: Make application.yml
+#          run: |
+#            cd ./src/main
+#            mkdir resources
+#            cd ./resources
+#            touch ./application.yml
+#            echo "${{ secrets.APPLICATION }}" > ./application.yml
+#          shell: bash
+
+      - name: Grant exec permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+
+      - name: Make zip file
+        run: |
+          mkdir deploy
+          cp ./deploy_files/* ./deploy/
+          cp ./Dockerfile ./deploy/
+          cp ./build/libs/*.jar ./deploy/
+          zip -r -qq -j ./backend-build.zip ./deploy
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp \
+            --region ap-northeast-2 \
+             ./backend-build.zip s3://umocharacerjar
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name umocharacer-deploy
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name umocharacer-deploy-group
+          --s3-location bucket=umocharacerjar,bundleType=zip,key=backend-build.zip
