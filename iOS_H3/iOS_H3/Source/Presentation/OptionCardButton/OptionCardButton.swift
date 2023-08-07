@@ -126,9 +126,9 @@ class OptionCardButton: UIButton {
         } else {
             setAppearance(borderWidth: 0,
                           imageName: "icon_uncheck_img",
-                          tintColor: Colors.coolGrey3 ?? .red,
-                          backgroundColor: Colors.coolGrey1 ?? .red,
-                          textColor: Colors.coolGrey3 ?? .red)
+                          tintColor: Colors.coolGrey3,
+                          backgroundColor: Colors.coolGrey1,
+                          textColor: Colors.coolGrey3)
 
             tagListView.isHidden = true
         }
