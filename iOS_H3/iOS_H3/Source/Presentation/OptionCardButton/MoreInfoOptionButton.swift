@@ -12,7 +12,7 @@ class MoreInfoOptionButton: OptionCardButton {
     private let moreInfoButton: UIButton = {
         let button = UIButton()
 
-        button.setImage(UIImage(named: "arrow_right_img"), for: .normal)
+        button.setImage(UIImage(named: "arrow_right_img") ?? .remove, for: .normal)
         return button
     }()
 
