@@ -42,7 +42,7 @@ class OptionCardButton: UIButton {
     private let optionSubTitleLabel: UILabel = {
         let label = UILabel()
         label.isUserInteractionEnabled = false
-        label.font = Fonts.regularBody2
+        label.font = Fonts.regularBody3
         label.textColor = Colors.coolGrey3
         return label
     }()
