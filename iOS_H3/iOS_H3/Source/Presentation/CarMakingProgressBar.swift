@@ -18,6 +18,13 @@ final class CarMakingProgressBar: UIScrollView {
         return stackView
     }()
 
+    private let progressBarButtons = CarMakingStep.allCases.map {
+        CarMakingProgressBarButton(title: $0.progressBarTitle)
+    }
+
+    // MARK: - Properties
+    private var selectedButtonIndex = 0
+
     // MARK: - Lifecycles
 
     init() {
@@ -43,8 +50,16 @@ final class CarMakingProgressBar: UIScrollView {
     private func setupViews() {
         self.showsHorizontalScrollIndicator = false
 
+        setupProgressBarButtons()
         setupStackViewConstraints()
         addSubviewsOfStackView()
+    }
+
+    private func setupProgressBarButtons() {
+        progressBarButtons.forEach { button in
+            button.addTarget(self, action: #selector(progressBarButtonDidTapped(_:)), for: .touchUpInside)
+        }
+        progressBarButtons.first?.isSelected = true
     }
 
     private func setupStackViewConstraints() {
@@ -59,11 +74,6 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     private func addSubviewsOfStackView() {
-        let progressBarButtons = CarMakingStep.allCases.map {
-            CarMakingProgressBarButton(title: $0.progressBarTitle)
-        }
-        progressBarButtons.first?.isSelected = true
-
         let spacingViews = (0...progressBarButtons.count).map { index in
             let spacingView = CarMakingProgressBarSpacingView()
             spacingView.translatesAutoresizingMaskIntoConstraints = false
@@ -79,5 +89,15 @@ final class CarMakingProgressBar: UIScrollView {
             stackView.addArrangedSubview(progressBarButtons[index])
         }
         stackView.addArrangedSubview(spacingViews[progressBarButtons.count])
+    }
+
+    @objc
+    private func progressBarButtonDidTapped(_ sender: UIButton) {
+        guard let index = progressBarButtons.firstIndex(where: { $0 == sender }) else {
+            return
+        }
+        progressBarButtons[selectedButtonIndex].isSelected = false
+        progressBarButtons[index].isSelected = true
+        selectedButtonIndex = index
     }
 }
