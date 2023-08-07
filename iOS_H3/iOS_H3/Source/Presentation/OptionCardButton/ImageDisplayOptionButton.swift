@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 // 내장 색상 옵션 버튼
 class ImageDisplayOptionButton: OptionCardButton {
-    private let colorImageView: UIImageView = {
+    private let optionImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.layer.cornerRadius = 2
         imageView.backgroundColor = .gray
@@ -29,18 +29,18 @@ class ImageDisplayOptionButton: OptionCardButton {
     }
 
     private func layout() {
-        self.addSubview(colorImageView)
-        colorImageView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(optionImageView)
+        optionImageView.translatesAutoresizingMaskIntoConstraints = false
 
-        colorImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        colorImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        colorImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 15).isActive = true
-        colorImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        optionImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        optionImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        optionImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 15).isActive = true
+        optionImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
 
     }
 
     func setImage(_ image: UIImage?) {
-        colorImageView.image = image
+        optionImageView.image = image
     }
 
 }
