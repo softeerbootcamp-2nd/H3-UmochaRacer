@@ -48,7 +48,7 @@ jobs:
       - name: Code Deploy
         run: aws deploy create-deployment --application-name umocharacer-deploy
           --deployment-config-name CodeDeployDefault.OneAtATime
-          --deployment-group-name umocharacer-deploy-group
+          --deployment-group-name umocharacer-web-deploy-group
           --s3-location bucket=umocharacerjar,bundleType=zip,key=frontend-build.zip
 
         

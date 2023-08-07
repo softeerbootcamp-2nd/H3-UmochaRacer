@@ -11,9 +11,9 @@ else
   sudo docker stop $FRONTEND_PID
   sleep 5
   sudo docker rm $FRONTEND_PID
-  sudo docker rmi $(docker images --filter=reference="h3-umocharacer-front" -q)
+  sudo docker rmi $(sudo docker images --filter=reference="h3-umocharacer-front" -q)
 fi
 
-cd /home/ubuntu/frontend/nginx
+cd /home/ubuntu/web/frontend/nginx
 sudo docker build -t h3-umocharacer-front .
-sudo docker run -d --name h3-umocharacer-front -v /home/ubuntu/frontend/dist:/usr/share/nginx/html -p 80:80 h3-umocharacer-front
+sudo docker run -d --name h3-umocharacer-front -v /home/ubuntu/web/frontend/dist:/usr/share/nginx/html -p 80:80 h3-umocharacer-front

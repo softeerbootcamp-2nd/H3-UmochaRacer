@@ -3,11 +3,11 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/frontend
+    destination: /home/ubuntu/web/frontend
     overwrite: yes
 
 permissions:
-  - object: /home/ubuntu/frontend
+  - object: /home/ubuntu/web/frontend
     pattern: "**"
     owner: ubuntu
     group: ubuntu
