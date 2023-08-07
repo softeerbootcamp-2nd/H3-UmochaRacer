@@ -1,7 +1,5 @@
-import {styled} from 'styled-components';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
-
 import Self from './pages/Self';
 import Main from './pages/Main';
 function App() {
