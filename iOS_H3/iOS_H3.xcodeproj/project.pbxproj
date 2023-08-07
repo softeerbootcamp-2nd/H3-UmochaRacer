@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
 		471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */; };
+		471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */; };
 		471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D52A811D3F00B67D54 /* OptionCardInfo.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
 		471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoOptionCardButtonView.swift; sourceTree = "<group>"; };
+		471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		471917D52A811D3F00B67D54 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */,
 				471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */,
 				471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */,
+				471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -730,6 +733,7 @@
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
 				471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */,
+				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
