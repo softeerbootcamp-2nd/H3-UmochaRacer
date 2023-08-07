@@ -4,7 +4,6 @@ import com.example.backend.domain.cardb.dto.CardbResponseDto;
 import com.example.backend.domain.cardb.entity.Cardb;
 import com.example.backend.domain.cardb.repository.CardbRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
