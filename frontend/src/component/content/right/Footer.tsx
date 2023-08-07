@@ -37,8 +37,11 @@ export default Footer;
 const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0;
   width: 100%;
   height: 47px;
+  z-index: 3;
 `;
 
 const ModalToggle = styled.div`

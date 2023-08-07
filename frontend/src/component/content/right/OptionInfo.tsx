@@ -26,8 +26,10 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
+  position: relative;
   width: 375px;
   height: 565px;
+  padding-top: 27px;
 `;
 
 const OptionTitle = styled.span`
