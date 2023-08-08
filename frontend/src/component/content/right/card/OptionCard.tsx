@@ -6,10 +6,18 @@ import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import Icon from '@/component/common/icons';
 
+interface Data {
+  label: string;
+  optionId: number;
+  rate: number;
+  price: number;
+}
+
 interface CardProps {
   key: number;
   isSelected: boolean;
   onClick: () => void;
+  data: Data;
 }
 
 const SelectIcon = () => {
@@ -45,7 +53,12 @@ const DefaultIcon = () => {
     </svg>
   );
 };
-function OptionCard({key, isSelected, onClick}: CardProps) {
+
+const formatCurrencyKRW = (number: number) => {
+  return Intl.NumberFormat('ko-KR').format(number);
+};
+
+function OptionCard({key, isSelected, onClick, data}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -72,7 +85,7 @@ function OptionCard({key, isSelected, onClick}: CardProps) {
     <Wrapper onClick={onClick} isSeleted={isSelected.toString()}>
       <IconBox>{isSelected ? SelectIcon() : DefaultIcon()}</IconBox>
       <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
-      <Text2 className="black">디젤 2.2</Text2>
+      <Text2 className="black">{data.label}</Text2>
       <DetailBox ref={contentBoxRef} toggle={toggle}>
         <DetailContent ref={contentRef}>
           컨텐츠
@@ -83,7 +96,7 @@ function OptionCard({key, isSelected, onClick}: CardProps) {
         </DetailContent>
       </DetailBox>
       <Footer>
-        <Price className="blue">+ 1,480,000원</Price>
+        <Price className="blue">{`+ ${formatCurrencyKRW(data.price)}원`}</Price>
         <DetailToggle onClick={clickedToggle} isOpen={toggle}></DetailToggle>
       </Footer>
     </Wrapper>
@@ -98,6 +111,8 @@ const Select = css`
 const Default = css`
   background: ${colors.Cool_Grey_001};
   border: 2px solid transparent;
+  cursor: pointer;
+
   &:hover {
     border: 2px solid ${colors.Cool_Grey_003};
     .blue {
@@ -129,7 +144,6 @@ const Wrapper = styled.li<{isSeleted: string}>`
     }
   }};
   transition: 0.5s;
-  cursor: pointer;
 `;
 
 const IconBox = styled.div`

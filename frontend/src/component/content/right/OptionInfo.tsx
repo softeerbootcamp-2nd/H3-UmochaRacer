@@ -5,9 +5,20 @@ import Modal from './optioninfo/Modal';
 import Footer from './Footer';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
-import {Title1_Medium, Title3_Medium, Title3_Regular} from '@/style/fonts';
+import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 
-function SelectedOptionInfo() {
+interface Data {
+  optionId: number;
+  label: string;
+  rate: number;
+  price: number;
+}
+
+interface OptionInfoProps {
+  cardData: Data[];
+}
+
+function OptionInfo({cardData}: OptionInfoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -20,7 +31,7 @@ function SelectedOptionInfo() {
       <Container>
         <OptionTitle>파워트레인</OptionTitle>
         <Text>을 선택해주세요.</Text>
-        <OptionCardList></OptionCardList>
+        <OptionCardList cardData={cardData}></OptionCardList>
         <ModalWrapper ref={modalRef} isOpen={isModalOpen}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
@@ -30,7 +41,7 @@ function SelectedOptionInfo() {
   );
 }
 
-export default React.memo(SelectedOptionInfo);
+export default React.memo(OptionInfo);
 
 const Wrapper = styled.div`
   ${flexCenter}

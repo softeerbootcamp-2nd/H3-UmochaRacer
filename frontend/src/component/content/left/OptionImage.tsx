@@ -2,10 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '../../../style/common';
 
-function OptionImage() {
+interface ImageProps {
+  url: string;
+}
+
+function OptionImage({url}: ImageProps) {
   return (
     <Wrapper>
-      <img src="image 103.png"></img>
+      <img src={url}></img>
     </Wrapper>
   );
 }
