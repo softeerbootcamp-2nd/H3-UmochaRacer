@@ -20,7 +20,7 @@ class ColorViewOptionCardButton: OptionCardButton {
                   optionTitle: String = "옵션 타이틀",
                   optionSubTitle: String = "옵션 서브 타이틀",
                   price: String = "+ 0원") {
-        super.init(type: type)
+        super.init(type: type, optionTitle: optionTitle, optionSubTitle: optionSubTitle, price: price)
         layout()
         attribute()
     }

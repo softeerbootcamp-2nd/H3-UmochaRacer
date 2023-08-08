@@ -9,9 +9,9 @@ import Foundation
 import UIKit
 // 자세히보기 옵션 버튼
 class MoreInfoOptionButton: OptionCardButton {
+
     private let moreInfoButton: UIButton = {
         let button = UIButton()
-
         button.setImage(UIImage(named: "arrow_right_img") ?? .remove, for: .normal)
         return button
     }()
@@ -20,7 +20,7 @@ class MoreInfoOptionButton: OptionCardButton {
                   optionTitle: String = "옵션 타이틀",
                   optionSubTitle: String = "옵션 서브 타이틀",
                   price: String = "+ 0원") {
-        super.init(type: type)
+        super.init(type: type, optionTitle: optionTitle, optionSubTitle: optionSubTitle, price: price)
         layout()
     }
 
@@ -36,7 +36,6 @@ class MoreInfoOptionButton: OptionCardButton {
         moreInfoButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
         moreInfoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18).isActive = true
         moreInfoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
-
     }
 
 }
