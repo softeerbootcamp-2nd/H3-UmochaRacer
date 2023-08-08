@@ -28,7 +28,13 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Properties
-    private var selectedButtonIndex = 0
+
+    private var selectedButtonIndex: Int = 0 {
+        didSet {
+            progressBarButtons[oldValue].isSelected = false
+            progressBarButtons[selectedButtonIndex].isSelected = true
+        }
+    }
 
     // MARK: - Lifecycles
 
@@ -104,8 +110,6 @@ final class CarMakingProgressBar: UIScrollView {
         guard let index = progressBarButtons.firstIndex(where: { $0 == sender }) else {
             return
         }
-        progressBarButtons[selectedButtonIndex].isSelected = false
-        progressBarButtons[index].isSelected = true
         selectedButtonIndex = index
     }
 }
