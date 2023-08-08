@@ -9,6 +9,11 @@ import UIKit
 
 final class CarMakingProgressBar: UIScrollView {
 
+    enum Constants {
+        static let horizontalInset = 16.0
+        static let barButtonSpacing = 24.0
+    }
+
     // MARK: - UI properties
 
     private let stackView: UIStackView = {
@@ -78,8 +83,11 @@ final class CarMakingProgressBar: UIScrollView {
             let spacingView = CarMakingProgressBarSpacingView()
             spacingView.translatesAutoresizingMaskIntoConstraints = false
 
-            let width = index == 0 || index == progressBarButtons.count ? 16.0 : 24.0
-            spacingView.widthAnchor.constraint(equalToConstant: width).isActive = true
+            if index == 0 || index == progressBarButtons.count {
+                spacingView.widthAnchor.constraint(equalToConstant: Constants.horizontalInset).isActive = true
+            } else {
+                spacingView.widthAnchor.constraint(equalToConstant: Constants.barButtonSpacing).isActive = true
+            }
 
             return spacingView
         }
