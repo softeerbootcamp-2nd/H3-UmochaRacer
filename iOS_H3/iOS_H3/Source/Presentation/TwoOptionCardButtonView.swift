@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class TwoOptionCardButtonView: UIView {
+final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     enum Constants {
         static let buttonSpacing = 12.0
@@ -15,11 +15,11 @@ final class TwoOptionCardButtonView: UIView {
 
     // MARK: - UI Properties
 
-    private let optionCardButtons: [OptionCardButton]
+    private(set) var optionCardButtons: [OptionCardButton]
 
     // MARK: - Properties
 
-    private var selectedButtonIndex = 0
+    var selectedButtonIndex = 0
 
     // MARK: - LifeCycles
 
@@ -52,25 +52,13 @@ final class TwoOptionCardButtonView: UIView {
     }
 
     // MARK: - Helpers
+}
 
-    func selectOption(index: Int) {
-        optionCardButtons[selectedButtonIndex].isSelected = false
-        optionCardButtons[index].isSelected = true
-        selectedButtonIndex = index
-    }
+extension TwoOptionCardButtonView: MoreInfoOptionButtonDelegate {
 
-    /// index에 해당하는 옵션 카드의 view를 업데이트
-    func updateView(index: Int, with cardInfo: OptionCardInfo) {
-        optionCardButtons[index].setOptionTitle(cardInfo.title)
-        optionCardButtons[index].setOptionSubTitle(cardInfo.subTitle)
-        optionCardButtons[index].setPrice(cardInfo.priceString)
-    }
-
-    /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
-    func updateAllViews(with cardInfos: [OptionCardInfo]) {
-        optionCardButtons.enumerated().forEach { (index, _) in
-            updateView(index: index, with: cardInfos[index])
-        }
+    func moreInfoButtonPressed() {
+        print(#function)
+        // show alert
     }
 }
 
@@ -129,13 +117,5 @@ extension TwoOptionCardButtonView {
             optionCardButtons[1].trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButtons[1].bottomAnchor.constraint(equalTo: self.optionCardButtons[0].bottomAnchor)
         ])
-    }
-}
-
-extension TwoOptionCardButtonView: MoreInfoOptionButtonDelegate {
-
-    func moreInfoButtonPressed() {
-        print(#function)
-        // show alert
     }
 }
