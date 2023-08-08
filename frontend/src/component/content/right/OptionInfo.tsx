@@ -36,7 +36,7 @@ function OptionInfo({cardData, setNewIndex}: OptionInfoProps) {
           cardData={cardData}
           setNewIndex={setNewIndex}
         ></OptionCardList>
-        <ModalWrapper ref={modalRef} isOpen={isModalOpen}>
+        <ModalWrapper ref={modalRef} opened={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
         <Footer onClick={handleModalView} isOpen={isModalOpen}></Footer>
@@ -52,12 +52,12 @@ const Wrapper = styled.div`
   flex: 4;
 `;
 
-const ModalWrapper = styled.div<{isOpen: boolean}>`
+const ModalWrapper = styled.div<{opened: string}>`
   position: absolute;
   top: 26px;
   width: 375px;
   height: 440px;
-  margin-top: ${(props) => (props.isOpen ? '0px' : '130%')};
+  margin-top: ${(props) => (props.opened ? '0px' : '130%')};
   padding: 50px 0px;
   border-radius: 6px;
   border: 2px solid ${colors.Cool_Grey_001};

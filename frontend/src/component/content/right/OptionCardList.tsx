@@ -26,7 +26,7 @@ function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
       key={index}
-      isSelected={selectedItem === index}
+      selected={selectedItem === index}
       onClick={() => handleItemClick(index)}
       data={elem}
     ></OptionCard>
