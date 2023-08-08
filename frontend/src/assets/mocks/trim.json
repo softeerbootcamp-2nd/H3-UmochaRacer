@@ -1,0 +1,76 @@
+[
+  {
+    "id": 1,
+    "name": "Guide Mode",
+    "tag": "나만을 위한 팰리세이드",
+    "price": 38960000,
+    "route": "/",
+    "description": {
+      "title": "나에게 딱맞는 구성으로,",
+      "hasDescription": true,
+      "descriptionData": [
+        {
+          "main": "내 관심 분야를 바탕으로 유형 분석",
+          "sub": "선택해주신 태그를 바탕으로 나의 유형을 분석해드려요."
+        },
+        {
+          "main": "개인맞춤 가이드와 함께 쉽게 옵션 선택!",
+          "sub": "나와 비슷한 유형의 사람들은 어떤 옵션을 선택했는지 알 수 있어요."
+        },
+        {
+          "main": "나만의 멋진 차 완성!",
+          "sub": "나의 취향이 반영된 멋진 차가 완성돼요!"
+        }
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "name": "Exclusive",
+    "tag": "기본에 충실",
+    "price": 40440000,
+    "route": "/",
+    "description": null
+  },
+  {
+    "id": 3,
+    "name": "Le Blanc",
+    "tag": "베스트셀러",
+    "price": 43460000,
+    "route": "/self",
+    "description": {
+      "title": "모두가 선택한 베스트셀러",
+      "hasDescription": false,
+      "descriptionData": [
+        {
+          "main": "20인치\n알로이 휠",
+          "sub": "src/asset/images/le_blanc_option1.png"
+        },
+        {
+          "main": "서라운드 뷰\n모니터",
+          "sub": "src/asset/images/le_blanc_option2.png"
+        },
+        {
+          "main": "클러스터\n(12.3인치 컬러 LCD)",
+          "sub": "src/asset/images/le_blanc_option3.png"
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "name": "Prestige",
+    "tag": "부담없는 고급감",
+    "price": 47720000,
+    "route": "/",
+    "description": null
+  },
+  {
+    "id": 5,
+    "name": "Calligraphy",
+    "tag": "최고를 원한다면",
+    "price": 52540000,
+    "route": "/",
+    "description": null
+  }
+]

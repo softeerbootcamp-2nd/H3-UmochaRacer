@@ -1,18 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import * as icons from '@/assets/icons';
+
+type IconType = keyof typeof icons;
 interface IconProps {
-  name: string;
+  name: IconType;
   size: number;
 }
-function Icon({name, size}: IconProps) {
-  return (
-    <IconImg
-      src={`../src/assets/icons/${name}.svg`}
-      width={size}
-      height={size}
-    ></IconImg>
-  );
-}
 
+function Icon({name, size}: IconProps) {
+  const Icon = icons[name];
+  return <Icon width={size} height={size} />;
+}
 export default Icon;
-const IconImg = styled.img``;
