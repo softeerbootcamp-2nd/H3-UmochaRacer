@@ -17,29 +17,6 @@ enum CarMakingStep: Int, CaseIterable {
     case optionSelection
     case makingEstimate
 
-    var progressBarTitle: String {
-        var title = (self.rawValue < 10 ? "0" : "") + "\(self.rawValue) "
-        switch self {
-        case .powertrain:
-            title += "파워트레인"
-        case .driveMethod:
-            title += "구동 방식"
-        case .bodyType:
-            title += "바디 타입"
-        case .externalColor:
-            title += "외장 색상"
-        case .internalColor:
-            title += "내장 색상"
-        case .wheelSelection:
-            title += "휠 선택"
-        case .optionSelection:
-            title += "옵션 선택"
-        case .makingEstimate:
-            title += "견적 내기"
-        }
-        return title
-    }
-
     var title: String {
         switch self {
         case .powertrain:
@@ -56,8 +33,21 @@ enum CarMakingStep: Int, CaseIterable {
             return "휠"
         case .optionSelection:
             return "옵션"
-        default:
-            return ""
+        case .makingEstimate:
+            return "견적 내기"
         }
+    }
+
+    var progressBarTitle: String {
+        var title = (self.rawValue < 10 ? "0" : "") + "\(self.rawValue) "
+        switch self {
+        case .wheelSelection:
+            title += "휠 선택"
+        case .optionSelection:
+            title += "옵션 선택"
+        default:
+            title += self.title
+        }
+        return title
     }
 }
