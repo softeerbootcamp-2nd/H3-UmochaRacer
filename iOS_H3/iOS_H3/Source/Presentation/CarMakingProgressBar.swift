@@ -58,6 +58,10 @@ final class CarMakingProgressBar: UIScrollView {
 
     // MARK: - Helpers
 
+}
+
+extension CarMakingProgressBar {
+
     private func setupViews() {
         self.showsHorizontalScrollIndicator = false
 
