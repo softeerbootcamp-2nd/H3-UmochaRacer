@@ -7,6 +7,11 @@
 
 import Foundation
 import UIKit
+
+protocol MoreInfoOptionButtonDelegate: AnyObject {
+    func moreInfoButtonPressed()
+}
+
 // 자세히보기 옵션 버튼
 class MoreInfoOptionButton: OptionCardButton {
 
@@ -16,12 +21,15 @@ class MoreInfoOptionButton: OptionCardButton {
         return button
     }()
 
+    weak var delegate: MoreInfoOptionButtonDelegate?
+
     override init(type: OptionCardButton.OptionCardType,
                   optionTitle: String = "옵션 타이틀",
                   optionSubTitle: String = "옵션 서브 타이틀",
                   price: String = "+ 0원") {
         super.init(type: type, optionTitle: optionTitle, optionSubTitle: optionSubTitle, price: price)
         layout()
+        addMoreInfoButtonTarget()
     }
 
     required init?(coder: NSCoder) {
@@ -38,4 +46,12 @@ class MoreInfoOptionButton: OptionCardButton {
         moreInfoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     }
 
+    private func addMoreInfoButtonTarget() {
+        moreInfoButton.addTarget(self, action: #selector(moreInfoButtonTapped), for: .touchUpInside)
+    }
+
+    @objc
+    private func moreInfoButtonTapped() {
+        delegate?.moreInfoButtonPressed()
+    }
 }
