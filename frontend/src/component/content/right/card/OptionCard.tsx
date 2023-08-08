@@ -1,11 +1,18 @@
 import React from 'react';
 import {useState, useRef, useCallback} from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
+import Icon from '@/component/common/icons';
 
-const Icon = () => {
+interface CardProps {
+  key: number;
+  isSelected: boolean;
+  onClick: () => void;
+}
+
+const SelectIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -22,7 +29,23 @@ const Icon = () => {
   );
 };
 
-function OptionCard() {
+const DefaultIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M12.4004 22.1064C6.87739 22.1064 2.40039 17.6294 2.40039 12.1064C2.40039 6.58345 6.87739 2.10645 12.4004 2.10645C17.9234 2.10645 22.4004 6.58345 22.4004 12.1064C22.4004 17.6294 17.9234 22.1064 12.4004 22.1064ZM11.0434 16.3494L18.1134 9.27845L16.6994 7.86445L11.0434 13.5214L8.21439 10.6924L6.80039 12.1064L11.0434 16.3494Z"
+        fill="#AAAAAA"
+      />
+    </svg>
+  );
+};
+function OptionCard({key, isSelected, onClick}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -46,19 +69,21 @@ function OptionCard() {
   );
 
   return (
-    <Wrapper>
-      {Icon()}
-      <Text1>구매자의 63%가 선택했어요!</Text1>
-      <Text2>디젤 2.2</Text2>
+    <Wrapper onClick={onClick} isSeleted={isSelected.toString()}>
+      <IconBox>{isSelected ? SelectIcon() : DefaultIcon()}</IconBox>
+      <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+      <Text2 className="black">디젤 2.2</Text2>
       <DetailBox ref={contentBoxRef} toggle={toggle}>
         <DetailContent ref={contentRef}>
-          컨텐츠컨텐츠컨텐츠컨텐츠컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
-          컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
-          컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
+          컨텐츠
+          <Text1>구매자의 63%가 선택했어요!</Text1>
+          <Text2>디젤 2.2</Text2>
+          <Text1>구매자의 63%가 선택했어요!</Text1>
+          <Text2>디젤 2.2</Text2>
         </DetailContent>
       </DetailBox>
       <Footer>
-        <Price>+ 1,480,000원</Price>
+        <Price className="blue">+ 1,480,000원</Price>
         <DetailToggle onClick={clickedToggle} isOpen={toggle}></DetailToggle>
       </Footer>
     </Wrapper>
@@ -66,8 +91,29 @@ function OptionCard() {
 }
 
 export default OptionCard;
+const Select = css`
+  border: 2px solid ${colors.Main_Hyundai_Blue};
+`;
 
-const Wrapper = styled.div`
+const Default = css`
+  background: ${colors.Cool_Grey_001};
+  border: 2px solid transparent;
+  &:hover {
+    border: 2px solid ${colors.Cool_Grey_003};
+    .blue {
+      color: ${colors.Main_Hyundai_Blue};
+    }
+    .black {
+      color: ${colors.Cool_Grey};
+    }
+  }
+  div {
+    color: ${colors.Cool_Grey_003};
+    transition: 0.5s;
+  }
+`;
+
+const Wrapper = styled.li<{isSeleted: string}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -75,7 +121,22 @@ const Wrapper = styled.div`
   min-height: 150px;
   padding: 20px;
   border-radius: 6px;
-  border: 2px solid ${colors.Main_Hyundai_Blue};
+  ${(props) => {
+    if (props.isSeleted === 'true') {
+      return Select;
+    } else {
+      return Default;
+    }
+  }};
+  transition: 0.5s;
+  cursor: pointer;
+`;
+
+const IconBox = styled.div`
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  transition: 0.5s;
 `;
 
 const Text1 = styled.div`
@@ -107,15 +168,17 @@ const Price = styled.div`
 `;
 
 const DetailBox = styled.div<{toggle: boolean}>`
+  position: relative;
   height: 0;
-  opacity: ${(props) => (props.toggle ? '1' : '0')};
-  border-top: 1px solid ${colors.Cool_Grey_001};
-  transition:
-    height 0.5s,
-    opacity 0.5s;
+  pointer-events: ${(props) => (props.toggle ? '' : 'none')};
+  overflow: hidden;
+  transition: height 0.5s;
 `;
 
 const DetailContent = styled.div`
+  position: absolute;
+  width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-top: 1px solid ${colors.Cool_Grey_001};
 `;
