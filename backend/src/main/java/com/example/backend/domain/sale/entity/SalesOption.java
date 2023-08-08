@@ -9,6 +9,6 @@ import org.springframework.data.relational.core.mapping.Table;
 public class SalesOption {
     @Id
     private Long id;
-    AggregateReference<Sales,Long> salesId;
-    AggregateReference<AdditionalOption, Long> optionId;
+    private AggregateReference<Sales,Long> salesId;
+    private AggregateReference<AdditionalOption, Long> optionId;
 }

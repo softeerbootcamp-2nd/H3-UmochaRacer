@@ -10,7 +10,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class InteriorColor {
     @Id
     private Long id;
-    AggregateReference<ExteriorColor, Long> exteriorColorId;
+    private AggregateReference<ExteriorColor, Long> exteriorColorId;
     private String iconSrc;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
     private BaseInfo baseInfo;

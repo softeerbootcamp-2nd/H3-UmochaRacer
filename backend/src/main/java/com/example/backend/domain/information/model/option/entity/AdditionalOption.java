@@ -10,8 +10,8 @@ import org.springframework.data.relational.core.mapping.Table;
 public class AdditionalOption {
     @Id
     private Long id;
-    AggregateReference<AdditionalOption, Long> topOptionId;
-    AggregateReference<Parts, Long> partsId;
+    private AggregateReference<AdditionalOption, Long> topOptionId;
+    private AggregateReference<Parts, Long> partsId;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
     private String detail;

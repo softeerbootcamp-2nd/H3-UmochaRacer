@@ -12,12 +12,12 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Sales {
     @Id
     private Long id;
-    AggregateReference<Model, Long> modelId;
-    AggregateReference<ExteriorColor, Long> exteriorColorId;
-    AggregateReference<InteriorColor, Long> interioiColorId;
-    AggregateReference<Tag, Long> tag1;
-    AggregateReference<Tag, Long> tag2;
-    AggregateReference<Tag, Long> tag3;
+    private AggregateReference<Model, Long> modelId;
+    private AggregateReference<ExteriorColor, Long> exteriorColorId;
+    private AggregateReference<InteriorColor, Long> interioiColorId;
+    private AggregateReference<Tag, Long> tag1;
+    private AggregateReference<Tag, Long> tag2;
+    private AggregateReference<Tag, Long> tag3;
     private Integer age;
     private Gender gender;
 }
