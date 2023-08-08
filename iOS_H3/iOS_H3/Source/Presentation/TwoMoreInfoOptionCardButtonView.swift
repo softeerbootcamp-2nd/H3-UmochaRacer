@@ -24,3 +24,10 @@ final class TwoMoreInfoOptionCardButtonView: TwoOptionCardButtonView {
         }
     }
 }
+
+extension TwoMoreInfoOptionCardButtonView: MoreInfoOptionButtonDelegate {
+    func moreInfoButtonDidTapped() {
+        print(#function)
+        // show alert
+    }
+}
