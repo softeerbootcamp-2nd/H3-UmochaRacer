@@ -22,7 +22,7 @@ function DetailFeature({descriptionData}: DetailFeatureProps) {
               <Feature.Image src={data.sub} />
               <Feature.Text>
                 {data.main}
-                <Feature.Border />
+                {idx !== descriptionData.length - 1 && <Feature.Border />}
               </Feature.Text>
             </Feature.Option>
           ))}
@@ -53,7 +53,7 @@ const Feature = {
     height: 60px;
     margin: 0 30px;
   `,
-  Text: styled.p`
+  Text: styled.div`
     ${Title6_Regular}
     font-weight: 400;
     white-space: pre-line;
@@ -72,9 +72,5 @@ const Feature = {
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    &:last-child Border {
-      display: none;
-    }
   `,
 };

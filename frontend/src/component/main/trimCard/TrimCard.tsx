@@ -48,7 +48,7 @@ function TrimCard({trimData}: TrimCardProps) {
           <Card.Price>{`${trimData.price.toLocaleString()}원 부터`}</Card.Price>
           <Icon name="ArrowRight" size={20} />
         </Card.PriceWrapper>
-        {true && (
+        {isHover && (
           <Card.DescriptionWrapper>
             {trimData.description && (
               <TrimDescription
