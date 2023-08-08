@@ -51,7 +51,13 @@ function OptionCard() {
       <Text1>구매자의 63%가 선택했어요!</Text1>
       <Text2>디젤 2.2</Text2>
       <DetailBox ref={contentBoxRef} toggle={toggle}>
-        <DetailContent ref={contentRef}>컨텐츠</DetailContent>
+        <DetailContent ref={contentRef}>
+          컨텐츠
+          <Text1>구매자의 63%가 선택했어요!</Text1>
+          <Text2>디젤 2.2</Text2>
+          <Text1>구매자의 63%가 선택했어요!</Text1>
+          <Text2>디젤 2.2</Text2>
+        </DetailContent>
       </DetailBox>
       <Footer>
         <Price>+ 1,480,000원</Price>
@@ -103,15 +109,17 @@ const Price = styled.div`
 `;
 
 const DetailBox = styled.div<{toggle: boolean}>`
+  position: relative;
   height: 0;
-  opacity: ${(props) => (props.toggle ? '1' : '0')};
-  border-top: 1px solid ${colors.Cool_Grey_001};
-  transition:
-    height 0.5s,
-    opacity 0.5s;
+  pointer-events: ${(props) => (props.toggle ? '' : 'none')};
+  overflow: hidden;
+  transition: height 0.5s;
 `;
 
 const DetailContent = styled.div`
+  position: absolute;
+  width: 100%;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-top: 1px solid ${colors.Cool_Grey_001};
 `;
