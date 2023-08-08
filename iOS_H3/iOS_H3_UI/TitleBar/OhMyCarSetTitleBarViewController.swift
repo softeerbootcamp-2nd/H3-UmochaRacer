@@ -72,7 +72,6 @@ class OhMyCarSetTitleBarViewController: UIViewController {
             guideModeBar.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
 }
 
 extension OhMyCarSetTitleBarViewController: OhMyCarSetTitleBarDelegate {

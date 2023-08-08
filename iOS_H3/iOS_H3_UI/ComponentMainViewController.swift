@@ -51,13 +51,11 @@ class ComponentMainViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupViews()
-
     }
 
     func setupViews() {
         setupContainerView()
         setupUIComponentButtons()
-
     }
 
     func setupContainerView() {
