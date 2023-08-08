@@ -8,11 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
+
+		471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */; };
+		471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */; };
+		471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D52A811D3F00B67D54 /* OptionCardInfo.swift */; };
+		471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */; };
+		471917E42A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917E32A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift */; };
+
 		471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
 		471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */; };
 		471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */; };
 		471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C92A7FA02000B67D54 /* CarMakingStep.swift */; };
 		471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
+
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
@@ -96,11 +104,19 @@
 
 /* Begin PBXFileReference section */
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
+
+		471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoOptionCardButtonView.swift; sourceTree = "<group>"; };
+		471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoOptionCardButtonViewController.swift; sourceTree = "<group>"; };
+		471917D52A811D3F00B67D54 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
+		471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionCardButtonListViewable.swift; path = iOS_H3/Source/Presentation/OptionCardButtonListViewable.swift; sourceTree = SOURCE_ROOT; };
+		471917E32A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoMoreInfoOptionCardButtonView.swift; sourceTree = "<group>"; };
+
 		471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBar.swift; sourceTree = "<group>"; };
 		471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarButton.swift; sourceTree = "<group>"; };
 		471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarViewController.swift; sourceTree = "<group>"; };
 		471917C92A7FA02000B67D54 /* CarMakingStep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStep.swift; sourceTree = "<group>"; };
 		471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarSpacingView.swift; sourceTree = "<group>"; };
+
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
@@ -130,8 +146,8 @@
 		5F3B50BA2A79EDE900158E96 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		5F3D88182A7C72C7004C5AD2 /* OhMyCarSetTitleBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OhMyCarSetTitleBar.swift; path = iOS_H3/Source/Presentation/TitleBar/OhMyCarSetTitleBar.swift; sourceTree = SOURCE_ROOT; };
 		5F5E21122A78DD21003C1185 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardButton.swift; sourceTree = "<group>"; };
 		5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetTitleBarViewController.swift; sourceTree = "<group>"; };
+		5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardButton.swift; sourceTree = "<group>"; };
 		5F6203662A7BC59500D09531 /* iOS_H3_UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_H3_UI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6203682A7BC59500D09531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F62036A2A7BC59500D09531 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -221,10 +237,17 @@
 				5F5F724B2A7E00FC0084AFD4 /* TitleBar */,
 				477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */,
 				471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */,
+
+				471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */,
+				471917E32A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift */,
+				471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */,
+				471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */,
+
 				471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */,
 				471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */,
 				471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */,
 				471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */,
+
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -317,6 +340,7 @@
 		478B26822A78FD3800598902 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				471917D52A811D3F00B67D54 /* OptionCardInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -418,6 +442,15 @@
 			path = iOS_H3UITests;
 			sourceTree = "<group>";
 		};
+		5F5F724B2A7E00FC0084AFD4 /* TitleBar */ = {
+			isa = PBXGroup;
+			children = (
+				5F3D88182A7C72C7004C5AD2 /* OhMyCarSetTitleBar.swift */,
+				5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */,
+			);
+			path = TitleBar;
+			sourceTree = "<group>";
+		};
 		5F5F724F2A7E12970084AFD4 /* OptionCardButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,15 +463,6 @@
 				5F2593E12A7FCA16001B2D84 /* OptionCardButtonViewController.swift */,
 			);
 			path = OptionCardButton;
-			sourceTree = "<group>";
-		};
-		5F5F724B2A7E00FC0084AFD4 /* TitleBar */ = {
-			isa = PBXGroup;
-			children = (
-				5F3D88182A7C72C7004C5AD2 /* OhMyCarSetTitleBar.swift */,
-				5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */,
-			);
-			path = TitleBar;
 			sourceTree = "<group>";
 		};
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
@@ -720,6 +744,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */,
+				471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */,
 				5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */,
 				5F3D88192A7C72C7004C5AD2 /* OhMyCarSetTitleBar.swift in Sources */,
@@ -740,13 +765,16 @@
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 
 				5F2593DC2A7FB3CE001B2D84 /* ColorViewOptionCardButton.swift in Sources */,
-				5F62039B2A7BC86900D09531 /* OhMyCarSetNavigationBar.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F2593D82A7FB385001B2D84 /* MoreInfoOptionButton.swift in Sources */,
 
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
+				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
+				471917E42A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
+				471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */,
+				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -961,8 +989,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS_H3/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = H3UmochaRacer;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -972,7 +1002,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.umocha-racer.iOS-H3";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.softeer.H3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -990,8 +1020,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iOS_H3/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = H3UmochaRacer;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -1001,7 +1033,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.umocha-racer.iOS-H3";
+				PRODUCT_BUNDLE_IDENTIFIER = kr.codesquad.softeer.H3;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
