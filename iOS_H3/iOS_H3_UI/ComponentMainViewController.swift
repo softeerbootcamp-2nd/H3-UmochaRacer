@@ -43,7 +43,23 @@ class ComponentMainViewController: UIViewController {
         let button = UIButton()
         button.setTitle("공통버튼 보기", for: .normal)
         button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(didTapButtons), for: .touchUpInside)
+        button.addTarget(self, action: #selector(didTapOhMyCarSetButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var progressBarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("프로그레스 바 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapProgressBarButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var twoOptionCardButtonViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("TwoOptionCardButtonView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapTwoOptionCardButtonViewButton), for: .touchUpInside)
         return button
     }()
 
@@ -83,26 +99,37 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(titleBarButton)
         stackView.addArrangedSubview(optionCardButton)
         stackView.addArrangedSubview(ohMyCarSetButton)
+        stackView.addArrangedSubview(progressBarButton)
+        stackView.addArrangedSubview(twoOptionCardButtonViewButton)
 
-        let buttons = [titleBarButton, optionCardButton, ohMyCarSetButton]
+        let buttons = [titleBarButton, optionCardButton, ohMyCarSetButton, progressBarButton, twoOptionCardButtonViewButton]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
 
     @objc func didTapTitleBarButton() {
-        let titleBarVC = OhMyCarSetTitleBarViewController()
-        self.present(titleBarVC, animated: false)
+        let viewController = OhMyCarSetTitleBarViewController()
+        self.present(viewController, animated: false)
     }
 
     @objc func didTapOptionCardButton() {
-        let titleBarVC = OptionCardButtonViewController()
-        self.present(titleBarVC, animated: false)
+        let viewController = OptionCardButtonViewController()
+        self.present(viewController, animated: false)
     }
 
-    @objc func didTapButtons() {
-        let titleBarVC = OhMyCarSetButtonViewController()
-        self.present(titleBarVC, animated: false)
+    @objc func didTapOhMyCarSetButton() {
+        let viewController = OhMyCarSetButtonViewController()
+        self.present(viewController, animated: false)
+    }
+    
+    @objc func didTapProgressBarButton() {
+        let viewController = CarMakingProgressBarViewController()
+        self.present(viewController, animated: false)
     }
 
+    @objc func didTapTwoOptionCardButtonViewButton() {
+        let viewController = TwoOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
 }
