@@ -102,7 +102,13 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
 
-        let buttons = [titleBarButton, optionCardButton, ohMyCarSetButton, progressBarButton, twoOptionCardButtonViewButton]
+        let buttons = [
+            titleBarButton,
+            optionCardButton,
+            ohMyCarSetButton,
+            progressBarButton,
+            twoOptionCardButtonViewButton
+        ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
@@ -122,7 +128,7 @@ class ComponentMainViewController: UIViewController {
         let viewController = OhMyCarSetButtonViewController()
         self.present(viewController, animated: false)
     }
-    
+
     @objc func didTapProgressBarButton() {
         let viewController = CarMakingProgressBarViewController()
         self.present(viewController, animated: false)
