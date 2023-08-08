@@ -84,7 +84,7 @@ function OptionCard({selected, onClick, data}: CardProps) {
   return (
     <Wrapper onClick={onClick} selected={selected}>
       <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
-      <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+      <Text1 className="blue">구매자의 {data.rate}%가 선택했어요!</Text1>
       <Text2 className="black">{data.label}</Text2>
       <DetailBox ref={contentBoxRef} toggle={toggle.toString()}>
         <DetailContent ref={contentRef}>
