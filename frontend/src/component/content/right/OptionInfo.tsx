@@ -57,7 +57,7 @@ const ModalWrapper = styled.div<{opened: string}>`
   top: 26px;
   width: 375px;
   height: 440px;
-  margin-top: ${(props) => (props.opened ? '0px' : '130%')};
+  margin-top: ${(props) => (props.opened === 'true' ? '0px' : '130%')};
   padding: 50px 0px;
   border-radius: 6px;
   border: 2px solid ${colors.Cool_Grey_001};
