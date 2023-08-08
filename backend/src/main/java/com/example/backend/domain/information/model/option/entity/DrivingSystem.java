@@ -7,7 +7,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("DRIVING_SYSTEM")
 public class DrivingSystem {
     private Long id;
-    @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
+    @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
     private String detail;
     private String comment;

@@ -1,11 +1,14 @@
 package com.example.backend.domain.information.model.car.entity;
 
+import com.example.backend.domain.global.model.BaseInfo;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("TRIM")
 public class Trim {
     @Id
     private Long id;
-    private String name;
+    @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
+    private BaseInfo baseInfo;
 }
