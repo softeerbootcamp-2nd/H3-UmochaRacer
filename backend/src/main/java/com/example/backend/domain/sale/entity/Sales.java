@@ -5,19 +5,27 @@ import com.example.backend.domain.information.model.car.entity.InteriorColor;
 import com.example.backend.domain.information.model.car.entity.Model;
 import com.example.backend.domain.sale.entity.enums.Gender;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.List;
 
 @Table("SALES")
 public class Sales {
     @Id
     private Long id;
-    private AggregateReference<Model, Long> modelId;
-    private AggregateReference<ExteriorColor, Long> exteriorColorId;
-    private AggregateReference<InteriorColor, Long> interioiColorId;
-    private AggregateReference<Tag, Long> tag1;
-    private AggregateReference<Tag, Long> tag2;
-    private AggregateReference<Tag, Long> tag3;
+    @MappedCollection(keyColumn = "id")
+    private List<Model> modelId;
+    @MappedCollection(keyColumn = "id")
+    private List<ExteriorColor> exteriorColorId;
+    @MappedCollection(keyColumn = "id")
+    private List<InteriorColor> interiorColors;
+    @MappedCollection(keyColumn = "id")
+    private List<Tag> tag1;
+    @MappedCollection(keyColumn = "id")
+    private List<Tag> tag2;
+    @MappedCollection(keyColumn = "id")
+    private List<Tag> tag3;
     private Integer age;
     private Gender gender;
 }

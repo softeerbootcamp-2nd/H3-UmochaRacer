@@ -2,13 +2,17 @@ package com.example.backend.domain.sale.entity;
 
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
+import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
+
+import java.util.List;
 
 @Table("SALES_OPTION")
 public class SalesOption {
     @Id
     private Long id;
-    private AggregateReference<Sales,Long> salesId;
-    private AggregateReference<AdditionalOption, Long> optionId;
+    @MappedCollection(keyColumn = "id")
+    private List<Sales> salesId;
+    @MappedCollection(keyColumn = "id")
+    private List<AdditionalOption> optionId;
 }
