@@ -21,6 +21,11 @@
 		471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C92A7FA02000B67D54 /* CarMakingStep.swift */; };
 		471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
 
+		471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
+		471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
+		471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */; };
+		471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */; };
+		471917EA2A82369E00B67D54 /* CarMakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C92A7FA02000B67D54 /* CarMakingStep.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
@@ -228,6 +233,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		471917E52A82365200B67D54 /* CarMakingProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */,
+				471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */,
+				471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */,
+				471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */,
+			);
+			path = CarMakingProgressBar;
+			sourceTree = "<group>";
+		};
 		477620C62A7B8F5300D60B59 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -261,11 +277,6 @@
 				471917E32A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift */,
 				471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */,
 				471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */,
-
-				471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */,
-				471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */,
-				471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */,
-				471917C72A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift */,
 
 			);
 			path = Presentation;
@@ -496,6 +507,7 @@
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
 			isa = PBXGroup;
 			children = (
+				471917E52A82365200B67D54 /* CarMakingProgressBar */,
 				5F39EF442A81B8CE004B0C97 /* OhMyCarSetButton */,
 				5F5F724F2A7E12970084AFD4 /* OptionCardButton */,
 				5F4975592A8119C9008FFFE5 /* TitleBar */,
@@ -836,24 +848,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				471917EA2A82369E00B67D54 /* CarMakingStep.swift in Sources */,
 				5F49755F2A811AC1008FFFE5 /* UILabel+.swift in Sources */,
 				5F39EF3D2A81B797004B0C97 /* MoreInfoOptionButton.swift in Sources */,
 				5F62036D2A7BC59500D09531 /* ComponentMainViewController.swift in Sources */,
+				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */,
 				5F39EF3F2A81B79D004B0C97 /* ImageDisplayOptionButton.swift in Sources */,
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				5F39EF402A81B79F004B0C97 /* ColorViewOptionCardButton.swift in Sources */,
+				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
+				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
 				5F39EF422A81B7A3004B0C97 /* OptionMotionView.swift in Sources */,
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
+				471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
