@@ -1,16 +1,26 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {colors} from '../../../style/theme';
 import OptionCard from './card/OptionCard';
 
 function OptionCardList() {
+  const [selectedItem, setSelectedItem] = useState<number | null>(0);
+
+  const handleItemClick = (index: number) => {
+    setSelectedItem(index);
+  };
+
+  const cards: React.JSX.Element[] = [0, 1, 2].map((index) => (
+    <OptionCard
+      key={index}
+      isSelected={selectedItem === index}
+      onClick={() => handleItemClick(index)}
+    ></OptionCard>
+  ));
+
   return (
     <Wrapper>
-      <Container>
-        <OptionCard></OptionCard>
-        <OptionCard></OptionCard>
-        <OptionCard></OptionCard>
-      </Container>
+      <Container>{cards}</Container>
     </Wrapper>
   );
 }
