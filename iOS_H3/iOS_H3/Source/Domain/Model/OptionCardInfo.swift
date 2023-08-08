@@ -10,5 +10,5 @@ import Foundation
 struct OptionCardInfo {
     let title: String
     let subTitle: String
-    let priceString: String
+    let priceString: String     // 예시) "+ 100,000원"
 }
