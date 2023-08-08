@@ -18,5 +18,10 @@ public class AdditionalOption {
     private List<Parts> partsId;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
+    private Type type;
     private String detail;
+
+    enum Type {
+        BASIC, WHEEL, ADDITIONAL;
+    }
 }
