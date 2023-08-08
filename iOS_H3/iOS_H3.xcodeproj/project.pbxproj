@@ -461,13 +461,13 @@
 			path = iOS_H3UITests;
 			sourceTree = "<group>";
 		};
-		5F39EF442A81B8CE004B0C97 /* Button */ = {
+		5F39EF442A81B8CE004B0C97 /* OhMyCarSetButton */ = {
 			isa = PBXGroup;
 			children = (
 				477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */,
 				471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */,
 			);
-			path = Button;
+			path = OhMyCarSetButton;
 			sourceTree = "<group>";
 		};
 		5F4975592A8119C9008FFFE5 /* TitleBar */ = {
@@ -496,7 +496,7 @@
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
 			isa = PBXGroup;
 			children = (
-				5F39EF442A81B8CE004B0C97 /* Button */,
+				5F39EF442A81B8CE004B0C97 /* OhMyCarSetButton */,
 				5F5F724F2A7E12970084AFD4 /* OptionCardButton */,
 				5F4975592A8119C9008FFFE5 /* TitleBar */,
 				5F6203682A7BC59500D09531 /* AppDelegate.swift */,
