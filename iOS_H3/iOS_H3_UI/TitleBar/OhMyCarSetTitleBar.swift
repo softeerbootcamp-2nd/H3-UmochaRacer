@@ -154,6 +154,7 @@ class OhMyCarSetTitleBar: UIView {
         button.titleLabel?.font = Fonts.regularBody2
         button.titleLabel?.setupLineHeight(FontLineHeights.regularBody2)
         button.titleLabel?.setupLetterSpacing(FontLetterSpacings.regularBody2)
+        button.widthAnchor.constraint(equalToConstant: 60).isActive = true
 
         button.addTarget(self, action: #selector(skipButtonTapped), for: .touchUpInside)
         return button

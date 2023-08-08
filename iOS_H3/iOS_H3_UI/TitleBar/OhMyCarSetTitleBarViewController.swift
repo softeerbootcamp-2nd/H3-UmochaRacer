@@ -51,9 +51,9 @@ class OhMyCarSetTitleBarViewController: UIViewController {
         guideModeBar.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            onboardingBar.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 48),
-            onboardingBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
-            onboardingBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0),
+            onboardingBar.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 48),
+            onboardingBar.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            onboardingBar.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0),
             onboardingBar.heightAnchor.constraint(equalToConstant: 50),
 
             mainBar.topAnchor.constraint(equalTo: onboardingBar.bottomAnchor, constant: 0),
@@ -72,7 +72,6 @@ class OhMyCarSetTitleBarViewController: UIViewController {
             guideModeBar.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
-
 }
 
 extension OhMyCarSetTitleBarViewController: OhMyCarSetTitleBarDelegate {
