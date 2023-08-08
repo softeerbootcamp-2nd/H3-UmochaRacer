@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol MoreInfoOptionButtonDelegate: AnyObject {
-    func moreInfoButtonPressed()
+    func moreInfoButtonDidTapped()
 }
 
 // 자세히보기 옵션 버튼
@@ -52,6 +52,6 @@ class MoreInfoOptionButton: OptionCardButton {
 
     @objc
     private func moreInfoButtonTapped() {
-        delegate?.moreInfoButtonPressed()
+        delegate?.moreInfoButtonDidTapped()
     }
 }
