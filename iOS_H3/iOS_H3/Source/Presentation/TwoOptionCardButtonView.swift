@@ -23,8 +23,12 @@ final class TwoOptionCardButtonView: UIView {
 
     // MARK: - LifeCycles
 
-    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
-        optionCardButtons = (0..<2).map { _ in OptionCardButton(type: type) }
+    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType, hasMoreInfo: Bool = false) {
+        if hasMoreInfo {
+            optionCardButtons = (0..<2).map { _ in MoreInfoOptionButton(type: type) }
+        } else {
+            optionCardButtons = (0..<2).map { _ in OptionCardButton(type: type) }
+        }
         super.init(frame: frame)
 
         setupOptionCardButtons()
@@ -77,6 +81,13 @@ extension TwoOptionCardButtonView {
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(optionCardButtonDidTapped(_:)), for: .touchUpInside)
         }
+
+        optionCardButtons.forEach { button in
+            guard let moreInfoButton = button as? MoreInfoOptionButton else {
+                return
+            }
+            moreInfoButton.delegate = self
+        }
     }
 
     private func setupViews() {
@@ -118,5 +129,13 @@ extension TwoOptionCardButtonView {
             optionCardButtons[1].trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButtons[1].bottomAnchor.constraint(equalTo: self.optionCardButtons[0].bottomAnchor)
         ])
+    }
+}
+
+extension TwoOptionCardButtonView: MoreInfoOptionButtonDelegate {
+
+    func moreInfoButtonPressed() {
+        print(#function)
+        // show alert
     }
 }
