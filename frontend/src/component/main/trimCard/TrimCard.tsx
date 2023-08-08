@@ -25,7 +25,7 @@ type TrimData = {
   } | null;
 };
 
-export interface TrimCardProps {
+interface TrimCardProps {
   trimData: TrimData;
 }
 function TrimCard({trimData}: TrimCardProps) {
@@ -49,11 +49,14 @@ function TrimCard({trimData}: TrimCardProps) {
           <Icon name="ArrowRight" size={20} />
         </Card.PriceWrapper>
         {isHover && (
-          <>
+          <Card.DescriptionWrapper>
             {trimData.description && (
-              <TrimDescription trimDescription={trimData.description} />
+              <TrimDescription
+                trimDescription={trimData.description}
+                name={trimData.name}
+              />
             )}
-          </>
+          </Card.DescriptionWrapper>
         )}
       </Card.Wrapper>
     </>
@@ -80,7 +83,6 @@ const Card = {
     background: ${colors.Hyundai_White};
     color: ${colors.Cool_Grey};
     flex-shrink: 0;
-    backdrop-filter: blur(12px);
     padding: 20px 14px 20px 20px;
     cursor: pointer;
 
@@ -108,5 +110,10 @@ const Card = {
   `,
   Price: styled.p`
     ${Body2_Regular}
+  `,
+  DescriptionWrapper: styled.div`
+    position: absolute;
+    top: -253px;
+    left: 0;
   `,
 };
