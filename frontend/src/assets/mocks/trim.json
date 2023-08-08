@@ -44,15 +44,15 @@
       "descriptionData": [
         {
           "main": "20인치\n알로이 휠",
-          "sub": "src/asset/images/le_blanc_option1.png"
+          "sub": "src/assets/images/le_blanc_option1.png"
         },
         {
           "main": "서라운드 뷰\n모니터",
-          "sub": "src/asset/images/le_blanc_option2.png"
+          "sub": "src/assets/images/le_blanc_option2.png"
         },
         {
           "main": "클러스터\n(12.3인치 컬러 LCD)",
-          "sub": "src/asset/images/le_blanc_option3.png"
+          "sub": "src/assets/images/le_blanc_option3.png"
         }
       ]
     }

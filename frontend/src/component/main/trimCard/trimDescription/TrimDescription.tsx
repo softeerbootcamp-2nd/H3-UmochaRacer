@@ -18,15 +18,15 @@ interface TrimDescriptionProps {
 function TrimDescription({trimDescription, name}: TrimDescriptionProps) {
   return (
     <Description.Wrapper>
-      <TrimDescriptionBorder>
-        <TitleContainer>
-          <TrimSubTitle>{trimDescription.title}</TrimSubTitle>
-          <TrimTitle>{name}</TrimTitle>
-        </TitleContainer>
+      <Description.Border>
+        <Description.TitleContainer>
+          <Description.SubTitle>{trimDescription.title}</Description.SubTitle>
+          <Description.Title>{name}</Description.Title>
+        </Description.TitleContainer>
         {trimDescription && (
           <TrimDescriptionDetail descriptionDetail={trimDescription} />
         )}
-      </TrimDescriptionBorder>
+      </Description.Border>
     </Description.Wrapper>
   );
 }
@@ -49,57 +49,55 @@ const Description = {
     color: white;
     z-index: 1;
   `,
-};
-export const TrimDescriptionBorder = styled.div`
-  display: flex;
-  gap: 50px;
-  width: 100%;
-  height: 100%;
-  padding: 37px 26px 37px 33px;
-  border-radius: 6px;
-  box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.2);
-
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
+  Border: styled.div`
+    display: flex;
+    gap: 50px;
+    width: 100%;
+    height: 100%;
+    padding: 37px 26px 37px 33px;
     border-radius: 6px;
-    padding: 2px;
-    background: linear-gradient(
-      320deg,
-      rgba(255, 255, 255, 0.7) 0%,
-      rgba(224, 224, 224, 0) 35%,
-      rgba(0, 212, 255, 0) 65%,
-      rgba(225, 225, 225, 0.7) 100%
-    );
-    -webkit-mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    mask:
-      linear-gradient(#fff 0 0) content-box,
-      linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-  }
-`;
+    box-shadow: 0px 10px 16px 0px rgba(0, 0, 0, 0.2);
 
-export const TitleContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin: auto 0;
-`;
-
-export const TrimSubTitle = styled.div`
-  ${Title4_Regular}
-  text-shadow: 0px 2px 12px rgba(44, 44, 44, 0.3);
-`;
-
-export const TrimTitle = styled.div`
-  font-family: 'Hyundai Sans Head Medium';
-  font-size: 32px;
-  font-weight: 500;
-  line-height: 34px;
-  letter-spacing: -0.96px;
-  text-shadow: 0px 2px 12px rgba(44, 44, 44, 0.3);
-`;
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 6px;
+      padding: 2px;
+      background: linear-gradient(
+        320deg,
+        rgba(255, 255, 255, 0.7) 0%,
+        rgba(224, 224, 224, 0) 35%,
+        rgba(0, 212, 255, 0) 65%,
+        rgba(225, 225, 225, 0.7) 100%
+      );
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+    }
+  `,
+  TitleContainer: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin: auto 0;
+  `,
+  SubTitle: styled.p`
+    white-space: nowrap;
+    ${Title4_Regular}
+    text-shadow: 0px 2px 12px rgba(44, 44, 44, 0.3);
+  `,
+  Title: styled.p`
+    font-family: 'Hyundai Sans Head Medium';
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 34px;
+    letter-spacing: -0.96px;
+    text-shadow: 0px 2px 12px rgba(44, 44, 44, 0.3);
+  `,
+};
