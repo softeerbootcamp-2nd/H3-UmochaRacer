@@ -86,7 +86,6 @@ class ComponentMainViewController: UIViewController {
 
         let buttons = [titleBarButton, optionCardButton, ohMyCarSetButton]
         for button in buttons {
-            button.widthAnchor.constraint(equalToConstant: 200).isActive = true
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
         }
     }
