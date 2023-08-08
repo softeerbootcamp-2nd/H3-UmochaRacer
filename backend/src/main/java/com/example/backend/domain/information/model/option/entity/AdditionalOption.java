@@ -1,4 +1,4 @@
-package com.example.backend.domain.information.entity.car.entity;
+package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
 import org.springframework.data.annotation.Id;
@@ -6,13 +6,13 @@ import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("INTERIOR_COLOR")
-public class InteriorColor {
+@Table("ADDITIONAL_OPTION")
+public class AdditionalOption {
     @Id
     private Long id;
-    private AggregateReference<ExteriorColor, Long> exteriorColorId;
-    private String iconSrc;
-    @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
+    private AggregateReference<AdditionalOption, Long> topOptionId;
+    private AggregateReference<Parts, Long> partsId;
+    @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
-    private String comment;
+    private String detail;
 }

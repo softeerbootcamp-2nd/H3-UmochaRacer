@@ -1,4 +1,4 @@
-package com.example.backend.domain.information.entity.option.entity;
+package com.example.backend.domain.information.model.option.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
