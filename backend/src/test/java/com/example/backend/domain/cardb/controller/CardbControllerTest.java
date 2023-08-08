@@ -7,19 +7,17 @@ import com.example.backend.utils.AbstractRestDocsTest;
 import com.example.backend.utils.RestDocsConfiguration;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.restdocs.payload.JsonFieldType;
 
-import static com.example.backend.utils.ApiDocumentUtils.getDocumentRequest;
-import static com.example.backend.utils.ApiDocumentUtils.getDocumentResponse;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
-import static org.springframework.restdocs.request.RequestDocumentation.*;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,9 +46,8 @@ class CardbControllerTest extends AbstractRestDocsTest {
                             requestParameters(
                                     parameterWithName("keyword").description("백카사전 키워드")
                             ),
-//                                getDocumentRequest(),
-//                                getDocumentResponse(),
                                 responseFields(
+                                        fieldWithPath("code").type(JsonFieldType.NUMBER).description("상태 코드(Http Status 아님)"),
                                         fieldWithPath("message").type(JsonFieldType.STRING).description("결과메시지"),
                                         fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이"),
                                         fieldWithPath("data.keyword").type(JsonFieldType.STRING).description("백카사전 키워드"),
