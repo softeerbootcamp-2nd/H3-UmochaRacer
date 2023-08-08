@@ -43,6 +43,8 @@ class OptionCardButton: UIButton {
         let label = UILabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.regularBody3
+        label.setupLineHeight(FontLineHeights.regularBody3)
+        label.setupLetterSpacing(FontLetterSpacings.regularBody3)
         label.textColor = Colors.coolGrey3
         return label
     }()
@@ -50,6 +52,8 @@ class OptionCardButton: UIButton {
         let label = UILabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.mediumTitle2
+        label.setupLineHeight(FontLineHeights.mediumTitle2)
+        label.setupLetterSpacing(FontLetterSpacings.mediumTitle2)
         label.textColor = Colors.coolGrey3
         return label
     }()
@@ -57,6 +61,8 @@ class OptionCardButton: UIButton {
         let label = UILabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.regularBody2
+        label.setupLineHeight(FontLineHeights.regularBody2)
+        label.setupLetterSpacing(FontLetterSpacings.regularBody2)
         label.textColor = Colors.coolGrey3
         return label
     }()
@@ -150,7 +156,7 @@ class OptionCardButton: UIButton {
     }
 
     private func attribute() {
-        self.layer.cornerRadius = 10
+        self.layer.cornerRadius = 6
     }
 
     private func layout() {
