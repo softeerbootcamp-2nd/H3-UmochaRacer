@@ -12,4 +12,10 @@ public class Cardb {
     private String keyword;
     private String description;
     private String imageSrc;
+
+    public Cardb(String keyword, String description, String imageSrc) {
+        this.keyword = keyword;
+        this.description = description;
+        this.imageSrc = imageSrc;
+    }
 }
