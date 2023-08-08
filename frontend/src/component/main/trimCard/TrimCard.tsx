@@ -4,6 +4,7 @@ import {Body2_Regular, Title2_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import React, {useState} from 'react';
 import {styled} from 'styled-components';
+import {useNavigate} from 'react-router-dom';
 
 import trim from '@/assets/mocks/trim.json';
 import TrimDescription from './trimDescription/TrimDescription';
@@ -28,12 +29,18 @@ export interface TrimCardProps {
   trimData: TrimData;
 }
 function TrimCard({trimData}: TrimCardProps) {
+  const navigate = useNavigate();
   const [isHover, setIsHover] = useState<boolean>(false);
+
+  const handleTrimCardClick = (route: string) => {
+    navigate(route);
+  };
   return (
     <>
       <Card.Wrapper
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
+        onClick={() => handleTrimCardClick(trimData.route)}
       >
         <Card.Tag>{`#${trimData.tag}`}</Card.Tag>
         <Card.Name>{`${trimData.name}`}</Card.Name>
