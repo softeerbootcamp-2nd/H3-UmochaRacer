@@ -45,6 +45,7 @@ final class OhMyCarSetButton: UIButton {
 
     enum Constants {
         static let cornerRadius = 6.0
+        static let borderWidth = 1.0
     }
 
     // MARK: - Properties
@@ -123,7 +124,7 @@ extension OhMyCarSetButton {
         backgroundColor = colorType.backgroundColor
         setTitleColor(colorType.titleColor, for: .normal)
         if colorType.hasBorder {
-            addBorder(width: 1, color: .black)
+            addBorder(width: Constants.borderWidth, color: .black)
         }
     }
 }
