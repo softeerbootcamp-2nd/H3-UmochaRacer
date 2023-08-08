@@ -12,5 +12,6 @@
     "allowImportingTsExtensions": true,
     "baseUrl": ".",
     "paths": {"@/*": ["src/*"]}
-  }
+  },
+  "include": ["src", "custom.d.ts"]
 }

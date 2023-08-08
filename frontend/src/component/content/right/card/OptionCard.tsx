@@ -50,7 +50,11 @@ function OptionCard() {
       <Text1>구매자의 63%가 선택했어요!</Text1>
       <Text2>디젤 2.2</Text2>
       <DetailBox ref={contentBoxRef} toggle={toggle}>
-        <DetailContent ref={contentRef}>컨텐츠</DetailContent>
+        <DetailContent ref={contentRef}>
+          컨텐츠컨텐츠컨텐츠컨텐츠컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
+          컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
+          컨텐츠 컨텐츠 컨텐츠 컨텐츠 컨텐츠
+        </DetailContent>
       </DetailBox>
       <Footer>
         <Price>+ 1,480,000원</Price>

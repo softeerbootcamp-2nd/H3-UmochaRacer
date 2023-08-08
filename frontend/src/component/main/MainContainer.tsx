@@ -23,9 +23,9 @@ function MainContainer() {
         <ShowMore.Wrapper>
           <ShowMore.Text>자세한 설명과 비교를 원한다면</ShowMore.Text>
           <ShowMore.IconWrapper>
-            <Icon name={'more1'} size={26} />
+            <Icon name="More1" size={26} />
             <ShowMore.Abs>
-              <Icon name={'more2'} size={26} />
+              <Icon name="More2" size={26} />
             </ShowMore.Abs>
           </ShowMore.IconWrapper>
         </ShowMore.Wrapper>
@@ -44,9 +44,9 @@ const Main = {
     width: 100%;
   `,
   Content: styled.div`
-    width: 100%;
+    width: 1024px;
     height: 100%;
-    padding: 85px 128px 0 128px;
+    padding-top: 85px;
     display: flex;
     flex-direction: column;
   `,
@@ -70,13 +70,15 @@ const Title = {
     font-size: 64px;
     font-style: normal;
     font-weight: 500;
-    line-height: 88%;
+    line-height: 130%;
   `,
 };
 
 const TrimCardWrapper = styled.div`
   margin-top: auto;
   margin-bottom: 40px;
+  display: flex;
+  gap: 16px;
 `;
 
 const ShowMore = {
