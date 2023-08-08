@@ -9,6 +9,7 @@ function OptionCardList() {
       <Container>
         <OptionCard></OptionCard>
         <OptionCard></OptionCard>
+        <OptionCard></OptionCard>
       </Container>
     </Wrapper>
   );
@@ -17,17 +18,24 @@ function OptionCardList() {
 export default OptionCardList;
 
 const Wrapper = styled.div`
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
   width: 100%;
-  height: 370px;
+  height: 375px;
   margin-top: 32px;
+  overflow-y: scroll;
 `;
 
 const Container = styled.ul`
+  li {
+    width: 100%;
+  }
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  height: 100%;
+  height: 485px;
   gap: 16px;
-  overflow-y: scroll;
 `;
