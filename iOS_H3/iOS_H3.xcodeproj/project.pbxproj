@@ -821,7 +821,6 @@
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 				5F2593DC2A7FB3CE001B2D84 /* ColorViewOptionCardButton.swift in Sources */,
-				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F2593D82A7FB385001B2D84 /* MoreInfoOptionButton.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
