@@ -33,11 +33,18 @@ function Content({ContentData}: OptionInfoProps) {
     }),
   );
 
+  const setNewIndex = (nextIndex: number) => {
+    setIndex(nextIndex);
+  };
+
   return (
     <Wrapper>
       <Container>
         <OptionImage url={ContentData[seletedIndex].imageSrc} />
-        <OptionInfo cardData={subOptiondData} />
+        <OptionInfo
+          cardData={subOptiondData}
+          setNewIndex={(index: number) => setNewIndex(index)}
+        />
       </Container>
     </Wrapper>
   );

@@ -16,9 +16,10 @@ interface Data {
 
 interface OptionInfoProps {
   cardData: Data[];
+  setNewIndex: (index: number) => void;
 }
 
-function OptionInfo({cardData}: OptionInfoProps) {
+function OptionInfo({cardData, setNewIndex}: OptionInfoProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -31,7 +32,10 @@ function OptionInfo({cardData}: OptionInfoProps) {
       <Container>
         <OptionTitle>파워트레인</OptionTitle>
         <Text>을 선택해주세요.</Text>
-        <OptionCardList cardData={cardData}></OptionCardList>
+        <OptionCardList
+          cardData={cardData}
+          setNewIndex={setNewIndex}
+        ></OptionCardList>
         <ModalWrapper ref={modalRef} isOpen={isModalOpen}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>

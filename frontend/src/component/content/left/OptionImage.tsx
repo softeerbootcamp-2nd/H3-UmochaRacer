@@ -19,4 +19,7 @@ export default OptionImage;
 const Wrapper = styled.div`
   ${flexCenter}
   flex: 6;
+  img {
+    max-width: 100%;
+  }
 `;

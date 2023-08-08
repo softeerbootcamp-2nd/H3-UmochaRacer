@@ -12,12 +12,14 @@ interface Data {
 
 interface OptionCardListProps {
   cardData: Data[];
+  setNewIndex: (index: number) => void;
 }
 
-function OptionCardList({cardData}: OptionCardListProps) {
+function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
+    setNewIndex(index);
     setSelectedItem(index);
   };
 
