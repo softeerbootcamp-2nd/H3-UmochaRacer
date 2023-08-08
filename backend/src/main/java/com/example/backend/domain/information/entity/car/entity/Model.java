@@ -1,8 +1,8 @@
-package com.example.backend.domain.information.model.car.entity;
+package com.example.backend.domain.information.entity.car.entity;
 
-import com.example.backend.domain.information.model.option.entity.Bodytype;
-import com.example.backend.domain.information.model.option.entity.DrivingSystem;
-import com.example.backend.domain.information.model.option.entity.Powertrain;
+import com.example.backend.domain.information.entity.option.entity.Bodytype;
+import com.example.backend.domain.information.entity.option.entity.DrivingSystem;
+import com.example.backend.domain.information.entity.option.entity.Powertrain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Table;

@@ -1,14 +1,16 @@
-package com.example.backend.domain.information.model.car.entity;
+package com.example.backend.domain.information.entity.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("TRIM")
-public class Trim {
+@Table("BODYTYPE")
+public class Bodytype {
     @Id
     private Long id;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
+    private String detail;
+    private String comment;
 }

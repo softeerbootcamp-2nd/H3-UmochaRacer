@@ -1,8 +1,8 @@
 package com.example.backend.domain.sale.entity;
 
-import com.example.backend.domain.information.model.car.entity.ExteriorColor;
-import com.example.backend.domain.information.model.car.entity.InteriorColor;
-import com.example.backend.domain.information.model.car.entity.Model;
+import com.example.backend.domain.information.entity.car.entity.ExteriorColor;
+import com.example.backend.domain.information.entity.car.entity.InteriorColor;
+import com.example.backend.domain.information.entity.car.entity.Model;
 import com.example.backend.domain.sale.entity.enums.Gender;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
