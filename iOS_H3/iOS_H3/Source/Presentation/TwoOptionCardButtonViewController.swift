@@ -35,7 +35,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
     }()
 
     private let moreInfoTwoOptionCardButtonView: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .selfMode, hasMoreInfo: true)
+        let view = TwoMoreInfoOptionCardButtonView(type: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
