@@ -23,7 +23,7 @@ final class MultiOptionCardButtonViewController: UIViewController {
             .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
             .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
         ]
-        view.updateView(with: cardInfos)
+        view.updateAllViews(with: cardInfos)
 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -36,7 +36,7 @@ final class MultiOptionCardButtonViewController: UIViewController {
             .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
             .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
         ]
-        view.updateView(with: cardInfos)
+        view.updateAllViews(with: cardInfos)
 
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
