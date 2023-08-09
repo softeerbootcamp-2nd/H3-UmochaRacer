@@ -59,6 +59,7 @@ class OptionCardCell: UICollectionViewCell {
         optionCardButton.setOptionTitle(info.title)
         optionCardButton.setOptionSubTitle(info.subTitle)
         optionCardButton.setPrice(info.priceString)
+        optionCardButton.isSelected = info.isSelected
     }
 }
 
