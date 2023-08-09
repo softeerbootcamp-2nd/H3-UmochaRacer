@@ -49,7 +49,7 @@ function TrimCard({trimData}: TrimCardProps) {
           <Icon name="ArrowRight" size={20} />
         </Card.PriceWrapper>
         {isHover && (
-          <Card.DescriptionWrapper>
+          <Card.DescriptionWrapper id={trimData.id}>
             {trimData.description && (
               <TrimDescription
                 trimDescription={trimData.description}
@@ -111,9 +111,9 @@ const Card = {
   Price: styled.p`
     ${Body2_Regular}
   `,
-  DescriptionWrapper: styled.div`
+  DescriptionWrapper: styled.div<{id: number}>`
     position: absolute;
     top: -253px;
-    left: 0;
+    left: ${({id}) => (id <= 1 ? '0' : id <= 4 ? '-210px' : '-420px')};
   `,
 };

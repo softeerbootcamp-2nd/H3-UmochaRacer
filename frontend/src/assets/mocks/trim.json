@@ -30,7 +30,24 @@
     "tag": "기본에 충실",
     "price": 40440000,
     "route": "/",
-    "description": null
+    "description": {
+      "title": "모두가 선택한 베스트셀러",
+      "hasDescription": false,
+      "descriptionData": [
+        {
+          "main": "20인치\n알로이 휠",
+          "sub": "src/assets/images/le_blanc_option1.png"
+        },
+        {
+          "main": "서라운드 뷰\n모니터",
+          "sub": "src/assets/images/le_blanc_option2.png"
+        },
+        {
+          "main": "클러스터\n(12.3인치 컬러 LCD)",
+          "sub": "src/assets/images/le_blanc_option3.png"
+        }
+      ]
+    }
   },
   {
     "id": 3,
@@ -63,7 +80,24 @@
     "tag": "부담없는 고급감",
     "price": 47720000,
     "route": "/",
-    "description": null
+    "description": {
+      "title": "모두가 선택한 베스트셀러",
+      "hasDescription": false,
+      "descriptionData": [
+        {
+          "main": "20인치\n알로이 휠",
+          "sub": "src/assets/images/le_blanc_option1.png"
+        },
+        {
+          "main": "서라운드 뷰\n모니터",
+          "sub": "src/assets/images/le_blanc_option2.png"
+        },
+        {
+          "main": "클러스터\n(12.3인치 컬러 LCD)",
+          "sub": "src/assets/images/le_blanc_option3.png"
+        }
+      ]
+    }
   },
   {
     "id": 5,
@@ -71,6 +105,23 @@
     "tag": "최고를 원한다면",
     "price": 52540000,
     "route": "/",
-    "description": null
+    "description": {
+      "title": "모두가 선택한 베스트셀러",
+      "hasDescription": false,
+      "descriptionData": [
+        {
+          "main": "20인치\n알로이 휠",
+          "sub": "src/assets/images/le_blanc_option1.png"
+        },
+        {
+          "main": "서라운드 뷰\n모니터",
+          "sub": "src/assets/images/le_blanc_option2.png"
+        },
+        {
+          "main": "클러스터\n(12.3인치 컬러 LCD)",
+          "sub": "src/assets/images/le_blanc_option3.png"
+        }
+      ]
+    }
   }
 ]
