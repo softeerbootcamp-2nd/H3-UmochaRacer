@@ -2,18 +2,32 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import OptionCard from './card/OptionCard';
 
-function OptionCardList() {
+interface Data {
+  optionId: number;
+  label: string;
+  rate: number;
+  price: number;
+}
+
+interface OptionCardListProps {
+  cardData: Data[];
+  setNewIndex: (index: number) => void;
+}
+
+function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
+    setNewIndex(index);
     setSelectedItem(index);
   };
 
-  const cards: React.JSX.Element[] = [0, 1, 2].map((index) => (
+  const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
       key={index}
-      isSelected={selectedItem === index}
+      selected={selectedItem === index}
       onClick={() => handleItemClick(index)}
+      data={elem}
     ></OptionCard>
   ));
 
@@ -45,6 +59,6 @@ const Container = styled.ul`
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
-  height: 485px;
+  max-height: 485px;
   gap: 16px;
 `;

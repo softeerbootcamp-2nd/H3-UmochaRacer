@@ -5,10 +5,18 @@ import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 
+interface Data {
+  label: string;
+  optionId: number;
+  rate: number;
+  price: number;
+}
+
 interface CardProps {
   key: number;
-  isSelected: boolean;
+  selected: boolean;
   onClick: () => void;
+  data: Data;
 }
 
 const SelectIcon = () => {
@@ -44,7 +52,7 @@ const DefaultIcon = () => {
     </svg>
   );
 };
-function OptionCard({isSelected, onClick}: CardProps) {
+function OptionCard({selected, onClick, data}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -68,10 +76,10 @@ function OptionCard({isSelected, onClick}: CardProps) {
   );
 
   return (
-    <Wrapper onClick={onClick} $isseleted={isSelected.toString()}>
-      <IconBox>{isSelected ? SelectIcon() : DefaultIcon()}</IconBox>
-      <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
-      <Text2 className="black">디젤 2.2</Text2>
+    <Wrapper onClick={onClick} $selected={selected}>
+      <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
+      <Text1 className="blue">구매자의 {data.rate}%가 선택했어요!</Text1>
+      <Text2 className="black">{data.label}</Text2>
       <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
         <DetailContent ref={contentRef}>
           컨텐츠
@@ -82,8 +90,8 @@ function OptionCard({isSelected, onClick}: CardProps) {
         </DetailContent>
       </DetailBox>
       <Footer>
-        <Price className="blue">+ 1,480,000원</Price>
-        <DetailToggle onClick={clickedToggle} isOpen={toggle}></DetailToggle>
+        <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
+        <DetailToggle onClick={clickedToggle} opened={toggle}></DetailToggle>
       </Footer>
     </Wrapper>
   );
@@ -97,6 +105,8 @@ const Select = css`
 const Default = css`
   background: ${colors.Cool_Grey_001};
   border: 2px solid transparent;
+  cursor: pointer;
+
   &:hover {
     border: 2px solid ${colors.Cool_Grey_003};
     .blue {
@@ -112,7 +122,7 @@ const Default = css`
   }
 `;
 
-const Wrapper = styled.li<{$isseleted: string}>`
+const Wrapper = styled.li<{$selected: boolean}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -120,15 +130,8 @@ const Wrapper = styled.li<{$isseleted: string}>`
   min-height: 150px;
   padding: 20px;
   border-radius: 6px;
-  ${(props) => {
-    if (props.$isseleted === 'true') {
-      return Select;
-    } else {
-      return Default;
-    }
-  }};
+  ${(props) => (props.$selected ? Select : Default)};
   transition: 0.5s;
-  cursor: pointer;
 `;
 
 const IconBox = styled.div`
