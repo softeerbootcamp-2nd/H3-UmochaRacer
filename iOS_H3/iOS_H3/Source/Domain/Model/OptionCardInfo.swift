@@ -14,6 +14,7 @@ struct OptionCardInfo: Hashable {
     let image: URL?
     let color: URColor?
     let hasMoreInfo: Bool       // 자세히보기 여부
+    var isSelected: Bool
 
     init(
         title: String,
@@ -21,7 +22,8 @@ struct OptionCardInfo: Hashable {
         priceString: String,
         image: URL? = nil,
         color: URColor? = nil,
-        hasMoreInfo: Bool = false
+        hasMoreInfo: Bool = false,
+        isSelected: Bool = false
     ) {
         self.title = title
         self.subTitle = subTitle
@@ -29,5 +31,6 @@ struct OptionCardInfo: Hashable {
         self.image = image
         self.color = color
         self.hasMoreInfo = hasMoreInfo
+        self.isSelected = isSelected
     }
 }
