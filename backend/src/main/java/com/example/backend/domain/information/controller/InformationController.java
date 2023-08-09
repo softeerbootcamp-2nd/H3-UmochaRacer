@@ -7,6 +7,7 @@ import com.example.backend.domain.information.dto.InformationResponse;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
 import com.example.backend.domain.information.service.InformationStrategyFactory;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.List;
 public class InformationController {
     private final InformationStrategyFactory strategyFactory;
 
+    @Order(2)
     @GetMapping("/{targetInfo}")
     public ResponseEntity<ResponseDto<List<CommonResponse>>> returnCarInformation(
             @PathVariable("targetInfo") String targetInfo
@@ -33,8 +35,10 @@ public class InformationController {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
-//    @GetMapping("/interior-color")
-//    public ResponseEntity<ResponseDto<InformationResponse> returnInteriorColor() {
-//
-//    }
+    @Order(1)
+    @GetMapping("/interior_color")
+    public String returnInteriorColor() {
+        // TODO 내장 색상 구현
+        return "sdfsdf";
+    }
 }

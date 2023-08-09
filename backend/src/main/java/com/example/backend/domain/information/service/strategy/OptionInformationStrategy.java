@@ -18,7 +18,7 @@ public class OptionInformationStrategy implements InformationStrategy {
     @Override
     public List<CommonResponse> findAll() {
         List<AdditionalOption> all = additionalOptionRepository
-                .findAllByTopOptionIdIsNullAndType(AdditionalOption.Type.ADDITIONAL.toString());
+                .findAllByTopOptionIdIsNullAndFlag(AdditionalOption.Flag.ADDITIONAL.toString());
         return all.stream().map(InformationMapper::map).collect(Collectors.toList());
     }
 

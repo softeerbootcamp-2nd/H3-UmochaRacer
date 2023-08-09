@@ -12,15 +12,15 @@ insert into Exterior_color(id, name, image_src, price,comment, color_code) value
 insert into Interior_color(id, name, image_src, price,comment, icon_src, exterior_color_id) values(32, '블루', 'url',0,'외장색에 종속됨', 'icon url',1);
 insert into Interior_color(id, name, image_src, price,comment, icon_src, exterior_color_id) values(2, '가죽 리얼블랙', 'url',0,'시크한 당신에게 안성맞춤', 'icon url', null);
 
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(1, '머플러 어쩌고', 'url', 1234,'배기구 두 개', '사진', null, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(2, '온열시트',   'url', 99999,'겨울에도 따뜻하게', '파츠 사진', null, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(3, '전방 감지 카메라', 'url', 654321, '전방을 감지', '파츠 사진', null, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(10, '패키지1', 'url', 993311, '패키지1', '파츠 사진', null, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(90, '하위옵1', 'url', 65423, '하위1',  null, 10, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(91, '하위옵2', 'url', 2, '하위2', '파츠 사진', 10, 'ADDITIONAL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(92, '하위옵3', 'url', 33, '하3', null , 10, 'ADDITIONAL');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(1, '머플러 어쩌고', 'url', 1234,'배기구 두 개', '사진', null, 'ADDITIONAL', 'SAFETY');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(2, '온열시트',   'url', 99999,'겨울에도 따뜻하게', '파츠 사진', null, 'ADDITIONAL', 'SAFETY');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(3, '전방 감지 카메라', 'url', 654321, '전방을 감지', '파츠 사진', null, 'ADDITIONAL', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(10, '패키지1', 'url', 993311, '패키지1', '파츠 사진', null, 'ADDITIONAL', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(90, '하위옵1', 'url', 65423, '하위1',  null, 10, 'ADDITIONAL', 'SEAT');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(91, '하위옵2', 'url', 2, '하위2', '파츠 사진', 10, 'ADDITIONAL', 'SEAT');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(92, '하위옵3', 'url', 33, '하3', null , 10, 'ADDITIONAL', 'MULTIMEDIA');
 
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(99, '알콘 어쩌고', 'url', 100000,'강력한 휠', 'H 지뉴인', null, 'WHEEL');
-insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, `type`) values(123, '알콘 2222', 'url', 200000,'브레이크 좋음', '엔 퍼포먼스', null, 'WHEEL');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(99, '알콘 어쩌고', 'url', 100000,'강력한 휠', 'H 지뉴인', null, 'WHEEL', 'SAFETY');
+insert into additional_option(id, name, image_src, price,detail,parts_src, top_option_id, flag, category) values(123, '알콘 2222', 'url', 200000,'브레이크 좋음', '엔 퍼포먼스', null, 'WHEEL', 'SAFETY');
 
 

@@ -17,7 +17,7 @@ public class WheelStrategy implements InformationStrategy{
 
     @Override
     public List<CommonResponse> findAll() {
-        List<AdditionalOption> all = additionalOptionRepository.findAllByType(AdditionalOption.Type.WHEEL.toString());
+        List<AdditionalOption> all = additionalOptionRepository.findAllByFlag(AdditionalOption.Flag.WHEEL.toString());
         return all.stream().map(InformationMapper::map).collect(Collectors.toList());
     }
 
