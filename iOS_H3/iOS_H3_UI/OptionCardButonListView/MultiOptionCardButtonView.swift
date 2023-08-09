@@ -8,6 +8,7 @@
 import UIKit
 
 final class MultiOptionCardButtonView: UIView {
+final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     
     enum Constants {
         static let cellHeight = 150.0
@@ -62,8 +63,8 @@ final class MultiOptionCardButtonView: UIView {
     }
     
     // MARK: - Helpers
-    
-    func updateView(with cardInfos: [OptionCardInfo]) {
+
+    func updateAllViews(with cardInfos: [OptionCardInfo]) {
         var snapshot = dataSource.snapshot()
         
         let previousItem = snapshot.itemIdentifiers
