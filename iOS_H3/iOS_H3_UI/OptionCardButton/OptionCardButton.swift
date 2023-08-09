@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol MoreInfoOptionButtonDelegate: AnyObject {
+    func moreInfoButtonDidTapped()
+}
+
 class OptionCardButton: UIButton {
 
     enum OptionCardType {
@@ -15,6 +19,7 @@ class OptionCardButton: UIButton {
         case guideMode
     }
 
+    // MARK: - UI properties
     private struct Constants {
         static let checkImageViewWidth: CGFloat = 24
         static let checkImageViewTopAnchor: CGFloat = 24
@@ -27,6 +32,7 @@ class OptionCardButton: UIButton {
         static let tagListViewHeight: CGFloat = 20
     }
 
+    // MARK: - Properties
     override var isSelected: Bool {
         didSet {
             updateButtonUI()
@@ -79,37 +85,162 @@ class OptionCardButton: UIButton {
         return view
     }()
 
+    private let moreInfoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "arrow_right_img") ?? .remove, for: .normal)
+        button.isHidden = true
+        return button
+    }()
+
+    private let optionImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.layer.cornerRadius = 2
+        imageView.backgroundColor = .gray
+        imageView.isHidden = true
+        return imageView
+    }()
+
+    private let colorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        view.isUserInteractionEnabled = false
+        view.layer.cornerRadius = 30
+        view.isHidden = true
+        return view
+    }()
+
     private var type: OptionCardType
+
+    weak var delegate: MoreInfoOptionButtonDelegate?
+
+    // MARK: - Lifecycles
 
     override init(frame: CGRect) {
         type = .selfMode
         super.init(frame: frame)
-        setupUI()
+        setupViews()
     }
 
     required init?(coder: NSCoder) {
         type = .selfMode
         super.init(coder: coder)
-        setupUI()
+        setupViews()
+    }
+
+    init(type: OptionCardType, info: OptionCardInfo) {
+        self.type = type
+        super.init(frame: .zero)
+        setupViews()
+        self.optionTitleLabel.text = info.title
+        self.optionSubTitleLabel.text = info.subTitle
+        self.priceLabel.text = info.priceString
+        self.moreInfoButton.isHidden = !info.hasMoreInfo
+        setupViews()
+        addMoreInfoButtonTarget()
+        if let color = info.color { setColor(UIColor(urColor: color)) }
+        if let url = info.image {
+            setImage(url: url)
+        }
     }
 
     init(type: OptionCardType,
          optionTitle: String = "옵션 타이틀",
          optionSubTitle: String = "옵션 서브 타이틀",
-         price: String = "+ 0원") {
+         price: String = "+ 0원",
+         hasMoreInfo: Bool = false,
+         color: URColor? = nil,
+         image: URL? = nil
+    ) {
         self.type = type
         super.init(frame: .zero)
         self.optionTitleLabel.text = optionTitle
         self.optionSubTitleLabel.text = optionSubTitle
         self.priceLabel.text = price
-        setupUI()
+        self.moreInfoButton.isHidden = !hasMoreInfo
+        setupViews()
+        addMoreInfoButtonTarget()
+        if let color = color { setColor(UIColor(urColor: color)) }
+        if let url = image { setImage(url: url) }
     }
 
-    private func setupUI() {
-        layout()
-        attribute()
+    // MARK: - Helpers
+
+    func setColor(_ color: UIColor) {
+        colorView.backgroundColor = color
+        colorView.isHidden = false
+    }
+
+    func setOptionTitle(_ title: String) {
+        self.optionTitleLabel.text = title
+    }
+
+    func setOptionSubTitle(_ subTitle: String) {
+        self.optionSubTitleLabel.text = subTitle
+    }
+
+    func setPrice(_ price: String) {
+        self.priceLabel.text = price
+    }
+
+    func addTags(_ tags: [String]) {
+        tagListView.addTags(tags)
+    }
+
+    func setImage(url: URL) {
+
+        // TODO: 이미지 캐싱 적용 후 수정
+        optionImageView.image = UIImage()
+        optionImageView.isHidden = false
+    }
+
+    func animateButton(title: String, description: String) {
+        animatedView.translatesAutoresizingMaskIntoConstraints = false
+        animatedView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        animatedView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+
+        animatedView.showWithAnimation(title: title, description: description)
+    }
+
+    private func addMoreInfoButtonTarget() {
+        moreInfoButton.addTarget(self, action: #selector(moreInfoButtonTapped), for: .touchUpInside)
+    }
+
+    @objc func optionButtonTapped() {
+        isSelected.toggle()
+    }
+
+    @objc
+    private func moreInfoButtonTapped() {
+        delegate?.moreInfoButtonDidTapped()
+    }
+
+}
+
+extension OptionCardButton {
+    private func setupViews() {
+        addSubViews()
+        setupConstraints()
         updateButtonUI()
-        self.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        self.addTarget(self, action: #selector(optionButtonTapped), for: .touchUpInside)
+        self.layer.cornerRadius = 6
+    }
+
+    private func addSubViews() {
+        [checkImageView,
+         optionTitleLabel,
+         optionSubTitleLabel,
+         priceLabel,
+         tagListView,
+         moreInfoButton,
+         optionImageView,
+         colorView,
+         animatedView
+        ].forEach {
+            self.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
 
     private func updateButtonUI() {
@@ -155,28 +286,18 @@ class OptionCardButton: UIButton {
         priceLabel.textColor = textColor
     }
 
-    private func attribute() {
-        self.layer.cornerRadius = 6
+    private func setupConstraints() {
+        setupCheckImageViewConstraint() // 체크 이미지 Constraint 설정
+        setupOptionSubTitleLabelConstraint() // 서브 타이틀 Constraint 설정
+        setupOptionTitleLabelConstraint() // 타이틀 Constraint 설정
+        setupPriceLabelConstraint() // 가격 라벨 Constraint 설정
+        setupTagListViewConstraint() // 태그 리스트 뷰 Constraint 설정
+        setupMoreInfoButtonConstraint() // 더보기 버튼 Constraint 설정
+        setupImageViewConstraint() // 이미지 옵션 뷰 Constraint 설정
+        setupColorViewConstraint() // 컬러 옵션 뷰 Constraint 설정
     }
 
-    private func layout() {
-        [checkImageView,
-         optionTitleLabel,
-         optionSubTitleLabel,
-         priceLabel,
-         tagListView
-        ].forEach {
-            self.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        layoutCheckImageView() // 체크 이미지 Constraint 설정
-        layoutOptionSubTitleLabel() // 서브 타이틀 Constraint 설정
-        layoutOptionTitleLabel() // 타이틀 Constraint 설정
-        layoutPriceLabel() // 가격 라벨 Constraint 설정
-        layoutTagListView() // 태그 리스트 뷰 Constraint 설정
-    }
-
-    private func layoutCheckImageView() {
+    private func setupCheckImageViewConstraint() {
         checkImageView.widthAnchor.constraint(equalToConstant: Constants.checkImageViewWidth).isActive = true
         checkImageView.heightAnchor.constraint(equalToConstant: Constants.checkImageViewWidth).isActive = true
         checkImageView.topAnchor.constraint(equalTo: self.topAnchor,
@@ -185,28 +306,28 @@ class OptionCardButton: UIButton {
                                                 constant: Constants.checkImageViewLeadingAnchor).isActive = true
     }
 
-    private func layoutOptionSubTitleLabel() {
+    private func setupOptionSubTitleLabelConstraint() {
         optionSubTitleLabel.topAnchor.constraint(equalTo: checkImageView.bottomAnchor,
                                                  constant: Constants.optionSubTitleTopAnchor).isActive = true
         optionSubTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                      constant: Constants.checkImageViewLeadingAnchor).isActive = true
     }
 
-    private func layoutOptionTitleLabel() {
+    private func setupOptionTitleLabelConstraint() {
         optionTitleLabel.topAnchor.constraint(equalTo: optionSubTitleLabel.bottomAnchor,
                                               constant: Constants.optionTitleTopAnchor).isActive = true
         optionTitleLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                                   constant: Constants.checkImageViewLeadingAnchor).isActive = true
     }
 
-    private func layoutPriceLabel() {
+    private func setupPriceLabelConstraint() {
         priceLabel.topAnchor.constraint(equalTo: optionTitleLabel.bottomAnchor,
                                         constant: Constants.priceLabelTopAnchor).isActive = true
         priceLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor,
                                             constant: Constants.checkImageViewLeadingAnchor).isActive = true
     }
 
-    private func layoutTagListView() {
+    private func setupTagListViewConstraint() {
         tagListView.topAnchor.constraint(equalTo: self.topAnchor,
                                          constant: Constants.tagListViewTopAnchor).isActive = true
         tagListView.leadingAnchor.constraint(equalTo: checkImageView.trailingAnchor,
@@ -216,40 +337,31 @@ class OptionCardButton: UIButton {
         tagListView.heightAnchor.constraint(equalToConstant: Constants.tagListViewHeight).isActive = true
     }
 
-    // 옵션 타이틀을 변경하는 메서드
-    func setOptionTitle(_ title: String) {
-        self.optionTitleLabel.text = title
+    private func setupMoreInfoButtonConstraint() {
+        moreInfoButton.translatesAutoresizingMaskIntoConstraints = false
+
+        moreInfoButton.widthAnchor.constraint(equalToConstant: 18).isActive = true
+        moreInfoButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
+        moreInfoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18).isActive = true
+        moreInfoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
     }
 
-    // 옵션 서브 타이틀을 변경하는 메서드
-    func setOptionSubTitle(_ subTitle: String) {
-        self.optionSubTitleLabel.text = subTitle
+    private func setupImageViewConstraint() {
+        optionImageView.translatesAutoresizingMaskIntoConstraints = false
+
+        optionImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        optionImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        optionImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 15).isActive = true
+        optionImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+
     }
 
-    // 가격을 변경하는 메서드
-    func setPrice(_ price: String) {
-        self.priceLabel.text = price
-    }
-
-    // 여러 태그를 한 번에 추가하는 메서드
-    func addTags(_ tags: [String]) {
-        tagListView.addTags(tags)
-    }
-
-    // 외부에서 호출 가능한 애니메이션 메서드
-    func animateButton(title: String, description: String) {
-        self.addSubview(animatedView)
-        animatedView.translatesAutoresizingMaskIntoConstraints = false
-        animatedView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        animatedView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-
-        animatedView.showWithAnimation(title: title, description: description)
-    }
-
-    @objc func buttonTapped() {
-        isSelected.toggle()
+    private func setupColorViewConstraint() {
+        colorView.translatesAutoresizingMaskIntoConstraints = false
+        colorView.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        colorView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        colorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        colorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -28).isActive = true
     }
 
 }
