@@ -64,16 +64,22 @@ function TrimCard({trimData}: TrimCardProps) {
 }
 function TrimCardList() {
   return (
-    <>
+    <TrimCardWrapper>
       {trim.map((trimItem) => (
         <TrimCard key={trimItem.id} trimData={trimItem} />
       ))}
-    </>
+    </TrimCardWrapper>
   );
 }
 
 export default TrimCardList;
 
+const TrimCardWrapper = styled.div`
+  margin-top: auto;
+  margin-bottom: 40px;
+  display: flex;
+  gap: 16px;
+`;
 const Card = {
   Wrapper: styled.div`
     position: relative;

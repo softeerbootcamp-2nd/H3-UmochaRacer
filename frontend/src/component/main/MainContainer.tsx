@@ -1,37 +1,27 @@
 import React from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
-import {colors} from '@/style/theme';
-import Icon from '../common/icons';
 import main from '@/assets/images/main.png';
-import {Title5_Regular} from '@/style/fonts';
 import {flexCenter} from '@/style/common';
-import TrimCard from './trimCard/TrimCard';
+import TrimCardList from './intro/trimCard/TrimCard';
+
+import IntroTitle from './intro/IntroTitle';
+import IntroShowMore from './intro/IntroShowMore';
 function MainContainer() {
   return (
-    <Main.Intro>
-      <Main.Header>
-        <Header />
-      </Main.Header>
-      <Main.Content>
-        <Title.Wrapper>
-          <Title.Title>내 차 만들기</Title.Title>
-          <Title.SubTitle>PALISADE</Title.SubTitle>
-        </Title.Wrapper>
-        <TrimCardWrapper>
-          <TrimCard />
-        </TrimCardWrapper>
-        <ShowMore.Wrapper>
-          <ShowMore.Text>자세한 설명과 비교를 원한다면</ShowMore.Text>
-          <ShowMore.IconWrapper>
-            <Icon name="More1" size={26} />
-            <ShowMore.Abs>
-              <Icon name="More2" size={26} />
-            </ShowMore.Abs>
-          </ShowMore.IconWrapper>
-        </ShowMore.Wrapper>
-      </Main.Content>
-    </Main.Intro>
+    <>
+      <Main.Intro>
+        <Main.Header>
+          <Header />
+        </Main.Header>
+        <Main.Content>
+          <IntroTitle />
+          <TrimCardList />
+          <IntroShowMore />
+        </Main.Content>
+      </Main.Intro>
+      asdfl;fsf
+    </>
   );
 }
 
@@ -58,57 +48,5 @@ const Main = {
     padding-top: 85px;
     display: flex;
     flex-direction: column;
-  `,
-};
-
-const Title = {
-  Wrapper: styled.div`
-    margin-top: 16px;
-  `,
-  Title: styled.p`
-    color: ${colors.Hyundai_White};
-    font-family: 'Hyundai Sans Head Regular';
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: -0.96px;
-  `,
-  SubTitle: styled.p`
-    color: ${colors.Hyundai_White};
-    font-family: 'Hyundai Sans Head Medium';
-    font-size: 64px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 130%;
-  `,
-};
-
-const TrimCardWrapper = styled.div`
-  margin-top: auto;
-  margin-bottom: 40px;
-  display: flex;
-  gap: 16px;
-`;
-
-const ShowMore = {
-  Wrapper: styled.div`
-    ${flexCenter}
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 32px;
-  `,
-  Text: styled.p`
-    opacity: 0.6;
-    color: ${colors.Hyundai_White};
-    ${Title5_Regular}
-  `,
-  IconWrapper: styled.div`
-    ${flexCenter}
-    flex-direction: column;
-    position: relative;
-  `,
-  Abs: styled.div`
-    position: absolute;
-    top: 10px;
   `,
 };
