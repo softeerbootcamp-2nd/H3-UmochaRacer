@@ -3,12 +3,13 @@ import Header from '../header/Header';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import Icon from '../common/icons';
+import main from '@/assets/images/main.png';
 import {Title5_Regular} from '@/style/fonts';
 import {flexCenter} from '@/style/common';
 import TrimCard from './trimCard/TrimCard';
 function MainContainer() {
   return (
-    <>
+    <Main.Intro>
       <Main.Header>
         <Header />
       </Main.Header>
@@ -30,12 +31,20 @@ function MainContainer() {
           </ShowMore.IconWrapper>
         </ShowMore.Wrapper>
       </Main.Content>
-    </>
+    </Main.Intro>
   );
 }
 
 export default MainContainer;
 const Main = {
+  Intro: styled.div`
+    height: 100vh;
+    ${flexCenter}
+    width: 100vw;
+    background-image: url(${main});
+    background-size: cover;
+    background-position: center;
+  `,
   Header: styled.div`
     position: fixed;
     top: 0;
