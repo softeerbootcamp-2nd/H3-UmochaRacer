@@ -11,3 +11,8 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  sql:
+    init:
+      mode: always
+      schema-locations: classpath:sql/scheme.sql
+      data-locations: classpath:sql/data.sql

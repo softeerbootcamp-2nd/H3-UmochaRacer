@@ -3,6 +3,8 @@ package com.example.backend.domain.cardb.service;
 import com.example.backend.domain.cardb.dto.CardbResponseDto;
 import com.example.backend.domain.cardb.entity.Cardb;
 import com.example.backend.domain.cardb.repository.CardbRepository;
+import com.example.backend.domain.global.exception.RestApiException;
+import com.example.backend.domain.global.model.enums.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,9 @@ import java.util.Optional;
 public class CardbService {
     private final CardbRepository repository;
 
-    public CardbResponseDto getDescriptionByKeyword(String keyword) throws ClassNotFoundException {
+    public CardbResponseDto getDescriptionByKeyword(String keyword) throws RestApiException {
         Optional<Cardb> target = repository.findByKeyword(keyword);
-        if(target.isEmpty()) throw new ClassNotFoundException();
+        if (target.isEmpty()) throw new RestApiException(ErrorCode.NO_KEYWORD_EXIST);
         return new CardbResponseDto(target.get());
     }
 }
