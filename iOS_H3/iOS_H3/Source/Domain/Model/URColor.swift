@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct URColor {
+struct URColor: Hashable {
     let red: Int8
     let green: Int8
     let blue: Int8

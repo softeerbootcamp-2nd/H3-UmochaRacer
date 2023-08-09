@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct OptionCardInfo {
+struct OptionCardInfo: Hashable {
     let title: String
     let subTitle: String
     let priceString: String     // 예시) "+ 100,000원"
