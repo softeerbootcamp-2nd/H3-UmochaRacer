@@ -1,47 +1,60 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
-import {colors} from '@/style/theme';
-import Icon from '../common/icons';
-import {Title5_Regular} from '@/style/fonts';
+import main from '@/assets/images/main.png';
 import {flexCenter} from '@/style/common';
-import TrimCard from './trimCard/TrimCard';
+import TrimCardList from './intro/trimCard/TrimCard';
+
+import IntroTitle from './intro/IntroTitle';
+import IntroShowMore from './intro/IntroShowMore';
 function MainContainer() {
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const updateScroll = () => {
+    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
+  };
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+  });
   return (
     <>
-      <Main.Header>
-        <Header />
-      </Main.Header>
-      <Main.Content>
-        <Title.Wrapper>
-          <Title.Title>내 차 만들기</Title.Title>
-          <Title.SubTitle>PALISADE</Title.SubTitle>
-        </Title.Wrapper>
-        <TrimCardWrapper>
-          <TrimCard />
-        </TrimCardWrapper>
-        <ShowMore.Wrapper>
-          <ShowMore.Text>자세한 설명과 비교를 원한다면</ShowMore.Text>
-          <ShowMore.IconWrapper>
-            <Icon name="More1" size={26} />
-            <ShowMore.Abs>
-              <Icon name="More2" size={26} />
-            </ShowMore.Abs>
-          </ShowMore.IconWrapper>
-        </ShowMore.Wrapper>
-      </Main.Content>
+      <Intro.Wrapper>
+        <Intro.Header className={scrollPosition < 1 ? '' : 'change_header'}>
+          <Header />
+        </Intro.Header>
+        <Intro.Content>
+          <IntroTitle />
+          <TrimCardList />
+          <IntroShowMore />
+        </Intro.Content>
+      </Intro.Wrapper>
+      <Trim.Header>
+        <Trim.IntroP>모델 한 눈에 비교하기</Trim.IntroP>
+        <Trim.ModelWrapper></Trim.ModelWrapper>
+      </Trim.Header>
     </>
   );
 }
 
 export default MainContainer;
-const Main = {
+const Intro = {
+  Wrapper: styled.div`
+    height: 100vh;
+    ${flexCenter}
+    width: 100vw;
+    background-image: url(${main});
+    background-size: cover;
+    background-position: center;
+  `,
   Header: styled.div`
     position: fixed;
     top: 0;
     left: 0;
     z-index: 100;
     width: 100%;
+    transition: 0.2s ease-in-out;
+    &.change_header {
+      background: #e7e7e7;
+    }
   `,
   Content: styled.div`
     width: 1024px;
@@ -52,54 +65,25 @@ const Main = {
   `,
 };
 
-const Title = {
-  Wrapper: styled.div`
-    margin-top: 16px;
+const Trim = {
+  Header: styled.div`
+    width: 100%;
+    height: 335px;
+    border-bottom: 1px solid #bebebe;
+    background: #e7e7e7;
   `,
-  Title: styled.p`
-    color: ${colors.Hyundai_White};
-    font-family: 'Hyundai Sans Head Regular';
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    letter-spacing: -0.96px;
-  `,
-  SubTitle: styled.p`
-    color: ${colors.Hyundai_White};
-    font-family: 'Hyundai Sans Head Medium';
-    font-size: 64px;
+  IntroP: styled.p`
+    color: #212121;
+    font-family: Hyundai Sans Head KR;
+    font-size: 40px;
     font-style: normal;
     font-weight: 500;
     line-height: 130%;
+    letter-spacing: -1.6px;
+    text-align: center;
+    padding-top: 100px;
   `,
-};
-
-const TrimCardWrapper = styled.div`
-  margin-top: auto;
-  margin-bottom: 40px;
-  display: flex;
-  gap: 16px;
-`;
-
-const ShowMore = {
-  Wrapper: styled.div`
-    ${flexCenter}
-    flex-direction: column;
-    gap: 4px;
-    margin-bottom: 32px;
-  `,
-  Text: styled.p`
-    opacity: 0.6;
-    color: ${colors.Hyundai_White};
-    ${Title5_Regular}
-  `,
-  IconWrapper: styled.div`
-    ${flexCenter}
-    flex-direction: column;
-    position: relative;
-  `,
-  Abs: styled.div`
-    position: absolute;
-    top: 10px;
+  ModelWrapper: styled.div`
+    width: 1024px;
   `,
 };
