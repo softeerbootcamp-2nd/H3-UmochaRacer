@@ -1,32 +1,32 @@
 {
 	"data" : [
 		{
-			"id" : 99,
-			"label" : "알로이 20인치 휠 & 타이어",
+			"optionId" : 99,
+			"name" : "알로이 20인치 휠 & 타이어",
 			"price" : 0,
 			"imageSrc" : "src/assets/images/20_darkwheel1.png",
 			"parts" : "N Performance",
 			"partsSrc" : "src/assets/images/performance_logo.png"
 		},
 		{
-			"id" : 100,
-			"label" : "20인치 다크 스퍼터링 휠",
+			"optionId" : 100,
+			"name" : "20인치 다크 스퍼터링 휠",
 			"price" : 840000,
 			"imageSrc" : "src/assets/images/20_darkwheel.png",
 			"parts" : "N performance",
 			"partsSrc" : "src/assets/images/performance_logo.png"
 		},
         {
-			"id" : 101,
-			"label" : "20인치 블랙톤 전면 가공 휠",
+			"optionId" : 101,
+			"name" : "20인치 블랙톤 전면 가공 휠",
 			"price" : 840000,
 			"imageSrc" : "src/assets/images/20inchwheel.png",
 			"parts" : "N Performance",
 			"partsSrc" : "src/assets/images/performance_logo.png"
 		},
 		{
-			"id" : 102,
-			"label" : "알콘 단조 브레이크 & 인치 휠 패키지",
+			"optionId" : 102,
+			"name" : "알콘 단조 브레이크 & 인치 휠 패키지",
 			"price" : 3660000,
 			"imageSrc" : "src/assets/images/alconbreak.png",
 			"parts" : "N performance",

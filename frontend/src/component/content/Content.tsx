@@ -1,48 +1,67 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
 import {OptionContext} from '@/provider/optionProvider';
-interface Data {
-  optionId: number;
-  label: string;
-  rate: number;
-  price: number;
-  imageSrc: string;
+import {CardData} from './contentInterface';
+import bodytype from '@/assets/mocks/bodytype.json';
+import powertrain from '@/assets/mocks/powertrain.json';
+import drivingsystem from '@/assets/mocks/drivingsystem.json';
+import exterior from '@/assets/mocks/exteriror-color.json';
+import interior from '@/assets/mocks/interior-color.json';
+import wheel from '@/assets/mocks/wheel.json';
+import {cardDataType} from './contentInterface';
+
+interface Ratio {
+  // 구매율, 선택률
+  ratio?: number | undefined;
+  selectionRatio?: number | undefined;
 }
 
-interface Props {
-  optionId: number;
-  label: string;
-  rate: number;
-  price: number;
-}
-interface OptionInfoProps {
-  ContentData: Data[];
-}
-function Content({ContentData}: OptionInfoProps) {
-  const [seletedIndex, setIndex] = useState<number>(0);
+function Content() {
+  const [selectedIndex, setIndex] = useState<number>(0);
   const {option, setOption} = useContext(OptionContext);
-  const subOptiondData: Props[] = ContentData.map(
-    ({optionId, label, rate, price}) => ({
-      optionId,
-      label,
-      rate,
-      price,
-    }),
-  );
-
+  const [cardData, setcardData] = useState<cardDataType[]>([]);
   const setNewIndex = (nextIndex: number) => {
     setIndex(nextIndex);
   };
+  useEffect(() => {
+    setIndex(0);
+    switch (option) {
+      case 0:
+        setcardData(powertrain.data);
+        break;
+      case 1:
+        setcardData(drivingsystem.data);
+        break;
+      case 2:
+        setcardData(bodytype.data);
+        break;
+      case 3:
+        setcardData(exterior.data);
+        break;
+      case 4:
+        setcardData(interior.data);
+        break;
+      case 5:
+        setcardData(wheel.data);
+        break;
+      default:
+        setcardData(powertrain.data);
+    }
+  }, [option]);
   return (
     <Wrapper>
       <Container>
-        <OptionImage url={ContentData[seletedIndex].imageSrc} />
-        <OptionInfo
-          cardData={subOptiondData}
-          setNewIndex={(index: number) => setNewIndex(index)}
-        />
+        {cardData.length > 0 && (
+          <>
+            <OptionImage url={cardData[selectedIndex].imageSrc} />
+            <OptionInfo
+              cardData={cardData}
+              setNewIndex={(index: number) => setNewIndex(index)}
+            />
+          </>
+        )}
       </Container>
     </Wrapper>
   );

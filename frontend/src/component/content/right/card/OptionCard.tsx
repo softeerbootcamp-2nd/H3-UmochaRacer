@@ -4,19 +4,11 @@ import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
-
-interface Data {
-  label: string;
-  optionId: number;
-  rate: number;
-  price: number;
-}
-
+import {cardDataType} from '../../contentInterface';
 interface CardProps {
-  key: number;
   selected: boolean;
   onClick: () => void;
-  data: Data;
+  data: cardDataType;
 }
 
 const SelectIcon = () => {
@@ -78,8 +70,8 @@ function OptionCard({selected, onClick, data}: CardProps) {
   return (
     <Wrapper onClick={onClick} $selected={selected}>
       <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
-      <Text1 className="blue">구매자의 {data.rate}%가 선택했어요!</Text1>
-      <Text2 className="black">{data.label}</Text2>
+      <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+      <Text2 className="black">{data.name}</Text2>
       <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
         <DetailContent ref={contentRef}>
           컨텐츠

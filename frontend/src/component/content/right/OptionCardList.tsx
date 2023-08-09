@@ -1,27 +1,29 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import OptionCard from './card/OptionCard';
-
+import {cardDataType} from '../contentInterface';
 interface Data {
   optionId: number;
-  label: string;
+  name: string;
   rate: number;
   price: number;
 }
 
-interface OptionCardListProps {
-  cardData: Data[];
+interface carfListProps {
+  cardData: cardDataType[];
   setNewIndex: (index: number) => void;
 }
 
-function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
+function OptionCardList({cardData, setNewIndex}: carfListProps) {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
 
   const handleItemClick = (index: number) => {
     setNewIndex(index);
     setSelectedItem(index);
   };
-
+  useEffect(() => {
+    setSelectedItem(0);
+  }, [cardData]);
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
       key={index}
@@ -30,7 +32,6 @@ function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
       data={elem}
     ></OptionCard>
   ));
-
   return (
     <Wrapper>
       <Container>{cards}</Container>

@@ -1,14 +1,14 @@
 {
 	"data" : [
 		{
-			"id": 32,
+			"optionId": 32,
 			"name" : "퀄팅 천연 (블랙)",
 			"price" : 0,
 			"iconSrc" : "src/assets/images/innerblack.png",
 			"imageSrc" : "src/assets/images/innerblack1.png"
 		},
 		{
-			"id": 33,
+			"optionId": 33,
 			"name" : "쿨그레이",
 			"price" : 0,
             "iconSrc" : "src/assets/images/innergrey.png",

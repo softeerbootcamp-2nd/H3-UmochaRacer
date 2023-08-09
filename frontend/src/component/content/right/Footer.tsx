@@ -1,8 +1,9 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useContext, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Body2_Medium, Title1_Medium} from '@/style/fonts';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface props {
   onClick: () => void;
@@ -30,6 +31,7 @@ const upperButton = (isModalOpen: boolean) => {
 };
 
 function Footer({onClick, isOpen}: props) {
+  const {option, setOption} = useContext(OptionContext);
   return (
     <Wrapper>
       <Total>
@@ -40,8 +42,12 @@ function Footer({onClick, isOpen}: props) {
         <TotalPrice>47,270,000 원</TotalPrice>
       </Total>
       <OptionSwitcher>
-        <PrevOptionButton>이전</PrevOptionButton>
-        <NextOptionButton>선택 완료</NextOptionButton>
+        <PrevOptionButton onClick={() => setOption(option - 1)}>
+          이전
+        </PrevOptionButton>
+        <NextOptionButton onClick={() => setOption(option + 1)}>
+          선택 완료
+        </NextOptionButton>
       </OptionSwitcher>
     </Wrapper>
   );
