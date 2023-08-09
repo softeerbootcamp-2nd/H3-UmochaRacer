@@ -900,7 +900,6 @@
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
-
 				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918032A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
