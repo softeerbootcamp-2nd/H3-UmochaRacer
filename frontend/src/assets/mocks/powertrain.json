@@ -2,15 +2,13 @@
 	"data" : [
 		{
 			"optionId": 12,
-			"label" : "디젤 2.2",
-			"rate": 63,
+			"name" : "디젤 2.2",
 			"price" : 1480000,
 			"imageSrc" : "src/assets/images/powertrain.png"
 		},
 		{
 			"optionId": 34,
-			"label" : "가솔린 2.8",
-			"rate": 37,
+			"name" : "가솔린 2.8",
 			"price" : 0,
 			"imageSrc" : "src/assets/images/gasoline.png"
 		}

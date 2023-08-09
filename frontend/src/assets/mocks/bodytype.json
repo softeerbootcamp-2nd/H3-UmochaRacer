@@ -1,0 +1,19 @@
+{
+	"data" : [
+		{
+			"id": 5,
+			"label" : "7인승",
+			"price" : 0,
+			"imageSrc" : "src/assets/images/7seats.png"
+		},
+		{
+			"id": 6,
+			"label" : "8인승",
+			"price" : 0,
+			"imageSrc" : "src/assets/images/8seats.png"
+		}
+	],
+
+	"message" : "머시기"
+}
+			
