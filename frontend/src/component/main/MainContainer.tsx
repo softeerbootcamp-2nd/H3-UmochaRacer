@@ -7,6 +7,7 @@ import TrimCardList from './intro/trimCard/TrimCard';
 
 import IntroTitle from './intro/IntroTitle';
 import IntroShowMore from './intro/IntroShowMore';
+import ModelTitleList from './modelTitle/ModelTitle';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const updateScroll = () => {
@@ -29,7 +30,9 @@ function MainContainer() {
       </Intro.Wrapper>
       <Trim.Header>
         <Trim.IntroP>모델 한 눈에 비교하기</Trim.IntroP>
-        <Trim.ModelWrapper></Trim.ModelWrapper>
+        <Trim.ModelWrapper>
+          <ModelTitleList />
+        </Trim.ModelWrapper>
       </Trim.Header>
     </>
   );
@@ -81,9 +84,13 @@ const Trim = {
     line-height: 130%;
     letter-spacing: -1.6px;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 65px;
+    height: 150px;
   `,
   ModelWrapper: styled.div`
-    width: 1024px;
+    width: 1280px;
+    height: 180px;
+    ${flexCenter}
+    background: #e7e7e7;
   `,
 };
