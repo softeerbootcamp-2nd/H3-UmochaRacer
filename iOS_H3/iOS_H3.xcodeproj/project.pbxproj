@@ -36,6 +36,8 @@
 		471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
 		471918082A834FDB00B67D54 /* GuideModeOptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */; };
 		471918092A834FDB00B67D54 /* GuideModeOptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */; };
+		4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
+		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
@@ -153,6 +155,7 @@
 		471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfModeOptionCardCell.swift; sourceTree = "<group>"; };
 		471918042A834D8600B67D54 /* OptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardCell.swift; sourceTree = "<group>"; };
 		471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideModeOptionCardCell.swift; sourceTree = "<group>"; };
+		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
@@ -273,6 +276,7 @@
 				471918042A834D8600B67D54 /* OptionCardCell.swift */,
 				471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */,
 				471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */,
+				4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */,
 			);
 			path = OptionCardButonListView;
 			sourceTree = "<group>";
@@ -829,6 +833,7 @@
 				471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */,
 				471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
+				4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918022A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
@@ -885,6 +890,7 @@
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
+				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918032A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
 				5F39EF402A81B79F004B0C97 /* ColorViewOptionCardButton.swift in Sources */,
