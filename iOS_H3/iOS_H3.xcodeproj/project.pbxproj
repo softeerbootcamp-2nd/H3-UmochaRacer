@@ -28,6 +28,8 @@
 		471917F12A82371E00B67D54 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D52A811D3F00B67D54 /* OptionCardInfo.swift */; };
 		471917FC2A83338D00B67D54 /* URColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FB2A83338D00B67D54 /* URColor.swift */; };
 		471917FD2A83338D00B67D54 /* URColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FB2A83338D00B67D54 /* URColor.swift */; };
+		471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */; };
+		471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */; };
 		471918022A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */; };
 		471918032A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */; };
 		471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
@@ -147,6 +149,7 @@
 		471917D52A811D3F00B67D54 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
 		471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionCardButtonListViewable.swift; path = iOS_H3_UI/OptionCardButonListView/OptionCardButtonListViewable.swift; sourceTree = SOURCE_ROOT; };
 		471917FB2A83338D00B67D54 /* URColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URColor.swift; sourceTree = "<group>"; };
+		471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonView.swift; sourceTree = "<group>"; };
 		471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelfModeOptionCardCell.swift; sourceTree = "<group>"; };
 		471918042A834D8600B67D54 /* OptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardCell.swift; sourceTree = "<group>"; };
 		471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuideModeOptionCardCell.swift; sourceTree = "<group>"; };
@@ -266,6 +269,7 @@
 			children = (
 				471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */,
 				471917EB2A8236A500B67D54 /* TwoOptionCardButtonView */,
+				471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */,
 				471918042A834D8600B67D54 /* OptionCardCell.swift */,
 				471918012A834B7700B67D54 /* SelfModeOptionCardCell.swift */,
 				471918072A834FDB00B67D54 /* GuideModeOptionCardCell.swift */,
@@ -825,6 +829,7 @@
 				471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */,
 				471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
+				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918022A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
@@ -880,6 +885,7 @@
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
+				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918032A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
 				5F39EF402A81B79F004B0C97 /* ColorViewOptionCardButton.swift in Sources */,
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
