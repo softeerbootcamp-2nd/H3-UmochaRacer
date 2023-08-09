@@ -11,4 +11,7 @@ struct OptionCardInfo {
     let title: String
     let subTitle: String
     let priceString: String     // 예시) "+ 100,000원"
+    let image: URL?
+    let color: URColor?
+    let hasMoreInfo: Bool       // 자세히보기 여부
 }
