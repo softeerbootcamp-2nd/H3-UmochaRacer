@@ -5,7 +5,7 @@ import {colors} from '@/style/theme';
 
 interface props {
   onClick: (event: React.MouseEvent) => void;
-  isOpen: boolean;
+  opened: boolean;
 }
 
 const DetailIcon = (isOpen: boolean) => {
@@ -27,13 +27,13 @@ const DetailIcon = (isOpen: boolean) => {
   );
 };
 
-function DetailToggle({onClick, isOpen}: props) {
-  const buttonText: string = isOpen ? '접기' : '자세히보기';
+function DetailToggle({onClick, opened}: props) {
+  const buttonText: string = opened ? '접기' : '자세히보기';
 
   return (
     <Wrapper onClick={onClick}>
       {buttonText}
-      {DetailIcon(isOpen)}
+      {DetailIcon(opened)}
     </Wrapper>
   );
 }

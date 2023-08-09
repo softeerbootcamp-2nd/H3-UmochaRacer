@@ -1,14 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
 
-function Content() {
+interface Data {
+  optionId: number;
+  label: string;
+  rate: number;
+  price: number;
+  imageSrc: string;
+}
+
+interface Props {
+  optionId: number;
+  label: string;
+  rate: number;
+  price: number;
+}
+interface OptionInfoProps {
+  ContentData: Data[];
+}
+
+function Content({ContentData}: OptionInfoProps) {
+  const [seletedIndex, setIndex] = useState<number>(0);
+
+  const subOptiondData: Props[] = ContentData.map(
+    ({optionId, label, rate, price}) => ({
+      optionId,
+      label,
+      rate,
+      price,
+    }),
+  );
+
+  const setNewIndex = (nextIndex: number) => {
+    setIndex(nextIndex);
+  };
+
   return (
     <Wrapper>
       <Container>
-        <OptionImage />
-        <OptionInfo />
+        <OptionImage url={ContentData[seletedIndex].imageSrc} />
+        <OptionInfo
+          cardData={subOptiondData}
+          setNewIndex={(index: number) => setNewIndex(index)}
+        />
       </Container>
     </Wrapper>
   );
