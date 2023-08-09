@@ -51,6 +51,10 @@ class OptionCardCell: UICollectionViewCell {
         setupViews()
         setupButtonTapSubject()
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        optionCardButton.isSelected = false
     }
 
     // MARK: - Helpers
