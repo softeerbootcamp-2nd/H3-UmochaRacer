@@ -34,12 +34,6 @@ final class TwoOptionCardButtonViewController: UIViewController {
         return view
     }()
 
-    private let moreInfoTwoOptionCardButtonView: TwoOptionCardButtonView = {
-        let view = TwoMoreInfoOptionCardButtonView(type: .selfMode)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     // MARK: - Lifecycles
 
     override func viewDidLoad() {
@@ -60,14 +54,12 @@ final class TwoOptionCardButtonViewController: UIViewController {
         view.addSubview(selfModeTwoOptionCardButtonView)
         view.addSubview(guideModeTwoOptionCardButtonView)
         view.addSubview(twoOptionCardButtonViewWithData)
-        view.addSubview(moreInfoTwoOptionCardButtonView)
     }
 
     private func setupConstraints() {
         setupSelfModeTwoOptionCardButtonViewConstraints()
         setupGuideModeTwoOptionCardButtonViewConstraints()
         setupTwoOptionCardButtonViewWithDataConstraints()
-        setupMoreInfoTwoOptionCardButtonViewConstraints()
     }
 
     private func setupSelfModeTwoOptionCardButtonViewConstraints() {
@@ -119,24 +111,6 @@ final class TwoOptionCardButtonViewController: UIViewController {
                 equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
             ),
             twoOptionCardButtonViewWithData.heightAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.heightAnchor
-            )
-        ])
-    }
-
-    private func setupMoreInfoTwoOptionCardButtonViewConstraints() {
-        NSLayoutConstraint.activate([
-            moreInfoTwoOptionCardButtonView.topAnchor.constraint(
-                equalTo: twoOptionCardButtonViewWithData.bottomAnchor,
-                constant: 10
-            ),
-            moreInfoTwoOptionCardButtonView.leadingAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.leadingAnchor
-            ),
-            moreInfoTwoOptionCardButtonView.trailingAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
-            ),
-            moreInfoTwoOptionCardButtonView.heightAnchor.constraint(
                 equalTo: selfModeTwoOptionCardButtonView.heightAnchor
             )
         ])
