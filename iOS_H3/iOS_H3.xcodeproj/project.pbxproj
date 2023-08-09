@@ -28,6 +28,8 @@
 		471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */; };
 		471917F02A82371100B67D54 /* OptionCardButtonListViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */; };
 		471917F12A82371E00B67D54 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D52A811D3F00B67D54 /* OptionCardInfo.swift */; };
+		471917FC2A83338D00B67D54 /* URColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FB2A83338D00B67D54 /* URColor.swift */; };
+		471917FD2A83338D00B67D54 /* URColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FB2A83338D00B67D54 /* URColor.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
@@ -141,6 +143,7 @@
 		471917D52A811D3F00B67D54 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
 		471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionCardButtonListViewable.swift; path = iOS_H3_UI/OptionCardButonListView/OptionCardButtonListViewable.swift; sourceTree = SOURCE_ROOT; };
 		471917E32A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TwoMoreInfoOptionCardButtonView.swift; sourceTree = "<group>"; };
+		471917FB2A83338D00B67D54 /* URColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URColor.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
@@ -380,6 +383,7 @@
 			isa = PBXGroup;
 			children = (
 				471917D52A811D3F00B67D54 /* OptionCardInfo.swift */,
+				471917FB2A83338D00B67D54 /* URColor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -814,7 +818,6 @@
 				471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
-
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
@@ -824,6 +827,7 @@
 				5F2593D82A7FB385001B2D84 /* MoreInfoOptionButton.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
+				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
 				471917E42A8221D800B67D54 /* TwoMoreInfoOptionCardButtonView.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
@@ -876,6 +880,7 @@
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */,
+				471917FD2A83338D00B67D54 /* URColor.swift in Sources */,
 				471917F02A82371100B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
