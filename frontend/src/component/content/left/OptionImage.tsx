@@ -9,7 +9,7 @@ interface ImageProps {
 function OptionImage({url}: ImageProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   return (
-    <Wrapper ref={wrapperRef} currHeight={wrapperRef.current?.clientHeight}>
+    <Wrapper ref={wrapperRef} $currheight={wrapperRef.current?.clientHeight}>
       <img src={url}></img>
     </Wrapper>
   );
@@ -17,13 +17,13 @@ function OptionImage({url}: ImageProps) {
 
 export default OptionImage;
 
-const Wrapper = styled.div<{currHeight: any}>`
+const Wrapper = styled.div<{$currheight: number | undefined}>`
   ${flexCenter}
   overflow: hidden;
   flex: 6;
   height: 100%;
   img {
     height: auto;
-    max-height: ${(props) => props.currHeight}px;
+    max-height: ${(props) => props.$currheight}px;
   }
 `;
