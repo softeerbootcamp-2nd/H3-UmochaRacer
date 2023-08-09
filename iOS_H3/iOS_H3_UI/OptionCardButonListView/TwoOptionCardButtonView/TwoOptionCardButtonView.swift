@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
+final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     enum Constants {
         static let buttonSpacing = 12.0
@@ -23,13 +23,8 @@ class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - LifeCycles
 
-    convenience init(type: OptionCardButton.OptionCardType) {
-        let buttons = (0..<2).map { _ in OptionCardButton(type: type) }
-        self.init(button1: buttons[0], button2: buttons[1])
-    }
-
-    init(frame: CGRect = .zero, button1: OptionCardButton, button2: OptionCardButton) {
-        optionCardButtons = [button1, button2]
+    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
+        optionCardButtons = (0..<2).map { _ in OptionCardButton(type: type) }
         super.init(frame: frame)
 
         setupOptionCardButtons()
