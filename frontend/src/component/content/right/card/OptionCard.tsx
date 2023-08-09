@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
-import Icon from '@/component/common/icons';
 
 interface Data {
   label: string;
@@ -53,11 +52,6 @@ const DefaultIcon = () => {
     </svg>
   );
 };
-
-const formatCurrencyKRW = (number: number) => {
-  return Intl.NumberFormat('ko-KR').format(number);
-};
-
 function OptionCard({selected, onClick, data}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
@@ -82,11 +76,11 @@ function OptionCard({selected, onClick, data}: CardProps) {
   );
 
   return (
-    <Wrapper onClick={onClick} selected={selected}>
+    <Wrapper onClick={onClick} $selected={selected}>
       <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
       <Text1 className="blue">구매자의 {data.rate}%가 선택했어요!</Text1>
       <Text2 className="black">{data.label}</Text2>
-      <DetailBox ref={contentBoxRef} toggle={toggle.toString()}>
+      <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
         <DetailContent ref={contentRef}>
           컨텐츠
           <Text1>구매자의 63%가 선택했어요!</Text1>
@@ -96,7 +90,7 @@ function OptionCard({selected, onClick, data}: CardProps) {
         </DetailContent>
       </DetailBox>
       <Footer>
-        <Price className="blue">{`+ ${formatCurrencyKRW(data.price)}원`}</Price>
+        <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
         <DetailToggle onClick={clickedToggle} opened={toggle}></DetailToggle>
       </Footer>
     </Wrapper>
@@ -128,7 +122,7 @@ const Default = css`
   }
 `;
 
-const Wrapper = styled.li<{selected: boolean}>`
+const Wrapper = styled.li<{$selected: boolean}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -136,7 +130,7 @@ const Wrapper = styled.li<{selected: boolean}>`
   min-height: 150px;
   padding: 20px;
   border-radius: 6px;
-  ${(props) => (props.selected ? Select : Default)};
+  ${(props) => (props.$selected ? Select : Default)};
   transition: 0.5s;
 `;
 
@@ -175,10 +169,10 @@ const Price = styled.div`
   color: ${colors.Main_Hyundai_Blue};
 `;
 
-const DetailBox = styled.div<{toggle: string}>`
+const DetailBox = styled.div<{$toggle: string}>`
   position: relative;
   height: 0;
-  pointer-events: ${(props) => (props.toggle === 'true' ? '' : 'none')};
+  pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
   overflow: hidden;
   transition: height 0.5s;
 `;

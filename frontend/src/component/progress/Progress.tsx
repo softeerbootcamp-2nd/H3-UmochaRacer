@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
 import OptionItem from './OptionItem';
 import ProgressBar from './ProgressBar';
 import {colors} from '@/style/theme';
+import {OptionContext} from '@/provider/optionProvider';
 function Progress() {
-  const [selectedOption, setSelectedOption] = useState(0);
+  const {option, setOption} = useContext(OptionContext);
   const menuItems = [
     '파워트레인',
     '구동 방식',
@@ -17,7 +18,7 @@ function Progress() {
     '견적 내기',
   ];
   const handleOptionClick = (index: number) => {
-    setSelectedOption(index);
+    setOption(index);
   };
   const menuItemController = () => {
     return menuItems.map((menuItem: string, index: number) => (
@@ -25,7 +26,7 @@ function Progress() {
         key={index}
         idx={index}
         menuName={menuItem}
-        selected={index === selectedOption}
+        selected={index === option}
         onClick={() => handleOptionClick(index)}
       />
     ));
@@ -36,7 +37,7 @@ function Progress() {
       <Wrapper>
         <OptionItemWrapper>
           {menuItemController()}
-          <SelectedBar active={selectedOption} />
+          <SelectedBar $active={option} />
         </OptionItemWrapper>
         <ProgressBar />
       </Wrapper>
@@ -60,9 +61,9 @@ const OptionItemWrapper = styled.div`
   ${flexCenter}
   position: relative;
 `;
-export const SelectedBar = styled.div<{active: number}>`
+export const SelectedBar = styled.div<{$active: number}>`
   position: absolute;
-  left: ${({active}) => `${active * 120}px`};
+  left: ${({$active}) => `${$active * 120}px`};
   bottom: -2px;
 
   display: flex;

@@ -2,14 +2,30 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import Self from './pages/Self';
 import Main from './pages/Main';
+import OptionProvider from './provider/optionProvider';
+interface AppProviderProps {
+  contexts: React.ElementType[];
+  children: React.ReactNode;
+}
+
 function App() {
+  const AppProvider = ({contexts, children}: AppProviderProps) =>
+    contexts.reduce(
+      (prev: React.ReactNode, context: React.ElementType) =>
+        React.createElement(context, {
+          children: prev,
+        }),
+      children,
+    );
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/self" element={<Self />} />
-      </Routes>
-    </BrowserRouter>
+    <AppProvider contexts={[OptionProvider]}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/self" element={<Self />} />
+        </Routes>
+      </BrowserRouter>
+    </AppProvider>
   );
 }
 
