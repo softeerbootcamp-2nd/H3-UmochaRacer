@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {colors} from '../../../style/theme';
 import OptionCard from './card/OptionCard';
 
 function OptionCardList() {

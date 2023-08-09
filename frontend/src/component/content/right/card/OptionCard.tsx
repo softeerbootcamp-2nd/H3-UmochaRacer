@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
-import Icon from '@/component/common/icons';
 
 interface CardProps {
   key: number;
@@ -45,7 +44,7 @@ const DefaultIcon = () => {
     </svg>
   );
 };
-function OptionCard({key, isSelected, onClick}: CardProps) {
+function OptionCard({isSelected, onClick}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -69,11 +68,11 @@ function OptionCard({key, isSelected, onClick}: CardProps) {
   );
 
   return (
-    <Wrapper onClick={onClick} isSeleted={isSelected.toString()}>
+    <Wrapper onClick={onClick} $isseleted={isSelected.toString()}>
       <IconBox>{isSelected ? SelectIcon() : DefaultIcon()}</IconBox>
       <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
       <Text2 className="black">디젤 2.2</Text2>
-      <DetailBox ref={contentBoxRef} toggle={toggle}>
+      <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
         <DetailContent ref={contentRef}>
           컨텐츠
           <Text1>구매자의 63%가 선택했어요!</Text1>
@@ -113,7 +112,7 @@ const Default = css`
   }
 `;
 
-const Wrapper = styled.li<{isSeleted: string}>`
+const Wrapper = styled.li<{$isseleted: string}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -122,7 +121,7 @@ const Wrapper = styled.li<{isSeleted: string}>`
   padding: 20px;
   border-radius: 6px;
   ${(props) => {
-    if (props.isSeleted === 'true') {
+    if (props.$isseleted === 'true') {
       return Select;
     } else {
       return Default;
@@ -167,10 +166,10 @@ const Price = styled.div`
   color: ${colors.Main_Hyundai_Blue};
 `;
 
-const DetailBox = styled.div<{toggle: boolean}>`
+const DetailBox = styled.div<{$toggle: string}>`
   position: relative;
   height: 0;
-  pointer-events: ${(props) => (props.toggle ? '' : 'none')};
+  pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
   overflow: hidden;
   transition: height 0.5s;
 `;

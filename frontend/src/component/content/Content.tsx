@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
+import {OptionContext} from '@/provider/optionProvider';
 
 function Content() {
+  const {option, setOption} = useContext(OptionContext);
+  console.log(option);
   return (
     <Wrapper>
       <Container>

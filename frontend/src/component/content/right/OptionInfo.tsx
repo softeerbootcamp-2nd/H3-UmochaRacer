@@ -5,7 +5,7 @@ import Modal from './optioninfo/Modal';
 import Footer from './Footer';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
-import {Title1_Medium, Title3_Medium, Title3_Regular} from '@/style/fonts';
+import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 
 function SelectedOptionInfo() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,10 +21,13 @@ function SelectedOptionInfo() {
         <OptionTitle>파워트레인</OptionTitle>
         <Text>을 선택해주세요.</Text>
         <OptionCardList></OptionCardList>
-        <ModalWrapper ref={modalRef} isOpen={isModalOpen}>
+        <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
-        <Footer onClick={handleModalView} isOpen={isModalOpen}></Footer>
+        <Footer
+          onClick={handleModalView}
+          isOpen={isModalOpen.toString()}
+        ></Footer>
       </Container>
     </Wrapper>
   );
@@ -37,12 +40,12 @@ const Wrapper = styled.div`
   flex: 4;
 `;
 
-const ModalWrapper = styled.div<{isOpen: boolean}>`
+const ModalWrapper = styled.div<{$isopen: string}>`
   position: absolute;
   top: 26px;
   width: 375px;
   height: 440px;
-  margin-top: ${(props) => (props.isOpen ? '0px' : '130%')};
+  margin-top: ${(props) => (props.$isopen === 'true' ? '0px' : '130%')};
   padding: 50px 0px;
   border-radius: 6px;
   border: 2px solid ${colors.Cool_Grey_001};
