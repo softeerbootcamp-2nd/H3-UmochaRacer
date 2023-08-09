@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Combine
 
 class OptionCardCell: UICollectionViewCell {
     
     // MARK: - UI properties
 
     private let optionCardButton: OptionCardButton
+
+    // MARK: - Properties
+
+    var buttonTapSubject = PassthroughSubject<Void, Never>()
 
     // MARK: - Lifecycles
 
@@ -20,6 +25,7 @@ class OptionCardCell: UICollectionViewCell {
         super.init(frame: frame)
 
         setupViews()
+        setupButtonTapSubject()
     }
     
     init?(coder: NSCoder, type: OptionCardButton.OptionCardType) {
@@ -27,6 +33,7 @@ class OptionCardCell: UICollectionViewCell {
         super.init(coder: coder)
 
         setupViews()
+        setupButtonTapSubject()
     }
 
     override init(frame: CGRect) {
@@ -34,6 +41,7 @@ class OptionCardCell: UICollectionViewCell {
         super.init(frame: frame)
 
         setupViews()
+        setupButtonTapSubject()
     }
 
     required init?(coder: NSCoder) {
@@ -41,6 +49,8 @@ class OptionCardCell: UICollectionViewCell {
         super.init(coder: coder)
 
         setupViews()
+        setupButtonTapSubject()
+    }
     }
 
     // MARK: - Helpers
@@ -62,5 +72,14 @@ extension OptionCardCell {
             optionCardButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+    }
+    
+    private func setupButtonTapSubject() {
+        optionCardButton.addTarget(self, action: #selector(optionButtonDidTapped), for: .touchUpInside)
+    }
+    
+    @objc
+    private func optionButtonDidTapped() {
+        buttonTapSubject.send(())
     }
 }
