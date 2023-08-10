@@ -5,7 +5,6 @@
 //  Created by KoJeongMin  on 2023/08/05.
 //
 
-import Foundation
 import UIKit
 
 protocol OptionCardButtonDelegate: AnyObject {
