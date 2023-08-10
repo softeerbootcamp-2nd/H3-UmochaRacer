@@ -29,12 +29,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
     }
 
-    @ExceptionHandler(NoCommentException.class)
-    public ResponseEntity<Object> handleNoCommentException(NoCommentException exception) {
-        ErrorCode errorCode = exception.getErrorCode();
-        return handleExceptionInternal(errorCode);
-    }
-
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> handleWrongAccessException(IllegalArgumentException exception) {
         ErrorCode errorCode = ErrorCode.ILLEGAL_ARGUMENT;

@@ -13,6 +13,6 @@ public class Bodytype {
     private Long id;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
-    private Detail detailId;
+    private Long detailId;
     private String comment;
 }

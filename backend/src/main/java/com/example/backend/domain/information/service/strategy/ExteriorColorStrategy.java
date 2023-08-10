@@ -1,6 +1,6 @@
 package com.example.backend.domain.information.service.strategy;
 
-import com.example.backend.domain.global.exception.NoCommentException;
+import com.example.backend.domain.global.exception.RestApiException;
 import com.example.backend.domain.global.model.enums.ErrorCode;
 import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
@@ -33,7 +33,7 @@ public class ExteriorColorStrategy implements InformationStrategy {
     @Override
     public CommentResponse findCommentById(long id) {
         String comment = exteriorColorRepository.findExteriorColorCommentById(id);
-        if(comment == null) throw new NoCommentException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
+        if (comment == null) throw new RestApiException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
         return CommentResponse.builder()
                 .comment(comment)
                 .build();

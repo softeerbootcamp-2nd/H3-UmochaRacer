@@ -14,13 +14,13 @@ public class AdditionalOption {
     @Id
     private Long id;
     @MappedCollection(idColumn = "top_option_id")
-    private AggregateReference<AdditionalOption,Long> topOptionId;
+    private AggregateReference<AdditionalOption, Long> topOptionId;
     private String partsSrc;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
     private String flag;
     private String category;
-    private Detail detailId;
+    private Long detailId;
 
     public enum Flag {
         BASIC, ADDITIONAL;

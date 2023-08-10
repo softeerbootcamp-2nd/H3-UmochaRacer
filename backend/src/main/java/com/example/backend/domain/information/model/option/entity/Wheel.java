@@ -11,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Wheel {
     @Id
     private Long id;
-    private Detail detailId;
+    private Long detailId;
     private Wheel subWheelId;
     private String partsSrc;
     private String flag;

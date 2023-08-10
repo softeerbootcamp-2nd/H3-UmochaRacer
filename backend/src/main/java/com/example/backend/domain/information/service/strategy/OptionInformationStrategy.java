@@ -1,6 +1,6 @@
 package com.example.backend.domain.information.service.strategy;
 
-import com.example.backend.domain.global.exception.NoCommentException;
+import com.example.backend.domain.global.exception.RestApiException;
 import com.example.backend.domain.global.model.enums.ErrorCode;
 import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
@@ -33,6 +33,6 @@ public class OptionInformationStrategy implements InformationStrategy {
 
     @Override
     public CommentResponse findCommentById(long id) {
-        throw new NoCommentException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
+        throw new RestApiException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
     }
 }

@@ -13,6 +13,6 @@ public class Powertrain {
     private Long id;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
     private BaseInfo baseInfo;
-    private Detail detailId;
+    private Long detailId;
     private String comment;
 }
