@@ -78,6 +78,13 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
+extension MultiOptionCardButtonView: OptionCardButtonDelegate {
+    
+    func moreInfoButtonDidTapped() {
+        print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
+    }
+}
+
 // MARK: - Setup CollectionView
 
 extension MultiOptionCardButtonView {
