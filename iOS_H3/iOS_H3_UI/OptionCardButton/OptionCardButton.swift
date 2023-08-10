@@ -141,15 +141,8 @@ class OptionCardButton: UIButton {
         self.type = type
         super.init(frame: .zero)
         setupViews()
-        self.optionTitleLabel.text = info.title
-        self.optionSubTitleLabel.text = info.subTitle
-        self.priceLabel.text = info.priceString
-        self.moreInfoButton.isHidden = !info.hasMoreInfo
+        update(type: type, cardInfo: info)
         addMoreInfoButtonTarget()
-        if let color = info.color { setColor(UIColor(urColor: color)) }
-        if let url = info.image {
-            setImage(url: url)
-        }
     }
 
     init(type: OptionCardType,
