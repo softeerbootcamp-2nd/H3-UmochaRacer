@@ -7,6 +7,7 @@ import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {cardDataType} from '../contentInterface';
+
 interface Data {
   optionId: number;
   name: string;

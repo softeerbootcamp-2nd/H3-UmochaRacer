@@ -129,7 +129,7 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
         ''
       )}
 
-      <CardSection>
+      <CardSection $height={26} $end={true}>
         <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
 
         {hasDetail(option) ? (
@@ -189,8 +189,10 @@ const Wrapper = styled.li<{$selected: boolean}>`
   transition: 0.5s;
 `;
 
-const CardSection = styled.div<{$height?: number}>`
+const CardSection = styled.div<{$height?: number; $end?: boolean}>`
   ${flexBetween}
+  align-items: ${(props) => (props.$end ? 'flex-end' : 'center')};
+
   height: ${(props) => (props.$height ? props.$height : '')}px;
 `;
 
@@ -219,6 +221,7 @@ const Parts = styled.div<{$url: string; $selected: boolean}>`
   align-items: center;
   position: relative;
   width: 84px;
+  height: 24px;
   background: url(${(props) => props.$url}) no-repeat;
   background-position: center;
   ${(props) => {
@@ -250,6 +253,7 @@ const MiddleImg = styled.div<{$url: string; $selected: boolean}>`
   align-items: center;
   position: relative;
   width: 150px;
+  height: 60px;
   background: url(${(props) => props.$url}) no-repeat;
   background-position: center;
   ${(props) => {
@@ -276,7 +280,9 @@ const DetailBox = styled.div<{$toggle: string}>`
   opacity: 0;
   pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
   overflow: hidden;
-  transition: 0.5s;
+  transition:
+    height 1s,
+    opacity 1s;
 `;
 
 const DetailContent = styled.div`

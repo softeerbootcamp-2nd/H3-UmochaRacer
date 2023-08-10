@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
 import {OptionContext} from '@/provider/optionProvider';
-import {CardData} from './contentInterface';
 import bodytype from '@/assets/mocks/bodytype.json';
 import powertrain from '@/assets/mocks/powertrain.json';
 import drivingsystem from '@/assets/mocks/drivingsystem.json';
@@ -25,6 +24,7 @@ function Content() {
   const setNewIndex = (nextIndex: number) => {
     setIndex(nextIndex);
   };
+
   useEffect(() => {
     setIndex(0);
     switch (option) {
@@ -50,12 +50,17 @@ function Content() {
         setcardData(powertrain.data);
     }
   }, [option]);
+
   return (
     <Wrapper>
       <Container>
         {cardData.length > 0 && (
           <>
-            <OptionImage url={cardData[selectedIndex].imageSrc} />
+            <OptionImage
+              key={option}
+              cardData={cardData}
+              selectedIndex={selectedIndex}
+            />
             <OptionInfo
               cardData={cardData}
               setNewIndex={(index: number) => setNewIndex(index)}
