@@ -19,6 +19,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
 
     private let guideModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(type: .guideMode)
+        view.updateView(index: 0, with: OptionCardInfo(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -28,17 +29,12 @@ final class TwoOptionCardButtonViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         let cardInfos: [OptionCardInfo] = [
             .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원"),
-            .init(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원")
+            .init(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true)
         ]
         view.updateAllViews(with: cardInfos)
         return view
     }()
 
-    private let moreInfoTwoOptionCardButtonView: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .selfMode)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
 
     // MARK: - Lifecycles
 
@@ -60,14 +56,12 @@ final class TwoOptionCardButtonViewController: UIViewController {
         view.addSubview(selfModeTwoOptionCardButtonView)
         view.addSubview(guideModeTwoOptionCardButtonView)
         view.addSubview(twoOptionCardButtonViewWithData)
-        view.addSubview(moreInfoTwoOptionCardButtonView)
     }
 
     private func setupConstraints() {
         setupSelfModeTwoOptionCardButtonViewConstraints()
         setupGuideModeTwoOptionCardButtonViewConstraints()
         setupTwoOptionCardButtonViewWithDataConstraints()
-        setupMoreInfoTwoOptionCardButtonViewConstraints()
     }
 
     private func setupSelfModeTwoOptionCardButtonViewConstraints() {
@@ -119,24 +113,6 @@ final class TwoOptionCardButtonViewController: UIViewController {
                 equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
             ),
             twoOptionCardButtonViewWithData.heightAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.heightAnchor
-            )
-        ])
-    }
-
-    private func setupMoreInfoTwoOptionCardButtonViewConstraints() {
-        NSLayoutConstraint.activate([
-            moreInfoTwoOptionCardButtonView.topAnchor.constraint(
-                equalTo: twoOptionCardButtonViewWithData.bottomAnchor,
-                constant: 10
-            ),
-            moreInfoTwoOptionCardButtonView.leadingAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.leadingAnchor
-            ),
-            moreInfoTwoOptionCardButtonView.trailingAnchor.constraint(
-                equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
-            ),
-            moreInfoTwoOptionCardButtonView.heightAnchor.constraint(
                 equalTo: selfModeTwoOptionCardButtonView.heightAnchor
             )
         ])
