@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState, useRef, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
@@ -58,14 +58,25 @@ function OptionCard({selected, onClick, data}: CardProps) {
 
       if (contentBoxRef.current.clientHeight > 0) {
         contentBoxRef.current.style.height = '0';
+        contentBoxRef.current.style.opacity = '0';
       } else {
         contentBoxRef.current.style.height = `${contentRef.current.clientHeight}px`;
+        contentBoxRef.current.style.opacity = '1';
       }
 
       setToggle(!toggle);
     },
     [toggle],
   );
+
+  useEffect(() => {
+    if (toggle && !selected) {
+      if (contentBoxRef.current) {
+        contentBoxRef.current.style.height = '0';
+        setToggle(!toggle);
+      }
+    }
+  }, [selected]);
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
@@ -83,7 +94,11 @@ function OptionCard({selected, onClick, data}: CardProps) {
       </DetailBox>
       <Footer>
         <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
-        <DetailToggle onClick={clickedToggle} opened={toggle}></DetailToggle>
+        <DetailToggle
+          onClick={clickedToggle}
+          opened={toggle}
+          selected={selected}
+        ></DetailToggle>
       </Footer>
     </Wrapper>
   );
@@ -164,9 +179,10 @@ const Price = styled.div`
 const DetailBox = styled.div<{$toggle: string}>`
   position: relative;
   height: 0;
+  opacity: 0;
   pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
   overflow: hidden;
-  transition: height 0.5s;
+  transition: 0.5s;
 `;
 
 const DetailContent = styled.div`
