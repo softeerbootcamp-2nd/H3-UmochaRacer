@@ -86,6 +86,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 extension MultiOptionCardButtonView: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         buttonTapCancellableByIndex[indexPath.row]?.cancel()
+        buttonTapCancellableByIndex[indexPath.row] = nil
     }
 }
 
