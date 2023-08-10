@@ -17,6 +17,10 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     enum Constants {
         static let cellHeight = 150.0
         static let optionCardCollectionViewHeight = 150.0
+        static let spacing = 10.0
+        static let dotIndicatorHeight = 8.0
+        static let currentDotIndicatorColor = "2B2F36"
+        static let dotIndicatorColor = "D9D9D9"
     }
     
     enum Section {
@@ -29,6 +33,8 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     
     private var optionCardCollectionView: UICollectionView!
     
+    private var dotIndicator = UIPageControl()
+
     // MARK: - Properties
     
     private let optionCardType: OptionCardButton.OptionCardType
@@ -68,18 +74,13 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     // MARK: - Helpers
 
     func updateAllViews(with cardInfos: [OptionCardInfo]) {
-        var snapshot = dataSource.snapshot()
-        
-        let previousItem = snapshot.itemIdentifiers
-        snapshot.deleteItems(previousItem)
-        snapshot.appendItems(cardInfos)
-        
-        dataSource.apply(snapshot)
+        dotIndicator.numberOfPages = cardInfos.count
+        updateSnapshot(item: cardInfos)
     }
 }
 
 extension MultiOptionCardButtonView: OptionCardButtonDelegate {
-    
+
     func moreInfoButtonDidTapped() {
         print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
     }
@@ -142,6 +143,16 @@ extension MultiOptionCardButtonView {
         snapshot.appendSections([Section.optionCard])
         dataSource.apply(snapshot)
     }
+
+    private func updateSnapshot(item: [OptionCardInfo]) {
+        var snapshot = dataSource.snapshot()
+
+        let previousItem = snapshot.itemIdentifiers
+        snapshot.deleteItems(previousItem)
+        snapshot.appendItems(item)
+
+        dataSource.apply(snapshot)
+    }
 }
 
 // MARK: - Setup
@@ -149,12 +160,21 @@ extension MultiOptionCardButtonView {
 extension MultiOptionCardButtonView {
 
     private func setupViews() {
+        setupDotIndicator()
         addSubviews()
         setupConstraints()
     }
 
+    private func setupDotIndicator() {
+        dotIndicator.currentPage = 0
+        dotIndicator.currentPageIndicatorTintColor = UIColor(hex: Constants.currentDotIndicatorColor)
+        dotIndicator.pageIndicatorTintColor = UIColor(hex: Constants.dotIndicatorColor)
+        dotIndicator.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     private func addSubviews() {
         addSubview(optionCardCollectionView)
+        addSubview(dotIndicator)
     }
 
     private func setupConstraints() {
@@ -163,6 +183,12 @@ extension MultiOptionCardButtonView {
             optionCardCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             optionCardCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardCollectionView.heightAnchor.constraint(equalToConstant: Constants.optionCardCollectionViewHeight)
+        ])
+        NSLayoutConstraint.activate([
+            dotIndicator.topAnchor.constraint(equalTo: optionCardCollectionView.bottomAnchor, constant: Constants.spacing),
+            dotIndicator.leadingAnchor.constraint(equalTo: optionCardCollectionView.leadingAnchor),
+            dotIndicator.trailingAnchor.constraint(equalTo: optionCardCollectionView.trailingAnchor),
+            dotIndicator.heightAnchor.constraint(equalToConstant: Constants.dotIndicatorHeight)
         ])
     }
 }
