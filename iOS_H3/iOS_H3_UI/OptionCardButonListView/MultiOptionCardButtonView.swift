@@ -7,7 +7,10 @@
 
 import UIKit
 
-final class MultiOptionCardButtonView: UIView {
+protocol MultiOptionCardButtonViewDelegate: AnyObject {
+    func optionCardButtonDidTapped(index: Int)
+}
+
 final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     
     enum Constants {
@@ -36,6 +39,8 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         .guideMode: GuideModeOptionCardCell.identifier
     ]
     
+    weak var delegate: MultiOptionCardButtonViewDelegate?
+
     // MARK: - Lifecycles
     
     init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
