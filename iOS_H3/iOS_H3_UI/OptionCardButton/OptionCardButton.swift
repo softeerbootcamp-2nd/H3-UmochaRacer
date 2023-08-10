@@ -201,9 +201,6 @@ class OptionCardButton: UIButton {
 
         animatedView.showWithAnimation(title: title, description: description)
     }
-
-   
-
 }
 
 extension OptionCardButton {
@@ -275,14 +272,14 @@ extension OptionCardButton {
     }
 
     private func setupConstraints() {
-        setupCheckImageViewConstraint() // 체크 이미지 Constraint 설정
-        setupOptionSubTitleLabelConstraint() // 서브 타이틀 Constraint 설정
-        setupOptionTitleLabelConstraint() // 타이틀 Constraint 설정
-        setupPriceLabelConstraint() // 가격 라벨 Constraint 설정
-        setupTagListViewConstraint() // 태그 리스트 뷰 Constraint 설정
-        setupMoreInfoButtonConstraint() // 더보기 버튼 Constraint 설정
-        setupImageViewConstraint() // 이미지 옵션 뷰 Constraint 설정
-        setupColorViewConstraint() // 컬러 옵션 뷰 Constraint 설정
+        setupCheckImageViewConstraint()
+        setupOptionSubTitleLabelConstraint()
+        setupOptionTitleLabelConstraint()
+        setupPriceLabelConstraint()
+        setupTagListViewConstraint()
+        setupMoreInfoButtonConstraint()
+        setupImageViewConstraint()
+        setupColorViewConstraint()
     }
 
     private func setupCheckImageViewConstraint() {
