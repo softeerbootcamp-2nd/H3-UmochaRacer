@@ -83,20 +83,12 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
-extension MultiOptionCardButtonView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        buttonTapCancellableByIndex[indexPath.row]?.cancel()
-        buttonTapCancellableByIndex[indexPath.row] = nil
-    }
-}
-
 // MARK: - Setup CollectionView
 
 extension MultiOptionCardButtonView {
 
     private func setupOptionCardCollectionView() {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
-        optionCardCollectionView.delegate = self
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
         optionCardCollectionView.isScrollEnabled = true
         optionCardCollectionView.bounces = false
