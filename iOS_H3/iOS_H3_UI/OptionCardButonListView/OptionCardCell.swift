@@ -9,7 +9,9 @@ import UIKit
 import Combine
 
 class OptionCardCell: UICollectionViewCell {
-    
+
+    static let identifier = "OptionCardCell"
+
     // MARK: - UI properties
 
     private let optionCardButton: OptionCardButton
