@@ -35,6 +35,17 @@ final class TwoOptionCardButtonViewController: UIViewController {
         return view
     }()
 
+    private let moreInfoVersionView: TwoOptionCardButtonView = {
+        let view = TwoOptionCardButtonView(type: .selfMode)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        let cardInfos: [OptionCardInfo] = [
+            .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원", hasMoreInfo: true),
+            .init(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", hasMoreInfo: true)
+        ]
+        view.updateAllViews(with: cardInfos)
+        return view
+    }()
+
     // MARK: - Lifecycles
 
     override func viewDidLoad() {
@@ -55,12 +66,14 @@ final class TwoOptionCardButtonViewController: UIViewController {
         view.addSubview(selfModeTwoOptionCardButtonView)
         view.addSubview(guideModeTwoOptionCardButtonView)
         view.addSubview(twoOptionCardButtonViewWithData)
+        view.addSubview(moreInfoVersionView)
     }
 
     private func setupConstraints() {
         setupSelfModeTwoOptionCardButtonViewConstraints()
         setupGuideModeTwoOptionCardButtonViewConstraints()
         setupTwoOptionCardButtonViewWithDataConstraints()
+        setupMoreInfoVersionViewConstraints()
     }
 
     private func setupSelfModeTwoOptionCardButtonViewConstraints() {
@@ -112,6 +125,24 @@ final class TwoOptionCardButtonViewController: UIViewController {
                 equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
             ),
             twoOptionCardButtonViewWithData.heightAnchor.constraint(
+                equalTo: selfModeTwoOptionCardButtonView.heightAnchor
+            )
+        ])
+    }
+    
+    private func setupMoreInfoVersionViewConstraints() {
+        NSLayoutConstraint.activate([
+            moreInfoVersionView.topAnchor.constraint(
+                equalTo: twoOptionCardButtonViewWithData.bottomAnchor,
+                constant: 10
+            ),
+            moreInfoVersionView.leadingAnchor.constraint(
+                equalTo: selfModeTwoOptionCardButtonView.leadingAnchor
+            ),
+            moreInfoVersionView.trailingAnchor.constraint(
+                equalTo: selfModeTwoOptionCardButtonView.trailingAnchor
+            ),
+            moreInfoVersionView.heightAnchor.constraint(
                 equalTo: selfModeTwoOptionCardButtonView.heightAnchor
             )
         ])
