@@ -1,13 +1,14 @@
 package com.example.backend.domain.information.service.strategy;
 
 import com.example.backend.domain.information.dto.CommonResponse;
-import lombok.RequiredArgsConstructor;
+import com.example.backend.domain.information.dto.CommentResponse;
 
 import java.util.List;
 
 public interface InformationStrategy {
     List<CommonResponse> findAll();
     StrategyName getStrategyName();
+    CommentResponse findCommentById(long id);
 
     enum StrategyName {
         POWERTRAIN("powertrain"),

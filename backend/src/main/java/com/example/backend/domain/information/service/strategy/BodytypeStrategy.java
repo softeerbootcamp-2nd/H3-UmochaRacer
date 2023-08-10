@@ -1,6 +1,7 @@
 package com.example.backend.domain.information.service.strategy;
 
 import com.example.backend.domain.information.dto.CommonResponse;
+import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.option.entity.Bodytype;
 import com.example.backend.domain.information.model.option.repository.BodytypeRepository;
@@ -26,4 +27,13 @@ public class BodytypeStrategy implements InformationStrategy {
     public StrategyName getStrategyName() {
         return StrategyName.BODYTYPE;
     }
+
+    @Override
+    public CommentResponse findCommentById(long id) {
+        String comment = bodytypeRepository.findBodytypeCommentById(id);
+        return CommentResponse.builder()
+                .comment(comment)
+                .build();
+    }
+
 }

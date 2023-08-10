@@ -1,5 +1,6 @@
 package com.example.backend.domain.information.service.strategy;
 
+import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
@@ -19,5 +20,12 @@ public class InteriorColorStrategy {
     public List<CommonResponse> findAll(long exteriorColorId) {
         List<InteriorColor> all = interiorColorRepository.findAllByExteriorColorId(exteriorColorId);
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
+    }
+
+    public CommentResponse findCommentById(long id) {
+        String comment = interiorColorRepository.findInteriorColorCommentById(id);
+        return CommentResponse.builder()
+                .comment(comment)
+                .build();
     }
 }

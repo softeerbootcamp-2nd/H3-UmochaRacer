@@ -1,5 +1,6 @@
 package com.example.backend.domain.information.service;
 
+import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
 import com.example.backend.domain.information.service.strategy.InformationStrategy.StrategyName;
@@ -33,5 +34,9 @@ public class InformationStrategyFactory {
 
     public List<CommonResponse> findInteriorColorByExteriorColor(long exteriorColorId) {
         return interiorColorStrategy.findAll(exteriorColorId);
+    }
+
+    public CommentResponse findInteriorColorCommentById(long id) {
+        return interiorColorStrategy.findCommentById(id);
     }
 }

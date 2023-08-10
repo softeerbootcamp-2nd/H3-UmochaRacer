@@ -1,5 +1,6 @@
 package com.example.backend.domain.information.service.strategy;
 
+import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.option.entity.DrivingSystem;
@@ -25,5 +26,13 @@ public class DrivingSystemStrategy implements InformationStrategy {
     @Override
     public StrategyName getStrategyName() {
         return StrategyName.DRIVING_SYSTEM;
+    }
+
+    @Override
+    public CommentResponse findCommentById(long id) {
+        String comment = repository.findDrivingSystemCommentById(id);
+        return CommentResponse.builder()
+                .comment(comment)
+                .build();
     }
 }
