@@ -111,7 +111,17 @@ extension MultiOptionCardButtonView {
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .paging
 
+        connectDotIndicator(with: section)
+
         return UICollectionViewCompositionalLayout(section: section)
+    }
+    
+    private func connectDotIndicator(with section: NSCollectionLayoutSection) {
+        section.visibleItemsInvalidationHandler = { [weak self] (_, offset, _) in
+            guard let self else { return }
+            let page = Int(round(offset.x / self.bounds.width))
+            dotIndicator.currentPage = page
+        }
     }
 
     private func registerCollectionViewCell() {
