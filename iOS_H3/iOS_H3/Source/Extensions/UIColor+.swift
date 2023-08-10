@@ -37,4 +37,10 @@ extension UIColor {
         let blue = CGFloat(hexValue & 0xff) / 255
         self.init(red: red, green: green, blue: blue, alpha: CGFloat(alphaValue))
     }
+
+    convenience init(urColor: URColor) {
+        self.init(red: CGFloat(urColor.red) / 255.0,
+                  green: CGFloat(urColor.green) / 255.0,
+                  blue: CGFloat(urColor.blue) / 255.0, alpha: 1.0)
+    }
 }
