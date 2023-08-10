@@ -1,6 +1,7 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
+import com.example.backend.domain.information.model.car.entity.Detail;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -20,10 +21,10 @@ public class AdditionalOption {
     private BaseInfo baseInfo;
     private String flag;
     private String category;
-    private String detail;
+    private Detail detailId;
 
     public enum Flag {
-        BASIC, WHEEL, ADDITIONAL;
+        BASIC, ADDITIONAL;
 
         @Override
         public String toString() {

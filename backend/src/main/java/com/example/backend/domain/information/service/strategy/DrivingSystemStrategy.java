@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DrivingSystemStrategy implements InformationStrategy {
     private final DrivingSystemRepository repository;
+    private final InformationMapper informationMapper;
+
     @Override
     public List<CommonResponse> findAll() {
         List<DrivingSystem> all = (List<DrivingSystem>) repository.findAll();
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override

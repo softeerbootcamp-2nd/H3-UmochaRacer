@@ -6,16 +6,13 @@ import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.dto.OptionInformationResponse;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
-import com.example.backend.domain.information.model.option.entity.AdditionalOption;
-import com.example.backend.domain.information.model.option.entity.Bodytype;
-import com.example.backend.domain.information.model.option.entity.DrivingSystem;
-import com.example.backend.domain.information.model.option.entity.Powertrain;
+import com.example.backend.domain.information.model.option.entity.*;
+import org.springframework.stereotype.Component;
 
+@Component
 public class InformationMapper {
-    private InformationMapper() {
-    }
 
-    public static CommonResponse map(ExteriorColor exteriorColor) {
+    public CommonResponse map(ExteriorColor exteriorColor) {
         return ColorInformationResponse.builder()
                 .id(exteriorColor.getId())
                 .name(exteriorColor.getBaseInfo().getName())
@@ -25,7 +22,7 @@ public class InformationMapper {
                 .build();
     }
 
-    public static CommonResponse map(InteriorColor interiorColor) {
+    public CommonResponse map(InteriorColor interiorColor) {
         return ColorInformationResponse.builder()
                 .id(interiorColor.getId())
                 .name(interiorColor.getBaseInfo().getName())
@@ -35,7 +32,7 @@ public class InformationMapper {
                 .build();
     }
 
-    public static CommonResponse map(Bodytype bodytype) {
+    public CommonResponse map(Bodytype bodytype) {
         return CarInformationResponse.builder()
                 .id(bodytype.getId())
                 .imageSrc(bodytype.getBaseInfo().getImageSrc())
@@ -44,7 +41,7 @@ public class InformationMapper {
                 .build();
     }
 
-    public static CommonResponse map(DrivingSystem drivingSystem) {
+    public CommonResponse map(DrivingSystem drivingSystem) {
         return CarInformationResponse.builder()
                 .id(drivingSystem.getId())
                 .imageSrc(drivingSystem.getBaseInfo().getImageSrc())
@@ -53,7 +50,7 @@ public class InformationMapper {
                 .build();
     }
 
-    public static CommonResponse map(Powertrain powertrain) {
+    public CommonResponse map(Powertrain powertrain) {
         return CarInformationResponse.builder()
                 .id(powertrain.getId())
                 .imageSrc(powertrain.getBaseInfo().getImageSrc())
@@ -62,13 +59,23 @@ public class InformationMapper {
                 .build();
     }
 
-    public static CommonResponse map(AdditionalOption additionalOption) {
+    public CommonResponse map(AdditionalOption additionalOption) {
         return OptionInformationResponse.builder()
                 .id(additionalOption.getId())
                 .name(additionalOption.getBaseInfo().getName())
                 .imageSrc(additionalOption.getBaseInfo().getImageSrc())
                 .price(additionalOption.getBaseInfo().getPrice())
                 .partsSrc(additionalOption.getPartsSrc())
+                .build();
+    }
+
+    public CommonResponse map(Wheel wheel) {
+        return OptionInformationResponse.builder()
+                .id(wheel.getId())
+                .name(wheel.getBaseInfo().getName())
+                .price(wheel.getBaseInfo().getPrice())
+                .imageSrc(wheel.getBaseInfo().getImageSrc())
+                .partsSrc(wheel.getPartsSrc())
                 .build();
     }
 }

@@ -14,9 +14,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InteriorColorStrategy {
     private final InteriorColorRepository interiorColorRepository;
+    private final InformationMapper informationMapper;
 
     public List<CommonResponse> findAll(long exteriorColorId) {
         List<InteriorColor> all = interiorColorRepository.findAllByExteriorColorId(exteriorColorId);
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 }

@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ExteriorColorStrategy implements InformationStrategy {
     private final ExteriorColorRepository exteriorColorRepository;
+    private final InformationMapper informationMapper;
 
     @Override
     public List<CommonResponse> findAll() {
         List<ExteriorColor> all = (List<ExteriorColor>) exteriorColorRepository.findAll();
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override

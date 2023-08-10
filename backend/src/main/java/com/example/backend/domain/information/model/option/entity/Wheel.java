@@ -7,13 +7,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
-@Table("POWERTRAIN")
+@Table("WHEEL")
 @Getter
-public class Powertrain {
+public class Wheel {
     @Id
     private Long id;
-    @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
-    private BaseInfo baseInfo;
     private Detail detailId;
+    private Wheel subWheelId;
+    private String partsSrc;
+    private String flag;
+    private String category;
     private String comment;
+    @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
+    private BaseInfo baseInfo;
 }

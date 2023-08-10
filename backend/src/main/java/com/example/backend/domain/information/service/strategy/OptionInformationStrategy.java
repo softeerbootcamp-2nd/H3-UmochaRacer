@@ -14,12 +14,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class OptionInformationStrategy implements InformationStrategy {
     private final AdditionalOptionRepository additionalOptionRepository;
+    private final InformationMapper informationMapper;
 
     @Override
     public List<CommonResponse> findAll() {
         List<AdditionalOption> all = additionalOptionRepository
                 .findAllByTopOptionIdIsNullAndFlag(AdditionalOption.Flag.ADDITIONAL.toString());
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override

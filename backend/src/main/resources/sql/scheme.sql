@@ -14,7 +14,7 @@ CREATE TABLE `Powertrain`
     `name`      varchar(255),
     `image_src` varchar(255),
     `price`     integer,
-    `detail`    varchar(255),
+    `detail_id` Long,
     `comment`   varchar(255)
 );
 
@@ -25,7 +25,7 @@ CREATE TABLE `Bodytype`
     `name`      varchar(255),
     `image_src` varchar(255),
     `price`     integer,
-    `detail`    varchar(255),
+    `detail_id` Long,
     `comment`   varchar(255)
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE `Driving_System`
     `name`      varchar(255),
     `image_src` varchar(255),
     `price`     integer,
-    `detail`    varchar(255),
+    `detail_id` Long,
     `comment`   varchar(255)
 );
 
@@ -110,7 +110,7 @@ CREATE TABLE `Additional_Option`
     `id`            Long PRIMARY KEY,
     `name`          varchar(255),
     `top_option_id` Long,
-    `detail`        varchar(255),
+    `detail_id`     Long,
     `parts_src`     varchar(255),
     `price`         int,
     `image_src`     varchar(255),
@@ -123,6 +123,38 @@ CREATE TABLE `Tag`
 (
     `id`   Long PRIMARY KEY,
     `name` varchar(255)
+);
+
+Drop table if exists Trim_Exterior_Color;
+create table Trim_Exterior_Color (
+    `id` Long primary key,
+    trim_id Long,
+    exterior_color_id Long
+);
+
+Drop Table if exists Detail;
+create TAble `Detail`
+(
+    `id`          Long Primary key,
+    `title`       varchar(255),
+    `description` varchar(255),
+    `image_src`   varchar(255),
+    `info`        varchar(255)
+);
+
+Drop Table if exists Wheel;
+create TAble `Wheel`
+(
+    `id`           Long PRIMARY KEY,
+    `name`         varchar(255),
+    `detail_id`    Long,
+    `sub_wheel_id` Long,
+    `parts_src`    varchar(255),
+    `price`        int,
+    `image_src`    varchar(255),
+    `category`     varchar(255),
+    `comment`      varchar(255),
+    flag           varchar(255)
 );
 
 ALTER TABLE `Model`
@@ -172,3 +204,22 @@ ALTER TABLE `Sales_Options`
 
 ALTER TABLE `Additional_Option`
     ADD FOREIGN KEY (`top_option_id`) REFERENCES `Additional_Option` (`id`);
+
+ALTER TABLE `Wheel`
+    ADD FOREIGN KEY (`sub_wheel_id`) REFERENCES `Wheel` (`id`);
+
+ALTER TABLE `Wheel`
+    ADD FOREIGN KEY (`detail_id`) REFERENCES `Detail` (`id`);
+
+ALTER TABLE `Additional_Option`
+    ADD FOREIGN KEY (`detail_id`) REFERENCES `Detail` (`id`);
+
+ALTER TABLE `Driving_System`
+    ADD FOREIGN KEY (`detail_id`) REFERENCES `Detail` (`id`);
+
+ALTER TABLE `Powertrain`
+    ADD FOREIGN KEY (`detail_id`) REFERENCES `Detail` (`id`);
+ALTER TABLE `Trim_Exterior_Color`
+    ADD FOREIGN KEY (`trim_id`) REFERENCES `Trim` (`id`);
+ALTER TABLE `Trim_Exterior_Color`
+    ADD FOREIGN KEY (`exterior_color_id`) REFERENCES `Exterior_color` (`id`);

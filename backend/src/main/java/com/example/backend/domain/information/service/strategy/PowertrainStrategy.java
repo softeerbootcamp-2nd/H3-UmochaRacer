@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class PowertrainStrategy implements InformationStrategy {
     private final PowertrainRepository powertrainRepository;
+    private final InformationMapper informationMapper;
 
     @Override
     public List<CommonResponse> findAll() {
         List<Powertrain> all = (List<Powertrain>) powertrainRepository.findAll();
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override

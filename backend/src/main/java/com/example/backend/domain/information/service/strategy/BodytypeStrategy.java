@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BodytypeStrategy implements InformationStrategy {
     private final BodytypeRepository bodytypeRepository;
+    private final InformationMapper informationMapper;
 
     @Override
     public List<CommonResponse> findAll() {
         List<Bodytype> all = (List<Bodytype>) bodytypeRepository.findAll();
-        return all.stream().map(InformationMapper::map).collect(Collectors.toList());
+        return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override
