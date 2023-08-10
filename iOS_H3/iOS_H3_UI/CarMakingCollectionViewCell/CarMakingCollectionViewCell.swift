@@ -33,7 +33,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         return label
     }()
 
-    let optionButtonListView: UIView?
+    let optionButtonListView: UIView
 
     // MARK: - Lifecycles
 
@@ -90,8 +90,7 @@ extension CarMakingCollectionViewCell {
     }
 
     func addSubViews() {
-        guard let listView = optionButtonListView else { return }
-        [optionImageView, descriptionLabel, listView]
+        [optionImageView, descriptionLabel, optionButtonListView]
             .forEach {
                 self.contentView.addSubview($0)
             }
@@ -112,11 +111,11 @@ extension CarMakingCollectionViewCell {
     }
 
     func setupButtonListView() {
-        optionButtonListView?.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        optionButtonListView?.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        optionButtonListView?.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
+        optionButtonListView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        optionButtonListView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        optionButtonListView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
                                                    constant: Constants.buttonListViewTopMargin).isActive = true
-        optionButtonListView?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        optionButtonListView?.heightAnchor.constraint(equalToConstant: Constants.buttonListViewHeight).isActive = true
+        optionButtonListView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        optionButtonListView.heightAnchor.constraint(equalToConstant: Constants.buttonListViewHeight).isActive = true
     }
 }
