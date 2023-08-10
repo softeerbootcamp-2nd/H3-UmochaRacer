@@ -145,7 +145,6 @@ class OptionCardButton: UIButton {
         self.optionSubTitleLabel.text = info.subTitle
         self.priceLabel.text = info.priceString
         self.moreInfoButton.isHidden = !info.hasMoreInfo
-        setupViews()
         addMoreInfoButtonTarget()
         if let color = info.color { setColor(UIColor(urColor: color)) }
         if let url = info.image {
@@ -174,6 +173,24 @@ class OptionCardButton: UIButton {
     }
 
     // MARK: - Helpers
+    func update(type: OptionCardType? = nil, cardInfo: OptionCardInfo? = nil) {
+        if let type = type {
+            self.type = type
+        }
+        
+        if let cardInfo = cardInfo {
+            self.optionTitleLabel.text = cardInfo.title
+            self.optionSubTitleLabel.text = cardInfo.subTitle
+            self.priceLabel.text = cardInfo.priceString
+            self.moreInfoButton.isHidden = !cardInfo.hasMoreInfo
+            if let color = cardInfo.color { setColor(UIColor(urColor: color)) }
+            if let url = cardInfo.image {
+                setImage(url: url)
+            }
+        }
+        
+        updateButtonUI()
+    }
 
     func setColor(_ color: UIColor) {
         colorView.backgroundColor = color
