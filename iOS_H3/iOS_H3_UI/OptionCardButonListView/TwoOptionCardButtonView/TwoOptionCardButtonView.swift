@@ -53,10 +53,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func updateView(index: Int, with cardInfo: OptionCardInfo) {
         if !isValidateIndex(index) { return }
 
-        optionCardButtons[index].setOptionTitle(cardInfo.title)
-        optionCardButtons[index].setOptionSubTitle(cardInfo.subTitle)
-        optionCardButtons[index].setPrice(cardInfo.priceString)
-
+        optionCardButtons[index].update(cardInfo: cardInfo)
         if cardInfo.isSelected {
             selectOption(index: index)
         }
