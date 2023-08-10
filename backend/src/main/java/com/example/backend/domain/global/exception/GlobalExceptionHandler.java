@@ -34,4 +34,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ErrorCode errorCode = exception.getErrorCode();
         return handleExceptionInternal(errorCode);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<Object> handleWrongAccessException(IllegalArgumentException exception) {
+        ErrorCode errorCode = ErrorCode.ILLEGAL_ARGUMENT;
+        return handleExceptionInternal(errorCode);
+    }
 }
