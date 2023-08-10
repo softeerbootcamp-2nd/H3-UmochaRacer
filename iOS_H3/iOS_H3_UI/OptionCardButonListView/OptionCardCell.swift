@@ -61,11 +61,8 @@ class OptionCardCell: UICollectionViewCell {
 
     // MARK: - Helpers
 
-    func configure(_ info: OptionCardInfo) {
-        optionCardButton.setOptionTitle(info.title)
-        optionCardButton.setOptionSubTitle(info.subTitle)
-        optionCardButton.setPrice(info.priceString)
-        optionCardButton.isSelected = info.isSelected
+    func configure(cardType: OptionCardButton.OptionCardType, info: OptionCardInfo) {
+        optionCardButton.update(type: cardType, cardInfo: info)
     }
 }
 
