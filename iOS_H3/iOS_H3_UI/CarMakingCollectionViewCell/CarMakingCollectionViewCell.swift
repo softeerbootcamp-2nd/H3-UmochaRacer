@@ -5,8 +5,8 @@
 //  Created by KoJeongMin  on 2023/08/08.
 //
 
-import Foundation
 import UIKit
+
 class CarMakingCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UI properties
@@ -16,6 +16,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         static let descriptionLabelTopMargin: CGFloat = 26.0
         static let buttonListViewTopMargin: CGFloat = 20.0
         static let buttonListViewHeight: CGFloat = 200.0
+        static let descriptionSuffix : String = "을 선택해주세요"
     }
 
     let optionImageView: UIImageView = {
@@ -39,7 +40,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         optionButtonListView = TwoOptionCardButtonView()
-        super.init(frame: .zero)
+        super.init(frame: frame)
         setupViews()
 
     }
@@ -50,15 +51,9 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         setupViews()
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-
-    }
-
     init(frame: CGRect = .zero, buttonListViewable: OptionCardButtonListViewable) {
         optionButtonListView = buttonListViewable
         super.init(frame: frame)
-
     }
 
     // MARK: - Helpers
@@ -67,16 +62,13 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
                    makingStepTitle: String,
                    optionInfos: [OptionCardInfo]) {
 
-        // TODO: 이미지 업데이트(optionInfos 수정 전 코드)
-
         // 라벨 업데이트
-        self.descriptionLabel.text = makingStepTitle
+        self.descriptionLabel.text = makingStepTitle + Constants.descriptionSuffix
         self.descriptionLabel.applyBoldToString(targetString: makingStepTitle,
                                                 font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
         // 버튼 업데이트
         let listView = optionButtonListView as? OptionCardButtonListViewable
         listView?.updateAllViews(with: optionInfos)
-
     }
 
 }
