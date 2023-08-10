@@ -202,18 +202,7 @@ class OptionCardButton: UIButton {
         animatedView.showWithAnimation(title: title, description: description)
     }
 
-    private func addMoreInfoButtonTarget() {
-        moreInfoButton.addTarget(self, action: #selector(moreInfoButtonTapped), for: .touchUpInside)
-    }
-
-    @objc func optionButtonTapped() {
-        isSelected.toggle()
-    }
-
-    @objc
-    private func moreInfoButtonTapped() {
-        delegate?.moreInfoButtonDidTapped()
-    }
+   
 
 }
 
@@ -363,4 +352,17 @@ extension OptionCardButton {
         colorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -28).isActive = true
     }
 
+    private func addMoreInfoButtonTarget() {
+        moreInfoButton.addTarget(self, action: #selector(moreInfoButtonTapped), for: .touchUpInside)
+    }
+
+    @objc
+    private func optionButtonTapped() {
+        isSelected.toggle()
+    }
+
+    @objc
+    private func moreInfoButtonTapped() {
+        delegate?.moreInfoButtonDidTapped()
+    }
 }
