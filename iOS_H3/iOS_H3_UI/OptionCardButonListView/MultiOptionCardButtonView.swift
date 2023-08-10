@@ -34,11 +34,6 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     private let optionCardType: OptionCardButton.OptionCardType
 
     private var dataSource: OptionCardCollectionViewDiffableDataSource!
-
-    private let cellIdentifiers: [OptionCardButton.OptionCardType: String] = [
-        .selfMode: SelfModeOptionCardCell.identifier,
-        .guideMode: GuideModeOptionCardCell.identifier
-    ]
     
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
@@ -112,19 +107,17 @@ extension MultiOptionCardButtonView {
     }
 
     private func registerCollectionViewCell() {
-        optionCardCollectionView.register(SelfModeOptionCardCell.self, forCellWithReuseIdentifier: SelfModeOptionCardCell.identifier)
-        optionCardCollectionView.register(GuideModeOptionCardCell.self, forCellWithReuseIdentifier: GuideModeOptionCardCell.identifier)
+        optionCardCollectionView.register(OptionCardCell.self, forCellWithReuseIdentifier: OptionCardCell.identifier)
     }
 
     private func setupCollectionViewDataSource() {
         dataSource = OptionCardCollectionViewDiffableDataSource(collectionView: optionCardCollectionView) { [weak self] (collectionView, indexPath, item) in
             guard let self,
-                  let cellIdentifier = cellIdentifiers[optionCardType],
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? OptionCardCell else {
+                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OptionCardCell.identifier, for: indexPath) as? OptionCardCell else {
                 return OptionCardCell()
             }
             
-            cell.configure(item)
+            cell.configure(cardType: optionCardType, info: item)
             
             let cancellable = cell.buttonTapSubject
                 .sink { [weak self] in
