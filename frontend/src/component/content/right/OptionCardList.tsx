@@ -44,6 +44,7 @@ function OptionCardList({cardData, setNewIndex}: carfListProps) {
       selected={selectedItem === index}
       onClick={() => handleItemClick(index)}
       data={elem}
+      option={option}
     ></OptionCard>
   ));
 

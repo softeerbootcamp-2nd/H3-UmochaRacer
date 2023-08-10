@@ -9,6 +9,7 @@ interface CardProps {
   selected: boolean;
   onClick: () => void;
   data: cardDataType;
+  option: number;
 }
 
 const SelectIcon = () => {
@@ -44,7 +45,14 @@ const DefaultIcon = () => {
     </svg>
   );
 };
-function OptionCard({selected, onClick, data}: CardProps) {
+
+const DetailOption = new Set([0, 1, 2, 5, 6]);
+
+const hasDetail = (option: number) => {
+  return DetailOption.has(option);
+};
+
+function OptionCard({selected, onClick, data, option}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -80,31 +88,71 @@ function OptionCard({selected, onClick, data}: CardProps) {
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
-      <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
-      <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
-      <Text2 className="black">{data.name}</Text2>
-      <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
-        <DetailContent ref={contentRef}>
-          컨텐츠
-          <Text1>구매자의 63%가 선택했어요!</Text1>
-          <Text2>디젤 2.2</Text2>
-          <Text1>구매자의 63%가 선택했어요!</Text1>
-          <Text2>디젤 2.2</Text2>
-        </DetailContent>
-      </DetailBox>
-      <Footer>
+      <CardSection>
+        <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
+
+        {data.partsSrc ? (
+          <Parts $url={data.partsSrc} $selected={selected}></Parts>
+        ) : (
+          ''
+        )}
+      </CardSection>
+
+      <CardSection $height={60}>
+        <TextBox>
+          <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+          <Text2 className="black">{data.name}</Text2>
+        </TextBox>
+        {data.iconSrc ? (
+          <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
+        ) : (
+          ''
+        )}
+        {data.colorCode ? (
+          <ColorBox $colorcode={data.colorCode}></ColorBox>
+        ) : (
+          ''
+        )}
+      </CardSection>
+
+      {hasDetail(option) ? (
+        <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
+          <DetailContent ref={contentRef}>
+            컨텐츠
+            <Text1>구매자의 63%가 선택했어요!</Text1>
+            <Text2>디젤 2.2</Text2>
+            <Text1>구매자의 63%가 선택했어요!</Text1>
+            <Text2>디젤 2.2</Text2>
+          </DetailContent>
+        </DetailBox>
+      ) : (
+        ''
+      )}
+
+      <CardSection>
         <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
-        <DetailToggle
-          onClick={clickedToggle}
-          opened={toggle}
-          selected={selected}
-        ></DetailToggle>
-      </Footer>
+
+        {hasDetail(option) ? (
+          <DetailToggle
+            onClick={clickedToggle}
+            opened={toggle}
+            selected={selected}
+          ></DetailToggle>
+        ) : (
+          ''
+        )}
+      </CardSection>
     </Wrapper>
   );
 }
 
 export default OptionCard;
+
+const flexBetween = css`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const Select = css`
   border: 2px solid ${colors.Main_Hyundai_Blue};
 `;
@@ -141,6 +189,11 @@ const Wrapper = styled.li<{$selected: boolean}>`
   transition: 0.5s;
 `;
 
+const CardSection = styled.div<{$height?: number}>`
+  ${flexBetween}
+  height: ${(props) => (props.$height ? props.$height : '')}px;
+`;
+
 const IconBox = styled.div`
   width: 24px;
   height: 24px;
@@ -148,27 +201,68 @@ const IconBox = styled.div`
   transition: 0.5s;
 `;
 
+const imageBlur = css`
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: ${colors.Cool_Grey_001};
+    opacity: 0.5;
+  }
+`;
+
+const Parts = styled.div<{$url: string; $selected: boolean}>`
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 84px;
+  background: url(${(props) => props.$url}) no-repeat;
+  background-position: center;
+  ${(props) => {
+    return props.$selected ? '' : imageBlur;
+  }}
+`;
+
+const TextBox = styled.div`
+  gap: 4px;
+`;
+
 const Text1 = styled.div`
   ${Popup_Regular}
   font-size: 12px;
   line-height: 130%;
-  margin-top: 10px;
   height: 16px;
+  margin-top: 10px;
   color: ${colors.Main_Hyundai_Blue};
 `;
 
 const Text2 = styled.div`
   ${Title2_Medium}
-  margin-top: 4px;
   height: 26px;
   color: ${colors.Cool_Grey};
 `;
 
-const Footer = styled.div`
+const MiddleImg = styled.div<{$url: string; $selected: boolean}>`
   display: flex;
-  justify-content: space-between;
-  height: 18px;
-  margin-top: 13px;
+  align-items: center;
+  position: relative;
+  width: 150px;
+  background: url(${(props) => props.$url}) no-repeat;
+  background-position: center;
+  ${(props) => {
+    return props.$selected ? '' : imageBlur;
+  }}
+`;
+
+const ColorBox = styled.div<{$colorcode: string}>`
+  width: 60px;
+  height: 60px;
+  border: 1px solid ${colors.Cool_Grey_002};
+  border-radius: 100%;
+  background: ${(props) => props.$colorcode};
 `;
 
 const Price = styled.div`
