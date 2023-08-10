@@ -16,15 +16,9 @@ final class MultiOptionCardButtonViewController: UIViewController {
 
     // MARK: - UI properties
 
-    private let selfModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
+    private lazy var selfModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
         let view = MultiOptionCardButtonView(type: .selfMode)
-
-        let cardInfos: [OptionCardInfo] = [
-            .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
-            .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
-        ]
-        view.updateAllViews(with: cardInfos)
-
+        view.updateAllViews(with: self.cardInfos)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -41,16 +35,29 @@ final class MultiOptionCardButtonViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
+    
+    // MARK: - Properties
+    var cardInfos: [OptionCardInfo] = [
+        .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
+        .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원"),
+        .init(title: "셀3", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
+        .init(title: "셀4", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
+    ]
 
     // MARK: - Lifecycles
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupDelegate()
         setupViews()
     }
 
     // MARK: - Helpers
+    
+    private func setupDelegate() {
+        selfModeMultiOptionCardButtonView.delegate = self
+    }
 
     private func setupViews() {
         view.backgroundColor = .white
@@ -76,5 +83,12 @@ final class MultiOptionCardButtonViewController: UIViewController {
             guideModeMultiOptionCardButtonView.trailingAnchor.constraint(equalTo: selfModeMultiOptionCardButtonView.trailingAnchor),
             guideModeMultiOptionCardButtonView.heightAnchor.constraint(equalTo: selfModeMultiOptionCardButtonView.heightAnchor)
         ])
+    }
+}
+
+extension MultiOptionCardButtonViewController: MultiOptionCardButtonViewDelegate {
+    func optionCardButtonDidTapped(index: Int) {
+        cardInfos[index].isSelected.toggle()
+        selfModeMultiOptionCardButtonView.updateAllViews(with: cardInfos)
     }
 }
