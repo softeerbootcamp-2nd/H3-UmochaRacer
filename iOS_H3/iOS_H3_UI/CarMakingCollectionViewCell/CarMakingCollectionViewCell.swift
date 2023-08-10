@@ -1,5 +1,5 @@
 //
-//  TwoOptionCarMakingCell.swift
+//  CarMakingCollectionViewCell.swift
 //  iOS_H3
 //
 //  Created by KoJeongMin  on 2023/08/08.
@@ -9,7 +9,15 @@ import Foundation
 import UIKit
 class CarMakingCollectionViewCell: UICollectionViewCell {
 
-    // 이미지 + 라벨 + 옵션버튼리스트뷰
+    // MARK: - UI properties
+    enum Constants {
+        static let imageHeight = 310.0
+        static let descriptionLabelLeadingMargin: CGFloat = 20.0
+        static let descriptionLabelTopMargin: CGFloat = 26.0
+        static let buttonListViewTopMargin: CGFloat = 20.0
+        static let buttonListViewHeight: CGFloat = 200.0
+    }
+
     let optionImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
@@ -17,28 +25,29 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     let descriptionLabel: UILabel = {
         let label = UILabel()
+        label.text = "옵션을 골라주세요."
+        // TODO: 폰트 누락 확인 필요.
+        label.font = Fonts.regularTitle6
+        label.setupLineHeight(FontLineHeights.regularTitle6)
+        label.setupLetterSpacing(FontLetterSpacings.regularTitle6)
         return label
     }()
 
-    let optionButtonListView: TwoOptionCardButtonView = {
-        let twoButtonView = TwoOptionCardButtonView(type: .selfMode)
-        return twoButtonView
-    }()
+    let optionButtonListView: UIView?
+
+    // MARK: - Lifecycles
 
     override init(frame: CGRect) {
+        optionButtonListView = TwoOptionCardButtonView()
         super.init(frame: .zero)
-
-        addSubview(optionImageView)
-        addSubview(descriptionLabel)
-        addSubview(optionButtonListView)
+        setupViews()
 
     }
 
     required init?(coder: NSCoder) {
+        optionButtonListView = TwoOptionCardButtonView()
         super.init(coder: coder)
-        addSubview(optionImageView)
-        addSubview(descriptionLabel)
-        addSubview(optionButtonListView)
+        setupViews()
     }
 
     override func prepareForReuse() {
@@ -46,4 +55,68 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     }
 
+    init(frame: CGRect = .zero, buttonListViewable: OptionCardButtonListViewable) {
+        optionButtonListView = buttonListViewable
+        super.init(frame: frame)
+
+    }
+
+    // MARK: - Helpers
+    func configure(type: OptionCardButton.OptionCardType,
+                   bannerImage: URL,
+                   makingStepTitle: String,
+                   optionInfos: [OptionCardInfo]) {
+
+        // TODO: 이미지 업데이트(optionInfos 수정 전 코드)
+
+        // 라벨 업데이트
+        self.descriptionLabel.text = makingStepTitle
+        self.descriptionLabel.applyBoldToString(targetString: makingStepTitle,
+                                                font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
+        // 버튼 업데이트
+        let listView = optionButtonListView as? OptionCardButtonListViewable
+        listView?.updateAllViews(with: optionInfos)
+
+    }
+
+}
+
+extension CarMakingCollectionViewCell {
+    func setupViews() {
+        addSubViews()
+        setupImageView()
+        setupDescriptionLabel()
+        setupButtonListView()
+    }
+
+    func addSubViews() {
+        guard let listView = optionButtonListView else { return }
+        [optionImageView, descriptionLabel, listView]
+            .forEach {
+                self.contentView.addSubview($0)
+            }
+    }
+
+    func setupImageView() {
+        optionImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
+        optionImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
+        optionImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
+        optionImageView.heightAnchor.constraint(equalToConstant: Constants.imageHeight).isActive = true
+    }
+
+    func setupDescriptionLabel() {
+        descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,
+                                                  constant: Constants.descriptionLabelLeadingMargin).isActive = true
+        descriptionLabel.topAnchor.constraint(equalTo: self.optionImageView.bottomAnchor,
+                                              constant: Constants.descriptionLabelTopMargin).isActive = true
+    }
+
+    func setupButtonListView() {
+        optionButtonListView?.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        optionButtonListView?.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        optionButtonListView?.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
+                                                   constant: Constants.buttonListViewTopMargin).isActive = true
+        optionButtonListView?.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        optionButtonListView?.heightAnchor.constraint(equalToConstant: Constants.buttonListViewHeight).isActive = true
+    }
 }
