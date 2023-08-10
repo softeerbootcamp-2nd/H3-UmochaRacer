@@ -38,4 +38,9 @@ public class PowertrainStrategy implements InformationStrategy {
                 .comment(comment)
                 .build();
     }
+
+    @Override
+    public Long findDetailId(long id) {
+        return powertrainRepository.findDetailIdById(id);
+    }
 }

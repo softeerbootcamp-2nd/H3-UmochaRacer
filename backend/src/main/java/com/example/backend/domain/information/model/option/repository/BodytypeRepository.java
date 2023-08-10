@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface BodytypeRepository extends CrudRepository<Bodytype, Long> {
     @Query("SELECT comment FROM Bodytype WHERE id = :id")
     String findBodytypeCommentById(long id);
+
+    @Query("SELECT detail_id FROM Bodytype WHERE id = :id")
+    Long findDetailIdById(long id);
 }

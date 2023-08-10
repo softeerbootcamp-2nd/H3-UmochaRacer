@@ -39,4 +39,9 @@ public class BodytypeStrategy implements InformationStrategy {
                 .build();
     }
 
+    @Override
+    public Long findDetailId(long id) {
+        return bodytypeRepository.findDetailIdById(id);
+    }
+
 }

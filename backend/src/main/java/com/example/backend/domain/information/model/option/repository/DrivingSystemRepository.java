@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface DrivingSystemRepository extends CrudRepository<DrivingSystem, Long> {
     @Query("SELECT comment FROM Driving_system WHERE id = :id")
     String findDrivingSystemCommentById(long id);
+
+    @Query("SELECT detail_id FROM Driving_system WHERE id = :id")
+    Long findDetailIdById(long id);
 }

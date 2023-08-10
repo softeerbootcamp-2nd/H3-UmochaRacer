@@ -35,4 +35,9 @@ public class OptionInformationStrategy implements InformationStrategy {
     public CommentResponse findCommentById(long id) {
         throw new RestApiException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
     }
+
+    @Override
+    public Long findDetailId(long id) {
+        return additionalOptionRepository.findDetailIdById(id);
+    }
 }

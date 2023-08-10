@@ -38,4 +38,9 @@ public class WheelStrategy implements InformationStrategy {
                 .comment(comment)
                 .build();
     }
+
+    @Override
+    public Long findDetailId(long id) {
+        return wheelRepository.findDetailIdById(id);
+    }
 }

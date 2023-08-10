@@ -38,4 +38,11 @@ public class DrivingSystemStrategy implements InformationStrategy {
                 .comment(comment)
                 .build();
     }
+
+    @Override
+    public Long findDetailId(long id) {
+        return repository.findDetailIdById(id);
+    }
+
+
 }

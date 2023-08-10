@@ -9,4 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface WheelRepository extends CrudRepository<Wheel, Long> {
     @Query("SELECT comment FROM wheel WHERE id = :id")
     String findWheelCommentById(long id);
+
+    @Query("SELECT detail_id FROM wheel WHERE id = :id")
+    Long findDetailIdById(long id);
 }

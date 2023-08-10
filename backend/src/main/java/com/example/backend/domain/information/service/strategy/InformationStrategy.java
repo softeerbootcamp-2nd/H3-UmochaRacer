@@ -9,6 +9,7 @@ public interface InformationStrategy {
     List<CommonResponse> findAll();
     StrategyName getStrategyName();
     CommentResponse findCommentById(long id);
+    Long findDetailId(long id);
 
     enum StrategyName {
         POWERTRAIN("powertrain"),
