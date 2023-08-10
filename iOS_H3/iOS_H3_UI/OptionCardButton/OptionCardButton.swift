@@ -193,7 +193,6 @@ class OptionCardButton: UIButton {
     }
 
     func animateButton(title: String, description: String) {
-        animatedView.translatesAutoresizingMaskIntoConstraints = false
         animatedView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
         animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
@@ -323,8 +322,6 @@ extension OptionCardButton {
     }
 
     private func setupMoreInfoButtonConstraint() {
-        moreInfoButton.translatesAutoresizingMaskIntoConstraints = false
-
         moreInfoButton.widthAnchor.constraint(equalToConstant: 18).isActive = true
         moreInfoButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
         moreInfoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18).isActive = true
@@ -332,13 +329,10 @@ extension OptionCardButton {
     }
 
     private func setupImageViewConstraint() {
-        optionImageView.translatesAutoresizingMaskIntoConstraints = false
-
         optionImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         optionImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         optionImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 15).isActive = true
         optionImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
-
     }
 
     private func setupColorViewConstraint() {
