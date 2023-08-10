@@ -27,6 +27,12 @@ public class IntroController {
         return mapToOKResponse(result);
     }
 
+    @GetMapping("interior-color")
+    public ResponseEntity<ResponseDto<List<?>>> getInteriorByTrim() {
+        List<IntroResponse> result = colorService.returnInColorByEachTrim();
+        return mapToOKResponse(result);
+    }
+
     private <T> ResponseEntity<ResponseDto<T>> mapToOKResponse(T result) {
         ResponseDto<T> body = ResponseDto.of(result, ErrorCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);

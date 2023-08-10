@@ -125,11 +125,18 @@ CREATE TABLE `Tag`
     `name` varchar(255)
 );
 
-Drop table if exists Trim_Exterior_Color;
-create table Trim_Exterior_Color (
+Drop table if exists Trim_Exterior;
+create table Trim_Exterior (
     `id` Long primary key,
     trim_id Long,
     exterior_color_id Long
+);
+
+Drop table if exists Trim_Interior;
+create table Trim_Interior (
+    `id` Long primary key,
+    trim_id Long,
+    interior_color_id Long
 );
 
 Drop Table if exists Detail;
@@ -219,7 +226,15 @@ ALTER TABLE `Driving_System`
 
 ALTER TABLE `Powertrain`
     ADD FOREIGN KEY (`detail_id`) REFERENCES `Detail` (`id`);
-ALTER TABLE `Trim_Exterior_Color`
+
+ALTER TABLE `Trim_Exterior`
     ADD FOREIGN KEY (`trim_id`) REFERENCES `Trim` (`id`);
-ALTER TABLE `Trim_Exterior_Color`
+
+ALTER TABLE `Trim_Exterior`
     ADD FOREIGN KEY (`exterior_color_id`) REFERENCES `Exterior_color` (`id`);
+
+ALTER TABLE `Trim_Interior`
+    ADD FOREIGN KEY (`trim_id`) REFERENCES `Trim` (`id`);
+
+ALTER TABLE `Trim_Interior`
+    ADD FOREIGN KEY (`interior_color_id`) REFERENCES `Interior_color` (`id`);
