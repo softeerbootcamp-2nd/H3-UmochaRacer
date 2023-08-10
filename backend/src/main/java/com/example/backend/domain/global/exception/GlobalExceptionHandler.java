@@ -28,4 +28,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 .message(errorCode.getMessage())
                 .build();
     }
+
+    @ExceptionHandler(NoCommentException.class)
+    public ResponseEntity<Object> handleNoCommentException(NoCommentException exception) {
+        ErrorCode errorCode = exception.getErrorCode();
+        return handleExceptionInternal(errorCode);
+    }
 }

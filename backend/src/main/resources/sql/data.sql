@@ -28,6 +28,6 @@ insert into additional_option(id, name, image_src, price,detail_id ,parts_src, t
 
 insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(99, '알콘 어쩌고', 'url', 100000, 'H 지뉴인', null, 'BASIC', '기본 휠',5);
 insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(2, '알콘 2222', 'url', 200000, '엔 퍼포먼스', null, 'ADDITIONAL', '브레이크와 세트세트', 4);
-insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment) values(123, '무슨 브레이크', 'url', 0, '엔 퍼포먼스', 2, 'ADDITIONAL', '강력한 제동을 제공');
-insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment) values(55, '무슨무슨 휠', 'url', 34242, '엔 퍼포먼스', 2, 'ADDITIONAL', '비싸고 오프로드에 강한 휠');
+insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(123, '무슨 브레이크', 'url', 0, '엔 퍼포먼스', 2, 'ADDITIONAL', '강력한 제동을 제공', null);
+insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(55, '무슨무슨 휠', 'url', 34242, '엔 퍼포먼스', 2, 'ADDITIONAL', '비싸고 오프로드에 강한 휠', null);
 
