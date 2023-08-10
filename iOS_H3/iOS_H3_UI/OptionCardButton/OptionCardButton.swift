@@ -29,6 +29,17 @@ class OptionCardButton: UIButton {
         static let tagListViewTopAnchor: CGFloat = 22
         static let tagListViewTrailingAnchor: CGFloat = -10
         static let tagListViewHeight: CGFloat = 20
+        static let moreInfoButtonWidth: CGFloat = 18
+        static let moreInfoButtonHeight: CGFloat = 18
+        static let moreInfoButtonBottomMargin: CGFloat = -18
+        static let moreInfoButtonTrailingMargin: CGFloat = -10
+        static let optionImageViewWidth: CGFloat = 150
+        static let optionImageViewHeight: CGFloat = 50
+        static let optionImageViewCenterY: CGFloat = 15
+        static let optionImageViewTrailingMargin: CGFloat = -18
+        static let colorViewWidth: CGFloat = 60
+        static let colorViewHeight: CGFloat = 60
+        static let colorViewTrailingMargin: CGFloat = -28
     }
 
     // MARK: - Properties
@@ -322,25 +333,30 @@ extension OptionCardButton {
     }
 
     private func setupMoreInfoButtonConstraint() {
-        moreInfoButton.widthAnchor.constraint(equalToConstant: 18).isActive = true
-        moreInfoButton.heightAnchor.constraint(equalToConstant: 18).isActive = true
-        moreInfoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18).isActive = true
-        moreInfoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10).isActive = true
+        moreInfoButton.widthAnchor.constraint(equalToConstant: Constants.moreInfoButtonWidth).isActive = true
+        moreInfoButton.heightAnchor.constraint(equalToConstant: Constants.moreInfoButtonHeight).isActive = true
+        moreInfoButton.bottomAnchor.constraint(equalTo: self.bottomAnchor,
+                                               constant: Constants.moreInfoButtonBottomMargin).isActive = true
+        moreInfoButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                 constant: Constants.moreInfoButtonTrailingMargin).isActive = true
     }
 
     private func setupImageViewConstraint() {
-        optionImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        optionImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        optionImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 15).isActive = true
-        optionImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -18).isActive = true
+        optionImageView.widthAnchor.constraint(equalToConstant: Constants.optionImageViewWidth).isActive = true
+        optionImageView.heightAnchor.constraint(equalToConstant: Constants.optionImageViewHeight).isActive = true
+        optionImageView.centerYAnchor.constraint(equalTo: self.centerYAnchor,
+                                                 constant: Constants.optionImageViewCenterY).isActive = true
+        optionImageView.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                                  constant: Constants.optionImageViewTrailingMargin).isActive = true
     }
 
     private func setupColorViewConstraint() {
         colorView.translatesAutoresizingMaskIntoConstraints = false
-        colorView.widthAnchor.constraint(equalToConstant: 60).isActive = true
-        colorView.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        colorView.widthAnchor.constraint(equalToConstant: Constants.colorViewWidth).isActive = true
+        colorView.heightAnchor.constraint(equalToConstant: Constants.colorViewHeight).isActive = true
         colorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        colorView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -28).isActive = true
+        colorView.trailingAnchor.constraint(equalTo: self.trailingAnchor,
+                                            constant: Constants.colorViewTrailingMargin).isActive = true
     }
 
     private func addMoreInfoButtonTarget() {
