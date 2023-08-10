@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class OptionCardCell: UICollectionViewCell {
+final class OptionCardCell: UICollectionViewCell {
 
     static let identifier = "OptionCardCell"
 
