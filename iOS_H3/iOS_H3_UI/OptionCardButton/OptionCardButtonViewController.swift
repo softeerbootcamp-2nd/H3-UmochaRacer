@@ -5,31 +5,34 @@
 //  Created by KoJeongMin  on 2023/08/06.
 //
 
-import Foundation
 import UIKit
 class OptionCardButtonViewController: UIViewController {
 
     // 셀프모드 기본 버튼
     lazy var selfModeBasicButton: OptionCardButton = {
-        let button = MoreInfoOptionButton(type: .selfMode)
+        let button = OptionCardButton(type: .selfMode)
         return button
     }()
 
-    // 가이드모드 기본 버튼
+    // 가이드모드 자세히보기 버튼
     lazy var guideModeBasicButton: OptionCardButton = {
-        let button = MoreInfoOptionButton(type: .guideMode)
+        let button = OptionCardButton(type: .guideMode, hasMoreInfo: true)
         return button
     }()
 
     // 셀프모드 내장 색상 버튼
     lazy var selfModeInnerColorButton: OptionCardButton = {
-        let button = ImageDisplayOptionButton(type: .selfMode)
+        let button = OptionCardButton(type: .selfMode)
+        if let url = URL(string: "https://github.com/") {
+            button.setImage(url: url)
+        }
         return button
     }()
 
     // 셀프모드 외장 색상 버튼
-    lazy var guideModeOuterColorButton: ColorViewOptionCardButton = {
-        let button = ColorViewOptionCardButton(type: .guideMode)
+    lazy var guideModeOuterColorButton: OptionCardButton = {
+        let button = OptionCardButton(type: .guideMode)
+        button.setColor(.blue)
         return button
     }()
 
@@ -61,7 +64,7 @@ class OptionCardButtonViewController: UIViewController {
         // self.selfModeInnerButton.setImage(UIImage(named: ""), for: .normal)
 
         // 컬러 변경하기
-        self.guideModeOuterColorButton.setColor(.blue)
+        self.guideModeOuterColorButton.setColor(.black)
         // 태그 추가하기
         self.guideModeBasicButton.addTags(["효율 89%", "배터리 95%"])
         self.guideModeOuterColorButton.addTags(["효율 89%", "배터리 95%"])
