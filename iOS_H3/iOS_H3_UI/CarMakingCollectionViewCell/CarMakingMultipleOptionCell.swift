@@ -6,3 +6,13 @@
 //
 
 import Foundation
+class CarMakingMultipleOptionCell: CarMakingCollectionViewCell {
+
+    override init(frame: CGRect) {
+        super.init(frame: frame, buttonListViewable: TwoOptionCardButtonView.init())
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+}
