@@ -70,39 +70,38 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         let listView = optionButtonListView as? OptionCardButtonListViewable
         listView?.updateAllViews(with: optionInfos)
     }
-
 }
 
 extension CarMakingCollectionViewCell {
-    func setupViews() {
+    private func setupViews() {
         addSubViews()
         setupImageView()
         setupDescriptionLabel()
         setupButtonListView()
     }
 
-    func addSubViews() {
+    private func addSubViews() {
         [optionImageView, descriptionLabel, optionButtonListView]
             .forEach {
                 self.contentView.addSubview($0)
             }
     }
 
-    func setupImageView() {
+    private func setupImageView() {
         optionImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         optionImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         optionImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         optionImageView.heightAnchor.constraint(equalToConstant: Constants.imageHeight).isActive = true
     }
 
-    func setupDescriptionLabel() {
+    private func setupDescriptionLabel() {
         descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,
                                                   constant: Constants.descriptionLabelLeadingMargin).isActive = true
         descriptionLabel.topAnchor.constraint(equalTo: self.optionImageView.bottomAnchor,
                                               constant: Constants.descriptionLabelTopMargin).isActive = true
     }
 
-    func setupButtonListView() {
+    private func setupButtonListView() {
         optionButtonListView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         optionButtonListView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         optionButtonListView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
