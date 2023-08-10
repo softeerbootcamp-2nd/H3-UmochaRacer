@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-protocol MoreInfoOptionButtonDelegate: AnyObject {
+protocol OptionCardButtonDelegate: AnyObject {
     func moreInfoButtonDidTapped()
 }
 
@@ -111,7 +111,7 @@ class OptionCardButton: UIButton {
 
     private var type: OptionCardType
 
-    weak var delegate: MoreInfoOptionButtonDelegate?
+    weak var delegate: OptionCardButtonDelegate?
 
     // MARK: - Lifecycles
 
