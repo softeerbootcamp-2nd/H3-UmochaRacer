@@ -89,7 +89,7 @@ extension MultiOptionCardButtonView: UICollectionViewDelegate {
     }
 }
 
-// MARK: - Setup
+// MARK: - Setup CollectionView
 
 extension MultiOptionCardButtonView {
 
@@ -105,11 +105,6 @@ extension MultiOptionCardButtonView {
         setupSnapshot()
     }
 
-    private func setupViews() {
-        addSubviews()
-        setupConstraints()
-    }
-    
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -122,12 +117,12 @@ extension MultiOptionCardButtonView {
 
         return UICollectionViewCompositionalLayout(section: section)
     }
-    
+
     private func registerCollectionViewCell() {
         optionCardCollectionView.register(SelfModeOptionCardCell.self, forCellWithReuseIdentifier: SelfModeOptionCardCell.identifier)
         optionCardCollectionView.register(GuideModeOptionCardCell.self, forCellWithReuseIdentifier: GuideModeOptionCardCell.identifier)
     }
-    
+
     private func setupCollectionViewDataSource() {
         dataSource = OptionCardCollectionViewDiffableDataSource(collectionView: optionCardCollectionView) { [weak self] (collectionView, indexPath, item) in
             guard let self,
@@ -148,11 +143,21 @@ extension MultiOptionCardButtonView {
             return cell
         }
     }
-    
+
     private func setupSnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, OptionCardInfo>()
         snapshot.appendSections([Section.optionCard])
         dataSource.apply(snapshot)
+    }
+}
+
+// MARK: - Setup
+
+extension MultiOptionCardButtonView {
+
+    private func setupViews() {
+        addSubviews()
+        setupConstraints()
     }
 
     private func addSubviews() {
