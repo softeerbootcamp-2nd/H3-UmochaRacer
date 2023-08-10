@@ -1,6 +1,6 @@
-package com.example.backend.domain.information.model.car.repository;
+package com.example.backend.domain.information.model.option.repository;
 
-import com.example.backend.domain.information.model.car.entity.Detail;
+import com.example.backend.domain.information.model.option.entity.Detail;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
