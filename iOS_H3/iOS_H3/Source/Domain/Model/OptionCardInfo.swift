@@ -8,6 +8,7 @@
 import Foundation
 
 struct OptionCardInfo: Hashable {
+    private let id = UUID()
     let title: String
     let subTitle: String
     let priceString: String     // 예시) "+ 100,000원"
