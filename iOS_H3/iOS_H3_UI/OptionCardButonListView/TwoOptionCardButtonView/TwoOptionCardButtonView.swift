@@ -67,12 +67,20 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
+extension TwoOptionCardButtonView: OptionCardButtonDelegate {
+    
+    func moreInfoButtonDidTapped() {
+        print("[TwoOptionCardButtonView]", #function, "- show alert 구현 필요")
+    }
+}
+
 extension TwoOptionCardButtonView {
 
     private func setupOptionCardButtons() {
         optionCardButtons.forEach { button in
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(optionCardButtonDidTapped(_:)), for: .touchUpInside)
+            button.delegate = self
         }
     }
 
