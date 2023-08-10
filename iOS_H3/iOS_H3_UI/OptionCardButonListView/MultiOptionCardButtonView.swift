@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol MultiOptionCardButtonViewDelegate: AnyObject {
     func optionCardButtonDidTapped(index: Int)
@@ -39,6 +40,8 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         .guideMode: GuideModeOptionCardCell.identifier
     ]
     
+    private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
+
     weak var delegate: MultiOptionCardButtonViewDelegate?
 
     // MARK: - Lifecycles
@@ -80,12 +83,19 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
+extension MultiOptionCardButtonView: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        buttonTapCancellableByIndex[indexPath.row]?.cancel()
+    }
+}
+
 // MARK: - Setup
 
 extension MultiOptionCardButtonView {
 
     private func setupOptionCardCollectionView() {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
+        optionCardCollectionView.delegate = self
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
         optionCardCollectionView.isScrollEnabled = true
         optionCardCollectionView.bounces = false
@@ -127,6 +137,13 @@ extension MultiOptionCardButtonView {
             }
             
             cell.configure(item)
+            
+            let cancellable = cell.buttonTapSubject
+                .sink { [weak self] in
+                    guard let self else { return }
+                    delegate?.optionCardButtonDidTapped(index: indexPath.row)
+                }
+            buttonTapCancellableByIndex[indexPath.row] = cancellable
             
             return cell
         }
