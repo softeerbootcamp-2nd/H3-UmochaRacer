@@ -30,4 +30,8 @@ public class ExteriorColor {
         this.baseInfo = new BaseInfo(name, imageSrc, price);
         this.comment = comment;
     }
+
+    public String getName() {
+        return this.baseInfo.getName();
+    }
 }

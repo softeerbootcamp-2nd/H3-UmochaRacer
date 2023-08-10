@@ -29,4 +29,8 @@ public class InteriorColor {
         this.baseInfo = new BaseInfo(name, imageSrc, price);
         this.comment = comment;
     }
+
+    public String getName() {
+        return baseInfo.getName();
+    }
 }
