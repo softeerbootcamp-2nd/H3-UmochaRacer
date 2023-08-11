@@ -1,26 +1,42 @@
-import React, {useState} from 'react';
-import styled from 'styled-components';
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
-
+import {cardDataType} from '../contentInterface';
+import {OptionContext} from '@/provider/optionProvider';
 interface Data {
   optionId: number;
-  label: string;
+  name: string;
   rate: number;
   price: number;
 }
 
-interface OptionCardListProps {
-  cardData: Data[];
+interface carfListProps {
+  cardData: cardDataType[];
   setNewIndex: (index: number) => void;
 }
 
-function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
+const moveTop = keyframes`
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+`;
+
+function OptionCardList({cardData, setNewIndex}: carfListProps) {
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
+  const {option} = useContext(OptionContext);
+  const ulRef = useRef<HTMLUListElement>(null);
 
   const handleItemClick = (index: number) => {
     setNewIndex(index);
     setSelectedItem(index);
   };
+
+  useEffect(() => {
+    setSelectedItem(0);
+  }, [cardData]);
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
@@ -28,12 +44,13 @@ function OptionCardList({cardData, setNewIndex}: OptionCardListProps) {
       selected={selectedItem === index}
       onClick={() => handleItemClick(index)}
       data={elem}
+      option={option}
     ></OptionCard>
   ));
 
   return (
-    <Wrapper>
-      <Container>{cards}</Container>
+    <Wrapper key={option}>
+      <Container ref={ulRef}>{cards}</Container>
     </Wrapper>
   );
 }
@@ -60,5 +77,6 @@ const Container = styled.ul`
   align-items: flex-start;
   width: 100%;
   max-height: 485px;
+  animation: ${moveTop} 1s ease-out;
   gap: 16px;
 `;

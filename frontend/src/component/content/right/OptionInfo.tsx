@@ -6,20 +6,21 @@ import Footer from './Footer';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Title1_Medium, Title3_Regular} from '@/style/fonts';
+import {cardDataType} from '../contentInterface';
 
 interface Data {
   optionId: number;
-  label: string;
+  name: string;
   rate: number;
   price: number;
 }
 
-interface OptionInfoProps {
-  cardData: Data[];
+interface cardDataProps {
+  cardData: cardDataType[];
   setNewIndex: (index: number) => void;
 }
 
-function OptionInfo({cardData, setNewIndex}: OptionInfoProps) {
+function OptionInfo({cardData, setNewIndex}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const modalRef = useRef<HTMLDivElement>(null);
@@ -39,10 +40,7 @@ function OptionInfo({cardData, setNewIndex}: OptionInfoProps) {
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
-        <Footer
-          onClick={handleModalView}
-          isOpen={isModalOpen.toString()}
-        ></Footer>
+        <Footer onClick={handleModalView} isOpen={isModalOpen}></Footer>
       </Container>
     </Wrapper>
   );

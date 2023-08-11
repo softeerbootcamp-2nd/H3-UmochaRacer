@@ -13,6 +13,8 @@ const OptionProvider = ({children}: OptionProviderProps) => {
   const [optionState, setOptionState] = useState<number>(0);
 
   const setOption = (option: number) => {
+    if (option === -1) return;
+    else if (option === 7) return;
     setOptionState(option);
   };
 

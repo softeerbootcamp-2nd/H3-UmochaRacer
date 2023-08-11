@@ -1,0 +1,50 @@
+{
+	"data" : [
+		{
+			"optionId": 1,
+			"name" : "크리미 화이트 펄",
+			"imageSrc" : "src/assets/images/white.png",
+			"price" : 100000,
+			"colorCode" : "#FAFAFA"
+		},
+		{
+			"optionId": 2,
+			"name" : "어비스 블랙 펄",
+			"imageSrc" : "src/assets/images/black.png",
+            "price" : 0,
+			"colorCode" : "#212121"
+		},
+        {
+			"optionId": 3,
+			"name" : "그라파이트 그레이 메탈릭",
+			"imageSrc" : "src/assets/images/grey.png",
+			"price" : 0,
+			"colorCode" : "#2C2925"
+		},
+		{
+			"optionId": 4,
+			"name" : "쉬머링 실버 메탈릭",
+			"imageSrc" : "src/assets/images/silver.png",
+			"price" : 0,
+			"colorCode" : "#9B9D9C"
+		},
+        {
+			"optionId": 5,
+			"name" : "문라이트 블루 펄",
+			"imageSrc" : "src/assets/images/blue.png",
+			"price" : 100000,
+			"colorCode" : "#1C2234"
+			
+		},
+		{
+			"optionId": 6,
+			"name" : "가이아 브라운 펄",
+			"imageSrc" : "src/assets/images/brown.png",
+			"price" : 0,
+			"colorCode" : "#333635"
+		}
+	],
+
+	"message" : "머시기"
+}
+			

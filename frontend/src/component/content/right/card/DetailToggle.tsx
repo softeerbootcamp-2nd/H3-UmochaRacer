@@ -6,6 +6,7 @@ import {colors} from '@/style/theme';
 interface props {
   onClick: (event: React.MouseEvent) => void;
   opened: boolean;
+  selected: boolean;
 }
 
 const DetailIcon = (isOpen: boolean) => {
@@ -27,11 +28,11 @@ const DetailIcon = (isOpen: boolean) => {
   );
 };
 
-function DetailToggle({onClick, opened}: props) {
+function DetailToggle({onClick, opened, selected}: props) {
   const buttonText: string = opened ? '접기' : '자세히보기';
 
   return (
-    <Wrapper onClick={onClick}>
+    <Wrapper onClick={onClick} $selected={selected.toString()}>
       {buttonText}
       {DetailIcon(opened)}
     </Wrapper>
@@ -40,7 +41,7 @@ function DetailToggle({onClick, opened}: props) {
 
 export default DetailToggle;
 
-const Wrapper = styled.button`
+const Wrapper = styled.button<{$selected: string}>`
   display: inline-flex;
   align-items: center;
   height: 16px;
@@ -51,4 +52,6 @@ const Wrapper = styled.button`
   letter-spacing: -0.36px;
   color: ${colors.Cool_Grey_003};
   gap: 2px;
+
+  pointer-events: ${(props) => (props.$selected === 'true' ? '' : 'none')};
 `;
