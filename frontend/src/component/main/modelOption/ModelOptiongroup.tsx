@@ -9,17 +9,20 @@ interface ModelOptionGroupProps {
 }
 
 function ModelOptionGroup({options}: ModelOptionGroupProps) {
-  return (
-    <Wrapper>
-      {options.map((item, index) => (
-        <ModelOptionDetail
-          key={index}
-          icon={item.icon as IconType}
-          name={item.name}
-        />
-      ))}
-    </Wrapper>
-  );
+  const showDetailItems = () => {
+    return (
+      <>
+        {options.map((item, index) => (
+          <ModelOptionDetail
+            key={index}
+            icon={item.icon as IconType}
+            name={item.name}
+          />
+        ))}
+      </>
+    );
+  };
+  return <Wrapper>{showDetailItems()}</Wrapper>;
 }
 
 export default ModelOptionGroup;
@@ -27,5 +30,5 @@ const Wrapper = styled.div`
   width: 214px;
   ${flexCenter}
   flex-direction: column;
-  gap: 36px;
+  gap: 24px;
 `;

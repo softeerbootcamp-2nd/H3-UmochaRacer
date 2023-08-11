@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
 import main from '@/assets/images/main.png';
@@ -12,13 +12,23 @@ import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [modelWrapperTop, setModelWrapperTop] = useState(0);
+  const modelWrapperRef = useRef<HTMLDivElement | null>(null);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-    console.log(scrollPosition);
-  });
+    if (modelWrapperRef.current) {
+      setModelWrapperTop(
+        modelWrapperRef.current.getBoundingClientRect().top - 85,
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Intro.Wrapper>
@@ -33,12 +43,10 @@ function MainContainer() {
       </Intro.Wrapper>
       <Trim.Header>
         <Trim.IntroP>모델 한 눈에 비교하기</Trim.IntroP>
-        <Trim.ModelWrapper
-          className={scrollPosition < 1043 ? '' : 'attach_header'}
-        >
-          <ModelTitleList />
-        </Trim.ModelWrapper>
       </Trim.Header>
+      <Trim.ModelWrapper>
+        <ModelTitleList />
+      </Trim.ModelWrapper>
       <Trim.InfoWrapper>
         <ModelInfoList />
       </Trim.InfoWrapper>
@@ -83,8 +91,7 @@ const Intro = {
 const Trim = {
   Header: styled.div`
     width: 100%;
-    height: 335px;
-    border-bottom: 1px solid #bebebe;
+    height: 200px;
     background: #e7e7e7;
     ${flexBetween}
     flex-direction : column;
@@ -104,16 +111,11 @@ const Trim = {
   ModelWrapper: styled.div`
     width: 100%;
     height: 100px;
-    margin-bottom: 36px;
+    padding-bottom: 36px;
     ${flexCenter}
     background: #e7e7e7;
-
-    &.attach_header {
-      position: fixed;
-      top: 85px;
-      left: 0;
-      z-index: 99;
-    }
+    position: sticky;
+    top: 85px;
   `,
   InfoWrapper: styled.div`
     width: 100%;

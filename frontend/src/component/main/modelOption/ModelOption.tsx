@@ -46,10 +46,8 @@ function ModelOption({name}: {name: string}) {
     return null;
   }
 
-  const isOuterColor = name === '외장 색상';
-  const DetailWrapperComponent = isOuterColor
-    ? FlexCenterWrapper
-    : FlexBetweenWrapper;
+  const DetailWrapperComponent =
+    name === '외장 색상' ? FlexCenterWrapper : FlexBetweenWrapper;
 
   return (
     <Option.Wrapper>
