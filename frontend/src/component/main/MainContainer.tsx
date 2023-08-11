@@ -12,11 +12,24 @@ import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
+    if (scrollPosition > 1 && !hasScrolled) {
+      window.scrollTo({top: window.innerHeight - 50, behavior: 'smooth'});
+      setHasScrolled(true);
+    } else if (scrollPosition === 0) {
+      setHasScrolled(false);
+    }
+  }, [scrollPosition, hasScrolled]);
+
+  useEffect(() => {
     window.addEventListener('scroll', updateScroll);
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -69,7 +82,7 @@ const Intro = {
     width: 100%;
     transition: 0.2s ease-in-out;
     &.change_header {
-      background: #e7e7e7;
+      background: #f2f4f7;
     }
   `,
   Content: styled.div`
@@ -85,12 +98,12 @@ const Trim = {
   Header: styled.div`
     width: 100%;
     height: 200px;
-    background: #e7e7e7;
+    background: #f2f4f7;
     ${flexBetween}
     flex-direction : column;
   `,
   IntroP: styled.p`
-    color: #212121;
+    color: #202732;
     font-family: Hyundai Sans Head Medium;
     font-size: 40px;
     font-style: normal;
@@ -106,7 +119,7 @@ const Trim = {
     height: 100px;
     padding-bottom: 36px;
     ${flexCenter}
-    background: #e7e7e7;
+    background: #F2F4F7;
     position: sticky;
     top: 85px;
   `,
