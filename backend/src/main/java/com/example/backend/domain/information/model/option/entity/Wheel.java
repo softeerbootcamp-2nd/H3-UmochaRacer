@@ -1,7 +1,6 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
-import com.example.backend.domain.information.model.car.entity.Detail;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
@@ -12,7 +11,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class Wheel {
     @Id
     private Long id;
-    private Detail detailId;
+    private Long detailId;
     private Wheel subWheelId;
     private String partsSrc;
     private String flag;

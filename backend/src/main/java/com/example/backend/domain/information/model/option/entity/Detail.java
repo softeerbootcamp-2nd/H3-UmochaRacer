@@ -1,4 +1,4 @@
-package com.example.backend.domain.information.model.car.entity;
+package com.example.backend.domain.information.model.option.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
