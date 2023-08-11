@@ -1,7 +1,6 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
-import com.example.backend.domain.information.model.car.entity.Detail;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
@@ -14,6 +13,6 @@ public class Powertrain {
     private Long id;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_NULL)
     private BaseInfo baseInfo;
-    private Detail detailId;
+    private Long detailId;
     private String comment;
 }

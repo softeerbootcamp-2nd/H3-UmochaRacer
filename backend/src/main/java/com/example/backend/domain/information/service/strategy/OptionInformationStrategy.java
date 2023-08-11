@@ -1,5 +1,8 @@
 package com.example.backend.domain.information.service.strategy;
 
+import com.example.backend.domain.global.exception.RestApiException;
+import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;
@@ -26,5 +29,15 @@ public class OptionInformationStrategy implements InformationStrategy {
     @Override
     public StrategyName getStrategyName() {
         return StrategyName.ADDITIONAL_OPTION;
+    }
+
+    @Override
+    public CommentResponse findCommentById(long id) {
+        throw new RestApiException(ErrorCode.NO_COMMENT_EXIST_FOR_ID);
+    }
+
+    @Override
+    public Long findDetailId(long id) {
+        return additionalOptionRepository.findDetailIdById(id);
     }
 }

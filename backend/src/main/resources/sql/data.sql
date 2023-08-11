@@ -5,7 +5,6 @@ insert into detail(id, title, description, image_src, info) values(3, '2WD', '2�
 insert into detail(id, title, description, image_src, info) values(4, '휠&타이어', '강력 브레이크로 사고 유발 감소','url' ,null);
 insert into detail(id, title, description, image_src, info) values(5, '아무 디테일', '아무 설명','url' ,null);
 
-
 insert into Powertrain(id, name, image_src, price,  detail_id,comment) values(1, '디젤2.2', 'url', 123456, 1,'연료 <cardb>효율</cardb>이 좋아요!');
 insert into Powertrain(id, name, image_src, price,  detail_id, comment) values(2, '가솔린3.8', 'url', 8080,2, '가솔린 따봉');
 

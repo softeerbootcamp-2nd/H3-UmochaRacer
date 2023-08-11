@@ -1,7 +1,6 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
-import com.example.backend.domain.information.model.car.entity.Detail;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
@@ -15,13 +14,13 @@ public class AdditionalOption {
     @Id
     private Long id;
     @MappedCollection(idColumn = "top_option_id")
-    private AggregateReference<AdditionalOption,Long> topOptionId;
+    private AggregateReference<AdditionalOption, Long> topOptionId;
     private String partsSrc;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
     private String flag;
     private String category;
-    private Detail detailId;
+    private Long detailId;
 
     public enum Flag {
         BASIC, ADDITIONAL;
