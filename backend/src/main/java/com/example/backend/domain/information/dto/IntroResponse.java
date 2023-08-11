@@ -7,9 +7,9 @@ import java.util.List;
 @Getter
 public class IntroResponse {
     private String trim;
-    private List<CommonResponse> sources;
+    private List<SimpleColorResponse> sources;
 
-    public IntroResponse(String trim, List<CommonResponse> sources) {
+    public IntroResponse(String trim, List<SimpleColorResponse> sources) {
         this.trim = trim;
         this.sources = sources;
     }
