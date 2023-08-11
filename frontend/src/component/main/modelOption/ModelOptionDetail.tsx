@@ -30,10 +30,10 @@ const Detail = {
     color: ${colors.Cool_Grey_004};
     ${Label2_Regular};
     white-space: pre-wrap;
-    width: 100px;
+    width: 160px;
   `,
   IconWrapper: styled.div`
-    width: 100px;
+    width: 75px;
     text-align: center;
   `,
 };

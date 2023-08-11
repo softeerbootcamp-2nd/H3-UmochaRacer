@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
 import main from '@/assets/images/main.png';
@@ -12,18 +12,11 @@ import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
-  const [modelWrapperTop, setModelWrapperTop] = useState(0);
-  const modelWrapperRef = useRef<HTMLDivElement | null>(null);
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
     window.addEventListener('scroll', updateScroll);
-    if (modelWrapperRef.current) {
-      setModelWrapperTop(
-        modelWrapperRef.current.getBoundingClientRect().top - 85,
-      );
-    }
   }, []);
 
   useEffect(() => {
