@@ -4,7 +4,7 @@ import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.model.enums.ErrorCode;
 import com.example.backend.domain.information.dto.IntroResponse;
 import com.example.backend.domain.information.service.ColorService;
-import com.example.backend.domain.information.service.OptionInformationService;
+//import com.example.backend.domain.information.service.OptionInformationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/intro")
 @RequiredArgsConstructor
 public class IntroController {
-    private final OptionInformationService optionInformationService;
+//    private final OptionInformationService optionInformationService;
     private final ColorService colorService;
 
     @GetMapping("/exterior-color")
