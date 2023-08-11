@@ -57,7 +57,7 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Helpers
-
+    var scrollToIndexHandler: ((Int) -> Void)?
 }
 
 extension CarMakingProgressBar {
@@ -115,5 +115,12 @@ extension CarMakingProgressBar {
             return
         }
         selectedButtonIndex = index
+
+        let buttonWidth = progressBarButtons[index].bounds.width
+        _ = Constants.barButtonSpacing * CGFloat(index)
+        let inset = Constants.horizontalInset * (index == 0 ? 1 : 0.5)
+        let offset = (buttonWidth + Constants.barButtonSpacing) * CGFloat(index) + inset - (bounds.width / 2) + (buttonWidth / 2)
+        setContentOffset(CGPoint(x: max(0, offset), y: 0), animated: true)
+        scrollToIndexHandler?(index)
     }
 }
