@@ -4,7 +4,7 @@ import {styled} from 'styled-components';
 
 import model from '@/assets/mocks/modelData.json';
 import {colors} from '@/style/theme';
-import {Body2_Regular} from '@/style/fonts';
+import {Body1_Medium} from '@/style/fonts';
 
 type modelDataType = {
   id: number;
@@ -17,29 +17,29 @@ type modelDataType = {
 interface modelDatProps {
   modelData: modelDataType;
 }
-function ModelTitle({modelData}: modelDatProps) {
+function ModelInfo({modelData}: modelDatProps) {
   return (
     <>
       <Model.Title>
-        <Model.Name>{modelData.name}</Model.Name>
-        <Model.Tag>{modelData.tag}</Model.Tag>
+        <Model.Img src={modelData.src} />
+        <Model.Tag>{`${modelData.price.toLocaleString()}원 부터`}</Model.Tag>
       </Model.Title>
     </>
   );
 }
-function ModelTitleList() {
+function ModelInfoList() {
   return (
-    <ModelTitleWrapper>
+    <ModelInfoWrapper>
       {model.map((modelItem) => (
-        <ModelTitle key={modelItem.id} modelData={modelItem} />
+        <ModelInfo key={modelItem.id} modelData={modelItem} />
       ))}
-    </ModelTitleWrapper>
+    </ModelInfoWrapper>
   );
 }
 
-export default ModelTitleList;
+export default ModelInfoList;
 
-const ModelTitleWrapper = styled.div`
+const ModelInfoWrapper = styled.div`
   ${flexBetween};
   width: 1024px;
 `;
@@ -50,16 +50,13 @@ const Model = {
     flex-direction: column;
     gap: 16px;
   `,
-  Name: styled.p`
-    color: ${colors.Cool_Grey};
-    font-family: Hyundai Sans Head Medium;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 500;
-    letter-spacing: -0.84px;
+  Img: styled.img`
+    width: 214px;
+    height: 155px;
+    flex-shrink: 0;
   `,
   Tag: styled.p`
     color: ${colors.Cool_Grey};
-    ${Body2_Regular};
+    ${Body1_Medium};
   `,
 };

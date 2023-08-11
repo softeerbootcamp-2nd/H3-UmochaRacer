@@ -1,0 +1,58 @@
+{
+  "exclusive" : [
+    {
+      "icon": "Navigation",
+      "name":"12.3인치 내비게이션"
+    },
+    {
+      "icon": "CruiseControl",
+      "name":"내비게이션 기반\n스마트 크루즈 컨트롤"
+    },
+    {
+      "icon": "InsideMirror",
+      "name":"베젤리스\n인사이드 미러"
+    }
+  ],
+  "LeBlanc" : [
+    {
+      "icon": "Wheel",
+      "name":"20인치 알로이 휠"
+    },
+    {
+      "icon": "Monitor",
+      "name":"서라운드 뷰 모니터"
+    },
+    {
+      "icon": "Cluster",
+      "name":"12.3인치 클러스터\n(컬러 LCD)"
+    }
+  ],
+  "Prestige":[
+    {
+      "icon": "Curtain",
+      "name":"2열 수동식 도어 커튼"
+    },
+    {
+      "icon": "Position",
+      "name":"스마트 자세제어"
+    },
+    {
+      "icon": "TouchControl",
+      "name":"전후석 통합\n터치 공조 컨트롤"
+    }
+  ],
+  "Calligraphy":[
+    {
+      "icon": "Krell",
+      "name":"KRELL\n프리미엄 사운드"
+    },
+    {
+      "icon": "ParkingSub",
+      "name":"원격 스마트\n주차 보조"
+    },
+    {
+      "icon": "Design",
+      "name":"캘리그라피\n전용 디자인"
+    }
+  ]
+}

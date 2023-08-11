@@ -129,3 +129,10 @@ export const Popup_Regular = css`
   line-height: 21px;
   letter-spacing: -0.42px;
 `;
+export const Label2_Regular = css`
+  font-family: 'Hyundai Sans Text Regular';
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15.6px;
+  letter-spacing: -0.36px;
+`;
