@@ -137,12 +137,11 @@ extension MultiOptionCardButtonView {
             
             cell.configure(cardType: optionCardType, info: item)
             
-            let cancellable = cell.buttonTapSubject
+            buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
                     delegate?.optionCardButtonDidTapped(index: indexPath.row)
                 }
-            buttonTapCancellableByIndex[indexPath.row] = cancellable
             
             return cell
         }
