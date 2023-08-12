@@ -134,8 +134,15 @@ extension BottomModalView {
 
     private func setupViews() {
         backgroundColor = .white
+        setupTopCornerRadius()
         addSubviews()
         setupConstraints()
+    }
+
+    private func setupTopCornerRadius() {
+        layer.masksToBounds = true
+        layer.cornerRadius = 16
+        layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
     }
 
     private func addSubviews() {
