@@ -15,14 +15,19 @@ final class BottomModalViewController: UIViewController {
 
     // MARK: - UI properties
 
-    private let bottomModalView = BottomModalView()
+    private lazy var bottomModalView: BottomModalView = {
+        let view = BottomModalView()
+        view.dataSource = self
+        view.delegate = self
+        view.updateEstimatePrice(12345)
+        return view
+    }()
 
     // MARK: - Lifecycles
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setupBottomModalView()
         setupViews()
     }
 
@@ -30,16 +35,22 @@ final class BottomModalViewController: UIViewController {
 }
 
 extension BottomModalViewController: BottomModalViewDataSource {
-
-    private func setupBottomModalView() {
-        bottomModalView.dataSource = self
-        bottomModalView.updateEstimatePrice(12345)
-    }
-
     func estimateSummaryData() -> Int {
         return -1
     }
+}
 
+extension BottomModalViewController: BottomModalViewDelegate {
+    func backButtonDidTapped() {
+        print("[BottomModalViewDelegate] 이전 버튼 클릭 시 액션 구현 필요")
+    }
+
+    func completionButtonDidTapped() {
+        print("[BottomModalViewDelegate] 선택완료 버튼 클릭 시 액션 구현 필요")
+    }
+}
+
+extension BottomModalViewController {
     private func setupViews() {
         view.backgroundColor = .white
         bottomModalView.translatesAutoresizingMaskIntoConstraints = false
