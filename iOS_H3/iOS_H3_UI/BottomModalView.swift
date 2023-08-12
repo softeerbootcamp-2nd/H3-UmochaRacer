@@ -10,6 +10,8 @@ import UIKit
 final class BottomModalView: UIView {
 
     enum Constants {
+        static let bottomModalViewHeight = 129.0
+
         static let cornerRadius = 16.0
         static let shadowColorHex = "8B8B8B"
         static let shadowHeight = 8.0
@@ -43,6 +45,8 @@ final class BottomModalView: UIView {
 
     private let modalHandleView = UIView()
 
+    private let estimateSummaryView = EstimateSummaryView()
+
     private let bottomContentView = UIView()
 
     private let priceTitleLabel = UILabel()
@@ -52,6 +56,12 @@ final class BottomModalView: UIView {
     private let backButton = OhMyCarSetButton()
 
     private let completionButton = OhMyCarSetButton(colorType: .mainHyundaiBlue, title: "선택완료")
+
+    private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: Constants.bottomModalViewHeight)
+
+    // MARK: - Properties
+
+    private var isShowingEstimateSummaryView: Bool = false
 
     // MARK: - Lifecycles
 
@@ -81,6 +91,7 @@ extension BottomModalView {
 
     private func setupProperties() {
         setupModalHandleView()
+        setupEstimateSummaryView()
         setupBottomContentView()
         setupPriceTitleLabel()
         setupPriceLabel()
@@ -92,6 +103,11 @@ extension BottomModalView {
         modalHandleView.translatesAutoresizingMaskIntoConstraints = false
         addTapGestureToModalHandleView()
         addModalHandleSubLayer()
+    }
+
+    private func setupEstimateSummaryView() {
+        estimateSummaryView.isHidden = true
+        estimateSummaryView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupBottomContentView() {
@@ -132,7 +148,28 @@ extension BottomModalView {
 
     @objc
     private func modalHandleViewDidTapped() {
-        print(#function)
+        if isShowingEstimateSummaryView {
+            hideEstimateSummaryView()
+        } else {
+            showEstimateSummaryView()
+        }
+        isShowingEstimateSummaryView.toggle()
+    }
+
+    private func showEstimateSummaryView() {
+        estimateSummaryView.isHidden = false
+
+        let screenHeight = window?.windowScene?.screen.bounds.height ?? 812
+        let viewHeight = screenHeight * 3 / 4
+        heightConstraint.constant = viewHeight
+        layoutIfNeeded()
+    }
+
+    private func hideEstimateSummaryView() {
+        estimateSummaryView.isHidden = true
+
+        heightConstraint.constant = Constants.bottomModalViewHeight
+        layoutIfNeeded()
     }
 
     private func addModalHandleSubLayer() {
@@ -172,6 +209,7 @@ extension BottomModalView {
 
     private func addSubviews() {
         addSubview(modalHandleView)
+        addSubview(estimateSummaryView)
         addSubview(bottomContentView)
         bottomContentView.addSubview(priceTitleLabel)
         bottomContentView.addSubview(priceLabel)
@@ -180,7 +218,9 @@ extension BottomModalView {
     }
 
     private func setupConstraints() {
+        heightConstraint.isActive = true
         setupModalHandleViewConstraints()
+        setupEstimateSummaryViewConstraints()
         setupBottomContentViewConstraints()
         setupPriceTitleLabelConstraints()
         setupPriceLabelConstraints()
@@ -194,6 +234,15 @@ extension BottomModalView {
             modalHandleView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             modalHandleView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             modalHandleView.heightAnchor.constraint(equalToConstant: Constants.modalHandleViewHeight)
+        ])
+    }
+
+    private func setupEstimateSummaryViewConstraints() {
+        NSLayoutConstraint.activate([
+            estimateSummaryView.topAnchor.constraint(equalTo: modalHandleView.bottomAnchor),
+            estimateSummaryView.leadingAnchor.constraint(equalTo: modalHandleView.leadingAnchor),
+            estimateSummaryView.trailingAnchor.constraint(equalTo: modalHandleView.trailingAnchor),
+            estimateSummaryView.bottomAnchor.constraint(equalTo: bottomContentView.topAnchor)
         ])
     }
 

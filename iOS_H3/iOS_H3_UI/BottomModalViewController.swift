@@ -38,8 +38,7 @@ extension BottomModalViewController {
         NSLayoutConstraint.activate([
             bottomModalView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             bottomModalView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            bottomModalView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            bottomModalView.heightAnchor.constraint(equalToConstant: Constants.bottomModalViewHeight)
+            bottomModalView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }
