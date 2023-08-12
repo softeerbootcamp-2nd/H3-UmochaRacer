@@ -19,18 +19,23 @@ final class BottomModalView: UIView {
         static let modalHandleSubLayerTopOffset = 8.0
         static let modalHandleSubLayerWidth = 40.0
         static let modalHandleSubLayerHeight = 5.0
+
         static let bottomContentViewHeight = 108.0
-        static let leadingInset = 20.0
-        static let trailingInset = 27.0
+
+        static let priceTitleLabelLeftOffset = 20.0
         static let priceTitleLabelTopOffset = 15.0
         static let priceTitleLabelWidth = 75.0
         static let priceTitleLabelHeight = 20.0
+
         static let priceLabelTopOffset = 4.0
         static let priceLabelRightOffset = 5.0
         static let priceLabelHeight = 29.0
+
         static let completionButtonTopOffset = 16.0
+        static let completionButtonRightOffset = 27.0
         static let completionButtonWidth = 87.0
         static let completionButtonHeight = 50.0
+
         static let backButtonRightOffset = 32.0
     }
 
@@ -209,7 +214,7 @@ extension BottomModalView {
             ),
             priceTitleLabel.leadingAnchor.constraint(
                 equalTo: bottomContentView.leadingAnchor,
-                constant: Constants.leadingInset
+                constant: Constants.priceTitleLabelLeftOffset
             ),
             priceTitleLabel.widthAnchor.constraint(equalToConstant: Constants.priceTitleLabelWidth),
             priceTitleLabel.heightAnchor.constraint(equalToConstant: Constants.priceTitleLabelHeight)
@@ -256,7 +261,7 @@ extension BottomModalView {
             ),
             completionButton.trailingAnchor.constraint(
                 equalTo: self.trailingAnchor,
-                constant: -Constants.trailingInset
+                constant: -Constants.completionButtonRightOffset
             ),
             completionButton.widthAnchor.constraint(
                 equalToConstant: Constants.completionButtonWidth
