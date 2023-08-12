@@ -11,6 +11,11 @@ protocol BottomModalViewDataSource: AnyObject {
     func estimateSummaryData() -> Int   // 반환 타입 수정 필요
 }
 
+protocol BottomModalViewDelegate: AnyObject {
+    func backButtonDidTapped()
+    func completionButtonDidTapped()
+}
+
 final class BottomModalView: UIView {
 
     enum Constants {
@@ -67,6 +72,8 @@ final class BottomModalView: UIView {
     // MARK: - Properties
 
     weak var dataSource: BottomModalViewDataSource!
+
+    weak var delegate: BottomModalViewDelegate!
 
     private var isShowingEstimateSummaryView: Bool = false
 
