@@ -9,9 +9,8 @@ import java.util.List;
 
 @Repository
 public interface AdditionalOptionRepository extends CrudRepository<AdditionalOption, Long> {
-//    @Query("SELECT * FROM Additional_Option ao WHERE ao.top_Option_Id IS NULL AND ao.flag = :flag")
+    //    @Query("SELECT * FROM Additional_Option ao WHERE ao.top_Option_Id IS NULL AND ao.flag = :flag")
     List<AdditionalOption> findAllByTopOptionIdIsNullAndFlag(String flag);
-    List<AdditionalOption> findAllByFlag(String flag);
 
     @Query("SELECT detail_id FROM Additional_Option WHERE id = :id")
     Long findDetailIdById(long id);

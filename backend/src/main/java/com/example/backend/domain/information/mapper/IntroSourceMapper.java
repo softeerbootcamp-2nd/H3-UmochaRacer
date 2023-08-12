@@ -1,11 +1,10 @@
 package com.example.backend.domain.information.mapper;
 
-import com.example.backend.domain.information.dto.ColorInformationResponse;
-import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.dto.IntroResponse;
 import com.example.backend.domain.information.dto.SimpleColorResponse;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
+import com.example.backend.domain.information.model.option.entity.AdditionalOption;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,8 +16,13 @@ public class IntroSourceMapper {
     public SimpleColorResponse map(ExteriorColor exteriorColor) {
         return new SimpleColorResponse(exteriorColor.getName(), exteriorColor.getColorCode());
     }
+
     public SimpleColorResponse map(InteriorColor interiorColor) {
         return new SimpleColorResponse(interiorColor.getName(), interiorColor.getIconSrc());
+    }
+
+    public SimpleColorResponse map(AdditionalOption additionalOption) {
+        return new SimpleColorResponse(additionalOption.getName(), additionalOption.getImageSrc());
     }
 
     public List<IntroResponse> mapToResponse(Map<String, List<SimpleColorResponse>> data) {

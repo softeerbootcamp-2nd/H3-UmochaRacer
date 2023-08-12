@@ -1,11 +1,10 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
+import lombok.Builder;
 import lombok.Getter;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.mapping.Embedded;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("ADDITIONAL_OPTION")
@@ -13,8 +12,7 @@ import org.springframework.data.relational.core.mapping.Table;
 public class AdditionalOption {
     @Id
     private Long id;
-    @MappedCollection(idColumn = "top_option_id")
-    private AggregateReference<AdditionalOption, Long> topOptionId;
+    private Long topOptionId;
     private String partsSrc;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
@@ -35,6 +33,7 @@ public class AdditionalOption {
         PERFORMANCE("성능"), AI_SAFETY("지능형 안전 기술"),
         SAFETY("안전"), EXTERIOR("외관"), INTERIOR("내장"),
         SEAT("시트"), CONVENIENCE("편의"), MULTIMEDIA("멀티미디어"),
+
         SYSTEM("시스템"), TEMPERATURE("온도 관리"), OUTER_DEVICE("외부 장치"),
         INNER_DEVICE("내부 장치");
 
@@ -48,5 +47,19 @@ public class AdditionalOption {
         public String toString() {
             return super.toString();
         }
+    }
+
+    @Builder
+    public AdditionalOption(String name, String imageSrc, int price, String category) {
+        this.baseInfo = new BaseInfo(name, imageSrc, price);
+        this.category = category;
+    }
+
+    public String getName() {
+        return this.baseInfo.getName();
+    }
+
+    public String getImageSrc() {
+        return this.baseInfo.getImageSrc();
     }
 }
