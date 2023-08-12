@@ -16,7 +16,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         static let descriptionLabelTopMargin: CGFloat = 26.0
         static let buttonListViewTopMargin: CGFloat = 20.0
         static let buttonListViewHeight: CGFloat = 150
-        static let descriptionSuffix : String = "을 선택해주세요"
+        static let descriptionSuffix: String = "을 선택해주세요"
     }
 
     let optionImageView: UIImageView = {
@@ -59,21 +59,20 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         setupViews()
     }
 
+    override func prepareForReuse() {
+        optionImageView.image = nil
+    }
+
     // MARK: - Helpers
     func configure(type: OptionCardButton.OptionCardType,
-                   bannerImage: URL,
+                   bannerImage: String?,
                    makingStepTitle: String,
                    optionInfos: [OptionCardInfo]) {
-        
 
-        DispatchQueue.global().async {
-            if let data = try? Data(contentsOf: bannerImage) {
-                DispatchQueue.main.async {
-                    self.optionImageView.image = UIImage(data: data)
-                }
-            }
+        if let urlString = bannerImage {
+            self.optionImageView.loadCachedImage(of: urlString)
         }
-        
+
         // 라벨 업데이트
         self.descriptionLabel.text = makingStepTitle + Constants.descriptionSuffix
         self.descriptionLabel.applyBoldToString(targetString: makingStepTitle,
