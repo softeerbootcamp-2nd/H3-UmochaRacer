@@ -27,6 +27,7 @@ final class BottomModalView: UIView {
         static let modalHandleSubLayerHeight = 5.0
 
         static let bottomContentViewHeight = 108.0
+        static let bottomContentViewShadowOpacity = 0.7
 
         static let priceTitleLabelLeftOffset = 20.0
         static let priceTitleLabelTopOffset = 15.0
@@ -106,17 +107,20 @@ extension BottomModalView {
     }
 
     private func setupModalHandleView() {
+        modalHandleView.backgroundColor = .white
         modalHandleView.translatesAutoresizingMaskIntoConstraints = false
         addTapGestureToModalHandleView()
         addModalHandleSubLayer()
     }
 
     private func setupEstimateSummaryView() {
+        estimateSummaryView.backgroundColor = .white
         estimateSummaryView.isHidden = true
         estimateSummaryView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupBottomContentView() {
+        bottomContentView.backgroundColor = .white
         bottomContentView.translatesAutoresizingMaskIntoConstraints = false
     }
 
@@ -164,6 +168,7 @@ extension BottomModalView {
 
     private func showEstimateSummaryView() {
         estimateSummaryView.isHidden = false
+        bottomContentView.layer.shadowOpacity = Float(Constants.bottomContentViewShadowOpacity)
 
         if let dataSource {
             estimateSummaryView.configure(dataSource.estimateSummaryData())
@@ -177,6 +182,7 @@ extension BottomModalView {
 
     private func hideEstimateSummaryView() {
         estimateSummaryView.isHidden = true
+        bottomContentView.layer.shadowOpacity = 0
 
         heightConstraint.constant = Constants.bottomModalViewHeight
         layoutIfNeeded()
@@ -198,9 +204,9 @@ extension BottomModalView {
     // MARK: - Setup Views
 
     private func setupViews() {
-        backgroundColor = .white
         setupTopCornerRadius()
         setupShawdow()
+        setupBottomContentViewShadow()
         addSubviews()
         setupConstraints()
     }
@@ -215,6 +221,12 @@ extension BottomModalView {
         layer.shadowOffset = CGSize(width: 0, height: -Constants.shadowHeight * 2)
         layer.shadowOpacity = Float(Constants.shadowOpacity)
         layer.shadowRadius = Constants.cornerRadius
+    }
+
+    private func setupBottomContentViewShadow() {
+        bottomContentView.layer.shadowColor = UIColor.white.cgColor
+        bottomContentView.layer.shadowOffset = CGSize(width: 0, height: -Constants.shadowHeight * 2)
+        bottomContentView.layer.shadowOpacity = 0
     }
 
     private func addSubviews() {
