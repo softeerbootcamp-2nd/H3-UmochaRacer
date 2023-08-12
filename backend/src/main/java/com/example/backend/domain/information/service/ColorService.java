@@ -1,7 +1,7 @@
 package com.example.backend.domain.information.service;
 
 import com.example.backend.domain.information.dto.IntroResponse;
-import com.example.backend.domain.information.dto.SimpleColorResponse;
+import com.example.backend.domain.information.dto.SimpleIntroResponse;
 import com.example.backend.domain.information.mapper.IntroSourceMapper;
 import com.example.backend.domain.information.model.car.entity.TrimExterior;
 import com.example.backend.domain.information.model.car.entity.TrimInterior;
@@ -25,10 +25,10 @@ public class ColorService {
     public List<IntroResponse> returnExColorByEachTrim() {
         List<TrimExterior> targets = trimExteriorRepository.findAll();
 
-        Map<String, List<SimpleColorResponse>> results = new HashMap<>();
+        Map<String, List<SimpleIntroResponse>> results = new HashMap<>();
         for (TrimExterior target : targets) {
-            List<SimpleColorResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
-            SimpleColorResponse toDto = introSourceMapper.map(target.getExteriorColor());
+            List<SimpleIntroResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
+            SimpleIntroResponse toDto = introSourceMapper.map(target.getExteriorColor());
             trimList.add(toDto);
             results.put(target.getTrimName(), trimList);
         }
@@ -39,10 +39,10 @@ public class ColorService {
     public List<IntroResponse> returnInColorByEachTrim() {
         List<TrimInterior> targets = trimInteriorRepository.findAll();
 
-        Map<String, List<SimpleColorResponse>> results = new HashMap<>();
+        Map<String, List<SimpleIntroResponse>> results = new HashMap<>();
         for (TrimInterior target : targets) {
-            List<SimpleColorResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
-            SimpleColorResponse toDto = introSourceMapper.map(target.getInteriorColor());
+            List<SimpleIntroResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
+            SimpleIntroResponse toDto = introSourceMapper.map(target.getInteriorColor());
             trimList.add(toDto);
             results.put(target.getTrimName(), trimList);
         }

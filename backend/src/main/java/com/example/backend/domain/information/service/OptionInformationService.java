@@ -3,7 +3,7 @@ package com.example.backend.domain.information.service;
 import com.example.backend.domain.global.exception.RestApiException;
 import com.example.backend.domain.global.model.enums.ErrorCode;
 import com.example.backend.domain.information.dto.IntroResponse;
-import com.example.backend.domain.information.dto.SimpleColorResponse;
+import com.example.backend.domain.information.dto.SimpleIntroResponse;
 import com.example.backend.domain.information.mapper.IntroSourceMapper;
 import com.example.backend.domain.information.model.car.entity.TrimAdditionalOption;
 import com.example.backend.domain.information.model.car.repository.TrimAdditionalOptionRepository;
@@ -43,7 +43,7 @@ public class OptionInformationService {
                 pageRequest
         );
 
-        List<SimpleColorResponse> results = targets.stream()
+        List<SimpleIntroResponse> results = targets.stream()
                 .map(TrimAdditionalOption::getAdditionalOption)
                 .map(introSourceMapper::map)
                 .collect(Collectors.toList());
