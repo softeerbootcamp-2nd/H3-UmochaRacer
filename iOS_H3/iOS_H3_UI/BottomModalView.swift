@@ -176,15 +176,17 @@ extension BottomModalView {
 
         let screenHeight = window?.windowScene?.screen.bounds.height ?? 812
         let viewHeight = screenHeight * 3 / 4
-        heightConstraint.constant = viewHeight
-        layoutIfNeeded()
+        updateHeightConstraint(viewHeight)
     }
 
     private func hideEstimateSummaryView() {
         estimateSummaryView.isHidden = true
         bottomContentView.layer.shadowOpacity = 0
+        updateHeightConstraint(Constants.bottomModalViewHeight)
+    }
 
-        heightConstraint.constant = Constants.bottomModalViewHeight
+    private func updateHeightConstraint(_ height: CGFloat) {
+        heightConstraint.constant = height
         layoutIfNeeded()
     }
 
