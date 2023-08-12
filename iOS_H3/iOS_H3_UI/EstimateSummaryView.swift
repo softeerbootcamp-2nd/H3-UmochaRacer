@@ -38,7 +38,7 @@ extension EstimateSummaryView {
     private func setupViews() {
         let image = UIImage(named: "temp_estimateSummary")
         imageView.image = image
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(imageView)
