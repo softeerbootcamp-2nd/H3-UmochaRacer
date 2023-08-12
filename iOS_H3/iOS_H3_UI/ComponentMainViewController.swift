@@ -63,6 +63,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var bottomModalViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("하단모달창 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didBottomModalViewButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -101,13 +109,15 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(ohMyCarSetButton)
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
+        stackView.addArrangedSubview(bottomModalViewButton)
 
         let buttons = [
             titleBarButton,
             optionCardButton,
             ohMyCarSetButton,
             progressBarButton,
-            twoOptionCardButtonViewButton
+            twoOptionCardButtonViewButton,
+            bottomModalViewButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -136,6 +146,11 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapTwoOptionCardButtonViewButton() {
         let viewController = TwoOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didBottomModalViewButton() {
+        let viewController = BottomModalViewController()
         self.present(viewController, animated: false)
     }
 }
