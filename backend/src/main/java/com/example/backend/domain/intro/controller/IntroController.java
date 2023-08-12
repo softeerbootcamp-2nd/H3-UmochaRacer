@@ -1,10 +1,10 @@
-package com.example.backend.domain.information.controller;
+package com.example.backend.domain.intro.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.model.enums.ErrorCode;
-import com.example.backend.domain.information.dto.IntroResponse;
-import com.example.backend.domain.information.service.ColorService;
-import com.example.backend.domain.information.service.OptionInformationService;
+import com.example.backend.domain.intro.dto.IntroResponse;
+import com.example.backend.domain.intro.service.ColorService;
+import com.example.backend.domain.intro.service.OptionInformationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

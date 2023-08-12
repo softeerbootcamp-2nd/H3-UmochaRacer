@@ -1,7 +1,7 @@
-package com.example.backend.domain.information.mapper;
+package com.example.backend.domain.intro.mapper;
 
-import com.example.backend.domain.information.dto.IntroResponse;
-import com.example.backend.domain.information.dto.SimpleIntroResponse;
+import com.example.backend.domain.intro.dto.IntroResponse;
+import com.example.backend.domain.intro.dto.SimpleIntroResponse;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;

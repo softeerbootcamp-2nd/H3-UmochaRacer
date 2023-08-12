@@ -1,8 +1,8 @@
-package com.example.backend.domain.information.model.car.repository;
+package com.example.backend.domain.intro.mapper;
 
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.entity.Trim;
-import com.example.backend.domain.information.model.car.entity.TrimExterior;
+import com.example.backend.domain.intro.entity.TrimExterior;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;

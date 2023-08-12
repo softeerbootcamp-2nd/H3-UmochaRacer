@@ -1,4 +1,4 @@
-package com.example.backend.domain.information.dto;
+package com.example.backend.domain.intro.dto;
 
 import lombok.Getter;
 

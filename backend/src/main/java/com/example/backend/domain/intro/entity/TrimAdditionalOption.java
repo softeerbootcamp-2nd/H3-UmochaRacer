@@ -1,5 +1,6 @@
-package com.example.backend.domain.information.model.car.entity;
+package com.example.backend.domain.intro.entity;
 
+import com.example.backend.domain.information.model.car.entity.Trim;
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;

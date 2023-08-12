@@ -1,12 +1,12 @@
-package com.example.backend.domain.information.service;
+package com.example.backend.domain.intro.service;
 
-import com.example.backend.domain.information.dto.IntroResponse;
-import com.example.backend.domain.information.dto.SimpleIntroResponse;
-import com.example.backend.domain.information.mapper.IntroSourceMapper;
-import com.example.backend.domain.information.model.car.entity.TrimExterior;
-import com.example.backend.domain.information.model.car.entity.TrimInterior;
-import com.example.backend.domain.information.model.car.repository.TrimExteriorRepository;
-import com.example.backend.domain.information.model.car.repository.TrimInteriorRepository;
+import com.example.backend.domain.intro.dto.IntroResponse;
+import com.example.backend.domain.intro.dto.SimpleIntroResponse;
+import com.example.backend.domain.intro.mapper.IntroSourceMapper;
+import com.example.backend.domain.intro.entity.TrimExterior;
+import com.example.backend.domain.intro.entity.TrimInterior;
+import com.example.backend.domain.intro.repository.TrimExteriorRepository;
+import com.example.backend.domain.intro.repository.TrimInteriorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -1,7 +1,7 @@
-package com.example.backend.domain.information.model.car.repository;
+package com.example.backend.domain.intro.mapper;
 
 import com.example.backend.domain.information.model.car.entity.Trim;
-import com.example.backend.domain.information.model.car.entity.TrimAdditionalOption;
+import com.example.backend.domain.intro.entity.TrimAdditionalOption;
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;
 import org.springframework.jdbc.core.RowMapper;
 
