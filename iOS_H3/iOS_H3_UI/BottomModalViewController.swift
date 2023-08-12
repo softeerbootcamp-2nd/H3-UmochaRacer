@@ -31,7 +31,7 @@ final class BottomModalViewController: UIViewController {
 extension BottomModalViewController {
 
     private func setupViews() {
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = .white
         bottomModalView.translatesAutoresizingMaskIntoConstraints = false
 
         view.addSubview(bottomModalView)
