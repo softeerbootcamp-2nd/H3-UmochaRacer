@@ -276,24 +276,19 @@ extension BottomModalView {
                 equalTo: priceTitleLabel.bottomAnchor,
                 constant: Constants.priceLabelTopOffset
             ),
-            priceLabel.leadingAnchor.constraint(
-                equalTo: priceTitleLabel.leadingAnchor
-            ),
+            priceLabel.leadingAnchor.constraint(equalTo: priceTitleLabel.leadingAnchor),
             priceLabel.trailingAnchor.constraint(
                 equalTo: backButton.leadingAnchor,
                 constant: -Constants.priceLabelRightOffset
             ),
-            priceLabel.heightAnchor.constraint(
-                equalToConstant: Constants.priceLabelHeight
-            )
+            priceLabel.heightAnchor.constraint(equalToConstant: Constants.priceLabelHeight)
         ])
     }
 
     private func setupBackButtonConstraints() {
         backButton.sizeToFit()
         NSLayoutConstraint.activate([
-            backButton.centerYAnchor.constraint(
-                equalTo: completionButton.centerYAnchor
+            backButton.centerYAnchor.constraint(equalTo: completionButton.centerYAnchor
             ),
             backButton.trailingAnchor.constraint(
                 equalTo: completionButton.leadingAnchor,
@@ -312,12 +307,8 @@ extension BottomModalView {
                 equalTo: self.trailingAnchor,
                 constant: -Constants.completionButtonRightOffset
             ),
-            completionButton.widthAnchor.constraint(
-                equalToConstant: Constants.completionButtonWidth
-            ),
-            completionButton.heightAnchor.constraint(
-                equalToConstant: Constants.completionButtonHeight
-            )
+            completionButton.widthAnchor.constraint(equalToConstant: Constants.completionButtonWidth),
+            completionButton.heightAnchor.constraint(equalToConstant: Constants.completionButtonHeight)
         ])
     }
 }
