@@ -22,13 +22,22 @@ final class BottomModalViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupBottomModalView()
         setupViews()
     }
 
     // MARK: - Helpers
 }
 
-extension BottomModalViewController {
+extension BottomModalViewController: BottomModalViewDataSource {
+
+    private func setupBottomModalView() {
+        bottomModalView.dataSource = self
+    }
+
+    func estimateSummaryData() -> Int {
+        return -1
+    }
 
     private func setupViews() {
         view.backgroundColor = .white
