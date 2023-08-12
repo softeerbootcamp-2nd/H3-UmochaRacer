@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol BottomModalViewDataSource: AnyObject {
+    func estimateSummaryData() -> Int   // 반환 타입 수정 필요
+}
+
 final class BottomModalView: UIView {
 
     enum Constants {
@@ -60,6 +64,8 @@ final class BottomModalView: UIView {
     private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: Constants.bottomModalViewHeight)
 
     // MARK: - Properties
+
+    weak var dataSource: BottomModalViewDataSource!
 
     private var isShowingEstimateSummaryView: Bool = false
 
