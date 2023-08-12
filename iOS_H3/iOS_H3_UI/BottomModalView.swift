@@ -10,6 +10,11 @@ import UIKit
 final class BottomModalView: UIView {
 
     enum Constants {
+        static let cornerRadius = 16.0
+        static let shadowColorHex = "8B8B8B"
+        static let shadowHeight = 8.0
+        static let shadowOpacity = 0.1
+
         static let modalHandleViewHeight = 21.0
         static let modalHandleSubLayerTopOffset = 8.0
         static let modalHandleSubLayerWidth = 40.0
@@ -143,14 +148,21 @@ extension BottomModalView {
     private func setupViews() {
         backgroundColor = .white
         setupTopCornerRadius()
+        setupShawdow()
         addSubviews()
         setupConstraints()
     }
 
     private func setupTopCornerRadius() {
-        layer.masksToBounds = true
-        layer.cornerRadius = 16
+        layer.cornerRadius = Constants.cornerRadius
         layer.maskedCorners = [.layerMaxXMinYCorner, .layerMinXMinYCorner]
+    }
+
+    private func setupShawdow() {
+        layer.shadowColor = (UIColor(hex: Constants.shadowColorHex) ?? .black).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: -Constants.shadowHeight * 2)
+        layer.shadowOpacity = Float(Constants.shadowOpacity)
+        layer.shadowRadius = Constants.cornerRadius
     }
 
     private func addSubviews() {
