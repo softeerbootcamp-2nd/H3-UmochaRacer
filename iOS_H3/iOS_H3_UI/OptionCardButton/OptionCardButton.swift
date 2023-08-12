@@ -170,7 +170,7 @@ class OptionCardButton: UIButton {
         if let type = type {
             self.type = type
         }
-        
+
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle
@@ -181,7 +181,7 @@ class OptionCardButton: UIButton {
                 setImage(url: url)
             }
         }
-        
+
         updateButtonUI()
     }
 
@@ -207,7 +207,6 @@ class OptionCardButton: UIButton {
     }
 
     func setImage(url: URL) {
-
         // TODO: 이미지 캐싱 적용 후 수정
         optionImageView.image = UIImage()
         optionImageView.isHidden = false
