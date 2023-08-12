@@ -10,7 +10,7 @@ import Foundation
 class CarMakingMultipleOptionCell: CarMakingCollectionViewCell {
 
     static let identifier = "CarMakingMultipleOptionCell"
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame, buttonListViewable: MultiOptionCardButtonView.init())
     }
