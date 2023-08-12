@@ -1,7 +1,7 @@
 package com.example.backend.domain.intro.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.intro.dto.IntroResponse;
 import com.example.backend.domain.intro.service.ColorService;
 import com.example.backend.domain.intro.service.OptionInformationService;
@@ -46,7 +46,7 @@ public class IntroController {
     }
 
     private <T> ResponseEntity<ResponseDto<T>> mapToOKResponse(T result) {
-        ResponseDto<T> body = ResponseDto.of(result, ErrorCode.SUCCESS);
+        ResponseDto<T> body = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }

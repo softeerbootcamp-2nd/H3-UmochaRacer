@@ -1,7 +1,7 @@
 package com.example.backend.domain.information.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.service.InformationStrategyFactory;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
@@ -31,7 +31,7 @@ public class InformationController {
 
 
     @Order(1)
-    @GetMapping("/interior_color")
+    @GetMapping("/interior-color")
     public ResponseEntity<ResponseDto<List<CommonResponse>>> returnInteriorColor(
             @RequestParam("exteriorColorId") long exteriorColorId
     ) {
@@ -40,7 +40,7 @@ public class InformationController {
     }
 
     private ResponseEntity<ResponseDto<List<CommonResponse>>> mapToOKResponse(List<CommonResponse> result) {
-        ResponseDto<List<CommonResponse>> body = ResponseDto.of(result, ErrorCode.SUCCESS);
+        ResponseDto<List<CommonResponse>> body = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }

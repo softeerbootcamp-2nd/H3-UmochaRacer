@@ -4,7 +4,7 @@ import com.example.backend.domain.cardb.dto.CardbResponseDto;
 import com.example.backend.domain.cardb.service.CardbService;
 import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.exception.RestApiException;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class CardbController {
             @RequestParam(value = "keyword") String keyword
     ) throws RestApiException {
         CardbResponseDto result = cardbService.getDescriptionByKeyword(keyword);
-        ResponseDto<CardbResponseDto> data = ResponseDto.of(result, ErrorCode.SUCCESS);
+        ResponseDto<CardbResponseDto> data = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(data);
     }
 }

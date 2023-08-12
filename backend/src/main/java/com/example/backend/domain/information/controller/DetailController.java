@@ -1,7 +1,7 @@
 package com.example.backend.domain.information.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.DetailResponse;
 import com.example.backend.domain.information.service.DetailService;
 import com.example.backend.domain.information.service.InformationStrategyFactory;
@@ -26,7 +26,7 @@ public class DetailController {
         Long detailId = informationStrategy.findDetailId(targetId);
         DetailResponse detailResponse = detailService.getDetailById(detailId);
 
-        ResponseDto<DetailResponse> body = ResponseDto.of(detailResponse, ErrorCode.SUCCESS);
+        ResponseDto<DetailResponse> body = ResponseDto.of(detailResponse, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 

@@ -1,7 +1,7 @@
 package com.example.backend.domain.intro.service;
 
 import com.example.backend.domain.global.exception.RestApiException;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.intro.dto.IntroResponse;
 import com.example.backend.domain.intro.dto.SimpleIntroResponse;
 import com.example.backend.domain.intro.mapper.IntroSourceMapper;
@@ -22,8 +22,8 @@ public class OptionInformationService {
 
 
     public IntroResponse findBy(Long trimId, String category, int page, int size) {
-        if (page == -1) throw new RestApiException(ErrorCode.PAGE_NOT_FOUND);
-        if (size == -1) throw new RestApiException(ErrorCode.PAGE_SIZE_NOT_FOUND);
+        if (page == -1) throw new RestApiException(ResultCode.PAGE_NOT_FOUND);
+        if (size == -1) throw new RestApiException(ResultCode.PAGE_SIZE_NOT_FOUND);
 
         PageRequest pageRequest = PageRequest.of(page, size);
 
@@ -49,7 +49,7 @@ public class OptionInformationService {
             String trimName = targets.get(0).getTrimName();
             return new IntroResponse(trimName, results);
         }catch (IndexOutOfBoundsException e) {
-            throw new RestApiException(ErrorCode.END_PAGE);
+            throw new RestApiException(ResultCode.END_PAGE);
         }
     }
 }

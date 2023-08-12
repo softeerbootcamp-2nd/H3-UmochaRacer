@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @RequiredArgsConstructor
-public enum ErrorCode {
+public enum ResultCode {
     SUCCESS(1000, HttpStatus.OK, "성공"),
 
     NO_KEYWORD_EXIST(2001, HttpStatus.BAD_REQUEST, "키워드에 해당하는 정보가 없습니다."),

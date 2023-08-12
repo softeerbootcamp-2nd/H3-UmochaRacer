@@ -1,11 +1,11 @@
 package com.example.backend.domain.global.dto;
 
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import lombok.Getter;
 
 @Getter
 public class ResponseDto<T> {
-    public static <S> ResponseDto<S> of(S s, ErrorCode status) {
+    public static <S> ResponseDto<S> of(S s, ResultCode status) {
         return new ResponseDto<>(s, status.getMessage(), status.getCode());
     }
 
