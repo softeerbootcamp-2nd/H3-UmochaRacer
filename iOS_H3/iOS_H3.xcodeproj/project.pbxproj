@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		470096442A874A0D003711F2 /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096432A874A0D003711F2 /* BottomModalView.swift */; };
+		470096462A876305003711F2 /* BottomModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096452A876305003711F2 /* BottomModalViewController.swift */; };
 		470096472A87630A003711F2 /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096432A874A0D003711F2 /* BottomModalView.swift */; };
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
 		471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
@@ -143,6 +144,7 @@
 
 /* Begin PBXFileReference section */
 		470096432A874A0D003711F2 /* BottomModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalView.swift; sourceTree = "<group>"; };
+		470096452A876305003711F2 /* BottomModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalViewController.swift; sourceTree = "<group>"; };
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
 		471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBar.swift; sourceTree = "<group>"; };
 		471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarButton.swift; sourceTree = "<group>"; };
@@ -559,6 +561,7 @@
 				5F6203732A7BC59600D09531 /* LaunchScreen.storyboard */,
 				5F6203762A7BC59600D09531 /* Info.plist */,
 				470096432A874A0D003711F2 /* BottomModalView.swift */,
+				470096452A876305003711F2 /* BottomModalViewController.swift */,
 			);
 			path = iOS_H3_UI;
 			sourceTree = "<group>";
@@ -898,19 +901,14 @@
 				471917EC2A8236EE00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */,
-
-				5F39EF3F2A81B79D004B0C97 /* ImageDisplayOptionButton.swift in Sources */,
-
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
-
 				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				471918032A834B7700B67D54 /* SelfModeOptionCardCell.swift in Sources */,
-				5F39EF402A81B79F004B0C97 /* ColorViewOptionCardButton.swift in Sources */,
-
+				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
