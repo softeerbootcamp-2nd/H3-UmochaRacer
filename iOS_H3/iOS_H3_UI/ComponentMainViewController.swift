@@ -62,8 +62,8 @@ class ComponentMainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapTwoOptionCardButtonViewButton), for: .touchUpInside)
         return button
     }()
-    
-    lazy private var carMakingContentViewButton : UIButton = {
+
+    lazy private var carMakingContentViewButton: UIButton = {
         let button = UIButton()
         button.setTitle("CarMakingContentViewButton 보기", for: .normal)
         button.setTitleColor(.blue, for: .normal)
