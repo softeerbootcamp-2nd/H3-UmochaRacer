@@ -16,9 +16,9 @@ public interface TrimAdditionalOptionRepository extends PagingAndSortingReposito
                     "FROM Trim_Additional_Option tao \n" +
                     "LEFT OUTER JOIN Trim t ON t.id = tao.trim_id \n" +
                     "LEFT OUTER JOIN Additional_option ao ON ao.id = tao.additional_option_id\n" +
-                    "WHERE tao.trim_id = :trimId AND  ao.category = :category \n" +
+                    "WHERE tao.trim_id = :trimId AND (:category = '' OR ao.category = :category) \n" +
                     "LIMIT  :size \n"+
-                    "OFFSET :offset \n",
+                    "OFFSET :offset",
             rowMapperClass = TrimAdditionalOptionRowMapper.class
     )
     List<TrimAdditionalOption> findAllByCategoryOrderByIdWithPaging(Long trimId, String category, long size, long offset, Pageable page);

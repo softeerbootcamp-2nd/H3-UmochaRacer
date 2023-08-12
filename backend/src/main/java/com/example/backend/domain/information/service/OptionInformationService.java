@@ -48,6 +48,11 @@ public class OptionInformationService {
                 .map(introSourceMapper::map)
                 .collect(Collectors.toList());
 
-        return new IntroResponse(trimId.toString(), results);
+        try{
+            String trimName = targets.get(0).getTrimName();
+            return new IntroResponse(trimName, results);
+        }catch (IndexOutOfBoundsException e) {
+            throw new RestApiException(ErrorCode.END_PAGE);
+        }
     }
 }
