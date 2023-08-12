@@ -1,6 +1,5 @@
 package com.example.backend.domain.information.service;
 
-import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.dto.IntroResponse;
 import com.example.backend.domain.information.dto.SimpleColorResponse;
 import com.example.backend.domain.information.mapper.IntroSourceMapper;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +25,7 @@ public class ColorService {
     public List<IntroResponse> returnExColorByEachTrim() {
         List<TrimExterior> targets = trimExteriorRepository.findAll();
 
-        HashMap<String, List<SimpleColorResponse>> results = new HashMap<>();
+        Map<String, List<SimpleColorResponse>> results = new HashMap<>();
         for (TrimExterior target : targets) {
             List<SimpleColorResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
             SimpleColorResponse toDto = introSourceMapper.map(target.getExteriorColor());
@@ -39,7 +39,7 @@ public class ColorService {
     public List<IntroResponse> returnInColorByEachTrim() {
         List<TrimInterior> targets = trimInteriorRepository.findAll();
 
-        HashMap<String, List<SimpleColorResponse>> results = new HashMap<>();
+        Map<String, List<SimpleColorResponse>> results = new HashMap<>();
         for (TrimInterior target : targets) {
             List<SimpleColorResponse> trimList = results.getOrDefault(target.getTrimName(), new ArrayList<>());
             SimpleColorResponse toDto = introSourceMapper.map(target.getInteriorColor());
