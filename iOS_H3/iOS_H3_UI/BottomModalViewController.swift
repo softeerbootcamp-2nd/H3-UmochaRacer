@@ -33,6 +33,7 @@ extension BottomModalViewController: BottomModalViewDataSource {
 
     private func setupBottomModalView() {
         bottomModalView.dataSource = self
+        bottomModalView.updateEstimatePrice(12345)
     }
 
     func estimateSummaryData() -> Int {
