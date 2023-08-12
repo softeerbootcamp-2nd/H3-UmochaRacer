@@ -154,10 +154,12 @@ extension BottomModalView {
         backButton.changeColor(titleColor: Colors.coolGrey3, backgroundColor: .white)
         backButton.setTitle("이전", for: .normal)
         backButton.translatesAutoresizingMaskIntoConstraints = false
+        backButton.addTarget(self, action: #selector(backButtonDidTapped), for: .touchUpInside)
     }
 
     private func setupCompletionButton() {
         completionButton.translatesAutoresizingMaskIntoConstraints = false
+        completionButton.addTarget(self, action: #selector(completionButtonDidTapped), for: .touchUpInside)
     }
 
     private func addTapGestureToModalHandleView() {
@@ -211,6 +213,16 @@ extension BottomModalView {
         )
         subLayer.backgroundColor = Colors.coolGrey3.cgColor
         modalHandleView.layer.addSublayer(subLayer)
+    }
+
+    @objc
+    private func backButtonDidTapped() {
+        delegate.backButtonDidTapped()
+    }
+
+    @objc
+    private func completionButtonDidTapped() {
+        delegate.completionButtonDidTapped()
     }
 
     // MARK: - Setup Views
