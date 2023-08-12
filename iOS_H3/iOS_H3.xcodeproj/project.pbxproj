@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		470096442A874A0D003711F2 /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096432A874A0D003711F2 /* BottomModalView.swift */; };
+		470096472A87630A003711F2 /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096432A874A0D003711F2 /* BottomModalView.swift */; };
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
 		471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
 		471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */; };
@@ -140,6 +142,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		470096432A874A0D003711F2 /* BottomModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalView.swift; sourceTree = "<group>"; };
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
 		471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBar.swift; sourceTree = "<group>"; };
 		471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarButton.swift; sourceTree = "<group>"; };
@@ -555,6 +558,7 @@
 				5F6203712A7BC59600D09531 /* Assets.xcassets */,
 				5F6203732A7BC59600D09531 /* LaunchScreen.storyboard */,
 				5F6203762A7BC59600D09531 /* Info.plist */,
+				470096432A874A0D003711F2 /* BottomModalView.swift */,
 			);
 			path = iOS_H3_UI;
 			sourceTree = "<group>";
@@ -862,6 +866,7 @@
 				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				471918082A834FDB00B67D54 /* GuideModeOptionCardCell.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
+				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -925,6 +930,7 @@
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
 				471918092A834FDB00B67D54 /* GuideModeOptionCardCell.swift in Sources */,
 				471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
+				470096442A874A0D003711F2 /* BottomModalView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
