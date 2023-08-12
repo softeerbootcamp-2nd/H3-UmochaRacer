@@ -88,6 +88,9 @@ final class BottomModalView: UIView {
 
     // MARK: - Helpers
 
+    func updateEstimatePrice(_ price: Int) {
+        priceLabel.text = "\(price.toPriceString()) 원"
+    }
 }
 
 // MARK: - Setup
