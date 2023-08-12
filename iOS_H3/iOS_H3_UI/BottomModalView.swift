@@ -14,6 +14,7 @@ final class BottomModalView: UIView {
         static let modalHandleSubLayerTopOffset = 8.0
         static let modalHandleSubLayerWidth = 40.0
         static let modalHandleSubLayerHeight = 5.0
+        static let bottomContentViewHeight = 108.0
         static let leadingInset = 20.0
         static let trailingInset = 27.0
         static let priceTitleLabelTopOffset = 15.0
@@ -31,6 +32,8 @@ final class BottomModalView: UIView {
     // MARK: - UI properties
 
     private let modalHandleView = UIView()
+
+    private let bottomContentView = UIView()
 
     private let priceTitleLabel = UILabel()
 
@@ -68,6 +71,7 @@ extension BottomModalView {
 
     private func setupProperties() {
         setupModalHandleView()
+        setupBottomContentView()
         setupPriceTitleLabel()
         setupPriceLabel()
         setupBackButton()
@@ -78,6 +82,10 @@ extension BottomModalView {
         modalHandleView.translatesAutoresizingMaskIntoConstraints = false
         addTapGestureToModalHandleView()
         addModalHandleSubLayer()
+    }
+
+    private func setupBottomContentView() {
+        bottomContentView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupPriceTitleLabel() {
@@ -146,19 +154,17 @@ extension BottomModalView {
     }
 
     private func addSubviews() {
-        [
-            modalHandleView,
-            priceTitleLabel,
-            priceLabel,
-            backButton,
-            completionButton
-        ].forEach {
-            addSubview($0)
-        }
+        addSubview(modalHandleView)
+        addSubview(bottomContentView)
+        bottomContentView.addSubview(priceTitleLabel)
+        bottomContentView.addSubview(priceLabel)
+        bottomContentView.addSubview(backButton)
+        bottomContentView.addSubview(completionButton)
     }
 
     private func setupConstraints() {
         setupModalHandleViewConstraints()
+        setupBottomContentViewConstraints()
         setupPriceTitleLabelConstraints()
         setupPriceLabelConstraints()
         setupBackButtonConstraints()
@@ -167,37 +173,34 @@ extension BottomModalView {
 
     private func setupModalHandleViewConstraints() {
         NSLayoutConstraint.activate([
-            modalHandleView.topAnchor.constraint(
-                equalTo: self.topAnchor
-            ),
-            modalHandleView.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor
-            ),
-            modalHandleView.trailingAnchor.constraint(
-                equalTo: self.trailingAnchor
-            ),
-            modalHandleView.heightAnchor.constraint(
-                equalToConstant: Constants.modalHandleViewHeight
-            )
+            modalHandleView.topAnchor.constraint(equalTo: self.topAnchor),
+            modalHandleView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            modalHandleView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            modalHandleView.heightAnchor.constraint(equalToConstant: Constants.modalHandleViewHeight)
+        ])
+    }
+
+    private func setupBottomContentViewConstraints() {
+        NSLayoutConstraint.activate([
+            bottomContentView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
+            bottomContentView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
+            bottomContentView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
+            bottomContentView.heightAnchor.constraint(equalToConstant: Constants.bottomContentViewHeight)
         ])
     }
 
     private func setupPriceTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             priceTitleLabel.topAnchor.constraint(
-                equalTo: modalHandleView.bottomAnchor,
+                equalTo: bottomContentView.topAnchor,
                 constant: Constants.priceTitleLabelTopOffset
             ),
             priceTitleLabel.leadingAnchor.constraint(
-                equalTo: self.leadingAnchor,
+                equalTo: bottomContentView.leadingAnchor,
                 constant: Constants.leadingInset
             ),
-            priceTitleLabel.widthAnchor.constraint(
-                equalToConstant: Constants.priceTitleLabelWidth
-            ),
-            priceTitleLabel.heightAnchor.constraint(
-                equalToConstant: Constants.priceTitleLabelHeight
-            )
+            priceTitleLabel.widthAnchor.constraint(equalToConstant: Constants.priceTitleLabelWidth),
+            priceTitleLabel.heightAnchor.constraint(equalToConstant: Constants.priceTitleLabelHeight)
         ])
     }
 
@@ -236,7 +239,7 @@ extension BottomModalView {
     private func setupCompletionButtonConstraints() {
         NSLayoutConstraint.activate([
             completionButton.topAnchor.constraint(
-                equalTo: modalHandleView.bottomAnchor,
+                equalTo: bottomContentView.topAnchor,
                 constant: Constants.completionButtonTopOffset
             ),
             completionButton.trailingAnchor.constraint(
