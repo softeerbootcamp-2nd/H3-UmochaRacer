@@ -63,6 +63,7 @@ function Content() {
             />
             <OptionInfo
               cardData={cardData}
+              option={option}
               setNewIndex={(index: number) => setNewIndex(index)}
             />
           </>

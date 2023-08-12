@@ -17,11 +17,22 @@ interface Data {
 
 interface cardDataProps {
   cardData: cardDataType[];
+  option: number;
   setNewIndex: (index: number) => void;
 }
 
-function OptionInfo({cardData, setNewIndex}: cardDataProps) {
+function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const menuItems = [
+    '파워트레인',
+    '구동 방식',
+    '바디 타입',
+    '외장 색상',
+    '내장 색상',
+    '휠',
+    '옵션',
+  ];
 
   const modalRef = useRef<HTMLDivElement>(null);
   const handleModalView = useCallback(() => {
@@ -31,7 +42,7 @@ function OptionInfo({cardData, setNewIndex}: cardDataProps) {
   return (
     <Wrapper>
       <Container>
-        <OptionTitle>파워트레인</OptionTitle>
+        <OptionTitle>{menuItems[option]}</OptionTitle>
         <Text>을 선택해주세요.</Text>
         <OptionCardList
           cardData={cardData}
