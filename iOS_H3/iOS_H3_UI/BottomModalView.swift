@@ -165,6 +165,10 @@ extension BottomModalView {
     private func showEstimateSummaryView() {
         estimateSummaryView.isHidden = false
 
+        if let dataSource {
+            estimateSummaryView.configure(dataSource.estimateSummaryData())
+        }
+
         let screenHeight = window?.windowScene?.screen.bounds.height ?? 812
         let viewHeight = screenHeight * 3 / 4
         heightConstraint.constant = viewHeight
