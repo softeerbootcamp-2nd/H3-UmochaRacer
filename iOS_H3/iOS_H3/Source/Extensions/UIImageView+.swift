@@ -30,21 +30,24 @@ extension UIImageView {
             else { return }
 
             urlComponents.scheme = "https"
+            guard let imageURL = urlComponents.url else { return }
 
-            guard
-                let imageURL = urlComponents.url,
-                let imageData = try? Data(contentsOf: imageURL),
-                let loadedImage = UIImage(data: imageData)
-            else { return }
-
-            ImageCacheManager.shared.setObject(loadedImage, forKey: key as NSString)
-
-            DispatchQueue.main.async { [weak self] in
-                if showLoadingIndicator {
-                    self?.subviews.forEach { $0.removeFromSuperview() }
+            URLSession.shared.dataTask(with: imageURL) { [weak self] data, response, error in
+                guard
+                    let data = data,
+                    let loadedImage = UIImage(data: data),
+                    error == nil
+                else { return }
+                
+                ImageCacheManager.shared.setObject(loadedImage, forKey: key as NSString)
+                
+                DispatchQueue.main.async {
+                    if showLoadingIndicator {
+                        self?.subviews.forEach { $0.removeFromSuperview() }
+                    }
+                    self?.image = loadedImage
                 }
-                self?.image = loadedImage
-            }
+            }.resume()
         }
     }
 }
