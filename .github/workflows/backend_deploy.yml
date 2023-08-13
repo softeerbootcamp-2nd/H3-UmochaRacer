@@ -1,6 +1,8 @@
 name: Backend Deploy When Merged Or Pushed
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - develop-be

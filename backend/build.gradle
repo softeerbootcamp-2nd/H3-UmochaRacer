@@ -50,15 +50,15 @@ test {
     useJUnitPlatform()
 }
 
-asciidoctor.doFirst {
-    delete file('src/main/resources/static/docs')
-}
+//asciidoctor.doFirst {
+//    delete file('src/main/resources/static/docs')
+//}
 
-asciidoctor { // index.adoc -> html 변환 도구
-    dependsOn test
-    configurations 'asciidoctorExtension'
-    inputs.dir snippetsDir
-}
+//asciidoctor { // index.adoc -> html 변환 도구
+//    dependsOn test
+//    configurations 'asciidoctorExtension'
+//    inputs.dir snippetsDir
+//}
 
 task copyDocument(type: Copy){
     dependsOn asciidoctor
