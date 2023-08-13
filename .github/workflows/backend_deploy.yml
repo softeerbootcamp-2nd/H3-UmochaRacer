@@ -2,19 +2,19 @@ name: Backend Deploy When Merged Or Pushed
 
 on:
   workflow_dispatch:
-
   push:
-    branches:
-      - develop-be
-    paths: 'backend/**'
-
-defaults:
-  run:
-    working-directory: backend
+    branches: ["develop-be"]
+    paths:
+      - "backend/**"
+      - ".github/**"
 
 jobs:
   deploy:
     runs-on: ubuntu-20.04
+
+    defaults:
+      run:
+        working-directory: ./backend
 
     steps:
       - name: Checkout
@@ -36,15 +36,13 @@ jobs:
 #            restore-keys: |
 #              ${{ runner.os }}-gradle-
 
-        # yaml 파일 secret 설정 시 설정 예정
-#        - name: Make application.yml
-#          run: |
-#            cd ./src/main
-#            mkdir resources
-#            cd ./resources
-#            touch ./application.yml
-#            echo "${{ secrets.APPLICATION }}" > ./application.yml
-#          shell: bash
+      - name: 배포용(API TEST) application.yml 설정
+        run: |
+          cd ./src/main
+          cd ./resources
+          touch ./application-dev.yml
+          echo "${{ secrets.APPLICATION }}" > ./application-dev.yml
+        shell: bash
 
       - name: Grant exec permission for gradlew
         run: chmod +x gradlew
