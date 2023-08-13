@@ -1,23 +1,13 @@
 import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {flexCenter} from '@/style/common';
-import {Body1_Regular, Title1_Medium} from '@/style/fonts';
+import {Title1_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import Keyframes from 'styled-components/dist/models/Keyframes';
+import Bottom from './Bottom';
 
-const RADIUS = 176;
+const RADIUS = 174;
 const ROUND = RADIUS * 2 * Math.PI;
-
-const growAnimation = keyframes`
-  0% {
-    opacity: 0;
-    clip-path: polygon(-20% 0%, 0% -20%, 0% 100%, 0% 125%);
-  }
-  100% {
-    opacity: 1;
-    clip-path: polygon(-20% 0, 120% -20%, 100% 100%, 0% 125%);
-  }
-`;
 
 const progressAni = keyframes`
 100%{
@@ -64,7 +54,7 @@ const ProgressBar = () => {
         cx="180"
         cy="180"
         r={RADIUS}
-        strokeWidth="8"
+        strokeWidth="12"
         strokeDasharray={ROUND}
       />
       <ProgressCircle
@@ -72,7 +62,7 @@ const ProgressBar = () => {
         cx="180"
         cy="180"
         r={RADIUS}
-        strokeWidth="8"
+        strokeWidth="12"
         strokeDasharray={ROUND}
         strokeDashoffset={ROUND}
       ></ProgressCircle>
@@ -121,30 +111,7 @@ const ToolIcon = () => {
   );
 };
 
-const Circle = (color: string, delay: number) => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="22"
-      height="22"
-      viewBox="0 0 22 22"
-      fill="none"
-    >
-      <circle cx="11" cy="11" r="11" fill={color} />
-      <AnimationPath
-        d="M6.5 10.8L9.63043 14L15.5 8"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        $delay={delay}
-      ></AnimationPath>
-    </svg>
-  );
-};
-
 function LoadingAnimation() {
-  const DELAY = 0.7;
   return (
     <Wrapper>
       <Container>
@@ -154,20 +121,7 @@ function LoadingAnimation() {
           <IconBox $ani={blink2}>{ToolIcon()}</IconBox>
         </Top>
         <Middle>나만의 팰리세이드가 만들어지고 있어요!</Middle>
-        <Bottom>
-          <ProgressIndicator>
-            <CheckBox>{Circle(colors.Main_Hyundai_Blue, DELAY)}</CheckBox>
-            <Text $color={colors.Main_Hyundai_Blue}>엔진 장착 중. . .</Text>
-          </ProgressIndicator>
-          <ProgressIndicator>
-            <CheckBox>{Circle('#6E809D', DELAY + 1)}</CheckBox>
-            <Text $color="#9D9FA3">도색하는 중. . .</Text>
-          </ProgressIndicator>
-          <ProgressIndicator>
-            <CheckBox>{Circle('#6E809D', DELAY + 2)}</CheckBox>
-            <Text $color="#9D9FA3">옵션 장착 중. . .</Text>
-          </ProgressIndicator>
-        </Bottom>
+        <Bottom></Bottom>
       </Container>
     </Wrapper>
   );
@@ -217,37 +171,4 @@ const Middle = styled.div`
   margin: 0 auto;
   text-align: center;
   color: ${colors.Main_Hyundai_Blue};
-`;
-
-const Bottom = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 126px;
-  height: 106px;
-  margin: 0 auto;
-`;
-
-const ProgressIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-`;
-
-const CheckBox = styled.div`
-  ${flexCenter}
-  width: 22px;
-  height: 22px;
-`;
-
-const AnimationPath = styled.path<{$delay: number}>`
-  opacity: 0;
-  animation: ${growAnimation} 0.3s forwards;
-  animation-delay: ${({$delay}) => $delay}s;
-`;
-
-const Text = styled.div<{$color: string}>`
-  ${Body1_Regular}
-  text-wrap: nowrap;
-  color: ${({$color}) => $color};
 `;
