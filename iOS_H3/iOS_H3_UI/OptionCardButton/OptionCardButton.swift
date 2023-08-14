@@ -208,7 +208,6 @@ class OptionCardButton: UIButton {
     }
 
     func setImage(url: URL) {
-
         // TODO: 이미지 캐싱 적용 후 수정
         optionImageView.image = UIImage()
         optionImageView.isHidden = false

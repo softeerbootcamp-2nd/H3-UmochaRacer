@@ -9,6 +9,10 @@ import UIKit
 
 class ComponentMainViewController: UIViewController {
 
+    enum Constants {
+        static let buttonHeight = 30.0
+    }
+
     lazy private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -60,6 +64,14 @@ class ComponentMainViewController: UIViewController {
         button.setTitle("TwoOptionCardButtonView 보기", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(didTapTwoOptionCardButtonViewButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var bottomModalViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("하단모달창 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didBottomModalViewButton), for: .touchUpInside)
         return button
     }()
 
@@ -125,6 +137,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(ohMyCarSetButton)
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
+        stackView.addArrangedSubview(bottomModalViewButton)
         stackView.addArrangedSubview(multiOptionCardButtonViewButton)
         stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
@@ -135,12 +148,13 @@ class ComponentMainViewController: UIViewController {
             ohMyCarSetButton,
             progressBarButton,
             twoOptionCardButtonViewButton,
+            bottomModalViewButton,
             multiOptionCardButtonViewButton,
             carMakingContentViewButton,
             optionCategoryTabbarButton
         ]
         for button in buttons {
-            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
         }
     }
 
@@ -166,6 +180,11 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapTwoOptionCardButtonViewButton() {
         let viewController = TwoOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didBottomModalViewButton() {
+        let viewController = BottomModalViewController()
         self.present(viewController, animated: false)
     }
 
