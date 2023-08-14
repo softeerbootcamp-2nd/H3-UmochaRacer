@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, {useEffect, useState} from 'react';
+import styled, {keyframes} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body3_Regular, Title2_Medium} from '@/style/fonts';
 
@@ -32,10 +32,90 @@ const SmileIcon = () => {
     </svg>
   );
 };
-function FeedBack() {
+
+const SmileIcon2 = () => {
   return (
-    <Wrapper>
-      <IconBox>{SmileIcon()}</IconBox>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="30"
+      height="30"
+      viewBox="0 0 24 25"
+      fill="none"
+    >
+      <g clipPath="url(#clip0_601_18916)">
+        <path
+          d="M4.92901 19.4372C3.99904 18.5097 3.26154 17.4075 2.75889 16.194C2.25623 14.9805 1.99833 13.6797 2.00001 12.3662C2.00001 6.84321 6.47701 2.36621 12 2.36621C17.523 2.36621 22 6.84321 22 12.3662C22 17.8892 17.523 22.3662 12 22.3662H2.00001L4.92901 19.4372Z"
+          fill="#FFA724"
+        />
+        <ellipse cx="10" cy="10.3662" rx="1" ry="1" fill="#0E2B5C" />
+        <ellipse cx="14" cy="10.3662" rx="1" ry="1" fill="#0E2B5C" />
+        <path
+          d="M8.46447 15.9017C7.52678 14.9641 7 13.6923 7 12.3662H9C9 13.1619 9.31607 13.9249 9.87868 14.4875C10.4413 15.0501 11.2044 15.3662 12 15.3662C12.7956 15.3662 13.5587 15.0501 14.1213 14.4875C14.6839 13.9249 15 13.1619 15 12.3662H17C17 13.6923 16.4732 14.9641 15.5355 15.9017C14.5979 16.8394 13.3261 17.3662 12 17.3662C10.6739 17.3662 9.40215 16.8394 8.46447 15.9017Z"
+          fill="#0E2B5C"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_601_18916">
+          <rect
+            width="24"
+            height="24"
+            fill="white"
+            transform="translate(0 0.366211)"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
+
+const GoodIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="26"
+      height="33"
+      viewBox="0 0 26 33"
+      fill="none"
+    >
+      <path
+        d="M2.83845 17.0006H5.98659V29.5931H2.83845C2.56013 29.5931 2.29322 29.4826 2.09642 29.2858C1.89962 29.089 1.78906 28.8221 1.78906 28.5438V18.0499C1.78906 17.7716 1.89962 17.5047 2.09642 17.3079C2.29322 17.1111 2.56013 17.0006 2.83845 17.0006ZM8.39283 15.6437L15.1089 8.92765C15.1981 8.83813 15.3167 8.78385 15.4428 8.77479C15.5689 8.76573 15.694 8.80249 15.7952 8.87833L16.6903 9.54993C16.9389 9.73656 17.1267 9.99262 17.2299 10.2858C17.3332 10.579 17.3474 10.8962 17.2706 11.1975L16.0607 15.9512H22.7767C23.3333 15.9512 23.8672 16.1723 24.2608 16.5659C24.6544 16.9595 24.8755 17.4933 24.8755 18.0499V20.2578C24.8758 20.5321 24.8223 20.8038 24.7181 21.0575L21.4702 28.9436C21.391 29.1358 21.2564 29.3002 21.0836 29.4159C20.9108 29.5315 20.7075 29.5932 20.4996 29.5931H9.13474C8.85643 29.5931 8.58951 29.4826 8.39272 29.2858C8.19592 29.089 8.08536 28.8221 8.08536 28.5438V16.3856C8.08542 16.1073 8.19602 15.8405 8.39283 15.6437Z"
+        fill="#FFA724"
+      />
+      <rect
+        x="7.03906"
+        y="3.77734"
+        width="2.51852"
+        height="5.03704"
+        transform="rotate(-30 7.03906 3.77734)"
+        fill="#FFA724"
+      />
+      <rect x="14.5938" width="2.51852" height="5.03704" fill="#FFA724" />
+      <rect
+        width="2.51852"
+        height="5.03704"
+        transform="matrix(-0.866025 -0.5 -0.5 0.866025 25.25 3.77734)"
+        fill="#FFA724"
+      />
+    </svg>
+  );
+};
+
+function FeedBack() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisible(true);
+    }, 1000);
+  }, []);
+
+  return (
+    <Wrapper $visible={visible}>
+      <IconContainer $visible={visible}>
+        <IconBox>{SmileIcon()}</IconBox>
+        <IconBox className="smile2">{SmileIcon2()}</IconBox>
+        <IconBox className="good">{GoodIcon()}</IconBox>
+      </IconContainer>
       <TitleBox>디젤엔진은 효율이 좋아요!</TitleBox>
       <Description>
         알콘(alcon) 단조 브레이크 & 20인치 휠 패키지는 뛰어난 제동력이
@@ -47,7 +127,7 @@ function FeedBack() {
 
 export default FeedBack;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{$visible: boolean}>`
   position: absolute;
   width: 374px;
   height: 150px;
@@ -55,12 +135,36 @@ const Wrapper = styled.div`
   left: 0;
   padding: 20px;
   border-radius: 6px;
-  background: ${colors.Main_Hyundai_Blue};
+  opacity: ${({$visible}) => ($visible ? 1 : 0)};
+  transition: 0.5s;
+`;
+
+const IconContainer = styled.div<{$visible: boolean}>`
+  position: relative;
+  width: 30px;
+  height: 30px;
+
+  div {
+    transition: 0.5s;
+  }
+
+  .smile2 {
+    opacity: ${({$visible}) => ($visible ? 1 : 0)};
+    transition-delay: 0.5s;
+  }
+
+  .good {
+    top: -3px;
+    left: ${({$visible}) => ($visible ? '100%' : 0)};
+    opacity: ${({$visible}) => ($visible ? 1 : 0)};
+    transition-delay: 0.5s;
+  }
 `;
 
 const IconBox = styled.div`
-  width: 30px;
-  height: 30px;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const TitleBox = styled.div`

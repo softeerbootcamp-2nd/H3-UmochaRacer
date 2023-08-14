@@ -145,8 +145,8 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
             ''
           )}
         </CardSection>
-        <FeedBack></FeedBack>
       </Container>
+      <FeedBack></FeedBack>
     </Wrapper>
   );
 }
