@@ -61,12 +61,12 @@ class OptionMotionView: UIView {
         feedbackDescriptionLabel.translatesAutoresizingMaskIntoConstraints = false
 
         smileImageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        smileImageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        smileImageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
         smileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 20).isActive = true
         smileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20).isActive = true
 
         goodImageView.widthAnchor.constraint(equalToConstant: 20).isActive = true
-        goodImageView.widthAnchor.constraint(equalToConstant: 26).isActive = true
+        goodImageView.heightAnchor.constraint(equalToConstant: 26).isActive = true
         goodImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 17).isActive = true
         goodImageView.leadingAnchor.constraint(equalTo: smileImageView.trailingAnchor, constant: 2).isActive = true
 
