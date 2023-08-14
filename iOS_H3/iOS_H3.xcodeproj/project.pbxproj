@@ -48,6 +48,8 @@
 		4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */; };
 		4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */; };
 		479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF82A777BDE0055A4FA /* ViewController.swift */; };
+		479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AC2A8AA18600DECB70 /* NetworkService.swift */; };
+		479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AC2A8AA18600DECB70 /* NetworkService.swift */; };
 		479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
 		479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
 		479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AE2A8AA18600DECB70 /* EndPoint.swift */; };
@@ -193,6 +195,7 @@
 		479023952A8A3DB000DECB70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		479023982A8A3DB000DECB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4790239A2A8A3DB000DECB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		479023AC2A8AA18600DECB70 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		479023AD2A8AA18600DECB70 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		479023AE2A8AA18600DECB70 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
@@ -505,6 +508,7 @@
 		479023AB2A8AA18600DECB70 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				479023AC2A8AA18600DECB70 /* NetworkService.swift */,
 				479023AD2A8AA18600DECB70 /* NetworkError.swift */,
 				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
 			);
@@ -965,6 +969,7 @@
 				479023B42A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */,
 				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
+				479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
 				479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */,
 			);
@@ -1010,6 +1015,7 @@
 				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
+				479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */,
 				5F6603EF2A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
