@@ -1,4 +1,4 @@
-import React, {useCallback, useContext, useRef, useState} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
@@ -7,6 +7,7 @@ import {OptionContext} from '@/provider/optionProvider';
 
 interface props {
   onClick: () => void;
+  setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
   isOpen: boolean;
 }
 const upperButton = (isModalOpen: boolean) => {
@@ -30,7 +31,7 @@ const upperButton = (isModalOpen: boolean) => {
   );
 };
 
-function Footer({onClick, isOpen}: props) {
+function Footer({onClick, isOpen, setIsSaved}: props) {
   const {option, setOption} = useContext(OptionContext);
   return (
     <Wrapper>
@@ -45,7 +46,14 @@ function Footer({onClick, isOpen}: props) {
         <PrevOptionButton onClick={() => setOption(option - 1)}>
           이전
         </PrevOptionButton>
-        <NextOptionButton onClick={() => setOption(option + 1)}>
+        <NextOptionButton
+          onClick={() => {
+            setIsSaved(true);
+            setTimeout(() => {
+              setOption(option + 1);
+            }, 2500);
+          }}
+        >
           선택 완료
         </NextOptionButton>
       </OptionSwitcher>

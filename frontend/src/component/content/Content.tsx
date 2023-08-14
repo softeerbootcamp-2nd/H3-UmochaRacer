@@ -19,7 +19,7 @@ interface Ratio {
 
 function Content() {
   const [selectedIndex, setIndex] = useState<number>(0);
-  const {option, setOption} = useContext(OptionContext);
+  const {option} = useContext(OptionContext);
   const [cardData, setcardData] = useState<cardDataType[]>([]);
   const setNewIndex = (nextIndex: number) => {
     setIndex(nextIndex);
@@ -63,6 +63,7 @@ function Content() {
             />
             <OptionInfo
               cardData={cardData}
+              option={option}
               setNewIndex={(index: number) => setNewIndex(index)}
             />
           </>

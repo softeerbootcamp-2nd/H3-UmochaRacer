@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
@@ -17,30 +17,51 @@ interface Data {
 
 interface cardDataProps {
   cardData: cardDataType[];
+  option: number;
   setNewIndex: (index: number) => void;
 }
 
-function OptionInfo({cardData, setNewIndex}: cardDataProps) {
+function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
+
+  const menuItems = [
+    '파워트레인',
+    '구동 방식',
+    '바디 타입',
+    '외장 색상',
+    '내장 색상',
+    '휠',
+    '옵션',
+  ];
 
   const modalRef = useRef<HTMLDivElement>(null);
   const handleModalView = useCallback(() => {
     setIsModalOpen((prev) => !prev);
   }, []);
 
+  useEffect(() => {
+    setIsSaved(false);
+  }, [option]);
+
   return (
     <Wrapper>
       <Container>
-        <OptionTitle>파워트레인</OptionTitle>
+        <OptionTitle>{menuItems[option]}</OptionTitle>
         <Text>을 선택해주세요.</Text>
         <OptionCardList
           cardData={cardData}
+          isSaved={isSaved}
           setNewIndex={setNewIndex}
         ></OptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
-        <Footer onClick={handleModalView} isOpen={isModalOpen}></Footer>
+        <Footer
+          onClick={handleModalView}
+          setIsSaved={setIsSaved}
+          isOpen={isModalOpen}
+        ></Footer>
       </Container>
     </Wrapper>
   );

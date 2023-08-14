@@ -2,6 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React, {useEffect} from 'react';
 import Self from './pages/Self';
 import Main from './pages/Main';
+import Loading from './pages/Loading';
 import OptionProvider from './provider/optionProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/self" element={<Self />} />
+          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
     </AppProvider>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled, {css, keyframes} from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {cardDataType} from '../contentInterface';
@@ -10,7 +10,7 @@ interface ImageProps {
 
 const growAnimation = keyframes`
   0% {
-    clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%);
   }
   100% {
     clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
@@ -20,7 +20,6 @@ const growAnimation = keyframes`
 function OptionImage({cardData, selectedIndex}: ImageProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<number | undefined>(undefined);
-
   const imgBox = wrapperRef.current?.childNodes[selectedIndex];
 
   if (imgBox instanceof HTMLElement) {
@@ -66,7 +65,7 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
 
 export default OptionImage;
 
-const Wrapper = styled.div<{$currheight: number | undefined}>`
+const Wrapper = styled.div<{$currheight?: number}>`
   flex: 6;
 `;
 
@@ -87,7 +86,7 @@ const ImageBox = styled.div<{$isActive: boolean}>`
   ${({$isActive}) =>
     $isActive &&
     css`
-      animation: ${growAnimation} 0.75s both;
+      animation: ${growAnimation} 0.5s both cubic-bezier(1, 0, 0.5, 1);
       animation-delay: 0.2s;
     `}
 `;

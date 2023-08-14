@@ -2,11 +2,14 @@ import React, {useEffect} from 'react';
 import {useState, useRef, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
-import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import {cardDataType} from '../../contentInterface';
+
+import DetailToggle from './DetailToggle';
+import FeedBack from './FeedBack';
 interface CardProps {
   selected: boolean;
+  isSaved: boolean;
   onClick: () => void;
   data: cardDataType;
   option: number;
@@ -52,7 +55,7 @@ const hasDetail = (option: number) => {
   return DetailOption.has(option);
 };
 
-function OptionCard({selected, onClick, data, option}: CardProps) {
+function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -86,62 +89,72 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
     }
   }, [selected]);
 
+  if (isSaved && toggle) {
+    if (contentBoxRef.current) {
+      contentBoxRef.current.style.height = '0';
+    }
+    setToggle(!toggle);
+  }
+
   return (
     <Wrapper onClick={onClick} $selected={selected}>
-      <CardSection>
-        <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
+      <Container>
+        <CardSection>
+          <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
 
-        {data.partsSrc ? (
-          <Parts $url={data.partsSrc} $selected={selected}></Parts>
-        ) : (
-          ''
-        )}
-      </CardSection>
+          {data.partsSrc ? (
+            <Parts $url={data.partsSrc} $selected={selected}></Parts>
+          ) : (
+            ''
+          )}
+        </CardSection>
 
-      <CardSection $height={60}>
-        <TextBox>
-          <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
-          <Text2 className="black">{data.name}</Text2>
-        </TextBox>
-        {data.iconSrc ? (
-          <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
-        ) : (
-          ''
-        )}
-        {data.colorCode ? (
-          <ColorBox $colorcode={data.colorCode}></ColorBox>
-        ) : (
-          ''
-        )}
-      </CardSection>
-
-      {hasDetail(option) ? (
-        <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
-          <DetailContent ref={contentRef}>
-            컨텐츠
-            <Text1>구매자의 63%가 선택했어요!</Text1>
-            <Text2>디젤 2.2</Text2>
-            <Text1>구매자의 63%가 선택했어요!</Text1>
-            <Text2>디젤 2.2</Text2>
-          </DetailContent>
-        </DetailBox>
-      ) : (
-        ''
-      )}
-
-      <CardSection $height={26} $end={true}>
-        <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
+        <CardSection $height={60}>
+          <TextBox>
+            <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+            <Text2 className="black">{data.name}</Text2>
+          </TextBox>
+          {data.iconSrc ? (
+            <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
+          ) : (
+            ''
+          )}
+          {data.colorCode ? (
+            <ColorBox $colorcode={data.colorCode}></ColorBox>
+          ) : (
+            ''
+          )}
+        </CardSection>
 
         {hasDetail(option) ? (
-          <DetailToggle
-            onClick={clickedToggle}
-            opened={toggle}
-            selected={selected}
-          ></DetailToggle>
+          <DetailBox ref={contentBoxRef} $toggle={toggle} $isSaved={isSaved}>
+            <DetailContent ref={contentRef}>
+              컨텐츠
+              <Text1>구매자의 63%가 선택했어요!</Text1>
+              <Text2>디젤 2.2</Text2>
+              <Text1>구매자의 63%가 선택했어요!</Text1>
+              <Text2>디젤 2.2</Text2>
+            </DetailContent>
+          </DetailBox>
         ) : (
           ''
         )}
-      </CardSection>
+
+        <CardSection $height={26} $end={true}>
+          <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
+
+          {hasDetail(option) ? (
+            <DetailToggle
+              onClick={clickedToggle}
+              opened={toggle}
+              selected={selected}
+            ></DetailToggle>
+          ) : (
+            ''
+          )}
+        </CardSection>
+      </Container>
+      {isSaved && selected && <FeedBack></FeedBack>}
     </Wrapper>
   );
 }
@@ -181,6 +194,7 @@ const Wrapper = styled.li<{$selected: boolean}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
+  position: relative;
   width: 375px;
   min-height: 150px;
   padding: 20px;
@@ -189,6 +203,7 @@ const Wrapper = styled.li<{$selected: boolean}>`
   transition: 0.5s;
 `;
 
+const Container = styled.div``;
 const CardSection = styled.div<{$height?: number; $end?: boolean}>`
   ${flexBetween}
   align-items: ${(props) => (props.$end ? 'flex-end' : 'center')};
@@ -257,7 +272,7 @@ const MiddleImg = styled.div<{$url: string; $selected: boolean}>`
   background: url(${(props) => props.$url}) no-repeat;
   background-position: center;
   ${(props) => {
-    return props.$selected ? '' : imageBlur;
+    return !props.$selected && imageBlur;
   }}
 `;
 
@@ -274,11 +289,11 @@ const Price = styled.div`
   color: ${colors.Main_Hyundai_Blue};
 `;
 
-const DetailBox = styled.div<{$toggle: string}>`
+const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
   position: relative;
   height: 0;
   opacity: 0;
-  pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
+  pointer-events: ${({$toggle}) => !$toggle && 'none'};
   overflow: hidden;
   transition:
     height 1s,

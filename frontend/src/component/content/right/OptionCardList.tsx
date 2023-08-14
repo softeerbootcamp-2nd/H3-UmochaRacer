@@ -12,6 +12,7 @@ interface Data {
 
 interface carfListProps {
   cardData: cardDataType[];
+  isSaved: boolean;
   setNewIndex: (index: number) => void;
 }
 
@@ -24,8 +25,28 @@ const moveTop = keyframes`
   }
 `;
 
-function OptionCardList({cardData, setNewIndex}: carfListProps) {
-  const [selectedItem, setSelectedItem] = useState<number | null>(0);
+const scrollIntoSelected = (
+  elem: React.RefObject<HTMLUListElement>,
+  index: number,
+) => {
+  const scrollBlock: ScrollIntoViewOptions = {
+    behavior: 'smooth',
+    block: 'center',
+  };
+
+  if (elem && elem.current) {
+    const scrollItem = elem.current.childNodes[index] as HTMLElement;
+
+    if (elem.current.lastChild === scrollItem) {
+      scrollBlock.block = 'end';
+    }
+
+    scrollItem.scrollIntoView(scrollBlock);
+  }
+};
+
+function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
+  const [selectedItem, setSelectedItem] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
 
@@ -38,10 +59,15 @@ function OptionCardList({cardData, setNewIndex}: carfListProps) {
     setSelectedItem(0);
   }, [cardData]);
 
+  useEffect(() => {
+    scrollIntoSelected(ulRef, selectedItem);
+  }, [selectedItem]);
+
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
       key={index}
       selected={selectedItem === index}
+      isSaved={isSaved}
       onClick={() => handleItemClick(index)}
       data={elem}
       option={option}
@@ -75,8 +101,9 @@ const Container = styled.ul`
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
+  margin-bottom: 30px;
   width: 100%;
-  max-height: 485px;
-  animation: ${moveTop} 1s ease-out;
+
+  // animation: ${moveTop} 1s ease-out;
   gap: 16px;
 `;
