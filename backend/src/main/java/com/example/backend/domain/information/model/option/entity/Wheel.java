@@ -15,10 +15,9 @@ public class Wheel {
     @Id
     private Long id;
     private Long detailId;
-    private Wheel subWheelId;
+    private Long subWheelId;
     private String partsSrc;
     private String flag;
-    private String category;
     private String comment;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;

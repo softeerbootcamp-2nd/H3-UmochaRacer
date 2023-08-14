@@ -5,8 +5,8 @@ import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
-import com.example.backend.domain.information.model.option.entity.Powertrain;
-import com.example.backend.domain.information.model.option.repository.PowertrainRepository;
+import com.example.backend.domain.information.model.option.entity.DrivingSystem;
+import com.example.backend.domain.information.model.option.repository.DrivingSystemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,24 +15,24 @@ import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
-public class PowertrainStrategy implements InformationStrategy {
-    private final PowertrainRepository powertrainRepository;
+public class DrivingSystemService implements InformationStrategy {
+    private final DrivingSystemRepository repository;
     private final InformationMapper informationMapper;
 
     @Override
     public List<CommonResponse> findAll() {
-        List<Powertrain> all = (List<Powertrain>) powertrainRepository.findAll();
+        List<DrivingSystem> all = (List<DrivingSystem>) repository.findAll();
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
     @Override
     public StrategyName getStrategyName() {
-        return StrategyName.POWERTRAIN;
+        return StrategyName.DRIVING_SYSTEM;
     }
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = powertrainRepository.findPowertrainCommentById(id);
+        String comment = repository.findDrivingSystemCommentById(id);
         if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
         return CommentResponse.builder()
                 .comment(comment)
@@ -41,6 +41,8 @@ public class PowertrainStrategy implements InformationStrategy {
 
     @Override
     public Long findDetailId(long id) {
-        return powertrainRepository.findDetailIdById(id);
+        return repository.findDetailIdById(id);
     }
+
+
 }
