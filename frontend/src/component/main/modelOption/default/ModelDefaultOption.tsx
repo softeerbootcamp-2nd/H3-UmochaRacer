@@ -60,7 +60,7 @@ function ModelDefaultOption() {
       </Wrapper>
       <Category.ShowMore>
         <Category.ShowMoreP>더보기</Category.ShowMoreP>
-        <Icon name="ArrowBottom" />
+        <Icon name="ArrowBottom" size={24} />
       </Category.ShowMore>
     </>
   );

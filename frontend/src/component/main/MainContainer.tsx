@@ -11,7 +11,8 @@ import ModelTitleList from './modelTitle/ModelTitle';
 import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
 import {colors} from '@/style/theme';
-import {Body1_Medium} from '@/style/fonts';
+import {Body1_Medium, Title5_Regular} from '@/style/fonts';
+import Icon from '../common/icons';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -77,6 +78,15 @@ function MainContainer() {
           <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
         </Trim.CarMake>
       </Trim.CarMakeWrapper>
+      <GuideModeButton.Wrapper>
+        <GuideModeButton.Suggest>
+          무엇을 골라야 할 지 모르겠다면?
+        </GuideModeButton.Suggest>
+        <GuideModeButton.LinkWrapper>
+          <GuideModeButton.Guide>Guide Mode</GuideModeButton.Guide>
+          <Icon name="ArrowRight" size={36} />
+        </GuideModeButton.LinkWrapper>
+      </GuideModeButton.Wrapper>
     </>
   );
 }
@@ -161,9 +171,40 @@ const Trim = {
     height: 50px;
     border-radius: 6px;
     background: ${colors.Main_Hyundai_Blue};
+    cursor: pointer;
   `,
   CarMakeP: styled.p`
     color: ${colors.Hyundai_White};
     ${Body1_Medium}
+  `,
+};
+
+const GuideModeButton = {
+  Wrapper: styled.div`
+    ${flexCenter};
+    gap: 80px;
+    width: 533px;
+    height: 90px;
+    border-radius: 6px;
+    background: ${colors.Cool_Grey_001};
+    margin: 69px auto 204px auto;
+    cursor: pointer;
+  `,
+  Suggest: styled.p`
+    color: ${colors.Cool_Grey};
+    ${Title5_Regular}
+  `,
+  LinkWrapper: styled.div`
+    ${flexCenter};
+    gap: 8px;
+  `,
+  Guide: styled.p`
+    color: ${colors.Cool_Grey};
+    font-family: 'Hyundai Sans Text Medium';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
   `,
 };
