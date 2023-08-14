@@ -4,7 +4,7 @@ import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
 import com.example.backend.domain.information.service.strategy.InformationStrategy.StrategyName;
-import com.example.backend.domain.information.service.strategy.InteriorColorStrategy;
+import com.example.backend.domain.information.service.strategy.InteriorColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +16,15 @@ import java.util.Set;
 @Component
 public class InformationStrategyFactory {
     private final Map<StrategyName, InformationStrategy> informationStrategies;
-    private final InteriorColorStrategy interiorColorStrategy;
+    private final InteriorColorService interiorColorService;
 
     @Autowired
-    public InformationStrategyFactory(Set<InformationStrategy> informationStrategies, InteriorColorStrategy interiorColorStrategy) {
+    public InformationStrategyFactory(Set<InformationStrategy> informationStrategies, InteriorColorService interiorColorService) {
         this.informationStrategies = new EnumMap<>(StrategyName.class);
         for (InformationStrategy strategy : informationStrategies) {
             this.informationStrategies.put(strategy.getStrategyName(), strategy);
         }
-        this.interiorColorStrategy = interiorColorStrategy;
+        this.interiorColorService = interiorColorService;
     }
 
     public InformationStrategy findInformationStrategy(String param) {
@@ -32,10 +32,10 @@ public class InformationStrategyFactory {
     }
 
     public List<CommonResponse> findInteriorColorByExteriorColor(long exteriorColorId) {
-        return interiorColorStrategy.findAll(exteriorColorId);
+        return interiorColorService.findAll(exteriorColorId);
     }
 
     public CommentResponse findInteriorColorCommentById(long id) {
-        return interiorColorStrategy.findCommentById(id);
+        return interiorColorService.findCommentById(id);
     }
 }
