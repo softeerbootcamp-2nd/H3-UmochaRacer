@@ -81,13 +81,20 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
   );
 
   useEffect(() => {
-    if ((toggle && !selected) || isSaved) {
+    if (toggle && !selected) {
       if (contentBoxRef.current) {
         contentBoxRef.current.style.height = '0';
         setToggle(!toggle);
       }
     }
-  }, [selected, isSaved]);
+  }, [selected]);
+
+  if (isSaved && toggle) {
+    if (contentBoxRef.current) {
+      contentBoxRef.current.style.height = '0';
+    }
+    setToggle(!toggle);
+  }
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
