@@ -50,6 +50,8 @@
 		479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF82A777BDE0055A4FA /* ViewController.swift */; };
 		479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
 		479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
+		479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AE2A8AA18600DECB70 /* EndPoint.swift */; };
+		479023B42A8AA18600DECB70 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AE2A8AA18600DECB70 /* EndPoint.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -192,6 +194,7 @@
 		479023982A8A3DB000DECB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4790239A2A8A3DB000DECB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		479023AD2A8AA18600DECB70 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		479023AE2A8AA18600DECB70 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -503,6 +506,7 @@
 			isa = PBXGroup;
 			children = (
 				479023AD2A8AA18600DECB70 /* NetworkError.swift */,
+				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -958,6 +962,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				479023B42A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */,
 				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
 				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
@@ -995,6 +1000,7 @@
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
+				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 				4700964D2A880372003711F2 /* Int+.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
