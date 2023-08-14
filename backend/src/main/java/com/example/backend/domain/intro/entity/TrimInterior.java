@@ -2,11 +2,14 @@ package com.example.backend.domain.intro.entity;
 
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
 import com.example.backend.domain.information.model.car.entity.Trim;
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("Trim_Interior")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class TrimInterior {
     @Id
     private Long id;
