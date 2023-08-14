@@ -111,7 +111,6 @@ extension CarMakingContentView {
         configureCollectionViewLayout()
         registerCollectionViewCells()
         setupCollectionViewDataSource()
-        collectionView.dataSource = collectionViewDataSource
         collectionView.delegate = flowLayoutDelegate
         setupSnapshot()
     }
