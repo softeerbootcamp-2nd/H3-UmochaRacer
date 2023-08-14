@@ -11,7 +11,7 @@ interface Props {
   onAnimationEnd: () => void;
 }
 
-const ActiveCircle = (delay: number, onAnimationEnd?: () => void) => {
+const ActiveCircle = (onAnimationEnd?: () => void) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -27,7 +27,6 @@ const ActiveCircle = (delay: number, onAnimationEnd?: () => void) => {
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
-        $delay={delay}
         onAnimationEnd={onAnimationEnd}
       ></AnimationPath>
     </svg>
@@ -65,7 +64,6 @@ function ProgressIndicator({
   doneText,
   onAnimationEnd,
 }: Props) {
-  const DELAY = 0.7;
   const textRef = useRef<HTMLDivElement>(null);
   const animationEnd = () => {
     const textElem = textRef.current;
@@ -78,7 +76,7 @@ function ProgressIndicator({
   return (
     <Wrapper>
       <CheckBox>
-        {isActive ? ActiveCircle(DELAY, animationEnd) : DefaultCircle()}
+        {isActive ? ActiveCircle(animationEnd) : DefaultCircle()}
       </CheckBox>
       <Text ref={textRef} $isActive={isActive}>
         {loadingText}
@@ -101,10 +99,9 @@ const CheckBox = styled.div`
   height: 22px;
 `;
 
-const AnimationPath = styled.path<{$delay: number}>`
+const AnimationPath = styled.path`
   opacity: 0;
-  animation: ${growAnimation} 0.3s forwards;
-  animation-delay: ${({$delay}) => $delay}s;
+  animation: ${growAnimation} 1s forwards;
 `;
 
 const Text = styled.div<{$isActive: boolean}>`
