@@ -34,7 +34,8 @@ extension Endpoint {
         guard let baseURL = URL(string: baseURL) else {
             throw NetworkError.invalidURL(baseURL)
         }
-        let url = baseURL.appending(path: path).appending(queries: parameters)
+
+        let url = baseURL.appendingPath(path).appendingQueries(parameters)
         let urlRequest = URLRequest(url: url)
             .setHttpMethod(httpMethod)
             .appendingHeaders(headers)
@@ -45,12 +46,27 @@ extension Endpoint {
 
 fileprivate extension URL {
 
+    func appendingPath(_ path: String) -> URL {
+        var url = self
+        if #available(iOS 16.0, *) {
+            url.append(path: path)
+        } else {
+            url.appendPathComponent(path)
+        }
+        return url
+    }
+
     /// HTTPParameter로부터 URL에 query를 추가
-    func appending(queries httpParameter: HTTPParameter?) -> URL {
+    func appendingQueries(_ httpParameter: HTTPParameter?) -> URL {
         var url = self
         if case .query(let quries) = httpParameter {
-            let queryItems = quries.map { URLQueryItem(name: $0.key, value: $0.value) }
-            url.append(queryItems: queryItems)
+            if #available(iOS 16.0, *) {
+                let queryItems = quries.map { URLQueryItem(name: $0.key, value: $0.value) }
+                url.append(queryItems: queryItems)
+            } else {
+                let queryString = quries.map { "?\($0.key)=\($0.value)" }.joined()
+                url = url.appendingPath(queryString)
+            }
         }
         return url
     }
