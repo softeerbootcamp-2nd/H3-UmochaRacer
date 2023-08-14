@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
+import TotalEstimate from './totalestimate/TotalEstimate';
+
 import {OptionContext} from '@/provider/optionProvider';
 import bodytype from '@/assets/mocks/bodytype.json';
 import powertrain from '@/assets/mocks/powertrain.json';
@@ -10,12 +12,6 @@ import exterior from '@/assets/mocks/exteriror-color.json';
 import interior from '@/assets/mocks/interior-color.json';
 import wheel from '@/assets/mocks/wheel.json';
 import {cardDataType} from './contentInterface';
-
-interface Ratio {
-  // 구매율, 선택률
-  ratio?: number | undefined;
-  selectionRatio?: number | undefined;
-}
 
 function Content() {
   const [selectedIndex, setIndex] = useState<number>(0);
@@ -46,15 +42,18 @@ function Content() {
       case 5:
         setcardData(wheel.data);
         break;
-      default:
+      case 6:
         setcardData(powertrain.data);
+        break;
+      default:
+        setcardData([]);
     }
   }, [option]);
 
   return (
     <Wrapper>
       <Container>
-        {cardData.length > 0 && (
+        {cardData.length > 0 ? (
           <>
             <OptionImage
               key={option}
@@ -67,6 +66,8 @@ function Content() {
               setNewIndex={(index: number) => setNewIndex(index)}
             />
           </>
+        ) : (
+          <TotalEstimate></TotalEstimate>
         )}
       </Container>
     </Wrapper>

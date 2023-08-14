@@ -111,7 +111,11 @@ const ToolIcon = () => {
   );
 };
 
-function LoadingAnimation() {
+interface Props {
+  setLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function LoadingAnimation({setLoaded}: Props) {
   return (
     <Wrapper>
       <Container>
@@ -121,7 +125,7 @@ function LoadingAnimation() {
           <IconBox $ani={blink2}>{ToolIcon()}</IconBox>
         </Top>
         <Middle>나만의 팰리세이드가 만들어지고 있어요!</Middle>
-        <Bottom></Bottom>
+        <Bottom setLoaded={setLoaded}></Bottom>
       </Container>
     </Wrapper>
   );
