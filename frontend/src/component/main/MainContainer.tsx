@@ -13,9 +13,12 @@ import ModelOption from './modelOption/ModelOption';
 import {colors} from '@/style/theme';
 import {Body1_Medium, Title5_Regular} from '@/style/fonts';
 import Icon from '../common/icons';
+import {useModalContext} from '@/provider/modalProvider';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
+
+  const {openModal} = useModalContext();
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
@@ -82,7 +85,7 @@ function MainContainer() {
         <GuideModeButton.Suggest>
           무엇을 골라야 할 지 모르겠다면?
         </GuideModeButton.Suggest>
-        <GuideModeButton.LinkWrapper>
+        <GuideModeButton.LinkWrapper onClick={() => openModal('exit')}>
           <GuideModeButton.Guide>Guide Mode</GuideModeButton.Guide>
           <Icon name="ArrowRight" size={36} />
         </GuideModeButton.LinkWrapper>
