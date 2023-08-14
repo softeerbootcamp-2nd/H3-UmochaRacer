@@ -28,7 +28,8 @@ public class InformationStrategyFactory {
     }
 
     public InformationStrategy findInformationStrategy(String param) {
-        return informationStrategies.get(StrategyName.valueOf(param.toUpperCase()));
+        StrategyName strategyTarget = StrategyName.getByUri(param);
+        return informationStrategies.get(strategyTarget);
     }
 
     public List<CommonResponse> findInteriorColorByExteriorColor(long exteriorColorId) {
