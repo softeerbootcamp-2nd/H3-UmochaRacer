@@ -9,6 +9,8 @@ import java.util.List;
 
 @Repository
 public interface AdditionalOptionRepository extends CrudRepository<AdditionalOption, Long> {
+    @Query("SELECT * FROM ADDITIONAL_OPTION ao WHERE ao.category = :category")
+    List<AdditionalOption> findAllByCategoryAndTopOptionIdIsNull(String category);
     @Query("SELECT detail_id FROM ADDITIONAL_OPTION WHERE id = :id")
     Long findDetailIdById(long id);
 }

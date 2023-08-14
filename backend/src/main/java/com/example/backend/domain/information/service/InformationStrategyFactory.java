@@ -18,7 +18,6 @@ public class InformationStrategyFactory {
     private final Map<StrategyName, InformationStrategy> informationStrategies;
     private final InteriorColorStrategy interiorColorStrategy;
 
-    // Autowired 대신 AnnotationConfigApplicationContext??
     @Autowired
     public InformationStrategyFactory(Set<InformationStrategy> informationStrategies, InteriorColorStrategy interiorColorStrategy) {
         this.informationStrategies = new EnumMap<>(StrategyName.class);
