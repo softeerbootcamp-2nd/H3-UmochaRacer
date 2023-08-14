@@ -7,13 +7,14 @@ import Icon from '@/component/common/icons';
 import ModelPointOption from './point/ModelPointOption';
 import ModelOuterOption from './outer/ModelOuterOption';
 import ModelInnerOption from './inner/ModelInnerOption';
+import ModelDefaultOption from './default/ModelDefaultOption';
 
 function ModelOption({name}: {name: string}) {
   const modelOptionList = {
     '핵심 옵션': <ModelPointOption />,
     '외장 색상': <ModelOuterOption />,
     '내장 색상': <ModelInnerOption />,
-    '기본 포함 품목': <ModelPointOption />,
+    '기본 포함 품목': <ModelDefaultOption />,
   };
   return (
     <Option.Wrapper>
@@ -30,7 +31,7 @@ const Option = {
   Wrapper: styled.div`
     width: 1024px;
     ${flexCenter}
-    gap: 24px;
+    gap: 32px;
     flex-direction: column;
     margin-bottom: 56px;
   `,

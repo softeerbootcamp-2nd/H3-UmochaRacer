@@ -2,7 +2,7 @@ import React from 'react';
 import ModelOptionDetail from './ModelOptionDetail';
 import styled from 'styled-components';
 import {flexBetween, flexCenter} from '@/style/common';
-import outerOption from '@/assets/mocks/outerOption.json';
+import outerOption from '@/assets/mocks/main/outerOption.json';
 
 type Option = {
   icon: string;

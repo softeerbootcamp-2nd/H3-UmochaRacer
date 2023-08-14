@@ -59,6 +59,7 @@ function MainContainer() {
         <ModelOption name="핵심 옵션" />
         <ModelOption name="외장 색상" />
         <ModelOption name="내장 색상" />
+        <ModelOption name="기본 포함 품목" />
       </Trim.OptionWrapper>
     </>
   );
