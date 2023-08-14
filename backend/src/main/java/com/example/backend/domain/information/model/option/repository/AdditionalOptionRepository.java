@@ -12,6 +12,6 @@ public interface AdditionalOptionRepository extends CrudRepository<AdditionalOpt
     //    @Query("SELECT * FROM Additional_Option ao WHERE ao.top_Option_Id IS NULL AND ao.flag = :flag")
     List<AdditionalOption> findAllByTopOptionIdIsNullAndFlag(String flag);
 
-    @Query("SELECT detail_id FROM Additional_Option WHERE id = :id")
+    @Query("SELECT detail_id FROM ADDITIONAL_OPTION WHERE id = :id")
     Long findDetailIdById(long id);
 }

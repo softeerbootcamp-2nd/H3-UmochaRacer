@@ -6,10 +6,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PowertrainRepository extends CrudRepository<Powertrain, Long> {
-    @Query("SELECT comment FROM Powertrain WHERE id = :id")
+public interface
+PowertrainRepository extends CrudRepository<Powertrain, Long> {
+    @Query("SELECT comment FROM POWERTRAIN WHERE id = :id")
     String findPowertrainCommentById(long id);
 
-    @Query("SELECT detail_id FROM Powertrain WHERE id = :id")
+    @Query("SELECT detail_id FROM POWERTRAIN WHERE id = :id")
     Long findDetailIdById(long id);
 }

@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ExteriorColorRepository extends CrudRepository<ExteriorColor, Long> {
-    @Query("SELECT comment FROM Exterior_color WHERE id = :id")
+    @Query("SELECT comment FROM EXTERIOR_COLOR WHERE id = :id")
     String findExteriorColorCommentById(long id);
 }
