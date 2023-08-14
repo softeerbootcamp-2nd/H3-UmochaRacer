@@ -16,7 +16,7 @@ protocol NetworkServiceProtocol {
 final class NetworkService: NetworkServiceProtocol {
 
     private let urlSession: URLSession
-    
+
     init() {
         urlSession = URLSession.shared
     }
@@ -53,7 +53,6 @@ final class NetworkService: NetworkServiceProtocol {
         } catch {
             return Just(Result.failure(error)).eraseToAnyPublisher()
         }
-        
     }
 
     private func request(to urlRequest: URLRequest) -> AnyPublisher<Result<Data, Error>, Never> {

@@ -12,7 +12,7 @@ enum NetworkError: LocalizedError {
     case serverError(_ response: URLResponse)
     case clientError(_ error: Error)
     case decodeError
-    
+
     var errorDescription: String? {
         switch self {
         case .invalidURL(let baseURL):
