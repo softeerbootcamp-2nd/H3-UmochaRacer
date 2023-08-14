@@ -129,12 +129,13 @@ export default FeedBack;
 
 const Wrapper = styled.div<{$visible: boolean}>`
   position: absolute;
-  width: 374px;
-  height: 150px;
-  top: 0;
-  left: 0;
+  width: 375px;
+  height: 154px;
+  top: -2px;
+  left: -2px;
   padding: 20px;
   border-radius: 6px;
+  background: ${colors.Main_Hyundai_Blue};
   opacity: ${({$visible}) => ($visible ? 1 : 0)};
   transition: 0.5s;
 `;
