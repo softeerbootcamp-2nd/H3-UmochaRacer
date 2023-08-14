@@ -21,7 +21,6 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     let optionImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .black
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
@@ -105,7 +104,6 @@ extension CarMakingCollectionViewCell {
         optionImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         optionImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
         optionImageView.heightAnchor.constraint(equalToConstant: Constants.imageHeight).isActive = true
-        optionImageView.backgroundColor = .black
     }
 
     private func setupDescriptionLabel() {
