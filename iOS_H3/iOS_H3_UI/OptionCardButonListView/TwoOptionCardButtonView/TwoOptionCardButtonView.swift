@@ -53,10 +53,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func updateView(index: Int, with cardInfo: OptionCardInfo) {
         if !isValidateIndex(index) { return }
 
-        optionCardButtons[index].setOptionTitle(cardInfo.title)
-        optionCardButtons[index].setOptionSubTitle(cardInfo.subTitle)
-        optionCardButtons[index].setPrice(cardInfo.priceString)
-
+        optionCardButtons[index].update(cardInfo: cardInfo)
         if cardInfo.isSelected {
             selectOption(index: index)
         }
@@ -70,12 +67,20 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
+extension TwoOptionCardButtonView: OptionCardButtonDelegate {
+    
+    func moreInfoButtonDidTapped() {
+        print("[TwoOptionCardButtonView]", #function, "- show alert 구현 필요")
+    }
+}
+
 extension TwoOptionCardButtonView {
 
     private func setupOptionCardButtons() {
         optionCardButtons.forEach { button in
             button.translatesAutoresizingMaskIntoConstraints = false
             button.addTarget(self, action: #selector(optionCardButtonDidTapped(_:)), for: .touchUpInside)
+            button.delegate = self
         }
     }
 
