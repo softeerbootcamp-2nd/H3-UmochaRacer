@@ -12,6 +12,7 @@ interface Data {
 
 interface carfListProps {
   cardData: cardDataType[];
+  isSaved: boolean;
   setNewIndex: (index: number) => void;
 }
 
@@ -44,7 +45,7 @@ const scrollIntoSelected = (
   }
 };
 
-function OptionCardList({cardData, setNewIndex}: carfListProps) {
+function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
   const [selectedItem, setSelectedItem] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
@@ -66,6 +67,7 @@ function OptionCardList({cardData, setNewIndex}: carfListProps) {
     <OptionCard
       key={index}
       selected={selectedItem === index}
+      isSaved={isSaved}
       onClick={() => handleItemClick(index)}
       data={elem}
       option={option}

@@ -9,6 +9,7 @@ import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
 interface CardProps {
   selected: boolean;
+  isSaved: boolean;
   onClick: () => void;
   data: cardDataType;
   option: number;
@@ -54,7 +55,7 @@ const hasDetail = (option: number) => {
   return DetailOption.has(option);
 };
 
-function OptionCard({selected, onClick, data, option}: CardProps) {
+function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
   const contentBoxRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -80,13 +81,13 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
   );
 
   useEffect(() => {
-    if (toggle && !selected) {
+    if ((toggle && !selected) || isSaved) {
       if (contentBoxRef.current) {
         contentBoxRef.current.style.height = '0';
         setToggle(!toggle);
       }
     }
-  }, [selected]);
+  }, [selected, isSaved]);
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
@@ -119,7 +120,7 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
         </CardSection>
 
         {hasDetail(option) ? (
-          <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
+          <DetailBox ref={contentBoxRef} $toggle={toggle} $isSaved={isSaved}>
             <DetailContent ref={contentRef}>
               컨텐츠
               <Text1>구매자의 63%가 선택했어요!</Text1>
@@ -146,7 +147,7 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
           )}
         </CardSection>
       </Container>
-      <FeedBack></FeedBack>
+      {isSaved && selected && <FeedBack></FeedBack>}
     </Wrapper>
   );
 }
@@ -264,7 +265,7 @@ const MiddleImg = styled.div<{$url: string; $selected: boolean}>`
   background: url(${(props) => props.$url}) no-repeat;
   background-position: center;
   ${(props) => {
-    return props.$selected ? '' : imageBlur;
+    return !props.$selected && imageBlur;
   }}
 `;
 
@@ -281,11 +282,11 @@ const Price = styled.div`
   color: ${colors.Main_Hyundai_Blue};
 `;
 
-const DetailBox = styled.div<{$toggle: string}>`
+const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
   position: relative;
   height: 0;
   opacity: 0;
-  pointer-events: ${(props) => (props.$toggle === 'true' ? '' : 'none')};
+  pointer-events: ${({$toggle}) => !$toggle && 'none'};
   overflow: hidden;
   transition:
     height 1s,

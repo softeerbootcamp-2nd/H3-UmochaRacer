@@ -1,4 +1,4 @@
-import React, {useCallback, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
@@ -23,6 +23,7 @@ interface cardDataProps {
 
 function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   const menuItems = [
     '파워트레인',
@@ -39,6 +40,10 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
     setIsModalOpen((prev) => !prev);
   }, []);
 
+  useEffect(() => {
+    setIsSaved(false);
+  }, [option]);
+
   return (
     <Wrapper>
       <Container>
@@ -46,12 +51,17 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
         <Text>을 선택해주세요.</Text>
         <OptionCardList
           cardData={cardData}
+          isSaved={isSaved}
           setNewIndex={setNewIndex}
         ></OptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
-        <Footer onClick={handleModalView} isOpen={isModalOpen}></Footer>
+        <Footer
+          onClick={handleModalView}
+          setIsSaved={setIsSaved}
+          isOpen={isModalOpen}
+        ></Footer>
       </Container>
     </Wrapper>
   );

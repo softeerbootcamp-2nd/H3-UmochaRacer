@@ -1,11 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import styled, {keyframes} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body3_Regular, Title2_Medium} from '@/style/fonts';
-
-interface Props {
-  visible: boolean;
-}
 
 const SmileIcon = () => {
   return (
@@ -101,17 +97,9 @@ const GoodIcon = () => {
 };
 
 function FeedBack() {
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setVisible(true);
-    }, 1000);
-  }, []);
-
   return (
-    <Wrapper $visible={visible}>
-      <IconContainer $visible={visible}>
+    <Wrapper>
+      <IconContainer>
         <IconBox>{SmileIcon()}</IconBox>
         <IconBox className="smile2">{SmileIcon2()}</IconBox>
         <IconBox className="good">{GoodIcon()}</IconBox>
@@ -127,7 +115,26 @@ function FeedBack() {
 
 export default FeedBack;
 
-const Wrapper = styled.div<{$visible: boolean}>`
+const opacityAni = keyframes`
+0%{
+    opacity: 0;
+}
+100%{
+    opacity: 1;
+}
+`;
+
+const moveOpacityAni = keyframes`
+0%{
+    opacity: 0;
+    left: 0;
+}
+100%{
+    opacity: 1;
+    left: 100%;
+}
+`;
+const Wrapper = styled.div`
   position: absolute;
   width: 375px;
   height: 154px;
@@ -136,11 +143,10 @@ const Wrapper = styled.div<{$visible: boolean}>`
   padding: 20px;
   border-radius: 6px;
   background: ${colors.Main_Hyundai_Blue};
-  opacity: ${({$visible}) => ($visible ? 1 : 0)};
-  transition: 0.5s;
+  animation: ${opacityAni} 0.5s forwards;
 `;
 
-const IconContainer = styled.div<{$visible: boolean}>`
+const IconContainer = styled.div`
   position: relative;
   width: 30px;
   height: 30px;
@@ -150,15 +156,16 @@ const IconContainer = styled.div<{$visible: boolean}>`
   }
 
   .smile2 {
-    opacity: ${({$visible}) => ($visible ? 1 : 0)};
-    transition-delay: 0.5s;
+    opacity: 0;
+    animation: ${opacityAni} 0.5s forwards;
+    animation-delay: 0.5s;
   }
 
   .good {
+    opacity: 0;
     top: -3px;
-    left: ${({$visible}) => ($visible ? '100%' : 0)};
-    opacity: ${({$visible}) => ($visible ? 1 : 0)};
-    transition-delay: 0.5s;
+    animation: ${moveOpacityAni} 0.5s forwards;
+    animation-delay: 0.5s;
   }
 `;
 
