@@ -14,9 +14,9 @@ public interface TrimAdditionalOptionRepository extends PagingAndSortingReposito
     @Query(
             value = "SELECT tao.id, tao.trim_id, tao.additional_option_id,\n" +
                     "       t.name AS trim_name, ao.name AS ao_name, ao.image_src AS ao_image_src, ao.category\n" +
-                    "FROM Trim_Additional_Option tao \n" +
-                    "LEFT OUTER JOIN Trim t ON t.id = tao.trim_id \n" +
-                    "LEFT OUTER JOIN Additional_option ao ON ao.id = tao.additional_option_id\n" +
+                    "FROM TRIM_ADDITIONAL_OPTION tao \n" +
+                    "LEFT OUTER JOIN TRIM t ON t.id = tao.trim_id \n" +
+                    "LEFT OUTER JOIN ADDITIONAL_OPTION ao ON ao.id = tao.additional_option_id\n" +
                     "WHERE tao.trim_id = :trimId AND (:category = '' OR ao.category = :category) \n" +
                     "LIMIT  :size \n"+
                     "OFFSET :offset",

@@ -13,9 +13,9 @@ public interface TrimInteriorRepository extends CrudRepository<TrimInterior, Lon
     @Query(
             value = "SELECT ti.id, ti.trim_id, ti.interior_color_id,\n" +
             "       t.name AS trim_name, ic.name AS ic_name, ic.icon_src\n" +
-            "FROM Trim_Interior ti\n" +
-            "LEFT OUTER JOIN Trim t ON t.id = ti.trim_id \n" +
-            "LEFT OUTER JOIN Interior_Color ic ON ic.id = ti.interior_color_id",
+            "FROM TRIM_INTERIOR ti\n" +
+            "LEFT OUTER JOIN TRIM t ON t.id = ti.trim_id \n" +
+            "LEFT OUTER JOIN INTERIOR_COLOR ic ON ic.id = ti.interior_color_id",
             rowMapperClass = TrimInteriorRowMapper.class
     )
     List<TrimInterior> findAll();

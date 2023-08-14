@@ -114,7 +114,6 @@ CREATE TABLE `Additional_Option`
     `parts_src`     varchar(255),
     `price`         int,
     `image_src`     varchar(255),
-    `flag`          ENUM ('BASIC', 'ADDITIONAL'),
     `category`      varchar(255)
 );
 
@@ -144,7 +143,7 @@ create TAble `Detail`
 (
     `id`          Long Primary key,
     `title`       varchar(255),
-    `description` varchar(255),
+    `description` TEXT,
     `image_src`   varchar(255),
     `info`        varchar(255)
 );

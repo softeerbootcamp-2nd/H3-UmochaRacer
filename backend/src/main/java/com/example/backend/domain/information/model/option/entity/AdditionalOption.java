@@ -19,18 +19,8 @@ public class AdditionalOption {
     private String partsSrc;
     @Embedded(onEmpty = Embedded.OnEmpty.USE_EMPTY)
     private BaseInfo baseInfo;
-    private String flag;
     private String category;
     private Long detailId;
-
-    public enum Flag {
-        BASIC, ADDITIONAL;
-
-        @Override
-        public String toString() {
-            return super.toString();
-        }
-    }
 
     public enum Category {
         PERFORMANCE("성능"), AI_SAFETY("지능형 안전 기술"),
