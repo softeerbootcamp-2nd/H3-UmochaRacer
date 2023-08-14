@@ -9,9 +9,9 @@ import UIKit
 
 class CarMakingProgressBarViewController: UIViewController {
 
-    let defaultButton = CarMakingProgressBarButton(title: "01 파워트레인")
+    let selectedButton = CarMakingProgressBarButton(title: "01 파워트레인")
 
-    let selectedButton: CarMakingProgressBarButton = {
+    let defaultButton: CarMakingProgressBarButton = {
         let button = CarMakingProgressBarButton(title: "02 구동방식")
         button.isSelected = true
         return button
