@@ -132,7 +132,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
             )
         ])
     }
-    
+
     private func setupMoreInfoVersionViewConstraints() {
         NSLayoutConstraint.activate([
             moreInfoVersionView.topAnchor.constraint(
