@@ -119,8 +119,6 @@ extension CarMakingContentView {
     private func configureCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: collectionView.bounds.width,
-                                 height: collectionView.bounds.height - progressBarHeight)
         collectionView.collectionViewLayout = layout
     }
 
