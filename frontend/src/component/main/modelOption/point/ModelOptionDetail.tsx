@@ -1,18 +1,17 @@
-import Icon, {IconType} from '@/component/common/icons';
 import {flexBetween} from '@/style/common';
 import {Label2_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import React from 'react';
 import styled from 'styled-components';
 interface detailProps {
-  icon: IconType;
+  src: string;
   name: string;
 }
-function ModelOptionDetail({icon, name}: detailProps) {
+function ModelOptionDetail({src, name}: detailProps) {
   return (
     <Detail.Wrapper>
       <Detail.IconWrapper>
-        <Icon name={icon} />
+        <Detail.Icon src={`/src/assets/images/point/${src}.png`} />
       </Detail.IconWrapper>
       <Detail.Name>{name}</Detail.Name>
     </Detail.Wrapper>
@@ -22,7 +21,6 @@ function ModelOptionDetail({icon, name}: detailProps) {
 export default ModelOptionDetail;
 const Detail = {
   Wrapper: styled.div`
-    width: 90%;
     ${flexBetween}
     gap : 24px;
   `,
@@ -30,10 +28,13 @@ const Detail = {
     color: ${colors.Cool_Grey_004};
     ${Label2_Regular};
     white-space: pre-wrap;
-    width: 160px;
+    width: 100px;
   `,
   IconWrapper: styled.div`
-    width: 75px;
     text-align: center;
+  `,
+  Icon: styled.img`
+    width: 60px;
+    height: 60px;
   `,
 };

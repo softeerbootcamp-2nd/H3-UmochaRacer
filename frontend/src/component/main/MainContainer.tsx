@@ -31,7 +31,6 @@ function MainContainer() {
       window.removeEventListener('scroll', updateScroll);
     };
   }, []);
-
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
