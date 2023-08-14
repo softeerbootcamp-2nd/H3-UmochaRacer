@@ -8,6 +8,8 @@
 import Foundation
 class CarMakingTwoOptionCell: CarMakingCollectionViewCell {
 
+    static let identifier = "CarMakingTwoOptionCell"
+
     override init(frame: CGRect) {
         super.init(frame: frame, buttonListViewable: TwoOptionCardButtonView.init())
 

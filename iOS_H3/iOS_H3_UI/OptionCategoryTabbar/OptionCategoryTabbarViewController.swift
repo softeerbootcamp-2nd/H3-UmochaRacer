@@ -1,26 +1,27 @@
 //
-//  CarMakingProgressBarViewController.swift
-//  iOS_H3
+//  OptionCategoryTabbarViewController.swift
+//  iOS_H3_UI
 //
-//  Created by  sangyeon on 2023/08/06.
+//  Created by KoJeongMin  on 2023/08/13.
 //
 
 import UIKit
 
-class CarMakingProgressBarViewController: UIViewController {
+class OptionCategoryTabbarViewController: UIViewController, UIScrollViewDelegate {
+    let defaultButton = OhMyCarSetButton(colorType: .mainHyundaiBlue, title: "시스템")
 
-    let selectedButton = CarMakingProgressBarButton(title: "01 파워트레인")
-
-    let defaultButton: CarMakingProgressBarButton = {
-        let button = CarMakingProgressBarButton(title: "02 구동방식")
-        button.isSelected = true
+    let selectedButton: OhMyCarSetButton = {
+        let button = OhMyCarSetButton(colorType: .grey, title: "시스템")
+        button.changeColor(titleColor: Colors.coolGrey3, backgroundColor: Colors.coolGrey1)
+        button.isSelected = false
         return button
     }()
 
-    let progressBar = CarMakingProgressBar()
+    let progressBar = OptionCategoryTabBar()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressBar.tabBarDelegate = self
 
         setupViews()
     }
@@ -52,5 +53,11 @@ class CarMakingProgressBarViewController: UIViewController {
             progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             progressBar.heightAnchor.constraint(equalTo: defaultButton.heightAnchor)
         ])
+    }
+}
+
+extension OptionCategoryTabbarViewController: OptionCategoryTabBarDelegate {
+    func tabBarButtonDidTapped(didSelectItemAt index: Int) {
+        print("\(index) 선택")
     }
 }

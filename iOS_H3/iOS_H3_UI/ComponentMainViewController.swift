@@ -75,6 +75,30 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var multiOptionCardButtonViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("MultiOptionCardButtonView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapMultiOptionCardButtonViewButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var carMakingContentViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CarMakingContentViewButton 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapCarMakingContentViewButton), for: .touchUpInside)
+        return button
+    }()
+
+	lazy private var optionCategoryTabbarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("OptionCategoryTabbar 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapOptionCategoryTabbarButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -114,6 +138,9 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
         stackView.addArrangedSubview(bottomModalViewButton)
+        stackView.addArrangedSubview(multiOptionCardButtonViewButton)
+        stackView.addArrangedSubview(carMakingContentViewButton)
+        stackView.addArrangedSubview(optionCategoryTabbarButton)
 
         let buttons = [
             titleBarButton,
@@ -121,7 +148,10 @@ class ComponentMainViewController: UIViewController {
             ohMyCarSetButton,
             progressBarButton,
             twoOptionCardButtonViewButton,
-            bottomModalViewButton
+            bottomModalViewButton,
+            multiOptionCardButtonViewButton,
+            carMakingContentViewButton,
+            optionCategoryTabbarButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -157,4 +187,20 @@ class ComponentMainViewController: UIViewController {
         let viewController = BottomModalViewController()
         self.present(viewController, animated: false)
     }
+
+    @objc func didTapMultiOptionCardButtonViewButton() {
+        let viewController = MultiOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapCarMakingContentViewButton() {
+        let viewController = CarMakingContentViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapOptionCategoryTabbarButton() {
+        let viewController = OptionCategoryTabbarViewController()
+        self.present(viewController, animated: false)
+	}
 }
