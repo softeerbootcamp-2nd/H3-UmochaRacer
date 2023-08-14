@@ -1,14 +1,17 @@
 package com.example.backend.domain.information.model.option.entity;
 
 import com.example.backend.domain.global.model.BaseInfo;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Embedded;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table("ADDITIONAL_OPTION")
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class AdditionalOption {
     @Id
     private Long id;

@@ -15,7 +15,7 @@ public class InformationMapper {
     public CommonResponse map(ExteriorColor exteriorColor) {
         return ColorInformationResponse.builder()
                 .id(exteriorColor.getId())
-                .name(exteriorColor.getBaseInfo().getName())
+                .name(exteriorColor.getName())
                 .imageSrc(exteriorColor.getBaseInfo().getImageSrc())
                 .price(exteriorColor.getBaseInfo().getPrice())
                 .colorCode(exteriorColor.getColorCode())
@@ -25,7 +25,7 @@ public class InformationMapper {
     public CommonResponse map(InteriorColor interiorColor) {
         return ColorInformationResponse.builder()
                 .id(interiorColor.getId())
-                .name(interiorColor.getBaseInfo().getName())
+                .name(interiorColor.getName())
                 .imageSrc(interiorColor.getBaseInfo().getImageSrc())
                 .price(interiorColor.getBaseInfo().getPrice())
                 .iconSrc(interiorColor.getIconSrc())
