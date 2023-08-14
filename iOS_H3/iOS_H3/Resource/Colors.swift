@@ -16,4 +16,7 @@ enum Colors {
     static let coolGrey3 = UIColor.init(hex: "#A5ACB8") ?? .red
     static let coolGrey2 = UIColor.init(hex: "#D1D9E3") ?? .red
     static let coolGrey1 = UIColor.init(hex: "#EDF2FA") ?? .red
+
+    static let currentDotColorOfDotIndicator = UIColor.init(hex: "#2B2F36") ?? .red
+    static let defaultDotColorOfDotIndicator = UIColor.init(hex: "#D9D9D9") ?? .red
 }

@@ -63,7 +63,23 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
-    lazy private var optionCategoryTabbarButton: UIButton = {
+    lazy private var multiOptionCardButtonViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("MultiOptionCardButtonView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapMultiOptionCardButtonViewButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var carMakingContentViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CarMakingContentViewButton 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapCarMakingContentViewButton), for: .touchUpInside)
+        return button
+    }()
+
+	lazy private var optionCategoryTabbarButton: UIButton = {
         let button = UIButton()
         button.setTitle("OptionCategoryTabbar 보기", for: .normal)
         button.setTitleColor(.blue, for: .normal)
@@ -109,6 +125,8 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(ohMyCarSetButton)
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
+        stackView.addArrangedSubview(multiOptionCardButtonViewButton)
+        stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
 
         let buttons = [
@@ -117,6 +135,8 @@ class ComponentMainViewController: UIViewController {
             ohMyCarSetButton,
             progressBarButton,
             twoOptionCardButtonViewButton,
+            multiOptionCardButtonViewButton,
+            carMakingContentViewButton,
             optionCategoryTabbarButton
         ]
         for button in buttons {
@@ -149,8 +169,19 @@ class ComponentMainViewController: UIViewController {
         self.present(viewController, animated: false)
     }
 
+    @objc func didTapMultiOptionCardButtonViewButton() {
+        let viewController = MultiOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapCarMakingContentViewButton() {
+        let viewController = CarMakingContentViewController()
+        viewController.modalPresentationStyle = .fullScreen
+        self.present(viewController, animated: false)
+    }
+
     @objc func didTapOptionCategoryTabbarButton() {
         let viewController = OptionCategoryTabbarViewController()
         self.present(viewController, animated: false)
-    }
+	}
 }

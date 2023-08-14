@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol CarMakingProgressBarDelegate: AnyObject {
+    func progressBarButtonDidTapped(didSelectItemAt index: Int)
+}
+
 final class CarMakingProgressBar: UIScrollView {
 
     enum Constants {
@@ -28,6 +32,7 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Properties
+    weak var progressBarDelegate: CarMakingProgressBarDelegate?
 
     private var selectedButtonIndex: Int = 0 {
         didSet {
@@ -57,7 +62,6 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Helpers
-
 }
 
 extension CarMakingProgressBar {
@@ -115,5 +119,16 @@ extension CarMakingProgressBar {
             return
         }
         selectedButtonIndex = index
+        moveContentOffset(to: index)
+        progressBarDelegate?.progressBarButtonDidTapped(didSelectItemAt: index)
+    }
+
+    private func moveContentOffset(to index: Int) {
+        let buttonWidth = progressBarButtons[index].bounds.width
+        let inset = Constants.horizontalInset * (index == 0 ? 1 : 0.5)
+        var offset = (buttonWidth + Constants.barButtonSpacing) * CGFloat(index)
+        + inset - (bounds.width / 2) + (buttonWidth / 2)
+        offset = min(offset, contentSize.width - bounds.width)
+        setContentOffset(CGPoint(x: max(0, offset), y: 0), animated: true)
     }
 }

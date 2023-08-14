@@ -8,8 +8,10 @@
 import UIKit
 import Combine
 
-class OptionCardCell: UICollectionViewCell {
-    
+final class OptionCardCell: UICollectionViewCell {
+
+    static let identifier = "OptionCardCell"
+
     // MARK: - UI properties
 
     private let optionCardButton: OptionCardButton
@@ -27,7 +29,7 @@ class OptionCardCell: UICollectionViewCell {
         setupViews()
         setupButtonTapSubject()
     }
-    
+
     init?(coder: NSCoder, type: OptionCardButton.OptionCardType) {
         optionCardButton = OptionCardButton(type: type)
         super.init(coder: coder)
@@ -51,19 +53,17 @@ class OptionCardCell: UICollectionViewCell {
         setupViews()
         setupButtonTapSubject()
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         optionCardButton.isSelected = false
+        buttonTapSubject = PassthroughSubject<Void, Never>()
     }
 
     // MARK: - Helpers
 
-    func configure(_ info: OptionCardInfo) {
-        optionCardButton.setOptionTitle(info.title)
-        optionCardButton.setOptionSubTitle(info.subTitle)
-        optionCardButton.setPrice(info.priceString)
-        optionCardButton.isSelected = info.isSelected
+    func configure(cardType: OptionCardButton.OptionCardType, info: OptionCardInfo) {
+        optionCardButton.update(type: cardType, cardInfo: info)
     }
 }
 
@@ -78,11 +78,11 @@ extension OptionCardCell {
             optionCardButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
-    
+
     private func setupButtonTapSubject() {
         optionCardButton.addTarget(self, action: #selector(optionButtonDidTapped), for: .touchUpInside)
     }
-    
+
     @objc
     private func optionButtonDidTapped() {
         buttonTapSubject.send(())
