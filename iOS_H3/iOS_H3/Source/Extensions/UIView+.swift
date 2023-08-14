@@ -10,9 +10,13 @@ import UIKit
 extension UIView {
     func showLoadingIndicator() {
         let activityIndicator = UIActivityIndicatorView(style: .medium)
-        activityIndicator.center = CGPoint(x: self.bounds.midX, y: self.bounds.midY)
-        self.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
+           self.addSubview(activityIndicator)
+           activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+           NSLayoutConstraint.activate([
+               activityIndicator.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+               activityIndicator.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+           ])
+           activityIndicator.startAnimating()
     }
 
     func hideLoadingIndicator() {
