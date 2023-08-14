@@ -94,11 +94,11 @@ extension CarMakingContentViewController: CarMakingContentViewDataSource {
         return PageSection.allCases.count
     }
 
-    func contentView( numberOfItemsInSection section: Int) -> Int {
+    func contentView(numberOfItemsInSection section: Int) -> Int {
         return CarMakingStep.allCases.count
     }
 
-    func contentView( stepAtIndexPath indexPath: IndexPath) -> CarMakingStep {
+    func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep {
         return CarMakingStep.allCases[indexPath.row]
     }
 
