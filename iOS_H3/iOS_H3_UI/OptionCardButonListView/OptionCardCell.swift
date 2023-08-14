@@ -8,7 +8,9 @@
 import UIKit
 import Combine
 
-class OptionCardCell: UICollectionViewCell {
+final class OptionCardCell: UICollectionViewCell {
+
+    static let identifier = "OptionCardCell"
 
     // MARK: - UI properties
 
@@ -55,15 +57,13 @@ class OptionCardCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         optionCardButton.isSelected = false
+        buttonTapSubject = PassthroughSubject<Void, Never>()
     }
 
     // MARK: - Helpers
 
-    func configure(_ info: OptionCardInfo) {
-        optionCardButton.setOptionTitle(info.title)
-        optionCardButton.setOptionSubTitle(info.subTitle)
-        optionCardButton.setPrice(info.priceString)
-        optionCardButton.isSelected = info.isSelected
+    func configure(cardType: OptionCardButton.OptionCardType, info: OptionCardInfo) {
+        optionCardButton.update(type: cardType, cardInfo: info)
     }
 }
 

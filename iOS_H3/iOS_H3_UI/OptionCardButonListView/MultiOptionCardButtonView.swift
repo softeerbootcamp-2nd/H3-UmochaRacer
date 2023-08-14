@@ -13,80 +13,74 @@ protocol MultiOptionCardButtonViewDelegate: AnyObject {
 }
 
 final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
-    
+
     enum Constants {
         static let cellHeight = 150.0
         static let optionCardCollectionViewHeight = 150.0
+        static let spacing = 10.0
+        static let dotIndicatorHeight = 8.0
     }
-    
+
     enum Section {
         case optionCard
     }
-    
-    typealias OptionCardCollectionViewDiffableDataSource = UICollectionViewDiffableDataSource<Section, OptionCardInfo>
-    
+
+    typealias CollectionViewDiffableDataSource = UICollectionViewDiffableDataSource<Section, OptionCardInfo>
+
     // MARK: - UI properties
-    
+
     private var optionCardCollectionView: UICollectionView!
-    
+
+    private var dotIndicator = UIPageControl()
+
     // MARK: - Properties
-    
+
     private let optionCardType: OptionCardButton.OptionCardType
 
-    private var dataSource: OptionCardCollectionViewDiffableDataSource!
+    private var dataSource: CollectionViewDiffableDataSource!
 
-    private let cellIdentifiers: [OptionCardButton.OptionCardType: String] = [
-        .selfMode: SelfModeOptionCardCell.identifier,
-        .guideMode: GuideModeOptionCardCell.identifier
-    ]
-    
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
     weak var delegate: MultiOptionCardButtonViewDelegate?
 
     // MARK: - Lifecycles
-    
+
     init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
         optionCardType = type
         super.init(frame: frame)
-        
+
         setupOptionCardCollectionView()
         setupViews()
     }
-    
+
     override init(frame: CGRect) {
         optionCardType = .selfMode
         super.init(frame: frame)
-        
+
         setupOptionCardCollectionView()
         setupViews()
     }
-    
+
     required init?(coder: NSCoder) {
         optionCardType = .selfMode
         super.init(coder: coder)
-        
+
         setupOptionCardCollectionView()
         setupViews()
     }
-    
+
     // MARK: - Helpers
 
     func updateAllViews(with cardInfos: [OptionCardInfo]) {
-        var snapshot = dataSource.snapshot()
-        
-        let previousItem = snapshot.itemIdentifiers
-        snapshot.deleteItems(previousItem)
-        snapshot.appendItems(cardInfos)
-        
-        dataSource.apply(snapshot)
+        dotIndicator.numberOfPages = cardInfos.count
+        updateSnapshot(item: cardInfos)
     }
 }
 
-extension MultiOptionCardButtonView: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        buttonTapCancellableByIndex[indexPath.row]?.cancel()
-        buttonTapCancellableByIndex[indexPath.row] = nil
+extension MultiOptionCardButtonView: OptionCardButtonDelegate {
+
+    func moreInfoButtonDidTapped() {
+        print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
     }
 }
 
@@ -96,51 +90,68 @@ extension MultiOptionCardButtonView {
 
     private func setupOptionCardCollectionView() {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
-        optionCardCollectionView.delegate = self
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
         optionCardCollectionView.isScrollEnabled = true
         optionCardCollectionView.bounces = false
-        
+
         registerCollectionViewCell()
         setupCollectionViewDataSource()
         setupSnapshot()
     }
 
     private func createCollectionViewLayout() -> UICollectionViewLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .fractionalHeight(1)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
 
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .absolute(Constants.cellHeight))
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .fractionalWidth(1),
+            heightDimension: .absolute(Constants.cellHeight)
+        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
 
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .paging
 
+        connectDotIndicator(with: section)
+
         return UICollectionViewCompositionalLayout(section: section)
     }
 
+    private func connectDotIndicator(with section: NSCollectionLayoutSection) {
+        section.visibleItemsInvalidationHandler = { [weak self] (_, offset, _) in
+            guard let self else { return }
+            let page = Int(round(offset.x / self.bounds.width))
+            dotIndicator.currentPage = page
+        }
+    }
+
     private func registerCollectionViewCell() {
-        optionCardCollectionView.register(SelfModeOptionCardCell.self, forCellWithReuseIdentifier: SelfModeOptionCardCell.identifier)
-        optionCardCollectionView.register(GuideModeOptionCardCell.self, forCellWithReuseIdentifier: GuideModeOptionCardCell.identifier)
+        optionCardCollectionView.register(OptionCardCell.self, forCellWithReuseIdentifier: OptionCardCell.identifier)
     }
 
     private func setupCollectionViewDataSource() {
-        dataSource = OptionCardCollectionViewDiffableDataSource(collectionView: optionCardCollectionView) { [weak self] (collectionView, indexPath, item) in
+        dataSource = CollectionViewDiffableDataSource(
+            collectionView: optionCardCollectionView
+        ) { [weak self] (collectionView, indexPath, item) in
             guard let self,
-                  let cellIdentifier = cellIdentifiers[optionCardType],
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as? OptionCardCell else {
+                  let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: OptionCardCell.identifier,
+                    for: indexPath
+                  ) as? OptionCardCell else {
                 return OptionCardCell()
             }
-            
-            cell.configure(item)
-            
-            let cancellable = cell.buttonTapSubject
+
+            cell.configure(cardType: optionCardType, info: item)
+
+            buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
                     delegate?.optionCardButtonDidTapped(index: indexPath.row)
                 }
-            buttonTapCancellableByIndex[indexPath.row] = cancellable
-            
+
             return cell
         }
     }
@@ -150,6 +161,16 @@ extension MultiOptionCardButtonView {
         snapshot.appendSections([Section.optionCard])
         dataSource.apply(snapshot)
     }
+
+    private func updateSnapshot(item: [OptionCardInfo]) {
+        var snapshot = dataSource.snapshot()
+
+        let previousItem = snapshot.itemIdentifiers
+        snapshot.deleteItems(previousItem)
+        snapshot.appendItems(item)
+
+        dataSource.apply(snapshot)
+    }
 }
 
 // MARK: - Setup
@@ -157,12 +178,21 @@ extension MultiOptionCardButtonView {
 extension MultiOptionCardButtonView {
 
     private func setupViews() {
+        setupDotIndicator()
         addSubviews()
         setupConstraints()
     }
 
+    private func setupDotIndicator() {
+        dotIndicator.currentPage = 0
+        dotIndicator.currentPageIndicatorTintColor = Colors.currentDotColorOfDotIndicator
+        dotIndicator.pageIndicatorTintColor = Colors.defaultDotColorOfDotIndicator
+        dotIndicator.translatesAutoresizingMaskIntoConstraints = false
+    }
+
     private func addSubviews() {
         addSubview(optionCardCollectionView)
+        addSubview(dotIndicator)
     }
 
     private func setupConstraints() {
@@ -171,6 +201,15 @@ extension MultiOptionCardButtonView {
             optionCardCollectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             optionCardCollectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardCollectionView.heightAnchor.constraint(equalToConstant: Constants.optionCardCollectionViewHeight)
+        ])
+        NSLayoutConstraint.activate([
+            dotIndicator.topAnchor.constraint(
+                equalTo: optionCardCollectionView.bottomAnchor,
+                constant: Constants.spacing
+            ),
+            dotIndicator.leadingAnchor.constraint(equalTo: optionCardCollectionView.leadingAnchor),
+            dotIndicator.trailingAnchor.constraint(equalTo: optionCardCollectionView.trailingAnchor),
+            dotIndicator.heightAnchor.constraint(equalToConstant: Constants.dotIndicatorHeight)
         ])
     }
 }

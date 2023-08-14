@@ -63,6 +63,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var multiOptionCardButtonViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("MultiOptionCardButtonView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapMultiOptionCardButtonViewButton), for: .touchUpInside)
+        return button
+    }()
+
     lazy private var carMakingContentViewButton: UIButton = {
         let button = UIButton()
         button.setTitle("CarMakingContentViewButton 보기", for: .normal)
@@ -109,6 +117,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(ohMyCarSetButton)
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
+        stackView.addArrangedSubview(multiOptionCardButtonViewButton)
         stackView.addArrangedSubview(carMakingContentViewButton)
 
         let buttons = [
@@ -117,6 +126,7 @@ class ComponentMainViewController: UIViewController {
             ohMyCarSetButton,
             progressBarButton,
             twoOptionCardButtonViewButton,
+            multiOptionCardButtonViewButton,
             carMakingContentViewButton
         ]
         for button in buttons {
@@ -146,6 +156,11 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapTwoOptionCardButtonViewButton() {
         let viewController = TwoOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapMultiOptionCardButtonViewButton() {
+        let viewController = MultiOptionCardButtonViewController()
         self.present(viewController, animated: false)
     }
 

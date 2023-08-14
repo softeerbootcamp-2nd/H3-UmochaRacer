@@ -176,6 +176,7 @@ class OptionCardButton: UIButton {
             self.optionSubTitleLabel.text = cardInfo.subTitle
             self.priceLabel.text = cardInfo.priceString
             self.moreInfoButton.isHidden = !cardInfo.hasMoreInfo
+            isSelected = cardInfo.isSelected
             if let color = cardInfo.color { setColor(UIColor(urColor: color)) }
             if let url = cardInfo.image {
                 setImage(url: url)
