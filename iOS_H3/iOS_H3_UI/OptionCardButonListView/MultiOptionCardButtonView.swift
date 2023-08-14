@@ -19,8 +19,6 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         static let optionCardCollectionViewHeight = 150.0
         static let spacing = 10.0
         static let dotIndicatorHeight = 8.0
-        static let currentDotIndicatorColor = "2B2F36"
-        static let dotIndicatorColor = "D9D9D9"
     }
     
     enum Section {
@@ -176,8 +174,8 @@ extension MultiOptionCardButtonView {
 
     private func setupDotIndicator() {
         dotIndicator.currentPage = 0
-        dotIndicator.currentPageIndicatorTintColor = UIColor(hex: Constants.currentDotIndicatorColor)
-        dotIndicator.pageIndicatorTintColor = UIColor(hex: Constants.dotIndicatorColor)
+        dotIndicator.currentPageIndicatorTintColor = Colors.currentDotColorOfDotIndicator
+        dotIndicator.pageIndicatorTintColor = Colors.defaultDotColorOfDotIndicator
         dotIndicator.translatesAutoresizingMaskIntoConstraints = false
     }
 
