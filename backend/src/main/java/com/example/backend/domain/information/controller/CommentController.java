@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.*;
 public class CommentController {
     private final InformationStrategyFactory strategyFactory;
 
-    @GetMapping("/{targetInfo}")
+    @GetMapping("/{targetInfo}/{id}")
     public ResponseEntity<ResponseDto<CommentResponse>> returnComment(
-            @PathVariable("targetInfo") String targetInfo, @RequestParam("id") long targetId
+            @PathVariable("targetInfo") String targetInfo, @PathVariable("id") long targetId
     ) {
         InformationStrategy informationStrategy = strategyFactory.findInformationStrategy(targetInfo);
         CommentResponse commentResponse = informationStrategy.findCommentById(targetId);
@@ -27,9 +27,9 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
-    @GetMapping("/interior_color")
+    @GetMapping("/interior-color/{id}")
     public ResponseEntity<ResponseDto<CommentResponse>> returnInteriorColorComment(
-            @RequestParam("id") long targetId
+            @PathVariable("id") long targetId
     ) {
         CommentResponse result = strategyFactory.findInteriorColorCommentById(targetId);
 

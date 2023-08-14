@@ -21,9 +21,9 @@ public class DetailController {
     private final DetailService detailService;
     private final AdditionalOptionService additionalOptionService;
 
-    @GetMapping("/{targetInfo}")
+    @GetMapping("/{targetInfo}/{id}")
     public ResponseEntity<ResponseDto<DetailResponse>> returnDetail(
-            @PathVariable("targetInfo") String targetInfo, @RequestParam("id") long targetId
+            @PathVariable("targetInfo") String targetInfo, @PathVariable("id") long targetId
     ) {
         InformationStrategy informationStrategy = strategyFactory.findInformationStrategy(targetInfo);
         Long detailId = informationStrategy.findDetailId(targetId);
@@ -34,9 +34,9 @@ public class DetailController {
     }
 
     @Order(1)
-    @GetMapping("/additional-option")
+    @GetMapping("/additional-option/{id}")
     public ResponseEntity<ResponseDto<DetailResponse>> returnAdditionalOptionDetail (
-            @RequestParam("id") long targetId
+            @PathVariable("id") long targetId
     ){
         Long detailId = additionalOptionService.findDetailId(targetId);
         DetailResponse result = detailService.getDetailById(detailId);
