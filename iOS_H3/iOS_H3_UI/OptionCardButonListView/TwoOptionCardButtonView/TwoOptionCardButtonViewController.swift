@@ -19,7 +19,10 @@ final class TwoOptionCardButtonViewController: UIViewController {
 
     private let guideModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(type: .guideMode)
-        view.updateView(index: 0, with: OptionCardInfo(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true))
+        view.updateView(
+            index: 0,
+            with: OptionCardInfo(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true)
+        )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -34,7 +37,6 @@ final class TwoOptionCardButtonViewController: UIViewController {
         view.updateAllViews(with: cardInfos)
         return view
     }()
-
 
     // MARK: - Lifecycles
 

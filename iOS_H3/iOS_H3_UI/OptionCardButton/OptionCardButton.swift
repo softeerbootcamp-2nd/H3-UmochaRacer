@@ -170,7 +170,7 @@ class OptionCardButton: UIButton {
         if let type = type {
             self.type = type
         }
-        
+
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle
@@ -181,7 +181,7 @@ class OptionCardButton: UIButton {
                 setImage(url: url)
             }
         }
-        
+
         updateButtonUI()
     }
 
