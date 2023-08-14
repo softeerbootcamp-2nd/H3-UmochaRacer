@@ -10,6 +10,8 @@ import IntroShowMore from './intro/IntroShowMore';
 import ModelTitleList from './modelTitle/ModelTitle';
 import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
+import {colors} from '@/style/theme';
+import {Body1_Medium} from '@/style/fonts';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [hasScrolled, setHasScrolled] = useState(false);
@@ -61,6 +63,20 @@ function MainContainer() {
         <ModelOption name="내장 색상" />
         <ModelOption name="기본 포함 품목" />
       </Trim.OptionWrapper>
+      <Trim.CarMakeWrapper>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+      </Trim.CarMakeWrapper>
     </>
   );
 }
@@ -133,5 +149,21 @@ const Trim = {
     width: 100%;
     ${flexCenter}
     flex-direction : column;
+  `,
+  CarMakeWrapper: styled.div`
+    ${flexCenter};
+    gap: 120px;
+    margin-top: 44px;
+  `,
+  CarMake: styled.div`
+    ${flexCenter};
+    width: 140px;
+    height: 50px;
+    border-radius: 6px;
+    background: ${colors.Main_Hyundai_Blue};
+  `,
+  CarMakeP: styled.p`
+    color: ${colors.Hyundai_White};
+    ${Body1_Medium}
   `,
 };

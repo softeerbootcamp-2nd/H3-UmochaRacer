@@ -4,7 +4,8 @@ import styled from 'styled-components';
 import {flexBetween, flexCenter} from '@/style/common';
 import mainOption from '@/assets/mocks/main/defaultOption.json';
 import {colors} from '@/style/theme';
-import {Body2_Medium, Popup_Regular} from '@/style/fonts';
+import {Body1_Medium, Body2_Medium, Popup_Regular} from '@/style/fonts';
+import Icon from '@/component/common/icons';
 
 type Option = {
   icon: string;
@@ -57,6 +58,10 @@ function ModelDefaultOption() {
         {renderOptionDetails(mainOption[selectedCategory].Prestige)}
         {renderOptionDetails(mainOption[selectedCategory].Calligraphy)}
       </Wrapper>
+      <Category.ShowMore>
+        <Category.ShowMoreP>더보기</Category.ShowMoreP>
+        <Icon name="ArrowBottom" />
+      </Category.ShowMore>
     </>
   );
 }
@@ -97,5 +102,18 @@ const Category = {
     color: ${(props) =>
       props.$isSelected ? colors.Hyundai_White : colors.Cool_Grey_003};
     ${(props) => (props.$isSelected ? Body2_Medium : Popup_Regular)};
+  `,
+  ShowMore: styled.div`
+    ${flexCenter};
+    width: 140px;
+    height: 50px;
+    border-radius: 6px;
+    background: ${colors.Cool_Grey_001};
+    cursor: pointer;
+    margin-top: 20px;
+  `,
+  ShowMoreP: styled.p`
+    color: ${colors.Cool_Grey_004};
+    ${Body1_Medium}
   `,
 };
