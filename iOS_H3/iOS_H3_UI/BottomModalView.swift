@@ -85,6 +85,8 @@ final class BottomModalView: UIView {
         }
     }
 
+    private lazy var screenSize = window?.windowScene?.screen.bounds.size ?? UIWindow().screen.bounds.size
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
@@ -189,8 +191,7 @@ extension BottomModalView {
             estimateSummaryView.configure(dataSource.estimateSummaryData())
         }
 
-        let screenHeight = window?.windowScene?.screen.bounds.height ?? 812
-        let viewHeight = screenHeight * 3 / 4
+        let viewHeight = screenSize.height * 3 / 4
         updateHeightConstraint(viewHeight)
     }
 
@@ -207,9 +208,8 @@ extension BottomModalView {
 
     private func addModalHandleSubLayer() {
         let subLayer = CALayer()
-        let fullWidth = window?.windowScene?.screen.bounds.width ?? UIWindow().screen.bounds.width
         subLayer.frame = CGRect(
-            x: (fullWidth - Constants.modalHandleSubLayerWidth) / 2,
+            x: (screenSize.width - Constants.modalHandleSubLayerWidth) / 2,
             y: Constants.modalHandleSubLayerTopOffset,
             width: Constants.modalHandleSubLayerWidth,
             height: Constants.modalHandleSubLayerHeight
