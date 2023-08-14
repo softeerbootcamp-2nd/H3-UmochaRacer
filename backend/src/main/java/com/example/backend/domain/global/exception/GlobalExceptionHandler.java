@@ -1,7 +1,7 @@
 package com.example.backend.domain.global.exception;
 
-import com.example.backend.domain.global.dto.ErrorResponse;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.dto.ExceptionResponse;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,26 +12,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(RestApiException.class)
     public ResponseEntity<Object> handleClassNotFoundException(RestApiException exception) {
-        ErrorCode errorCode = exception.getErrorCode();
-        return handleExceptionInternal(errorCode);
+        ResultCode resultCode = exception.getResultCode();
+        return handleExceptionInternal(resultCode);
     }
 
-    private ResponseEntity<Object> handleExceptionInternal(ErrorCode errorCode) {
-        return ResponseEntity.status(errorCode.getHttpStatus())
-                .body(makeErrorResponse(errorCode));
+    private ResponseEntity<Object> handleExceptionInternal(ResultCode resultCode) {
+        return ResponseEntity.status(resultCode.getHttpStatus())
+                .body(makeErrorResponse(resultCode));
     }
 
-    private ErrorResponse makeErrorResponse(ErrorCode errorCode) {
-        return ErrorResponse.builder()
-                .code(errorCode.getCode())
-                .status(errorCode.getHttpStatus())
-                .message(errorCode.getMessage())
+    private ExceptionResponse makeErrorResponse(ResultCode resultCode) {
+        return ExceptionResponse.builder()
+                .code(resultCode.getCode())
+                .message(resultCode.getMessage())
                 .build();
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<Object> handleWrongAccessException(IllegalArgumentException exception) {
-        ErrorCode errorCode = ErrorCode.ILLEGAL_ARGUMENT;
-        return handleExceptionInternal(errorCode);
+        ResultCode resultCode = ResultCode.ILLEGAL_ARGUMENT;
+        return handleExceptionInternal(resultCode);
     }
 }

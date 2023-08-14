@@ -29,12 +29,26 @@ insert into Interior_color(id, name, image_src, price,comment, icon_src, exterio
 insert into Interior_color(id, name, image_src, price,comment, icon_src, exterior_color_id) values(5, '노', 'url',0,'노랑통닭', 'icon url', 2);
 insert into Interior_color(id, name, image_src, price,comment, icon_src, exterior_color_id) values(6, '보라', 'url',0,'보라해', 'icon url', 2);
 
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(1, '온열시트',   'url', 99999,5, '파츠 사진', null, 'ADDITIONAL', 'SAFETY');
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(2, '전방 감지 카메라', 'url', 654321,5, '파츠 사진', null, 'ADDITIONAL', 'PERFORMANCE');
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(50, '패키지1', 'url', 993311,5,  '파츠 사진', null, 'ADDITIONAL', 'PERFORMANCE');
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(51, '하위옵1', 'url', 65423, 5,  null, 50, 'ADDITIONAL', 'SEAT');
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(52, '하위옵2', 'url', 200000,5,  '파츠 사진', 50, 'ADDITIONAL', 'SEAT');
-insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(53, '하위옵3', 'url', 30003,5,  null , 50, 'ADDITIONAL', 'MULTIMEDIA');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(1, '온열시트',   'url', 99999,5, '파츠 사진', null, 'BASIC', 'SAFETY');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(2, '전방 감지 카메라', 'url', 11111,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(3, '이름 짓기 귀찮다2', 'url', 22222,5, '파츠 사진', null, 'BASIC', 'MULTIMEDIA');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(4, '아무거나123', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'AI_SAFETY');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(5, '아무거나123', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(6, '페이징 체크용1', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(7, '페이징 체크용2', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(8, '페이징 체크용3', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(9, '페이징 체크용4', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(10, '페이징 체크용5', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(11, '페이징 체크용6', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(12, '페이징 체크용7', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(13, '페이징 체크용8', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(14, '페이징 체크용9', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(15, '페이징 체크용10', 'url', 3333,5, '파츠 사진', null, 'BASIC', 'PERFORMANCE');
+
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(50, '패키지1', 'url', 993311,5,  '파츠 사진', null, 'ADDITIONAL', 'SYSTEM');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(51, '하위옵1', 'url', 65423, 5,  null, 50, 'ADDITIONAL', 'OUTER_DEVICE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(52, '하위옵2', 'url', 200000,5,  '파츠 사진', 50, 'ADDITIONAL', 'INNER_DEVICE');
+insert into additional_option(id, name, image_src, price,detail_id ,parts_src, top_option_id, flag, category) values(53, '하위옵3', 'url', 30003,5,  null , 50, 'ADDITIONAL', 'SYSTEM');
 
 insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(90, '알콘 어쩌고', 'url', 100000, 'H 지뉴인', null, 'BASIC', '기본 휠',5);
 insert into wheel(id, name, image_src, price,parts_src, sub_wheel_id, flag, comment, detail_id) values(91, '알콘 2222', 'url', 200000, '엔 퍼포먼스', null, 'ADDITIONAL', '브레이크와 세트세트', 4);
@@ -76,3 +90,38 @@ insert into trim_interior(id, trim_id, interior_color_id) values(10, 4, 6);
 insert into trim_interior(id, trim_id, interior_color_id) values(11, 4, 5);
 insert into trim_interior(id, trim_id, interior_color_id) values(12, 4, 4);
 insert into trim_interior(id, trim_id, interior_color_id) values(13, 4, 6);
+
+insert into trim_additional_option(id, trim_id, additional_option_id)
+values (1, 1, 1),
+       (2, 1, 2),
+       (3, 1, 3),
+       (4, 1, 4),
+       (5, 1, 5),
+       (6, 1, 6),
+       (7, 1, 7),
+       (8, 1, 8),
+       (9, 1, 9),
+       (10, 1, 10),
+       (11, 1, 11),
+       (12, 1, 12),
+       (13, 1, 13),
+       (14, 1, 14),
+       (15, 1, 15),
+
+       (16, 2, 1),
+       (17, 2, 12),
+       (18, 2, 13),
+       (19, 2, 14),
+       (20, 2, 15),
+
+       (21, 3, 1),
+       (22, 3, 2),
+       (23, 3, 3),
+       (24, 3, 4),
+
+       (25, 4, 9),
+       (26, 4, 10),
+       (27, 4, 12),
+       (28, 4, 11),
+       (29, 4, 13),
+       (30, 4, 14);

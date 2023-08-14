@@ -1,6 +1,7 @@
-package com.example.backend.domain.information.model.car.repository;
+package com.example.backend.domain.intro.repository;
 
-import com.example.backend.domain.information.model.car.entity.TrimExterior;
+import com.example.backend.domain.intro.entity.TrimExterior;
+import com.example.backend.domain.intro.mapper.TrimExteriorRowMapper;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

@@ -1,7 +1,7 @@
 package com.example.backend.domain.information.service;
 
 import com.example.backend.domain.global.exception.RestApiException;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.DetailResponse;
 import com.example.backend.domain.information.model.option.entity.Detail;
 import com.example.backend.domain.information.model.option.repository.DetailRepository;
@@ -17,7 +17,7 @@ public class DetailService {
 
     public DetailResponse getDetailById(Long id) {
         Optional<Detail> target = repository.findById(id);
-        if (target.isEmpty()) throw new RestApiException(ErrorCode.NO_DETAIL_EXIST_FOR_ID);
+        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID);
         return new DetailResponse(target.get());
     }
 }

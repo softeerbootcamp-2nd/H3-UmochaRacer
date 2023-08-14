@@ -1,7 +1,7 @@
 package com.example.backend.domain.information.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
-import com.example.backend.domain.global.model.enums.ErrorCode;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.service.InformationStrategyFactory;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
@@ -23,7 +23,7 @@ public class CommentController {
         InformationStrategy informationStrategy = strategyFactory.findInformationStrategy(targetInfo);
         CommentResponse commentResponse = informationStrategy.findCommentById(targetId);
 
-        ResponseDto<CommentResponse> body = ResponseDto.of(commentResponse, ErrorCode.SUCCESS);
+        ResponseDto<CommentResponse> body = ResponseDto.of(commentResponse, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
@@ -33,7 +33,7 @@ public class CommentController {
     ) {
         CommentResponse result = strategyFactory.findInteriorColorCommentById(targetId);
 
-        ResponseDto<CommentResponse> body = ResponseDto.of(result, ErrorCode.SUCCESS);
+        ResponseDto<CommentResponse> body = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }

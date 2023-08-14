@@ -114,7 +114,7 @@ CREATE TABLE `Additional_Option`
     `parts_src`     varchar(255),
     `price`         int,
     `image_src`     varchar(255),
-    `flag`          ENUM ('BASIC', 'WHEEL', 'ADDITIONAL'),
+    `flag`          ENUM ('BASIC', 'ADDITIONAL'),
     `category`      varchar(255)
 );
 
@@ -150,7 +150,7 @@ create TAble `Detail`
 );
 
 Drop Table if exists Wheel;
-create TAble `Wheel`
+create TAble Wheel
 (
     `id`           Long PRIMARY KEY,
     `name`         varchar(255),
@@ -159,9 +159,15 @@ create TAble `Wheel`
     `parts_src`    varchar(255),
     `price`        int,
     `image_src`    varchar(255),
-    `category`     varchar(255),
     `comment`      varchar(255),
     flag           varchar(255)
+);
+
+Drop table if exists Trim_Additional_Option;
+create table Trim_Additional_Option(
+    id Long primary key,
+    trim_id Long,
+    additional_option_id Long
 );
 
 ALTER TABLE `Model`
@@ -231,10 +237,16 @@ ALTER TABLE `Trim_Exterior`
     ADD FOREIGN KEY (`trim_id`) REFERENCES `Trim` (`id`);
 
 ALTER TABLE `Trim_Exterior`
-    ADD FOREIGN KEY (`exterior_color_id`) REFERENCES `Exterior_color` (`id`);
+    ADD FOREIGN KEY (`exterior_color_id`) REFERENCES Exterior_color (`id`);
 
 ALTER TABLE `Trim_Interior`
     ADD FOREIGN KEY (`trim_id`) REFERENCES `Trim` (`id`);
 
 ALTER TABLE `Trim_Interior`
-    ADD FOREIGN KEY (`interior_color_id`) REFERENCES `Interior_color` (`id`);
+    ADD FOREIGN KEY (`interior_color_id`) REFERENCES Interior_color (`id`);
+
+ALTER TABLE Trim_Additional_Option
+    ADD FOREIGN KEY (`trim_id`) REFERENCES Trim (`id`);
+
+ALTER TABLE `Trim_Additional_Option`
+    ADD FOREIGN KEY (additional_option_id) REFERENCES Additional_Option (`id`);
