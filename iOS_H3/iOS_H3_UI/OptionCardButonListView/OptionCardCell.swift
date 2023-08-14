@@ -29,7 +29,7 @@ final class OptionCardCell: UICollectionViewCell {
         setupViews()
         setupButtonTapSubject()
     }
-    
+
     init?(coder: NSCoder, type: OptionCardButton.OptionCardType) {
         optionCardButton = OptionCardButton(type: type)
         super.init(coder: coder)
@@ -53,7 +53,7 @@ final class OptionCardCell: UICollectionViewCell {
         setupViews()
         setupButtonTapSubject()
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         optionCardButton.isSelected = false
@@ -78,11 +78,11 @@ extension OptionCardCell {
             optionCardButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
     }
-    
+
     private func setupButtonTapSubject() {
         optionCardButton.addTarget(self, action: #selector(optionButtonDidTapped), for: .touchUpInside)
     }
-    
+
     @objc
     private func optionButtonDidTapped() {
         buttonTapSubject.send(())

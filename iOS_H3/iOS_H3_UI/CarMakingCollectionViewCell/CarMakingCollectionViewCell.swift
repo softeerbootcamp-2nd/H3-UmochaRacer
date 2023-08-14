@@ -15,12 +15,13 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         static let descriptionLabelLeadingMargin: CGFloat = 20.0
         static let descriptionLabelTopMargin: CGFloat = 26.0
         static let buttonListViewTopMargin: CGFloat = 20.0
-        static let buttonListViewHeight: CGFloat = 200.0
-        static let descriptionSuffix : String = "을 선택해주세요"
+        static let buttonListViewHeight: CGFloat = 150
+        static let descriptionSuffix: String = "을 선택해주세요"
     }
 
     let optionImageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
 
@@ -28,9 +29,9 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "옵션을 골라주세요."
         // TODO: 폰트 누락 확인 필요.
-        label.font = Fonts.regularTitle6
-        label.setupLineHeight(FontLineHeights.regularTitle6)
-        label.setupLetterSpacing(FontLetterSpacings.regularTitle6)
+        label.font = Fonts.regularTitle3
+        label.setupLineHeight(FontLineHeights.regularTitle3)
+        label.setupLetterSpacing(FontLetterSpacings.regularTitle3)
         return label
     }()
 
@@ -54,13 +55,22 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     init(frame: CGRect = .zero, buttonListViewable: OptionCardButtonListViewable) {
         optionButtonListView = buttonListViewable
         super.init(frame: frame)
+        setupViews()
+    }
+
+    override func prepareForReuse() {
+        optionImageView.image = nil
     }
 
     // MARK: - Helpers
     func configure(type: OptionCardButton.OptionCardType,
-                   bannerImage: URL,
+                   bannerImage: String?,
                    makingStepTitle: String,
                    optionInfos: [OptionCardInfo]) {
+
+        if let urlString = bannerImage {
+            self.optionImageView.loadCachedImage(of: urlString)
+        }
 
         // 라벨 업데이트
         self.descriptionLabel.text = makingStepTitle + Constants.descriptionSuffix
@@ -75,6 +85,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 extension CarMakingCollectionViewCell {
     private func setupViews() {
         addSubViews()
+        self.backgroundView?.backgroundColor = .blue
         setupImageView()
         setupDescriptionLabel()
         setupButtonListView()
@@ -84,6 +95,7 @@ extension CarMakingCollectionViewCell {
         [optionImageView, descriptionLabel, optionButtonListView]
             .forEach {
                 self.contentView.addSubview($0)
+                $0.translatesAutoresizingMaskIntoConstraints = false
             }
     }
 
@@ -102,11 +114,10 @@ extension CarMakingCollectionViewCell {
     }
 
     private func setupButtonListView() {
-        optionButtonListView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        optionButtonListView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        optionButtonListView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
+        optionButtonListView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
         optionButtonListView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
                                                    constant: Constants.buttonListViewTopMargin).isActive = true
-        optionButtonListView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         optionButtonListView.heightAnchor.constraint(equalToConstant: Constants.buttonListViewHeight).isActive = true
     }
 }

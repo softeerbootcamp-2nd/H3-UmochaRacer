@@ -71,6 +71,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var carMakingContentViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("CarMakingContentViewButton 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapCarMakingContentViewButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -110,6 +118,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(progressBarButton)
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
         stackView.addArrangedSubview(multiOptionCardButtonViewButton)
+        stackView.addArrangedSubview(carMakingContentViewButton)
 
         let buttons = [
             titleBarButton,
@@ -117,7 +126,8 @@ class ComponentMainViewController: UIViewController {
             ohMyCarSetButton,
             progressBarButton,
             twoOptionCardButtonViewButton,
-            multiOptionCardButtonViewButton
+            multiOptionCardButtonViewButton,
+            carMakingContentViewButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -151,6 +161,12 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapMultiOptionCardButtonViewButton() {
         let viewController = MultiOptionCardButtonViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapCarMakingContentViewButton() {
+        let viewController = CarMakingContentViewController()
+        viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: false)
     }
 }
