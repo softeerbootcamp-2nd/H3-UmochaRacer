@@ -2,9 +2,11 @@ import React, {useEffect} from 'react';
 import {useState, useRef, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
-import DetailToggle from './DetailToggle';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import {cardDataType} from '../../contentInterface';
+
+import DetailToggle from './DetailToggle';
+import FeedBack from './FeedBack';
 interface CardProps {
   selected: boolean;
   onClick: () => void;
@@ -88,60 +90,63 @@ function OptionCard({selected, onClick, data, option}: CardProps) {
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
-      <CardSection>
-        <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
+      <Container>
+        <CardSection>
+          <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
 
-        {data.partsSrc ? (
-          <Parts $url={data.partsSrc} $selected={selected}></Parts>
-        ) : (
-          ''
-        )}
-      </CardSection>
+          {data.partsSrc ? (
+            <Parts $url={data.partsSrc} $selected={selected}></Parts>
+          ) : (
+            ''
+          )}
+        </CardSection>
 
-      <CardSection $height={60}>
-        <TextBox>
-          <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
-          <Text2 className="black">{data.name}</Text2>
-        </TextBox>
-        {data.iconSrc ? (
-          <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
-        ) : (
-          ''
-        )}
-        {data.colorCode ? (
-          <ColorBox $colorcode={data.colorCode}></ColorBox>
-        ) : (
-          ''
-        )}
-      </CardSection>
-
-      {hasDetail(option) ? (
-        <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
-          <DetailContent ref={contentRef}>
-            컨텐츠
-            <Text1>구매자의 63%가 선택했어요!</Text1>
-            <Text2>디젤 2.2</Text2>
-            <Text1>구매자의 63%가 선택했어요!</Text1>
-            <Text2>디젤 2.2</Text2>
-          </DetailContent>
-        </DetailBox>
-      ) : (
-        ''
-      )}
-
-      <CardSection $height={26} $end={true}>
-        <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
+        <CardSection $height={60}>
+          <TextBox>
+            <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+            <Text2 className="black">{data.name}</Text2>
+          </TextBox>
+          {data.iconSrc ? (
+            <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
+          ) : (
+            ''
+          )}
+          {data.colorCode ? (
+            <ColorBox $colorcode={data.colorCode}></ColorBox>
+          ) : (
+            ''
+          )}
+        </CardSection>
 
         {hasDetail(option) ? (
-          <DetailToggle
-            onClick={clickedToggle}
-            opened={toggle}
-            selected={selected}
-          ></DetailToggle>
+          <DetailBox ref={contentBoxRef} $toggle={toggle.toString()}>
+            <DetailContent ref={contentRef}>
+              컨텐츠
+              <Text1>구매자의 63%가 선택했어요!</Text1>
+              <Text2>디젤 2.2</Text2>
+              <Text1>구매자의 63%가 선택했어요!</Text1>
+              <Text2>디젤 2.2</Text2>
+            </DetailContent>
+          </DetailBox>
         ) : (
           ''
         )}
-      </CardSection>
+
+        <CardSection $height={26} $end={true}>
+          <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
+
+          {hasDetail(option) ? (
+            <DetailToggle
+              onClick={clickedToggle}
+              opened={toggle}
+              selected={selected}
+            ></DetailToggle>
+          ) : (
+            ''
+          )}
+        </CardSection>
+        <FeedBack></FeedBack>
+      </Container>
     </Wrapper>
   );
 }
@@ -181,6 +186,7 @@ const Wrapper = styled.li<{$selected: boolean}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
+  position: relative;
   width: 375px;
   min-height: 150px;
   padding: 20px;
@@ -189,6 +195,7 @@ const Wrapper = styled.li<{$selected: boolean}>`
   transition: 0.5s;
 `;
 
+const Container = styled.div``;
 const CardSection = styled.div<{$height?: number; $end?: boolean}>`
   ${flexBetween}
   align-items: ${(props) => (props.$end ? 'flex-end' : 'center')};
