@@ -1,9 +1,11 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import React, {useEffect} from 'react';
+import React from 'react';
 import Self from './pages/Self';
 import Main from './pages/Main';
 import Loading from './pages/Loading';
 import OptionProvider from './provider/optionProvider';
+import {ModalProvider} from './provider/modalProvider';
+import Modal from './component/modal/Modal';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -19,7 +21,7 @@ function App() {
       children,
     );
   return (
-    <AppProvider contexts={[OptionProvider]}>
+    <AppProvider contexts={[OptionProvider, ModalProvider]}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
+      <Modal />
     </AppProvider>
   );
 }

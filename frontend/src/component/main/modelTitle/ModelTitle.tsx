@@ -2,7 +2,7 @@ import {flexBetween, flexCenter} from '@/style/common';
 import React from 'react';
 import {styled} from 'styled-components';
 
-import model from '@/assets/mocks/modelData.json';
+import model from '@/assets/mocks/main/modelData.json';
 import {colors} from '@/style/theme';
 import {Body2_Regular} from '@/style/fonts';
 

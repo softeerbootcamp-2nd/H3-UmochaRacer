@@ -10,15 +10,33 @@ import IntroShowMore from './intro/IntroShowMore';
 import ModelTitleList from './modelTitle/ModelTitle';
 import ModelInfoList from './modelInfo/ModelInfo';
 import ModelOption from './modelOption/ModelOption';
+import {colors} from '@/style/theme';
+import {Body1_Medium, Title5_Regular} from '@/style/fonts';
+import Icon from '../common/icons';
+import {useModalContext} from '@/provider/modalProvider';
 function MainContainer() {
   const [scrollPosition, setScrollPosition] = useState(0);
+  const [hasScrolled, setHasScrolled] = useState(false);
+
+  const {openModal} = useModalContext();
   const updateScroll = () => {
     setScrollPosition(window.scrollY || document.documentElement.scrollTop);
   };
   useEffect(() => {
-    window.addEventListener('scroll', updateScroll);
-  }, []);
+    if (scrollPosition > 1 && !hasScrolled) {
+      window.scrollTo({top: window.innerHeight - 50, behavior: 'smooth'});
+      setHasScrolled(true);
+    } else if (scrollPosition === 0) {
+      setHasScrolled(false);
+    }
+  }, [scrollPosition, hasScrolled]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', updateScroll);
+    return () => {
+      window.removeEventListener('scroll', updateScroll);
+    };
+  }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -47,7 +65,31 @@ function MainContainer() {
         <ModelOption name="핵심 옵션" />
         <ModelOption name="외장 색상" />
         <ModelOption name="내장 색상" />
+        <ModelOption name="기본 포함 품목" />
       </Trim.OptionWrapper>
+      <Trim.CarMakeWrapper>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+        <Trim.CarMake>
+          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+        </Trim.CarMake>
+      </Trim.CarMakeWrapper>
+      <GuideModeButton.Wrapper>
+        <GuideModeButton.Suggest>
+          무엇을 골라야 할 지 모르겠다면?
+        </GuideModeButton.Suggest>
+        <GuideModeButton.LinkWrapper onClick={() => openModal('exit')}>
+          <GuideModeButton.Guide>Guide Mode</GuideModeButton.Guide>
+          <Icon name="ArrowRight" size={36} />
+        </GuideModeButton.LinkWrapper>
+      </GuideModeButton.Wrapper>
     </>
   );
 }
@@ -69,7 +111,7 @@ const Intro = {
     width: 100%;
     transition: 0.2s ease-in-out;
     &.change_header {
-      background: #e7e7e7;
+      background: #f2f4f7;
     }
   `,
   Content: styled.div`
@@ -85,12 +127,12 @@ const Trim = {
   Header: styled.div`
     width: 100%;
     height: 200px;
-    background: #e7e7e7;
+    background: #f2f4f7;
     ${flexBetween}
     flex-direction : column;
   `,
   IntroP: styled.p`
-    color: #212121;
+    color: #202732;
     font-family: Hyundai Sans Head Medium;
     font-size: 40px;
     font-style: normal;
@@ -106,7 +148,7 @@ const Trim = {
     height: 100px;
     padding-bottom: 36px;
     ${flexCenter}
-    background: #e7e7e7;
+    background: #F2F4F7;
     position: sticky;
     top: 85px;
   `,
@@ -120,5 +162,52 @@ const Trim = {
     width: 100%;
     ${flexCenter}
     flex-direction : column;
+  `,
+  CarMakeWrapper: styled.div`
+    ${flexCenter};
+    gap: 120px;
+    margin-top: 44px;
+  `,
+  CarMake: styled.div`
+    ${flexCenter};
+    width: 140px;
+    height: 50px;
+    border-radius: 6px;
+    background: ${colors.Main_Hyundai_Blue};
+    cursor: pointer;
+  `,
+  CarMakeP: styled.p`
+    color: ${colors.Hyundai_White};
+    ${Body1_Medium}
+  `,
+};
+
+const GuideModeButton = {
+  Wrapper: styled.div`
+    ${flexCenter};
+    gap: 80px;
+    width: 533px;
+    height: 90px;
+    border-radius: 6px;
+    background: ${colors.Cool_Grey_001};
+    margin: 69px auto 204px auto;
+    cursor: pointer;
+  `,
+  Suggest: styled.p`
+    color: ${colors.Cool_Grey};
+    ${Title5_Regular}
+  `,
+  LinkWrapper: styled.div`
+    ${flexCenter};
+    gap: 8px;
+  `,
+  Guide: styled.p`
+    color: ${colors.Cool_Grey};
+    font-family: 'Hyundai Sans Text Medium';
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.96px;
   `,
 };
