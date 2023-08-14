@@ -119,14 +119,17 @@ extension CarMakingProgressBar {
             return
         }
         selectedButtonIndex = index
-
+        let offset = moveContentOffset(to : index)
+        setContentOffset(CGPoint(x: max(0, offset), y: 0), animated: true)
+        progressBarDelegate?.progressBarButtonDidTapped(didSelectItemAt: index)
+    }
+    
+    private func moveContentOffset(to index: Int) -> CGFloat{
         let buttonWidth = progressBarButtons[index].bounds.width
         let inset = Constants.horizontalInset * (index == 0 ? 1 : 0.5)
         let offset = (buttonWidth + Constants.barButtonSpacing) * CGFloat(index)
         + inset - (bounds.width / 2)
         + (buttonWidth / 2)
-
-        setContentOffset(CGPoint(x: max(0, offset), y: 0), animated: true)
-        progressBarDelegate?.progressBarButtonDidTapped(didSelectItemAt: index)
+        return min(offset, contentSize.width - bounds.width)
     }
 }
