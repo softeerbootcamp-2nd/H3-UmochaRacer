@@ -75,7 +75,15 @@ final class BottomModalView: UIView {
 
     weak var delegate: BottomModalViewDelegate!
 
-    private var isShowingEstimateSummaryView: Bool = false
+    private var isShowingEstimateSummaryView: Bool = false {
+        didSet {
+            if isShowingEstimateSummaryView {
+                showEstimateSummaryView()
+            } else {
+                hideEstimateSummaryView()
+            }
+        }
+    }
 
     // MARK: - Lifecycles
 
@@ -170,11 +178,6 @@ extension BottomModalView {
 
     @objc
     private func modalHandleViewDidTapped() {
-        if isShowingEstimateSummaryView {
-            hideEstimateSummaryView()
-        } else {
-            showEstimateSummaryView()
-        }
         isShowingEstimateSummaryView.toggle()
     }
 
