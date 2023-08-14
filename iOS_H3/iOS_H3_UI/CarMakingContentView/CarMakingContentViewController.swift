@@ -87,7 +87,7 @@ extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
     }
 }
 
-extension CarMakingContentViewController: CarMakingContentViewDataSource{
+extension CarMakingContentViewController: CarMakingContentViewDataSource {
     typealias Section = PageSection
 
     func numberOfSections() -> Int {
@@ -115,6 +115,7 @@ extension CarMakingContentViewController: CarMakingContentViewDataSource{
 struct CarMakingContentMockData {
     static let mockURL = [
         ["https://cdn.autotribune.co.kr/news/photo/202101/4849_30727_3533.jpg",
+         // swiftlint:disable:next line_length
          "https://i.namu.wiki/i/cBMX6XiTLltPPIawbb2zfP5Oy5RW9JybY0E5ZQ62oUYdppA2t54xDjiST7xfLe_2dL4pGN9VsBVknq4H-SYA2A.webp",
          "https://cdn.epnc.co.kr/news/photo/201804/79474_70575_4841.jpg",
          "https://pimg.daara.co.kr/kidd/photo/2021/01/08/thumbs/thumb_520390_1610089982_79.jpg"],

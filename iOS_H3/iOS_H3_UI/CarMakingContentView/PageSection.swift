@@ -6,7 +6,7 @@
 //
 
 import Foundation
-enum PageSection: Int, CarMakingSectionType, CaseIterable{
+enum PageSection: Int, CarMakingSectionType, CaseIterable {
     typealias Item = Int
 
     case twoButton = 0

@@ -132,9 +132,9 @@ extension CarMakingContentView {
     }
 
      func setupCollectionViewDataSource() {
-        collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(collectionView: collectionView)
-         {[weak self] (collectionView, indexPath, step) -> UICollectionViewCell? in
-
+         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(
+              collectionView: collectionView) { [weak self] (collectionView, indexPath, step)
+                  -> UICollectionViewCell? in
             let section = PageSection.allCases[indexPath.section]
             guard let self,
                   let cellIdentifier = cellIdentifiers[section],
@@ -178,7 +178,7 @@ class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension CarMakingContentView: CarMakingProgressBarDelegate{
+extension CarMakingContentView: CarMakingProgressBarDelegate {
     func progressBarButtonDidTapped(didSelectItemAt index: Int) {
         let section = PageSection.section(for: index)
         let item = section.itemIndex(for: index)

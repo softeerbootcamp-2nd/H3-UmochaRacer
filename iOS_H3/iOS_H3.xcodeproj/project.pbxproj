@@ -84,6 +84,7 @@
 		5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4D33B42A8758FF00942517 /* PageSection.swift */; };
 		5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */; };
 		5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */; };
+		5F4DB0F12A89A9B900E905A7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
 		5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
 		5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */; };
 		5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */; };
@@ -808,6 +809,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F4DB0F12A89A9B900E905A7 /* .swiftlint.yml in Resources */,
 				5F4975602A811F56008FFFE5 /* HyundaiSansTextKROTFMedium.otf in Resources */,
 				5F39EF3C2A81B483004B0C97 /* HyundaiSansHeadKRRegular.ttf in Resources */,
 				5F4975622A811F56008FFFE5 /* HyundaiSansHeadKRMedium.ttf in Resources */,

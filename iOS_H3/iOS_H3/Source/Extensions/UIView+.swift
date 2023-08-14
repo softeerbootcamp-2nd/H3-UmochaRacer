@@ -14,7 +14,7 @@ extension UIView {
         self.addSubview(activityIndicator)
         activityIndicator.startAnimating()
     }
-    
+
     func hideLoadingIndicator() {
         self.subviews.forEach {
             if $0 is UIActivityIndicatorView {
