@@ -331,12 +331,9 @@
 			children = (
 				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 				477620C42A7B80B900D60B59 /* UILabel+.swift */,
-
 				4700964C2A880372003711F2 /* Int+.swift */,
-
 				5F4D33B12A8751E500942517 /* UIImageView+.swift */,
 				5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */,
-
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -646,6 +643,15 @@
 			path = iOS_H3_UIUITests;
 			sourceTree = "<group>";
 		};
+		5F6A82F22A887AE40025D5A4 /* OptionCategoryTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */,
+				5F371BAE2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift */,
+			);
+			path = OptionCategoryTabbar;
+			sourceTree = "<group>";
+		};
 		5F99F0612A8516FA00C38555 /* CarMakingContentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -654,15 +660,6 @@
 				5F4D33B42A8758FF00942517 /* PageSection.swift */,
 			);
 			path = CarMakingContentView;
-			sourceTree = "<group>";
-		};
-		5F6A82F22A887AE40025D5A4 /* OptionCategoryTabbar */ = {
-			isa = PBXGroup;
-			children = (
-				5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */,
-				5F371BAE2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift */,
-			);
-			path = OptionCategoryTabbar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1041,11 +1038,8 @@
 				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
-
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
-
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
-
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
@@ -1069,11 +1063,8 @@
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
 				5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */,
 				471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
-
 				470096442A874A0D003711F2 /* BottomModalView.swift in Sources */,
-
 				5F371BB22A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
