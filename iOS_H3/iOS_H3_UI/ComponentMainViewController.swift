@@ -79,6 +79,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+	lazy private var optionCategoryTabbarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("OptionCategoryTabbar 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapOptionCategoryTabbarButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -119,6 +127,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(twoOptionCardButtonViewButton)
         stackView.addArrangedSubview(multiOptionCardButtonViewButton)
         stackView.addArrangedSubview(carMakingContentViewButton)
+        stackView.addArrangedSubview(optionCategoryTabbarButton)
 
         let buttons = [
             titleBarButton,
@@ -127,7 +136,8 @@ class ComponentMainViewController: UIViewController {
             progressBarButton,
             twoOptionCardButtonViewButton,
             multiOptionCardButtonViewButton,
-            carMakingContentViewButton
+            carMakingContentViewButton,
+            optionCategoryTabbarButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: 30).isActive = true
@@ -169,4 +179,9 @@ class ComponentMainViewController: UIViewController {
         viewController.modalPresentationStyle = .fullScreen
         self.present(viewController, animated: false)
     }
+
+    @objc func didTapOptionCategoryTabbarButton() {
+        let viewController = OptionCategoryTabbarViewController()
+        self.present(viewController, animated: false)
+	}
 }
