@@ -43,6 +43,11 @@
 		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
+		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
+		479023992A8A3DB000DECB70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */; };
+		4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */; };
+		4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */; };
+		479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF82A777BDE0055A4FA /* ViewController.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -180,6 +185,10 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
+		4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		479023952A8A3DB000DECB70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		479023982A8A3DB000DECB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4790239A2A8A3DB000DECB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -233,6 +242,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		479023872A8A3DAF00DECB70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBEE2A777BDE0055A4FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -472,6 +488,16 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4790238B2A8A3DAF00DECB70 /* NetworkLayerTest */ = {
+			isa = PBXGroup;
+			children = (
+				479023952A8A3DB000DECB70 /* Assets.xcassets */,
+				479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */,
+				4790239A2A8A3DB000DECB70 /* Info.plist */,
+			);
+			path = NetworkLayerTest;
+			sourceTree = "<group>";
+		};
 		47CB8CAB2A79EC7E004B24AD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +519,7 @@
 				5F6203672A7BC59500D09531 /* iOS_H3_UI */,
 				5F62037E2A7BC59600D09531 /* iOS_H3_UITests */,
 				5F6203882A7BC59700D09531 /* iOS_H3_UIUITests */,
+				4790238B2A8A3DAF00DECB70 /* NetworkLayerTest */,
 				5F00FBF22A777BDE0055A4FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -506,6 +533,7 @@
 				5F6203662A7BC59500D09531 /* iOS_H3_UI.app */,
 				5F62037B2A7BC59600D09531 /* iOS_H3_UITests.xctest */,
 				5F6203852A7BC59600D09531 /* iOS_H3_UIUITests.xctest */,
+				4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -640,6 +668,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		479023892A8A3DAF00DECB70 /* NetworkLayerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4790239D2A8A3DB000DECB70 /* Build configuration list for PBXNativeTarget "NetworkLayerTest" */;
+			buildPhases = (
+				479023862A8A3DAF00DECB70 /* Sources */,
+				479023872A8A3DAF00DECB70 /* Frameworks */,
+				479023882A8A3DAF00DECB70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkLayerTest;
+			productName = NetworkLayerTest;
+			productReference = 4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		5F00FBF02A777BDE0055A4FA /* iOS_H3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F00FC1B2A777BDF0055A4FA /* Build configuration list for PBXNativeTarget "iOS_H3" */;
@@ -758,6 +803,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					479023892A8A3DAF00DECB70 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					5F00FBF02A777BDE0055A4FA = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -801,11 +849,21 @@
 				5F6203652A7BC59500D09531 /* iOS_H3_UI */,
 				5F62037A2A7BC59600D09531 /* iOS_H3_UITests */,
 				5F6203842A7BC59600D09531 /* iOS_H3_UIUITests */,
+				479023892A8A3DAF00DECB70 /* NetworkLayerTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		479023882A8A3DAF00DECB70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				479023992A8A3DB000DECB70 /* LaunchScreen.storyboard in Resources */,
+				479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBEF2A777BDE0055A4FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,6 +945,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		479023862A8A3DAF00DECB70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */,
+				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
+				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBED2A777BDE0055A4FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1052,6 +1120,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				479023982A8A3DB000DECB70 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1071,6 +1147,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4790239B2A8A3DB000DECB70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkLayerTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift-test.NetworkLayerTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4790239C2A8A3DB000DECB70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkLayerTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift-test.NetworkLayerTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5F00FC192A777BDF0055A4FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1460,6 +1588,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4790239D2A8A3DB000DECB70 /* Build configuration list for PBXNativeTarget "NetworkLayerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4790239B2A8A3DB000DECB70 /* Debug */,
+				4790239C2A8A3DB000DECB70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5F00FBEC2A777BDE0055A4FA /* Build configuration list for PBXProject "iOS_H3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
