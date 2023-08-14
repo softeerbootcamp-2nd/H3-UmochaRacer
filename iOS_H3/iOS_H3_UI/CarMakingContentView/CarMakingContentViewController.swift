@@ -88,7 +88,6 @@ extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
 }
 
 extension CarMakingContentViewController: CarMakingContentViewDataSource {
-    typealias Section = PageSection
 
     func numberOfSections() -> Int {
         return PageSection.allCases.count

@@ -8,7 +8,6 @@
 import UIKit
 
 protocol CarMakingContentViewDataSource: AnyObject {
-    associatedtype Section: CarMakingSectionType
     func numberOfSections() -> Int
     func contentView(numberOfItemsInSection section: Int) -> Int
     func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep
@@ -32,7 +31,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
 
-    weak var dataSource: (any CarMakingContentViewDataSource)? {
+    weak var dataSource: (CarMakingContentViewDataSource)? {
         didSet {
             setupSnapshot()
         }
