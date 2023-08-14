@@ -9,6 +9,10 @@ import UIKit
 
 class ComponentMainViewController: UIViewController {
 
+    enum Constants {
+        static let buttonHeight = 30.0
+    }
+
     lazy private var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -120,7 +124,7 @@ class ComponentMainViewController: UIViewController {
             bottomModalViewButton
         ]
         for button in buttons {
-            button.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
         }
     }
 
