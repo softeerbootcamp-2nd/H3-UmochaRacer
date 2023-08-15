@@ -58,6 +58,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     private let carMakingMode: CarMakingMode
 
+    private var currentStep = 0
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
@@ -79,6 +81,35 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }
 
     // MARK: - Helpers
+
+    func moveNextStep() {
+        guard currentStep < CarMakingStep.allCases.count else { return }
+        currentStep += 1
+        moveStep(to: currentStep)
+    }
+
+    func movePrevStep() {
+        guard currentStep > 0 else { return }
+        currentStep -= 1
+        moveStep(to: currentStep)
+    }
+}
+
+extension CarMakingContentView {
+
+    private func moveStep(to index: Int) {
+        carMakingProgressBar.selectButton(for: index)
+        moveCollectionView(to: index)
+    }
+
+    private func moveCollectionView(to index: Int) {
+        let section = PageSection.section(for: index)
+        let sectionIndex = section.index
+        let item = section.itemIndex(for: index)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
 }
 
 // MARK: - Setup Views
@@ -187,10 +218,7 @@ class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
 extension CarMakingContentView: CarMakingProgressBarDelegate {
 
     func progressBarButtonDidTapped(didSelectItemAt index: Int) {
-        let section = PageSection.section(for: index)
-        let item = section.itemIndex(for: index)
-        let sectionIndex = PageSection.allCases.firstIndex(of: section)!
-        let indexPath = IndexPath(item: item, section: sectionIndex)
-        self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        currentStep = index
+        moveCollectionView(to: index)
     }
 }
