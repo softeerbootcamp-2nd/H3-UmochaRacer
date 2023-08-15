@@ -38,4 +38,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchWheel() -> AnyPublisher<Result<WheelResponse, Error>, Never> {
         return networkService.request(CarInfoEndpoint.wheel)
     }
+
+    func fetchAdditionalOption(category: String) -> AnyPublisher<Result<AdditionalOptionResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.additionalOption(category: category))
+    }
 }
