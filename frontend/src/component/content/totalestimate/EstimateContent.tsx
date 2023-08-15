@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Top from './estimatecontent/Top';
 import Middle from './estimatecontent/Middle';
+import Bottom from './estimatecontent/Bottom';
 import {colors} from '@/style/theme';
 import {Body2_Medium} from '@/style/fonts';
 
@@ -49,11 +50,13 @@ function EstimateContent() {
       </Button>
     );
   });
+
   return (
     <Wrapper>
       <Top></Top>
       <Middle></Middle>
       <ButtonBox>{buttons}</ButtonBox>
+      <Bottom></Bottom>
     </Wrapper>
   );
 }
