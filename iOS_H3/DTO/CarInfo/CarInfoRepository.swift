@@ -18,4 +18,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchPowertrain(model: String, type: String) -> AnyPublisher<Result<PowertrainResponse, Error>, Never> {
         return networkService.request(CarInfoEndpoint.powertrain(model: model, type: type))
     }
+
+    func fetchDrivingSystem() -> AnyPublisher<Result<DrivingSystemResponse, Error>, Never> {
+           return networkService.request(CarInfoEndpoint.drivingSystem)
+       }
 }
