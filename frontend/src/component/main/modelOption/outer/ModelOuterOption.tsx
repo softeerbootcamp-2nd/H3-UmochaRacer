@@ -2,40 +2,47 @@ import React from 'react';
 import ModelOptionDetail from './ModelOptionDetail';
 import styled from 'styled-components';
 import {flexBetween, flexCenter} from '@/style/common';
-import outerOption from '@/assets/mocks/main/outerOption.json';
+import useFetch from '@/component/hooks/useFetch';
+import {sortData} from '@/component/util/sortData';
 
 type Option = {
-  icon: string;
+  imageSrc: string;
   name: string;
 };
 
-function ModelInnerOption() {
+type TrimData = {
+  trim: string;
+  sources: Option[];
+};
+
+function ModelOuterOption() {
+  const {data} = useFetch<TrimData[]>('/intro/exterior-color');
+
   const renderOptionDetails = (optionList: Option[]) => {
     return (
       <OptionWrapper>
         {optionList.map((item, index) => (
           <ModelOptionDetail
             key={index}
-            border={index === 0}
-            color={item.icon}
+            border={item.name === '크리미 화이트 펄'}
+            src={item.imageSrc}
             name={item.name}
           />
         ))}
       </OptionWrapper>
     );
   };
-
   return (
     <Wrapper>
-      {renderOptionDetails(outerOption.exclusive)}
-      {renderOptionDetails(outerOption.LeBlanc)}
-      {renderOptionDetails(outerOption.Prestige)}
-      {renderOptionDetails(outerOption.Calligraphy)}
+      {data &&
+        sortData(data).map((trimData, index) => (
+          <div key={index}>{renderOptionDetails(trimData.sources)}</div>
+        ))}
     </Wrapper>
   );
 }
 
-export default ModelInnerOption;
+export default ModelOuterOption;
 
 const Wrapper = styled.div`
   ${flexBetween};

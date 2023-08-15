@@ -6,17 +6,16 @@ import styled from 'styled-components';
 interface detailProps {
   src: string;
   name: string;
-  description?: string;
 }
-function ModelOptionDetail({src, name, description}: detailProps) {
+function ModelOptionDetail({src, name}: detailProps) {
   return (
     <Detail.Wrapper>
       <Detail.IconWrapper>
-        <Detail.Icon src={`/src/assets/images/inner/${src}.png`} />
+        <Detail.Icon src={src} />
       </Detail.IconWrapper>
       <Detail.NameWrapper>
         <Detail.Name>{name}</Detail.Name>
-        <Detail.Description>{description}</Detail.Description>
+        {/* <Detail.Description>{description}</Detail.Description> */}
       </Detail.NameWrapper>
     </Detail.Wrapper>
   );

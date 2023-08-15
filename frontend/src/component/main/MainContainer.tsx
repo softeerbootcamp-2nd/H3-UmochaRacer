@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
 import main from '@/assets/images/main.png';
@@ -14,32 +14,11 @@ import {colors} from '@/style/theme';
 import {Body1_Medium, Title5_Regular} from '@/style/fonts';
 import Icon from '../common/icons';
 import {useModalContext} from '@/provider/modalProvider';
+import {useScroll} from '../hooks/useScroll';
 function MainContainer() {
-  const [scrollPosition, setScrollPosition] = useState(0);
-  const [hasScrolled, setHasScrolled] = useState(false);
-
+  const scrollPosition = useScroll();
   const {openModal} = useModalContext();
-  const updateScroll = () => {
-    setScrollPosition(window.scrollY || document.documentElement.scrollTop);
-  };
-  useEffect(() => {
-    if (scrollPosition > 1 && !hasScrolled) {
-      window.scrollTo({top: window.innerHeight - 50, behavior: 'smooth'});
-      setHasScrolled(true);
-    } else if (scrollPosition === 0) {
-      setHasScrolled(false);
-    }
-  }, [scrollPosition, hasScrolled]);
 
-  useEffect(() => {
-    window.addEventListener('scroll', updateScroll);
-    return () => {
-      window.removeEventListener('scroll', updateScroll);
-    };
-  }, []);
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
   return (
     <>
       <Intro.Wrapper>

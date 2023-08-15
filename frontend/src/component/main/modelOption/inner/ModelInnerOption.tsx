@@ -2,25 +2,26 @@ import React from 'react';
 import ModelOptionDetail from './ModelOptionDetail';
 import styled from 'styled-components';
 import {flexBetween, flexCenter} from '@/style/common';
-import innerOption from '@/assets/mocks/main/innerOption.json';
+import useFetch from '@/component/hooks/useFetch';
+import {sortData} from '@/component/util/sortData';
 
 type Option = {
-  icon: string;
+  imageSrc: string;
   name: string;
-  description?: string;
+};
+
+type TrimData = {
+  trim: string;
+  sources: Option[];
 };
 
 function ModelInnerOption() {
+  const {data} = useFetch<TrimData[]>('/intro/interior-color');
   const renderOptionDetails = (optionList: Option[]) => {
     return (
       <OptionWrapper>
         {optionList.map((item, index) => (
-          <ModelOptionDetail
-            key={index}
-            src={item.icon}
-            name={item.name}
-            description={item.description}
-          />
+          <ModelOptionDetail key={index} src={item.imageSrc} name={item.name} />
         ))}
       </OptionWrapper>
     );
@@ -28,10 +29,10 @@ function ModelInnerOption() {
 
   return (
     <Wrapper>
-      {renderOptionDetails(innerOption.exclusive)}
-      {renderOptionDetails(innerOption.LeBlanc)}
-      {renderOptionDetails(innerOption.Prestige)}
-      {renderOptionDetails(innerOption.Calligraphy)}
+      {data &&
+        sortData(data).map((trimData, index) => (
+          <div key={index}>{renderOptionDetails(trimData.sources)}</div>
+        ))}
     </Wrapper>
   );
 }
