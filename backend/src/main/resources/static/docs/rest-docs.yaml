@@ -11,7 +11,7 @@ paths:
     get:
       tags:
       - api
-      operationId: Car DBInformation
+      operationId: Car DB
       parameters:
       - name: keyword
         in: query
@@ -27,17 +27,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/api-v1-cardb1589866205'
               examples:
-                Information:
-                  value: |-
-                    {
-                      "data" : {
-                        "keyword" : "파워트레인",
-                        "description" : "토크 어쩌고 저쩌고",
-                        "imageSrc" : "s3 url"
-                      },
-                      "message" : "성공",
-                      "code" : 1000
-                    }
                 Car DB:
                   value: |-
                     {
@@ -49,8 +38,65 @@ paths:
                       "message" : "성공",
                       "code" : 1000
                     }
+  /api/v1/info/powertrain:
+    get:
+      tags:
+      - api
+      operationId: Information
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/api-v1-info-powertrain1819027622'
+              examples:
+                Information:
+                  value: |-
+                    {
+                      "data" : [ {
+                        "id" : 1,
+                        "name" : "디젤2.2",
+                        "imageSrc" : "url",
+                        "price" : 123456
+                      }, {
+                        "id" : 2,
+                        "name" : "가솔린3.8",
+                        "imageSrc" : "url",
+                        "price" : 8080
+                      } ],
+                      "message" : "성공",
+                      "code" : 1000
+                    }
 components:
   schemas:
+    api-v1-info-powertrain1819027622:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 상태 코드(Http Status 아님)
+        data:
+          type: array
+          description: 결과 데이터
+          items:
+            type: object
+            properties:
+              price:
+                type: number
+                description: 옵션 가격
+              name:
+                type: string
+                description: 옵션 이름
+              imageSrc:
+                type: string
+                description: 이미지 url
+              id:
+                type: number
+                description: 식별 아이디
+        message:
+          type: string
+          description: 결과메시지
     api-v1-cardb1589866205:
       type: object
       properties:
