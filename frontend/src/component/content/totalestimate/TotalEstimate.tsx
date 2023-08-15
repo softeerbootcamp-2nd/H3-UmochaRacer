@@ -5,7 +5,7 @@ import EstimateContent from './EstimateContent';
 import {flexCenter} from '@/style/common';
 
 function TotalEstimate() {
-  const [loaded, setLoaded] = useState(true);
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <Wrapper>

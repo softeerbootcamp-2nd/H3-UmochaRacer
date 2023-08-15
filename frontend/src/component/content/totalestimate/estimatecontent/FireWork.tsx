@@ -17,12 +17,11 @@ const explode = (
   }
   `
       : keyframes`
-  100% {
-      transform: translate(${positionX}px, -${positionY}px)
-      rotate(${rotate}deg);
-      ;
-  }
-  `;
+    100% {
+        transform: translate(${positionX}px, -${positionY}px)
+        rotate(${rotate}deg);
+    }
+    `;
 
   return resultAni;
 };
@@ -49,7 +48,7 @@ function Fireworks({direction, number}: Props) {
           key={index}
           $color={colors[index % colors.length]}
           $animation={animation}
-          $width={Math.random() * (40 - 10) + 10}
+          $width={Math.random() * 30 + 10}
           $height={Math.random() + 10}
         ></ExplosionDiv>
       );

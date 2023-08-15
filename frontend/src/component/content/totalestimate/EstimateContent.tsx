@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Top from './estimatecontent/Top';
 import Middle from './estimatecontent/Middle';
 import Bottom from './estimatecontent/Bottom';
+import Firework from './estimatecontent/FireWork';
 import {colors} from '@/style/theme';
 import {Body2_Medium} from '@/style/fonts';
 
+const LEFT = 'left';
+const RIGHT = 'right';
 interface ButtonLayout {
   text: string;
   background: string;
@@ -54,6 +57,8 @@ function EstimateContent() {
   return (
     <Wrapper>
       <Top></Top>
+      <Firework direction={LEFT} number={10}></Firework>
+      <Firework direction={RIGHT} number={10}></Firework>
       <Middle></Middle>
       <ButtonBox>{buttons}</ButtonBox>
       <Bottom></Bottom>
