@@ -30,4 +30,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchExteriorColor() -> AnyPublisher<Result<ExteriorColorResponse, Error>, Never> {
         return networkService.request(CarInfoEndpoint.exteriorColor)
     }
+
+    func fetchInteriorColor() -> AnyPublisher<Result<InteriorColorResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.interiorColor)
+    }
 }
