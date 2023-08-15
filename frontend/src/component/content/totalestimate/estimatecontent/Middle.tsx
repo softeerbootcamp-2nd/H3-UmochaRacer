@@ -18,7 +18,11 @@ function Middle() {
   const price = 47270000;
   return (
     <Wrapper>
-      <EstimateHeader text={'견적 요약'} price={price}></EstimateHeader>
+      <EstimateHeader
+        text={'견적 요약'}
+        price={price}
+        padding={24}
+      ></EstimateHeader>
       <EstimateList
         gap={36}
         sidePadding={24}

@@ -5,11 +5,12 @@ import {Title1_Medium, Title4_Regular} from '@/style/fonts';
 interface Props {
   text: string;
   price: number;
+  padding?: number;
 }
 
-function EstimateHeader({text, price}: Props) {
+function EstimateHeader({text, price, padding}: Props) {
   return (
-    <Wrapper>
+    <Wrapper $padding={padding}>
       <Left>{text}</Left>
       <Right>
         <Text>차량 총 견적 금액</Text>
@@ -21,13 +22,13 @@ function EstimateHeader({text, price}: Props) {
 
 export default EstimateHeader;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{$padding?: number}>`
   display: flex;
   justify-content: space-between;
   width: 100%;
   height: 44px;
   margin: 52px 0 14px 0;
-  padding-left: 24px;
+  padding-left: ${({$padding}) => $padding && $padding}px;
 `;
 
 const Right = styled.div`
