@@ -5,14 +5,14 @@ import React from 'react';
 import styled from 'styled-components';
 interface detailProps {
   border: boolean;
-  color: string;
+  src: string;
   name: string;
 }
-function ModelOptionDetail({border, color, name}: detailProps) {
+function ModelOptionDetail({border, src, name}: detailProps) {
   return (
     <Detail.Wrapper>
       <Detail.IconWrapper>
-        <Detail.Icon $border={border} $color={color}></Detail.Icon>
+        <Detail.Icon $border={border} src={src}></Detail.Icon>
       </Detail.IconWrapper>
       <Detail.Name>{name}</Detail.Name>
     </Detail.Wrapper>
@@ -34,9 +34,8 @@ const Detail = {
   IconWrapper: styled.div`
     text-align: center;
   `,
-  Icon: styled.div<{$border: boolean; $color: string}>`
+  Icon: styled.img<{$border: boolean}>`
     border-radius: 50%;
-    background-color: ${(props) => props.$color};
     width: 20px;
     height: 20px;
 

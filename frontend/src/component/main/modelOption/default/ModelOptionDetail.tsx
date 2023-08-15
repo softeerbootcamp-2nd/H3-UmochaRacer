@@ -10,7 +10,7 @@ interface detailProps {
 function ModelOptionDetail({src, name}: detailProps) {
   return (
     <Detail.Wrapper>
-      <Detail.IconWrapper src={`/src/assets/images/default/${src}.png`} />
+      <Detail.IconWrapper src={src} />
       <Detail.Name>{name}</Detail.Name>
     </Detail.Wrapper>
   );
@@ -21,6 +21,7 @@ const Detail = {
   Wrapper: styled.div`
     ${flexBetween}
     gap : 16px;
+    height: 60px;
   `,
   Name: styled.p`
     color: ${colors.Cool_Grey};
