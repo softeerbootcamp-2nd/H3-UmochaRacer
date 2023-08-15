@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-public class AdditonalOptionInformationControllerTest extends AbstractRestDocsTest {
+class AdditonalOptionInformationControllerTest extends AbstractRestDocsTest {
     @Mock
     private InformationStrategy strategyFactory;
 
@@ -72,9 +72,6 @@ public class AdditonalOptionInformationControllerTest extends AbstractRestDocsTe
                         "휠 / 추가옵션 Information",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
-                        requestFields(
-
-                        ),
                         responseFields(
                                 fieldWithPath("code").type(JsonFieldType.NUMBER).description("상태 코드(Http Status 아님)"),
                                 fieldWithPath("message").type(JsonFieldType.STRING).description("결과메시지"),
