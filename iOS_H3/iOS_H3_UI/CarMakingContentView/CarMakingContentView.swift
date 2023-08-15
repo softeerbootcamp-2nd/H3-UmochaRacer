@@ -26,20 +26,6 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     let progressBarHeight = 26.0
     let bottomSheetHeight = 129.0
 
-    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
-
-    weak var dataSource: CarMakingContentViewDataSource? {
-        didSet {
-            setupSnapshot()
-        }
-    }
-
-    private let carMakingMode: CarMakingMode
-    private let cellIdentifiers: [PageSection: String] = [
-        .twoButton: CarMakingTwoOptionCell.identifier,
-        .multipleButton: CarMakingMultipleOptionCell.identifier
-    ]
-
     // MARK: - UI properties
 
     private let collectionView: UICollectionView = {
@@ -55,7 +41,22 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Properties
 
+    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
+
     private let flowLayoutDelegate = FlowLayoutDelegate()
+
+    weak var dataSource: CarMakingContentViewDataSource? {
+        didSet {
+            setupSnapshot()
+        }
+    }
+
+    private let cellIdentifiers: [PageSection: String] = [
+        .twoButton: CarMakingTwoOptionCell.identifier,
+        .multipleButton: CarMakingMultipleOptionCell.identifier
+    ]
+
+    private let carMakingMode: CarMakingMode
 
     // MARK: - Lifecycles
 
@@ -79,6 +80,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Helpers
 }
+
+// MARK: - Setup Views
 
 extension CarMakingContentView {
 
@@ -166,7 +169,8 @@ extension CarMakingContentView {
 
 }
 
-// MARK: : UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
+
 class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     let progressBarHeight = 26.0
 
@@ -178,7 +182,10 @@ class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - CarMakingProgressBar Delegate
+
 extension CarMakingContentView: CarMakingProgressBarDelegate {
+
     func progressBarButtonDidTapped(didSelectItemAt index: Int) {
         let section = PageSection.section(for: index)
         let item = section.itemIndex(for: index)
