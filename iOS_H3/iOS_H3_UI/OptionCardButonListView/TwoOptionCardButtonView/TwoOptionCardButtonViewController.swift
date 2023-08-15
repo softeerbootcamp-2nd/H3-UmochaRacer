@@ -12,13 +12,13 @@ final class TwoOptionCardButtonViewController: UIViewController {
     // MARK: - UI properties
 
     private let selfModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .selfMode)
+        let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let guideModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .guideMode)
+        let view = TwoOptionCardButtonView(carMakingMode: .guideMode)
         view.updateView(
             index: 0,
             with: OptionCardInfo(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true)
@@ -28,7 +28,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
     }()
 
     private let twoOptionCardButtonViewWithData: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .selfMode)
+        let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         let cardInfos: [OptionCardInfo] = [
             .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원"),
@@ -39,7 +39,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
     }()
 
     private let moreInfoVersionView: TwoOptionCardButtonView = {
-        let view = TwoOptionCardButtonView(type: .selfMode)
+        let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         let cardInfos: [OptionCardInfo] = [
             .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원", hasMoreInfo: true),

@@ -17,14 +17,14 @@ final class MultiOptionCardButtonViewController: UIViewController {
     // MARK: - UI properties
 
     private lazy var selfModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
-        let view = MultiOptionCardButtonView(type: .selfMode)
+        let view = MultiOptionCardButtonView(carMakingMode: .selfMode)
         view.updateAllViews(with: self.cardInfos)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let guideModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
-        let view = MultiOptionCardButtonView(type: .guideMode)
+        let view = MultiOptionCardButtonView(carMakingMode: .guideMode)
 
         let cardInfos: [OptionCardInfo] = [
             .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
