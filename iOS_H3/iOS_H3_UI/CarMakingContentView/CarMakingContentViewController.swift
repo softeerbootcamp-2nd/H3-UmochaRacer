@@ -65,24 +65,24 @@ final class CarMakingContentViewController: UIViewController {
     }
 }
 extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
-    func titleButtonTapped() {
+    func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
         print("titleButton Pressed")
     }
 
-    func backButtonPressed() {
+    func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("backButton Pressed")
         self.dismiss(animated: true)
     }
 
-    func skipButtonPressed() {
+    func titleBarSkipButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("skipButton Pressed")
     }
 
-    func dictionaryButtonPressed() {
+    func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("dictionaryButton Pressed")
     }
 
-    func changeModelButtonPressed() {
+    func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("changeModelButton Pressed")
     }
 }
