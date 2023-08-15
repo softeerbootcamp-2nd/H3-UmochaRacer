@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 @objc protocol OhMyCarSetTitleBarDelegate: AnyObject {
-    @objc optional func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar)
+    func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar)
     @objc optional func titleBarSkipButtonPressed(_ titleBar: OhMyCarSetTitleBar)
     @objc optional func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar)
     @objc optional func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar)
@@ -175,7 +175,7 @@ class OhMyCarSetTitleBar: UIView {
     }
 
     @objc private func backButtonTapped() {
-        delegate?.titleBarBackButtonPressed?(self)
+        delegate?.titleBarBackButtonPressed(self)
     }
 
     @objc private func skipButtonTapped() {
