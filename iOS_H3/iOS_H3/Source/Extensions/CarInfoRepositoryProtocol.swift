@@ -10,5 +10,6 @@ import Combine
 
 protocol CarInfoRepositoryProtocol {
     func fetchPowertrain(model: String, type: String) -> AnyPublisher<Result<PowertrainResponse, Error>, Never>
-   
+
+    func fetchDrivingSystem() -> AnyPublisher<Result<DrivingSystemResponse, Error>, Never>
 }
