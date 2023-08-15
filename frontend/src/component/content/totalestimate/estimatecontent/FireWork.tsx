@@ -38,7 +38,7 @@ function Fireworks({direction, number}: Props) {
     (_, index) => {
       const animation = explode(
         Math.random() * 256 + 256,
-        Math.random() * 150 + 250,
+        Math.random() * 250 + 200,
         Math.random() * 180,
         direction,
       );
