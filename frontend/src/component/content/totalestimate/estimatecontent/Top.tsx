@@ -42,6 +42,7 @@ export default Top;
 const Wrapper = styled.div`
   ${flexCenter}
   flex-direction: column;
+  margin-top: 60px;
   gap: 10px;
 `;
 
