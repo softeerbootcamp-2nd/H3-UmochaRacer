@@ -26,4 +26,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchBodyType() -> AnyPublisher<Result<BodyTypeResponse, Error>, Never> {
         return networkService.request(CarInfoEndpoint.bodyType)
     }
+
+    func fetchExteriorColor() -> AnyPublisher<Result<ExteriorColorResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.exteriorColor)
+    }
 }
