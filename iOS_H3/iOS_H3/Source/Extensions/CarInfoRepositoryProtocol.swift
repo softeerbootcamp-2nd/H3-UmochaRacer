@@ -16,4 +16,6 @@ protocol CarInfoRepositoryProtocol {
     func fetchBodyType() -> AnyPublisher<Result<BodyTypeResponse, Error>, Never>
 
     func fetchExteriorColor() -> AnyPublisher<Result<ExteriorColorResponse, Error>, Never>
+
+    func fetchInteriorColor() -> AnyPublisher<Result<InteriorColorResponse, Error>, Never>
 }
