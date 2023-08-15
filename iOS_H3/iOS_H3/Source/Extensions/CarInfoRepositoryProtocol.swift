@@ -22,4 +22,6 @@ protocol CarInfoRepositoryProtocol {
     func fetchWheel() -> AnyPublisher<Result<WheelResponse, Error>, Never>
 
     func fetchAdditionalOption(category: String) -> AnyPublisher<Result<AdditionalOptionResponse, Error>, Never>
+
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<Result<SingleExteriorColorResponse, Error>, Never>
 }

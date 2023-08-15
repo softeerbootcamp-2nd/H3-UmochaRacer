@@ -42,4 +42,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchAdditionalOption(category: String) -> AnyPublisher<Result<AdditionalOptionResponse, Error>, Never> {
         return networkService.request(CarInfoEndpoint.additionalOption(category: category))
     }
+
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<Result<SingleExteriorColorResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.singleExteriorColor(optionId: optionId))
+    }
 }
