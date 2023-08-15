@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-protocol OhMyCarSetTitleBarDelegate: AnyObject {
-    func backButtonPressed()
-    func skipButtonPressed()
-    func dictionaryButtonPressed()
-    func changeModelButtonPressed()
-    func titleButtonTapped()
+@objc protocol OhMyCarSetTitleBarDelegate: AnyObject {
+    @objc optional func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar)
+    @objc optional func titleBarSkipButtonPressed(_ titleBar: OhMyCarSetTitleBar)
+    @objc optional func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar)
+    @objc optional func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar)
+    @objc optional func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar)
 }
 
 class OhMyCarSetTitleBar: UIView {
@@ -175,25 +175,25 @@ class OhMyCarSetTitleBar: UIView {
     }
 
     @objc private func backButtonTapped() {
-        delegate?.backButtonPressed()
+        delegate?.titleBarBackButtonPressed?(self)
     }
 
     @objc private func skipButtonTapped() {
-        delegate?.skipButtonPressed()
+        delegate?.titleBarSkipButtonPressed?(self)
     }
 
     @objc private func dictionaryButtonTapped(_ sender: UIButton) {
         isDictionaryButtonOn.toggle()
         let buttonImage = isDictionaryButtonOn ? "dictionary_on_img" : "dictionary_off_img"
         sender.setImage(UIImage(named: buttonImage), for: .normal)
-        delegate?.dictionaryButtonPressed()
+        delegate?.titleBarDictionaryButtonPressed?(self)
     }
 
     @objc private func changeModelButtonTapped() {
-        delegate?.changeModelButtonPressed()
+        delegate?.titleBarChangeModelButtonPressed?(self)
     }
     @objc private func titleLogoButtonTapped() {
-        delegate?.titleButtonTapped()
+        delegate?.titleBarTitleButtonTapped?(self)
     }
 
     private func setTitleLabel() {
