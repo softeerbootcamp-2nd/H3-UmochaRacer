@@ -23,8 +23,6 @@ public abstract class AbstractStrategyTest {
     protected ExteriorColorRepository exteriorColorRepository;
     @Mock
     protected WheelRepository wheelRepository;
-    @Mock
-    protected InteriorColorRepository interiorColorRepository;
 
     @Mock
     protected InformationMapper informationMapper;

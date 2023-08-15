@@ -3,7 +3,6 @@ package com.example.backend.domain.information.controller;
 import com.example.backend.AbstractRestDocsTest;
 import com.example.backend.domain.information.service.AdditionalOptionService;
 import com.example.backend.domain.information.service.strategy.InformationStrategy;
-import com.example.backend.domain.information.service.strategy.PowertrainService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -16,7 +15,6 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.web.servlet.ResultActions;
 
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,8 +25,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 class CarInformationControllerTest extends AbstractRestDocsTest {
     @Mock
     private InformationStrategy strategyFactory;
-    @Mock
-    private PowertrainService powertrainService;
 
     @MockBean
     private AdditionalOptionService additionalOptionService;
@@ -46,7 +42,7 @@ class CarInformationControllerTest extends AbstractRestDocsTest {
     void performOptionInfoTest(String uri) throws Exception {
 
         ResultActions perform = mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/api/v1/info/"+uri)
+                RestDocumentationRequestBuilders.get("/api/v1/info/" + uri)
         );
 
         perform.andDo(print())
