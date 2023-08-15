@@ -1,0 +1,75 @@
+openapi: 3.0.1
+info:
+  title: 유모차레이서 API Docs
+  description: Rest API Documentation
+  version: "1.0"
+servers:
+- url: http://43.202.37.97:9999/api/
+tags: []
+paths:
+  /api/v1/cardb:
+    get:
+      tags:
+      - api
+      operationId: Car DBInformation
+      parameters:
+      - name: keyword
+        in: query
+        description: 백카사전 키워드
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json;charset=UTF-8:
+              schema:
+                $ref: '#/components/schemas/api-v1-cardb1589866205'
+              examples:
+                Information:
+                  value: |-
+                    {
+                      "data" : {
+                        "keyword" : "파워트레인",
+                        "description" : "토크 어쩌고 저쩌고",
+                        "imageSrc" : "s3 url"
+                      },
+                      "message" : "성공",
+                      "code" : 1000
+                    }
+                Car DB:
+                  value: |-
+                    {
+                      "data" : {
+                        "keyword" : "파워트레인",
+                        "description" : "토크 어쩌고 저쩌고",
+                        "imageSrc" : "s3 url"
+                      },
+                      "message" : "성공",
+                      "code" : 1000
+                    }
+components:
+  schemas:
+    api-v1-cardb1589866205:
+      type: object
+      properties:
+        code:
+          type: number
+          description: 상태 코드(Http Status 아님)
+        data:
+          type: object
+          properties:
+            description:
+              type: string
+              description: 백카사전 설명
+            imageSrc:
+              type: string
+              description: 이미지 url
+            keyword:
+              type: string
+              description: 백카사전 키워드
+          description: 결과 데이터
+        message:
+          type: string
+          description: 결과메시지
