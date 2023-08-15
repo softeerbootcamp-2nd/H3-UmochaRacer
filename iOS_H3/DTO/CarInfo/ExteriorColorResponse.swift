@@ -6,3 +6,17 @@
 //
 
 import Foundation
+struct ExteriorColorResponse: Codable {
+    let data: [ExteriorColor]
+    let message: String?
+    let code: Int?
+
+    struct ExteriorColor: Codable {
+        let id: Int?
+        let label: String?
+        let price: Int?
+        let colorCode: String?
+        let imageSrc: String?
+        let iconSrc: String?
+    }
+}
