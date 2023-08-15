@@ -22,4 +22,8 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchDrivingSystem() -> AnyPublisher<Result<DrivingSystemResponse, Error>, Never> {
            return networkService.request(CarInfoEndpoint.drivingSystem)
        }
+
+    func fetchBodyType() -> AnyPublisher<Result<BodyTypeResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.bodyType)
+    }
 }
