@@ -22,16 +22,16 @@ final class OptionCardCell: UICollectionViewCell {
 
     // MARK: - Lifecycles
 
-    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
-        optionCardButton = OptionCardButton(type: type)
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
+        optionCardButton = OptionCardButton(mode: carMakingMode)
         super.init(frame: frame)
 
         setupViews()
         setupButtonTapSubject()
     }
 
-    init?(coder: NSCoder, type: OptionCardButton.OptionCardType) {
-        optionCardButton = OptionCardButton(type: type)
+    init?(coder: NSCoder, carMakingMode: CarMakingMode) {
+        optionCardButton = OptionCardButton(mode: carMakingMode)
         super.init(coder: coder)
 
         setupViews()
@@ -39,7 +39,7 @@ final class OptionCardCell: UICollectionViewCell {
     }
 
     override init(frame: CGRect) {
-        optionCardButton = OptionCardButton(type: .selfMode)
+        optionCardButton = OptionCardButton(mode: .selfMode)
         super.init(frame: frame)
 
         setupViews()
@@ -47,7 +47,7 @@ final class OptionCardCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        optionCardButton = OptionCardButton(type: .selfMode)
+        optionCardButton = OptionCardButton(mode: .selfMode)
         super.init(coder: coder)
 
         setupViews()
@@ -62,8 +62,8 @@ final class OptionCardCell: UICollectionViewCell {
 
     // MARK: - Helpers
 
-    func configure(cardType: OptionCardButton.OptionCardType, info: OptionCardInfo) {
-        optionCardButton.update(type: cardType, cardInfo: info)
+    func configure(carMakingMode: CarMakingMode, info: OptionCardInfo) {
+        optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info)
     }
 }
 

@@ -63,7 +63,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: - Helpers
-    func configure(type: OptionCardButton.OptionCardType,
+    func configure(mode: CarMakingMode,
                    bannerImage: String?,
                    makingStepTitle: String,
                    optionInfos: [OptionCardInfo]) {

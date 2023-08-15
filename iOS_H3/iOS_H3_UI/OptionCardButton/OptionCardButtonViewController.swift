@@ -10,19 +10,19 @@ class OptionCardButtonViewController: UIViewController {
 
     // 셀프모드 기본 버튼
     lazy var selfModeBasicButton: OptionCardButton = {
-        let button = OptionCardButton(type: .selfMode)
+        let button = OptionCardButton(mode: .selfMode)
         return button
     }()
 
     // 가이드모드 자세히보기 버튼
     lazy var guideModeBasicButton: OptionCardButton = {
-        let button = OptionCardButton(type: .guideMode, hasMoreInfo: true)
+        let button = OptionCardButton(mode: .guideMode, hasMoreInfo: true)
         return button
     }()
 
     // 셀프모드 내장 색상 버튼
     lazy var selfModeInnerColorButton: OptionCardButton = {
-        let button = OptionCardButton(type: .selfMode)
+        let button = OptionCardButton(mode: .selfMode)
         if let url = URL(string: "https://github.com/") {
             button.setImage(url: url)
         }
@@ -31,7 +31,7 @@ class OptionCardButtonViewController: UIViewController {
 
     // 셀프모드 외장 색상 버튼
     lazy var guideModeOuterColorButton: OptionCardButton = {
-        let button = OptionCardButton(type: .guideMode)
+        let button = OptionCardButton(mode: .guideMode)
         button.setColor(.blue)
         return button
     }()

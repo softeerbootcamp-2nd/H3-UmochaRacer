@@ -22,7 +22,7 @@ final class CarMakingContentViewController: UIViewController {
     }()
 
     private lazy var carMakingContentView: CarMakingContentView = {
-        let view = CarMakingContentView<PageSection>(frame: .zero, type: .selfMode)
+        let view = CarMakingContentView<PageSection>(frame: .zero, mode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()

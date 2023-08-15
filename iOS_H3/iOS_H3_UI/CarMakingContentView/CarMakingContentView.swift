@@ -37,11 +37,12 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
-    private let optionCardType: OptionCardButton.OptionCardType
+    private let carMakingMode: CarMakingMode
     private let cellIdentifiers: [PageSection: String] = [
         .twoButton: CarMakingTwoOptionCell.identifier,
         .multipleButton: CarMakingMultipleOptionCell.identifier
     ]
+
     // MARK: - UI properties
 
     private let collectionView: UICollectionView = {
@@ -56,21 +57,25 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }()
 
     // MARK: - Properties
+
     private let flowLayoutDelegate = FlowLayoutDelegate()
 
     // MARK: - Lifecycles
+
     override init(frame: CGRect) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(frame: frame)
         setupViews()
     }
+
     required init?(coder: NSCoder) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(coder: coder)
         setupViews()
     }
-    init(frame: CGRect, type: OptionCardButton.OptionCardType) {
-        optionCardType = type
+
+    init(frame: CGRect, mode: CarMakingMode) {
+        carMakingMode = mode
         super.init(frame: frame)
         setupViews()
     }
@@ -79,6 +84,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 }
 
 extension CarMakingContentView {
+
     private func setupViews() {
         setupProgressBar()
         setupCollectionView()
@@ -141,7 +147,7 @@ extension CarMakingContentView {
 
             let urlString = self.dataSource?.contentView(urlForItemAtIndex: indexPath)
             let options = self.dataSource?.contentView(optionsForItemAtIndex: indexPath) ?? []
-            cell.configure(type: self.optionCardType,
+            cell.configure(mode: self.carMakingMode,
                            bannerImage: urlString,
                            makingStepTitle: step.title,
                            optionInfos: options)
