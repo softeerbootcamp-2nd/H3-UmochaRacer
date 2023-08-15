@@ -11,6 +11,7 @@ final class CarMakingViewController: UIViewController {
 
     enum Constants {
         static let titleBarHeight = 50.0
+        static let bottomModalViewHeight = 129.0
     }
 
     // MARK: - UI properties
@@ -18,6 +19,8 @@ final class CarMakingViewController: UIViewController {
     private var titleBar: OhMyCarSetTitleBar!
 
     private var carMakingContentView: CarMakingContentView<PageSection>!
+
+    private let bottomModalView = BottomModalView()
 
     // MARK: - Properties
 
@@ -79,26 +82,50 @@ extension CarMakingViewController: CarMakingContentViewDataSource {
     }
 }
 
+// MARK: - BottomModalView Delegate & DataSource
+
+extension CarMakingViewController: BottomModalViewDelegate, BottomModalViewDataSource {
+
+    func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView) {
+        carMakingContentView.movePrevStep()
+    }
+
+    func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
+        carMakingContentView.moveNextStep()
+    }
+
+    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int {
+        return -1
+    }
+}
+
 // MARK: - Setup Properties
 
 extension CarMakingViewController {
 
     private func setupProperties() {
-        initTitleBar()
-        initContentView()
+        setupTitleBar()
+        setupContentView()
+        setupBottomModalView()
     }
 
-    private func initTitleBar() {
+    private func setupTitleBar() {
         let titleBarType: OhMyCarSetTitleBar.NavigationBarType = (mode == .selfMode) ? .selfMode : .guideMode
         titleBar = OhMyCarSetTitleBar(type: titleBarType)
         titleBar.delegate = self
         titleBar.translatesAutoresizingMaskIntoConstraints = false
     }
 
-    private func initContentView() {
+    private func setupContentView() {
         carMakingContentView = CarMakingContentView(frame: .zero, mode: mode)
         carMakingContentView.dataSource = self
         carMakingContentView.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private func setupBottomModalView() {
+        bottomModalView.delegate = self
+        bottomModalView.dataSource = self
+        bottomModalView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
 
@@ -113,13 +140,15 @@ extension CarMakingViewController {
     }
 
     private func addSubviews() {
-        view.addSubview(titleBar)
-        view.addSubview(carMakingContentView)
+        [titleBar, carMakingContentView, bottomModalView].forEach {
+            view.addSubview($0)
+        }
     }
 
     private func setupConstraints() {
         setupTitleBarConstraints()
         setupContentViewConstraints()
+        setupBottomModalViewConstraints()
     }
 
     private func setupTitleBarConstraints() {
@@ -136,7 +165,18 @@ extension CarMakingViewController {
             carMakingContentView.topAnchor.constraint(equalTo: titleBar.bottomAnchor),
             carMakingContentView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
             carMakingContentView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
-            carMakingContentView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            carMakingContentView.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -Constants.bottomModalViewHeight
+            )
+        ])
+    }
+
+    private func setupBottomModalViewConstraints() {
+        NSLayoutConstraint.activate([
+            bottomModalView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
+            bottomModalView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
+            bottomModalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
