@@ -62,6 +62,10 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Helpers
+
+    func selectButton(for index: Int) {
+        selectedButtonIndex = index
+    }
 }
 
 extension CarMakingProgressBar {
