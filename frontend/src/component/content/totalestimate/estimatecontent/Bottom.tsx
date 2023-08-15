@@ -54,6 +54,7 @@ function Bottom() {
     return (
       <DetailEstimate
         key={index}
+        optionIndex={index - 1}
         optionName={elem.optionName}
         optionTitle={elem.optionTitle}
         price={elem.price}

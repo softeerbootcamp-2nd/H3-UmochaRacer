@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
+import {OptionContext} from '@/provider/optionProvider';
 
 import {
   Title1_Medium,
@@ -13,6 +14,7 @@ import {flexCenter} from '@/style/common';
 interface Props {
   optionName: string;
   optionTitle: string;
+  optionIndex: number;
   imgSrc: string;
   price: number;
 }
@@ -34,7 +36,19 @@ const EditIcon = () => {
   );
 };
 
-function DetailEstimate({optionName, optionTitle, imgSrc, price}: Props) {
+function DetailEstimate({
+  optionName,
+  optionTitle,
+  optionIndex,
+  imgSrc,
+  price,
+}: Props) {
+  const {setOption} = useContext(OptionContext);
+
+  const handleButtonClick = () => {
+    setOption(optionIndex);
+  };
+
   return (
     <Wrapper>
       <Header>
@@ -47,7 +61,7 @@ function DetailEstimate({optionName, optionTitle, imgSrc, price}: Props) {
           <ContentLeft>{optionTitle}</ContentLeft>
           <ContentRight>
             {`+ ${price.toLocaleString()}원`}
-            <EditButton>
+            <EditButton onClick={handleButtonClick}>
               <IconBox>{EditIcon()}</IconBox>
               수정
             </EditButton>
