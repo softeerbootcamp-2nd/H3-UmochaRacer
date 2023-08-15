@@ -3,6 +3,10 @@ import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
 import {Title1_Medium, Title4_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
+import Firework from './top/FireWork';
+
+const LEFT = 'left';
+const RIGHT = 'right';
 
 function Top() {
   const [imgsrc, setImgsrc] = useState('src/assets/images/white.png');
@@ -33,6 +37,8 @@ function Top() {
           내부
         </ImageButton>
       </ButtonBox>
+      <Firework direction={LEFT} number={10}></Firework>
+      <Firework direction={RIGHT} number={10}></Firework>
     </Wrapper>
   );
 }

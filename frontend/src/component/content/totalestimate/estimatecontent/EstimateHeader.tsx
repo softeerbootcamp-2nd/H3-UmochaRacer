@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 44px;
   margin: 52px 0 14px 0;
-  padding: 0 24px;
+  padding-left: 24px;
 `;
 
 const Right = styled.div`
