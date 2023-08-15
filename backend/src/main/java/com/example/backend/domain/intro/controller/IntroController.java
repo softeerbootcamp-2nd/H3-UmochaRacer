@@ -39,7 +39,7 @@ public class IntroController {
             @RequestParam(value = "trimId", required = false, defaultValue = "-1") long trimId,
             @RequestParam(value = "category", required = false, defaultValue = "") String category,
             @RequestParam(value = "page", required = false, defaultValue = "-1") int page,
-            @RequestParam(value = "size", required = false, defaultValue = "-1") int size
+            @RequestParam(value = "size", required = false, defaultValue = "5") int size
     ) {
         IntroResponse result = optionInformationService.findBy(trimId, category, page, size);
         return mapToOKResponse(result);

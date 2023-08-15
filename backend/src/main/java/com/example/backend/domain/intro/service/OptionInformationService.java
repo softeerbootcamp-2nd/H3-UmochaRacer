@@ -22,8 +22,8 @@ public class OptionInformationService {
 
 
     public IntroResponse findBy(Long trimId, String category, int page, int size) {
-        if (page == -1) throw new RestApiException(ResultCode.PAGE_NOT_FOUND);
-        if (size == -1) throw new RestApiException(ResultCode.PAGE_SIZE_NOT_FOUND);
+        if (page < 0) throw new RestApiException(ResultCode.PAGE_NOT_FOUND);
+        if (size <= 0) throw new RestApiException(ResultCode.PAGE_SIZE_ERROR);
 
         PageRequest pageRequest = PageRequest.of(page, size);
 
