@@ -43,6 +43,21 @@
 		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
+		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
+		479023992A8A3DB000DECB70 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */; };
+		4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF42A777BDE0055A4FA /* AppDelegate.swift */; };
+		4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF62A777BDE0055A4FA /* SceneDelegate.swift */; };
+		479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F00FBF82A777BDE0055A4FA /* ViewController.swift */; };
+		479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AC2A8AA18600DECB70 /* NetworkService.swift */; };
+		479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AC2A8AA18600DECB70 /* NetworkService.swift */; };
+		479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
+		479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AD2A8AA18600DECB70 /* NetworkError.swift */; };
+		479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AE2A8AA18600DECB70 /* EndPoint.swift */; };
+		479023B42A8AA18600DECB70 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023AE2A8AA18600DECB70 /* EndPoint.swift */; };
+		479023B62A8B231200DECB70 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B52A8B231200DECB70 /* URL+.swift */; };
+		479023B72A8B231200DECB70 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B52A8B231200DECB70 /* URL+.swift */; };
+		479023B92A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
+		479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -180,6 +195,15 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
+		4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		479023952A8A3DB000DECB70 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		479023982A8A3DB000DECB70 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4790239A2A8A3DB000DECB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		479023AC2A8AA18600DECB70 /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		479023AD2A8AA18600DECB70 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		479023AE2A8AA18600DECB70 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		479023B52A8B231200DECB70 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
+		479023B82A8B231D00DECB70 /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -233,6 +257,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		479023872A8A3DAF00DECB70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBEE2A777BDE0055A4FA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -315,12 +346,11 @@
 			children = (
 				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 				477620C42A7B80B900D60B59 /* UILabel+.swift */,
-
 				4700964C2A880372003711F2 /* Int+.swift */,
-
 				5F4D33B12A8751E500942517 /* UIImageView+.swift */,
 				5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */,
-
+				479023B52A8B231200DECB70 /* URL+.swift */,
+				479023B82A8B231D00DECB70 /* URLRequest+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -367,6 +397,7 @@
 		478B267A2A78FC7A00598902 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				479023AB2A8AA18600DECB70 /* Network */,
 				478B267B2A78FCDC00598902 /* App */,
 				478B26792A78FC7400598902 /* Data */,
 				478B26782A78FC6F00598902 /* Domain */,
@@ -472,6 +503,26 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		4790238B2A8A3DAF00DECB70 /* NetworkLayerTest */ = {
+			isa = PBXGroup;
+			children = (
+				479023952A8A3DB000DECB70 /* Assets.xcassets */,
+				479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */,
+				4790239A2A8A3DB000DECB70 /* Info.plist */,
+			);
+			path = NetworkLayerTest;
+			sourceTree = "<group>";
+		};
+		479023AB2A8AA18600DECB70 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				479023AC2A8AA18600DECB70 /* NetworkService.swift */,
+				479023AD2A8AA18600DECB70 /* NetworkError.swift */,
+				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		47CB8CAB2A79EC7E004B24AD /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -493,6 +544,7 @@
 				5F6203672A7BC59500D09531 /* iOS_H3_UI */,
 				5F62037E2A7BC59600D09531 /* iOS_H3_UITests */,
 				5F6203882A7BC59700D09531 /* iOS_H3_UIUITests */,
+				4790238B2A8A3DAF00DECB70 /* NetworkLayerTest */,
 				5F00FBF22A777BDE0055A4FA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -506,6 +558,7 @@
 				5F6203662A7BC59500D09531 /* iOS_H3_UI.app */,
 				5F62037B2A7BC59600D09531 /* iOS_H3_UITests.xctest */,
 				5F6203852A7BC59600D09531 /* iOS_H3_UIUITests.xctest */,
+				4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -618,6 +671,15 @@
 			path = iOS_H3_UIUITests;
 			sourceTree = "<group>";
 		};
+		5F6A82F22A887AE40025D5A4 /* OptionCategoryTabbar */ = {
+			isa = PBXGroup;
+			children = (
+				5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */,
+				5F371BAE2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift */,
+			);
+			path = OptionCategoryTabbar;
+			sourceTree = "<group>";
+		};
 		5F99F0612A8516FA00C38555 /* CarMakingContentView */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,18 +690,26 @@
 			path = CarMakingContentView;
 			sourceTree = "<group>";
 		};
-		5F6A82F22A887AE40025D5A4 /* OptionCategoryTabbar */ = {
-			isa = PBXGroup;
-			children = (
-				5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */,
-				5F371BAE2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift */,
-			);
-			path = OptionCategoryTabbar;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		479023892A8A3DAF00DECB70 /* NetworkLayerTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4790239D2A8A3DB000DECB70 /* Build configuration list for PBXNativeTarget "NetworkLayerTest" */;
+			buildPhases = (
+				479023862A8A3DAF00DECB70 /* Sources */,
+				479023872A8A3DAF00DECB70 /* Frameworks */,
+				479023882A8A3DAF00DECB70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NetworkLayerTest;
+			productName = NetworkLayerTest;
+			productReference = 4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */;
+			productType = "com.apple.product-type.application";
+		};
 		5F00FBF02A777BDE0055A4FA /* iOS_H3 */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5F00FC1B2A777BDF0055A4FA /* Build configuration list for PBXNativeTarget "iOS_H3" */;
@@ -758,6 +828,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					479023892A8A3DAF00DECB70 = {
+						CreatedOnToolsVersion = 14.3;
+					};
 					5F00FBF02A777BDE0055A4FA = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -801,11 +874,21 @@
 				5F6203652A7BC59500D09531 /* iOS_H3_UI */,
 				5F62037A2A7BC59600D09531 /* iOS_H3_UITests */,
 				5F6203842A7BC59600D09531 /* iOS_H3_UIUITests */,
+				479023892A8A3DAF00DECB70 /* NetworkLayerTest */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		479023882A8A3DAF00DECB70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				479023992A8A3DB000DECB70 /* LaunchScreen.storyboard in Resources */,
+				479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBEF2A777BDE0055A4FA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -887,6 +970,21 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		479023862A8A3DAF00DECB70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				479023B42A8AA18600DECB70 /* EndPoint.swift in Sources */,
+				479023A02A8A3E5D00DECB70 /* ViewController.swift in Sources */,
+				479023B72A8B231200DECB70 /* URL+.swift in Sources */,
+				479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */,
+				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
+				479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */,
+				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
+				479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5F00FBED2A777BDE0055A4FA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -896,11 +994,13 @@
 				5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				5F1FC1CA2A82577C00C54EBE /* CarMakingCollectionViewCell.swift in Sources */,
+				479023B92A8B231D00DECB70 /* URLRequest+.swift in Sources */,
 				47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */,
 				5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */,
 				5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */,
 				5F2593DE2A7FB3FD001B2D84 /* TagListView.swift in Sources */,
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
+				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
@@ -917,14 +1017,17 @@
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
+				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 				4700964D2A880372003711F2 /* Int+.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
+				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
+				479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */,
 				5F6603EF2A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
@@ -973,11 +1076,8 @@
 				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
-
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
-
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
-
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
@@ -1001,11 +1101,8 @@
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
 				5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */,
 				471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
-
 				470096442A874A0D003711F2 /* BottomModalView.swift in Sources */,
-
 				5F371BB22A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
-
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1052,6 +1149,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		479023972A8A3DB000DECB70 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				479023982A8A3DB000DECB70 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 		5F00FBFF2A777BDF0055A4FA /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1071,6 +1176,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		4790239B2A8A3DB000DECB70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkLayerTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift-test.NetworkLayerTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4790239C2A8A3DB000DECB70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NetworkLayerTest/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift-test.NetworkLayerTest";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5F00FC192A777BDF0055A4FA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1460,6 +1617,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4790239D2A8A3DB000DECB70 /* Build configuration list for PBXNativeTarget "NetworkLayerTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4790239B2A8A3DB000DECB70 /* Debug */,
+				4790239C2A8A3DB000DECB70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5F00FBEC2A777BDE0055A4FA /* Build configuration list for PBXProject "iOS_H3" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

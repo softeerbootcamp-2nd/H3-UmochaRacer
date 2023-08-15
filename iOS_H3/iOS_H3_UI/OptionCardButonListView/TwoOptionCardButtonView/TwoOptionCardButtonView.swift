@@ -68,7 +68,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 }
 
 extension TwoOptionCardButtonView: OptionCardButtonDelegate {
-    
+
     func moreInfoButtonDidTapped() {
         print("[TwoOptionCardButtonView]", #function, "- show alert 구현 필요")
     }
