@@ -41,13 +41,15 @@ final class NetworkService: NetworkServiceProtocol {
             let urlRequest = try endpoint.toURLRequest()
             return request(to: urlRequest)
                 .map { result in
-                    if case .success(let data) = result,
-                       let decodedData = try? JSONDecoder().decode(T.self, from: data) {
-                        return .success(decodedData)
-                    } else if case .failure(let error) = result {
+                    switch result {
+                    case .success(let data):
+                        if let decodedData = try? JSONDecoder().decode(T.self, from: data) {
+                            return .success(decodedData)
+                        }
+                        return .failure(NetworkError.decodeError)
+                    case .failure(let error):
                         return .failure(error)
                     }
-                    return .failure(NetworkError.decodeError)
                 }
                 .eraseToAnyPublisher()
         } catch {
