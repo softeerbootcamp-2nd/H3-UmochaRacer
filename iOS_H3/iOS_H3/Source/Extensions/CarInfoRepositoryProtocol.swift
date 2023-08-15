@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import Combine
+
+protocol CarInfoRepositoryProtocol {
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<Result<PowertrainResponse, Error>, Never>
+   
+}

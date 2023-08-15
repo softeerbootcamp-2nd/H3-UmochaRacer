@@ -6,3 +6,16 @@
 //
 
 import Foundation
+import Combine
+
+final class CarInfoRepository: CarInfoRepositoryProtocol {
+    private let networkService: NetworkServiceProtocol
+
+    init(networkService: NetworkServiceProtocol) {
+        self.networkService = networkService
+    }
+
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<Result<PowertrainResponse, Error>, Never> {
+        return networkService.request(CarInfoEndpoint.powertrain(model: model, type: type))
+    }
+}
