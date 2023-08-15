@@ -89,18 +89,6 @@ extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
 
 extension CarMakingContentViewController: CarMakingContentViewDataSource {
 
-    func numberOfSections() -> Int {
-        return PageSection.allCases.count
-    }
-
-    func contentView(numberOfItemsInSection section: Int) -> Int {
-        return CarMakingStep.allCases.count
-    }
-
-    func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep {
-        return CarMakingStep.allCases[indexPath.row]
-    }
-
     func contentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
         return CarMakingContentMockData.mockURL[indexPath.section][indexPath.row]
     }

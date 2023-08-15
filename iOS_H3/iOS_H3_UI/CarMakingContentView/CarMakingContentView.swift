@@ -8,9 +8,6 @@
 import UIKit
 
 protocol CarMakingContentViewDataSource: AnyObject {
-    func numberOfSections() -> Int
-    func contentView(numberOfItemsInSection section: Int) -> Int
-    func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep
     func contentView(urlForItemAtIndex indexPath: IndexPath) -> String?
     func contentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
 }
