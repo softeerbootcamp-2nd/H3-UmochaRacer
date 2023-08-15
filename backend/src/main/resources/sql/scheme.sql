@@ -89,6 +89,7 @@ CREATE TABLE `Sales`
     `model_id`          Long,
     `exterior_color_id` Long,
     `interior_color_id` Long,
+    `wheel_id`          Long,
     `age`               integer,
     `gender`            varchar(255),
     `tag1`              Long,
@@ -125,16 +126,18 @@ CREATE TABLE `Tag`
 );
 
 Drop table if exists Trim_Exterior;
-create table Trim_Exterior (
-    `id` Long primary key,
-    trim_id Long,
+create table Trim_Exterior
+(
+    `id`              Long primary key,
+    trim_id           Long,
     exterior_color_id Long
 );
 
 Drop table if exists Trim_Interior;
-create table Trim_Interior (
-    `id` Long primary key,
-    trim_id Long,
+create table Trim_Interior
+(
+    `id`              Long primary key,
+    trim_id           Long,
     interior_color_id Long
 );
 
@@ -163,9 +166,10 @@ create TAble Wheel
 );
 
 Drop table if exists Trim_Additional_Option;
-create table Trim_Additional_Option(
-    id Long primary key,
-    trim_id Long,
+create table Trim_Additional_Option
+(
+    id                   Long primary key,
+    trim_id              Long,
     additional_option_id Long
 );
 
@@ -249,3 +253,6 @@ ALTER TABLE Trim_Additional_Option
 
 ALTER TABLE `Trim_Additional_Option`
     ADD FOREIGN KEY (additional_option_id) REFERENCES Additional_Option (`id`);
+
+ALTER TABLE `Sales`
+    ADD FOREIGN KEY (wheel_id) REFERENCES Wheel (`id`);
