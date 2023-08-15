@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import LoadingAnimation from '@/component/loding/LoadingAnimation';
+import EstimateContent from './EstimateContent';
 import {flexCenter} from '@/style/common';
 
 function TotalEstimate() {
@@ -9,7 +10,7 @@ function TotalEstimate() {
   return (
     <Wrapper>
       {loaded ? (
-        '얍'
+        <EstimateContent></EstimateContent>
       ) : (
         <LoadingAnimation setLoaded={setLoaded}></LoadingAnimation>
       )}
