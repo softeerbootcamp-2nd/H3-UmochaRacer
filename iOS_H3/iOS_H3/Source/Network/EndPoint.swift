@@ -31,11 +31,13 @@ extension Endpoint {
 
     /// Endpoint로부터 URLRequest를 생성
     func toURLRequest() throws -> URLRequest {
-        guard let baseURL = URL(string: baseURL) else {
+        guard var url = URL(string: baseURL) else {
             throw NetworkError.invalidURL(baseURL)
         }
 
-        let url = baseURL.appendingPath(path).appendingQueries(parameters)
+        url.appendingPath(path)
+        url.appendingQueries(parameters)
+
         var urlRequest = URLRequest(url: url)
         urlRequest.setHttpMethod(httpMethod)
         urlRequest.appendingHeaders(headers)

@@ -9,28 +9,24 @@ import Foundation
 
 extension URL {
 
-    func appendingPath(_ path: String) -> URL {
-        var url = self
+    mutating func appendingPath(_ path: String) {
         if #available(iOS 16.0, *) {
-            url.append(path: path)
+            append(path: path)
         } else {
-            url.appendPathComponent(path)
+            appendPathComponent(path)
         }
-        return url
     }
 
     /// HTTPParameter로부터 URL에 query를 추가
-    func appendingQueries(_ httpParameter: HTTPParameter?) -> URL {
-        var url = self
+    mutating func appendingQueries(_ httpParameter: HTTPParameter?) {
         if case .query(let quries) = httpParameter {
             if #available(iOS 16.0, *) {
                 let queryItems = quries.map { URLQueryItem(name: $0.key, value: $0.value) }
-                url.append(queryItems: queryItems)
+                append(queryItems: queryItems)
             } else {
                 let queryString = quries.map { "?\($0.key)=\($0.value)" }.joined()
-                url = url.appendingPath(queryString)
+                appendingPath(queryString)
             }
         }
-        return url
     }
 }
