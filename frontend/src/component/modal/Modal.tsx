@@ -2,38 +2,30 @@ import React, {useEffect} from 'react';
 import {useModalContext, ModalType} from '@/provider/modalProvider';
 import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
+import {colors} from '@/style/theme';
+import ExitModal from './exit/ExitModal';
+import ModelChangeModal from './modelChange/ModelChangeModal';
+import PowerTrainModal from './powerTrainChange/PowerTrainModal';
+import SelfChangeModal from './modeChange/SelfChangeModal';
+import GuideChangeModal from './modeChange/GuideChangeModal';
 
-interface ModalProps {}
 type NonNullableModalType = Exclude<ModalType, null>;
-type ButtonTextType = {
-  [key in NonNullableModalType]?: {
-    activate: string;
-    deactivate: string;
-  };
-};
 const ModalContent: Record<NonNullableModalType, React.FC> = {
-  exit: () => <div>나가기 모달</div>,
-  model_change: () => <div>모델 바꾸는 모달</div>,
-  powertrain_change: () => <div>파워트레인 바꾸는 모달</div>,
+  exit: () => <ExitModal />,
+  model_change: () => <ModelChangeModal />,
+  powertrain_change: () => <PowerTrainModal />,
   type_change: () => <div>타입 바꾸는 모달</div>,
-  mode_to_self: () => <div>셀프모드로 바꾸는 모달</div>,
-  mode_to_guide: () => <div>가이듣모드로 바꾸는 모달</div>,
+  mode_to_self: () => <SelfChangeModal />,
+  mode_to_guide: () => <GuideChangeModal />,
 };
-const ButtonText: ButtonTextType = {
-  exit: {
-    activate: '나갈래요',
-    deactivate: '나가지 않을래요!',
-  },
-};
-const Modal: React.FC<ModalProps> = () => {
-  const {isVisible, activeModal, closeModal} = useModalContext(); // 현재 위치를 가져옵니다.
+function Modal() {
+  const {isVisible, activeModal, closeModal} = useModalContext();
 
   useEffect(() => {
     const handlePopState = () => {
       closeModal();
     };
 
-    // popstate 이벤트를 감지하여 모달을 닫습니다.
     window.addEventListener('popstate', handlePopState);
 
     return () => {
@@ -43,7 +35,6 @@ const Modal: React.FC<ModalProps> = () => {
   if (!isVisible || !activeModal) return null;
 
   const ContentComponent = ModalContent[activeModal] ?? (() => null);
-  const deActiveText = ButtonText[activeModal]?.deactivate ?? '';
   const handleWrapperClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
@@ -52,12 +43,12 @@ const Modal: React.FC<ModalProps> = () => {
       <Background />
       <Wrapper onClick={closeModal}>
         <M.Wrapper onClick={handleWrapperClick}>
-          <button onClick={closeModal}>{deActiveText}</button>
+          <ContentComponent />
         </M.Wrapper>
       </Wrapper>
     </>
   );
-};
+}
 
 export default Modal;
 const Wrapper = styled.div`
@@ -72,11 +63,13 @@ const Wrapper = styled.div`
 
 const M = {
   Wrapper: styled.div`
-    width: 200px;
-    height: 300px;
-    background: #fff;
+    width: 343px;
+    border-radius: 6px;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.3);
+    background: ${colors.Hyundai_White};
     opacity: 1;
     ${flexCenter}
+    padding : 26px 18px 18px 18px;
   `,
 };
 
