@@ -89,11 +89,11 @@ extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
 
 extension CarMakingContentViewController: CarMakingContentViewDataSource {
 
-    func contentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
+    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
         return CarMakingContentMockData.mockURL[indexPath.section][indexPath.row]
     }
 
-    func contentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
+    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
         return CarMakingContentMockData.mockOption[indexPath.section][indexPath.row]
     }
 }

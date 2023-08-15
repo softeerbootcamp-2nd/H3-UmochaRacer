@@ -8,8 +8,8 @@
 import UIKit
 
 protocol CarMakingContentViewDataSource: AnyObject {
-    func contentView(urlForItemAtIndex indexPath: IndexPath) -> String?
-    func contentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
+    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String?
+    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -28,7 +28,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
 
-    weak var dataSource: (CarMakingContentViewDataSource)? {
+    weak var dataSource: CarMakingContentViewDataSource? {
         didSet {
             setupSnapshot()
         }
@@ -132,7 +132,8 @@ extension CarMakingContentView {
 
      func setupCollectionViewDataSource() {
          collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(
-              collectionView: collectionView) { [weak self] (collectionView, indexPath, step)
+            collectionView: collectionView
+         ) { [weak self] (collectionView, indexPath, step)
                   -> UICollectionViewCell? in
             let section = PageSection.allCases[indexPath.section]
             guard let self,
@@ -142,8 +143,8 @@ extension CarMakingContentView {
                 return CarMakingCollectionViewCell()
             }
 
-            let urlString = self.dataSource?.contentView(urlForItemAtIndex: indexPath)
-            let options = self.dataSource?.contentView(optionsForItemAtIndex: indexPath) ?? []
+            let urlString = self.dataSource?.carMakingContentView(urlForItemAtIndex: indexPath)
+            let options = self.dataSource?.carMakingContentView(optionsForItemAtIndex: indexPath) ?? []
             cell.configure(mode: self.carMakingMode,
                            bannerImage: urlString,
                            makingStepTitle: step.title,
