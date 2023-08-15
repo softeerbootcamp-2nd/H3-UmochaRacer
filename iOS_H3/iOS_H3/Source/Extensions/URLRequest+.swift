@@ -10,27 +10,21 @@ import Foundation
 extension URLRequest {
 
     /// URLRequest의 httpMethod를 설정
-    func setHttpMethod(_ httpMethod: HTTPMethod) -> URLRequest {
-        var urlRequest = self
-        urlRequest.httpMethod = httpMethod.rawValue
-        return urlRequest
+    mutating func setHttpMethod(_ httpMethod: HTTPMethod) {
+        self.httpMethod = httpMethod.rawValue
     }
 
     /// URLRequest의 header field 설정
-    func appendingHeaders(_ headers: [String: String]) -> URLRequest {
-        var urlRequest = self
+    mutating func appendingHeaders(_ headers: [String: String]) {
         headers.forEach { header in
-            urlRequest.addValue(header.value, forHTTPHeaderField: header.key)
+            addValue(header.value, forHTTPHeaderField: header.key)
         }
-        return urlRequest
     }
 
     /// HTTPParameter로부터 URLRequest의 body를 설정
-    func setBody(for httpParameter: HTTPParameter?) -> URLRequest {
-        var urlRequest = self
+    mutating func setBody(for httpParameter: HTTPParameter?) {
         if case .body(let data) = httpParameter {
-            urlRequest.httpBody = try? JSONEncoder().encode(data)
+            httpBody = try? JSONEncoder().encode(data)
         }
-        return urlRequest
     }
 }

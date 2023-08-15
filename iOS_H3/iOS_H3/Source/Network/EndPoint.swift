@@ -36,10 +36,11 @@ extension Endpoint {
         }
 
         let url = baseURL.appendingPath(path).appendingQueries(parameters)
-        let urlRequest = URLRequest(url: url)
-            .setHttpMethod(httpMethod)
-            .appendingHeaders(headers)
-            .setBody(for: parameters)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.setHttpMethod(httpMethod)
+        urlRequest.appendingHeaders(headers)
+        urlRequest.setBody(for: parameters)
+
         return urlRequest
     }
 }
