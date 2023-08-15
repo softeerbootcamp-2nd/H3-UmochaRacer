@@ -6,3 +6,16 @@
 //
 
 import Foundation
+
+struct DrivingSystemResponse: Codable {
+    let data: [DrivingSystem]
+    let message: String?
+    let code: Int?
+
+    struct DrivingSystem: Codable {
+        let id: Int?
+        let name: String?
+        let imageSrc: String?
+        let price: Int?
+    }
+}
