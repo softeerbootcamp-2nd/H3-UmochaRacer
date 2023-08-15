@@ -58,6 +58,9 @@
 		479023B72A8B231200DECB70 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B52A8B231200DECB70 /* URL+.swift */; };
 		479023B92A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
 		479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
+		479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
+		479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
+		479023C02A8B4E0600DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -204,6 +207,7 @@
 		479023AE2A8AA18600DECB70 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		479023B52A8B231200DECB70 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		479023B82A8B231D00DECB70 /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
+		479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingMode.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -406,6 +410,7 @@
 				471917C92A7FA02000B67D54 /* CarMakingStep.swift */,
 				5F4D33AE2A87519600942517 /* ImageCacheManager.swift */,
 				5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */,
+				479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -980,6 +985,7 @@
 				479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */,
 				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
 				479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */,
+				479023C02A8B4E0600DECB70 /* CarMakingMode.swift in Sources */,
 				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
 				479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */,
 			);
@@ -1032,6 +1038,7 @@
 				5F6603EF2A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
+				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
 				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
@@ -1083,6 +1090,7 @@
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
+				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				471917F12A82371E00B67D54 /* OptionCardInfo.swift in Sources */,
