@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
@@ -67,6 +67,10 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
     [toggle],
   );
 
+  useEffect(() => {
+    setToggle(false);
+  }, [selected]);
+
   return (
     <Wrapper onClick={onClick} $selected={selected}>
       <Container>
@@ -111,7 +115,7 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
           {hasDetail(option) ? (
             <DetailToggle
               onClick={clickedToggle}
-              opened={toggle}
+              opened={toggle && selected && !isSaved}
               selected={selected}
             ></DetailToggle>
           ) : (

@@ -9,11 +9,10 @@ interface Info {
   title: string;
   description: string;
 }
-
 interface DeatailData {
   title: string;
   description: string;
-  info?: Info[];
+  info?: string;
 }
 
 interface Props {
@@ -28,10 +27,26 @@ function DetailBox({isOpen, id, option}: Props) {
 
   const fetchedDetails = useFetch<DeatailData>(`/detail/${categoryName}/${id}`);
 
+  let info: React.JSX.Element[];
+
+  if (fetchedDetails.data?.info) {
+    info = JSON.parse(fetchedDetails.data?.info).map(
+      (elem: Info, index: number) => {
+        return (
+          <Info key={index}>
+            <InfoTitle>{elem.title}</InfoTitle>
+            <InfoDescription>{elem.description}</InfoDescription>
+          </Info>
+        );
+      },
+    );
+  }
+
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
         <DescriptionBox>{fetchedDetails.data?.description}</DescriptionBox>
+        {fetchedDetails.data?.info && info && <InfoBox>{info}</InfoBox>}
       </DetailContent>
     </Wrapper>
   );
@@ -61,3 +76,28 @@ const DetailContent = styled.div`
 const DescriptionBox = styled.div`
   ${Label2_Regular}
 `;
+
+const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 334px;
+  height: 64px;
+  margin-top: 17px;
+  padding: 12px;
+  border-radius: 6px;
+  background: #f3f3f3;
+  gap: 8px;
+`;
+
+const Info = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 8px;
+
+  div {
+    ${Label2_Regular}
+  }
+`;
+
+const InfoTitle = styled.div``;
+const InfoDescription = styled.div``;
