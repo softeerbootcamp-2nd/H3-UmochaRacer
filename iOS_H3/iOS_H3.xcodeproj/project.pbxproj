@@ -41,6 +41,7 @@
 		471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
 		4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
+		4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */; };
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		473309952A8BECBB00906FFB /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */; };
 		473309962A8BED4D00906FFB /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */; };
@@ -200,6 +201,7 @@
 		471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonView.swift; sourceTree = "<group>"; };
 		471918042A834D8600B67D54 /* OptionCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardCell.swift; sourceTree = "<group>"; };
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
+		4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewModel.swift; sourceTree = "<group>"; };
 		473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfo.swift; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 		478B26852A78FD8700598902 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1018,6 +1021,7 @@
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
+				4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */,
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */,
