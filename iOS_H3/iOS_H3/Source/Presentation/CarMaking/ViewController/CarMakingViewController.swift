@@ -29,6 +29,8 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
+    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
 
     private var cancellables = Set<AnyCancellable>()
@@ -53,6 +55,7 @@ final class CarMakingViewController: UIViewController {
         setupProperties()
         setupViews()
         bind()
+        viewDidLoadSubject.send(())
     }
 
     // MARK: - Helpers
