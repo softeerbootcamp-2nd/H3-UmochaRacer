@@ -33,7 +33,8 @@ final class CarMakingContentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        carMakingContentView.dataSource = self
+        carMakingContentView.delegate = self
+        carMakingContentView(stepDidChanged: 0)
     }
 
     // MARK: - Helpers
@@ -87,14 +88,18 @@ extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
     }
 }
 
-extension CarMakingContentViewController: CarMakingContentViewDataSource {
+extension CarMakingContentViewController: CarMakingContentViewDelegate {
 
-    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
-        return CarMakingContentMockData.mockURL[indexPath.section][indexPath.row]
-    }
+    func carMakingContentView(stepDidChanged stepIndex: Int) {
+        guard let step = CarMakingStep(rawValue: stepIndex) else { return }
+        let indexPath = PageSection.indexPath(for: stepIndex)
 
-    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
-        return CarMakingContentMockData.mockOption[indexPath.section][indexPath.row]
+        let stepInfo = CarMakingStepInfo(
+            step: step,
+            bannerImageURL: URL(string: CarMakingContentMockData.mockURL[indexPath.section][indexPath.row]),
+            optionCardInfoArray: CarMakingContentMockData.mockOption[indexPath.section][indexPath.row]
+        )
+        carMakingContentView.updateCurrentStepInfo(stepInfo)
     }
 }
 
