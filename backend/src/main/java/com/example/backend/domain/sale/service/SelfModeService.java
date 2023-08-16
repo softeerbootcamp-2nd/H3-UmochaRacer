@@ -30,7 +30,7 @@ public class SelfModeService {
     }
 
     private List<SalesSummaryResponse> mapToResponse(List<SaleSummary> saleSummaries) {
-        if(saleSummaries.size() == 0) throw new RestApiException(ResultCode.SALES_NOT_FOUND);
+        if(saleSummaries.isEmpty()) throw new RestApiException(ResultCode.SALES_NOT_FOUND);
         return summaryMapper.map(saleSummaries);
     }
 

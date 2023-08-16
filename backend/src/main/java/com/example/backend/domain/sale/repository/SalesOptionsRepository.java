@@ -15,7 +15,7 @@ public interface SalesOptionsRepository extends CrudRepository<SalesOptions, Lon
             value = "select so.additional_option_id as id, count(*) as select_count\n" +
                     "from SALES_OPTIONS so\n" +
                     "where id in (select ao.id from ADDITIONAL_OPTION ao where ao.category= :category)\n" +
-                    "group by id\n" +
+                    "group by so.additional_option_id\n" +
                     "with rollup",
             rowMapperClass = SelectionRatioRowMapper.class
     )

@@ -24,7 +24,7 @@ public class SummaryMapper {
 
     private SalesSummaryResponse calculateRatio(SaleSummary saleSummary, int totalCount) {
         // 현재 값/마지막 값 until 크기-1
-        int ratio = saleSummary.getSelectionCount() / totalCount;
+        int ratio = 100 * saleSummary.getSelectionCount() / totalCount;
         return new SalesSummaryResponse(saleSummary.getId(), ratio);
     }
 }
