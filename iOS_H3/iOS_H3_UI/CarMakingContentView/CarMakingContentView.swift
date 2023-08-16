@@ -7,18 +7,21 @@
 
 import UIKit
 
-protocol CarMakingContentViewDataSource: AnyObject {
-    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String?
-    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
+protocol CarMakingContentViewDelegate: AnyObject {
+    func carMakingContentView(stepDidChanged stepIndex: Int)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
-protocol CarMakingSectionType: Hashable {
+protocol CarMakingSectionType: Hashable, CaseIterable {
     associatedtype Item: Hashable
+
+    init?(sectionIndex: Int)
+
+    var cellIdentifiers: String { get }
     var range: Range<Int> { get }
+
     static func section(for index: Int) -> Self
-    func itemIndex(for globalIndex: Int) -> Int
-    static var allCases: [Self] { get }
+    static func indexPath(for globalIndex: Int) -> IndexPath
 }
 
 class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionViewDelegateFlowLayout {
@@ -41,26 +44,18 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Properties
 
-    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
+    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>!
 
     private let flowLayoutDelegate = FlowLayoutDelegate()
 
-    weak var dataSource: CarMakingContentViewDataSource? {
-        didSet {
-            setupSnapshot()
-        }
-    }
-
-    private let cellIdentifiers: [PageSection: String] = [
-        .twoButton: CarMakingTwoOptionCell.identifier,
-        .multipleButton: CarMakingMultipleOptionCell.identifier
-    ]
+    weak var delegate: CarMakingContentViewDelegate?
 
     private let carMakingMode: CarMakingMode
 
     private var currentStep: Int = 0 {
         didSet {
             moveStep(to: currentStep)
+            delegate?.carMakingContentView(stepDidChanged: currentStep)
         }
     }
 
@@ -87,13 +82,31 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     // MARK: - Helpers
 
     func moveNextStep() {
-        guard currentStep < CarMakingStep.allCases.count else { return }
+        guard currentStep < CarMakingStep.allCases.count - 1 else { return }
         currentStep += 1
     }
 
     func movePrevStep() {
         guard currentStep > 0 else { return }
         currentStep -= 1
+    }
+
+    func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
+        var snapshot = collectionViewDataSource.snapshot()
+
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let section = Section(sectionIndex: indexPathOfCurrentStep.section) else {
+            return
+        }
+
+        var sectionItems = snapshot.itemIdentifiers(inSection: section)
+        snapshot.deleteItems(sectionItems)
+
+        let currentItemIndex = indexPathOfCurrentStep.row
+        sectionItems[currentItemIndex] = info
+
+        snapshot.appendItems(sectionItems, toSection: section)
+        collectionViewDataSource.apply(snapshot)
     }
 }
 
@@ -105,11 +118,7 @@ extension CarMakingContentView {
     }
 
     private func moveCollectionView(to index: Int) {
-        let section = PageSection.section(for: index)
-        let sectionIndex = section.index
-        let item = section.itemIndex(for: index)
-        let indexPath = IndexPath(item: item, section: sectionIndex)
-
+        let indexPath = Section.indexPath(for: index)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 }
@@ -121,6 +130,7 @@ extension CarMakingContentView {
     private func setupViews() {
         setupProgressBar()
         setupCollectionView()
+        currentStep = 0
     }
 
     private func setupProgressBar() {
@@ -167,35 +177,34 @@ extension CarMakingContentView {
     }
 
      func setupCollectionViewDataSource() {
-         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(
+         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { [weak self] (collectionView, indexPath, step)
+         ) { (collectionView, indexPath, carMakingStepInfo)
                   -> UICollectionViewCell? in
-            let section = PageSection.allCases[indexPath.section]
-            guard let self,
-                  let cellIdentifier = cellIdentifiers[section],
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier,
-                                                                for: indexPath) as? CarMakingCollectionViewCell else {
-                return CarMakingCollectionViewCell()
-            }
-
-            let urlString = self.dataSource?.carMakingContentView(urlForItemAtIndex: indexPath)
-            let options = self.dataSource?.carMakingContentView(optionsForItemAtIndex: indexPath) ?? []
-            cell.configure(mode: self.carMakingMode,
-                           bannerImage: urlString,
-                           makingStepTitle: step.title,
-                           optionInfos: options)
+             guard let section = Section(sectionIndex: indexPath.section),
+                   let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: section.cellIdentifiers,
+                    for: indexPath
+                   ) as? CarMakingCollectionViewCell else {
+                 return CarMakingCollectionViewCell()
+             }
+             cell.configure(carMakingStepInfo: carMakingStepInfo)
             return cell
         }
 
     }
 
     func setupSnapshot() {
-        let steps = CarMakingStep.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CarMakingStep>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CarMakingStepInfo>()
         for section in Section.allCases {
             snapshot.appendSections([section])
-            snapshot.appendItems(Array(steps[section.range]), toSection: section)
+            let carMakingStepInfoArray = (section.range).compactMap { stepIndex -> CarMakingStepInfo? in
+                guard let step = CarMakingStep(rawValue: stepIndex) else {
+                    return nil
+                }
+                return CarMakingStepInfo(step: step)
+            }
+            snapshot.appendItems(carMakingStepInfoArray, toSection: section)
         }
         collectionViewDataSource.apply(snapshot, animatingDifferences: true)
     }

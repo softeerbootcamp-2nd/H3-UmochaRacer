@@ -8,7 +8,7 @@
 import Foundation
 
 enum CarMakingStep: Int, CaseIterable {
-    case powertrain = 1
+    case powertrain
     case driveMethod
     case bodyType
     case externalColor
@@ -39,7 +39,7 @@ enum CarMakingStep: Int, CaseIterable {
     }
 
     var progressBarTitle: String {
-        var title = (self.rawValue < 10 ? "0" : "") + "\(self.rawValue) "
+        var title = (self.rawValue < 10 ? "0" : "") + "\(self.rawValue + 1) "
         switch self {
         case .wheelSelection:
             title += "휠 선택"

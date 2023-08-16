@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class CarMakingViewController: UIViewController {
 
@@ -26,15 +27,25 @@ final class CarMakingViewController: UIViewController {
 
     private let mode: CarMakingMode
 
+    private let viewModel: CarMakingViewModel
+
+    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+
+    private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
+
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - Lifecycles
 
-    init(mode: CarMakingMode) {
+    init(mode: CarMakingMode, viewModel: CarMakingViewModel) {
+        self.viewModel = viewModel
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         self.mode = .selfMode
+        self.viewModel = CarMakingViewModel()
         super.init(coder: coder)
     }
 
@@ -43,9 +54,59 @@ final class CarMakingViewController: UIViewController {
 
         setupProperties()
         setupViews()
+        bind()
+        viewDidLoadSubject.send(())
     }
 
     // MARK: - Helpers
+}
+
+// MARK: - binding with ViewModel
+
+extension CarMakingViewController {
+
+    private func bind() {
+        let input = CarMakingViewModel.Input(
+            viewDidLoad: viewDidLoadSubject,
+            carMakingStepDidChanged: stepDidChanged
+        )
+        let output = viewModel.transform(input)
+
+        output.estimateSummary
+            .sink { [weak self] summary in
+                self?.updateBottomModalView(with: summary)
+            }
+            .store(in: &cancellables)
+
+        output.currentStepInfo
+            .sink { [weak self] info in
+                self?.updateCurrentStepInfo(with: info)
+            }
+            .store(in: &cancellables)
+
+        output.showIndicator
+            .sink { [weak self] showIndicator in
+                self?.showIndicator(showIndicator)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateBottomModalView(with estimateData: EstimateSummary) {
+        // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
+        bottomModalView.updateEstimateSummary(estimateData)
+    }
+
+    private func updateCurrentStepInfo(with info: CarMakingStepInfo) {
+        carMakingContentView.updateCurrentStepInfo(info)
+    }
+
+    private func showIndicator(_ show: Bool) {
+        if show {
+            view.showLoadingIndicator()
+        } else {
+            view.hideLoadingIndicator()
+        }
+    }
 }
 
 // MARK: - OhMyCarSetTitleBar Delegate
@@ -69,22 +130,20 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 }
 
-// MARK: - CarMakingContentView DataSource
+// MARK: - CarMakingContentView Delegate
 
-extension CarMakingViewController: CarMakingContentViewDataSource {
+extension CarMakingViewController: CarMakingContentViewDelegate {
 
-    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
-        return nil
-    }
-
-    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
-        return nil
+    func carMakingContentView(stepDidChanged stepIndex: Int) {
+        if let step = CarMakingStep(rawValue: stepIndex) {
+            stepDidChanged.send(step)
+        }
     }
 }
 
-// MARK: - BottomModalView Delegate & DataSource
+// MARK: - BottomModalView Delegate
 
-extension CarMakingViewController: BottomModalViewDelegate, BottomModalViewDataSource {
+extension CarMakingViewController: BottomModalViewDelegate {
 
     func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView) {
         carMakingContentView.movePrevStep()
@@ -92,10 +151,6 @@ extension CarMakingViewController: BottomModalViewDelegate, BottomModalViewDataS
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
         carMakingContentView.moveNextStep()
-    }
-
-    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int {
-        return -1
     }
 }
 
@@ -118,13 +173,12 @@ extension CarMakingViewController {
 
     private func setupContentView() {
         carMakingContentView = CarMakingContentView(frame: .zero, mode: mode)
-        carMakingContentView.dataSource = self
+        carMakingContentView.delegate = self
         carMakingContentView.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupBottomModalView() {
         bottomModalView.delegate = self
-        bottomModalView.dataSource = self
         bottomModalView.translatesAutoresizingMaskIntoConstraints = false
     }
 }
