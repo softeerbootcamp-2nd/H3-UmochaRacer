@@ -13,11 +13,9 @@ import ModelOption from './modelOption/ModelOption';
 import {colors} from '@/style/theme';
 import {Body1_Medium, Title5_Regular} from '@/style/fonts';
 import Icon from '../common/icons';
-import {useModalContext} from '@/provider/modalProvider';
 import {useScroll} from '../hooks/useScroll';
 function MainContainer() {
   const scrollPosition = useScroll();
-  const {openModal} = useModalContext();
 
   return (
     <>
@@ -64,7 +62,7 @@ function MainContainer() {
         <GuideModeButton.Suggest>
           무엇을 골라야 할 지 모르겠다면?
         </GuideModeButton.Suggest>
-        <GuideModeButton.LinkWrapper onClick={() => openModal('mode_to_guide')}>
+        <GuideModeButton.LinkWrapper>
           <GuideModeButton.Guide>Guide Mode</GuideModeButton.Guide>
           <Icon name="ArrowRight" size={36} />
         </GuideModeButton.LinkWrapper>
