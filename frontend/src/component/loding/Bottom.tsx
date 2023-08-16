@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import ProgressIndicator from './ProgressIndicator';
-import {useNavigate} from 'react-router-dom';
 
 const loadingTextArr = [
   '엔진 장착 중. . .',
@@ -11,9 +10,12 @@ const loadingTextArr = [
 
 const doneTextArr = ['엔진 장착 완료!', '도색완료!', '옵션 장착 완료!'];
 
-function Bottom() {
+interface Props {
+  setLoaded: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+function Bottom({setLoaded}: Props) {
   const [activeLevel, setActiveLevel] = useState(0);
-  const nevigate = useNavigate();
 
   const indicators: React.JSX.Element[] = loadingTextArr.map(
     (elem: string, index: number) => {
@@ -26,8 +28,8 @@ function Bottom() {
       } else {
         onAnimationEnd = () => {
           setTimeout(() => {
-            nevigate('/');
-          }, 1000);
+            setLoaded(true);
+          }, 1500);
         };
       }
 

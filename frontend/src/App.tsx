@@ -2,7 +2,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import Self from './pages/Self';
 import Main from './pages/Main';
-import Loading from './pages/Loading';
 import OptionProvider from './provider/optionProvider';
 import {ModalProvider} from './provider/modalProvider';
 import Modal from './component/modal/Modal';
@@ -26,7 +25,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/self" element={<Self />} />
-          <Route path="/loading" element={<Loading />} />
         </Routes>
       </BrowserRouter>
       <Modal />
