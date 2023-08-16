@@ -99,9 +99,15 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 }
 
-// MARK: - CarMakingContentView DataSource
+// MARK: - CarMakingContentView Delegate & DataSource
 
-extension CarMakingViewController: CarMakingContentViewDataSource {
+extension CarMakingViewController: CarMakingContentViewDelegate, CarMakingContentViewDataSource {
+
+    func carMakingContentView(stepDidChanged stepIndex: Int) {
+        if let step = CarMakingStep(rawValue: stepIndex) {
+            stepDidChanged.send(step)
+        }
+    }
 
     func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
         return nil
@@ -148,6 +154,7 @@ extension CarMakingViewController {
 
     private func setupContentView() {
         carMakingContentView = CarMakingContentView(frame: .zero, mode: mode)
+        carMakingContentView.delegate = self
         carMakingContentView.dataSource = self
         carMakingContentView.translatesAutoresizingMaskIntoConstraints = false
     }
