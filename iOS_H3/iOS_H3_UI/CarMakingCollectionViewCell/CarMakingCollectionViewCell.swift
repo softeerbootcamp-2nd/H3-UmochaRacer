@@ -29,10 +29,8 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     let descriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "옵션을 골라주세요."
-        // TODO: 폰트 누락 확인 필요.
         label.font = Fonts.regularTitle3
         label.setupLineHeight(FontLineHeights.regularTitle3)
-        label.setupLetterSpacing(FontLetterSpacings.regularTitle3)
         return label
     }()
 
