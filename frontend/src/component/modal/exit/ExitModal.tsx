@@ -8,6 +8,9 @@ function ExitModal() {
   const progressText = '나갈래요';
   const closeText = '나가지 않을래요!';
   const imgSrc = '';
+  const onClickLeft = () => {
+    window.location.href = '/';
+  };
   return (
     <ModalLayout
       iconName={iconName}
@@ -16,6 +19,7 @@ function ExitModal() {
       progressText={progressText}
       closeText={closeText}
       imgSrc={imgSrc}
+      onClickLeft={onClickLeft}
     />
   );
 }

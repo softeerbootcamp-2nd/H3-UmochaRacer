@@ -7,6 +7,9 @@ function GuideChangeModal() {
   const progressText = '안할래요';
   const closeText = '변경할래요!';
   const imgSrc = '';
+  const onClickRight = () => {
+    window.location.href = '/guide';
+  };
   return (
     <ModalLayout
       iconName={iconName}
@@ -15,6 +18,7 @@ function GuideChangeModal() {
       progressText={progressText}
       closeText={closeText}
       imgSrc={imgSrc}
+      onClickRight={onClickRight}
     />
   );
 }

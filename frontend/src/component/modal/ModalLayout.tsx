@@ -12,6 +12,8 @@ interface ModalLayoutProps {
   progressText: string;
   closeText: string;
   imgSrc?: string;
+  onClickLeft?: () => void;
+  onClickRight?: () => void;
 }
 function ModalLayout({
   iconName,
@@ -20,8 +22,24 @@ function ModalLayout({
   progressText,
   closeText,
   imgSrc,
+  onClickLeft,
+  onClickRight,
 }: ModalLayoutProps) {
   const {closeModal} = useModalContext();
+  const handleBtnRightClick = () => {
+    if (onClickRight) {
+      onClickRight();
+    } else {
+      closeModal();
+    }
+  };
+  const handleBtnLeftClick = () => {
+    if (onClickLeft) {
+      onClickLeft();
+    } else {
+      closeModal();
+    }
+  };
   return (
     <Modal.Wrapper>
       <Modal.TitleWrapper>
@@ -35,8 +53,12 @@ function ModalLayout({
         )}
       </Modal.DescriptionWrapper>
       <Modal.ButtonWrapper>
-        <Modal.ButtonProgress>{progressText}</Modal.ButtonProgress>
-        <Modal.ButtonClose onClick={closeModal}>{closeText}</Modal.ButtonClose>
+        <Modal.ButtonProgress onClick={handleBtnLeftClick}>
+          {progressText}
+        </Modal.ButtonProgress>
+        <Modal.ButtonClose onClick={handleBtnRightClick}>
+          {closeText}
+        </Modal.ButtonClose>
       </Modal.ButtonWrapper>
     </Modal.Wrapper>
   );
