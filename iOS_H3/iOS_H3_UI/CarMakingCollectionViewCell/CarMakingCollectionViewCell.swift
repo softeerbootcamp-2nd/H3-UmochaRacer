@@ -11,11 +11,12 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UI properties
     enum Constants {
-        static let imageHeight = 310.0
         static let descriptionLabelLeadingMargin: CGFloat = 20.0
-        static let descriptionLabelTopMargin: CGFloat = 26.0
-        static let buttonListViewTopMargin: CGFloat = 20.0
+        static let optionImageViewBottomMargin: CGFloat = 15.0
+        static let descriptionLabelHeight = 20.0
+        static let descriptionLabelBottomMargin: CGFloat = 15.0
         static let buttonListViewHeight: CGFloat = 150
+        static let buttonListViewBottomMargin: CGFloat = 15.0
         static let descriptionSuffix: String = "을 선택해주세요"
     }
 
@@ -109,21 +110,29 @@ extension CarMakingCollectionViewCell {
         optionImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor).isActive = true
         optionImageView.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor).isActive = true
         optionImageView.topAnchor.constraint(equalTo: self.contentView.topAnchor).isActive = true
-        optionImageView.heightAnchor.constraint(equalToConstant: Constants.imageHeight).isActive = true
+        optionImageView.bottomAnchor.constraint(
+            equalTo: descriptionLabel.topAnchor,
+            constant: -Constants.optionImageViewBottomMargin
+        ).isActive = true
     }
 
     private func setupDescriptionLabel() {
         descriptionLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,
                                                   constant: Constants.descriptionLabelLeadingMargin).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: self.optionImageView.bottomAnchor,
-                                              constant: Constants.descriptionLabelTopMargin).isActive = true
+        descriptionLabel.heightAnchor.constraint(equalToConstant: Constants.descriptionLabelHeight).isActive = true
+        descriptionLabel.bottomAnchor.constraint(
+            equalTo: optionButtonListView.topAnchor,
+            constant: -Constants.descriptionLabelBottomMargin
+        ).isActive = true
     }
 
     private func setupButtonListView() {
         optionButtonListView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16).isActive = true
         optionButtonListView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16).isActive = true
-        optionButtonListView.topAnchor.constraint(equalTo: self.descriptionLabel.bottomAnchor,
-                                                   constant: Constants.buttonListViewTopMargin).isActive = true
         optionButtonListView.heightAnchor.constraint(equalToConstant: Constants.buttonListViewHeight).isActive = true
+        optionButtonListView.bottomAnchor.constraint(
+            equalTo: bottomAnchor,
+            constant: -Constants.buttonListViewBottomMargin
+        ).isActive = true
     }
 }
