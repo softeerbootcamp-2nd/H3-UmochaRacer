@@ -17,9 +17,9 @@ public enum ResultCode {
     PAGE_NOT_FOUND(4101, HttpStatus.BAD_REQUEST, "페이지 정보를 정확히 입력해 주세요."),
     PAGE_SIZE_ERROR(4102, HttpStatus.BAD_REQUEST, "페이지 사이즈 정보를 정확히 입력해 주세요."),
     END_PAGE(4103, HttpStatus.ACCEPTED, "마지막 페이지입니다!"),
+    SALES_NOT_FOUND(4104, HttpStatus.BAD_REQUEST, "판매 정보가 없습니다."),
 
-    ILLEGAL_ARGUMENT(10001, HttpStatus.BAD_REQUEST, "해당 요청을 처리할 수 없습니다.")
-    ;
+    ILLEGAL_ARGUMENT(10001, HttpStatus.BAD_REQUEST, "해당 요청을 처리할 수 없습니다.");
 
     private final int code;
     private final HttpStatus httpStatus;
