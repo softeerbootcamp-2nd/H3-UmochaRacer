@@ -8,13 +8,6 @@ import {colors} from '../../../style/theme';
 import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {cardDataType} from '../contentInterface';
 
-interface Data {
-  optionId: number;
-  name: string;
-  rate: number;
-  price: number;
-}
-
 interface cardDataProps {
   cardData: cardDataType[];
   option: number;
@@ -24,7 +17,6 @@ interface cardDataProps {
 function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
-
   const menuItems = [
     '파워트레인',
     '구동 방식',
