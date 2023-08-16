@@ -146,6 +146,7 @@ extension CarMakingContentView {
     private func setupViews() {
         setupProgressBar()
         setupCollectionView()
+        currentStep = 0
     }
 
     private func setupProgressBar() {
