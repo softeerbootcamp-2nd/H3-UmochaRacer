@@ -133,7 +133,7 @@ extension CarMakingContentView {
 
     private func getIndexPathOfCollectionView(_ index: Int) -> IndexPath {
         let section = PageSection.section(for: index)
-        let sectionIndex = section.index
+        let sectionIndex = section.sectionIndex
         let item = section.itemIndex(for: index)
         return IndexPath(item: item, section: sectionIndex)
     }

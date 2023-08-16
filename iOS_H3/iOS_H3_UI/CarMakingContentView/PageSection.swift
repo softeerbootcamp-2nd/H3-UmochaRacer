@@ -12,7 +12,7 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     case twoButton = 0
     case multipleButton
 
-    var index: Int {
+    var sectionIndex: Int {
         return rawValue
     }
 
