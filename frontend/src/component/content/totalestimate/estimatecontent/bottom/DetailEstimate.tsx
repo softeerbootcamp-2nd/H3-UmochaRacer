@@ -10,8 +10,10 @@ import {
 } from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {flexCenter} from '@/style/common';
+import DetailBox from '@/component/common/DetilBox';
 
 interface Props {
+  detailOpen: boolean;
   optionName: string;
   optionTitle: string;
   optionIndex: number;
@@ -37,6 +39,7 @@ const EditIcon = () => {
 };
 
 function DetailEstimate({
+  detailOpen,
   optionName,
   optionTitle,
   optionIndex,
@@ -58,7 +61,16 @@ function DetailEstimate({
       <DetailContent>
         <ImageBox $src={imgSrc}></ImageBox>
         <ContentBox>
-          <ContentLeft>{optionTitle}</ContentLeft>
+          <ContentLeft>
+            {optionTitle}
+            <DeatailBoxWrapper>
+              <DetailBox
+                isOpen={detailOpen}
+                option={optionIndex}
+                id={1}
+              ></DetailBox>
+            </DeatailBoxWrapper>
+          </ContentLeft>
           <ContentRight>
             {`+ ${price.toLocaleString()}원`}
             <EditButton onClick={handleButtonClick}>
@@ -140,4 +152,8 @@ const EditButton = styled.button`
   width: 56px;
   color: ${colors.Sub_Active_Blue};
   gap: 6px;
+`;
+
+const DeatailBoxWrapper = styled.div`
+  position: absolute;
 `;

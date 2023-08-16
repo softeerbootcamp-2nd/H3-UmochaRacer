@@ -56,6 +56,7 @@ export default DetailBox;
 
 const Wrapper = styled.div<{$isOpen: boolean; $height?: number}>`
   position: relative;
+  width: 334px;
   height: ${({$isOpen, $height}) => ($isOpen ? $height : '0')}px;
   opacity: ${({$isOpen}) => ($isOpen ? '1' : '0')};
   pointer-events: ${({$isOpen}) => !$isOpen && 'none'};
