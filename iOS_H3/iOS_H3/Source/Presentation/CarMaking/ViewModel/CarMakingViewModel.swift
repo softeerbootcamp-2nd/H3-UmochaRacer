@@ -66,7 +66,6 @@ final class CarMakingViewModel {
         let stepIndex = step.rawValue
         let carMakingStepInfo = CarMakingStepInfo(
             step: step,
-            bannerImageURL: CarMakingMockData.mockURL[stepIndex],
             optionCardInfoArray: CarMakingMockData.mockOption[stepIndex]
         )
         return carMakingStepInfo
