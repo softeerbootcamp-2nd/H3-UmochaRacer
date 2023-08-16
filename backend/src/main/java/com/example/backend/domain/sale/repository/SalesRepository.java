@@ -18,4 +18,7 @@ public interface SalesRepository extends CrudRepository<Sales, Long> {
             "with rollup",
         rowMapperClass = SelectionRatioRowMapper.class)
     List<SalesSummary> findSalesRatio(String columnId);
+
+    @Query(value = "SELECT count(*) FROM SALES")
+    Integer getTotalSales();
 }

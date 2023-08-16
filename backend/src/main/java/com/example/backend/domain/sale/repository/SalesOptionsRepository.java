@@ -12,11 +12,13 @@ import java.util.List;
 @Repository
 public interface SalesOptionsRepository extends CrudRepository<SalesOptions, Long> {
     @Query(
-            value = "select so.additional_option_id as id, count(*) as select_count\n" +
-                    "from SALES_OPTIONS so\n" +
-                    "where id in (select ao.id from ADDITIONAL_OPTION ao where ao.category= :category)\n" +
-                    "group by so.additional_option_id\n" +
-                    "with rollup",
+            value = "SELECT so.additional_option_id      AS id,\n" +
+                    "       COUNT(*)                     AS select_count\n" +
+                    "FROM SALES_OPTIONS so\n" +
+                    "WHERE so.additional_option_id IN (SELECT id\n" +
+                    "                                  FROM ADDITIONAL_OPTION\n" +
+                    "                                  WHERE category = :category)\n" +
+                    "GROUP BY so.additional_option_id",
             rowMapperClass = SelectionRatioRowMapper.class
     )
     List<SalesSummary> findSalesRatio(String category);
