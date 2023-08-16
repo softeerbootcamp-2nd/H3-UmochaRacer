@@ -94,7 +94,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     // MARK: - Helpers
 
     func moveNextStep() {
-        guard currentStep < CarMakingStep.allCases.count else { return }
+        guard currentStep < CarMakingStep.allCases.count - 1 else { return }
         currentStep += 1
     }
 
