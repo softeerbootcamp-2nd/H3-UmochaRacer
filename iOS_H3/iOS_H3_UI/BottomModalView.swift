@@ -102,6 +102,10 @@ final class BottomModalView: UIView {
     func updateEstimatePrice(_ price: Int) {
         priceLabel.text = "\(price.toPriceString()) 원"
     }
+
+    func updateEstimateSummary(_ estimateSummary: EstimateSummary) {
+        estimateSummaryView.configure(estimateSummary)
+    }
 }
 
 // MARK: - Setup
