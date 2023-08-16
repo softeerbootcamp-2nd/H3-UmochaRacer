@@ -73,15 +73,21 @@ extension CarMakingViewController {
         let output = viewModel.transform(input)
 
         output.estimateSummary
-            .sink(receiveValue: updateBottomModalView)
+            .sink { [weak self] summary in
+                self?.updateBottomModalView(with: summary)
+            }
             .store(in: &cancellables)
 
         output.currentStepInfo
-            .sink(receiveValue: updateCurrentStepInfo)
+            .sink { [weak self] info in
+                self?.updateCurrentStepInfo(with: info)
+            }
             .store(in: &cancellables)
 
         output.showIndicator
-            .sink(receiveValue: showIndicator)
+            .sink { [weak self] showIndicator in
+                self?.showIndicator(showIndicator)
+            }
             .store(in: &cancellables)
     }
 

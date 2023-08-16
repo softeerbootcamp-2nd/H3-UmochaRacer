@@ -35,15 +35,17 @@ final class CarMakingViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .map(requestEstimateSummary)
-            .sink(receiveValue: { estimateSummary in
+            .sink(receiveValue: { [weak self] _ in
+                guard let self else { return }
+                let estimateSummary = requestEstimateSummary()
                 output.estimateSummary.send(estimateSummary)
             })
             .store(in: &cancellables)
 
         input.carMakingStepDidChanged
-            .map(requestCurrentStepInfo)
-            .sink(receiveValue: { carMakingStepInfo in
+            .sink(receiveValue: { [weak self] step in
+                guard let self else { return }
+                let carMakingStepInfo = requestCurrentStepInfo(step)
                 output.currentStepInfo.send(carMakingStepInfo)
             })
             .store(in: &cancellables)
