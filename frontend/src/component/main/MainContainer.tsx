@@ -64,7 +64,7 @@ function MainContainer() {
         <GuideModeButton.Suggest>
           무엇을 골라야 할 지 모르겠다면?
         </GuideModeButton.Suggest>
-        <GuideModeButton.LinkWrapper onClick={() => openModal('exit')}>
+        <GuideModeButton.LinkWrapper onClick={() => openModal('mode_to_guide')}>
           <GuideModeButton.Guide>Guide Mode</GuideModeButton.Guide>
           <Icon name="ArrowRight" size={36} />
         </GuideModeButton.LinkWrapper>
