@@ -112,6 +112,9 @@ extension CarMakingContentView {
     }
 
     private func moveCollectionView(to index: Int) {
+        let indexPath = getIndexPathOfCollectionView(index)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
 
     private func getIndexPathOfCollectionView(_ index: Int) -> IndexPath {
         let section = PageSection.section(for: index)
