@@ -22,7 +22,7 @@ final class CarMakingContentViewController: UIViewController {
     }()
 
     private lazy var carMakingContentView: CarMakingContentView = {
-        let view = CarMakingContentView<PageSection>(frame: .zero, type: .selfMode)
+        let view = CarMakingContentView<PageSection>(frame: .zero, mode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -65,47 +65,35 @@ final class CarMakingContentViewController: UIViewController {
     }
 }
 extension CarMakingContentViewController: OhMyCarSetTitleBarDelegate {
-    func titleButtonTapped() {
+    func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
         print("titleButton Pressed")
     }
 
-    func backButtonPressed() {
+    func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("backButton Pressed")
         self.dismiss(animated: true)
     }
 
-    func skipButtonPressed() {
+    func titleBarSkipButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("skipButton Pressed")
     }
 
-    func dictionaryButtonPressed() {
+    func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("dictionaryButton Pressed")
     }
 
-    func changeModelButtonPressed() {
+    func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("changeModelButton Pressed")
     }
 }
 
 extension CarMakingContentViewController: CarMakingContentViewDataSource {
 
-    func numberOfSections() -> Int {
-        return PageSection.allCases.count
-    }
-
-    func contentView(numberOfItemsInSection section: Int) -> Int {
-        return CarMakingStep.allCases.count
-    }
-
-    func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep {
-        return CarMakingStep.allCases[indexPath.row]
-    }
-
-    func contentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
+    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String? {
         return CarMakingContentMockData.mockURL[indexPath.section][indexPath.row]
     }
 
-    func contentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
+    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]? {
         return CarMakingContentMockData.mockOption[indexPath.section][indexPath.row]
     }
 }

@@ -23,8 +23,8 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - LifeCycles
 
-    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
-        optionCardButtons = (0..<2).map { _ in OptionCardButton(type: type) }
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
+        optionCardButtons = (0..<2).map { _ in OptionCardButton(mode: carMakingMode) }
         super.init(frame: frame)
 
         setupOptionCardButtons()
@@ -32,7 +32,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 
     override init(frame: CGRect) {
-        optionCardButtons = (0..<2).map { _ in OptionCardButton(type: .selfMode) }
+        optionCardButtons = (0..<2).map { _ in OptionCardButton(mode: .selfMode) }
         super.init(frame: frame)
 
         setupOptionCardButtons()
@@ -40,7 +40,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 
     required init?(coder: NSCoder) {
-        optionCardButtons = (0..<2).map { _ in OptionCardButton(type: .selfMode) }
+        optionCardButtons = (0..<2).map { _ in OptionCardButton(mode: .selfMode) }
         super.init(coder: coder)
 
         setupOptionCardButtons()
@@ -62,6 +62,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
     func updateAllViews(with cardInfos: [OptionCardInfo]) {
         optionCardButtons.enumerated().forEach { (index, _) in
+            if cardInfos.count <= index { return }
             updateView(index: index, with: cardInfos[index])
         }
     }

@@ -35,7 +35,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Properties
 
-    private let optionCardType: OptionCardButton.OptionCardType
+    private let carMakingMode: CarMakingMode
 
     private var dataSource: CollectionViewDiffableDataSource!
 
@@ -45,8 +45,8 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Lifecycles
 
-    init(frame: CGRect = .zero, type: OptionCardButton.OptionCardType) {
-        optionCardType = type
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
+        self.carMakingMode = carMakingMode
         super.init(frame: frame)
 
         setupOptionCardCollectionView()
@@ -54,7 +54,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 
     override init(frame: CGRect) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(frame: frame)
 
         setupOptionCardCollectionView()
@@ -62,7 +62,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 
     required init?(coder: NSCoder) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(coder: coder)
 
         setupOptionCardCollectionView()
@@ -144,7 +144,7 @@ extension MultiOptionCardButtonView {
                 return OptionCardCell()
             }
 
-            cell.configure(cardType: optionCardType, info: item)
+            cell.configure(carMakingMode: carMakingMode, info: item)
 
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in

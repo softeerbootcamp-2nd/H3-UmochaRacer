@@ -13,11 +13,6 @@ protocol OptionCardButtonDelegate: AnyObject {
 
 class OptionCardButton: UIButton {
 
-    enum OptionCardType {
-        case selfMode
-        case guideMode
-    }
-
     // MARK: - UI properties
     private struct Constants {
         static let checkImageViewWidth: CGFloat = 24
@@ -119,33 +114,33 @@ class OptionCardButton: UIButton {
         return view
     }()
 
-    private var type: OptionCardType
+    private var carMakingMode: CarMakingMode
 
     weak var delegate: OptionCardButtonDelegate?
 
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
-        type = .selfMode
+        carMakingMode = .selfMode
         super.init(frame: frame)
         setupViews()
     }
 
     required init?(coder: NSCoder) {
-        type = .selfMode
+        carMakingMode = .selfMode
         super.init(coder: coder)
         setupViews()
     }
 
-    init(type: OptionCardType, info: OptionCardInfo) {
-        self.type = type
+    init(carMakingMode: CarMakingMode, info: OptionCardInfo) {
+        self.carMakingMode = carMakingMode
         super.init(frame: .zero)
         setupViews()
-        update(type: type, cardInfo: info)
+        update(carMakingMode: carMakingMode, cardInfo: info)
         addMoreInfoButtonTarget()
     }
 
-    init(type: OptionCardType,
+    init(mode: CarMakingMode,
          optionTitle: String = "옵션 타이틀",
          optionSubTitle: String = "옵션 서브 타이틀",
          price: String = "+ 0원",
@@ -153,7 +148,7 @@ class OptionCardButton: UIButton {
          color: URColor? = nil,
          image: URL? = nil
     ) {
-        self.type = type
+        self.carMakingMode = mode
         super.init(frame: .zero)
         self.optionTitleLabel.text = optionTitle
         self.optionSubTitleLabel.text = optionSubTitle
@@ -166,9 +161,9 @@ class OptionCardButton: UIButton {
     }
 
     // MARK: - Helpers
-    func update(type: OptionCardType? = nil, cardInfo: OptionCardInfo? = nil) {
-        if let type = type {
-            self.type = type
+    func update(carMakingMode: CarMakingMode? = nil, cardInfo: OptionCardInfo? = nil) {
+        if let carMakingMode = carMakingMode {
+            self.carMakingMode = carMakingMode
         }
 
         if let cardInfo = cardInfo {
@@ -251,7 +246,7 @@ extension OptionCardButton {
     private func updateButtonUI() {
         let selectedColors: UIColor?
 
-        switch type {
+        switch carMakingMode {
         case .guideMode:
             selectedColors = Colors.subActiveBlue
         case .selfMode:

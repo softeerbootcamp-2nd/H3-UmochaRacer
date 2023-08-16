@@ -41,6 +41,7 @@
 		471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
 		4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
+		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
@@ -58,6 +59,10 @@
 		479023B72A8B231200DECB70 /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B52A8B231200DECB70 /* URL+.swift */; };
 		479023B92A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
 		479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
+		479023BC2A8B4BE600DECB70 /* CarMakingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BB2A8B4BE600DECB70 /* CarMakingViewController.swift */; };
+		479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
+		479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
+		479023C02A8B4E0600DECB70 /* CarMakingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -217,6 +222,8 @@
 		479023AE2A8AA18600DECB70 /* EndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		479023B52A8B231200DECB70 /* URL+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+.swift"; sourceTree = "<group>"; };
 		479023B82A8B231D00DECB70 /* URLRequest+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+.swift"; sourceTree = "<group>"; };
+		479023BB2A8B4BE600DECB70 /* CarMakingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewController.swift; sourceTree = "<group>"; };
+		479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingMode.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -394,7 +401,7 @@
 		478B26772A78FC5C00598902 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				478B26832A78FD4000598902 /* SelfMode */,
+				478B26832A78FD4000598902 /* CarMaking */,
 				5F00FBF82A777BDE0055A4FA /* ViewController.swift */,
 			);
 			path = Presentation;
@@ -431,6 +438,7 @@
 				471917C92A7FA02000B67D54 /* CarMakingStep.swift */,
 				5F4D33AE2A87519600942517 /* ImageCacheManager.swift */,
 				5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */,
+				479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */,
 				5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */,
 			);
 			path = Source;
@@ -501,19 +509,20 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		478B26832A78FD4000598902 /* SelfMode */ = {
+		478B26832A78FD4000598902 /* CarMaking */ = {
 			isa = PBXGroup;
 			children = (
 				478B26862A78FD8D00598902 /* View */,
 				478B26852A78FD8700598902 /* ViewModel */,
 				478B26842A78FD8200598902 /* ViewController */,
 			);
-			path = SelfMode;
+			path = CarMaking;
 			sourceTree = "<group>";
 		};
 		478B26842A78FD8200598902 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				479023BB2A8B4BE600DECB70 /* CarMakingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -944,6 +953,7 @@
 				47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				5F00FBFE2A777BDF0055A4FA /* Assets.xcassets in Resources */,
 				47CB8CB72A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf in Resources */,
+				4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */,
 				47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1025,6 +1035,7 @@
 				479023BA2A8B231D00DECB70 /* URLRequest+.swift in Sources */,
 				4790239E2A8A3E0A00DECB70 /* AppDelegate.swift in Sources */,
 				479023B02A8AA18600DECB70 /* NetworkService.swift in Sources */,
+				479023C02A8B4E0600DECB70 /* CarMakingMode.swift in Sources */,
 				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
 				479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */,
 				5F60E4C02A8B4DE700531462 /* ConstantKey.swift in Sources */,
@@ -1036,6 +1047,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4D33B22A8751E500942517 /* UIImageView+.swift in Sources */,
+				479023BC2A8B4BE600DECB70 /* CarMakingViewController.swift in Sources */,
 				5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */,
 				5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */,
@@ -1090,6 +1102,7 @@
 				5F60E4BD2A8B469C00531462 /* CarInfoEndpoint.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
+				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
 				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
@@ -1141,6 +1154,7 @@
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
+				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				471917F12A82371E00B67D54 /* OptionCardInfo.swift in Sources */,

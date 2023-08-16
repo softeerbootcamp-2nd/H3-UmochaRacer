@@ -8,11 +8,8 @@
 import UIKit
 
 protocol CarMakingContentViewDataSource: AnyObject {
-    func numberOfSections() -> Int
-    func contentView(numberOfItemsInSection section: Int) -> Int
-    func contentView(stepAtIndexPath indexPath: IndexPath) -> CarMakingStep
-    func contentView(urlForItemAtIndex indexPath: IndexPath) -> String?
-    func contentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
+    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String?
+    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -29,19 +26,6 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     let progressBarHeight = 26.0
     let bottomSheetHeight = 129.0
 
-    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
-
-    weak var dataSource: (CarMakingContentViewDataSource)? {
-        didSet {
-            setupSnapshot()
-        }
-    }
-
-    private let optionCardType: OptionCardButton.OptionCardType
-    private let cellIdentifiers: [PageSection: String] = [
-        .twoButton: CarMakingTwoOptionCell.identifier,
-        .multipleButton: CarMakingMultipleOptionCell.identifier
-    ]
     // MARK: - UI properties
 
     private let collectionView: UICollectionView = {
@@ -56,29 +40,84 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }()
 
     // MARK: - Properties
+
+    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
+
     private let flowLayoutDelegate = FlowLayoutDelegate()
 
+    weak var dataSource: CarMakingContentViewDataSource? {
+        didSet {
+            setupSnapshot()
+        }
+    }
+
+    private let cellIdentifiers: [PageSection: String] = [
+        .twoButton: CarMakingTwoOptionCell.identifier,
+        .multipleButton: CarMakingMultipleOptionCell.identifier
+    ]
+
+    private let carMakingMode: CarMakingMode
+
+    private var currentStep: Int = 0 {
+        didSet {
+            moveStep(to: currentStep)
+        }
+    }
+
     // MARK: - Lifecycles
+
     override init(frame: CGRect) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(frame: frame)
         setupViews()
     }
+
     required init?(coder: NSCoder) {
-        optionCardType = .selfMode
+        carMakingMode = .selfMode
         super.init(coder: coder)
         setupViews()
     }
-    init(frame: CGRect, type: OptionCardButton.OptionCardType) {
-        optionCardType = type
+
+    init(frame: CGRect, mode: CarMakingMode) {
+        carMakingMode = mode
         super.init(frame: frame)
         setupViews()
     }
 
     // MARK: - Helpers
+
+    func moveNextStep() {
+        guard currentStep < CarMakingStep.allCases.count else { return }
+        currentStep += 1
+    }
+
+    func movePrevStep() {
+        guard currentStep > 0 else { return }
+        currentStep -= 1
+    }
 }
 
 extension CarMakingContentView {
+
+    private func moveStep(to index: Int) {
+        carMakingProgressBar.selectButton(for: index)
+        moveCollectionView(to: index)
+    }
+
+    private func moveCollectionView(to index: Int) {
+        let section = PageSection.section(for: index)
+        let sectionIndex = section.index
+        let item = section.itemIndex(for: index)
+        let indexPath = IndexPath(item: item, section: sectionIndex)
+
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+}
+
+// MARK: - Setup Views
+
+extension CarMakingContentView {
+
     private func setupViews() {
         setupProgressBar()
         setupCollectionView()
@@ -129,7 +168,8 @@ extension CarMakingContentView {
 
      func setupCollectionViewDataSource() {
          collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(
-              collectionView: collectionView) { [weak self] (collectionView, indexPath, step)
+            collectionView: collectionView
+         ) { [weak self] (collectionView, indexPath, step)
                   -> UICollectionViewCell? in
             let section = PageSection.allCases[indexPath.section]
             guard let self,
@@ -139,9 +179,9 @@ extension CarMakingContentView {
                 return CarMakingCollectionViewCell()
             }
 
-            let urlString = self.dataSource?.contentView(urlForItemAtIndex: indexPath)
-            let options = self.dataSource?.contentView(optionsForItemAtIndex: indexPath) ?? []
-            cell.configure(type: self.optionCardType,
+            let urlString = self.dataSource?.carMakingContentView(urlForItemAtIndex: indexPath)
+            let options = self.dataSource?.carMakingContentView(optionsForItemAtIndex: indexPath) ?? []
+            cell.configure(mode: self.carMakingMode,
                            bannerImage: urlString,
                            makingStepTitle: step.title,
                            optionInfos: options)
@@ -162,7 +202,8 @@ extension CarMakingContentView {
 
 }
 
-// MARK: : UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
+
 class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     let progressBarHeight = 26.0
 
@@ -174,12 +215,11 @@ class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - CarMakingProgressBar Delegate
+
 extension CarMakingContentView: CarMakingProgressBarDelegate {
+
     func progressBarButtonDidTapped(didSelectItemAt index: Int) {
-        let section = PageSection.section(for: index)
-        let item = section.itemIndex(for: index)
-        let sectionIndex = PageSection.allCases.firstIndex(of: section)!
-        let indexPath = IndexPath(item: item, section: sectionIndex)
-        self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+        currentStep = index
     }
 }

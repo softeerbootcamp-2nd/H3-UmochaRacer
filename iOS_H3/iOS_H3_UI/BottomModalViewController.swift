@@ -35,17 +35,17 @@ final class BottomModalViewController: UIViewController {
 }
 
 extension BottomModalViewController: BottomModalViewDataSource {
-    func estimateSummaryData() -> Int {
+    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int {
         return -1
     }
 }
 
 extension BottomModalViewController: BottomModalViewDelegate {
-    func backButtonDidTapped() {
+    func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView) {
         print("[BottomModalViewDelegate] 이전 버튼 클릭 시 액션 구현 필요")
     }
 
-    func completionButtonDidTapped() {
+    func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
         print("[BottomModalViewDelegate] 선택완료 버튼 클릭 시 액션 구현 필요")
     }
 }
