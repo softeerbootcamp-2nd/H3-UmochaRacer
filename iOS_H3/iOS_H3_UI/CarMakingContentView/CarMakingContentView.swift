@@ -7,11 +7,6 @@
 
 import UIKit
 
-protocol CarMakingContentViewDataSource: AnyObject {
-    func carMakingContentView(urlForItemAtIndex indexPath: IndexPath) -> String?
-    func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
-}
-
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
 }
@@ -48,12 +43,6 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>!
 
     private let flowLayoutDelegate = FlowLayoutDelegate()
-
-    weak var dataSource: CarMakingContentViewDataSource? {
-        didSet {
-            setupSnapshot()
-        }
-    }
 
     weak var delegate: CarMakingContentViewDelegate?
 
