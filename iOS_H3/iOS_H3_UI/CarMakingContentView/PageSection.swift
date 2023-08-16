@@ -14,6 +14,14 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
 
     var sectionIndex: Int {
         return rawValue
+
+    var cellIdentifiers: String {
+        switch self {
+        case .twoButton:
+            return CarMakingTwoOptionCell.identifier
+        case .multipleButton:
+            return CarMakingMultipleOptionCell.identifier
+        }
     }
 
     var range: Range<Int> {
