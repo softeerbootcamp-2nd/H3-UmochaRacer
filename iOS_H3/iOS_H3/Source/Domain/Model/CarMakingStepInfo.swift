@@ -9,12 +9,10 @@ import Foundation
 
 struct CarMakingStepInfo: Hashable {
     let step: CarMakingStep
-    var bannerImageURL: URL?
     var optionCardInfoArray: [OptionCardInfo]
 
-    init(step: CarMakingStep, bannerImageURL: URL? = nil, optionCardInfoArray: [OptionCardInfo] = []) {
+    init(step: CarMakingStep, optionCardInfoArray: [OptionCardInfo] = []) {
         self.step = step
-        self.bannerImageURL = bannerImageURL
         self.optionCardInfoArray = optionCardInfoArray
     }
 }
