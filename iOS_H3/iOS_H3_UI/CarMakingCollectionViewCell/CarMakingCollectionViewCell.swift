@@ -63,23 +63,29 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     }
 
     // MARK: - Helpers
-    func configure(mode: CarMakingMode,
-                   bannerImage: String?,
-                   makingStepTitle: String,
-                   optionInfos: [OptionCardInfo]) {
-
-        if let urlString = bannerImage {
-            self.optionImageView.loadCachedImage(of: urlString)
-        }
-
-        // 라벨 업데이트
-        self.descriptionLabel.text = makingStepTitle + Constants.descriptionSuffix
-        self.descriptionLabel.applyBoldToString(targetString: makingStepTitle,
-                                                font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
-        // 버튼 업데이트
-        let listView = optionButtonListView as? OptionCardButtonListViewable
-        listView?.updateAllViews(with: optionInfos)
+    func configure(carMakingStepInfo: CarMakingStepInfo) {
+        configure(carMakingStepTitle: carMakingStepInfo.step.title)
+        configure(bannerImageURL: carMakingStepInfo.bannerImageURL)
+        configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
     }
+
+    func configure(bannerImageURL: URL?) {
+        optionImageView.loadCachedImage(of: bannerImageURL)
+    }
+
+    func configure(carMakingStepTitle: String) {
+        self.descriptionLabel.text = carMakingStepTitle + Constants.descriptionSuffix
+        self.descriptionLabel.applyBoldToString(targetString: carMakingStepTitle,
+                                                font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
+    }
+
+    func configure(optionInfoArray: [OptionCardInfo]) {
+        guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
+            return
+        }
+        optionButtonListView.updateAllViews(with: optionInfoArray)
+    }
+
 }
 
 extension CarMakingCollectionViewCell {
