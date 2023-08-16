@@ -30,7 +30,7 @@ class ExteriorColorServiceTest extends AbstractStrategyTest {
                 .imageSrc("src")
                 .build();
 
-        when(exteriorColorRepository.findAll()).thenReturn(List.of(exteriorColor));
+        when(exteriorColorRepository.findAllLimit()).thenReturn(List.of(exteriorColor));
         when(informationMapper.map(exteriorColor)).thenReturn(responseDto);
 
         List<CommonResponse> result = service.findAll();
