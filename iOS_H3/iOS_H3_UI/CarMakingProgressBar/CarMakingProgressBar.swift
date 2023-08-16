@@ -38,6 +38,7 @@ final class CarMakingProgressBar: UIScrollView {
         didSet {
             progressBarButtons[oldValue].isSelected = false
             progressBarButtons[selectedButtonIndex].isSelected = true
+            moveContentOffset(to: selectedButtonIndex)
         }
     }
 
@@ -62,6 +63,10 @@ final class CarMakingProgressBar: UIScrollView {
     }
 
     // MARK: - Helpers
+
+    func selectButton(for index: Int) {
+        selectedButtonIndex = index
+    }
 }
 
 extension CarMakingProgressBar {
@@ -119,7 +124,6 @@ extension CarMakingProgressBar {
             return
         }
         selectedButtonIndex = index
-        moveContentOffset(to: index)
         progressBarDelegate?.progressBarButtonDidTapped(didSelectItemAt: index)
     }
 
