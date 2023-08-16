@@ -45,7 +45,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Properties
 
-    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStep>!
+    var collectionViewDataSource: UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>!
 
     private let flowLayoutDelegate = FlowLayoutDelegate()
 
@@ -174,35 +174,36 @@ extension CarMakingContentView {
     }
 
      func setupCollectionViewDataSource() {
-         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStep>(
+         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { [weak self] (collectionView, indexPath, step)
+         ) { [weak self] (collectionView, indexPath, carMakingStepInfo)
                   -> UICollectionViewCell? in
-            let section = PageSection.allCases[indexPath.section]
-            guard let self,
-                  let cellIdentifier = cellIdentifiers[section],
-                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier,
-                                                                for: indexPath) as? CarMakingCollectionViewCell else {
-                return CarMakingCollectionViewCell()
-            }
-
-            let urlString = self.dataSource?.carMakingContentView(urlForItemAtIndex: indexPath)
-            let options = self.dataSource?.carMakingContentView(optionsForItemAtIndex: indexPath) ?? []
-            cell.configure(mode: self.carMakingMode,
-                           bannerImage: urlString,
-                           makingStepTitle: step.title,
-                           optionInfos: options)
+             let section = PageSection.allCases[indexPath.section]
+             guard let self,
+                   let cellIdentifier = cellIdentifiers[section],
+                   let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: cellIdentifier,
+                    for: indexPath
+                   ) as? CarMakingCollectionViewCell else {
+                 return CarMakingCollectionViewCell()
+             }
+             cell.configure(carMakingStepInfo: carMakingStepInfo)
             return cell
         }
 
     }
 
     func setupSnapshot() {
-        let steps = CarMakingStep.allCases
-        var snapshot = NSDiffableDataSourceSnapshot<Section, CarMakingStep>()
+        var snapshot = NSDiffableDataSourceSnapshot<Section, CarMakingStepInfo>()
         for section in Section.allCases {
             snapshot.appendSections([section])
-            snapshot.appendItems(Array(steps[section.range]), toSection: section)
+            let carMakingStepInfoArray = (section.range).compactMap { stepIndex -> CarMakingStepInfo? in
+                guard let step = CarMakingStep(rawValue: stepIndex) else {
+                    return nil
+                }
+                return CarMakingStepInfo(step: step)
+            }
+            snapshot.appendItems(carMakingStepInfoArray, toSection: section)
         }
         collectionViewDataSource.apply(snapshot, animatingDifferences: true)
     }
