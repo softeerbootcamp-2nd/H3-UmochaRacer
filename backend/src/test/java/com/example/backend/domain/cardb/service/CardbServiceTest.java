@@ -3,6 +3,7 @@ package com.example.backend.domain.cardb.service;
 import com.example.backend.domain.cardb.dto.CardbResponseDto;
 import com.example.backend.domain.cardb.entity.Cardb;
 import com.example.backend.domain.cardb.repository.CardbRepository;
+import com.example.backend.domain.global.exception.RestApiException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,10 +48,11 @@ class CardbServiceTest {
     @Test
     @DisplayName("키워드에 해당하는 정보가 없으면 null을 반환한다.")
     void shouldReturnNullWhenDoesNotExist() throws Exception {
-        when(cardbRepository.findByKeyword("디젤2.2"))
-                .thenReturn(Optional.of(sample));
+        when(cardbRepository.findByKeyword("안녕"))
+                .thenReturn(Optional.empty());
 
-        CardbResponseDto result = cardbService.getDescriptionByKeyword("안녕");
-
+        assertThrows(RestApiException.class,() -> {
+                cardbService.getDescriptionByKeyword("안녕");
+        });
     }
 }
