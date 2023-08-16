@@ -34,7 +34,7 @@ function ModelDefaultOption() {
     {eng: 'exterior', kor: '외관'},
     {eng: 'interior', kor: '내장'},
     {eng: 'seat', kor: '시트'},
-    {eng: 'convenience', kor: '편이'},
+    {eng: 'convenience', kor: '편의'},
     {eng: 'multimedia', kor: '멀티미디어'},
   ];
   useEffect(() => {

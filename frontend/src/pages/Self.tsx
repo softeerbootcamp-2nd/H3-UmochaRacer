@@ -26,7 +26,7 @@ const Wrapper = styled.div`
 
 const TopWrapper = styled.div`
   width: 100%;
-  min-height: 101px;
+  min-height: 111px;
   position: fixed;
   background: white;
   z-index: 999999;

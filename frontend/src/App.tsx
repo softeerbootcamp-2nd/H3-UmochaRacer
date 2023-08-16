@@ -5,6 +5,7 @@ import Main from './pages/Main';
 import OptionProvider from './provider/optionProvider';
 import {ModalProvider} from './provider/modalProvider';
 import Modal from './component/modal/Modal';
+import SelectedOptionProvider from './provider/selectedOptionProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -20,7 +21,9 @@ function App() {
       children,
     );
   return (
-    <AppProvider contexts={[OptionProvider, ModalProvider]}>
+    <AppProvider
+      contexts={[OptionProvider, ModalProvider, SelectedOptionProvider]}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />

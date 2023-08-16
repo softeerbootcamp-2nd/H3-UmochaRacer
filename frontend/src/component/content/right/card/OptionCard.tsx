@@ -7,6 +7,8 @@ import {cardDataType} from '../../contentInterface';
 
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
+import {getCategory} from '@/component/util/getCategory';
+import useFetch from '@/component/hooks/useFetch';
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
@@ -14,7 +16,12 @@ interface CardProps {
   data: cardDataType;
   option: number;
 }
-
+interface detailData {
+  title: string;
+  description: string;
+  info: string;
+  imageScr: string;
+}
 const SelectIcon = () => {
   return (
     <svg
@@ -80,6 +87,10 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
     [toggle],
   );
 
+  const categoryName = getCategory(option);
+  const fetchedDetails = useFetch<detailData>(
+    `/detail/${categoryName}/${data.id}`,
+  );
   useEffect(() => {
     if (toggle && !selected) {
       if (contentBoxRef.current) {
@@ -129,11 +140,7 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
         {hasDetail(option) ? (
           <DetailBox ref={contentBoxRef} $toggle={toggle} $isSaved={isSaved}>
             <DetailContent ref={contentRef}>
-              컨텐츠
-              <Text1>구매자의 63%가 선택했어요!</Text1>
-              <Text2>디젤 2.2</Text2>
-              <Text1>구매자의 63%가 선택했어요!</Text1>
-              <Text2>디젤 2.2</Text2>
+              {fetchedDetails.data?.description}
             </DetailContent>
           </DetailBox>
         ) : (
@@ -239,6 +246,7 @@ const Parts = styled.div<{$url: string; $selected: boolean}>`
   height: 24px;
   background: url(${(props) => props.$url}) no-repeat;
   background-position: center;
+  background-size: contain;
   ${(props) => {
     return props.$selected ? '' : imageBlur;
   }}
@@ -281,7 +289,7 @@ const ColorBox = styled.div<{$colorcode: string}>`
   height: 60px;
   border: 1px solid ${colors.Cool_Grey_002};
   border-radius: 100%;
-  background: ${(props) => props.$colorcode};
+  background-image: url(${(props) => props.$colorcode});
 `;
 
 const Price = styled.div`

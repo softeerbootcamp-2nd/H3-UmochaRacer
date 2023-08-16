@@ -51,7 +51,7 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
           prevRef.current = selectedIndex;
         }}
       >
-        <img src={elem.imageSrc}></img>
+        <ImageBoxImg src={elem.imageSrc}></ImageBoxImg>
       </ImageBox>
     );
   });
@@ -90,3 +90,4 @@ const ImageBox = styled.div<{$isActive: boolean}>`
       animation-delay: 0.2s;
     `}
 `;
+const ImageBoxImg = styled.img``;

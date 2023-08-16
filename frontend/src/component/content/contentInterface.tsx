@@ -13,8 +13,8 @@ export interface cardDataType {
   colorCode?: string | undefined;
   iconSrc?: string | undefined;
   partsSrc?: string | undefined;
-  optionId: number;
+  id: number;
   name: string;
-  price: number;
   imageSrc: string;
+  price: number;
 }
