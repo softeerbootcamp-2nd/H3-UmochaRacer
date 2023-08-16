@@ -46,6 +46,7 @@
 		473309952A8BECBB00906FFB /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */; };
 		473309962A8BED4D00906FFB /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */; };
 		473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
+		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
@@ -1113,6 +1114,7 @@
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
+				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
