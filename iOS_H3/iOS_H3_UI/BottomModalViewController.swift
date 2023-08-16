@@ -17,7 +17,6 @@ final class BottomModalViewController: UIViewController {
 
     private lazy var bottomModalView: BottomModalView = {
         let view = BottomModalView()
-        view.dataSource = self
         view.delegate = self
         view.updateEstimatePrice(12345)
         return view
@@ -32,12 +31,6 @@ final class BottomModalViewController: UIViewController {
     }
 
     // MARK: - Helpers
-}
-
-extension BottomModalViewController: BottomModalViewDataSource {
-    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int {
-        return -1
-    }
 }
 
 extension BottomModalViewController: BottomModalViewDelegate {

@@ -120,7 +120,7 @@ extension CarMakingViewController: CarMakingContentViewDelegate, CarMakingConten
 
 // MARK: - BottomModalView Delegate & DataSource
 
-extension CarMakingViewController: BottomModalViewDelegate, BottomModalViewDataSource {
+extension CarMakingViewController: BottomModalViewDelegate {
 
     func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView) {
         carMakingContentView.movePrevStep()
@@ -128,10 +128,6 @@ extension CarMakingViewController: BottomModalViewDelegate, BottomModalViewDataS
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
         carMakingContentView.moveNextStep()
-    }
-
-    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int {
-        return -1
     }
 }
 
@@ -161,7 +157,6 @@ extension CarMakingViewController {
 
     private func setupBottomModalView() {
         bottomModalView.delegate = self
-        bottomModalView.dataSource = self
         bottomModalView.translatesAutoresizingMaskIntoConstraints = false
     }
 }

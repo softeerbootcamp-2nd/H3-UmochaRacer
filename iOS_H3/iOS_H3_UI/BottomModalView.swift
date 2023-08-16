@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol BottomModalViewDataSource: AnyObject {
-    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int   // 반환 타입 수정 필요
-}
-
 protocol BottomModalViewDelegate: AnyObject {
     func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView)
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView)
@@ -70,8 +66,6 @@ final class BottomModalView: UIView {
     private lazy var heightConstraint = heightAnchor.constraint(equalToConstant: Constants.bottomModalViewHeight)
 
     // MARK: - Properties
-
-    weak var dataSource: BottomModalViewDataSource!
 
     weak var delegate: BottomModalViewDelegate!
 
@@ -186,10 +180,6 @@ extension BottomModalView {
     private func showEstimateSummaryView() {
         estimateSummaryView.isHidden = false
         bottomContentView.layer.shadowOpacity = Float(Constants.bottomContentViewShadowOpacity)
-
-        if let dataSource {
-            estimateSummaryView.configure(dataSource.estimateSummaryData(in: self))
-        }
 
         let viewHeight = screenSize.height * 3 / 4
         updateHeightConstraint(viewHeight)
