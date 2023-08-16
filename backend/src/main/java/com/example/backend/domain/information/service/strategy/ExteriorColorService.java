@@ -21,7 +21,7 @@ public class ExteriorColorService implements InformationStrategy {
 
     @Override
     public List<CommonResponse> findAll() {
-        List<ExteriorColor> all = (List<ExteriorColor>) exteriorColorRepository.findAll();
+        List<ExteriorColor> all = exteriorColorRepository.findAllLimit();
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
