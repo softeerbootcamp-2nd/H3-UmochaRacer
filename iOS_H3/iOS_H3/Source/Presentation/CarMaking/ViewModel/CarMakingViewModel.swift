@@ -28,10 +28,6 @@ final class CarMakingViewModel {
 
     private var cancellables = Set<AnyCancellable>()
 
-    // MARK: - Dependency
-
-    // MARK: - Lifecycles
-
     // MARK: - Helpers
 
     func transform(_ input: Input) -> Output {
