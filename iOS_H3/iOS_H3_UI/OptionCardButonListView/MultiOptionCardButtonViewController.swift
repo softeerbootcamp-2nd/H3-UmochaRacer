@@ -23,26 +23,15 @@ final class MultiOptionCardButtonViewController: UIViewController {
         return view
     }()
 
-    private let guideModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
+    private lazy var guideModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
         let view = MultiOptionCardButtonView(carMakingMode: .guideMode)
-
-        let cardInfos: [OptionCardInfo] = [
-            .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
-            .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
-        ]
-        view.updateAllViews(with: cardInfos)
-
+        view.updateAllViews(with: self.cardInfos)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     // MARK: - Properties
-    var cardInfos: [OptionCardInfo] = [
-        .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
-        .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원"),
-        .init(title: "셀3", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
-        .init(title: "셀4", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원")
-    ]
+    var cardInfos: [OptionCardInfo] = CarMakingContentMockData.mockOption[0]
 
     // MARK: - Lifecycles
 

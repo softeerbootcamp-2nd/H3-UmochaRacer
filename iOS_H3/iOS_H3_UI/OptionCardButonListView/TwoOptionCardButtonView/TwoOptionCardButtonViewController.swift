@@ -21,7 +21,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
         let view = TwoOptionCardButtonView(carMakingMode: .guideMode)
         view.updateView(
             index: 0,
-            with: OptionCardInfo(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true)
+            with: CarMakingContentMockData.mockOption[0][0]
         )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -30,22 +30,14 @@ final class TwoOptionCardButtonViewController: UIViewController {
     private let twoOptionCardButtonViewWithData: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        let cardInfos: [OptionCardInfo] = [
-            .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원"),
-            .init(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", isSelected: true)
-        ]
-        view.updateAllViews(with: cardInfos)
+        view.updateAllViews(with: CarMakingContentMockData.mockOption[0])
         return view
     }()
 
     private let moreInfoVersionView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        let cardInfos: [OptionCardInfo] = [
-            .init(title: "디젤 2.2", subTitle: "구매자의 63%가 선택한", priceString: "+ 1,480,000원", hasMoreInfo: true),
-            .init(title: "가솔린 3.8", subTitle: "구매자의 37%가 선택한", priceString: "+ 0원", hasMoreInfo: true)
-        ]
-        view.updateAllViews(with: cardInfos)
+        view.updateAllViews(with: CarMakingContentMockData.mockOption[0])
         return view
     }()
 
