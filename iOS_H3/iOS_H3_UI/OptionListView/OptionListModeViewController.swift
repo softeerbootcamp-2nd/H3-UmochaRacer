@@ -17,7 +17,6 @@ final class OptionListModeViewController: UIViewController {
         return view
     }()
 
-
     // MARK: - Properties
     var cardInfos: [OptionCardInfo] = [
         .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
@@ -69,17 +68,17 @@ final class OptionListModeViewController: UIViewController {
                 equalTo: view.trailingAnchor),
             selfModeOptionModeListView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
-         
+
     }
 }
 
 extension OptionListModeViewController: OptionListModeViewDelegate {
-    func optionListModeView(didSelectedIndex: Int) {
+    func optionListModeView(with: OptionListModeView, didSelectedIndex: Int) {
         cardInfos[didSelectedIndex].isSelected.toggle()
         selfModeOptionModeListView.updateAllViews(with: cardInfos)
     }
 
-    func optionListModeViewDidTapImageModeButton() {
+    func optionListModeViewDidTapImageModeButton(with: OptionListModeView) {
         self.dismiss(animated: true)
     }
 }
