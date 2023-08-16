@@ -1,14 +1,13 @@
-import React, {useEffect} from 'react';
-import {useState, useRef, useCallback} from 'react';
+import React from 'react';
+import {useState, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import {cardDataType} from '../../contentInterface';
-import DetilBox from '@/component/common/DetilBox';
+import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
-import {getCategory} from '@/component/util/getCategory';
-import useFetch from '@/component/hooks/useFetch';
+
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
@@ -16,12 +15,7 @@ interface CardProps {
   data: cardDataType;
   option: number;
 }
-interface detailData {
-  title: string;
-  description: string;
-  info: string;
-  imageScr: string;
-}
+
 const SelectIcon = () => {
   return (
     <svg
@@ -73,22 +67,6 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
     [toggle],
   );
 
-  // useEffect(() => {
-  //   if (toggle && !selected) {
-  //     if (contentBoxRef.current) {
-  //       contentBoxRef.current.style.height = '0';
-  //       setToggle(!toggle);
-  //     }
-  //   }
-  // }, [selected]);
-
-  // if (isSaved && toggle) {
-  //   if (contentBoxRef.current) {
-  //     contentBoxRef.current.style.height = '0';
-  //   }
-  //   setToggle(!toggle);
-  // }
-
   return (
     <Wrapper onClick={onClick} $selected={selected}>
       <Container>
@@ -120,7 +98,11 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
         </CardSection>
 
         {hasDetail(option) && (
-          <DetilBox isOpen={toggle} id={data.id}></DetilBox>
+          <DetailBox
+            isOpen={toggle && selected && !isSaved}
+            id={data.id}
+            option={option}
+          ></DetailBox>
         )}
 
         <CardSection $height={26} $end={true}>
@@ -272,22 +254,3 @@ const Price = styled.div`
   ${Body2_Regular}
   color: ${colors.Main_Hyundai_Blue};
 `;
-
-// const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
-//   position: relative;
-//   height: 0;
-//   opacity: 0;
-//   pointer-events: ${({$toggle}) => !$toggle && 'none'};
-//   overflow: hidden;
-//   transition:
-//     height 1s,
-//     opacity 1s;
-// `;
-
-// const DetailContent = styled.div`
-//   position: absolute;
-//   width: 100%;
-//   padding-top: 10px;
-//   padding-bottom: 10px;
-//   border-top: 1px solid ${colors.Cool_Grey_001};
-// `;

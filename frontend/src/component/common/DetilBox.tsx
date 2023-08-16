@@ -1,9 +1,9 @@
 import {colors} from '@/style/theme';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {getCategory} from '../util/getCategory';
-import {OptionContext} from '@/provider/optionProvider';
 import useFetch from '../hooks/useFetch';
+import {Label2_Regular} from '@/style/fonts';
 
 interface Info {
   title: string;
@@ -19,11 +19,11 @@ interface DeatailData {
 interface Props {
   isOpen: boolean;
   id: number;
+  option: number;
 }
 
-function DetilBox({isOpen, id}: Props) {
+function DetailBox({isOpen, id, option}: Props) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const {option} = useContext(OptionContext);
   const categoryName = getCategory(option);
 
   const fetchedDetails = useFetch<DeatailData>(`/detail/${categoryName}/${id}`);
@@ -31,13 +31,13 @@ function DetilBox({isOpen, id}: Props) {
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
-        {fetchedDetails.data?.description}
+        <DescriptionBox>{fetchedDetails.data?.description}</DescriptionBox>
       </DetailContent>
     </Wrapper>
   );
 }
 
-export default DetilBox;
+export default DetailBox;
 
 const Wrapper = styled.div<{$isOpen: boolean; $height?: number}>`
   position: relative;
@@ -56,4 +56,8 @@ const DetailContent = styled.div`
   padding-top: 10px;
   padding-bottom: 10px;
   border-top: 1px solid ${colors.Cool_Grey_001};
+`;
+
+const DescriptionBox = styled.div`
+  ${Label2_Regular}
 `;
