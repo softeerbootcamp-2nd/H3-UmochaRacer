@@ -98,6 +98,14 @@ class ComponentMainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapOptionCategoryTabbarButton), for: .touchUpInside)
         return button
     }()
+    
+    lazy private var optionListModeButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("optionListMode 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapOptionListModeButton), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -141,6 +149,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(multiOptionCardButtonViewButton)
         stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
+        stackView.addArrangedSubview(optionListModeButton)
 
         let buttons = [
             titleBarButton,
@@ -151,7 +160,8 @@ class ComponentMainViewController: UIViewController {
             bottomModalViewButton,
             multiOptionCardButtonViewButton,
             carMakingContentViewButton,
-            optionCategoryTabbarButton
+            optionCategoryTabbarButton,
+            optionListModeButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -203,4 +213,9 @@ class ComponentMainViewController: UIViewController {
         let viewController = OptionCategoryTabbarViewController()
         self.present(viewController, animated: false)
 	}
+
+    @objc func didTapOptionListModeButton() {
+        let viewController = OptionListModeViewController()
+        self.present(viewController, animated: false)
+    }
 }
