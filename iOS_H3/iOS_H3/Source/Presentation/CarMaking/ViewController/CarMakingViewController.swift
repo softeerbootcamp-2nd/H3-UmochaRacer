@@ -72,6 +72,13 @@ extension CarMakingViewController {
         )
         let output = viewModel.transform(input)
 
+        output.estimateSummary
+            .sink(receiveValue: { [weak self] estimate in
+                guard let self else { return }
+                bottomModalView.updateEstimateSummary(estimate)
+            })
+            .store(in: &cancellables)
+
         output.currentStepInfo
             .sink(receiveValue: { [weak self] info in
                 guard let self else { return }
