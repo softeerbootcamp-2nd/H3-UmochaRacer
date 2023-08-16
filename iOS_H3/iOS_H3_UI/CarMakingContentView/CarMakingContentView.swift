@@ -58,7 +58,11 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     private let carMakingMode: CarMakingMode
 
-    private var currentStep = 0
+    private var currentStep: Int = 0 {
+        didSet {
+            moveStep(to: currentStep)
+        }
+    }
 
     // MARK: - Lifecycles
 
@@ -85,13 +89,11 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     func moveNextStep() {
         guard currentStep < CarMakingStep.allCases.count else { return }
         currentStep += 1
-        moveStep(to: currentStep)
     }
 
     func movePrevStep() {
         guard currentStep > 0 else { return }
         currentStep -= 1
-        moveStep(to: currentStep)
     }
 }
 
@@ -219,6 +221,5 @@ extension CarMakingContentView: CarMakingProgressBarDelegate {
 
     func progressBarButtonDidTapped(didSelectItemAt index: Int) {
         currentStep = index
-        moveCollectionView(to: index)
     }
 }
