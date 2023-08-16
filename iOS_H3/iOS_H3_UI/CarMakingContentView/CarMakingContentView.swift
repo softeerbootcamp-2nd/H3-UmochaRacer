@@ -12,6 +12,10 @@ protocol CarMakingContentViewDataSource: AnyObject {
     func carMakingContentView(optionsForItemAtIndex indexPath: IndexPath) -> [OptionCardInfo]?
 }
 
+protocol CarMakingContentViewDelegate: AnyObject {
+    func carMakingContentView(stepDidChanged stepIndex: Int)
+}
+
 // 섹션을 정의하기 위한 기본 인터페이스
 protocol CarMakingSectionType: Hashable {
     associatedtype Item: Hashable
@@ -51,6 +55,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
+    weak var delegate: CarMakingContentViewDelegate?
+
     private let cellIdentifiers: [PageSection: String] = [
         .twoButton: CarMakingTwoOptionCell.identifier,
         .multipleButton: CarMakingMultipleOptionCell.identifier
@@ -61,6 +67,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     private var currentStep: Int = 0 {
         didSet {
             moveStep(to: currentStep)
+            delegate?.carMakingContentView(stepDidChanged: currentStep)
         }
     }
 
