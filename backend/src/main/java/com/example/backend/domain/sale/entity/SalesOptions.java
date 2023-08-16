@@ -7,8 +7,8 @@ import org.springframework.data.relational.core.mapping.Table;
 
 import java.util.List;
 
-@Table("SALES_OPTION")
-public class SalesOption {
+@Table("SALES_OPTIONS")
+public class SalesOptions {
     @Id
     private Long id;
     @MappedCollection(keyColumn = "id")
