@@ -9,8 +9,9 @@ import UIKit
 import Combine
 
 protocol OptionListModeViewDelegate: AnyObject {
-    func optionListModeView(didSelectedIndex: Int)
-    func optionListModeViewDidTapImageModeButton()
+    func optionListModeView(with optionListModeView: OptionListModeView,
+                            didSelectedIndex: Int)
+    func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView)
 }
 
 final class OptionListModeView: UIView {
@@ -95,7 +96,6 @@ extension OptionListModeView {
         addSubviews()
         setupCollectionView()
         setupConstraints()
-        
     }
 
     private func addSubviews() {
@@ -113,7 +113,7 @@ extension OptionListModeView {
         setupCollectionViewDataSource()
         setupSnapshot()
     }
-    
+
     private func createCollectionViewLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1),
@@ -152,7 +152,7 @@ extension OptionListModeView {
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
-                    delegate?.optionListModeView(didSelectedIndex: indexPath.row)
+                    delegate?.optionListModeView(with: self, didSelectedIndex: indexPath.row)
                 }
 
             return cell
@@ -181,7 +181,8 @@ extension OptionListModeView {
         imageModeButton.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-                containerView.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.containerViewTopConstant),
+                containerView.topAnchor.constraint(equalTo: self.topAnchor,
+                                                   constant: Constants.containerViewTopConstant),
                 containerView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                 containerView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                 containerView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
@@ -195,20 +196,24 @@ extension OptionListModeView {
 
         NSLayoutConstraint.activate([
             imageModeButton.topAnchor.constraint(equalTo: containerView.topAnchor),
-            imageModeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.margin),
+            imageModeButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,
+                                                      constant: -Constants.margin),
             imageModeButton.heightAnchor.constraint(equalToConstant: Constants.imageModeButtonHeight),
             imageModeButton.widthAnchor.constraint(equalToConstant: Constants.imageModeButtonWidth)
         ])
 
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: Constants.spacing),
-            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.margin),
-            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -Constants.margin),
+            collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor,
+                                                constant: Constants.spacing),
+            collectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor,
+                                                    constant: Constants.margin),
+            collectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor,
+                                                     constant: -Constants.margin),
             collectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
         ])
     }
-    
-    @objc func tapImageModeButton(){
-        delegate?.optionListModeViewDidTapImageModeButton()
+
+    @objc func tapImageModeButton() {
+        delegate?.optionListModeViewDidTapImageModeButton(with: self)
     }
 }
