@@ -93,16 +93,19 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
         var snapshot = collectionViewDataSource.snapshot()
-        let indexPath = getIndexPathOfCollectionView(currentStep)
 
-        if let section = PageSection.allCases[indexPath.section] as? Section {
-            let itemIndex = section.itemIndex(for: currentStep)
-            var items = snapshot.itemIdentifiers(inSection: section)
-            snapshot.deleteItems(items)
-
-            items[itemIndex] = info
-            snapshot.appendItems(items, toSection: section)
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let section = Section(sectionIndex: indexPathOfCurrentStep.section) else {
+            return
         }
+
+        var sectionItems = snapshot.itemIdentifiers(inSection: section)
+        snapshot.deleteItems(sectionItems)
+
+        let currentItemIndex = indexPathOfCurrentStep.row
+        sectionItems[currentItemIndex] = info
+
+        snapshot.appendItems(sectionItems, toSection: section)
         collectionViewDataSource.apply(snapshot)
     }
 }
@@ -115,15 +118,8 @@ extension CarMakingContentView {
     }
 
     private func moveCollectionView(to index: Int) {
-        let indexPath = getIndexPathOfCollectionView(index)
+        let indexPath = Section.indexPath(for: index)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-    }
-
-    private func getIndexPathOfCollectionView(_ index: Int) -> IndexPath {
-        let section = PageSection.section(for: index)
-        let sectionIndex = section.sectionIndex
-        let item = section.itemIndex(for: index)
-        return IndexPath(item: item, section: sectionIndex)
     }
 }
 
@@ -183,10 +179,9 @@ extension CarMakingContentView {
      func setupCollectionViewDataSource() {
          collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { [weak self] (collectionView, indexPath, carMakingStepInfo)
+         ) { (collectionView, indexPath, carMakingStepInfo)
                   -> UICollectionViewCell? in
-             let section = PageSection.allCases[indexPath.section]
-             guard let self,
+             guard let section = Section(sectionIndex: indexPath.section),
                    let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: section.cellIdentifiers,
                     for: indexPath
