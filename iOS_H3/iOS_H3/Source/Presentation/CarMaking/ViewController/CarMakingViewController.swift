@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class CarMakingViewController: UIViewController {
 
@@ -26,15 +27,23 @@ final class CarMakingViewController: UIViewController {
 
     private let mode: CarMakingMode
 
+    private let viewModel: CarMakingViewModel
+
+    private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
+
+    private var cancellables = Set<AnyCancellable>()
+
     // MARK: - Lifecycles
 
-    init(mode: CarMakingMode) {
+    init(mode: CarMakingMode, viewModel: CarMakingViewModel) {
+        self.viewModel = viewModel
         self.mode = mode
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
         self.mode = .selfMode
+        self.viewModel = CarMakingViewModel()
         super.init(coder: coder)
     }
 
@@ -43,9 +52,30 @@ final class CarMakingViewController: UIViewController {
 
         setupProperties()
         setupViews()
+        bind()
     }
 
     // MARK: - Helpers
+}
+
+// MARK: - binding with ViewModel
+
+extension CarMakingViewController {
+
+    private func bind() {
+        let input = CarMakingViewModel.Input(
+            viewDidLoad: viewDidLoadSubject,
+            carMakingStepDidChanged: stepDidChanged
+        )
+        let output = viewModel.transform(input)
+
+        output.currentStepInfo
+            .sink(receiveValue: { [weak self] info in
+                guard let self else { return }
+                carMakingContentView.updateCurrentStepInfo(info)
+            })
+            .store(in: &cancellables)
+    }
 }
 
 // MARK: - OhMyCarSetTitleBar Delegate
