@@ -110,7 +110,7 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 }
 
-// MARK: - CarMakingContentView Delegate & DataSource
+// MARK: - CarMakingContentView Delegate
 
 extension CarMakingViewController: CarMakingContentViewDelegate {
 
@@ -121,7 +121,7 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
     }
 }
 
-// MARK: - BottomModalView Delegate & DataSource
+// MARK: - BottomModalView Delegate
 
 extension CarMakingViewController: BottomModalViewDelegate {
 
