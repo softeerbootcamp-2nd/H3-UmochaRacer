@@ -79,6 +79,7 @@ export default Content;
 const Wrapper = styled.section`
   width: 100%;
   flex-grow: 1;
+  padding-top: 101px;
 `;
 
 const Container = styled.div<{$option: number}>`
