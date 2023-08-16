@@ -3,7 +3,7 @@ package com.example.backend.domain.sale.controller;
 import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.sale.dto.SalesSummaryResponse;
-import com.example.backend.domain.sale.service.SelfModeService;
+import com.example.backend.domain.sale.service.SelfModeServiceFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,13 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/sale")
 public class SaleRatioController {
-    private final SelfModeService selfModeService;
+    private final SelfModeServiceFactory selfModeServiceFactory;
 
     @GetMapping("{target}")
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnSelectionRatioInSelfMode(
             @PathVariable String target
     ) {
-        List<SalesSummaryResponse> result = selfModeService.getSelectionRatio(target);
+        List<SalesSummaryResponse> result = selfModeServiceFactory.getSelectionRatio(target);
         return mapToOKResponse(result);
     }
 
@@ -29,7 +29,7 @@ public class SaleRatioController {
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOptionSelectionRatioInSelfMode(
         @RequestParam("category") String category
     ) {
-        List<SalesSummaryResponse> result = selfModeService.getOptionSelectionRatio(category);
+        List<SalesSummaryResponse> result = selfModeServiceFactory.getOptionSelectionRatio(category);
         return mapToOKResponse(result);
     }
 

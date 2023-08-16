@@ -1,6 +1,6 @@
 package com.example.backend.domain.sale.repository;
 
-import com.example.backend.domain.sale.entity.SaleSummary;
+import com.example.backend.domain.sale.entity.SalesSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,7 +13,7 @@ import java.util.List;
 public class SalesTemplateRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    public List<SaleSummary> findSaleRatio(String columnId) {
+    public List<SalesSummary> findSaleRatio(String columnId) {
         String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count " +
                 "FROM SALES s " +
                 "GROUP BY s." + columnId + " WITH ROLLUP";

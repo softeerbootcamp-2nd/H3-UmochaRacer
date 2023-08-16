@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class SaleSummary {
+public class SalesSummary {
     private Long id;
     private int selectionCount;
 
-    public SaleSummary(Long id, int selectionCount) {
+    public SalesSummary(Long id, int selectionCount) {
         this.id = id;
         this.selectionCount = selectionCount;
     }

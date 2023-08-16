@@ -1,6 +1,6 @@
 package com.example.backend.domain.sale.service;
 
-import com.example.backend.domain.sale.entity.SaleSummary;
+import com.example.backend.domain.sale.entity.SalesSummary;
 import com.example.backend.domain.sale.repository.SalesOptionsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +13,7 @@ public class OptionSaleRatioServiceImpl implements RatioService {
     private final SalesOptionsRepository salesOptionsRepository;
 
     @Override
-    public List<SaleSummary> findSaleRatio(String category) {
+    public List<SalesSummary> findSaleRatio(String category) {
         return salesOptionsRepository.findSalesRatio(category.toUpperCase());
     }
 }
