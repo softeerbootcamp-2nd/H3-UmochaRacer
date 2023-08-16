@@ -19,9 +19,9 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     var range: Range<Int> {
         switch self {
         case .twoButton:
-            return 0..<4
+            return 0..<3
         case .multipleButton:
-            return 4..<8
+            return 3..<8
         }
     }
 
