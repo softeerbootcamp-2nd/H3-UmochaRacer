@@ -4,7 +4,7 @@ import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import {cardDataType} from '../../contentInterface';
-
+import DetilBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
 import {getCategory} from '@/component/util/getCategory';
@@ -64,48 +64,30 @@ const hasDetail = (option: number) => {
 
 function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
-  const contentBoxRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
-      if (contentBoxRef.current === null || contentRef.current === null) {
-        return;
-      }
-
-      if (contentBoxRef.current.clientHeight > 0) {
-        contentBoxRef.current.style.height = '0';
-        contentBoxRef.current.style.opacity = '0';
-      } else {
-        contentBoxRef.current.style.height = `${contentRef.current.clientHeight}px`;
-        contentBoxRef.current.style.opacity = '1';
-      }
-
       setToggle(!toggle);
     },
     [toggle],
   );
 
-  const categoryName = getCategory(option);
-  const fetchedDetails = useFetch<detailData>(
-    `/detail/${categoryName}/${data.id}`,
-  );
-  useEffect(() => {
-    if (toggle && !selected) {
-      if (contentBoxRef.current) {
-        contentBoxRef.current.style.height = '0';
-        setToggle(!toggle);
-      }
-    }
-  }, [selected]);
+  // useEffect(() => {
+  //   if (toggle && !selected) {
+  //     if (contentBoxRef.current) {
+  //       contentBoxRef.current.style.height = '0';
+  //       setToggle(!toggle);
+  //     }
+  //   }
+  // }, [selected]);
 
-  if (isSaved && toggle) {
-    if (contentBoxRef.current) {
-      contentBoxRef.current.style.height = '0';
-    }
-    setToggle(!toggle);
-  }
+  // if (isSaved && toggle) {
+  //   if (contentBoxRef.current) {
+  //     contentBoxRef.current.style.height = '0';
+  //   }
+  //   setToggle(!toggle);
+  // }
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
@@ -137,14 +119,8 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
           )}
         </CardSection>
 
-        {hasDetail(option) ? (
-          <DetailBox ref={contentBoxRef} $toggle={toggle} $isSaved={isSaved}>
-            <DetailContent ref={contentRef}>
-              {fetchedDetails.data?.description}
-            </DetailContent>
-          </DetailBox>
-        ) : (
-          ''
+        {hasDetail(option) && (
+          <DetilBox isOpen={toggle} id={data.id}></DetilBox>
         )}
 
         <CardSection $height={26} $end={true}>
@@ -297,21 +273,21 @@ const Price = styled.div`
   color: ${colors.Main_Hyundai_Blue};
 `;
 
-const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
-  position: relative;
-  height: 0;
-  opacity: 0;
-  pointer-events: ${({$toggle}) => !$toggle && 'none'};
-  overflow: hidden;
-  transition:
-    height 1s,
-    opacity 1s;
-`;
+// const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
+//   position: relative;
+//   height: 0;
+//   opacity: 0;
+//   pointer-events: ${({$toggle}) => !$toggle && 'none'};
+//   overflow: hidden;
+//   transition:
+//     height 1s,
+//     opacity 1s;
+// `;
 
-const DetailContent = styled.div`
-  position: absolute;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 1px solid ${colors.Cool_Grey_001};
-`;
+// const DetailContent = styled.div`
+//   position: absolute;
+//   width: 100%;
+//   padding-top: 10px;
+//   padding-bottom: 10px;
+//   border-top: 1px solid ${colors.Cool_Grey_001};
+// `;
