@@ -86,6 +86,17 @@ extension CarMakingViewController {
                 carMakingContentView.updateCurrentStepInfo(info)
             })
             .store(in: &cancellables)
+
+        output.showIndicator
+            .sink(receiveValue: { [weak self] showIndicatior in
+                guard let self else { return }
+                if showIndicatior {
+                    view.showLoadingIndicator()
+                } else {
+                    view.hideLoadingIndicator()
+                }
+            })
+            .store(in: &cancellables)
     }
 }
 

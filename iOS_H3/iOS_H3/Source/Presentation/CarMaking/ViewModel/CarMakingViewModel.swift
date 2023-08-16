@@ -22,6 +22,7 @@ final class CarMakingViewModel {
     struct Output {
         var estimateSummary = PassthroughSubject<EstimateSummary, Never>()
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
+        var showIndicator = PassthroughSubject<Bool, Never>()
     }
 
     // MARK: - Properties
