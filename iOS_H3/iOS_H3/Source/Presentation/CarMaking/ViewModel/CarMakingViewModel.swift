@@ -13,12 +13,14 @@ final class CarMakingViewModel {
     // MARK: - Input
 
     struct Input {
+        var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
     }
 
     // MARK: - Output
 
     struct Output {
+        var estimateSummary = PassthroughSubject<EstimateSummary, Never>()
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
     }
 
@@ -34,6 +36,14 @@ final class CarMakingViewModel {
 
     func transform(_ input: Input) -> Output {
         let output = Output()
+
+        input.viewDidLoad
+            .sink(receiveValue: { _ in
+                // usecase에 디폴트값 데이터 요청
+                let tempSummary = EstimateSummary(elements: [])
+                output.estimateSummary.send(tempSummary)
+            })
+            .store(in: &cancellables)
 
         input.carMakingStepDidChanged
             .sink(receiveValue: { step in
