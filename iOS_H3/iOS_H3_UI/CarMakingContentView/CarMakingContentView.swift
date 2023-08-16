@@ -48,11 +48,6 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     weak var delegate: CarMakingContentViewDelegate?
 
-    private let cellIdentifiers: [PageSection: String] = [
-        .twoButton: CarMakingTwoOptionCell.identifier,
-        .multipleButton: CarMakingMultipleOptionCell.identifier
-    ]
-
     private let carMakingMode: CarMakingMode
 
     private var currentStep: Int = 0 {
@@ -190,9 +185,8 @@ extension CarMakingContentView {
                   -> UICollectionViewCell? in
              let section = PageSection.allCases[indexPath.section]
              guard let self,
-                   let cellIdentifier = cellIdentifiers[section],
                    let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: cellIdentifier,
+                    withReuseIdentifier: section.cellIdentifiers,
                     for: indexPath
                    ) as? CarMakingCollectionViewCell else {
                  return CarMakingCollectionViewCell()
