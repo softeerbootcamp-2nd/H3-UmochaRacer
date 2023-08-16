@@ -30,6 +30,9 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     }
 
     func itemIndex(for globalIndex: Int) -> Int {
-        return globalIndex % self.range.count
+        if self == .multipleButton {
+            return globalIndex - PageSection.twoButton.range.count
+        }
+        return globalIndex
     }
 }
