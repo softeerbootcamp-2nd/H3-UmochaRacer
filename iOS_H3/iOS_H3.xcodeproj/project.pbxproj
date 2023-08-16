@@ -114,6 +114,19 @@
 		5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
 		5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */; };
 		5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */; };
+		5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */; };
+		5F60E4AB2A8B405900531462 /* PowertrainResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4AA2A8B405900531462 /* PowertrainResponse.swift */; };
+		5F60E4AD2A8B40CF00531462 /* DrivingSystemResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4AC2A8B40CF00531462 /* DrivingSystemResponse.swift */; };
+		5F60E4AF2A8B40F400531462 /* BodyTypeResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4AE2A8B40F400531462 /* BodyTypeResponse.swift */; };
+		5F60E4B12A8B410800531462 /* ExteriorColorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4B02A8B410800531462 /* ExteriorColorResponse.swift */; };
+		5F60E4B32A8B411900531462 /* InteriorColorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4B22A8B411900531462 /* InteriorColorResponse.swift */; };
+		5F60E4B52A8B412700531462 /* WheelResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4B42A8B412700531462 /* WheelResponse.swift */; };
+		5F60E4B72A8B419D00531462 /* AdditionalOptionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4B62A8B419D00531462 /* AdditionalOptionResponse.swift */; };
+		5F60E4B92A8B41AF00531462 /* SingleExteriorColorResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4B82A8B41AF00531462 /* SingleExteriorColorResponse.swift */; };
+		5F60E4BB2A8B43FD00531462 /* CarInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4BA2A8B43FD00531462 /* CarInfoRepository.swift */; };
+		5F60E4BD2A8B469C00531462 /* CarInfoEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */; };
+		5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */; };
+		5F60E4C02A8B4DE700531462 /* ConstantKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */; };
 		5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6203682A7BC59500D09531 /* AppDelegate.swift */; };
 		5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F62036A2A7BC59500D09531 /* SceneDelegate.swift */; };
 		5F62036D2A7BC59500D09531 /* ComponentMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F62036C2A7BC59500D09531 /* ComponentMainViewController.swift */; };
@@ -243,6 +256,18 @@
 		5F5E21122A78DD21003C1185 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetTitleBarViewController.swift; sourceTree = "<group>"; };
 		5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardButton.swift; sourceTree = "<group>"; };
+		5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CarInfoRepositoryProtocol.swift; path = iOS_H3/Source/Extensions/CarInfoRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4AA2A8B405900531462 /* PowertrainResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowertrainResponse.swift; path = DTO/CarInfo/PowertrainResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4AC2A8B40CF00531462 /* DrivingSystemResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrivingSystemResponse.swift; path = DTO/CarInfo/DrivingSystemResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4AE2A8B40F400531462 /* BodyTypeResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BodyTypeResponse.swift; path = DTO/CarInfo/BodyTypeResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4B02A8B410800531462 /* ExteriorColorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ExteriorColorResponse.swift; path = DTO/CarInfo/ExteriorColorResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4B22A8B411900531462 /* InteriorColorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InteriorColorResponse.swift; path = DTO/CarInfo/InteriorColorResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4B42A8B412700531462 /* WheelResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WheelResponse.swift; path = DTO/CarInfo/WheelResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4B62A8B419D00531462 /* AdditionalOptionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AdditionalOptionResponse.swift; path = DTO/CarInfo/AdditionalOptionResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4B82A8B41AF00531462 /* SingleExteriorColorResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SingleExteriorColorResponse.swift; path = DTO/CarInfo/SingleExteriorColorResponse.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4BA2A8B43FD00531462 /* CarInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CarInfoRepository.swift; path = DTO/CarInfo/CarInfoRepository.swift; sourceTree = SOURCE_ROOT; };
+		5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoEndpoint.swift; sourceTree = "<group>"; };
+		5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstantKey.swift; sourceTree = "<group>"; };
 		5F6203662A7BC59500D09531 /* iOS_H3_UI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOS_H3_UI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6203682A7BC59500D09531 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5F62036A2A7BC59500D09531 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -414,6 +439,7 @@
 				5F4D33AE2A87519600942517 /* ImageCacheManager.swift */,
 				5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */,
 				479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */,
+				5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -431,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				478B267F2A78FD2400598902 /* Protocol */,
+				5F60E4BA2A8B43FD00531462 /* CarInfoRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -445,6 +472,7 @@
 		478B267E2A78FD0E00598902 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				5F60E4A92A8B403600531462 /* CarInfo */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -452,6 +480,7 @@
 		478B267F2A78FD2400598902 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -528,6 +557,7 @@
 				479023AC2A8AA18600DECB70 /* NetworkService.swift */,
 				479023AD2A8AA18600DECB70 /* NetworkError.swift */,
 				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
+				5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -637,6 +667,21 @@
 				5F2593E12A7FCA16001B2D84 /* OptionCardButtonViewController.swift */,
 			);
 			path = OptionCardButton;
+			sourceTree = "<group>";
+		};
+		5F60E4A92A8B403600531462 /* CarInfo */ = {
+			isa = PBXGroup;
+			children = (
+				5F60E4AA2A8B405900531462 /* PowertrainResponse.swift */,
+				5F60E4AC2A8B40CF00531462 /* DrivingSystemResponse.swift */,
+				5F60E4AE2A8B40F400531462 /* BodyTypeResponse.swift */,
+				5F60E4B02A8B410800531462 /* ExteriorColorResponse.swift */,
+				5F60E4B22A8B411900531462 /* InteriorColorResponse.swift */,
+				5F60E4B42A8B412700531462 /* WheelResponse.swift */,
+				5F60E4B62A8B419D00531462 /* AdditionalOptionResponse.swift */,
+				5F60E4B82A8B41AF00531462 /* SingleExteriorColorResponse.swift */,
+			);
+			path = CarInfo;
 			sourceTree = "<group>";
 		};
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
@@ -993,6 +1038,7 @@
 				479023C02A8B4E0600DECB70 /* CarMakingMode.swift in Sources */,
 				4790239F2A8A3E0D00DECB70 /* SceneDelegate.swift in Sources */,
 				479023B22A8AA18600DECB70 /* NetworkError.swift in Sources */,
+				5F60E4C02A8B4DE700531462 /* ConstantKey.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1010,16 +1056,25 @@
 				47CB8CB92A79F1DE004B24AD /* Fonts.swift in Sources */,
 				5F00FBF92A777BDE0055A4FA /* ViewController.swift in Sources */,
 				5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */,
+				5F60E4B92A8B41AF00531462 /* SingleExteriorColorResponse.swift in Sources */,
 				5F2593DE2A7FB3FD001B2D84 /* TagListView.swift in Sources */,
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
+				5F60E4BB2A8B43FD00531462 /* CarInfoRepository.swift in Sources */,
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
+				5F60E4AB2A8B405900531462 /* PowertrainResponse.swift in Sources */,
+				5F60E4B12A8B410800531462 /* ExteriorColorResponse.swift in Sources */,
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
+				5F60E4AD2A8B40CF00531462 /* DrivingSystemResponse.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
+				5F60E4B72A8B419D00531462 /* AdditionalOptionResponse.swift in Sources */,
 				471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */,
 				471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */,
+				5F60E4B32A8B411900531462 /* InteriorColorResponse.swift in Sources */,
+				5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
+				5F60E4AF2A8B40F400531462 /* BodyTypeResponse.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
@@ -1027,6 +1082,7 @@
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
+				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
@@ -1039,9 +1095,11 @@
 				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
+				5F60E4B52A8B412700531462 /* WheelResponse.swift in Sources */,
 				479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				471917D62A811D3F00B67D54 /* OptionCardInfo.swift in Sources */,
 				5F6603EF2A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
+				5F60E4BD2A8B469C00531462 /* CarInfoEndpoint.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
