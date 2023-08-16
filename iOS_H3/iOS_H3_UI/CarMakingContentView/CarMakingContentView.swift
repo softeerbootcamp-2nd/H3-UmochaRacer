@@ -15,6 +15,8 @@ protocol CarMakingContentViewDelegate: AnyObject {
 protocol CarMakingSectionType: Hashable, CaseIterable {
     associatedtype Item: Hashable
     var sectionIndex: Int { get }
+
+    init?(sectionIndex: Int)
     var cellIdentifiers: String { get }
     var range: Range<Int> { get }
     static func section(for index: Int) -> Self

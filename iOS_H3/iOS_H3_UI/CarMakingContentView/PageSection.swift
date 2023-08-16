@@ -14,6 +14,9 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
 
     var sectionIndex: Int {
         return rawValue
+    init?(sectionIndex: Int) {
+        self.init(rawValue: sectionIndex)
+    }
 
     var cellIdentifiers: String {
         switch self {
