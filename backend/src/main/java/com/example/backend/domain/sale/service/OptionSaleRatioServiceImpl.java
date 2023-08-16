@@ -14,6 +14,6 @@ public class OptionSaleRatioServiceImpl implements RatioService {
 
     @Override
     public List<SaleSummary> findSaleRatio(String category) {
-        return salesOptionsRepository.findSalesRatio(category);
+        return salesOptionsRepository.findSalesRatio(category.toUpperCase());
     }
 }
