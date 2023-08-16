@@ -29,8 +29,8 @@ final class EstimateSummaryView: UIView {
 
     // MARK: - Helpers
 
-    func configure(_ data: Int) {
-        print("[EstimateSummaryView]", #function, "// 데이터 타입 수정하고 메소드 구현 필요")
+    func configure(_ data: EstimateSummary) {
+        print("[EstimateSummaryView]", #function, " \(data) // 메소드 구현 필요")
     }
 }
 
