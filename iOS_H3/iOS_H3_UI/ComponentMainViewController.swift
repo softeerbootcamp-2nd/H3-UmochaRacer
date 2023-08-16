@@ -98,7 +98,7 @@ class ComponentMainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapOptionCategoryTabbarButton), for: .touchUpInside)
         return button
     }()
-    
+
     lazy private var optionListModeButton: UIButton = {
         let button = UIButton()
         button.setTitle("optionListMode 보기", for: .normal)

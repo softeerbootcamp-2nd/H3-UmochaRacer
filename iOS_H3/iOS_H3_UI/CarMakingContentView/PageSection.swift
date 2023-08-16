@@ -12,6 +12,10 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     case twoButton = 0
     case multipleButton
 
+    var index: Int {
+        return rawValue
+    }
+
     var range: Range<Int> {
         switch self {
         case .twoButton:

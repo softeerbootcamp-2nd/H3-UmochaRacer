@@ -8,12 +8,12 @@
 import UIKit
 
 protocol BottomModalViewDataSource: AnyObject {
-    func estimateSummaryData() -> Int   // 반환 타입 수정 필요
+    func estimateSummaryData(in bottomModalView: BottomModalView) -> Int   // 반환 타입 수정 필요
 }
 
 protocol BottomModalViewDelegate: AnyObject {
-    func backButtonDidTapped()
-    func completionButtonDidTapped()
+    func bottomModalViewBackButtonDidTapped(_ bottomModalView: BottomModalView)
+    func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView)
 }
 
 final class BottomModalView: UIView {
@@ -188,7 +188,7 @@ extension BottomModalView {
         bottomContentView.layer.shadowOpacity = Float(Constants.bottomContentViewShadowOpacity)
 
         if let dataSource {
-            estimateSummaryView.configure(dataSource.estimateSummaryData())
+            estimateSummaryView.configure(dataSource.estimateSummaryData(in: self))
         }
 
         let viewHeight = screenSize.height * 3 / 4
@@ -220,12 +220,12 @@ extension BottomModalView {
 
     @objc
     private func backButtonDidTapped() {
-        delegate.backButtonDidTapped()
+        delegate.bottomModalViewBackButtonDidTapped(self)
     }
 
     @objc
     private func completionButtonDidTapped() {
-        delegate.completionButtonDidTapped()
+        delegate.bottomModalViewCompletionButtonDidTapped(self)
     }
 
     // MARK: - Setup Views
