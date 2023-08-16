@@ -12,12 +12,13 @@ protocol CarMakingContentViewDelegate: AnyObject {
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
-protocol CarMakingSectionType: Hashable {
+protocol CarMakingSectionType: Hashable, CaseIterable {
     associatedtype Item: Hashable
+    var sectionIndex: Int { get }
     var range: Range<Int> { get }
     static func section(for index: Int) -> Self
+    static func indexPath(for globalIndex: Int) -> IndexPath
     func itemIndex(for globalIndex: Int) -> Int
-    static var allCases: [Self] { get }
 }
 
 class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionViewDelegateFlowLayout {
