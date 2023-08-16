@@ -102,6 +102,21 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         guard currentStep > 0 else { return }
         currentStep -= 1
     }
+
+    func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
+        var snapshot = collectionViewDataSource.snapshot()
+        let indexPath = getIndexPathOfCollectionView(currentStep)
+
+        if let section = PageSection.allCases[indexPath.section] as? Section {
+            let itemIndex = section.itemIndex(for: currentStep)
+            var items = snapshot.itemIdentifiers(inSection: section)
+            snapshot.deleteItems(items)
+
+            items[itemIndex] = info
+            snapshot.appendItems(items, toSection: section)
+        }
+        collectionViewDataSource.apply(snapshot)
+    }
 }
 
 extension CarMakingContentView {
