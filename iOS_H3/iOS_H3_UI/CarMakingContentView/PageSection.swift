@@ -12,8 +12,6 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     case twoButton = 0
     case multipleButton
 
-    var sectionIndex: Int {
-        return rawValue
     init?(sectionIndex: Int) {
         self.init(rawValue: sectionIndex)
     }
@@ -46,7 +44,7 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
         return IndexPath(row: row, section: section.rawValue)
     }
 
-    func itemIndex(for globalIndex: Int) -> Int {
+    private func itemIndex(for globalIndex: Int) -> Int {
         if self == .multipleButton {
             return globalIndex - PageSection.twoButton.range.count
         }
