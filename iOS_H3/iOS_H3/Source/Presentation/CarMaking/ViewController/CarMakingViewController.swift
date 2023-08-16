@@ -75,6 +75,7 @@ extension CarMakingViewController {
         output.estimateSummary
             .sink(receiveValue: { [weak self] estimate in
                 guard let self else { return }
+                // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
                 bottomModalView.updateEstimateSummary(estimate)
             })
             .store(in: &cancellables)
