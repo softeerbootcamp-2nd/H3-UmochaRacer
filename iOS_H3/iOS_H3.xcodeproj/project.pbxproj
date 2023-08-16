@@ -21,7 +21,6 @@
 		471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C92A7FA02000B67D54 /* CarMakingStep.swift */; };
 		471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
 		471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CF2A80E69A00B67D54 /* TwoOptionCardButtonView.swift */; };
-		471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917D12A8118E200B67D54 /* TwoOptionCardButtonViewController.swift */; };
 		471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917DD2A81F9A200B67D54 /* OptionCardButtonListViewable.swift */; };
 		471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
 		471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917CB2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift */; };
@@ -37,7 +36,6 @@
 		471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917FE2A8339B100B67D54 /* MultiOptionCardButtonView.swift */; };
 		471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
 		471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471918042A834D8600B67D54 /* OptionCardCell.swift */; };
-		4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */; };
 		4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */; };
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
@@ -1137,7 +1135,6 @@
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
-				471917D22A8118E200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
 				473309952A8BECBB00906FFB /* CarMakingStepInfo.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,

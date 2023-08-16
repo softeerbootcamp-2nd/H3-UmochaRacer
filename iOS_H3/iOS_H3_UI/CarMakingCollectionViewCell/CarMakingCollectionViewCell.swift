@@ -64,12 +64,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     // MARK: - Helpers
     func configure(carMakingStepInfo: CarMakingStepInfo) {
         configure(carMakingStepTitle: carMakingStepInfo.step.title)
-        configure(bannerImageURL: carMakingStepInfo.bannerImageURL)
         configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
-    }
-
-    func configure(bannerImageURL: URL?) {
-        optionImageView.loadCachedImage(of: bannerImageURL)
     }
 
     func configure(carMakingStepTitle: String) {

@@ -173,7 +173,7 @@ class OptionCardButton: UIButton {
             self.moreInfoButton.isHidden = !cardInfo.hasMoreInfo
             isSelected = cardInfo.isSelected
             if let color = cardInfo.color { setColor(UIColor(urColor: color)) }
-            if let url = cardInfo.image {
+            if let url = cardInfo.iconImageURL {
                 setImage(url: url)
             }
         }
