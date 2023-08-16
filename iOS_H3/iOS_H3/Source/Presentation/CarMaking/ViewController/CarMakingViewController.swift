@@ -73,30 +73,33 @@ extension CarMakingViewController {
         let output = viewModel.transform(input)
 
         output.estimateSummary
-            .sink(receiveValue: { [weak self] estimate in
-                guard let self else { return }
-                // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
-                bottomModalView.updateEstimateSummary(estimate)
-            })
+            .sink(receiveValue: updateBottomModalView)
             .store(in: &cancellables)
 
         output.currentStepInfo
-            .sink(receiveValue: { [weak self] info in
-                guard let self else { return }
-                carMakingContentView.updateCurrentStepInfo(info)
-            })
+            .sink(receiveValue: updateCurrentStepInfo)
             .store(in: &cancellables)
 
         output.showIndicator
-            .sink(receiveValue: { [weak self] showIndicatior in
-                guard let self else { return }
-                if showIndicatior {
-                    view.showLoadingIndicator()
-                } else {
-                    view.hideLoadingIndicator()
-                }
-            })
+            .sink(receiveValue: showIndicator)
             .store(in: &cancellables)
+    }
+
+    private func updateBottomModalView(with estimateData: EstimateSummary) {
+        // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
+        bottomModalView.updateEstimateSummary(estimateData)
+    }
+
+    private func updateCurrentStepInfo(with info: CarMakingStepInfo) {
+        carMakingContentView.updateCurrentStepInfo(info)
+    }
+
+    private func showIndicator(_ show: Bool) {
+        if show {
+            view.showLoadingIndicator()
+        } else {
+            view.hideLoadingIndicator()
+        }
     }
 }
 

@@ -35,30 +35,39 @@ final class CarMakingViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .sink(receiveValue: { _ in
-                // usecase에 디폴트값 데이터 요청
-                let tempSummary = EstimateSummary(elements: [])
-                output.estimateSummary.send(tempSummary)
+            .map(requestEstimateSummary)
+            .sink(receiveValue: { estimateSummary in
+                output.estimateSummary.send(estimateSummary)
             })
             .store(in: &cancellables)
 
         input.carMakingStepDidChanged
-            .sink(receiveValue: { step in
-                // usecase에 데이터 요청. ex) usecase.getStepInfo(of: stepIndex)
-                // 전달된 옵션들 중 디폴트로 선택된 옵션의 isSelected 값 수정해서 전달
-                // 그러기 위해선 viewDidLoad 시점에 받은 견적요약 데이터 저장해놓고 수정하기? 근데 이건 usecase에서 해야할 거 같기도
-
-                let stepIndex = step.rawValue
-                let carMakingStepInfo = CarMakingStepInfo(
-                    step: step,
-                    bannerImageURL: CarMakingMockData.mockURL[stepIndex],
-                    optionCardInfoArray: CarMakingMockData.mockOption[stepIndex]
-                )
+            .map(requestCurrentStepInfo)
+            .sink(receiveValue: { carMakingStepInfo in
                 output.currentStepInfo.send(carMakingStepInfo)
             })
             .store(in: &cancellables)
 
         return output
+    }
+
+    private func requestEstimateSummary() -> EstimateSummary {
+        // usecase에 디폴트값 데이터 요청
+        return EstimateSummary(elements: [])
+    }
+
+    private func requestCurrentStepInfo(_ step: CarMakingStep) -> CarMakingStepInfo {
+        // usecase에 데이터 요청. ex) usecase.getStepInfo(of: stepIndex)
+        // 전달된 옵션들 중 디폴트로 선택된 옵션의 isSelected 값 수정해서 전달
+        // 그러기 위해선 viewDidLoad 시점에 받은 견적요약 데이터 저장해놓고 수정하기? 근데 이건 usecase에서 해야할 거 같기도
+
+        let stepIndex = step.rawValue
+        let carMakingStepInfo = CarMakingStepInfo(
+            step: step,
+            bannerImageURL: CarMakingMockData.mockURL[stepIndex],
+            optionCardInfoArray: CarMakingMockData.mockOption[stepIndex]
+        )
+        return carMakingStepInfo
     }
 }
 
