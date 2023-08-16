@@ -8,7 +8,10 @@
 import UIKit
 
 extension UIImageView {
-    func loadCachedImage(of key: String, showLoading: Bool = true) {
+    func loadCachedImage(of url: URL?, showLoading: Bool = true) {
+        guard let url else { return }
+
+        let key = url.lastPathComponent
         if let cachedImage = ImageCacheManager.shared.object(forKey: key as NSString) {
             self.image = cachedImage
             return
@@ -18,8 +21,7 @@ extension UIImageView {
             showLoadingIndicator()
         }
 
-        guard let url = URL(string: key),
-              var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         else { return }
 
         urlComponents.scheme = "https"
