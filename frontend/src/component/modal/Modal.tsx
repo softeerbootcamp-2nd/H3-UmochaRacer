@@ -57,7 +57,7 @@ const Wrapper = styled.div`
   position: fixed; // 위치를 fixed로 변경
   top: 0;
   left: 0;
-  z-index: 99999; // z-index를 높게 설정
+  z-index: 9999999; // z-index를 높게 설정
   ${flexCenter}
 `;
 
@@ -80,5 +80,5 @@ const Background = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99998;
+  z-index: 999999;
 `;
