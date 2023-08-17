@@ -153,7 +153,7 @@ class OptionCardButton: UIButton {
         self.optionTitleLabel.text = optionTitle
         self.optionSubTitleLabel.text = optionSubTitle
         self.priceLabel.text = price
-        self.moreInfoButton.isHidden = !hasMoreInfo
+        showMoreInfoButton(hasMoreInfo)
         setupViews()
         addMoreInfoButtonTarget()
         setColor(color)
@@ -170,7 +170,7 @@ class OptionCardButton: UIButton {
             self.optionTitleLabel.text = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle
             self.priceLabel.text = cardInfo.priceString
-            self.moreInfoButton.isHidden = !cardInfo.hasMoreInfo
+            showMoreInfoButton(cardInfo.hasMoreInfo)
             isSelected = cardInfo.isSelected
             setColor(cardInfo.color)
             setImage(url: cardInfo.iconImageURL)
@@ -207,6 +207,10 @@ class OptionCardButton: UIButton {
         if let url {
             optionImageView.loadCachedImage(of: url)
         }
+    }
+
+    func showMoreInfoButton(_ isShow: Bool) {
+        moreInfoButton.isHidden = !isShow
     }
 
     func animateButton(title: String, description: String) {
