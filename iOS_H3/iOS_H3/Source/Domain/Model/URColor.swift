@@ -8,7 +8,7 @@
 import Foundation
 
 struct URColor: Hashable {
-    let red: Int8
-    let green: Int8
-    let blue: Int8
+    let red: UInt8
+    let green: UInt8
+    let blue: UInt8
 }
