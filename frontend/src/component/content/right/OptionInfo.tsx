@@ -12,9 +12,15 @@ interface cardDataProps {
   cardData: cardDataType[];
   option: number;
   setNewIndex: (index: number) => void;
+  selectedIndex: number;
 }
 
-function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
+function OptionInfo({
+  cardData,
+  setNewIndex,
+  option,
+  selectedIndex,
+}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const menuItems = [
@@ -45,6 +51,7 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
           cardData={cardData}
           isSaved={isSaved}
           setNewIndex={setNewIndex}
+          selectedIndex={selectedIndex}
         ></OptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>

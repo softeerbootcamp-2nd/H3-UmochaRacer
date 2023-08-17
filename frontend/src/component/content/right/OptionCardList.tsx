@@ -1,19 +1,14 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useContext, useRef} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
 import {OptionContext} from '@/provider/optionProvider';
-interface Data {
-  optionId: number;
-  name: string;
-  rate: number;
-  price: number;
-}
 
-interface carfListProps {
+interface cardListProps {
   cardData: cardDataType[];
   isSaved: boolean;
   setNewIndex: (index: number) => void;
+  selectedIndex: number;
 }
 
 const moveTop = keyframes`
@@ -45,28 +40,27 @@ const scrollIntoSelected = (
   }
 };
 
-function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
-  const [selectedItem, setSelectedItem] = useState<number>(0);
+function OptionCardList({
+  cardData,
+  setNewIndex,
+  isSaved,
+  selectedIndex,
+}: cardListProps) {
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
 
   const handleItemClick = (index: number) => {
     setNewIndex(index);
-    setSelectedItem(index);
   };
 
   useEffect(() => {
-    setSelectedItem(0);
-  }, [cardData]);
-
-  useEffect(() => {
-    scrollIntoSelected(ulRef, selectedItem);
-  }, [selectedItem]);
+    scrollIntoSelected(ulRef, selectedIndex);
+  }, [selectedIndex]);
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
       key={index}
-      selected={selectedItem === index}
+      selected={selectedIndex === index}
       isSaved={isSaved}
       onClick={() => handleItemClick(index)}
       data={elem}

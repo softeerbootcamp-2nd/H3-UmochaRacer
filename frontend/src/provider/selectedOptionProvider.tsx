@@ -18,7 +18,7 @@ interface SelectedOptionContextType {
 const initialOptions: Option[] = [
   {
     key: '파워트레인',
-    name: '디젤 2.2',
+    value: '디젤 2.2',
     category: 'car',
     price: 1480000,
     id: 1,
