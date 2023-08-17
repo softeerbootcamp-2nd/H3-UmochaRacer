@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {useState, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
@@ -7,13 +7,13 @@ import {cardDataType} from '../../contentInterface';
 import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
   onClick: () => void;
   data: cardDataType;
-  option: number;
 }
 
 const SelectIcon = () => {
@@ -56,8 +56,9 @@ const hasDetail = (option: number) => {
   return DetailOption.has(option);
 };
 
-function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
-  const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
+function OptionCard({selected, onClick, data, isSaved}: CardProps) {
+  const [toggle, setToggle] = useState(false);
+  const {option} = useContext(OptionContext);
 
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
@@ -105,7 +106,6 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
           <DetailBox
             isOpen={toggle && selected && !isSaved}
             id={data.id}
-            option={option}
           ></DetailBox>
         )}
 

@@ -63,6 +63,7 @@ function Content() {
     }
   };
   const setNewIndex = (nextIndex: number) => {
+    console.log(nextIndex);
     setIndex(nextIndex);
     updateTempOption(nextIndex);
   };
@@ -104,7 +105,6 @@ function Content() {
             {option !== 6 ? (
               <OptionInfo
                 cardData={cardData}
-                option={option}
                 setNewIndex={(index: number) => setNewIndex(index)}
                 selectedIndex={selectedIndex}
               />

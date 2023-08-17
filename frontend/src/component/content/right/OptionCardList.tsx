@@ -64,7 +64,6 @@ function OptionCardList({
       isSaved={isSaved}
       onClick={() => handleItemClick(index)}
       data={elem}
-      option={option}
     ></OptionCard>
   ));
 
