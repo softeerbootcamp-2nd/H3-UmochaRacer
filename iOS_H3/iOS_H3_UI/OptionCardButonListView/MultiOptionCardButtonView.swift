@@ -41,7 +41,9 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
-    weak var delegate: MultiOptionCardButtonViewDelegate?
+    weak var delegate: OptionCardButtonListViewDelegate?
+
+    private var willDisplayingCellIndexPath = IndexPath()
 
     // MARK: - Lifecycles
 
@@ -75,12 +77,47 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         dotIndicator.numberOfPages = cardInfos.count
         updateSnapshot(item: cardInfos)
     }
+
+    func reloadViews(with cardInfos: [OptionCardInfo]) {
+        cardInfos.enumerated().forEach { (index, info) in
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = optionCardCollectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                return
+            }
+            cell.configure(carMakingMode: carMakingMode, info: info)
+        }
+    }
 }
+
+// MARK: - OptionCardButton Delegate
 
 extension MultiOptionCardButtonView: OptionCardButtonDelegate {
 
     func moreInfoButtonDidTapped() {
         print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
+    }
+}
+
+// MARK: - UICollectionView Delegate
+
+extension MultiOptionCardButtonView: UICollectionViewDelegate {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        willDisplayingCellIndexPath = indexPath
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplaying cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if willDisplayingCellIndexPath != indexPath {
+            delegate?.optionCardButtonListViewDidShowOption(self, index: willDisplayingCellIndexPath.row)
+        }
     }
 }
 
@@ -91,6 +128,7 @@ extension MultiOptionCardButtonView {
     private func setupOptionCardCollectionView() {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        optionCardCollectionView.delegate = self
         optionCardCollectionView.isScrollEnabled = true
         optionCardCollectionView.bounces = false
 
@@ -149,7 +187,8 @@ extension MultiOptionCardButtonView {
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
-                    delegate?.optionCardButtonDidTapped(index: indexPath.row)
+                    delegate?.optionCardButtonListViewDidSelectOption(self, index: indexPath.row)
+//                    selectedOptionIndex = indexPath.row
                 }
 
             return cell
@@ -170,6 +209,12 @@ extension MultiOptionCardButtonView {
         snapshot.appendItems(item)
 
         dataSource.apply(snapshot)
+    }
+
+    private func reloadSnapshot(item: [OptionCardInfo]) {
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadItems(item)
+//        dataSource.apply(snapshot)
     }
 }
 

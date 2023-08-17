@@ -19,7 +19,15 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Properties
 
-    private var selectedButtonIndex = 0
+    weak var delegate: OptionCardButtonListViewDelegate?
+
+    private var selectedButtonIndex = 0 {
+        didSet {
+//            optionCardButtons[oldValue].isSelected = false
+//            optionCardButtons[selectedButtonIndex].isSelected = true
+            delegate?.optionCardButtonListViewDidSelectOption(self, index: selectedButtonIndex)
+        }
+    }
 
     // MARK: - LifeCycles
 
@@ -54,9 +62,9 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
         if !isValidateIndex(index) { return }
 
         optionCardButtons[index].update(cardInfo: cardInfo)
-        if cardInfo.isSelected {
-            selectOption(index: index)
-        }
+//        if cardInfo.isSelected {
+//            selectOption(index: index)
+//        }
     }
 
     /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
@@ -66,7 +74,13 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
             updateView(index: index, with: cardInfos[index])
         }
     }
+
+    func reloadViews(with cardInfos: [OptionCardInfo]) {
+        updateAllViews(with: cardInfos)
+    }
 }
+
+// MARK: - OptionCardButton Delegate
 
 extension TwoOptionCardButtonView: OptionCardButtonDelegate {
 
@@ -74,6 +88,8 @@ extension TwoOptionCardButtonView: OptionCardButtonDelegate {
         print("[TwoOptionCardButtonView]", #function, "- show alert 구현 필요")
     }
 }
+
+// MARK: - Setup
 
 extension TwoOptionCardButtonView {
 
@@ -85,17 +101,28 @@ extension TwoOptionCardButtonView {
         }
     }
 
-    private func setupViews() {
-        addSubviews()
-        setupConstraints()
-    }
-
     @objc
     private func optionCardButtonDidTapped(_ sender: UIButton) {
         guard let selectedOptionIndex = optionCardButtons.firstIndex(where: { $0 == sender }) else {
             return
         }
         selectOption(index: selectedOptionIndex)
+    }
+
+    private func selectOption(index: Int) {
+        if !isValidateIndex(index) { return }
+        selectedButtonIndex = index
+    }
+
+    private func isValidateIndex(_ index: Int) -> Bool {
+        0..<optionCardButtons.count ~= index
+    }
+
+    // MARK: - Setup Views
+
+    private func setupViews() {
+        addSubviews()
+        setupConstraints()
     }
 
     private func addSubviews() {
@@ -123,17 +150,5 @@ extension TwoOptionCardButtonView {
             optionCardButtons[1].trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButtons[1].bottomAnchor.constraint(equalTo: self.optionCardButtons[0].bottomAnchor)
         ])
-    }
-
-    private func selectOption(index: Int) {
-        if !isValidateIndex(index) { return }
-
-        optionCardButtons[selectedButtonIndex].isSelected = false
-        optionCardButtons[index].isSelected = true
-        selectedButtonIndex = index
-    }
-
-    private func isValidateIndex(_ index: Int) -> Bool {
-        0..<optionCardButtons.count ~= index
     }
 }

@@ -100,6 +100,10 @@ extension CarMakingContentViewController: CarMakingContentViewDelegate {
         )
         carMakingContentView.updateCurrentStepInfo(stepInfo)
     }
+
+    func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int) {
+        CarMakingContentMockData.mockOption[stepIndex][optionIndex].isSelected.toggle()
+    }
 }
 
 // Mock Data
@@ -114,7 +118,7 @@ struct CarMakingContentMockData {
          "https://itimg.chosun.com/sitedata/image/202112/03/2021120301496_0.jpg"
     ].map { URL(string: $0)! }
 
-    static let mockOption = [
+    static var mockOption = [
             [OptionCardInfo.init(title: "디젤 2.2",
                                  subTitle: "구매자의 63%가 선택한",
                                  priceString: "+ 3,456,789원",
