@@ -21,7 +21,7 @@ public class AdditionalOptionService {
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
     }
 
-    public Long findDetailId(long id) {
+    public List<Long> findDetailId(long id) {
         return repository.findDetailIdById(id);
     }
 }

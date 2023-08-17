@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/detail")
 @RequiredArgsConstructor
@@ -35,13 +37,13 @@ public class DetailController {
 
     @Order(1)
     @GetMapping("/additional-option/{id}")
-    public ResponseEntity<ResponseDto<DetailResponse>> returnAdditionalOptionDetail (
-            @PathVariable("id") long targetId
+    public ResponseEntity<ResponseDto<List<DetailResponse>>> returnAdditionalOptionDetail (
+            @PathVariable("id") long optionId
     ){
-        Long detailId = additionalOptionService.findDetailId(targetId);
-        DetailResponse result = detailService.getDetailById(detailId);
+        List<Long> detailIdList = additionalOptionService.findDetailId(optionId);
+        List<DetailResponse> result = detailService.getOptionDetailById(detailIdList);
 
-        ResponseDto<DetailResponse> body = ResponseDto.of(result, ResultCode.SUCCESS);
+        ResponseDto<List<DetailResponse>> body = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 
