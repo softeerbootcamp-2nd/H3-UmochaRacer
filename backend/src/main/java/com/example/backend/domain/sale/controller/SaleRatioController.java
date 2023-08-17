@@ -17,7 +17,7 @@ import java.util.List;
 public class SaleRatioController {
     private final SelfModeServiceFactory selfModeServiceFactory;
 
-    @GetMapping("{target}")
+    @GetMapping("{target:exterior-color|interior-color|wheel}")
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnSelectionRatioInSelfMode(
             @PathVariable String target
     ) {
@@ -25,9 +25,17 @@ public class SaleRatioController {
         return mapToOKResponse(result);
     }
 
+    @GetMapping(value = "{target:powertrain|bodytype|driving-system}")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnVehicleSpecificationSelectionRatioInSelfMode(
+            @PathVariable String target
+    ) {
+        List<SalesSummaryResponse> result = selfModeServiceFactory.getVehicleSpecificationSaleRatio(target);
+        return mapToOKResponse(result);
+    }
+
     @GetMapping("additional-option")
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOptionSelectionRatioInSelfMode(
-        @RequestParam("category") String category
+            @RequestParam("category") String category
     ) {
         List<SalesSummaryResponse> result = selfModeServiceFactory.getOptionSelectionRatio(category);
         return mapToOKResponse(result);
