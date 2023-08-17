@@ -4,13 +4,13 @@
       "optionId": 5,
       "name": "7인승",
       "price": 0,
-      "imageSrc": "src/assets/image/7seats.png"
+      "imageSrc": "/image/7seats.png"
     },
     {
       "optionId": 6,
       "name": "8인승",
       "price": 0,
-      "imageSrc": "src/assets/image/8seats.png"
+      "imageSrc": "/image/8seats.png"
     }
   ],
 

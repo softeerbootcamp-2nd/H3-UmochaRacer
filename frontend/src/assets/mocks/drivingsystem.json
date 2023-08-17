@@ -4,13 +4,13 @@
       "optionId": 11,
       "name": "2WD",
       "price": 0,
-      "imageSrc": "src/assets/image/2wd.png"
+      "imageSrc": "/image/2wd.png"
     },
     {
       "optionId": 12,
       "name": "4WD",
       "price": 2370000,
-      "imageSrc": "src/assets/image/4wd.png"
+      "imageSrc": "/image/4wd.png"
     }
   ],
   "message": "머시기"

@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../header/Header';
 import styled from 'styled-components';
-import main from '@/assets/image/main.png';
+import main from '/image/main.png';
 import {flexBetween, flexCenter} from '@/style/common';
 import TrimCardList from './intro/trimCard/TrimCard';
 

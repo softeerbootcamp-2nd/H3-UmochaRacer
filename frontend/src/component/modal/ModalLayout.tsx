@@ -48,9 +48,7 @@ function ModalLayout({
       </Modal.TitleWrapper>
       <Modal.DescriptionWrapper>
         <Modal.Description>{description}</Modal.Description>
-        {imgSrc && (
-          <Modal.DescriptionImg src={`/src/assets/image/${imgSrc}.png`} />
-        )}
+        {imgSrc && <Modal.DescriptionImg src={`/image/${imgSrc}.png`} />}
       </Modal.DescriptionWrapper>
       <Modal.ButtonWrapper>
         <Modal.ButtonProgress onClick={handleBtnLeftClick}>

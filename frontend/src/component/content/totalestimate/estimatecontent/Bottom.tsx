@@ -12,37 +12,37 @@ import DetailEstimate from './bottom/DetailEstimate';
 
 const options = [
   {
-    imgSrc: 'src/assets/image/white.png',
+    imgSrc: '/image/white.png',
     optionName: '트림',
     optionTitle: 'Le Blanc (르블랑)',
     price: 43460000,
   },
   {
-    imgSrc: 'src/assets/image/powertrain.png',
+    imgSrc: '/image/powertrain.png',
     optionName: '파워트레인',
     optionTitle: '디젤 2.2',
     price: 1480000,
   },
   {
-    imgSrc: 'src/assets/image/2wd.png',
+    imgSrc: '/image/2wd.png',
     optionName: '구동방식',
     optionTitle: '2WD',
     price: 0,
   },
   {
-    imgSrc: 'src/assets/image/7seats.png',
+    imgSrc: '/image/7seats.png',
     optionName: '바디타입',
     optionTitle: '7인승',
     price: 0,
   },
   {
-    imgSrc: 'src/assets/image/white.png',
+    imgSrc: '/image/white.png',
     optionName: '외장 컬러',
     optionTitle: '크리미 화이트 펄',
     price: 100000,
   },
   {
-    imgSrc: 'src/assets/image/innerblack.png',
+    imgSrc: '/image/innerblack.png',
     optionName: '내장 컬러',
     optionTitle: '퀄팅천연 (블랙)',
     price: 0,
