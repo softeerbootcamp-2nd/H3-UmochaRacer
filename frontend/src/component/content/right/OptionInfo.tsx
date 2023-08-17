@@ -1,4 +1,10 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
@@ -7,16 +13,18 @@ import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {cardDataType} from '../contentInterface';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface cardDataProps {
   cardData: cardDataType[];
-  option: number;
   setNewIndex: (index: number) => void;
+  selectedIndex: number;
 }
 
-function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
+function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
+  const {option} = useContext(OptionContext);
   const menuItems = [
     '파워트레인',
     '구동 방식',
@@ -45,7 +53,7 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
           cardData={cardData}
           isSaved={isSaved}
           setNewIndex={setNewIndex}
-          option={option}
+          selectedIndex={selectedIndex}
         ></OptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>

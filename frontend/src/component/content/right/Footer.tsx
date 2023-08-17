@@ -4,6 +4,8 @@ import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Body2_Medium, Title1_Medium} from '@/style/fonts';
 import {OptionContext} from '@/provider/optionProvider';
+import {TempOptionContext} from '@/provider/tempOptionProvider';
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 
 interface props {
   onClick: () => void;
@@ -33,6 +35,8 @@ const upperButton = (isModalOpen: boolean) => {
 
 function Footer({onClick, isOpen, setIsSaved}: props) {
   const {option, setOption} = useContext(OptionContext);
+  const {tempOption} = useContext(TempOptionContext);
+  const {addOption} = useContext(SelectedOptionContext);
   return (
     <Wrapper>
       <Total>
@@ -49,6 +53,7 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
         <NextOptionButton
           onClick={() => {
             setIsSaved(true);
+            if (tempOption) addOption(tempOption);
             setTimeout(() => {
               setOption(option + 1);
             }, 2500);

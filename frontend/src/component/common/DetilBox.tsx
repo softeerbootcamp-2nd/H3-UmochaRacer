@@ -1,9 +1,10 @@
 import {colors} from '@/style/theme';
-import React, {useRef} from 'react';
+import React, {useContext, useRef} from 'react';
 import styled from 'styled-components';
 import {getCategory} from '../util/getCategory';
 import useFetch from '../hooks/useFetch';
 import {Label2_Regular} from '@/style/fonts';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface Info {
   title: string;
@@ -18,10 +19,10 @@ interface DeatailData {
 interface Props {
   isOpen: boolean;
   id: number;
-  option: number;
 }
 
-function DetailBox({isOpen, id, option}: Props) {
+function DetailBox({isOpen, id}: Props) {
+  const {option} = useContext(OptionContext);
   const contentRef = useRef<HTMLDivElement>(null);
   const categoryName = getCategory(option);
 

@@ -6,6 +6,7 @@ import OptionProvider from './provider/optionProvider';
 import {ModalProvider} from './provider/modalProvider';
 import Modal from './component/modal/Modal';
 import SelectedOptionProvider from './provider/selectedOptionProvider';
+import TempOptionProvider from './provider/tempOptionProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -22,7 +23,12 @@ function App() {
     );
   return (
     <AppProvider
-      contexts={[OptionProvider, ModalProvider, SelectedOptionProvider]}
+      contexts={[
+        OptionProvider,
+        ModalProvider,
+        SelectedOptionProvider,
+        TempOptionProvider,
+      ]}
     >
       <BrowserRouter>
         <Routes>
