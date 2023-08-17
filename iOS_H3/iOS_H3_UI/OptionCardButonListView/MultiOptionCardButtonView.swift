@@ -71,7 +71,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Helpers
 
-    func updateAllViews(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo]) {
         dotIndicator.numberOfPages = cardInfos.count
         updateSnapshot(item: cardInfos)
     }

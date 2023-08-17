@@ -8,5 +8,5 @@
 import UIKit
 
 protocol OptionCardButtonListViewable: UIView {
-    func updateAllViews(with cardInfos: [OptionCardInfo])
+    func configure(with cardInfos: [OptionCardInfo])
 }

@@ -60,7 +60,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 
     /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
-    func updateAllViews(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo]) {
         optionCardButtons.enumerated().forEach { (index, _) in
             if cardInfos.count <= index { return }
             updateView(index: index, with: cardInfos[index])

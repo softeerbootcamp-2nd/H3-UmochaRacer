@@ -30,14 +30,14 @@ final class TwoOptionCardButtonViewController: UIViewController {
     private let twoOptionCardButtonViewWithData: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.updateAllViews(with: CarMakingContentMockData.mockOption[0])
+        view.configure(with: CarMakingContentMockData.mockOption[0])
         return view
     }()
 
     private let moreInfoVersionView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.updateAllViews(with: CarMakingContentMockData.mockOption[0])
+        view.configure(with: CarMakingContentMockData.mockOption[0])
         return view
     }()
 

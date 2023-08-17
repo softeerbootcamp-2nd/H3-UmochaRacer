@@ -77,7 +77,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
-        optionButtonListView.updateAllViews(with: optionInfoArray)
+        optionButtonListView.configure(with: optionInfoArray)
     }
 
 }
