@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import Combine
 
 class CarMakingCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UI properties
+
     enum Constants {
         static let descriptionLabelLeadingMargin: CGFloat = 20.0
         static let optionImageViewBottomMargin: CGFloat = 15.0
@@ -36,13 +38,18 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     let optionButtonListView: UIView
 
+    // MARK: - Properites
+
+    private var optionCardInfoArray: [OptionCardInfo] = []
+
+    var optionDidSelected = PassthroughSubject<Int, Never>()
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
         optionButtonListView = TwoOptionCardButtonView()
         super.init(frame: frame)
         setupViews()
-
     }
 
     required init?(coder: NSCoder) {
@@ -54,17 +61,24 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     init(frame: CGRect = .zero, buttonListViewable: OptionCardButtonListViewable) {
         optionButtonListView = buttonListViewable
         super.init(frame: frame)
+        buttonListViewable.delegate = self
         setupViews()
     }
 
     override func prepareForReuse() {
         optionImageView.image = nil
+        optionDidSelected = PassthroughSubject<Int, Never>()
     }
 
     // MARK: - Helpers
     func configure(carMakingStepInfo: CarMakingStepInfo) {
         configure(carMakingStepTitle: carMakingStepInfo.step.title)
         configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
+
+        if !carMakingStepInfo.optionCardInfoArray.isEmpty {
+            let optionIndexToShowBanner = carMakingStepInfo.optionCardInfoArray.firstIndex { $0.isSelected } ?? 0
+            configure(bannerImageURL: carMakingStepInfo.optionCardInfoArray[optionIndexToShowBanner].bannerImageURL)
+        }
     }
 
     func configure(carMakingStepTitle: String) {
@@ -73,19 +87,50 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
                                                 font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
     }
 
+    func configure(bannerImageURL: URL?) {
+        optionImageView.loadCachedImage(of: bannerImageURL)
+    }
+
     func configure(optionInfoArray: [OptionCardInfo]) {
+        self.optionCardInfoArray = optionInfoArray
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
         optionButtonListView.updateAllViews(with: optionInfoArray)
     }
 
+    func update(optionInfoArray: [OptionCardInfo]) {
+        guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
+            return
+        }
+//        optionButtonListView.updateAllViews(with: optionInfoArray)
+        optionButtonListView.reloadViews(with: optionInfoArray)
+    }
 }
+
+// MARK: - OptionCardButtonListView Delegate
+
+extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
+
+    func optionCardButtonListViewDidSelectOption(_ optionCardButtonListView: OptionCardButtonListViewable, index: Int) {
+        optionDidSelected.send(index)
+        if optionCardButtonListView is TwoOptionCardButtonView {
+            configure(bannerImageURL: optionCardInfoArray[index].bannerImageURL)
+        }
+    }
+
+    func optionCardButtonListViewDidShowOption(_ optionCardButtonListView: OptionCardButtonListViewable, index: Int) {
+        if optionCardButtonListView is MultiOptionCardButtonView {
+            configure(bannerImageURL: optionCardInfoArray[index].bannerImageURL)
+        }
+    }
+}
+
+// MARK: - Setup
 
 extension CarMakingCollectionViewCell {
     private func setupViews() {
         addSubViews()
-        self.backgroundView?.backgroundColor = .blue
         setupImageView()
         setupDescriptionLabel()
         setupButtonListView()

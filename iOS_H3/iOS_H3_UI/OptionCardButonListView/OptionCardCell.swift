@@ -57,6 +57,7 @@ final class OptionCardCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         optionCardButton.isSelected = false
+//        optionCardButton.
         buttonTapSubject = PassthroughSubject<Void, Never>()
     }
 

@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
+    func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -37,6 +39,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         collectionView.isScrollEnabled = false
         return collectionView
     }()
+
     private let carMakingProgressBar: CarMakingProgressBar = {
         let progressBar = CarMakingProgressBar()
         return progressBar
@@ -58,6 +61,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
             delegate?.carMakingContentView(stepDidChanged: currentStep)
         }
     }
+
+    private var cancellableOfCellByIndex = [Int: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -92,6 +97,31 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }
 
     func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
+        updateCollectionViewSnapshot(info)
+    }
+
+    func updateOptionInfos(_ info: [OptionCardInfo]) {
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingCollectionViewCell else {
+            return
+        }
+        cell.update(optionInfoArray: info)
+    }
+}
+
+extension CarMakingContentView {
+
+    private func moveStep(to index: Int) {
+        carMakingProgressBar.selectButton(for: index)
+        moveCollectionView(to: index)
+    }
+
+    private func moveCollectionView(to index: Int) {
+        let indexPath = Section.indexPath(for: index)
+        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    private func updateCollectionViewSnapshot(_ info: CarMakingStepInfo) {
         var snapshot = collectionViewDataSource.snapshot()
 
         let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
@@ -107,19 +137,6 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
         snapshot.appendItems(sectionItems, toSection: section)
         collectionViewDataSource.apply(snapshot)
-    }
-}
-
-extension CarMakingContentView {
-
-    private func moveStep(to index: Int) {
-        carMakingProgressBar.selectButton(for: index)
-        moveCollectionView(to: index)
-    }
-
-    private func moveCollectionView(to index: Int) {
-        let indexPath = Section.indexPath(for: index)
-        collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
     }
 }
 
@@ -179,7 +196,7 @@ extension CarMakingContentView {
      func setupCollectionViewDataSource() {
          collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { (collectionView, indexPath, carMakingStepInfo)
+         ) { [weak self] (collectionView, indexPath, carMakingStepInfo)
                   -> UICollectionViewCell? in
              guard let section = Section(sectionIndex: indexPath.section),
                    let cell = collectionView.dequeueReusableCell(
@@ -189,9 +206,15 @@ extension CarMakingContentView {
                  return CarMakingCollectionViewCell()
              }
              cell.configure(carMakingStepInfo: carMakingStepInfo)
-            return cell
-        }
 
+             self?.cancellableOfCellByIndex[indexPath.row] = cell.optionDidSelected
+                 .sink { [weak self] optionIndex in
+                     guard let self else { return }
+                     delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
+                 }
+
+             return cell
+        }
     }
 
     func setupSnapshot() {
@@ -211,7 +234,7 @@ extension CarMakingContentView {
 
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionView DelegateFlowLayout
 
 class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     let progressBarHeight = 26.0
