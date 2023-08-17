@@ -72,7 +72,7 @@ function Content() {
     1: '/info/driving-system',
     2: '/info/bodytype',
     3: '/info/exterior-color',
-    4: '/info/yet-another-endpoint',
+    4: '/info/interior-color?exteriorColorId=1',
     5: '/info/wheel',
   };
 
@@ -83,7 +83,7 @@ function Content() {
     }
   }, [fetchedResponse]);
   const {selectedOptions} = useContext(SelectedOptionContext);
-
+  console.log(selectedOptions);
   useEffect(() => {
     const currentKey = keyMapping[option];
     const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
@@ -109,7 +109,11 @@ function Content() {
                 selectedIndex={selectedIndex}
               />
             ) : (
-              <></>
+              <OptionInfo
+                cardData={cardData}
+                setNewIndex={(index: number) => setNewIndex(index)}
+                selectedIndex={selectedIndex}
+              />
             )}
           </>
         ) : (

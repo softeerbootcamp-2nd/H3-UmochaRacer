@@ -64,11 +64,7 @@ function DetailEstimate({
           <ContentLeft>
             {optionTitle}
             <DeatailBoxWrapper>
-              <DetailBox
-                isOpen={detailOpen}
-                option={optionIndex}
-                id={1}
-              ></DetailBox>
+              <DetailBox isOpen={detailOpen} id={1}></DetailBox>
             </DeatailBoxWrapper>
           </ContentLeft>
           <ContentRight>

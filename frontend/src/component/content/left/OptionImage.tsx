@@ -90,4 +90,7 @@ const ImageBox = styled.div<{$isActive: boolean}>`
       animation-delay: 0.2s;
     `}
 `;
-const ImageBoxImg = styled.img``;
+const ImageBoxImg = styled.img`
+  /* object-fit: cover; */
+  width: 100%;
+`;
