@@ -68,7 +68,7 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
   );
 }
 
-export default React.memo(OptionInfo);
+export default OptionInfo;
 
 const Wrapper = styled.div`
   ${flexCenter}

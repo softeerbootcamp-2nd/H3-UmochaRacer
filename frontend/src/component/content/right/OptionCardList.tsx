@@ -7,6 +7,7 @@ import {OptionContext} from '@/provider/optionProvider';
 interface cardListProps {
   cardData: cardDataType[];
   isSaved: boolean;
+  option: number;
   setNewIndex: (index: number) => void;
   selectedIndex: number;
 }
@@ -52,10 +53,9 @@ function OptionCardList({
   const handleItemClick = (index: number) => {
     setNewIndex(index);
   };
-
   useEffect(() => {
     scrollIntoSelected(ulRef, selectedIndex);
-  }, [selectedIndex]);
+  }, [selectedIndex]); 
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
@@ -74,7 +74,9 @@ function OptionCardList({
   );
 }
 
-export default OptionCardList;
+export default React.memo(OptionCardList, (prevProps, nextProps) => {
+  return prevProps.cardData === nextProps.cardData;
+});
 
 const Wrapper = styled.div`
   &::-webkit-scrollbar {
