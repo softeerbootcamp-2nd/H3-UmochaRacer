@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import EstimateHeader from './EstimateHeader';
 import DetailEstimate from './bottom/DetailEstimate';
@@ -50,10 +50,12 @@ const options = [
 ];
 
 function Bottom() {
+  const [detailOpen, setDetailOpen] = useState<boolean>(false);
   const Details: React.JSX.Element[] = options.map((elem, index) => {
     return (
       <DetailEstimate
         key={index}
+        detailOpen={detailOpen}
         optionIndex={index - 1}
         optionName={elem.optionName}
         optionTitle={elem.optionTitle}
@@ -63,11 +65,16 @@ function Bottom() {
     );
   });
 
+  const handleButtonClick = () => {
+    setDetailOpen(!detailOpen);
+  };
+
   return (
     <Wrapper>
       <EstimateHeader
         text={'견적 자세히 보기'}
         price={43460000 + 1480000 + 100000}
+        onClick={handleButtonClick}
       ></EstimateHeader>
       <DetailList>{Details}</DetailList>
     </Wrapper>

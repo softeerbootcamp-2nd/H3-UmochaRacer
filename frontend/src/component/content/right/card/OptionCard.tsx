@@ -1,14 +1,13 @@
 import React, {useEffect} from 'react';
-import {useState, useRef, useCallback} from 'react';
+import {useState, useCallback} from 'react';
 import styled, {css} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body2_Regular, Popup_Regular, Title2_Medium} from '@/style/fonts';
 import {cardDataType} from '../../contentInterface';
-
+import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
-import {getCategory} from '@/component/util/getCategory';
-import useFetch from '@/component/hooks/useFetch';
+
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
@@ -16,12 +15,7 @@ interface CardProps {
   data: cardDataType;
   option: number;
 }
-interface detailData {
-  title: string;
-  description: string;
-  info: string;
-  imageScr: string;
-}
+
 const SelectIcon = () => {
   return (
     <svg
@@ -64,48 +58,18 @@ const hasDetail = (option: number) => {
 
 function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false); // 클릭 여부 상태 관리
-  const contentBoxRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
-      if (contentBoxRef.current === null || contentRef.current === null) {
-        return;
-      }
-
-      if (contentBoxRef.current.clientHeight > 0) {
-        contentBoxRef.current.style.height = '0';
-        contentBoxRef.current.style.opacity = '0';
-      } else {
-        contentBoxRef.current.style.height = `${contentRef.current.clientHeight}px`;
-        contentBoxRef.current.style.opacity = '1';
-      }
-
       setToggle(!toggle);
     },
     [toggle],
   );
 
-  const categoryName = getCategory(option);
-  const fetchedDetails = useFetch<detailData>(
-    `/detail/${categoryName}/${data.id}`,
-  );
   useEffect(() => {
-    if (toggle && !selected) {
-      if (contentBoxRef.current) {
-        contentBoxRef.current.style.height = '0';
-        setToggle(!toggle);
-      }
-    }
+    setToggle(false);
   }, [selected]);
-
-  if (isSaved && toggle) {
-    if (contentBoxRef.current) {
-      contentBoxRef.current.style.height = '0';
-    }
-    setToggle(!toggle);
-  }
 
   return (
     <Wrapper onClick={onClick} $selected={selected}>
@@ -137,14 +101,12 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
           )}
         </CardSection>
 
-        {hasDetail(option) ? (
-          <DetailBox ref={contentBoxRef} $toggle={toggle} $isSaved={isSaved}>
-            <DetailContent ref={contentRef}>
-              {fetchedDetails.data?.description}
-            </DetailContent>
-          </DetailBox>
-        ) : (
-          ''
+        {hasDetail(option) && (
+          <DetailBox
+            isOpen={toggle && selected && !isSaved}
+            id={data.id}
+            option={option}
+          ></DetailBox>
         )}
 
         <CardSection $height={26} $end={true}>
@@ -153,7 +115,7 @@ function OptionCard({selected, onClick, data, option, isSaved}: CardProps) {
           {hasDetail(option) ? (
             <DetailToggle
               onClick={clickedToggle}
-              opened={toggle}
+              opened={toggle && selected && !isSaved}
               selected={selected}
             ></DetailToggle>
           ) : (
@@ -295,23 +257,4 @@ const ColorBox = styled.div<{$colorcode: string}>`
 const Price = styled.div`
   ${Body2_Regular}
   color: ${colors.Main_Hyundai_Blue};
-`;
-
-const DetailBox = styled.div<{$toggle: boolean; $isSaved: boolean}>`
-  position: relative;
-  height: 0;
-  opacity: 0;
-  pointer-events: ${({$toggle}) => !$toggle && 'none'};
-  overflow: hidden;
-  transition:
-    height 1s,
-    opacity 1s;
-`;
-
-const DetailContent = styled.div`
-  position: absolute;
-  width: 100%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-top: 1px solid ${colors.Cool_Grey_001};
 `;

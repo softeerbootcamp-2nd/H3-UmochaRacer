@@ -6,11 +6,12 @@ interface Props {
   text: string;
   price: number;
   padding?: number;
+  onClick?: () => void;
 }
 
-function EstimateHeader({text, price, padding}: Props) {
+function EstimateHeader({text, price, padding, onClick}: Props) {
   return (
-    <Wrapper $padding={padding}>
+    <Wrapper $padding={padding} onClick={onClick}>
       <Left>{text}</Left>
       <Right>
         <Text>차량 총 견적 금액</Text>
