@@ -8,7 +8,7 @@
 import Foundation
 
 struct EstimateSummary {
-    let elements: [EstimateSummary]
+    let elements: [EstimateSummaryElement]
 }
 
 struct EstimateSummaryElement {
