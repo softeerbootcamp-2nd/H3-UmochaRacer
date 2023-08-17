@@ -45,7 +45,10 @@ final class CarMakingViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         self.mode = .selfMode
-        self.viewModel = CarMakingViewModel()
+        self.viewModel = CarMakingViewModel(selfModeUsecase:
+                                                SelfModeUsecase(carInfoRepository:
+                                                                    CarInfoRepository(networkService:
+                                                                                        NetworkService())))
         super.init(coder: coder)
     }
 
