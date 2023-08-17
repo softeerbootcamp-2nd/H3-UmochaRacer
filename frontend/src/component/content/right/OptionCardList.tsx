@@ -1,18 +1,12 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
-import {OptionContext} from '@/provider/optionProvider';
-interface Data {
-  optionId: number;
-  name: string;
-  rate: number;
-  price: number;
-}
 
 interface carfListProps {
   cardData: cardDataType[];
   isSaved: boolean;
+  option: number;
   setNewIndex: (index: number) => void;
 }
 
@@ -45,15 +39,14 @@ const scrollIntoSelected = (
   }
 };
 
-function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
+function OptionCardList({
+  cardData,
+  setNewIndex,
+  option,
+  isSaved,
+}: carfListProps) {
   const [selectedItem, setSelectedItem] = useState<number>(0);
-  const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
-
-  const handleItemClick = (index: number) => {
-    setNewIndex(index);
-    setSelectedItem(index);
-  };
 
   useEffect(() => {
     setSelectedItem(0);
@@ -62,6 +55,11 @@ function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
   useEffect(() => {
     scrollIntoSelected(ulRef, selectedItem);
   }, [selectedItem]);
+
+  const handleItemClick = (index: number) => {
+    setNewIndex(index);
+    setSelectedItem(index);
+  };
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
@@ -81,7 +79,9 @@ function OptionCardList({cardData, setNewIndex, isSaved}: carfListProps) {
   );
 }
 
-export default OptionCardList;
+export default React.memo(OptionCardList, (prevProps, nextProps) => {
+  return prevProps.cardData === nextProps.cardData;
+});
 
 const Wrapper = styled.div`
   &::-webkit-scrollbar {
