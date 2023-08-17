@@ -1,5 +1,6 @@
 package com.example.backend.domain.sale.entity;
 
+import com.example.backend.domain.guide.entity.Tag;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
 import com.example.backend.domain.information.model.car.entity.Model;
@@ -9,10 +10,7 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.jdbc.core.mapping.AggregateReference;
-import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
-
-import java.util.List;
 
 @Table("SALES")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)

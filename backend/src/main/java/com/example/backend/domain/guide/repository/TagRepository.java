@@ -1,6 +1,6 @@
-package com.example.backend.domain.sale.repository;
+package com.example.backend.domain.guide.repository;
 
-import com.example.backend.domain.sale.entity.Tag;
+import com.example.backend.domain.guide.entity.Tag;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
