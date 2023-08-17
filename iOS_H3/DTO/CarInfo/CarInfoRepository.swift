@@ -15,35 +15,65 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
         self.networkService = networkService
     }
 
-    func fetchPowertrain(model: String, type: String) -> AnyPublisher<Result<PowertrainResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.powertrain(model: model, type: type))
+    private func fetchCarMakingStepInfo(for endpoint: Endpoint,
+                                        step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
+        networkService.request(endpoint)
+            .map { (result: Result<APIResponse<[CarOptionData]>, Error>) -> CarMakingStepInfo in
+                switch result {
+                case .success(let data):
+                    let array = data.data.map { $0.toDomain() }
+                    return CarMakingStepInfo(step: step, optionCardInfoArray: array)
+                case .failure(let error):
+                    return CarMakingStepInfo(step: step)
+                }
+            }
+            .eraseToAnyPublisher()
     }
 
-    func fetchDrivingSystem() -> AnyPublisher<Result<DrivingSystemResponse, Error>, Never> {
-           return networkService.request(CarInfoEndpoint.drivingSystem)
-       }
-
-    func fetchBodyType() -> AnyPublisher<Result<BodyTypeResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.bodyType)
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.powertrain(model: model, type: type), step: .powertrain)
     }
 
-    func fetchExteriorColor() -> AnyPublisher<Result<ExteriorColorResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.exteriorColor)
+    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.drivingSystem, step: .driveMethod)
     }
 
-    func fetchInteriorColor() -> AnyPublisher<Result<InteriorColorResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.interiorColor)
+    func fetchBodyType() -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.bodyType, step: .bodyType)
     }
 
-    func fetchWheel() -> AnyPublisher<Result<WheelResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.wheel)
+    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.exteriorColor, step: .externalColor)
     }
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<Result<AdditionalOptionResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.additionalOption(category: category))
+    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.interiorColor, step: .internalColor)
     }
 
-    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<Result<SingleExteriorColorResponse, Error>, Never> {
-        return networkService.request(CarInfoEndpoint.singleExteriorColor(optionId: optionId))
+    func fetchWheel() -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .wheelSelection)
+    }
+
+    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .optionSelection)
+    }
+
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, Never> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .externalColor)
+    }
+
+    // TODO: IntroRepository로 분리
+    func fetchEstimate() -> AnyPublisher<EstimateSummary, Never> {
+        networkService.request(CarInfoEndpoint.estimate)
+            .map { (result: Result<APIResponse<[EstimateElementData]>, Error>) -> EstimateSummary in
+                switch result {
+                case .success(let data):
+                    let array = data.data.map { $0.toDomain() }
+                    return EstimateSummary(elements: array)
+                case .failure(let error):
+                    return EstimateSummary(elements: [])
+                }
+            }
+            .eraseToAnyPublisher()
     }
 }
