@@ -1,18 +1,17 @@
 {
-	"data" : [
-		{
-			"optionId": 12,
-			"name" : "디젤 2.2",
-			"price" : 1480000,
-			"imageSrc" : "src/assets/images/powertrain.png"
-		},
-		{
-			"optionId": 34,
-			"name" : "가솔린 2.8",
-			"price" : 0,
-			"imageSrc" : "src/assets/images/gasoline.png"
-		}
-	],
-	"message" : "머시기"
+  "data": [
+    {
+      "optionId": 12,
+      "name": "디젤 2.2",
+      "price": 1480000,
+      "imageSrc": "src/assets/image/powertrain.png"
+    },
+    {
+      "optionId": 34,
+      "name": "가솔린 2.8",
+      "price": 0,
+      "imageSrc": "src/assets/image/gasoline.png"
+    }
+  ],
+  "message": "머시기"
 }
-			

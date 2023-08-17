@@ -4,27 +4,27 @@
     "name": "Exclusive",
     "tag": "기본에 충실",
     "price": 40440000,
-    "src" : "src/assets/images/main_car.png"
+    "src": "src/assets/image/main_car.png"
   },
   {
     "id": 2,
     "name": "Le Blanc(르블랑)",
     "tag": "베스트셀러",
     "price": 43460000,
-    "src" : "src/assets/images/main_car.png"
+    "src": "src/assets/image/main_car.png"
   },
   {
     "id": 3,
     "name": "Prestige",
     "tag": "부담없는 고급감",
     "price": 47720000,
-    "src" : "src/assets/images/main_car.png"
+    "src": "src/assets/image/main_car.png"
   },
   {
     "id": 4,
     "name": "Calligraphy",
     "tag": "최고를 원한다면",
     "price": 52540000,
-    "src" : "src/assets/images/main_car.png"
+    "src": "src/assets/image/main_car.png"
   }
 ]

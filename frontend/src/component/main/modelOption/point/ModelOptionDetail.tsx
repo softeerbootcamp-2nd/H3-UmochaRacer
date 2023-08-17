@@ -11,7 +11,7 @@ function ModelOptionDetail({src, name}: detailProps) {
   return (
     <Detail.Wrapper>
       <Detail.IconWrapper>
-        <Detail.Icon src={`/src/assets/images/point/${src}.png`} />
+        <Detail.Icon src={`/src/assets/image/point/${src}.png`} />
       </Detail.IconWrapper>
       <Detail.Name>{name}</Detail.Name>
     </Detail.Wrapper>

@@ -49,7 +49,7 @@ function ModalLayout({
       <Modal.DescriptionWrapper>
         <Modal.Description>{description}</Modal.Description>
         {imgSrc && (
-          <Modal.DescriptionImg src={`/src/assets/images/${imgSrc}.png`} />
+          <Modal.DescriptionImg src={`/src/assets/image/${imgSrc}.png`} />
         )}
       </Modal.DescriptionWrapper>
       <Modal.ButtonWrapper>

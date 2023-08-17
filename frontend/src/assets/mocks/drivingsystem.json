@@ -1,18 +1,17 @@
 {
-	"data" : [
-		{
-			"optionId": 11,
-			"name" : "2WD",
-			"price" : 0,
-			"imageSrc" : "src/assets/images/2wd.png"
-		},
-		{
-			"optionId": 12,
-			"name" : "4WD",
-			"price" : 2370000,
-			"imageSrc" : "src/assets/images/4wd.png"
-		}
-	],
-	"message" : "머시기"
+  "data": [
+    {
+      "optionId": 11,
+      "name": "2WD",
+      "price": 0,
+      "imageSrc": "src/assets/image/2wd.png"
+    },
+    {
+      "optionId": 12,
+      "name": "4WD",
+      "price": 2370000,
+      "imageSrc": "src/assets/image/4wd.png"
+    }
+  ],
+  "message": "머시기"
 }
-			

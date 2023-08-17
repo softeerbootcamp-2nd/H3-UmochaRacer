@@ -5,7 +5,7 @@ import {Title1_Medium, Title4_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 
 function Top() {
-  const [imgsrc, setImgsrc] = useState('src/assets/images/white.png');
+  const [imgsrc, setImgsrc] = useState('src/assets/image/white.png');
 
   const buttonClick = (url: string) => {
     setImgsrc(url);
@@ -19,14 +19,14 @@ function Top() {
       </ImageBox>
       <ButtonBox>
         <ImageButton
-          onClick={() => buttonClick('src/assets/images/white.png')}
+          onClick={() => buttonClick('src/assets/image/white.png')}
           $background={colors.Main_Hyundai_Blue}
           $color={colors.Hyundai_White}
         >
           외부
         </ImageButton>
         <ImageButton
-          onClick={() => buttonClick('src/assets/images/innergrey1.png')}
+          onClick={() => buttonClick('src/assets/image/innergrey1.png')}
           $background={'#F2F2F2'}
           $color={colors.Main_Hyundai_Blue}
         >
