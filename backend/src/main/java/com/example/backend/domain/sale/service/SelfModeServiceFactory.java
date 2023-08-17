@@ -14,13 +14,20 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SelfModeServiceFactory {
-    private final SaleRatioServiceImpl saleRatioService;
+    private final VehicleTypeSaleRatioServiceImpl saleRatioService;
     private final OptionSaleRatioServiceImpl optionSaleRatioService;
+    private final VehicleSpecificationSaleRatioServiceImpl vehicleSpecificationSaleRatioServiceImpl;
     private final SummaryMapper summaryMapper;
 
     public List<SalesSummaryResponse> getSelectionRatio(String target) {
         String columnId = StringUtils.transUriToColumnId(target);
         List<SalesSummary> saleRatio = saleRatioService.findSaleRatio(columnId);
+        return mapToResponse(saleRatio);
+    }
+
+    public List<SalesSummaryResponse> getVehicleSpecificationSaleRatio(String target) {
+        String columnId = StringUtils.transUriToColumnId(target);
+        List<SalesSummary> saleRatio = vehicleSpecificationSaleRatioServiceImpl.findSaleRatio(columnId);
         return mapToResponse(saleRatio);
     }
 
@@ -30,7 +37,7 @@ public class SelfModeServiceFactory {
     }
 
     private List<SalesSummaryResponse> mapToResponse(List<SalesSummary> saleSummaries) {
-        if(saleSummaries.isEmpty()) throw new RestApiException(ResultCode.SALES_NOT_FOUND);
+        if (saleSummaries.isEmpty()) throw new RestApiException(ResultCode.SALES_NOT_FOUND);
         return summaryMapper.map(saleSummaries);
     }
 

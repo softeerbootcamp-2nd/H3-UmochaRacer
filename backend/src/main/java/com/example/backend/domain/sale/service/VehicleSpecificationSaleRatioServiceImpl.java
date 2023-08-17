@@ -9,11 +9,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SaleRatioServiceImpl implements RatioService {
-    private final SalesTemplateRepository salesRepository;
+public class VehicleSpecificationSaleRatioServiceImpl implements RatioService {
+    private final SalesTemplateRepository salesTemplateRepository;
 
     @Override
     public List<SalesSummary> findSaleRatio(String columnId) {
-        return salesRepository.findSaleRatio(columnId);
+        return salesTemplateRepository.findVehicleSpecificationSalesRatio(columnId);
     }
 }
