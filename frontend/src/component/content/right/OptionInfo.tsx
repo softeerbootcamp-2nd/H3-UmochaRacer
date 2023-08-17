@@ -45,6 +45,7 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
           cardData={cardData}
           isSaved={isSaved}
           setNewIndex={setNewIndex}
+          option={option}
         ></OptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
@@ -59,7 +60,7 @@ function OptionInfo({cardData, setNewIndex, option}: cardDataProps) {
   );
 }
 
-export default React.memo(OptionInfo);
+export default OptionInfo;
 
 const Wrapper = styled.div`
   ${flexCenter}
