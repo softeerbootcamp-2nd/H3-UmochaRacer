@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SaleRatioServiceImpl implements RatioService {
+public class VehicleTypeSaleRatioServiceImpl implements RatioService {
     private final SalesTemplateRepository salesRepository;
 
     @Override

@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SelfModeServiceFactory {
-    private final SaleRatioServiceImpl saleRatioService;
+    private final VehicleTypeSaleRatioServiceImpl saleRatioService;
     private final OptionSaleRatioServiceImpl optionSaleRatioService;
     private final VehicleSpecificationSaleRatioServiceImpl vehicleSpecificationSaleRatioServiceImpl;
     private final SummaryMapper summaryMapper;
