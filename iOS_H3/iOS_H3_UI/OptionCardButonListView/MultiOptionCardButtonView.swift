@@ -41,7 +41,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
-    weak var delegate: MultiOptionCardButtonViewDelegate?
+    weak var delegate: OptionCardButtonListViewDelegate?
 
     // MARK: - Lifecycles
 
@@ -161,7 +161,7 @@ extension MultiOptionCardButtonView {
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
-                    delegate?.optionCardButtonDidTapped(index: indexPath.row)
+                    delegate?.optionCardButtonListView(self, didSelectOptionAt: indexPath.row)
                 }
 
             return cell
