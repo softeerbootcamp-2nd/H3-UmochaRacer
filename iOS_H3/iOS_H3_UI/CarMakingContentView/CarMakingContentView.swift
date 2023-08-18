@@ -33,16 +33,16 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - UI properties
 
+    private let carMakingProgressBar: CarMakingProgressBar = {
+        let progressBar = CarMakingProgressBar()
+        return progressBar
+    }()
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isScrollEnabled = false
         return collectionView
-    }()
-
-    private let carMakingProgressBar: CarMakingProgressBar = {
-        let progressBar = CarMakingProgressBar()
-        return progressBar
     }()
 
     // MARK: - Properties
@@ -140,6 +140,28 @@ extension CarMakingContentView {
     }
 }
 
+// MARK: - UICollectionView DelegateFlowLayout
+
+class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
+    let progressBarHeight = 26.0
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = CGSize(width: collectionView.frame.width, height: collectionView.frame.height - progressBarHeight)
+        return height
+    }
+}
+
+// MARK: - CarMakingProgressBar Delegate
+
+extension CarMakingContentView: CarMakingProgressBarDelegate {
+
+    func progressBarButtonDidTapped(didSelectItemAt index: Int) {
+        currentStep = index
+    }
+}
+
 // MARK: - Setup Views
 
 extension CarMakingContentView {
@@ -232,26 +254,4 @@ extension CarMakingContentView {
         collectionViewDataSource.apply(snapshot, animatingDifferences: true)
     }
 
-}
-
-// MARK: - UICollectionView DelegateFlowLayout
-
-class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
-    let progressBarHeight = 26.0
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = CGSize(width: collectionView.frame.width, height: collectionView.frame.height - progressBarHeight)
-        return height
-    }
-}
-
-// MARK: - CarMakingProgressBar Delegate
-
-extension CarMakingContentView: CarMakingProgressBarDelegate {
-
-    func progressBarButtonDidTapped(didSelectItemAt index: Int) {
-        currentStep = index
-    }
 }
