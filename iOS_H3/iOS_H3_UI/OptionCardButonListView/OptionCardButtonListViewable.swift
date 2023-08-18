@@ -19,5 +19,8 @@ protocol OptionCardButtonListViewDelegate: AnyObject {
 }
 
 protocol OptionCardButtonListViewable: UIView {
+    var delegate: OptionCardButtonListViewDelegate? { get set }
+
     func configure(with cardInfos: [OptionCardInfo])
+    func reloadOptionCards(with cardInfos: [OptionCardInfo])
 }
