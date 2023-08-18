@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import styled, {css, keyframes} from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {cardDataType} from '../contentInterface';
@@ -22,9 +22,22 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
   const prevRef = useRef<number | undefined>(undefined);
   const imgBox = wrapperRef.current?.childNodes[selectedIndex];
 
+  if (prevRef.current !== undefined) {
+    const prevImgBox = wrapperRef.current?.childNodes[
+      prevRef.current
+    ] as HTMLElement;
+    prevImgBox.style.display = '';
+    prevImgBox.style.zIndex = '';
+  }
+
   if (imgBox instanceof HTMLElement) {
     imgBox.style.display = '';
+    imgBox.style.zIndex = '10';
   }
+
+  useEffect(() => {
+    prevRef.current = selectedIndex;
+  });
 
   const imageList = cardData.map((elem, index) => {
     return (
@@ -34,7 +47,6 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
         style={{
           display:
             index === selectedIndex || index === prevRef.current ? '' : 'none',
-          zIndex: index === selectedIndex ? '10' : '',
         }}
         onAnimationEnd={() => {
           if (prevRef.current !== undefined && wrapperRef.current) {
@@ -44,11 +56,13 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
               prevImgBox instanceof HTMLElement &&
               currImgBox instanceof HTMLElement
             ) {
-              prevImgBox.style.display = 'none';
-              currImgBox.style.zIndex = '';
+              if (prevRef.current !== selectedIndex) {
+                prevImgBox.style.display = 'none';
+                currImgBox.style.zIndex = '';
+              }
             }
+            prevRef.current = selectedIndex;
           }
-          prevRef.current = selectedIndex;
         }}
       >
         <ImageBoxImg src={elem.imageSrc}></ImageBoxImg>
