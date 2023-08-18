@@ -19,8 +19,8 @@ final class TwoOptionCardButtonViewController: UIViewController {
 
     private let guideModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .guideMode)
-        view.updateView(
-            index: 0,
+        view.updateOptionCard(
+            at: 0,
             with: CarMakingContentMockData.mockOption[0][0]
         )
         view.translatesAutoresizingMaskIntoConstraints = false
