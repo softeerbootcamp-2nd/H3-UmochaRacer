@@ -29,7 +29,7 @@ final class CarMakingViewModel {
 
     private var cancellables = Set<AnyCancellable>()
     private let selfModeUsecase: SelfModeUsecaseProtocol
-    private var selectedOptions: [CarMakingStep: OptionCardInfo] = [:]
+
     // MARK: - Lifecycles
 
     init(selfModeUsecase: SelfModeUsecaseProtocol) {
@@ -40,14 +40,6 @@ final class CarMakingViewModel {
 
     func transform(_ input: Input) -> Output {
         let output = Output()
-
-//        input.viewDidLoad
-//            .sink(receiveValue: { [weak self] _ in
-//                guard let self else { return }
-//                let estimateSummary = requestEstimateSummary()
-//                output.estimateSummary.send(estimateSummary)
-//            })
-//            .store(in: &cancellables)
 
         input.viewDidLoad
             .flatMap { [weak self] step -> AnyPublisher<EstimateSummary, Never> in
@@ -77,20 +69,17 @@ final class CarMakingViewModel {
         return output
     }
 
-//    private func requestEstimateSummary() -> EstimateSummary {
-//        // usecase에 디폴트값 데이터 요청
-//        return EstimateSummary(elements: [])
-//    }
     private func requestEstimateSummary() -> AnyPublisher<EstimateSummary, Never> {
         // usecase에 디폴트값 데이터 요청
         return selfModeUsecase.fetchInitialEstimate()
             .eraseToAnyPublisher()
     }
 
-    func selectOption(for step: CarMakingStep, option: OptionCardInfo) {
-            print("옵션 선택 \(option)")
-            selectedOptions[step] = option
-        }
+    private func updateEstimateSummary(step: CarMakingStep,
+                                       selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
+        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption)
+            .eraseToAnyPublisher()
+    }
 
     private func requestCurrentStepInfo(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
         return selfModeUsecase.fetchOptionInfo(step: step)
