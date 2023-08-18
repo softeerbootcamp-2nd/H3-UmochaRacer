@@ -75,6 +75,16 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         dotIndicator.numberOfPages = cardInfos.count
         updateSnapshot(item: cardInfos)
     }
+
+    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+        cardInfos.enumerated().forEach { (index, info) in
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = optionCardCollectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                return
+            }
+            cell.configure(carMakingMode: carMakingMode, info: info)
+        }
+    }
 }
 
 // MARK: - OptionCardButton Delegate
