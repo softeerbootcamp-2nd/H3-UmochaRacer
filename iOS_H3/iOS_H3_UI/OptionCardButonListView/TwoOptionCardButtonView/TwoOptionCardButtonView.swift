@@ -50,20 +50,16 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     // MARK: - Helpers
 
     /// index에 해당하는 옵션 카드의 view를 업데이트
-    func updateView(index: Int, with cardInfo: OptionCardInfo) {
+    func configureOptionCard(at index: Int, with cardInfo: OptionCardInfo) {
         if !isValidateIndex(index) { return }
-
         optionCardButtons[index].update(cardInfo: cardInfo)
-        if cardInfo.isSelected {
-            selectOption(index: index)
-        }
     }
 
     /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
     func configure(with cardInfos: [OptionCardInfo]) {
         optionCardButtons.enumerated().forEach { (index, _) in
             if cardInfos.count <= index { return }
-            updateView(index: index, with: cardInfos[index])
+            configureOptionCard(at: index, with: cardInfos[index])
         }
     }
 }
