@@ -74,7 +74,7 @@ extension TwoOptionCardButtonView: OptionCardButtonDelegate {
 
     func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton) {
         if let index = optionCardButtons.firstIndex(of: optionCardButton) {
-            delegate?.optionCardButtonListView(self, moreButtonDidTappedAt: index)
+//            delegate?.optionCardButtonListView(self, moreButtonDidTappedAt: index)
         }
     }
 }
