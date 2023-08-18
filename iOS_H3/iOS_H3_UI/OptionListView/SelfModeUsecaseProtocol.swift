@@ -9,28 +9,29 @@ import Combine
 import Foundation
 
 protocol SelfModeUsecaseProtocol {
-     func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never>
+    func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never>
 
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never>
 
-    // func applyOptionToEstimate(option: OptionCardInfo) -> AnyPublisher<Result<[EstimateSummary], Error>, Never>
+    func updateEstimateSummary(step: CarMakingStep,
+                               selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never>
 }
 
 class SelfModeUsecase: SelfModeUsecaseProtocol {
 
-    let carInfoRepository: CarInfoRepositoryProtocol
+    private let carInfoRepository: CarInfoRepositoryProtocol
+    private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
 
     init(carInfoRepository: CarInfoRepositoryProtocol) {
         self.carInfoRepository = carInfoRepository
     }
 
     func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never> {
-        let publisher = carInfoRepository.fetchEstimate()
-        return publisher
-            .map { summary in
-                var mutableSummary = summary
-                return mutableSummary
-            }
+        return carInfoRepository
+            .fetchEstimate()
+            .handleEvents(receiveOutput: { estimate in
+                self.currentEstimateSummary = estimate
+            })
             .eraseToAnyPublisher()
     }
 
@@ -67,8 +68,21 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-}
+    func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
+    -> AnyPublisher<EstimateSummary, Never> {
 
-//    func applyOptionToEstimate(option: OptionCardInfo) -> AnyPublisher<Result<[EstimateSummary], Error>, Never> {
-//
-//    }
+        var elements = currentEstimateSummary.elements
+        if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
+            let newElement = EstimateSummaryElement(stepName: step.title,
+                                                    selectedOption: selectedOption.title,
+                                                    category: selectedOption.title,
+                                                    price: Int(selectedOption.priceString) ?? 0)
+            elements[index] = newElement
+        }
+
+        let updatedSummary = EstimateSummary(elements: elements)
+        currentEstimateSummary = updatedSummary
+
+        return Just(updatedSummary).eraseToAnyPublisher()
+    }
+}
