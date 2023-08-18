@@ -75,6 +75,8 @@ extension TwoOptionCardButtonView: OptionCardButtonDelegate {
     }
 }
 
+// MARK: - Setup
+
 extension TwoOptionCardButtonView {
 
     private func setupOptionCardButtons() {
@@ -85,17 +87,28 @@ extension TwoOptionCardButtonView {
         }
     }
 
-    private func setupViews() {
-        addSubviews()
-        setupConstraints()
-    }
-
     @objc
     private func optionCardButtonDidTapped(_ sender: UIButton) {
         guard let selectedOptionIndex = optionCardButtons.firstIndex(where: { $0 == sender }) else {
             return
         }
         selectOption(index: selectedOptionIndex)
+    }
+
+    private func selectOption(index: Int) {
+        if !isValidateIndex(index) { return }
+        delegate?.optionCardButtonListView(self, didSelectOptionAt: index)
+    }
+
+    private func isValidateIndex(_ index: Int) -> Bool {
+        0..<optionCardButtons.count ~= index
+    }
+
+    // MARK: - Setup Views
+
+    private func setupViews() {
+        addSubviews()
+        setupConstraints()
     }
 
     private func addSubviews() {
@@ -123,17 +136,5 @@ extension TwoOptionCardButtonView {
             optionCardButtons[1].trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButtons[1].bottomAnchor.constraint(equalTo: self.optionCardButtons[0].bottomAnchor)
         ])
-    }
-
-    private func selectOption(index: Int) {
-        if !isValidateIndex(index) { return }
-
-        optionCardButtons[selectedButtonIndex].isSelected = false
-        optionCardButtons[index].isSelected = true
-        selectedButtonIndex = index
-    }
-
-    private func isValidateIndex(_ index: Int) -> Bool {
-        0..<optionCardButtons.count ~= index
     }
 }
