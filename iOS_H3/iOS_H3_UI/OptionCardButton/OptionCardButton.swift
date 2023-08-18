@@ -8,7 +8,7 @@
 import UIKit
 
 protocol OptionCardButtonDelegate: AnyObject {
-    func moreInfoButtonDidTapped()
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton)
 }
 
 class OptionCardButton: UIButton {
@@ -380,6 +380,6 @@ extension OptionCardButton {
 
     @objc
     private func moreInfoButtonTapped() {
-        delegate?.moreInfoButtonDidTapped()
+        delegate?.optionCardButtonMoreInfoButtonDidTap(self)
     }
 }
