@@ -131,10 +131,11 @@ extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
     }
 }
 
+// MARK: - Setup
+
 extension CarMakingCollectionViewCell {
     private func setupViews() {
         addSubViews()
-        self.backgroundView?.backgroundColor = .blue
         setupImageView()
         setupDescriptionLabel()
         setupButtonListView()
