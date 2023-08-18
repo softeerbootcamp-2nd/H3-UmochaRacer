@@ -18,19 +18,19 @@ const options = [
     price: 43460000,
   },
   {
-    imgSrc: '/image/powertrain.png',
+    imgSrc: '/image/white.png',
     optionName: '파워트레인',
     optionTitle: '디젤 2.2',
     price: 1480000,
   },
   {
-    imgSrc: '/image/2wd.png',
+    imgSrc: '/image/white.png',
     optionName: '구동방식',
     optionTitle: '2WD',
     price: 0,
   },
   {
-    imgSrc: '/image/7seats.png',
+    imgSrc: '/image/white.png',
     optionName: '바디타입',
     optionTitle: '7인승',
     price: 0,
@@ -42,7 +42,7 @@ const options = [
     price: 100000,
   },
   {
-    imgSrc: '/image/innerblack.png',
+    imgSrc: '/image/white.png',
     optionName: '내장 컬러',
     optionTitle: '퀄팅천연 (블랙)',
     price: 0,

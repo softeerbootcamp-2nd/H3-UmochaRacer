@@ -25,11 +25,9 @@ function DetailBox({isOpen, id}: Props) {
   const {option} = useContext(OptionContext);
   const contentRef = useRef<HTMLDivElement>(null);
   const categoryName = getCategory(option);
-
   const fetchedDetails = useFetch<DeatailData>(`/detail/${categoryName}/${id}`);
-
   let info: React.JSX.Element[] = [];
-
+  if (!fetchedDetails.data) return;
   if (fetchedDetails.data?.info) {
     info = JSON.parse(fetchedDetails.data?.info).map(
       (elem: Info, index: number) => {

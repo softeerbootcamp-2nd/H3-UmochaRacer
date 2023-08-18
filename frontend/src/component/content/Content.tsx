@@ -8,6 +8,7 @@ import {OptionContext} from '@/provider/optionProvider';
 import useFetch from '../hooks/useFetch';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
+import {flexCenter} from '@/style/common';
 type cardData = {
   id: number;
   name: string;
@@ -63,7 +64,6 @@ function Content() {
     }
   };
   const setNewIndex = (nextIndex: number) => {
-    console.log(nextIndex);
     setIndex(nextIndex);
     updateTempOption(nextIndex);
   };
@@ -74,46 +74,45 @@ function Content() {
     3: '/info/exterior-color',
     4: '/info/interior-color?exteriorColorId=1',
     5: '/info/wheel',
+    6: '',
+    7: '',
   };
-
   const fetchedResponse = useFetch<cardData[]>(urlEndpoint[option]);
   useEffect(() => {
     if (fetchedResponse.data) {
       setcardData(fetchedResponse.data);
+    } else {
+      setcardData([]);
     }
-  }, [fetchedResponse]);
+  }, [option, fetchedResponse]);
   const {selectedOptions} = useContext(SelectedOptionContext);
-  console.log(selectedOptions);
   useEffect(() => {
     const currentKey = keyMapping[option];
     const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
     if (foundOption) {
-      console.log(foundOption.id - 1);
       setNewIndex(foundOption.id - 1);
     }
   }, [option]);
   return (
     <Wrapper>
       <Container $option={option}>
-        {cardData.length > 0 ? (
+        {option < 7 ? (
           <>
-            <OptionImage
-              key={option}
-              cardData={cardData}
-              selectedIndex={selectedIndex}
-            />
             {option !== 6 ? (
-              <OptionInfo
-                cardData={cardData}
-                setNewIndex={(index: number) => setNewIndex(index)}
-                selectedIndex={selectedIndex}
-              />
+              <>
+                <OptionImage
+                  key={option}
+                  cardData={cardData}
+                  selectedIndex={selectedIndex}
+                />
+                <OptionInfo
+                  cardData={cardData}
+                  setNewIndex={(index: number) => setNewIndex(index)}
+                  selectedIndex={selectedIndex}
+                />
+              </>
             ) : (
-              <OptionInfo
-                cardData={cardData}
-                setNewIndex={(index: number) => setNewIndex(index)}
-                selectedIndex={selectedIndex}
-              />
+              <Temp>옵션 선택 페이지는 수정 중 입니다.</Temp>
             )}
           </>
         ) : (
@@ -136,4 +135,10 @@ const Container = styled.div<{$option: number}>`
   display: flex;
   width: 100%;
   height: 100%;
+`;
+
+const Temp = styled.div`
+  width: 100%;
+  height: 100%;
+  ${flexCenter}
 `;

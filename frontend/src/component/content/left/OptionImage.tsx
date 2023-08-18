@@ -26,8 +26,10 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
     const prevImgBox = wrapperRef.current?.childNodes[
       prevRef.current
     ] as HTMLElement;
-    prevImgBox.style.display = '';
-    prevImgBox.style.zIndex = '';
+    if (prevImgBox) {
+      prevImgBox.style.display = '';
+      prevImgBox.style.zIndex = '';
+    }
   }
 
   if (imgBox instanceof HTMLElement) {

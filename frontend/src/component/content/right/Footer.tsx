@@ -54,8 +54,10 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
           onClick={() => {
             setIsSaved(true);
             if (tempOption) addOption(tempOption);
+            document.body.style.pointerEvents = 'none';
             setTimeout(() => {
               setOption(option + 1);
+              document.body.style.pointerEvents = '';
             }, 2500);
           }}
         >

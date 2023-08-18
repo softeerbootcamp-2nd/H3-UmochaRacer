@@ -26,7 +26,7 @@ function Top() {
           외부
         </ImageButton>
         <ImageButton
-          onClick={() => buttonClick('/image/innergrey1.png')}
+          onClick={() => buttonClick('/image/inner.png')}
           $background={'#F2F2F2'}
           $color={colors.Main_Hyundai_Blue}
         >

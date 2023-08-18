@@ -1,6 +1,7 @@
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import React from 'react';
 import Self from './pages/Self';
+import Guide from './pages/Guide';
 import Main from './pages/Main';
 import OptionProvider from './provider/optionProvider';
 import {ModalProvider} from './provider/modalProvider';
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/self" element={<Self />} />
+          <Route path="/guide" element={<Guide />} />
         </Routes>
       </BrowserRouter>
       <Modal />

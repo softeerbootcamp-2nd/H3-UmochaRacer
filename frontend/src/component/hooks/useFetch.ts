@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 interface FetchResult<T> {
   data: T | null;
@@ -14,8 +14,8 @@ function useFetch<T>(url: string): FetchResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
+    if (!url) return;
     async function fetchData() {
       try {
         const response = await fetch(import.meta.env.VITE_API_URL + url);
@@ -33,6 +33,6 @@ function useFetch<T>(url: string): FetchResult<T> {
     fetchData();
   }, [url]);
 
-  return { data, error, loading };
+  return {data, error, loading};
 }
 export default useFetch;

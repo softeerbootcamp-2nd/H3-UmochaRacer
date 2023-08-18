@@ -53,7 +53,7 @@ function OptionCardList({
     setNewIndex(index);
   };
   useEffect(() => {
-    scrollIntoSelected(ulRef, selectedIndex);
+    if (cardData.length > 0) scrollIntoSelected(ulRef, selectedIndex);
   }, [selectedIndex]);
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
