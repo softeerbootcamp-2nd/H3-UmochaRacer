@@ -89,6 +89,12 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         optionButtonListView.configure(with: optionInfoArray)
     }
 
+    func update(optionInfoArray: [OptionCardInfo]) {
+        guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
+            return
+        }
+        optionButtonListView.reloadOptionCards(with: optionInfoArray)
+    }
 }
 
 extension CarMakingCollectionViewCell {
