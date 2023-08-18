@@ -73,6 +73,10 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
                                                 font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
     }
 
+    func configure(bannerImageURL: URL?) {
+        optionImageView.loadCachedImage(of: bannerImageURL)
+    }
+
     func configure(optionInfoArray: [OptionCardInfo]) {
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
