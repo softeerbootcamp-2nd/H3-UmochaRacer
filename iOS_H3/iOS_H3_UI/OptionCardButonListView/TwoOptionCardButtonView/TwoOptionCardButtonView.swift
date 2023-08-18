@@ -19,7 +19,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Properties
 
-    private var selectedButtonIndex = 0
+    weak var delegate: OptionCardButtonListViewDelegate?
 
     // MARK: - LifeCycles
 
@@ -61,6 +61,10 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
             if cardInfos.count <= index { return }
             configureOptionCard(at: index, with: cardInfos[index])
         }
+    }
+
+    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+        configure(with: cardInfos)
     }
 }
 
