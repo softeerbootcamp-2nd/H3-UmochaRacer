@@ -95,19 +95,12 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         updateCollectionViewSnapshot(ofItem: info)
     }
 
+    func updateOptionCard(with info: [OptionCardInfo]) {
         let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
-        guard let section = Section(sectionIndex: indexPathOfCurrentStep.section) else {
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingCollectionViewCell else {
             return
         }
-
-        var sectionItems = snapshot.itemIdentifiers(inSection: section)
-        snapshot.deleteItems(sectionItems)
-
-        let currentItemIndex = indexPathOfCurrentStep.row
-        sectionItems[currentItemIndex] = info
-
-        snapshot.appendItems(sectionItems, toSection: section)
-        collectionViewDataSource.apply(snapshot)
+        cell.update(optionInfoArray: info)
     }
 }
 
