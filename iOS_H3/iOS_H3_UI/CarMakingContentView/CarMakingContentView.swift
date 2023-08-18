@@ -91,7 +91,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         currentStep -= 1
     }
 
-    func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
+    func configureCurrentStep(with info: CarMakingStepInfo) {
         updateCollectionViewSnapshot(ofItem: info)
     }
 
