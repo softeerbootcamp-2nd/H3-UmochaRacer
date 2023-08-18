@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 class CarMakingCollectionViewCell: UICollectionViewCell {
 
@@ -41,6 +42,8 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     private var bannerImagesOfOption: [URL?] = []
 
+    var optionDidSelected = PassthroughSubject<Int, Never>()
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
@@ -64,6 +67,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         optionImageView.image = nil
+        optionDidSelected = PassthroughSubject<Int, Never>()
     }
 
     // MARK: - Helpers
@@ -111,6 +115,7 @@ extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
         _ optionCardButtonListView: OptionCardButtonListViewable,
         didSelectOptionAt index: Int
     ) {
+        optionDidSelected.send(index)
         if optionCardButtonListView is TwoOptionCardButtonView {
             configure(bannerImageURL: bannerImagesOfOption[index])
         }

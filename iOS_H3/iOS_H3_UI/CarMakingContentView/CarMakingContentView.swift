@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Combine
 
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
+    func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -37,6 +39,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         collectionView.isScrollEnabled = false
         return collectionView
     }()
+
     private let carMakingProgressBar: CarMakingProgressBar = {
         let progressBar = CarMakingProgressBar()
         return progressBar
@@ -58,6 +61,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
             delegate?.carMakingContentView(stepDidChanged: currentStep)
         }
     }
+
+    private var cancellableOfCellByIndex = [Int: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -191,7 +196,7 @@ extension CarMakingContentView {
      func setupCollectionViewDataSource() {
          collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { (collectionView, indexPath, carMakingStepInfo)
+         ) { [weak self] (collectionView, indexPath, carMakingStepInfo)
                   -> UICollectionViewCell? in
              guard let section = Section(sectionIndex: indexPath.section),
                    let cell = collectionView.dequeueReusableCell(
@@ -201,9 +206,15 @@ extension CarMakingContentView {
                  return CarMakingCollectionViewCell()
              }
              cell.configure(carMakingStepInfo: carMakingStepInfo)
-            return cell
-        }
 
+             self?.cancellableOfCellByIndex[indexPath.row] = cell.optionDidSelected
+                 .sink { [weak self] optionIndex in
+                     guard let self else { return }
+                     delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
+                 }
+
+             return cell
+        }
     }
 
     func setupSnapshot() {
