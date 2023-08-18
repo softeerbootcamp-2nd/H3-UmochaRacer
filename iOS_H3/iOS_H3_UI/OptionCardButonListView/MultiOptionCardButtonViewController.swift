@@ -93,9 +93,22 @@ final class MultiOptionCardButtonViewController: UIViewController {
     }
 }
 
-extension MultiOptionCardButtonViewController: MultiOptionCardButtonViewDelegate {
-    func optionCardButtonDidTapped(index: Int) {
+// MARK: - OptionCardButtonListView Delegate
+
+extension MultiOptionCardButtonViewController: OptionCardButtonListViewDelegate {
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didSelectOptionAt index: Int
+    ) {
         cardInfos[index].isSelected.toggle()
         selfModeMultiOptionCardButtonView.configure(with: cardInfos)
+    }
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didDisplayOptionAt index: Int
+    ) {
+
     }
 }
