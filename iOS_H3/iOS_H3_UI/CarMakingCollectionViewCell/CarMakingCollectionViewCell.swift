@@ -65,6 +65,11 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     func configure(carMakingStepInfo: CarMakingStepInfo) {
         configure(carMakingStepTitle: carMakingStepInfo.step.title)
         configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
+
+        if !carMakingStepInfo.optionCardInfoArray.isEmpty {
+            let optionIndexToShowBanner = carMakingStepInfo.optionCardInfoArray.firstIndex { $0.isSelected } ?? 0
+            configure(bannerImageURL: carMakingStepInfo.optionCardInfoArray[optionIndexToShowBanner].bannerImageURL)
+        }
     }
 
     func configure(carMakingStepTitle: String) {
