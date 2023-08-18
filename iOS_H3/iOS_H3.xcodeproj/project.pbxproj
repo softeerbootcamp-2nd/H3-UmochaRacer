@@ -384,6 +384,23 @@
 			path = OptionCardButonListView;
 			sourceTree = "<group>";
 		};
+		473A83362A8F5BD400C4EED9 /* BottomModalView */ = {
+			isa = PBXGroup;
+			children = (
+				470096432A874A0D003711F2 /* BottomModalView.swift */,
+				470096452A876305003711F2 /* BottomModalViewController.swift */,
+			);
+			path = BottomModalView;
+			sourceTree = "<group>";
+		};
+		473A83372A8F5BDF00C4EED9 /* EstimateSummaryView */ = {
+			isa = PBXGroup;
+			children = (
+				470096492A8791FE003711F2 /* EstimateSummaryView.swift */,
+			);
+			path = EstimateSummaryView;
+			sourceTree = "<group>";
+		};
 		477620C62A7B8F5300D60B59 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,6 +727,8 @@
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
 			isa = PBXGroup;
 			children = (
+				473A83372A8F5BDF00C4EED9 /* EstimateSummaryView */,
+				473A83362A8F5BD400C4EED9 /* BottomModalView */,
 				5F5AE0C42A8C5F4C007A0E3C /* OptionListView */,
 				5F99F0612A8516FA00C38555 /* CarMakingContentView */,
 				5F6A82F22A887AE40025D5A4 /* OptionCategoryTabbar */,
@@ -725,9 +744,6 @@
 				5F6203712A7BC59600D09531 /* Assets.xcassets */,
 				5F6203732A7BC59600D09531 /* LaunchScreen.storyboard */,
 				5F6203762A7BC59600D09531 /* Info.plist */,
-				470096432A874A0D003711F2 /* BottomModalView.swift */,
-				470096452A876305003711F2 /* BottomModalViewController.swift */,
-				470096492A8791FE003711F2 /* EstimateSummaryView.swift */,
 			);
 			path = iOS_H3_UI;
 			sourceTree = "<group>";
@@ -1087,12 +1103,9 @@
 				5F60E4BB2A8B43FD00531462 /* CarInfoRepository.swift in Sources */,
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
-
 				4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */,
-
 				5F60E4AB2A8B405900531462 /* PowertrainResponse.swift in Sources */,
 				5F60E4B12A8B410800531462 /* ExteriorColorResponse.swift in Sources */,
-
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F60E4AD2A8B40CF00531462 /* DrivingSystemResponse.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
@@ -1102,12 +1115,8 @@
 				5F60E4B32A8B411900531462 /* InteriorColorResponse.swift in Sources */,
 				5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
-				4719180B2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
-
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
-
 				5F60E4AF2A8B40F400531462 /* BodyTypeResponse.swift in Sources */,
-
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
