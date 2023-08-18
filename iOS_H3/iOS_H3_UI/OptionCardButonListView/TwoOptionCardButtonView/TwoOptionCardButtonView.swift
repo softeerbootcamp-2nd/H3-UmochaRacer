@@ -73,8 +73,6 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 extension TwoOptionCardButtonView: OptionCardButtonDelegate {
 
     func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton) {
-        if let _ = optionCardButtons.firstIndex(of: optionCardButton) {
-        }
     }
 }
 
