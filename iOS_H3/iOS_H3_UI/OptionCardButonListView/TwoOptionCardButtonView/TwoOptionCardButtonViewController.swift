@@ -19,7 +19,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
 
     private let guideModeTwoOptionCardButtonView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .guideMode)
-        view.updateOptionCard(
+        view.configureOptionCard(
             at: 0,
             with: CarMakingContentMockData.mockOption[0][0]
         )
