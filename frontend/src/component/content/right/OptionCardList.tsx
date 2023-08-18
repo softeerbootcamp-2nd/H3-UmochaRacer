@@ -28,14 +28,12 @@ const scrollIntoSelected = (
     behavior: 'smooth',
     block: 'center',
   };
-
-  if (elem && elem.current) {
+  if (elem && elem.current && elem.current.childNodes[index]) {
     const scrollItem = elem.current.childNodes[index] as HTMLElement;
 
     if (elem.current.lastChild === scrollItem) {
       scrollBlock.block = 'end';
     }
-
     scrollItem.scrollIntoView(scrollBlock);
   }
 };
@@ -54,7 +52,7 @@ function OptionCardList({
   };
   useEffect(() => {
     if (cardData.length > 0) scrollIntoSelected(ulRef, selectedIndex);
-  }, [selectedIndex]);
+  }, [selectedIndex, cardData]);
 
   const cards: React.JSX.Element[] = cardData.map((elem, index) => (
     <OptionCard
