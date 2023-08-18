@@ -10,6 +10,7 @@ import UIKit
 class CarMakingCollectionViewCell: UICollectionViewCell {
 
     // MARK: - UI properties
+
     enum Constants {
         static let descriptionLabelLeadingMargin: CGFloat = 20.0
         static let optionImageViewBottomMargin: CGFloat = 15.0
@@ -36,13 +37,16 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     let optionButtonListView: UIView
 
+    // MARK: - Properites
+
+    private var bannerImagesOfOption: [URL?] = []
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
         optionButtonListView = TwoOptionCardButtonView()
         super.init(frame: frame)
         setupViews()
-
     }
 
     required init?(coder: NSCoder) {
@@ -54,6 +58,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     init(frame: CGRect = .zero, buttonListViewable: OptionCardButtonListViewable) {
         optionButtonListView = buttonListViewable
         super.init(frame: frame)
+        buttonListViewable.delegate = self
         setupViews()
     }
 
@@ -83,6 +88,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(optionInfoArray: [OptionCardInfo]) {
+        bannerImagesOfOption = optionInfoArray.map { $0.bannerImageURL }
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
@@ -94,6 +100,29 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
             return
         }
         optionButtonListView.reloadOptionCards(with: optionInfoArray)
+    }
+}
+
+// MARK: - OptionCardButtonListView Delegate
+
+extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didSelectOptionAt index: Int
+    ) {
+        if optionCardButtonListView is TwoOptionCardButtonView {
+            configure(bannerImageURL: bannerImagesOfOption[index])
+        }
+    }
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didDisplayOptionAt index: Int
+    ) {
+        if optionCardButtonListView is MultiOptionCardButtonView {
+            configure(bannerImageURL: bannerImagesOfOption[index])
+        }
     }
 }
 
