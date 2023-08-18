@@ -92,7 +92,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }
 
     func updateCurrentStepInfo(_ info: CarMakingStepInfo) {
-        var snapshot = collectionViewDataSource.snapshot()
+        updateCollectionViewSnapshot(ofItem: info)
+    }
 
         let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
         guard let section = Section(sectionIndex: indexPathOfCurrentStep.section) else {
@@ -120,6 +121,24 @@ extension CarMakingContentView {
     private func moveCollectionView(to index: Int) {
         let indexPath = Section.indexPath(for: index)
         collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+    }
+
+    private func updateCollectionViewSnapshot(ofItem info: CarMakingStepInfo) {
+        var snapshot = collectionViewDataSource.snapshot()
+
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let section = Section(sectionIndex: indexPathOfCurrentStep.section) else {
+            return
+        }
+
+        var sectionItems = snapshot.itemIdentifiers(inSection: section)
+        snapshot.deleteItems(sectionItems)
+
+        let currentItemIndex = indexPathOfCurrentStep.row
+        sectionItems[currentItemIndex] = info
+
+        snapshot.appendItems(sectionItems, toSection: section)
+        collectionViewDataSource.apply(snapshot)
     }
 }
 
@@ -211,7 +230,7 @@ extension CarMakingContentView {
 
 }
 
-// MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionView DelegateFlowLayout
 
 class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     let progressBarHeight = 26.0
