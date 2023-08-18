@@ -43,6 +43,8 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     weak var delegate: OptionCardButtonListViewDelegate?
 
+    private var willDisplayingCellIndexPath = IndexPath()
+
     // MARK: - Lifecycles
 
     init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
@@ -96,6 +98,29 @@ extension MultiOptionCardButtonView: OptionCardButtonDelegate {
     }
 }
 
+// MARK: - UICollectionView Delegate
+
+extension MultiOptionCardButtonView: UICollectionViewDelegate {
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        willDisplay cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        willDisplayingCellIndexPath = indexPath
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didEndDisplaying cell: UICollectionViewCell,
+        forItemAt indexPath: IndexPath
+    ) {
+        if willDisplayingCellIndexPath != indexPath {
+            delegate?.optionCardButtonListView(self, didDisplayOptionAt: willDisplayingCellIndexPath.row)
+        }
+    }
+}
+
 // MARK: - Setup CollectionView
 
 extension MultiOptionCardButtonView {
@@ -103,6 +128,7 @@ extension MultiOptionCardButtonView {
     private func setupOptionCardCollectionView() {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        optionCardCollectionView.delegate = self
         optionCardCollectionView.isScrollEnabled = true
         optionCardCollectionView.bounces = false
 
