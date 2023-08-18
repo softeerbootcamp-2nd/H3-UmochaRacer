@@ -5,8 +5,6 @@ import com.example.backend.domain.guide.dto.FinalEstimateResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -33,7 +31,7 @@ public class JYCarRecommendationService implements CarRecommendationService {
         if (field.equals("wheel"))
             return getRecommendWheelList(field, estimate);
         if (field.contains("color"))
-            return optionRecommendationHandler.findTopSalesCountOfColor(field, estimate.getGender(), estimate.getAge());
+            return optionRecommendationHandler.findTopSalesCountOfColorAndWheel(field, estimate.getGender(), estimate.getAge());
         return getRecommendBaseOptionList(field, estimate);
     }
 
@@ -42,7 +40,7 @@ public class JYCarRecommendationService implements CarRecommendationService {
         if(tagList.contains(1L) || tagList.contains(10L))
             return List.of(4L);
         if(tagList.contains(5L))
-            return optionRecommendationHandler.findTopSalesCount(field, estimate.getGender(), estimate.getAge());
+            return optionRecommendationHandler.findTopSalesCountOfColorAndWheel(field, estimate.getGender(), estimate.getAge());
         return List.of(1L);
     }
 
