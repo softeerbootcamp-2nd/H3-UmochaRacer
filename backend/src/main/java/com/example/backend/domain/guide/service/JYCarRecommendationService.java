@@ -33,7 +33,7 @@ public class JYCarRecommendationService implements CarRecommendationService {
         if (field.equals("wheel"))
             return getRecommendWheelList(field, estimate);
         if (field.contains("color"))
-            return optionRecommendationHandler.findTopSalesCount(field, estimate.getGender(), estimate.getAge());
+            return optionRecommendationHandler.findTopSalesCountOfColor(field, estimate.getGender(), estimate.getAge());
         return getRecommendBaseOptionList(field, estimate);
     }
 

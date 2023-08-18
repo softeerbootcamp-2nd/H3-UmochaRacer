@@ -28,4 +28,8 @@ public class JYOptionRecommendationHandler implements OptionRecommendationHandle
     public List<Long> findTopSalesCount(String category, Gender gender, int age) {
         return tagOptionRepository.findOptionIdByGenderAge(category, gender, age);
     }
+
+    public List<Long> findTopSalesCountOfColor(String category, Gender gender, int age) {
+        return tagOptionRepository.findColorIdByGenderAge(category, gender, age);
+    }
 }
