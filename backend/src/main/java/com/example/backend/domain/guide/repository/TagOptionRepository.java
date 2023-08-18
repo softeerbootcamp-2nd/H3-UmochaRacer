@@ -39,7 +39,7 @@ public class TagOptionRepository {
         return jdbcTemplate.query(query, getRowMapperOfField(category));
     }
 
-    public List<Long> findColorIdByGenderAge(String category, Gender gender, int age) {
+    public List<Long> findColorOrWheelIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM SALES s\n" +
                 "JOIN MODEL m on s.model_id = m.id WHERE m.trim_id = 1 AND\n" +

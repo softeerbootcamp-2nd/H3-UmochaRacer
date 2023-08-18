@@ -1,6 +1,5 @@
 package com.example.backend.domain.guide.service;
 
-import com.example.backend.domain.guide.dto.EstimateRequest;
 import com.example.backend.domain.guide.repository.TagOptionRepository;
 import com.example.backend.domain.sale.entity.enums.Gender;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +28,7 @@ public class JYOptionRecommendationHandler implements OptionRecommendationHandle
         return tagOptionRepository.findOptionIdByGenderAge(category, gender, age);
     }
 
-    public List<Long> findTopSalesCountOfColor(String category, Gender gender, int age) {
-        return tagOptionRepository.findColorIdByGenderAge(category, gender, age);
+    public List<Long> findTopSalesCountOfColorAndWheel(String category, Gender gender, int age) {
+        return tagOptionRepository.findColorOrWheelIdByGenderAge(category, gender, age);
     }
 }
