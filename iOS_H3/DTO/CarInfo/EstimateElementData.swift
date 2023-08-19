@@ -17,7 +17,7 @@ struct EstimateElementData: Decodable {
 extension EstimateElementData {
     func toDomain() -> EstimateSummaryElement {
         return EstimateSummaryElement(stepName: self.key ?? "",
-                                      selectedOption: self.key ?? "",
+                                      selectedOption: self.value ?? "",
                                       category: self.category ?? "",
                                       price: self.price ?? 0)
     }
