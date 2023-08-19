@@ -8,7 +8,7 @@
 import UIKit
 
 protocol OptionCardButtonDelegate: AnyObject {
-    func moreInfoButtonDidTapped()
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton)
 }
 
 class OptionCardButton: UIButton {
@@ -153,11 +153,11 @@ class OptionCardButton: UIButton {
         self.optionTitleLabel.text = optionTitle
         self.optionSubTitleLabel.text = optionSubTitle
         self.priceLabel.text = price
-        self.moreInfoButton.isHidden = !hasMoreInfo
+        showMoreInfoButton(hasMoreInfo)
         setupViews()
         addMoreInfoButtonTarget()
-        if let color = color { setColor(UIColor(urColor: color)) }
-        if let url = image { setImage(url: url) }
+        setColor(color)
+        setImage(url: image)
     }
 
     // MARK: - Helpers
@@ -170,20 +170,20 @@ class OptionCardButton: UIButton {
             self.optionTitleLabel.text = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle
             self.priceLabel.text = cardInfo.priceString
-            self.moreInfoButton.isHidden = !cardInfo.hasMoreInfo
+            showMoreInfoButton(cardInfo.hasMoreInfo)
             isSelected = cardInfo.isSelected
-            if let color = cardInfo.color { setColor(UIColor(urColor: color)) }
-            if let url = cardInfo.iconImageURL {
-                setImage(url: url)
-            }
+            setColor(cardInfo.color)
+            setImage(url: cardInfo.iconImageURL)
         }
 
         updateButtonUI()
     }
 
-    func setColor(_ color: UIColor) {
-        colorView.backgroundColor = color
-        colorView.isHidden = false
+    func setColor(_ color: URColor?) {
+        colorView.isHidden = color == nil ? true: false
+        if let color {
+            colorView.backgroundColor = UIColor(urColor: color)
+        }
     }
 
     func setOptionTitle(_ title: String) {
@@ -202,9 +202,15 @@ class OptionCardButton: UIButton {
         tagListView.addTags(tags)
     }
 
-    func setImage(url: URL) {
-        optionImageView.loadCachedImage(of: url)
-        optionImageView.isHidden = false
+    func setImage(url: URL?) {
+        optionImageView.isHidden = url == nil ? true: false
+        if let url {
+            optionImageView.loadCachedImage(of: url)
+        }
+    }
+
+    func showMoreInfoButton(_ isShow: Bool) {
+        moreInfoButton.isHidden = !isShow
     }
 
     func animateButton(title: String, description: String) {
@@ -374,6 +380,6 @@ extension OptionCardButton {
 
     @objc
     private func moreInfoButtonTapped() {
-        delegate?.moreInfoButtonDidTapped()
+        delegate?.optionCardButtonMoreInfoButtonDidTap(self)
     }
 }

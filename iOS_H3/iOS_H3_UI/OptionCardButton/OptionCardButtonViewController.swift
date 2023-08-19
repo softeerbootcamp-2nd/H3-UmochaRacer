@@ -32,7 +32,7 @@ class OptionCardButtonViewController: UIViewController {
     // 셀프모드 외장 색상 버튼
     lazy var guideModeOuterColorButton: OptionCardButton = {
         let button = OptionCardButton(mode: .guideMode)
-        button.setColor(.blue)
+        button.setColor(URColor(red: 255, green: 167, blue: 36))
         return button
     }()
 
@@ -61,10 +61,10 @@ class OptionCardButtonViewController: UIViewController {
         self.guideModeBasicButton.setPrice("+ 3,456,789원")
 
         // 이미지 변경하기
-        // self.selfModeInnerButton.setImage(UIImage(named: ""), for: .normal)
+//         self.selfModeInnerColorButton.setImage(UIImage(named: ""), for: .normal)
 
         // 컬러 변경하기
-        self.guideModeOuterColorButton.setColor(.black)
+        self.guideModeOuterColorButton.setColor(URColor(red: 0, green: 0, blue: 0))
         // 태그 추가하기
         self.guideModeBasicButton.addTags(["효율 89%", "배터리 95%"])
         self.guideModeOuterColorButton.addTags(["효율 89%", "배터리 95%"])
