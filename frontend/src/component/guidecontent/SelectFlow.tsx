@@ -1,14 +1,9 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
-import {
-  Body1_Medium,
-  Body1_Regular,
-  Body2_Medium,
-  Title1_Medium,
-  Title3_Regular,
-} from '@/style/fonts';
+import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import GridList from './selectflow/GridList';
+import CardList from './selectflow/CardList';
 
 function SelectFlow() {
   return (
@@ -53,7 +48,7 @@ function SelectFlow() {
         <Left.Button>선택완료</Left.Button>
       </FlowContainer.Left>
       <FlowContainer.Right>
-        <GridList />
+        <CardList />
       </FlowContainer.Right>
     </Wrapper>
   );
@@ -124,58 +119,5 @@ const Left = {
     color: ${colors.Hyundai_White};
     background: ${colors.Main_Hyundai_Blue};
     gap: 10px;
-  `,
-};
-
-const Right = {
-  Card: styled.div`
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 343px;
-    height: 60px;
-    padding: 20px;
-    border-radius: 6px;
-    border: 2px solid ${colors.Main_Hyundai_Blue};
-    background: ${colors.Hyundai_White};
-  `,
-
-  Category: styled.div`
-    ${Body2_Medium}
-  `,
-
-  Icon: styled.div`
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-  `,
-
-  GridBox: styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  `,
-
-  GridComment: styled.div`
-    ${Body1_Regular}
-  `,
-
-  Grid: styled.div`
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-  `,
-
-  GridCard: styled.div`
-    display: flex;
-    width: 166px;
-    height: 60px;
-    padding: 18px 18px 18px 20px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 6px;
-    border: 2px solid ${colors.Main_Hyundai_Blue};
-    background: ${colors.Hyundai_White};
-    flex-shrink: 0;
   `,
 };
