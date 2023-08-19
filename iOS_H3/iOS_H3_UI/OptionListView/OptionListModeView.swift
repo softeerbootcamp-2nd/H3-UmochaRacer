@@ -56,6 +56,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
     private var collectionView: UICollectionView!
 
     // MARK: - Properties
+
     private let carMakingMode: CarMakingMode
 
     private var dataSource: CollectionViewDiffableDataSource!
@@ -87,6 +88,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
     }
 
     // MARK: - Helpers
+
     func configure(with cardInfos: [OptionCardInfo]) {
         updateSnapshot(item: cardInfos)
     }
@@ -101,6 +103,8 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
         }
     }
 }
+
+// MARK: - Setup
 
 extension OptionListModeView {
     private func setupViews() {
