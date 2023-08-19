@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import styled, {keyframes} from 'styled-components';
+import styled, {css} from 'styled-components';
 import {Body1_Regular, Body2_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {flexCenter} from '@/style/common';
@@ -17,67 +17,109 @@ const Circle = () => {
     </svg>
   );
 };
-function GirdList() {
-  const [selectNum, setSelectNum] = useState<number>(0);
 
-  return (
-    <Wrapper>
-      <Grid.Container>
-        <Grid.Comment>내 차는 이런 부분에서 강했으면 좋겠어요</Grid.Comment>
-        <Grid.GridBox>
-          <Grid.GridCard>
-            <Card.Option>주행력</Card.Option>
-            <Card.IconBox $number={selectNum}>{Circle()}</Card.IconBox>
-          </Grid.GridCard>
-          <Grid.GridCard>
-            <Card.Option>소음</Card.Option>
-            <Card.IconBox $number={selectNum}>{Circle()}</Card.IconBox>
-          </Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-        </Grid.GridBox>
-      </Grid.Container>
-      <Grid.Container>
-        <Grid.Comment>나는 차를 탈 때 이런게 중요해요</Grid.Comment>
-        <Grid.GridBox>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-        </Grid.GridBox>
-      </Grid.Container>
-      <Grid.Container>
-        <Grid.Comment>나는 차를 이렇게 활용하고 싶어요</Grid.Comment>
-        <Grid.GridBox>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-          <Grid.GridCard></Grid.GridCard>
-        </Grid.GridBox>
-      </Grid.Container>
-    </Wrapper>
+interface GridData {
+  comment: string;
+  category: string[];
+}
+
+const GridData: GridData[] = [
+  {
+    comment: '내 차는 이런 부분에서 강했으면 좋겠어요',
+    category: ['주행력', '소음', '효율', '파워'],
+  },
+  {
+    comment: '나는 차를 탈 때 이런게 중요해요',
+    category: ['디자인', '차량보호', '온도 조절', '건강', '신기술', '안전'],
+  },
+  {comment: '나는 차를 이렇게 활용하고 싶어요', category: ['차박', '가족여행']},
+];
+
+function GirdList() {
+  const [selectArr, setSelectArr] = useState<string[]>([]);
+
+  const handleClickCard = (e: React.MouseEvent) => {
+    let newArray;
+    const target = e.currentTarget as HTMLDivElement;
+    const firstChild = target.firstChild as HTMLElement;
+
+    const selectedIndex = selectArr.indexOf(firstChild.innerHTML);
+
+    if (selectedIndex > -1) {
+      newArray = selectArr.filter((elem) => elem !== firstChild.innerHTML);
+    } else {
+      newArray = selectArr.concat([firstChild.innerHTML]);
+    }
+
+    setSelectArr(newArray);
+  };
+
+  const GridList: React.JSX.Element[] = GridData.map(
+    (gridData: GridData, gridIndex: number) => {
+      return (
+        <Grid.Container key={gridIndex}>
+          <Grid.Comment>{gridData.comment}</Grid.Comment>
+          <Grid.GridBox>
+            {gridData.category.map(
+              (categoryData: string, categoryIndex: number) => {
+                const selectedIndex = selectArr.indexOf(categoryData);
+
+                return (
+                  <Grid.GridCard
+                    key={categoryIndex}
+                    onClick={handleClickCard}
+                    $isSelected={selectedIndex > -1}
+                  >
+                    <Card.Option>{categoryData}</Card.Option>
+                    <Card.IconBox
+                      $number={selectArr.length}
+                      $selectedIndex={selectedIndex}
+                    >
+                      {Circle()}
+                    </Card.IconBox>
+                  </Grid.GridCard>
+                );
+              },
+            )}
+          </Grid.GridBox>
+        </Grid.Container>
+      );
+    },
   );
+
+  return <Wrapper $isSelectedDone={selectArr.length === 3}>{GridList}</Wrapper>;
 }
 
 export default GirdList;
 
-const circleAni = keyframes`
-  0% {
-    stroke: #aeb1b7;
-    fill: transparent;
-  }
-  100% {
-    stroke: none;
-    fill: #0e2b5c;
-  }
-`;
-
-const Wrapper = styled.ul`
+const Wrapper = styled.ul<{$isSelectedDone: boolean}>`
   display: flex;
   flex-direction: column;
   gap: 36px;
+`;
+
+const SelectedCard = css`
+  background: ${colors.Hyundai_White};
+  border: 2px solid ${colors.Main_Hyundai_Blue};
+  div {
+    color: #212121;
+  }
+
+  :last-child::before {
+    opacity: 1;
+  }
+`;
+
+const defaultCard = css`
+  background: ${colors.Cool_Grey_001};
+  border: 2px solid transparent;
+  div {
+    color: ${colors.Cool_Grey_003};
+  }
+
+  :last-child::before {
+    opacity: 0;
+  }
 `;
 
 const Grid = {
@@ -98,7 +140,7 @@ const Grid = {
     gap: 12px;
   `,
 
-  GridCard: styled.div`
+  GridCard: styled.div<{$isSelected: boolean}>`
     display: flex;
     width: 166px;
     height: 60px;
@@ -106,41 +148,36 @@ const Grid = {
     justify-content: space-between;
     align-items: center;
     border-radius: 6px;
-    border: 2px solid transparent;
-    background: ${colors.Cool_Grey_001};
     transition: 0.5s;
-
+    ${({$isSelected}) =>
+      $isSelected
+        ? css`
+            ${SelectedCard}
+          `
+        : defaultCard}
     circle {
       r: 11.5;
       stroke: #aeb1b7;
       transition: all 0.5s;
     }
 
-    &:hover {
-      background: ${colors.Hyundai_White};
-      border: 2px solid ${colors.Main_Hyundai_Blue};
-      div {
-        color: #212121;
-      }
-      circle {
-        animation: ${circleAni} 0.5s forwards;
-      }
-
-      :last-child::before {
-        opacity: 1;
-      }
-    }
+    ${({$isSelected}) =>
+      !$isSelected &&
+      css`
+        &:hover {
+          ${SelectedCard}
+        }
+      `}
   `,
 };
 
 const Card = {
   Option: styled.div`
     ${Body1_Regular}
-    color: ${colors.Cool_Grey_003};
     transition: 0.5s;
   `,
 
-  IconBox: styled.div<{$number: number}>`
+  IconBox: styled.div<{$number: number; $selectedIndex: number}>`
     position: relative;
     width: 24px;
     height: 24px;
@@ -149,11 +186,15 @@ const Card = {
       ${Body2_Regular}
       ${flexCenter}
       position: absolute;
-      content: '${({$number}) => $number + 1}';
+      content: '${({$number, $selectedIndex}) =>
+        $selectedIndex > -1 ? $selectedIndex + 1 : $number + 1}';
       width: 100%;
       height: 100%;
+      border-radius: 100%;
       color: ${colors.Hyundai_White};
+      background: ${colors.Main_Hyundai_Blue};
       opacity: 0;
+      transition: 0.5s;
     }
   `,
 };
