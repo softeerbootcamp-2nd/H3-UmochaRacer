@@ -1,3 +1,5 @@
+import React from 'react';
+import styled, {css} from 'styled-components';
 import {
   Body1_Medium,
   Body1_Regular,
@@ -6,8 +8,7 @@ import {
   Title3_Regular,
 } from '@/style/fonts';
 import {colors} from '@/style/theme';
-import React from 'react';
-import styled, {css} from 'styled-components';
+import GridList from './selectflow/GridList';
 
 function SelectFlow() {
   return (
@@ -52,74 +53,7 @@ function SelectFlow() {
         <Left.Button>선택완료</Left.Button>
       </FlowContainer.Left>
       <FlowContainer.Right>
-        <Right.GridBox>
-          <Right.GridComment>
-            내 차는 이런 부분에서 강했으면 좋겠어요
-          </Right.GridComment>
-          <Right.Grid>
-            <Right.GridCard>
-              <Right.Category>차박</Right.Category>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle cx="12" cy="12" r="11.5" stroke="#AEB1B7" />
-              </svg>
-            </Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-          </Right.Grid>
-        </Right.GridBox>
-        <Right.GridBox>
-          <Right.GridComment>
-            내 차는 이런 부분에서 강했으면 좋겠어요
-          </Right.GridComment>
-          <Right.Grid>
-            <Right.GridCard>
-              <Right.Category>차박</Right.Category>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle cx="12" cy="12" r="11.5" stroke="#AEB1B7" />
-              </svg>
-            </Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-          </Right.Grid>
-        </Right.GridBox>
-        <Right.GridBox>
-          <Right.GridComment>
-            내 차는 이런 부분에서 강했으면 좋겠어요
-          </Right.GridComment>
-          <Right.Grid>
-            <Right.GridCard>
-              <Right.Category>차박</Right.Category>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle cx="12" cy="12" r="11.5" stroke="#AEB1B7" />
-              </svg>
-            </Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-            <Right.GridCard></Right.GridCard>
-          </Right.Grid>
-        </Right.GridBox>
+        <GridList />
       </FlowContainer.Right>
     </Wrapper>
   );
