@@ -25,7 +25,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-    func publisherForStep(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>? {
+    private func publisherForStep(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>? {
         switch step {
         case .powertrain:
             return carInfoRepository.fetchPowertrain(model: "asdf", type: "타입명")
