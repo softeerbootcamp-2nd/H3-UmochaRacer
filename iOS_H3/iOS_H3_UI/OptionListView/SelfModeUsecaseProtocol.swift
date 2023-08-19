@@ -6,12 +6,17 @@
 //
 
 import Combine
-import Foundation
+
+enum SelfModeUsecaseError: Error {
+    case networkError
+    case conversionError
+    case invalidStep
+}
 
 protocol SelfModeUsecaseProtocol {
     func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never>
 
-    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never>
+    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
 
     func updateEstimateSummary(step: CarMakingStep,
                                selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never>
