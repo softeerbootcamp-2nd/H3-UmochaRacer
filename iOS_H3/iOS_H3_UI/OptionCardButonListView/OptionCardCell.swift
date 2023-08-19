@@ -66,6 +66,18 @@ final class OptionCardCell: UICollectionViewCell {
     func configure(carMakingMode: CarMakingMode, info: OptionCardInfo) {
         optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info)
     }
+
+    func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        if optionCardButton.isSelected {
+            optionCardButton.animateButton(
+                title: title,
+                description: description,
+                completion: completion
+            )
+        } else {
+            completion?()
+        }
+     }
 }
 
 extension OptionCardCell {
@@ -94,5 +106,6 @@ extension OptionCardCell {
         optionCardButton.setColor(nil)
         optionCardButton.setImage(url: nil)
         optionCardButton.showMoreInfoButton(false)
+        optionCardButton.resetAnimatedView()
     }
 }
