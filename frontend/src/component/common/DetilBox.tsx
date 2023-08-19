@@ -1,56 +1,68 @@
 import {colors} from '@/style/theme';
-import React, {useContext, useRef} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import {getCategory} from '../util/getCategory';
-import useFetch from '../hooks/useFetch';
 import {Label2_Regular} from '@/style/fonts';
 import {OptionContext} from '@/provider/optionProvider';
+import {fetchData} from '@/api/fetchData';
 
 interface Info {
   title: string;
   description: string;
 }
-interface DeatailData {
+interface DetailData {
   title: string;
   description: string;
   info?: string;
 }
 
-interface Props {
+interface DetailBoxProps {
   isOpen: boolean;
   id: number;
+  isHovered: boolean;
 }
-
-function DetailBox({isOpen, id}: Props) {
+function DetailBox({isOpen, id, isHovered}: DetailBoxProps) {
   const {option} = useContext(OptionContext);
+  const [data, setData] = useState<DetailData | null>(null);
+  const [cache, setCache] = useState<DetailData | null>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const categoryName = getCategory(option);
-  const fetchedDetails = useFetch<DeatailData>(`/detail/${categoryName}/${id}`);
+  console.log('TEST');
+  useEffect(() => {
+    if (isHovered && !cache) {
+      const endpoint = `/detail/${categoryName}/${id}`;
+      fetchData(endpoint)
+        .then((fetchedData) => {
+          setData(fetchedData);
+          setCache(fetchedData);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  }, [isHovered, categoryName, id, cache]);
+
+  const displayData = cache || data;
+
   let info: React.JSX.Element[] = [];
-  if (!fetchedDetails.data) return;
-  if (fetchedDetails.data?.info) {
-    info = JSON.parse(fetchedDetails.data?.info).map(
-      (elem: Info, index: number) => {
-        return (
-          <Info key={index}>
-            <InfoTitle>{elem.title}</InfoTitle>
-            <InfoDescription>{elem.description}</InfoDescription>
-          </Info>
-        );
-      },
-    );
+  if (displayData?.info) {
+    info = JSON.parse(displayData?.info).map((elem: Info, index: number) => (
+      <Info key={index}>
+        <InfoTitle>{elem.title}</InfoTitle>
+        <InfoDescription>{elem.description}</InfoDescription>
+      </Info>
+    ));
   }
 
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
-        <DescriptionBox>{fetchedDetails.data?.description}</DescriptionBox>
-        {fetchedDetails.data?.info && info && <InfoBox>{info}</InfoBox>}
+        <DescriptionBox>{displayData?.description}</DescriptionBox>
+        {displayData?.info && <InfoBox>{info}</InfoBox>}
       </DetailContent>
     </Wrapper>
   );
 }
-
 export default DetailBox;
 
 const Wrapper = styled.div<{$isOpen: boolean; $height?: number}>`

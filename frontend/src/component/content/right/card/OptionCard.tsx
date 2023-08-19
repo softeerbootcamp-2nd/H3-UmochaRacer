@@ -59,7 +59,7 @@ const hasDetail = (option: number) => {
 function OptionCard({selected, onClick, data, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false);
   const {option} = useContext(OptionContext);
-
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -106,6 +106,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           <DetailBox
             isOpen={toggle && selected && !isSaved}
             id={data.id}
+            isHovered={isHovered}
           ></DetailBox>
         )}
 
@@ -113,11 +114,16 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
 
           {hasDetail(option) ? (
-            <DetailToggle
-              onClick={clickedToggle}
-              opened={toggle && selected && !isSaved}
-              selected={selected}
-            ></DetailToggle>
+            <div
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+            >
+              <DetailToggle
+                onClick={clickedToggle}
+                opened={toggle && selected && !isSaved}
+                selected={selected}
+              />
+            </div>
           ) : (
             ''
           )}
