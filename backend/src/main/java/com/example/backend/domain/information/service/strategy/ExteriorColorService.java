@@ -7,10 +7,12 @@ import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.repository.ExteriorColorRepository;
+import com.example.backend.domain.information.model.option.entity.Bodytype;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +25,13 @@ public class ExteriorColorService implements InformationStrategy {
     public List<CommonResponse> findAll() {
         List<ExteriorColor> all = exteriorColorRepository.findAllLimit();
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public CommonResponse findInformationById(long id) {
+        Optional<ExteriorColor> target = exteriorColorRepository.findById(id);
+        if(target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
+        return informationMapper.map(target.get());
     }
 
     @Override

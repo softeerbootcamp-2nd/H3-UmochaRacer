@@ -5,12 +5,14 @@ import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.CommentResponse;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
+import com.example.backend.domain.information.model.option.entity.Bodytype;
 import com.example.backend.domain.information.model.option.entity.DrivingSystem;
 import com.example.backend.domain.information.model.option.repository.DrivingSystemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +25,13 @@ public class DrivingSystemService implements InformationStrategy {
     public List<CommonResponse> findAll() {
         List<DrivingSystem> all = (List<DrivingSystem>) repository.findAll();
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public CommonResponse findInformationById(long id) {
+        Optional<DrivingSystem> target = repository.findById(id);
+        if(target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
+        return informationMapper.map(target.get());
     }
 
     @Override

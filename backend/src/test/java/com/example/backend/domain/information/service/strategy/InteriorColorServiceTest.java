@@ -5,6 +5,7 @@ import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.car.entity.InteriorColor;
 import com.example.backend.domain.information.model.car.repository.InteriorColorRepository;
+import com.example.backend.domain.information.service.InteriorColorService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

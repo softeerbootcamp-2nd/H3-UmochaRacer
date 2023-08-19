@@ -13,6 +13,7 @@ public enum ResultCode {
 
     NO_COMMENT_EXIST_FOR_ID(3001, HttpStatus.BAD_REQUEST, "option type과 id에 해당하는 커멘트가 없습니다."),
     NO_DETAIL_EXIST_FOR_ID(3002, HttpStatus.BAD_REQUEST, "해당하는 id의 상세 정보가 존재하지 않습니다."),
+    NO_CAR_INFORMATION_WITH_ID(3003, HttpStatus.BAD_REQUEST, "id에 해당하는 자동차 부품 정보가 없습니다."),
 
     PAGE_NOT_FOUND(4101, HttpStatus.BAD_REQUEST, "페이지 정보를 정확히 입력해 주세요."),
     PAGE_SIZE_ERROR(4102, HttpStatus.BAD_REQUEST, "페이지 사이즈 정보를 정확히 입력해 주세요."),

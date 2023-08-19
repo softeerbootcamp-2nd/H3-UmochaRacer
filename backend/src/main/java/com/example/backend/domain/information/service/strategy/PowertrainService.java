@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -23,6 +24,13 @@ public class PowertrainService implements InformationStrategy {
     public List<CommonResponse> findAll() {
         List<Powertrain> all = (List<Powertrain>) powertrainRepository.findAll();
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
+    }
+
+    @Override
+    public CommonResponse findInformationById(long id) {
+        Optional<Powertrain> target = powertrainRepository.findById(id);
+        if(target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
+        return informationMapper.map(target.get());
     }
 
     @Override
