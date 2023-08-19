@@ -10,7 +10,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/v1/**")
-                .allowedOrigins("*")
+                .allowedOrigins("http://umocha-racer.team/")
                 .allowedMethods("GET","POST")
                 .allowedHeaders("*")
                 .maxAge(3600);
