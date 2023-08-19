@@ -62,7 +62,7 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
-    private var cancellableOfCellByIndex = [Int: AnyCancellable]()
+    private var optionSelectCancellableByIndex = [Int: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -229,16 +229,24 @@ extension CarMakingContentView {
                    ) as? CarMakingCollectionViewCell else {
                  return CarMakingCollectionViewCell()
              }
-             cell.configure(carMakingStepInfo: carMakingStepInfo)
 
-             self?.cancellableOfCellByIndex[indexPath.row] = cell.optionDidSelected
-                 .sink { [weak self] optionIndex in
-                     guard let self else { return }
-                     delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
-                 }
+             cell.configure(carMakingStepInfo: carMakingStepInfo)
+             self?.subscribeCellEvent(of: cell, indexPath: indexPath)
 
              return cell
         }
+    }
+
+    private func subscribeCellEvent(of cell: CarMakingCollectionViewCell, indexPath: IndexPath) {
+        subscribe(optionSelection: cell.optionDidSelected, stepIndex: indexPath.row)
+    }
+
+    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, stepIndex: Int) {
+        optionSelectCancellableByIndex[stepIndex] = optionSelection
+            .sink { [weak self] optionIndex in
+                guard let self else { return }
+                delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
+            }
     }
 
     func setupSnapshot() {
