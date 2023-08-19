@@ -83,6 +83,10 @@ final class CarMakingViewModel {
 
     private func requestCurrentStepInfo(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
         return selfModeUsecase.fetchOptionInfo(step: step)
+            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
+                return Just(CarMakingStepInfo(step: step))
+                    .eraseToAnyPublisher()
+            }
             .eraseToAnyPublisher()
     }
 
