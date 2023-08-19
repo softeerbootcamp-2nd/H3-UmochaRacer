@@ -17,6 +17,8 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         static let listModeButtonTrailingOffset = 16.0
         static let listModeWidth = 20.0
         static let listModeHeight = 20.0
+        static let categoryTabBarTopOffset = 8.0
+        static let categoryTabBarHeight = 32.0
     }
 
     // MARK: - UI properties
@@ -24,6 +26,10 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     private let selectedOptionCountLabel = UILabel()
 
     private let listModeButton = UIButton()
+
+    private let listModeView = OptionListModeView(carMakingMode: .selfMode)
+
+    private let categoryTabBar = OptionCategoryTabBar()
 
     // MARK: - Lifecycles
 
@@ -43,9 +49,15 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     // MARK: - Helpers
 
+    override func configure(optionInfoArray: [OptionCardInfo]) {
+        super.configure(optionInfoArray: optionInfoArray)
+        listModeView.configure(with: optionInfoArray)
+    }
+
     override func update(optionInfoArray: [OptionCardInfo]) {
         super.update(optionInfoArray: optionInfoArray)
         updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
+        listModeView.reloadOptionCards(with: optionInfoArray)
     }
 
     private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
@@ -54,11 +66,30 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     }
 }
 
+// MARK: - OptionListModeView Delegate
+
+extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
+    func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView) {
+    }
+}
+
+// MARK: - OptionCategoryTabBar Delegate
+
+extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
+    func tabBarButtonDidTapped(didSelectItemAt index: Int) {
+        print("tabbar Tap: \(index)")
+    }
+}
+
+// MARK: - Setup
+
 extension CarMakingOptionSelectStepCell {
 
     private func setupProperties() {
         setupSelectedOptionCountLabel()
         setupListModeButton()
+        setupListModeView()
+        setupCategoryTabBar()
     }
 
     private func setupViews() {
@@ -76,11 +107,29 @@ extension CarMakingOptionSelectStepCell {
     private func setupListModeButton() {
         listModeButton.setImage(UIImage(named: "list_mode_button"), for: .normal)
         listModeButton.tintColor = .black
+        listModeButton.addTarget(self, action: #selector(listModeButtonDidTap), for: .touchUpInside)
         listModeButton.translatesAutoresizingMaskIntoConstraints = false
     }
 
+    private func setupListModeView() {
+        listModeView.translatesAutoresizingMaskIntoConstraints = false
+        listModeView.isHidden = true
+        listModeView.backgroundColor = .white
+        listModeView.delegate = self
+        listModeView.listModeViewDelegate = self
+    }
+
+    private func setupCategoryTabBar() {
+        categoryTabBar.translatesAutoresizingMaskIntoConstraints = false
+        categoryTabBar.tabBarDelegate = self
+    }
+
+    @objc
+    private func listModeButtonDidTap() {
+    }
+
     private func addSubviews() {
-        [selectedOptionCountLabel, listModeButton]
+        [selectedOptionCountLabel, listModeButton, listModeView, categoryTabBar]
             .forEach {
                 contentView.addSubview($0)
             }
@@ -89,6 +138,8 @@ extension CarMakingOptionSelectStepCell {
     private func setupConstraints() {
         setupSelectedOptionCountLabelConstraints()
         setupListModeButtonConstraints()
+        setupListModeViewConstraints()
+        setupCategoryTabBarConstraints()
     }
 
     private func setupSelectedOptionCountLabelConstraints() {
@@ -110,6 +161,27 @@ extension CarMakingOptionSelectStepCell {
             ),
             listModeButton.widthAnchor.constraint(equalToConstant: Constants.listModeWidth),
             listModeButton.heightAnchor.constraint(equalToConstant: Constants.listModeHeight)
+        ])
+    }
+
+    private func setupListModeViewConstraints() {
+        NSLayoutConstraint.activate([
+            listModeView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            listModeView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            listModeView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            listModeView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
+
+    private func setupCategoryTabBarConstraints() {
+        NSLayoutConstraint.activate([
+            categoryTabBar.topAnchor.constraint(
+                equalTo: contentView.topAnchor,
+                constant: Constants.categoryTabBarTopOffset
+            ),
+            categoryTabBar.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            categoryTabBar.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            categoryTabBar.heightAnchor.constraint(equalToConstant: Constants.categoryTabBarHeight)
         ])
     }
 }
