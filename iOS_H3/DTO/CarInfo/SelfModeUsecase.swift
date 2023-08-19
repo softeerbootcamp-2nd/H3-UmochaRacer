@@ -25,27 +25,30 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
-        let publisher: AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
-
+    func publisherForStep(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>? {
         switch step {
         case .powertrain:
-            publisher = carInfoRepository.fetchPowertrain(model: "asdf", type: "타입명")
+            return carInfoRepository.fetchPowertrain(model: "asdf", type: "타입명")
         case .driveMethod:
-            publisher = carInfoRepository.fetchDrivingSystem()
+            return carInfoRepository.fetchDrivingSystem()
         case .bodyType:
-            publisher = carInfoRepository.fetchBodyType()
+            return carInfoRepository.fetchBodyType()
         case .externalColor:
-            publisher = carInfoRepository.fetchExteriorColor()
+            return carInfoRepository.fetchExteriorColor()
         case .internalColor:
-            publisher = carInfoRepository.fetchInteriorColor()
+            return carInfoRepository.fetchInteriorColor()
         case .wheelSelection:
-            publisher = carInfoRepository.fetchWheel()
+            return carInfoRepository.fetchWheel()
         case .optionSelection:
-            publisher = carInfoRepository.fetchAdditionalOption(category: "")
+            return carInfoRepository.fetchAdditionalOption(category: "")
         default:
-            return Fail(error: SelfModeUsecaseError.invalidStep)
-                        .eraseToAnyPublisher()
+            return nil
+        }
+    }
+
+    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        guard let publisher = publisherForStep(step) else {
+            return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
         }
 
         return publisher
