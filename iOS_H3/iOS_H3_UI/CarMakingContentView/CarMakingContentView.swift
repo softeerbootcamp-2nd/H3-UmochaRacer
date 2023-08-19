@@ -86,9 +86,14 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Helpers
 
-    func moveNextStep() {
+    func moveNextStep(title: String, description: String) {
         guard currentStep < CarMakingStep.allCases.count - 1 else { return }
-        currentStep += 1
+        let indexPath = Section.indexPath(for: currentStep)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CarMakingCollectionViewCell {
+            cell.playFeedbackAnimation(title: title, description: description, completion: {[weak self] in
+                self?.currentStep += 1
+            })
+        }
     }
 
     func movePrevStep() {
