@@ -47,6 +47,11 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         setupViews()
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        listModeView.isHidden = true
+    }
+
     // MARK: - Helpers
 
     override func configure(optionInfoArray: [OptionCardInfo]) {
@@ -64,12 +69,19 @@ class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         let selectedOptionCount = optionInfoArray.filter { $0.isSelected }.count
         selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(selectedOptionCount)"
     }
+
+    private func showListModeView(isHidden: Bool) {
+        UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
+            self?.listModeView.isHidden = isHidden
+        })
+    }
 }
 
 // MARK: - OptionListModeView Delegate
 
 extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
     func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView) {
+        showListModeView(isHidden: true)
     }
 }
 
@@ -126,6 +138,7 @@ extension CarMakingOptionSelectStepCell {
 
     @objc
     private func listModeButtonDidTap() {
+        showListModeView(isHidden: false)
     }
 
     private func addSubviews() {
