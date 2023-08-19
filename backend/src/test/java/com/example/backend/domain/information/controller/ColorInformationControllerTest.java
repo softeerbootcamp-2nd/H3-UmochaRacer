@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @DisplayName("Exterior/Interior Color Controller Test")
-public class ColorInformationControllerTest extends AbstractRestDocsTest {
+class ColorInformationControllerTest extends AbstractRestDocsTest {
     @Mock
     private InformationStrategy strategyFactory;
 

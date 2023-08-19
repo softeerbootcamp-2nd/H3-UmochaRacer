@@ -47,7 +47,8 @@ public class BodytypeService implements InformationStrategy {
 
     @Override
     public Long findDetailId(long id) {
-        return bodytypeRepository.findDetailIdById(id);
+        return bodytypeRepository.findDetailIdById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID));
     }
 
 }
