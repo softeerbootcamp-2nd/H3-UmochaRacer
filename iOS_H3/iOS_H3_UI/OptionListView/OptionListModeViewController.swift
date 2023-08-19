@@ -80,11 +80,17 @@ extension OptionListModeViewController: OptionListModeViewDelegate {
 }
 
 extension OptionListModeViewController: OptionCardButtonListViewDelegate {
-    func optionCardButtonListView(_ optionCardButtonListView: OptionCardButtonListViewable, didSelectOptionAt index: Int) {
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didSelectOptionAt index: Int
+    ) {
         cardInfos[index].isSelected.toggle()
         selfModeOptionModeListView.configure(with: cardInfos)
     }
-    
-    func optionCardButtonListView(_ optionCardButtonListView: OptionCardButtonListViewable, didDisplayOptionAt index: Int) {
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didDisplayOptionAt index: Int
+    ) {
     }
 }
