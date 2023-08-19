@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
+final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     static let identifier = "CarMakingOptionSelectStepCell"
 
