@@ -213,6 +213,8 @@ extension CarMakingContentView {
                                 forCellWithReuseIdentifier: CarMakingTwoOptionCell.identifier)
         collectionView.register(CarMakingMultipleOptionCell.self,
                                 forCellWithReuseIdentifier: CarMakingMultipleOptionCell.identifier)
+        collectionView.register(CarMakingOptionSelectStepCell.self,
+                                forCellWithReuseIdentifier: CarMakingOptionSelectStepCell.identifier)
     }
 
      func setupCollectionViewDataSource() {
