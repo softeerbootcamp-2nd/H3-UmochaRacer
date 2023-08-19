@@ -46,6 +46,7 @@ final class OptionListModeViewController: UIViewController {
 
     private func setupDelegate() {
         selfModeOptionModeListView.delegate = self
+        selfModeOptionModeListView.listModeViewDelegate = self
     }
 
     private func setupViews() {
@@ -73,12 +74,17 @@ final class OptionListModeViewController: UIViewController {
 }
 
 extension OptionListModeViewController: OptionListModeViewDelegate {
-    func optionListModeView(with: OptionListModeView, didSelectedIndex: Int) {
-        cardInfos[didSelectedIndex].isSelected.toggle()
+    func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView) {
+        self.dismiss(animated: true)
+    }
+}
+
+extension OptionListModeViewController: OptionCardButtonListViewDelegate {
+    func optionCardButtonListView(_ optionCardButtonListView: OptionCardButtonListViewable, didSelectOptionAt index: Int) {
+        cardInfos[index].isSelected.toggle()
         selfModeOptionModeListView.configure(with: cardInfos)
     }
-
-    func optionListModeViewDidTapImageModeButton(with: OptionListModeView) {
-        self.dismiss(animated: true)
+    
+    func optionCardButtonListView(_ optionCardButtonListView: OptionCardButtonListViewable, didDisplayOptionAt index: Int) {
     }
 }
