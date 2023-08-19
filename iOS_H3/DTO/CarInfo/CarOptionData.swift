@@ -7,6 +7,26 @@
 
 import Foundation
 
+enum CarOptionToEntityError: LocalizedError {
+    case missingID
+    case missingName
+    case missingTitle
+    case missingSubTitle
+
+    var errorDescription: String? {
+        switch self {
+        case .missingID:
+            return "ID 값이 없습니다."
+        case .missingName:
+            return "이름 값이 없습니다."
+        case .missingTitle:
+            return "제목 값이 없습니다."
+        case .missingSubTitle:
+            return "부제목 값이 없습니다."
+        }
+    }
+}
+
 struct CarOptionData: Decodable {
     let id: Int?
     let name: String?
@@ -20,7 +40,7 @@ struct CarOptionData: Decodable {
 }
 
 extension CarOptionData {
-    func toDomain() -> OptionCardInfo {
+    func toDomain() throws -> OptionCardInfo {
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
         let iconImageURL = URL(string: self.iconSrc ?? "")
         let color = self.colorCode.flatMap { URColor(hex: $0) }
