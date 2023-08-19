@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
@@ -31,6 +32,10 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     private let categoryTabBar = OptionCategoryTabBar()
 
+    // MARK: - Properties
+
+    var optionCategoryTapSubject = PassthroughSubject<Int, Never>()
+
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
@@ -50,6 +55,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         listModeView.isHidden = true
+        optionCategoryTapSubject = PassthroughSubject<Int, Never>()
     }
 
     // MARK: - Helpers
@@ -89,7 +95,7 @@ extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
 
 extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
     func tabBarButtonDidTapped(didSelectItemAt index: Int) {
-        print("tabbar Tap: \(index)")
+        optionCategoryTapSubject.send(index)
     }
 }
 

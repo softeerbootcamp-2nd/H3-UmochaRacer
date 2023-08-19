@@ -16,6 +16,7 @@ final class CarMakingViewModel {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
+        var optionCategoryDidChanged: PassthroughSubject<Int, Never>
     }
 
     // MARK: - Output
@@ -67,6 +68,18 @@ final class CarMakingViewModel {
                 }
 
                 output.optionInfoDidUpdated.send(CarMakingMockData.mockOption[stepIndex])
+            }
+            .store(in: &cancellables)
+
+        input.optionCategoryDidChanged
+            .sink { categoryIndex in
+                guard let category = OptionCategoryType(rawValue: categoryIndex) else {
+                    // todo: 에러처리
+                    return
+                }
+//                let optionStepInfo = usecase.requestOptionStepInfo(category)
+//                output.currentStepInfo.send(optionStepInfo)
+                print("option category did changed to \(category)")
             }
             .store(in: &cancellables)
 

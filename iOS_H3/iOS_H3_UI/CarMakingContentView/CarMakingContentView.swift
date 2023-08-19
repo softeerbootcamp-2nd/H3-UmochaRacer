@@ -11,6 +11,7 @@ import Combine
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
     func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
+    func carMakingContentView(categoryDidSelectedAt categoryIndex: Int)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -63,6 +64,8 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
     }
 
     private var optionSelectCancellableByIndex = [Int: AnyCancellable]()
+
+    private var optionCategoryTapCancellableByIndex = [Int: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -239,6 +242,9 @@ extension CarMakingContentView {
 
     private func subscribeCellEvent(of cell: CarMakingCollectionViewCell, indexPath: IndexPath) {
         subscribe(optionSelection: cell.optionDidSelected, stepIndex: indexPath.row)
+        if let optionSelectStepCell = cell as? CarMakingOptionSelectStepCell {
+            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, stepIndex: indexPath.row)
+        }
     }
 
     private func subscribe(optionSelection: PassthroughSubject<Int, Never>, stepIndex: Int) {
@@ -246,6 +252,13 @@ extension CarMakingContentView {
             .sink { [weak self] optionIndex in
                 guard let self else { return }
                 delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
+            }
+    }
+
+    private func subscribe(optionCategoryTap: PassthroughSubject<Int, Never>, stepIndex: Int) {
+        optionCategoryTapCancellableByIndex[stepIndex] = optionCategoryTap
+            .sink { [weak self] categoryIndex in
+                self?.delegate?.carMakingContentView(categoryDidSelectedAt: categoryIndex)
             }
     }
 
