@@ -25,8 +25,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
-        let publisher: AnyPublisher<CarMakingStepInfo, Never>
+    func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        let publisher: AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
 
         switch step {
         case .powertrain:
@@ -44,10 +44,19 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         case .optionSelection:
             publisher = carInfoRepository.fetchAdditionalOption(category: "")
         default:
-            publisher = Just(CarMakingStepInfo(step: step)).eraseToAnyPublisher()
+            return Fail(error: SelfModeUsecaseError.invalidStep)
+                        .eraseToAnyPublisher()
         }
 
         return publisher
+            .mapError { error -> SelfModeUsecaseError in
+                switch error {
+                case .networkError:
+                    return .networkError
+                case .conversionError:
+                    return .conversionError
+                }
+            }
             .map { stepInfo in
                 var mutableStepInfo = stepInfo
                 if !mutableStepInfo.optionCardInfoArray.isEmpty {
