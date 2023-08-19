@@ -36,17 +36,22 @@ const DefaultIcon = () => {
   );
 };
 
-const ageArr = ['20대', '30대', '40대', '50대', '60대', '70대'];
-const gendersArr = ['여성', '남성', '선택 안함'];
+const ageArr: string[] = ['20대', '30대', '40대', '50대', '60대', '70대'];
+const gendersArr: string[] = ['여성', '남성', '선택 안함'];
 
-function CardList() {
+interface Props {
+  flowLevel: number;
+}
+
+function CardList({flowLevel}: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleClickCard = (nextIndex: number) => {
     setSelectedIndex(nextIndex);
   };
 
-  const cards = ageArr.map((elem, index) => {
+  const dataArr = flowLevel === 0 ? ageArr : gendersArr;
+  const cards = dataArr.map((elem, index) => {
     const isSelected = selectedIndex === index;
     return (
       <Card.Container
@@ -61,6 +66,7 @@ function CardList() {
       </Card.Container>
     );
   });
+
   return <Wrapper>{cards}</Wrapper>;
 }
 

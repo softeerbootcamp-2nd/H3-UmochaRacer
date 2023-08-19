@@ -1,11 +1,36 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import GridList from './selectflow/GridList';
 import CardList from './selectflow/CardList';
 
+interface FlowDescription {
+  comment: string;
+  suggest: string;
+  tip: string;
+}
+
+const flowTextArr: FlowDescription[] = [
+  {
+    comment: '만나서 반가워요!',
+    suggest: '연령대를 선택해주세요.',
+    tip: '비슷한 나이대의 사람들이 선호하는 컬러를 알려드려요.',
+  },
+  {
+    comment: '금방 끝나요!',
+    suggest: '성별을 선택해주세요.',
+    tip: '더 자세한 욥션을 추천해드릴 수 있어요.',
+  },
+  {
+    comment: '이제 마지막이에요.',
+    suggest: '키워드를 중요한 순서로 3개 선택해주세요.',
+    tip: '나의 관심사와 취향을 반영해 더 자세하게 추천해줄 수 있어요.',
+  },
+];
+
 function SelectFlow() {
+  const [flowLevel, setFlowLevel] = useState(1);
   return (
     <Wrapper>
       <FlowContainer.Left>
@@ -38,17 +63,15 @@ function SelectFlow() {
             <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
           </svg>
         </Left.Level>
-        <Left.Comment>만나서 반가워요!</Left.Comment>
+        <Left.Comment>{flowTextArr[flowLevel].comment}</Left.Comment>
         <Left.SelectionText>
-          키워드를 중요한 순서로키워드를 중요한 순서로
+          {flowTextArr[flowLevel].suggest}
         </Left.SelectionText>
-        <Left.Tip>
-          비슷한 나이대의 사람들이 선호하는 컬러를 알려드려요.
-        </Left.Tip>
-        <Left.Button>선택완료</Left.Button>
+        <Left.Tip>{flowTextArr[flowLevel].tip}</Left.Tip>
+        <Left.Button $isVisible={flowLevel === 2}>선택완료</Left.Button>
       </FlowContainer.Left>
       <FlowContainer.Right>
-        <CardList />
+        {flowLevel !== 2 ? <CardList flowLevel={flowLevel} /> : <GridList />}
       </FlowContainer.Right>
     </Wrapper>
   );
@@ -105,7 +128,7 @@ const Left = {
     color: #8C8C8C;
     font-size: 20px;
   `,
-  Button: styled.button`
+  Button: styled.button<{$isVisible: boolean}>`
     ${Body1_Medium}
     display: inline-flex;
     padding: 19px 120px;
@@ -114,10 +137,11 @@ const Left = {
     width: 297px;
     height: 59px;
     border-radius: 6px;
-    opacity: 0;
+    opacity: ${({$isVisible}) => ($isVisible ? 1 : 0)};
     pointer-events: none;
     color: ${colors.Hyundai_White};
     background: ${colors.Main_Hyundai_Blue};
+    transition: 0.5s;
     gap: 10px;
   `,
 };
