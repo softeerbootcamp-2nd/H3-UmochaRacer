@@ -32,8 +32,8 @@ public class TagOptionRepository {
     public List<Long> findOptionIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT m." + category_id + ", COUNT(*) as select_count FROM SALES s\n" +
-                "JOIN MODEL m on s.model_id = m.id WHERE m.trim_id = 1 AND\n" +
-                "s.gender = \'" + gender.name() + "\' AND "+ age + "<= s.age <" + (age+10) +
+                "JOIN (SELECT id, " + category_id + " FROM MODEL WHERE trim_id = 1) AS m on s.model_id = m.id\n" +
+                "WHERE " + gender.getQueryString() + age + "<= s.age <" + (age+10) +
                 " GROUP BY m." + category_id + " ORDER BY select_count DESC LIMIT 1";
 
         return jdbcTemplate.query(query, getRowMapperOfField(category));
@@ -42,8 +42,8 @@ public class TagOptionRepository {
     public List<Long> findColorOrWheelIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM SALES s\n" +
-                "JOIN MODEL m on s.model_id = m.id WHERE m.trim_id = 1 AND\n" +
-                "s.gender = \'" + gender.name() + "\' AND "+ age + "<= s.age <" + (age+10) +
+                "JOIN (SELECT id FROM MODEL WHERE trim_id = 1) AS m on s.model_id = m.id\n" +
+                "WHERE " + gender.getQueryString() + age + "<= s.age <" + (age+10) +
                 " GROUP BY s." + category_id + " ORDER BY select_count DESC LIMIT 1";
 
         return jdbcTemplate.query(query, getRowMapperOfField(category));
