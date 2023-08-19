@@ -34,6 +34,8 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     // MARK: - Properties
 
+    private var currentOptionInfo = [OptionCardInfo]()
+
     private var currentCategory = OptionCategoryType.system
 
     var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
@@ -57,6 +59,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         listModeView.isHidden = true
+        currentOptionInfo = []
         currentCategory = OptionCategoryType.system
         optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
     }
@@ -67,12 +70,14 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         super.configure(optionInfoArray: optionInfoArray)
         updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.configure(with: optionInfoArray)
+        currentOptionInfo = optionInfoArray
     }
 
     override func update(optionInfoArray: [OptionCardInfo]) {
         super.update(optionInfoArray: optionInfoArray)
         updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.reloadOptionCards(with: optionInfoArray)
+        currentOptionInfo = optionInfoArray
     }
 
     private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
@@ -81,6 +86,9 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     }
 
     private func showListModeView(isHidden: Bool) {
+        if isHidden {
+            super.configure(optionInfoArray: currentOptionInfo)
+        }
         UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
             self?.listModeView.isHidden = isHidden
         })
