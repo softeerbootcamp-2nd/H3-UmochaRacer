@@ -41,6 +41,19 @@ struct CarOptionData: Decodable {
 
 extension CarOptionData {
     func toDomain() throws -> OptionCardInfo {
+
+        guard let id = self.id else {
+            throw CarOptionToEntityError.missingID
+        }
+
+        guard let name = self.name else {
+            throw CarOptionToEntityError.missingName
+        }
+
+        guard let label = self.label else {
+            throw CarOptionToEntityError.missingTitle
+        }
+
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
         let iconImageURL = URL(string: self.iconSrc ?? "")
         let color = self.colorCode.flatMap { URColor(hex: $0) }
