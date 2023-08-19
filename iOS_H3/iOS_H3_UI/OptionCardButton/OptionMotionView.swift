@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 class OptionMotionView: UIView {
 
     private let smileImageView: UIImageView = {
@@ -24,6 +25,7 @@ class OptionMotionView: UIView {
     private let feedbackTitleLabel: UILabel = {
         let label = UILabel()
         label.font = Fonts.mediumTitle3
+        label.numberOfLines = .zero
         label.text = "옵션 피드백 타이틀"
         label.textColor = .white
         return label
@@ -34,6 +36,7 @@ class OptionMotionView: UIView {
         label.font = Fonts.regularBody2
         label.text = "옵션 피드백 상세한 설명 타이틀"
         label.textColor = .white
+        label.numberOfLines = .zero
         return label
     }()
 
@@ -81,23 +84,51 @@ class OptionMotionView: UIView {
 
     }
 
-    func showWithAnimation(title: String, description: String) {
-        self.goodImageView.isHidden = true
-        self.backgroundColor = Colors.mainHyundaiBlue
-        smileImageView.image = UIImage(named: "feedback_motion_face_first") ?? .remove
-        feedbackTitleLabel.text = title
-        feedbackDescriptionLabel.text = description
+    func showWithAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        prepareViews(title: title, description: description)
 
-        self.alpha = 0.0
-        self.isHidden = false
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1.0
         }, completion: { _ in
-            UIView.animate(withDuration: 0.8, animations: {
-                self.smileImageView.image = UIImage(named: "feedback_motion_face_second") ?? .remove
-                self.goodImageView.isHidden = false
+            self.performFirstAnimation(completion: {
+                self.performSecondAnimation(completion: {
+                    completion?()
+                    self.hideGoodImageView()
+                })
             })
         })
+    }
+
+    private func prepareViews(title: String, description: String) {
+        goodImageView.isHidden = true
+        backgroundColor = Colors.mainHyundaiBlue
+        smileImageView.image = UIImage(named: "feedback_motion_face_first") ?? .remove
+        feedbackTitleLabel.text = title
+        feedbackDescriptionLabel.text = description
+        alpha = 0.0
+        isHidden = false
+    }
+
+    private func performFirstAnimation(completion: @escaping () -> Void) {
+        UIView.animate(withDuration: 1.7, animations: {
+            self.smileImageView.image = UIImage(named: "feedback_motion_face_second") ?? .remove
+            self.goodImageView.isHidden = false
+        }, completion: { _ in
+            completion()
+        })
+    }
+
+    private func performSecondAnimation(completion: @escaping () -> Void) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            completion()
+        }
+    }
+
+    private func hideGoodImageView() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.goodImageView.isHidden = false
+            self.isHidden = true
+        }
     }
 
 }
