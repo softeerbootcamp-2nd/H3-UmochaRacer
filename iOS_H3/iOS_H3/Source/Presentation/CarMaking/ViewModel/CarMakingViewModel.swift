@@ -42,7 +42,7 @@ final class CarMakingViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .flatMap { [weak self] step -> AnyPublisher<EstimateSummary, Never> in
+            .flatMap { [weak self] _ -> AnyPublisher<EstimateSummary, Never> in
                 guard let self = self else {
                     return Just(EstimateSummary(elements: []))
                         .eraseToAnyPublisher()
