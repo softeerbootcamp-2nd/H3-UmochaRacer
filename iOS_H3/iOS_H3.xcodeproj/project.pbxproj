@@ -137,6 +137,7 @@
 		5F6203802A7BC59600D09531 /* iOS_H3_UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F62037F2A7BC59600D09531 /* iOS_H3_UITests.swift */; };
 		5F62038A2A7BC59700D09531 /* iOS_H3_UIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6203892A7BC59700D09531 /* iOS_H3_UIUITests.swift */; };
 		5F62038C2A7BC59700D09531 /* iOS_H3_UIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F62038B2A7BC59700D09531 /* iOS_H3_UIUITestsLaunchTests.swift */; };
+		5F64B55D2A9070F300B5AE08 /* SelfModeUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */; };
 		5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6603EB2A837F96000E393D /* CarMakingTwoOptionCell.swift */; };
 		5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6603EB2A837F96000E393D /* CarMakingTwoOptionCell.swift */; };
 		5F6603EF2A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6603EE2A8380C8000E393D /* CarMakingMultipleOptionCell.swift */; };
@@ -283,6 +284,7 @@
 		5F6203852A7BC59600D09531 /* iOS_H3_UIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iOS_H3_UIUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F6203892A7BC59700D09531 /* iOS_H3_UIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_H3_UIUITests.swift; sourceTree = "<group>"; };
 		5F62038B2A7BC59700D09531 /* iOS_H3_UIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_H3_UIUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelfModeUsecase.swift; path = DTO/CarInfo/SelfModeUsecase.swift; sourceTree = SOURCE_ROOT; };
 		5F6603EB2A837F96000E393D /* CarMakingTwoOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingTwoOptionCell.swift; sourceTree = "<group>"; };
 		5F6603EE2A8380C8000E393D /* CarMakingMultipleOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingMultipleOptionCell.swift; sourceTree = "<group>"; };
 		5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCategoryTabBar.swift; sourceTree = "<group>"; };
@@ -492,6 +494,7 @@
 			isa = PBXGroup;
 			children = (
 				478B26812A78FD3400598902 /* Protocol */,
+				5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -1112,6 +1115,7 @@
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
+				5F64B55D2A9070F300B5AE08 /* SelfModeUsecase.swift in Sources */,
 				473309952A8BECBB00906FFB /* CarMakingStepInfo.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
