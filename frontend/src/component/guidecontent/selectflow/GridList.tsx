@@ -69,6 +69,7 @@ function GirdList() {
                     key={categoryIndex}
                     onClick={handleClickCard}
                     $isSelected={selectedIndex > -1}
+                    $isSelectDone={selectArr.length === 3}
                   >
                     <Card.Option>{categoryData}</Card.Option>
                     <Card.IconBox
@@ -126,7 +127,6 @@ const Grid = {
   Container: styled.li`
     display: flex;
     flex-direction: column;
-    cursor: pointer;
     gap: 16px;
   `,
 
@@ -140,7 +140,7 @@ const Grid = {
     gap: 12px;
   `,
 
-  GridCard: styled.div<{$isSelected: boolean}>`
+  GridCard: styled.div<{$isSelected: boolean; $isSelectDone: boolean}>`
     display: flex;
     width: 166px;
     height: 60px;
@@ -149,12 +149,17 @@ const Grid = {
     align-items: center;
     border-radius: 6px;
     transition: 0.5s;
-    ${({$isSelected}) =>
-      $isSelected
-        ? css`
-            ${SelectedCard}
-          `
-        : defaultCard}
+    cursor: pointer;
+
+    ${({$isSelected}) => ($isSelected ? SelectedCard : defaultCard)}
+
+    ${({$isSelected, $isSelectDone}) =>
+      $isSelectDone &&
+      !$isSelected &&
+      css`
+        pointer-events: none;
+        cursor: none;
+      `};
     circle {
       r: 11.5;
       stroke: #aeb1b7;
