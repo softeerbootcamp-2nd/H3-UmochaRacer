@@ -40,15 +40,15 @@ public class WheelService implements InformationStrategy {
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = wheelRepository.findWheelCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = wheelRepository.findWheelCommentById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 
     @Override
     public Long findDetailId(long id) {
-        return wheelRepository.findDetailIdById(id);
+        return wheelRepository.findDetailIdById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+
     }
 }

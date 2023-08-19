@@ -16,8 +16,8 @@ public class CardbService {
     private final CardbRepository repository;
 
     public CardbResponseDto getDescriptionByKeyword(String keyword) throws RestApiException {
-        Optional<Cardb> target = repository.findByKeyword(keyword);
-        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_KEYWORD_EXIST);
-        return new CardbResponseDto(target.get());
+        Cardb target = repository.findByKeyword(keyword)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_KEYWORD_EXIST));
+        return new CardbResponseDto(target);
     }
 }

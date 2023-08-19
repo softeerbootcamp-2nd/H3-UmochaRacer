@@ -40,11 +40,9 @@ public class BodytypeService implements InformationStrategy {
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = bodytypeRepository.findBodytypeCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = bodytypeRepository.findBodytypeCommentById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 
     @Override

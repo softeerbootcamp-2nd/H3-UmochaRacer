@@ -28,9 +28,9 @@ public class PowertrainService implements InformationStrategy {
 
     @Override
     public CommonResponse findInformationById(long id) {
-        Optional<Powertrain> target = powertrainRepository.findById(id);
-        if(target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
-        return informationMapper.map(target.get());
+        Powertrain target = powertrainRepository.findById(id)
+                .orElseThrow(()-> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     @Override
@@ -40,15 +40,14 @@ public class PowertrainService implements InformationStrategy {
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = powertrainRepository.findPowertrainCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = powertrainRepository.findPowertrainCommentById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 
     @Override
     public Long findDetailId(long id) {
-        return powertrainRepository.findDetailIdById(id);
+        return powertrainRepository.findDetailIdById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
     }
 }

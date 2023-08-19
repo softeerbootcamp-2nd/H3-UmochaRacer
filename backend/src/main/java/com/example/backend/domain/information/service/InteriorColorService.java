@@ -26,16 +26,14 @@ public class InteriorColorService {
     }
 
     public CommonResponse findInformationById(long id) {
-        Optional<InteriorColor> target = interiorColorRepository.findById(id);
-        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
-        return informationMapper.map(target.get());
+        InteriorColor target = interiorColorRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     public CommentResponse findCommentById(long id) {
-        String comment = interiorColorRepository.findInteriorColorCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = interiorColorRepository.findInteriorColorCommentById(id)
+                .orElseThrow(() ->new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 }

@@ -25,9 +25,9 @@ public class AdditionalOptionService {
     }
 
     public CommonResponse getInformationById(long id) {
-        Optional<AdditionalOption> target = repository.findById(id);
-        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
-        return informationMapper.map(target.get());
+        AdditionalOption target = repository.findById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     public List<Long> findDetailId(long id) {

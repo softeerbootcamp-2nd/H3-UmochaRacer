@@ -29,9 +29,9 @@ public class ExteriorColorService implements InformationStrategy {
 
     @Override
     public CommonResponse findInformationById(long id) {
-        Optional<ExteriorColor> target = exteriorColorRepository.findById(id);
-        if(target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
-        return informationMapper.map(target.get());
+        ExteriorColor target = exteriorColorRepository.findById(id)
+                .orElseThrow(()-> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     @Override
@@ -41,11 +41,9 @@ public class ExteriorColorService implements InformationStrategy {
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = exteriorColorRepository.findExteriorColorCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = exteriorColorRepository.findExteriorColorCommentById(id)
+                .orElseThrow(()-> new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 
     @Override

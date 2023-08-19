@@ -18,17 +18,17 @@ public class DetailService {
     private final DetailRepository repository;
 
     public DetailResponse getDetailById(Long id) {
-        Optional<Detail> target = repository.findById(id);
-        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID);
-        return new DetailResponse(target.get());
+        Detail target = repository.findById(id)
+                .orElseThrow(() ->new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID));
+        return new DetailResponse(target);
     }
 
     public List<DetailResponse> getOptionDetailById(List<Long> detailIdList) {
         List<DetailResponse> detailResponseList = new ArrayList<>();
         for (Long detailId : detailIdList) {
-            Optional<Detail> detail = repository.findById(detailId);
-            if (detail.isEmpty()) throw new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID);
-            detailResponseList.add(new DetailResponse(detail.get()));
+            Detail detail = repository.findById(detailId)
+                    .orElseThrow(() -> new RestApiException(ResultCode.NO_DETAIL_EXIST_FOR_ID));
+            detailResponseList.add(new DetailResponse(detail));
         }
         return detailResponseList;
     }
