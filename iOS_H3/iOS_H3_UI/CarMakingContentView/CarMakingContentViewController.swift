@@ -102,6 +102,7 @@ extension CarMakingContentViewController: CarMakingContentViewDelegate {
 
     func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int) {
         CarMakingContentMockData.mockOption[stepIndex][optionIndex].isSelected.toggle()
+        carMakingContentView.updateOptionCard(with: CarMakingContentMockData.mockOption[stepIndex])
     }
 
     func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
