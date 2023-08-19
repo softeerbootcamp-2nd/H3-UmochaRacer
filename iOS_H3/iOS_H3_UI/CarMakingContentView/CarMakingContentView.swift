@@ -11,7 +11,7 @@ import Combine
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
     func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
-    func carMakingContentView(categoryDidSelectedAt categoryIndex: Int)
+    func carMakingContentView(categoryDidSelected category: OptionCategoryType)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -255,10 +255,10 @@ extension CarMakingContentView {
             }
     }
 
-    private func subscribe(optionCategoryTap: PassthroughSubject<Int, Never>, stepIndex: Int) {
+    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, stepIndex: Int) {
         optionCategoryTapCancellableByIndex[stepIndex] = optionCategoryTap
-            .sink { [weak self] categoryIndex in
-                self?.delegate?.carMakingContentView(categoryDidSelectedAt: categoryIndex)
+            .sink { [weak self] category in
+                self?.delegate?.carMakingContentView(categoryDidSelected: category)
             }
     }
 

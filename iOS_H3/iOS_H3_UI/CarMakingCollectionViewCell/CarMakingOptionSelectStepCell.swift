@@ -36,7 +36,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     private var currentCategory = OptionCategoryType.system
 
-    var optionCategoryTapSubject = PassthroughSubject<Int, Never>()
+    var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
 
     // MARK: - Lifecycles
 
@@ -58,7 +58,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         super.prepareForReuse()
         listModeView.isHidden = true
         currentCategory = OptionCategoryType.system
-        optionCategoryTapSubject = PassthroughSubject<Int, Never>()
+        optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
     }
 
     // MARK: - Helpers
@@ -105,7 +105,7 @@ extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
 
         if currentCategory != category {
             currentCategory = category
-            optionCategoryTapSubject.send(index)
+            optionCategoryTapSubject.send(category)
         }
     }
 }

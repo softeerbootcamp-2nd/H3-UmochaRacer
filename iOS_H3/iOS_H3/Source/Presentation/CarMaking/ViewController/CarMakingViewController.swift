@@ -35,7 +35,7 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
-    private let optionCategoryDidChanged = PassthroughSubject<Int, Never>()
+    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -158,8 +158,8 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
         }
     }
 
-    func carMakingContentView(categoryDidSelectedAt categoryIndex: Int) {
-        optionCategoryDidChanged.send(categoryIndex)
+    func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
+        optionCategoryDidChanged.send(category)
     }
 }
 
