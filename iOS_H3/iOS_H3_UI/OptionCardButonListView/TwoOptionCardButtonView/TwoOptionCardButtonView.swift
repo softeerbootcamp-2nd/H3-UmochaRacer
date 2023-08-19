@@ -66,6 +66,16 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
         configure(with: cardInfos)
     }
+
+    func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        for button in optionCardButtons where button.isSelected {
+            button.animateButton(
+                title: title,
+                description: description,
+                completion: completion
+            )
+        }
+    }
 }
 
 // MARK: - OptionCardButton Delegate
