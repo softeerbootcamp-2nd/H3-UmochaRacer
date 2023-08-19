@@ -16,9 +16,11 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     }
 
     private func fetchCarMakingStepInfo(for endpoint: Endpoint,
-                                        step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
+                                        step: CarMakingStep)
+    -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         networkService.request(endpoint)
-            .flatMap { (result: Result<APIResponse<[CarOptionData]>, Error>) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> in
+            .flatMap { (result: Result<APIResponse<[CarOptionData]>, Error>)
+                -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> in
                 switch result {
                 case .success(let data):
                     do {
@@ -27,11 +29,13 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
                             .setFailureType(to: CarInfoRepositoryError.self)
                             .eraseToAnyPublisher()
                     } catch let error as CarOptionToEntityError {
-                        return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.conversionError(error))
-                            .eraseToAnyPublisher()
+                        return Fail(outputType: CarMakingStepInfo.self,
+                                    failure: CarInfoRepositoryError.conversionError(error))
+                        .eraseToAnyPublisher()
                     } catch {
-                        return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.networkError(error))
-                            .eraseToAnyPublisher()
+                        return Fail(outputType: CarMakingStepInfo.self,
+                                    failure: CarInfoRepositoryError.networkError(error))
+                        .eraseToAnyPublisher()
                     }
                 case .failure(let error):
                     return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.networkError(error))
