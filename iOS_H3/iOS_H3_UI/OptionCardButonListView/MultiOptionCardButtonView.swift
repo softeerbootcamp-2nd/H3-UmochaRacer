@@ -87,6 +87,29 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
             cell.configure(carMakingMode: carMakingMode, info: info)
         }
     }
+
+    func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        let visibleIndexPaths = optionCardCollectionView.indexPathsForVisibleItems
+        var animationsCompletedCount = 0
+
+        for indexPath in visibleIndexPaths {
+            guard let cell = optionCardCollectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                continue
+            }
+
+            cell.playFeedbackAnimation(title: title, description: description) {
+                animationsCompletedCount += 1
+
+                if animationsCompletedCount == visibleIndexPaths.count {
+                    completion?()
+                }
+            }
+        }
+
+        if visibleIndexPaths.isEmpty {
+            completion?()
+        }
+    }
 }
 
 // MARK: - OptionCardButton Delegate
@@ -118,6 +141,7 @@ extension MultiOptionCardButtonView: UICollectionViewDelegate {
         if willDisplayingCellIndexPath != indexPath {
             delegate?.optionCardButtonListView(self, didDisplayOptionAt: willDisplayingCellIndexPath.row)
         }
+        
     }
 }
 
