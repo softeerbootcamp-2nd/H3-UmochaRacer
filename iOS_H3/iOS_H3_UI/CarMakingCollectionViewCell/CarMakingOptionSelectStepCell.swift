@@ -62,6 +62,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     override func configure(optionInfoArray: [OptionCardInfo]) {
         super.configure(optionInfoArray: optionInfoArray)
+        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.configure(with: optionInfoArray)
     }
 
