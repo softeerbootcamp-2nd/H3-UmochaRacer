@@ -16,50 +16,61 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     }
 
     private func fetchCarMakingStepInfo(for endpoint: Endpoint,
-                                        step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
+                                        step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         networkService.request(endpoint)
-            .map { (result: Result<APIResponse<[CarOptionData]>, Error>) -> CarMakingStepInfo in
+            .flatMap { (result: Result<APIResponse<[CarOptionData]>, Error>) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> in
                 switch result {
                 case .success(let data):
-                    let array = data.data.map { $0.toDomain() }
-                    return CarMakingStepInfo(step: step, optionCardInfoArray: array)
+                    do {
+                        let array = try data.data.map { try $0.toDomain() }
+                        return Just(CarMakingStepInfo(step: step, optionCardInfoArray: array))
+                            .setFailureType(to: CarInfoRepositoryError.self)
+                            .eraseToAnyPublisher()
+                    } catch let error as CarOptionToEntityError {
+                        return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.conversionError(error))
+                            .eraseToAnyPublisher()
+                    } catch {
+                        return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.networkError(error))
+                            .eraseToAnyPublisher()
+                    }
                 case .failure(let error):
-                    return CarMakingStepInfo(step: step)
+                    return Fail(outputType: CarMakingStepInfo.self, failure: CarInfoRepositoryError.networkError(error))
+                        .eraseToAnyPublisher()
                 }
             }
             .eraseToAnyPublisher()
     }
 
-    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.powertrain(model: model, type: type), step: .powertrain)
     }
 
-    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.drivingSystem, step: .driveMethod)
     }
 
-    func fetchBodyType() -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchBodyType() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.bodyType, step: .bodyType)
     }
 
-    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.exteriorColor, step: .externalColor)
     }
 
-    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.interiorColor, step: .internalColor)
     }
 
-    func fetchWheel() -> AnyPublisher<CarMakingStepInfo, Never> {
+    func fetchWheel() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .wheelSelection)
     }
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, Never> {
-        fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .optionSelection)
+    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.additionalOption(category: category), step: .optionSelection)
     }
 
-    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, Never> {
-        fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .externalColor)
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
+        fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
 
     // TODO: IntroRepository로 분리
