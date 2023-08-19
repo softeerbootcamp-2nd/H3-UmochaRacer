@@ -22,7 +22,6 @@ enum CarInfoRepositoryError: LocalizedError {
     }
 }
 
-
 protocol CarInfoRepositoryProtocol {
     typealias APIResult<T> = AnyPublisher<Result<T, Error>, Never>
     func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
