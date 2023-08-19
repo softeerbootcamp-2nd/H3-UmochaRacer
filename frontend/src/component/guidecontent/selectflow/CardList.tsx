@@ -1,8 +1,24 @@
 import {Body2_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
-import React from 'react';
+import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 
+const Selecticon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+    >
+      <path
+        d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM10.643 16.243L17.713 9.172L16.299 7.758L10.643 13.415L7.814 10.586L6.4 12L10.643 16.243Z"
+        fill="#0E2B5C"
+      />
+    </svg>
+  );
+};
 const DefaultIcon = () => {
   return (
     <svg
@@ -24,11 +40,24 @@ const ageArr = ['20대', '30대', '40대', '50대', '60대', '70대'];
 const gendersArr = ['여성', '남성', '선택 안함'];
 
 function CardList() {
+  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+
+  const handleClickCard = (nextIndex: number) => {
+    setSelectedIndex(nextIndex);
+  };
+
   const cards = ageArr.map((elem, index) => {
+    const isSelected = selectedIndex === index;
     return (
-      <Card.Container key={index}>
+      <Card.Container
+        key={index}
+        $isSelected={isSelected}
+        onClick={() => {
+          handleClickCard(index);
+        }}
+      >
         <Card.Category>{elem}</Card.Category>
-        <Card.Icon>{DefaultIcon()}</Card.Icon>
+        <Card.Icon>{isSelected ? Selecticon() : DefaultIcon()}</Card.Icon>
       </Card.Container>
     );
   });
@@ -60,7 +89,7 @@ const DefaultCard = css`
 `;
 
 const Card = {
-  Container: styled.li`
+  Container: styled.li<{$isSelected: boolean}>`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,7 +99,7 @@ const Card = {
     cursor: pointer;
     border-radius: 6px;
     transition: 0.5s;
-    ${DefaultCard}
+    ${({$isSelected}) => ($isSelected ? SelectedCard : DefaultCard)}
 
     &:hover {
       ${SelectedCard}
