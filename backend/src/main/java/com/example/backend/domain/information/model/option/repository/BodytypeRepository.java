@@ -13,5 +13,5 @@ public interface BodytypeRepository extends CrudRepository<Bodytype, Long> {
     Optional<String> findBodytypeCommentById(long id);
 
     @Query("SELECT detail_id FROM BODYTYPE WHERE id = :id")
-    Long findDetailIdById(long id);
+    Optional<Long> findDetailIdById(long id);
 }
