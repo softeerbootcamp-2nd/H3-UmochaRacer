@@ -9,12 +9,10 @@ import UIKit
 import Combine
 
 protocol OptionListModeViewDelegate: AnyObject {
-    func optionListModeView(with optionListModeView: OptionListModeView,
-                            didSelectedIndex: Int)
     func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView)
 }
 
-final class OptionListModeView: UIView {
+final class OptionListModeView: UIView, OptionCardButtonListViewable {
 
     enum Constants {
         static let cellHeight = 150.0
@@ -59,11 +57,14 @@ final class OptionListModeView: UIView {
 
     // MARK: - Properties
     private let carMakingMode: CarMakingMode
+
     private var dataSource: CollectionViewDiffableDataSource!
 
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
-    weak var delegate: OptionListModeViewDelegate?
+    weak var listModeViewDelegate: OptionListModeViewDelegate?
+
+    weak var delegate: OptionCardButtonListViewDelegate?
 
     // MARK: - Lifecycles
 
@@ -88,6 +89,16 @@ final class OptionListModeView: UIView {
     // MARK: - Helpers
     func configure(with cardInfos: [OptionCardInfo]) {
         updateSnapshot(item: cardInfos)
+    }
+
+    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+        cardInfos.enumerated().forEach { (index, info) in
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                return
+            }
+            cell.configure(carMakingMode: carMakingMode, info: info)
+        }
     }
 }
 
@@ -152,7 +163,7 @@ extension OptionListModeView {
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
-                    delegate?.optionListModeView(with: self, didSelectedIndex: indexPath.row)
+                    delegate?.optionCardButtonListView(self, didSelectOptionAt: indexPath.row)
                 }
 
             return cell
@@ -214,6 +225,6 @@ extension OptionListModeView {
     }
 
     @objc func tapImageModeButton() {
-        delegate?.optionListModeViewDidTapImageModeButton(with: self)
+        listModeViewDelegate?.optionListModeViewDidTapImageModeButton(with: self)
     }
 }
