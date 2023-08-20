@@ -11,9 +11,9 @@ struct EstimateSummary {
     let elements: [EstimateSummaryElement]
 }
 
-struct EstimateSummaryElement {
+struct EstimateSummaryElement: Hashable {
     let stepName: String
     let selectedOption: String
-    let category: String
+    let category: CarMakingCategory
     let price: Int
 }
