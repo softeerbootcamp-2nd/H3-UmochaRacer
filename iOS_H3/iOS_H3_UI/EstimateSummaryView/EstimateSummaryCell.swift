@@ -40,6 +40,12 @@ final class EstimateSummaryCell: UICollectionViewCell {
     }
 
     // MARK: - Helpers
+
+    func configure(_ data: EstimateSummaryElement) {
+        carMakingStepLabel.text = data.stepName
+        optionTitleLabel.text = data.selectedOption
+        priceLabel.text = "\(data.price)원"
+    }
 }
 
 extension EstimateSummaryCell {
