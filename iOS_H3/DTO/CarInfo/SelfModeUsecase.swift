@@ -24,7 +24,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .fetchEstimate()
             .mapError { error -> SelfModeUsecaseError in
                 switch error {
-                case is IntroRepositoryError:
+                case IntroRepositoryError.conversionError:
                     return .conversionError
                 default:
                     return .networkError
