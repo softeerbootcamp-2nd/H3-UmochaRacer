@@ -80,6 +80,11 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         currentOptionInfo = optionInfoArray
     }
 
+    override func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        super.playFeedbackAnimation(title: title, description: description, completion: completion)
+        listModeView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description)
+    }
+
     private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
         let selectedOptionCount = optionInfoArray.filter { $0.isSelected }.count
         selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(selectedOptionCount)"
