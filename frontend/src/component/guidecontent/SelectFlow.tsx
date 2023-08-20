@@ -62,7 +62,6 @@ const isMove = (prevLevel: number, currLevel: number) => {
   const category: string[] = ['age', 'gender'];
   if (prevLevel < currLevel) {
     Array.from({length: currLevel - prevLevel}).map((_, index) => {
-      console.log(currLevel + index);
       if (!selectData[category[prevLevel + index]]) {
         move = false;
       }
