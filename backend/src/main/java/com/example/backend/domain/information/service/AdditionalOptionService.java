@@ -1,5 +1,7 @@
 package com.example.backend.domain.information.service;
 
+import com.example.backend.domain.global.exception.RestApiException;
+import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.option.entity.AdditionalOption;
@@ -8,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -19,6 +22,12 @@ public class AdditionalOptionService {
     public List<CommonResponse> getByCategory(String category) {
         List<AdditionalOption> all = repository.findAllByCategoryAndTopOptionIdIsNull(category.toUpperCase());
         return all.stream().map(informationMapper::map).collect(Collectors.toList());
+    }
+
+    public CommonResponse getInformationById(long id) {
+        AdditionalOption target = repository.findById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     public List<Long> findDetailId(long id) {

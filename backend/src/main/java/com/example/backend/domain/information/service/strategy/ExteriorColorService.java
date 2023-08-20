@@ -7,10 +7,12 @@ import com.example.backend.domain.information.dto.CommonResponse;
 import com.example.backend.domain.information.mapper.InformationMapper;
 import com.example.backend.domain.information.model.car.entity.ExteriorColor;
 import com.example.backend.domain.information.model.car.repository.ExteriorColorRepository;
+import com.example.backend.domain.information.model.option.entity.Bodytype;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -26,17 +28,22 @@ public class ExteriorColorService implements InformationStrategy {
     }
 
     @Override
+    public CommonResponse findInformationById(long id) {
+        ExteriorColor target = exteriorColorRepository.findById(id)
+                .orElseThrow(()-> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
+    }
+
+    @Override
     public StrategyName getStrategyName() {
         return StrategyName.EXTERIOR_COLOR;
     }
 
     @Override
     public CommentResponse findCommentById(long id) {
-        String comment = exteriorColorRepository.findExteriorColorCommentById(id);
-        if (comment == null) throw new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID);
-        return CommentResponse.builder()
-                .comment(comment)
-                .build();
+        String comment = exteriorColorRepository.findExteriorColorCommentById(id)
+                .orElseThrow(()-> new RestApiException(ResultCode.NO_COMMENT_EXIST_FOR_ID));
+        return new CommentResponse(comment);
     }
 
     @Override

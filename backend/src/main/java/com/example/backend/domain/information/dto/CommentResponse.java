@@ -7,7 +7,6 @@ import lombok.Getter;
 public class CommentResponse {
     private String comment;
 
-    @Builder
     public CommentResponse(String comment){
         this.comment = comment;
     }
