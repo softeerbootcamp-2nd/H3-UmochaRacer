@@ -197,7 +197,6 @@ extension BottomModalView {
 
     private func updateHeightConstraint(_ height: CGFloat) {
         heightConstraint.constant = height
-        layoutIfNeeded()
     }
 
     private func addModalHandleSubLayer() {
