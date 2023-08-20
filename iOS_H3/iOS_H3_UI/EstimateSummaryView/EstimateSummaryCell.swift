@@ -72,18 +72,21 @@ extension EstimateSummaryCell {
         carMakingStepLabel.font = Fonts.regularBody2
         carMakingStepLabel.textColor = Colors.coolGrey3
         carMakingStepLabel.text = "카테고리"
+        carMakingStepLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupOptionTitleLabel() {
         optionTitleLabel.font = Fonts.regularBody2
         optionTitleLabel.textColor = Colors.coolGreyBlack
         optionTitleLabel.text = "옵션 타이틀"
+        optionTitleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupPriceLabel() {
-        optionTitleLabel.font = Fonts.regularBody2
-        optionTitleLabel.textColor = Colors.coolGreyBlack
-        optionTitleLabel.text = "0원"
+        priceLabel.font = Fonts.regularBody2
+        priceLabel.textColor = Colors.coolGreyBlack
+        priceLabel.text = "0원"
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
     }
 
     private func setupCarMakingStepLabelConstraints() {
