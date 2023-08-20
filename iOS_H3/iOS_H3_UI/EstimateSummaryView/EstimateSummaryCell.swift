@@ -43,25 +43,25 @@ final class EstimateSummaryCell: UICollectionViewCell {
 }
 
 extension EstimateSummaryCell {
-    
+
     private func setupViews() {
         setupUIProperties()
         addSubviews()
         setupConstraints()
     }
-    
+
     private func setupUIProperties() {
         setupCarMakingStepLabel()
         setupOptionTitleLabel()
         setupPriceLabel()
     }
-    
+
     private func addSubviews() {
         [carMakingStepLabel, optionTitleLabel, priceLabel].forEach {
             addSubview($0)
         }
     }
-    
+
     private func setupConstraints() {
         setupCarMakingStepLabelConstraints()
         setupOptionTitleLabelConstraints()
@@ -101,7 +101,10 @@ extension EstimateSummaryCell {
     private func setupOptionTitleLabelConstraints() {
         NSLayoutConstraint.activate([
             optionTitleLabel.topAnchor.constraint(equalTo: carMakingStepLabel.topAnchor),
-            optionTitleLabel.leadingAnchor.constraint(equalTo: carMakingStepLabel.trailingAnchor, constant: Constants.titleLabelLeadingOffset),
+            optionTitleLabel.leadingAnchor.constraint(
+                equalTo: carMakingStepLabel.trailingAnchor,
+                constant: Constants.titleLabelLeadingOffset
+            ),
             optionTitleLabel.bottomAnchor.constraint(equalTo: carMakingStepLabel.bottomAnchor)
         ])
     }
