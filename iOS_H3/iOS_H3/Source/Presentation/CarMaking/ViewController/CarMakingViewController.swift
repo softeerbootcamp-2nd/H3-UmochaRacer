@@ -165,7 +165,9 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        carMakingContentView.moveNextStep(feedbackTitle: "디젤 엔진은 효율이 좋아요!", feedbackDescription: "효율을 중시한다면, 탁월한 선택입니다.")
+        
+        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
+                                          feedbackDescription: viewModel.feedbackDescription)
     }
 }
 

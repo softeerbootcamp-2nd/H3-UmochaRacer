@@ -30,7 +30,8 @@ final class CarMakingViewModel {
     // MARK: - Properties
 
     private var cancellables = Set<AnyCancellable>()
-
+    var feedbackTitle: String = ""
+    var feedbackDescription: String = ""
     // MARK: - Helpers
 
     func transform(_ input: Input) -> Output {
