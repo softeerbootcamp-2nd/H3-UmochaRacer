@@ -91,8 +91,8 @@ final class CarMakingViewModel {
     }
 
     private func requestEstimateSummary() -> AnyPublisher<EstimateSummary, Never> {
-        // usecase에 디폴트값 데이터 요청
         return selfModeUsecase.fetchInitialEstimate()
+            .catch { _ in Just(EstimateSummary(elements: [])) }
             .eraseToAnyPublisher()
     }
 
