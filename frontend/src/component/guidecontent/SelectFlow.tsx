@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
+import {selectData} from './GuidData';
 import GridList from './selectflow/GridList';
 import CardList from './selectflow/CardList';
 
@@ -46,7 +47,19 @@ const CircleIcon = () => {
   );
 };
 
-function SelectFlow() {
+interface Props {
+  setComplete: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const isMove = (prevLevel: number, currLevel: number) => {
+  const category: string[] = ['age', 'gender'];
+  if (prevLevel < currLevel) {
+    return selectData[category[prevLevel]] !== undefined;
+  }
+  return true;
+};
+
+function SelectFlow({setComplete}: Props) {
   const [flowLevel, setFlowLevel] = useState(0);
   const handleCardClick = (nextFlow: number) => {
     setFlowLevel(nextFlow);
@@ -58,6 +71,7 @@ function SelectFlow() {
         <Left.IconBox
           key={index}
           onClick={() => {
+            if (!isMove(flowLevel, index)) return;
             handleCardClick(index);
           }}
         >
@@ -76,7 +90,12 @@ function SelectFlow() {
           {flowTextArr[flowLevel].suggest}
         </Left.SelectionText>
         <Left.Tip>{flowTextArr[flowLevel].tip}</Left.Tip>
-        <Left.Button $isVisible={flowLevel === LAST_FLOW_NUM}>
+        <Left.Button
+          $isVisible={flowLevel === LAST_FLOW_NUM}
+          onClick={() => {
+            setComplete(true);
+          }}
+        >
           선택완료
         </Left.Button>
       </FlowContainer.Left>

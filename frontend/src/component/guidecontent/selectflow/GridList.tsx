@@ -3,6 +3,7 @@ import styled, {css} from 'styled-components';
 import {Body1_Regular, Body2_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {flexCenter} from '@/style/common';
+import {GridData, gridData, selectData} from '../GuidData';
 
 const Circle = () => {
   return (
@@ -18,45 +19,29 @@ const Circle = () => {
   );
 };
 
-interface GridData {
-  comment: string;
-  category: string[];
-}
-
-const GridData: GridData[] = [
-  {
-    comment: '내 차는 이런 부분에서 강했으면 좋겠어요',
-    category: ['주행력', '소음', '효율', '파워'],
-  },
-  {
-    comment: '나는 차를 탈 때 이런게 중요해요',
-    category: ['디자인', '차량보호', '온도 조절', '건강', '신기술', '안전'],
-  },
-  {comment: '나는 차를 이렇게 활용하고 싶어요', category: ['차박', '가족여행']},
-];
-
 const MAX_LENGTH: number = 3;
 
 function GirdList() {
   const [selectArr, setSelectArr] = useState<string[]>([]);
 
   const handleClickCard = (e: React.MouseEvent) => {
-    let newArray;
     const target = e.currentTarget as HTMLDivElement;
     const firstChild = target.firstChild as HTMLElement;
 
-    const selectedIndex = selectArr.indexOf(firstChild.innerHTML);
+    const selectedIndex = selectData.option?.indexOf(firstChild.innerHTML);
 
     if (selectedIndex > -1) {
-      newArray = selectArr.filter((elem) => elem !== firstChild.innerHTML);
+      selectData.option = selectData.option.filter(
+        (elem) => elem !== firstChild.innerHTML,
+      );
     } else {
-      newArray = selectArr.concat([firstChild.innerHTML]);
+      selectData.option = selectArr.concat([firstChild.innerHTML]);
     }
 
-    setSelectArr(newArray);
+    setSelectArr(selectData.option);
   };
 
-  const GridList: React.JSX.Element[] = GridData.map(
+  const GridList: React.JSX.Element[] = gridData.map(
     (gridData: GridData, gridIndex: number) => {
       return (
         <Grid.Container key={gridIndex}>
@@ -64,14 +49,19 @@ function GirdList() {
           <Grid.GridBox>
             {gridData.category.map(
               (categoryData: string, categoryIndex: number) => {
-                const selectedIndex = selectArr.indexOf(categoryData);
+                let selectedIndex: number;
+                if (selectData.option) {
+                  selectedIndex = selectData.option.indexOf(categoryData);
+                } else {
+                  selectedIndex = -1;
+                }
 
                 return (
                   <Grid.GridCard
                     key={categoryIndex}
                     onClick={handleClickCard}
                     $isSelected={selectedIndex > -1}
-                    $isSelectDone={selectArr.length === MAX_LENGTH}
+                    $isSelectDone={selectData.option.length === MAX_LENGTH}
                   >
                     <Card.Option>{categoryData}</Card.Option>
                     <Card.IconBox
@@ -90,12 +80,12 @@ function GirdList() {
     },
   );
 
-  return <Wrapper $isSelectedDone={selectArr.length === 3}>{GridList}</Wrapper>;
+  return <Wrapper>{GridList}</Wrapper>;
 }
 
 export default GirdList;
 
-const Wrapper = styled.ul<{$isSelectedDone: boolean}>`
+const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 36px;

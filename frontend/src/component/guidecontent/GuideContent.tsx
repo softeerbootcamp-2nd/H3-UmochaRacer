@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import SelectFlow from './SelectFlow';
+import TotalEstimate from '../content/totalestimate/TotalEstimate';
 
 function GuideContent() {
+  const [complete, setComplete] = useState(false);
+
   return (
     <Wrapper>
       <Container>
-        <SelectFlow />
+        {complete ? (
+          <TotalEstimate />
+        ) : (
+          <SelectFlow setComplete={setComplete} />
+        )}
       </Container>
     </Wrapper>
   );

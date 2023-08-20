@@ -2,6 +2,7 @@ import {Body2_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
+import {selectData} from '../GuidData';
 
 const Selecticon = () => {
   return (
@@ -38,6 +39,8 @@ const DefaultIcon = () => {
 
 const ageArr: string[] = ['20대', '30대', '40대', '50대', '60대', '70대'];
 const gendersArr: string[] = ['여성', '남성', '선택 안함'];
+const FIRST_FLOW: number = 0;
+const SECOND_FLOW: number = 1;
 
 interface Props {
   flowLevel: number;
@@ -48,12 +51,19 @@ function CardList({flowLevel, onClick}: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleClickCard = (nextIndex: number) => {
+    if (flowLevel === FIRST_FLOW) selectData.age = nextIndex;
+    else selectData.gender = nextIndex;
+
     setSelectedIndex(nextIndex);
   };
 
   const dataArr = flowLevel === 0 ? ageArr : gendersArr;
   const cards = dataArr.map((elem, index) => {
-    const isSelected = selectedIndex === index;
+    let isSelected: boolean;
+
+    if (flowLevel === 0) isSelected = selectData.age === index;
+    else isSelected = selectData.gender === index;
+
     return (
       <Card.Container
         key={index}
