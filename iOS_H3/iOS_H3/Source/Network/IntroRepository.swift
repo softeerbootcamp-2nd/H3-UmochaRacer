@@ -14,15 +14,24 @@ final class IntroRepository: IntroRepositoryProtocol {
         self.networkService = networkService
     }
 
-    func fetchEstimate() -> AnyPublisher<EstimateSummary, Never> {
+    func fetchEstimate() -> AnyPublisher<EstimateSummary, Error> {
         networkService.request(IntroEndpoint.estimate)
-            .map { (result: Result<APIResponse<[EstimateElementData]>, Error>) -> EstimateSummary in
+            .flatMap { (result: Result<APIResponse<[EstimateElementData]>,
+                        Error>) -> AnyPublisher<EstimateSummary, Error> in
                 switch result {
                 case .success(let data):
-                    let array = data.data.map { $0.toDomain() }
-                    return EstimateSummary(elements: array)
+                    do {
+                        let array = try data.data.map { try $0.toDomain() }
+                        return Just(EstimateSummary(elements: array))
+                            .setFailureType(to: Error.self)
+                            .eraseToAnyPublisher()
+                    } catch let error as EstimateElementToEntityError {
+                        return Fail(error: IntroRepositoryError.conversionError(error)).eraseToAnyPublisher()
+                    } catch {
+                        return Fail(error: error).eraseToAnyPublisher()
+                    }
                 case .failure(let error):
-                    return EstimateSummary(elements: [])
+                    return Fail(error: IntroRepositoryError.networkError(error)).eraseToAnyPublisher()
                 }
             }
             .eraseToAnyPublisher()
