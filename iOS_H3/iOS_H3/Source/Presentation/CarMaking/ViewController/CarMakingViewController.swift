@@ -35,6 +35,8 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
+    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -74,7 +76,8 @@ extension CarMakingViewController {
         let input = CarMakingViewModel.Input(
             viewDidLoad: viewDidLoadSubject,
             carMakingStepDidChanged: stepDidChanged,
-            optionDidSelected: optionDidSelected
+            optionDidSelected: optionDidSelected,
+            optionCategoryDidChanged: optionCategoryDidChanged
         )
         let output = viewModel.transform(input)
 
@@ -156,6 +159,10 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
         if let step = CarMakingStep(rawValue: stepIndex) {
             optionDidSelected.send((step, optionIndex))
         }
+    }
+
+    func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
+        optionCategoryDidChanged.send(category)
     }
 }
 

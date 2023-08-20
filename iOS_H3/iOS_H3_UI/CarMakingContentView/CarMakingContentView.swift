@@ -11,6 +11,7 @@ import Combine
 protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
     func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
+    func carMakingContentView(categoryDidSelected category: OptionCategoryType)
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -33,16 +34,16 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - UI properties
 
+    private let carMakingProgressBar: CarMakingProgressBar = {
+        let progressBar = CarMakingProgressBar()
+        return progressBar
+    }()
+
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isScrollEnabled = false
         return collectionView
-    }()
-
-    private let carMakingProgressBar: CarMakingProgressBar = {
-        let progressBar = CarMakingProgressBar()
-        return progressBar
     }()
 
     // MARK: - Properties
@@ -62,7 +63,9 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
-    private var cancellableOfCellByIndex = [Int: AnyCancellable]()
+    private var optionSelectCancellableByIndex = [Int: AnyCancellable]()
+
+    private var optionCategoryTapCancellableByIndex = [Int: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -140,6 +143,28 @@ extension CarMakingContentView {
     }
 }
 
+// MARK: - UICollectionView DelegateFlowLayout
+
+class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
+    let progressBarHeight = 26.0
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = CGSize(width: collectionView.frame.width, height: collectionView.frame.height - progressBarHeight)
+        return height
+    }
+}
+
+// MARK: - CarMakingProgressBar Delegate
+
+extension CarMakingContentView: CarMakingProgressBarDelegate {
+
+    func progressBarButtonDidTapped(didSelectItemAt index: Int) {
+        currentStep = index
+    }
+}
+
 // MARK: - Setup Views
 
 extension CarMakingContentView {
@@ -191,6 +216,8 @@ extension CarMakingContentView {
                                 forCellWithReuseIdentifier: CarMakingTwoOptionCell.identifier)
         collectionView.register(CarMakingMultipleOptionCell.self,
                                 forCellWithReuseIdentifier: CarMakingMultipleOptionCell.identifier)
+        collectionView.register(CarMakingOptionSelectStepCell.self,
+                                forCellWithReuseIdentifier: CarMakingOptionSelectStepCell.identifier)
     }
 
      func setupCollectionViewDataSource() {
@@ -205,16 +232,34 @@ extension CarMakingContentView {
                    ) as? CarMakingCollectionViewCell else {
                  return CarMakingCollectionViewCell()
              }
-             cell.configure(carMakingStepInfo: carMakingStepInfo)
 
-             self?.cancellableOfCellByIndex[indexPath.row] = cell.optionDidSelected
-                 .sink { [weak self] optionIndex in
-                     guard let self else { return }
-                     delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
-                 }
+             cell.configure(carMakingStepInfo: carMakingStepInfo)
+             self?.subscribeCellEvent(of: cell, indexPath: indexPath)
 
              return cell
         }
+    }
+
+    private func subscribeCellEvent(of cell: CarMakingCollectionViewCell, indexPath: IndexPath) {
+        subscribe(optionSelection: cell.optionDidSelected, stepIndex: indexPath.row)
+        if let optionSelectStepCell = cell as? CarMakingOptionSelectStepCell {
+            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, stepIndex: indexPath.row)
+        }
+    }
+
+    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, stepIndex: Int) {
+        optionSelectCancellableByIndex[stepIndex] = optionSelection
+            .sink { [weak self] optionIndex in
+                guard let self else { return }
+                delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
+            }
+    }
+
+    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, stepIndex: Int) {
+        optionCategoryTapCancellableByIndex[stepIndex] = optionCategoryTap
+            .sink { [weak self] category in
+                self?.delegate?.carMakingContentView(categoryDidSelected: category)
+            }
     }
 
     func setupSnapshot() {
@@ -232,26 +277,4 @@ extension CarMakingContentView {
         collectionViewDataSource.apply(snapshot, animatingDifferences: true)
     }
 
-}
-
-// MARK: - UICollectionView DelegateFlowLayout
-
-class FlowLayoutDelegate: NSObject, UICollectionViewDelegateFlowLayout {
-    let progressBarHeight = 26.0
-
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = CGSize(width: collectionView.frame.width, height: collectionView.frame.height - progressBarHeight)
-        return height
-    }
-}
-
-// MARK: - CarMakingProgressBar Delegate
-
-extension CarMakingContentView: CarMakingProgressBarDelegate {
-
-    func progressBarButtonDidTapped(didSelectItemAt index: Int) {
-        currentStep = index
-    }
 }
