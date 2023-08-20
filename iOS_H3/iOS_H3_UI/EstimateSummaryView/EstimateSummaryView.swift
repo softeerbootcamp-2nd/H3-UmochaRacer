@@ -119,6 +119,11 @@ extension EstimateSummaryView {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
 
         collectionView.register(EstimateSummaryCell.self, forCellWithReuseIdentifier: EstimateSummaryCell.identifier)
+        collectionView.register(
+            EstimateSummaryHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: EstimateSummaryHeaderView.identifier
+        )
         setupDataSourceOfCollectionView()
         setupSnapshot()
     }
@@ -126,11 +131,17 @@ extension EstimateSummaryView {
     private func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: screenSize.width, height: Constants.collectionViewCellHeight)
+        flowLayout.headerReferenceSize = CGSize(width: screenSize.width, height: Constants.collectionViewHeaderHeight)
         flowLayout.sectionInset = Constants.collectionViewSectionInset
         return flowLayout
     }
 
     private func setupDataSourceOfCollectionView() {
+        configureCollectionViewCell()
+        configureCollectionViewHeader()
+    }
+
+    private func configureCollectionViewCell() {
         dataSource = DiffableDataSource(
             collectionView: collectionView
         ) { (collectionView, indexPath, item) in
@@ -144,6 +155,30 @@ extension EstimateSummaryView {
             cell.configure(item)
 
             return cell
+        }
+    }
+
+    private func configureCollectionViewHeader() {
+        dataSource.supplementaryViewProvider = { [weak self] (collectionView, kind, indexPath) in
+            if kind != UICollectionView.elementKindSectionHeader { return nil }
+
+            guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: EstimateSummaryHeaderView.identifier,
+                for: indexPath
+            ) as? EstimateSummaryHeaderView else {
+                return EstimateSummaryHeaderView()
+            }
+
+            let snapshot = self?.dataSource.snapshot()
+            guard let section = snapshot?.sectionIdentifiers[indexPath.section],
+                  let sectionItems = snapshot?.itemIdentifiers(inSection: section) else {
+                return header
+            }
+            let price = sectionItems.reduce(0) { $0 + $1.price }
+
+            header.configure(title: section.title, price: price)
+            return header
         }
     }
 
