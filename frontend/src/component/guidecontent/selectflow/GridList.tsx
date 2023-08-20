@@ -35,6 +35,8 @@ const GridData: GridData[] = [
   {comment: '나는 차를 이렇게 활용하고 싶어요', category: ['차박', '가족여행']},
 ];
 
+const MAX_LENGTH: number = 3;
+
 function GirdList() {
   const [selectArr, setSelectArr] = useState<string[]>([]);
 
@@ -69,7 +71,7 @@ function GirdList() {
                     key={categoryIndex}
                     onClick={handleClickCard}
                     $isSelected={selectedIndex > -1}
-                    $isSelectDone={selectArr.length === 3}
+                    $isSelectDone={selectArr.length === MAX_LENGTH}
                   >
                     <Card.Option>{categoryData}</Card.Option>
                     <Card.IconBox

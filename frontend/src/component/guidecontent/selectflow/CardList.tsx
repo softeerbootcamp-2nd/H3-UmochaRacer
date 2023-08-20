@@ -41,9 +41,10 @@ const gendersArr: string[] = ['여성', '남성', '선택 안함'];
 
 interface Props {
   flowLevel: number;
+  onClick: (index: number) => void;
 }
 
-function CardList({flowLevel}: Props) {
+function CardList({flowLevel, onClick}: Props) {
   const [selectedIndex, setSelectedIndex] = useState<number>(-1);
 
   const handleClickCard = (nextIndex: number) => {
@@ -59,6 +60,7 @@ function CardList({flowLevel}: Props) {
         $isSelected={isSelected}
         onClick={() => {
           handleClickCard(index);
+          onClick(flowLevel + 1);
         }}
       >
         <Card.Category>{elem}</Card.Category>

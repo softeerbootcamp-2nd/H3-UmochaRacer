@@ -29,49 +29,67 @@ const flowTextArr: FlowDescription[] = [
   },
 ];
 
+const LAST_FLOW_NUM: number = 2;
+const FLOW_NUM = 3;
+
+const CircleIcon = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="33"
+      height="33"
+      viewBox="0 0 33 33"
+      fill="none"
+    >
+      <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
+    </svg>
+  );
+};
+
 function SelectFlow() {
-  const [flowLevel, setFlowLevel] = useState(1);
+  const [flowLevel, setFlowLevel] = useState(0);
+  const handleCardClick = (nextFlow: number) => {
+    setFlowLevel(nextFlow);
+  };
+
+  const icons: React.JSX.Element[] = Array.from({length: FLOW_NUM}).map(
+    (_, index) => {
+      return (
+        <Left.IconBox
+          key={index}
+          onClick={() => {
+            handleCardClick(index);
+          }}
+        >
+          {CircleIcon()}
+        </Left.IconBox>
+      );
+    },
+  );
+
   return (
     <Wrapper>
       <FlowContainer.Left>
-        <Left.Level>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
-            fill="none"
-          >
-            <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
-            fill="none"
-          >
-            <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
-          </svg>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="33"
-            height="33"
-            viewBox="0 0 33 33"
-            fill="none"
-          >
-            <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
-          </svg>
-        </Left.Level>
+        <Left.Level>{icons}</Left.Level>
         <Left.Comment>{flowTextArr[flowLevel].comment}</Left.Comment>
         <Left.SelectionText>
           {flowTextArr[flowLevel].suggest}
         </Left.SelectionText>
         <Left.Tip>{flowTextArr[flowLevel].tip}</Left.Tip>
-        <Left.Button $isVisible={flowLevel === 2}>선택완료</Left.Button>
+        <Left.Button $isVisible={flowLevel === LAST_FLOW_NUM}>
+          선택완료
+        </Left.Button>
       </FlowContainer.Left>
       <FlowContainer.Right>
-        {flowLevel !== 2 ? <CardList flowLevel={flowLevel} /> : <GridList />}
+        {flowLevel !== LAST_FLOW_NUM ? (
+          <CardList
+            key={flowLevel}
+            flowLevel={flowLevel}
+            onClick={handleCardClick}
+          />
+        ) : (
+          <GridList />
+        )}
       </FlowContainer.Right>
     </Wrapper>
   );
@@ -112,6 +130,11 @@ const Left = {
     height: 33px;
     gap: 16px;
   `,
+  IconBox: styled.div`
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+  `,
   Comment: styled.div`
     ${Title3_Regular}
     font-size: 32px;
@@ -138,7 +161,7 @@ const Left = {
     height: 59px;
     border-radius: 6px;
     opacity: ${({$isVisible}) => ($isVisible ? 1 : 0)};
-    pointer-events: none;
+    pointer-events: ${({$isVisible}) => ($isVisible ? '' : 'none')};
     color: ${colors.Hyundai_White};
     background: ${colors.Main_Hyundai_Blue};
     transition: 0.5s;
