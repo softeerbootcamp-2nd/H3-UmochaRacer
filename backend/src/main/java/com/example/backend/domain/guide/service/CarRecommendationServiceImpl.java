@@ -31,16 +31,16 @@ public class CarRecommendationServiceImpl implements CarRecommendationService {
         if (field.equals("wheel"))
             return getRecommendWheelList(field, estimate);
         if (field.contains("color"))
-            return optionRecommendationHandler.findTopSalesCountOfColorAndWheel(field, estimate.getGender(), estimate.getAge());
+            return optionRecommendationHandler.findTopSalesCountOfColor(field, estimate.getGender(), estimate.getAge());
         return getRecommendBaseOptionList(field, estimate);
     }
 
     private List<Long> getRecommendWheelList(String field, EstimateRequest estimate) {
         List<Long> tagList = estimate.getTagList();
-        if(tagList.contains(1L) || tagList.contains(10L))
+        if(tagList.contains(5L) && (tagList.contains(1L) || tagList.contains(10L)))
             return List.of(4L);
         if(tagList.contains(5L))
-            return optionRecommendationHandler.findTopSalesCountOfColorAndWheel(field, estimate.getGender(), estimate.getAge());
+            return optionRecommendationHandler.findTopSalesCountOfWheel(estimate.getGender(), estimate.getAge());
         return List.of(1L);
     }
 

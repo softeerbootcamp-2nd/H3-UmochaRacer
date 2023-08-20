@@ -28,7 +28,11 @@ public class OptionRecommendationHandlerImpl implements OptionRecommendationHand
         return tagOptionRepository.findOptionIdByGenderAge(category, gender, age);
     }
 
-    public List<Long> findTopSalesCountOfColorAndWheel(String category, Gender gender, int age) {
-        return tagOptionRepository.findColorOrWheelIdByGenderAge(category, gender, age);
+    public List<Long> findTopSalesCountOfColor(String category, Gender gender, int age) {
+        return tagOptionRepository.findColorIdByGenderAge(category, gender, age);
+    }
+
+    public List<Long> findTopSalesCountOfWheel(Gender gender, int age) {
+        return tagOptionRepository.findWheelIdByGenderAge(gender, age);
     }
 }

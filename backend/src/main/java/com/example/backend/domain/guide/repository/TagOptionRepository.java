@@ -39,7 +39,7 @@ public class TagOptionRepository {
         return jdbcTemplate.query(query, getRowMapperOfField(category));
     }
 
-    public List<Long> findColorOrWheelIdByGenderAge(String category, Gender gender, int age) {
+    public List<Long> findColorIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM SALES s\n" +
                 "JOIN (SELECT id FROM MODEL WHERE trim_id = 1) AS m on s.model_id = m.id\n" +
@@ -47,5 +47,14 @@ public class TagOptionRepository {
                 " GROUP BY s." + category_id + " ORDER BY select_count DESC LIMIT 1";
 
         return jdbcTemplate.query(query, getRowMapperOfField(category));
+    }
+
+    public List<Long> findWheelIdByGenderAge(Gender gender, int age) {
+        String query = "SELECT s.wheel_id, COUNT(*) as select_count FROM SALES s\n" +
+                "JOIN (SELECT id FROM MODEL WHERE trim_id = 1) AS m on s.model_id = m.id\n" +
+                "WHERE (s.wheel_id = 2 OR s.wheel_id = 3) AND " + gender.getQueryString() + age + "<= s.age <" + (age+10) +
+                " GROUP BY s.wheel_id ORDER BY select_count DESC LIMIT 1";
+
+        return jdbcTemplate.query(query, getRowMapperOfField("wheel"));
     }
 }
