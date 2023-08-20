@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
-import {selectData} from './GuidData';
+import {selectData, MAX_LENGTH} from './GuidData';
 import GridList from './selectflow/GridList';
 import CardList from './selectflow/CardList';
 import {flexCenter} from '@/style/common';
@@ -178,6 +178,7 @@ function SelectFlow({setComplete}: Props) {
         <Left.Button
           $isVisible={flowLevel === LAST_FLOW_NUM}
           onClick={() => {
+            if (selectData.option.length < MAX_LENGTH) return;
             setComplete(true);
           }}
         >

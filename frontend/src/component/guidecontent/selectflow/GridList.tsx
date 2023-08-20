@@ -3,7 +3,7 @@ import styled, {css} from 'styled-components';
 import {Body1_Regular, Body2_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {flexCenter} from '@/style/common';
-import {GridData, gridData, selectData} from '../GuidData';
+import {GridData, gridData, selectData, MAX_LENGTH} from '../GuidData';
 
 const Circle = () => {
   return (
@@ -18,8 +18,6 @@ const Circle = () => {
     </svg>
   );
 };
-
-const MAX_LENGTH: number = 3;
 
 function GirdList() {
   const [selectArr, setSelectArr] = useState<string[]>([]);

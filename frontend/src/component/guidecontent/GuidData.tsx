@@ -26,3 +26,5 @@ export const selectData: SelectData = {
   gender: undefined,
   option: [],
 };
+
+export const MAX_LENGTH: number = 3;
