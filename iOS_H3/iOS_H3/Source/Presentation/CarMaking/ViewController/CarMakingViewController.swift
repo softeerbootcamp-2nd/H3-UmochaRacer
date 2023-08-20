@@ -165,7 +165,7 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        
+
         carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
                                           feedbackDescription: viewModel.feedbackDescription)
     }
