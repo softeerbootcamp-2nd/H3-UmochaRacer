@@ -44,7 +44,7 @@ final class EstimateSummaryCell: UICollectionViewCell {
     func configure(_ data: EstimateSummaryElement) {
         carMakingStepLabel.text = data.stepName
         optionTitleLabel.text = data.selectedOption
-        priceLabel.text = "\(String.priceString(from: data.price))원"
+        priceLabel.text = "+ \(String.priceString(from: data.price))원"
     }
 }
 
