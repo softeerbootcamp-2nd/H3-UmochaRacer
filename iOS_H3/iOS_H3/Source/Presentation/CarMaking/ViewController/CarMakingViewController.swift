@@ -50,7 +50,7 @@ final class CarMakingViewController: UIViewController {
         self.viewModel = CarMakingViewModel(selfModeUsecase:
                                                 SelfModeUsecase(carInfoRepository:
                                                                     CarInfoRepository(networkService:
-                                                                                        NetworkService())))
+                                                                                        NetworkService()), introRepsitory: IntroRepository(networkService: NetworkService())))
         super.init(coder: coder)
     }
 
