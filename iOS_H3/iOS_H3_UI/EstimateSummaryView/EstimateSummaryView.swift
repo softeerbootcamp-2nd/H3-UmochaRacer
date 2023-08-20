@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class EstimateSummaryView: UIView {
+final class EstimateSummaryView: UIScrollView {
 
     // MARK: - UI properties
 
@@ -34,14 +34,26 @@ final class EstimateSummaryView: UIView {
     }
 }
 
+// MARK: - Setup
+
 extension EstimateSummaryView {
+
     private func setupViews() {
         let image = UIImage(named: "temp_estimateSummary")
         imageView.image = image
         imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        setupConstraints()
+    }
 
         addSubview(imageView)
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            contentLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+    }
+    }
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: self.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
