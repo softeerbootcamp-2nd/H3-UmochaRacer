@@ -9,9 +9,17 @@ import UIKit
 
 final class EstimateSummaryView: UIScrollView {
 
+    enum Constants {
+        static let titleLabelTopOffset = 17.5
+        static let labelSideOffset = 20.0
+        static let labelHeight = 26.0
+    }
+
     // MARK: - UI properties
 
-    private let imageView = UIImageView()
+    private let titleLabel = UILabel()
+
+    private let priceLabel = UILabel()
 
     // MARK: - Lifecycles
 
@@ -39,26 +47,56 @@ final class EstimateSummaryView: UIScrollView {
 extension EstimateSummaryView {
 
     private func setupViews() {
-        let image = UIImage(named: "temp_estimateSummary")
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFill
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        setupUIProperties()
+        addSubviews()
         setupConstraints()
     }
 
-        addSubview(imageView)
+    private func setupUIProperties() {
+        setupTitleLabel()
+        setupPriceLabel()
+    }
+
+    private func addSubviews() {
+        [titleLabel, priceLabel].forEach { addSubview($0) }
+    }
+
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor),
             contentLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
+        setupTitleLabelConstraints()
+        setupPriceLabelConstraints()
     }
+
+    private func setupTitleLabel() {
+        titleLabel.font = Fonts.mediumTitle3
+        titleLabel.text = "견적 요약"
+        titleLabel.textColor = Colors.coolGreyBlack
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
     }
+
+    private func setupPriceLabel() {
+        priceLabel.font = Fonts.mediumTitle2
+        priceLabel.text = "0원"
+        priceLabel.textColor = Colors.mainHyundaiBlue
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+    }
+
+    private func setupTitleLabelConstraints() {
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: self.topAnchor),
-            imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
+            titleLabel.topAnchor.constraint(equalTo: topAnchor, constant: Constants.titleLabelTopOffset),
+            titleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.labelSideOffset),
+            titleLabel.heightAnchor.constraint(equalToConstant: Constants.labelHeight)
+        ])
+    }
+
+    private func setupPriceLabelConstraints() {
+        NSLayoutConstraint.activate([
+            priceLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
+            priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.labelSideOffset),
+            priceLabel.heightAnchor.constraint(equalTo: titleLabel.heightAnchor)
         ])
     }
 }
