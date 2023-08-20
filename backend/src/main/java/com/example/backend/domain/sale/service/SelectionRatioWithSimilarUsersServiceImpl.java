@@ -16,11 +16,22 @@ import java.util.List;
 public class SelectionRatioWithSimilarUsersServiceImpl implements SelectionRatioWithSimilarUsersService {
     private final SalesTemplateRepository repository;
     private final SummaryMapper summaryMapper;
+
     @Override
     public List<SalesSummaryResponse> calculateSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest) {
         List<SalesSummary> summaries = repository.findSelectionRatioWithSimilarUsers(target, estimateRequest);
+        return getSortedSalesSummaryResponses(summaries);
+    }
+
+    @Override
+    public List<SalesSummaryResponse> calculateSelectionRatioWitSameAgeAndGender(String target, EstimateRequest estimateRequest) {
+        List<SalesSummary> summaries = repository.findSelectionRatioWithSameAgeAndGender(target, estimateRequest);
+        return getSortedSalesSummaryResponses(summaries);
+    }
+
+    private List<SalesSummaryResponse> getSortedSalesSummaryResponses(List<SalesSummary> summaries) {
         List<SalesSummaryResponse> result = summaryMapper.map(summaries);
-        Collections.sort(result, (o1, o2)-> o2.getSelectionRatio() - o1.getSelectionRatio());
+        Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
         return result;
     }
 }

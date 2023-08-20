@@ -45,11 +45,20 @@ public class SaleRatioController {
     }
 
     @PostMapping("/{target:powertrain|bodytype|driving-system}/tag")
-    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> re(
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedCarComponentSalesRatio(
             @PathVariable("target") String target,
             @RequestBody EstimateRequest estimateRequest
     ) {
         List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithSimilarUsers(target, estimateRequest);
+        return mapToOKResponse(result);
+    }
+
+    @PostMapping("/{target:exterior-color|interior-color}/tag")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+            @PathVariable("target") String target,
+            @RequestBody EstimateRequest estimateRequest
+    ) {
+        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWitSameAgeAndGender(target, estimateRequest);
         return mapToOKResponse(result);
     }
 

@@ -116,4 +116,24 @@ public class SalesTemplateRepository {
                 "with rollup";
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
+
+    public List<SalesSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
+        String targetId = transUriToColumnId(target);
+        int age = estimateRequest.getAge();
+
+        String query = "with joined as (select " + targetId + ", age, gender\n" +
+                "                from SALES s\n" +
+                "                         join MODEL m on s.model_id = m.id\n" +
+                "                where m.trim_id = 1)\n" +
+                "\n" +
+                "select " + targetId + " as id,\n" +
+                "             count(" + targetId + ") as select_count \n" +
+                "      from joined\n" +
+                "      WHERE\n" +
+                "              (" + age + "<=age and age<=" + (age + 9) + " and gender = 'MALE')\n" +
+                "      group by " + targetId + "\n" +
+                "with rollup";
+
+        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
 }
