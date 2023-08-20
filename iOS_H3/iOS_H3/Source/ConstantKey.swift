@@ -9,6 +9,6 @@ import Foundation
 
 class ConstantKey {
     private init() {}
-    static let baseURL = "http://43.202.37.97:9999/api/"
+    static let baseURL = "http://umocha-racer.team:9999/api/v1/"
 
 }
