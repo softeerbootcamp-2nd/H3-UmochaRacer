@@ -31,7 +31,11 @@ final class CarMakingViewModel {
     // MARK: - Properties
 
     private var cancellables = Set<AnyCancellable>()
+
     private let selfModeUsecase: SelfModeUsecaseProtocol
+
+    var feedbackTitle: String = ""
+    var feedbackDescription: String = ""
 
     // MARK: - Lifecycles
 

@@ -105,6 +105,14 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         }
         optionButtonListView.reloadOptionCards(with: optionInfoArray)
     }
+
+    func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+        if let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable {
+            optionButtonListView.playFeedbackAnimation(feedbackTitle: title,
+                                                       feedbackDescription: description,
+                                                       completion: completion)
+        }
+    }
 }
 
 // MARK: - OptionCardButtonListView Delegate
