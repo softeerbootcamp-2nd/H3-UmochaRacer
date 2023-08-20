@@ -1,8 +1,8 @@
 package com.example.backend.domain.sale.service;
 
-import com.example.backend.domain.sale.dto.SalesSummaryResponse;
+import com.example.backend.domain.sale.dto.RatioSummaryResponse;
 import com.example.backend.domain.sale.dto.TagRatioRequest;
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.repository.TagRatioTemplateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,22 +15,22 @@ import java.util.List;
 public class TagSelectionRatioService {
     private final TagRatioTemplateRepository tagRatioTemplateRepository;
 
-    public List<SalesSummaryResponse> getSelectionRatio(TagRatioRequest request) {
+    public List<RatioSummaryResponse> getSelectionRatio(TagRatioRequest request) {
         List<Long> tagList = getRelatedTagList(request.getTagList(), request.getCategory(), request.getOptionId());
-        List<SalesSummaryResponse> result = new ArrayList<>();
+        List<RatioSummaryResponse> result = new ArrayList<>();
         for(Long tagId: tagList) {
-            List<SalesSummary> optionCount = getOptionSelectionRatioWithTag(tagId, request.getCategory(), request.getOptionId());
+            List<RatioSummary> optionCount = getOptionSelectionRatioWithTag(tagId, request.getCategory(), request.getOptionId());
             int ratio = calculateRatio(optionCount);
-            result.add(new SalesSummaryResponse(tagId, ratio));
+            result.add(new RatioSummaryResponse(tagId, ratio));
         }
         return result;
     }
 
-    private int calculateRatio(List<SalesSummary> optionCount) {
+    private int calculateRatio(List<RatioSummary> optionCount) {
         return (int)(100 * optionCount.get(0).getSelectionCount() / optionCount.get(1).getSelectionCount());
     }
 
-    private List<SalesSummary> getOptionSelectionRatioWithTag(Long tagId, String category, Long optionId) {
+    private List<RatioSummary> getOptionSelectionRatioWithTag(Long tagId, String category, Long optionId) {
         if(category.contains("option"))
             return tagRatioTemplateRepository.findAdditionalOptionCount(tagId, category, optionId);
         if(category.contains("color") || category.contains("wheel"))

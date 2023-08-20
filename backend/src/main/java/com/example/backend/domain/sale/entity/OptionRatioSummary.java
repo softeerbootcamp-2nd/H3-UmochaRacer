@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class OptionSalesSummary extends SalesSummary {
+public class OptionRatioSummary extends RatioSummary {
     private int totalCount;
 
-    public OptionSalesSummary(long id, int selectCount, int totalCount) {
+    public OptionRatioSummary(long id, int selectCount, int totalCount) {
         super(id, selectCount);
         this.totalCount = totalCount;
     }

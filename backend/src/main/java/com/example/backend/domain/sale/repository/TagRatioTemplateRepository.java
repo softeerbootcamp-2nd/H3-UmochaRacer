@@ -1,6 +1,6 @@
 package com.example.backend.domain.sale.repository;
 
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,7 +27,7 @@ public class TagRatioTemplateRepository {
         });
     }
 
-    public List<SalesSummary> findBaseOptionCount(Long tagId, String category, Long optionId) {
+    public List<RatioSummary> findBaseOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT m." + category_id + " AS id, COUNT(*) AS select_count FROM SALES s \n" +
                 "JOIN MODEL m ON s.model_id = m.id \n" +
@@ -38,7 +38,7 @@ public class TagRatioTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
-    public List<SalesSummary> findColorWheelOptionCount(Long tagId, String category, Long optionId) {
+    public List<RatioSummary> findColorWheelOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT " + category_id + " AS id, COUNT(*) AS select_count FROM SALES \n" +
                 "WHERE (tag1 = " + tagId + " OR tag2 = " + tagId + " OR tag3 = " + tagId + " )\n" +
@@ -48,7 +48,7 @@ public class TagRatioTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
-    public List<SalesSummary> findAdditionalOptionCount(Long tagId, String category, Long optionId) {
+    public List<RatioSummary> findAdditionalOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT so." + category_id + " AS id, COUNT(*) AS select_count FROM SALES s \n" +
                         "JOIN SALES_OPTIONS so ON s.id = so.sales_id \n" +

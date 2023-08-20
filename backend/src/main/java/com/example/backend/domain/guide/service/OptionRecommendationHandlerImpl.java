@@ -10,7 +10,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class JYOptionRecommendationHandler implements OptionRecommendationHandler {
+public class OptionRecommendationHandlerImpl implements OptionRecommendationHandler {
     private final TagOptionRepository tagOptionRepository;
 
     @Override

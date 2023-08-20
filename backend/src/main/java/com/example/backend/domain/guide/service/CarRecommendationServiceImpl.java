@@ -9,8 +9,8 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class JYCarRecommendationService implements CarRecommendationService {
-    private final JYOptionRecommendationHandler optionRecommendationHandler;
+public class CarRecommendationServiceImpl implements CarRecommendationService {
+    private final OptionRecommendationHandlerImpl optionRecommendationHandler;
 
     @Override
     public FinalEstimateResponse estimate(EstimateRequest estimate) {

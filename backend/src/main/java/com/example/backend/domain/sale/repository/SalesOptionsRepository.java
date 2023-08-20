@@ -1,7 +1,7 @@
 package com.example.backend.domain.sale.repository;
 
 import com.example.backend.domain.sale.entity.SalesOptions;
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,5 +21,5 @@ public interface SalesOptionsRepository extends CrudRepository<SalesOptions, Lon
                     "GROUP BY so.additional_option_id",
             rowMapperClass = SelectionRatioRowMapper.class
     )
-    List<SalesSummary> findSalesRatio(String category);
+    List<RatioSummary> findSalesRatio(String category);
 }

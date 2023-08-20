@@ -1,7 +1,7 @@
 package com.example.backend.domain.sale.repository;
 
 import com.example.backend.domain.sale.entity.Sales;
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -17,7 +17,7 @@ public interface SalesRepository extends CrudRepository<Sales, Long> {
             "group by id\n" +
             "with rollup",
             rowMapperClass = SelectionRatioRowMapper.class)
-    List<SalesSummary> findSalesRatio(String columnId);
+    List<RatioSummary> findSalesRatio(String columnId);
 
     @Query(value = "SELECT count(*) FROM SALES")
     Integer getTotalSales();

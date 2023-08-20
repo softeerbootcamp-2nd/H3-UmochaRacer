@@ -5,7 +5,7 @@ import com.example.backend.domain.global.model.enums.ResultCode;
 import com.example.backend.domain.guide.dto.EstimateRequest;
 import com.example.backend.domain.guide.dto.FinalEstimateResponse;
 import com.example.backend.domain.guide.dto.TagListResponse;
-import com.example.backend.domain.guide.service.JYCarRecommendationService;
+import com.example.backend.domain.guide.service.CarRecommendationServiceImpl;
 import com.example.backend.domain.guide.service.TagService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/api/v1/guide")
 public class TagController {
     private final TagService tagService;
-    private final JYCarRecommendationService jyCarRecommendationService;
+    private final CarRecommendationServiceImpl carRecommendationServiceImpl;
 
     @GetMapping("/tag")
     public ResponseEntity<ResponseDto<List<TagListResponse>>> returnAllTagWithCategory() {
@@ -32,7 +32,7 @@ public class TagController {
     public ResponseEntity<ResponseDto<FinalEstimateResponse>> returnGuideOption(
             @RequestBody EstimateRequest request
     ) {
-        FinalEstimateResponse result = jyCarRecommendationService.estimate(request);
+        FinalEstimateResponse result = carRecommendationServiceImpl.estimate(request);
         ResponseDto<FinalEstimateResponse> body = ResponseDto.of(result, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
