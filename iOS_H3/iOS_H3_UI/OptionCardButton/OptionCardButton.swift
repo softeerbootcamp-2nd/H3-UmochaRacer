@@ -214,7 +214,9 @@ class OptionCardButton: UIButton {
     }
 
     func animateButton(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        animatedView.showWithAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription, completion: completion)
+        animatedView.showWithAnimation(feedbackTitle: feedbackTitle,
+                                       feedbackDescription: feedbackDescription,
+                                       completion: completion)
     }
 
     func resetAnimatedView() {
