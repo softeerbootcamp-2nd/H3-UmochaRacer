@@ -51,6 +51,7 @@
 		4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
 		4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
 		4762D4602A921B22007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
+		4762D4622A92504A007F312D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4612A92504A007F312D /* String+.swift */; };
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
@@ -229,6 +230,7 @@
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryCell.swift; sourceTree = "<group>"; };
 		4762D45E2A9219DC007F312D /* CarMakingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingCategory.swift; sourceTree = "<group>"; };
+		4762D4612A92504A007F312D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
 		4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -421,6 +423,7 @@
 				5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */,
 				479023B52A8B231200DECB70 /* URL+.swift */,
 				479023B82A8B231D00DECB70 /* URLRequest+.swift */,
+				4762D4612A92504A007F312D /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1138,6 +1141,7 @@
 				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F2116E92A8EE5C4008FC7D2 /* EstimateElementData.swift in Sources */,
+				4762D4622A92504A007F312D /* String+.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
 				5F4834AC2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift in Sources */,
 				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
