@@ -8,8 +8,9 @@
 import UIKit
 
 final class EstimateSummaryCell: UICollectionViewCell {
-    
+
     enum Constants {
+        static let inset = 20.0
         static let carMakingStepLabelWidth = 70.0
         static let titleLabelLeadingOffset = 10.0
     }
@@ -86,7 +87,7 @@ extension EstimateSummaryCell {
     private func setupCarMakingStepLabelConstraints() {
         NSLayoutConstraint.activate([
             carMakingStepLabel.topAnchor.constraint(equalTo: topAnchor),
-            carMakingStepLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            carMakingStepLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.inset),
             carMakingStepLabel.bottomAnchor.constraint(equalTo: bottomAnchor),
             carMakingStepLabel.widthAnchor.constraint(equalToConstant: Constants.carMakingStepLabelWidth)
         ])
@@ -103,7 +104,7 @@ extension EstimateSummaryCell {
     private func setupPriceLabelConstraints() {
         NSLayoutConstraint.activate([
             priceLabel.topAnchor.constraint(equalTo: carMakingStepLabel.topAnchor),
-            priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            priceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.inset),
             priceLabel.bottomAnchor.constraint(equalTo: carMakingStepLabel.bottomAnchor)
         ])
     }
