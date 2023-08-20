@@ -10,11 +10,12 @@ import java.util.List;
 public class InitialService {
     public List<EstimateResponse> initializeEstimate() {
         List<EstimateResponse> estimateResponses = new ArrayList<>();
-        estimateResponses.add(new EstimateResponse("파워트레인", "가솔린3.8", "car", 0));
-        estimateResponses.add(new EstimateResponse("구동 방식", "2WD", "car", 0));
-        estimateResponses.add(new EstimateResponse("바디 타입", "7인승", "car", 0));
-        estimateResponses.add(new EstimateResponse("외장 색상", "어비스 블랙 펄", "color", 0));
-        estimateResponses.add(new EstimateResponse("내장 색상", "퀼팅 천연(블랙)", "color", 0));
+        // 카테고리: car, key; 파워트레인, value: 가솔린3.8
+        estimateResponses.add(new EstimateResponse("car", "파워트레인", "가솔린3.8", 0));
+        estimateResponses.add(new EstimateResponse("car", "구동 방식", "2WD", 0));
+        estimateResponses.add(new EstimateResponse("car", "바디 타입", "7인승", 0));
+        estimateResponses.add(new EstimateResponse("color", "외장 색상", "어비스 블랙 펄", 0));
+        estimateResponses.add(new EstimateResponse("color", "내장 색상", "퀼팅 천연(블랙)", 0));
         return estimateResponses;
     }
 
