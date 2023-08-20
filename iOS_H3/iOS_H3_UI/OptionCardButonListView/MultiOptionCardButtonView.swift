@@ -141,7 +141,7 @@ extension MultiOptionCardButtonView: UICollectionViewDelegate {
         if willDisplayingCellIndexPath != indexPath {
             delegate?.optionCardButtonListView(self, didDisplayOptionAt: willDisplayingCellIndexPath.row)
         }
-        
+
     }
 }
 
