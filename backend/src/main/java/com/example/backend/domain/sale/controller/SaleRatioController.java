@@ -44,7 +44,7 @@ public class SaleRatioController {
         return mapToOKResponse(result);
     }
 
-    @PostMapping("/{target}/tag")
+    @PostMapping("/{target:powertrain|bodytype|driving-system}/tag")
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> re(
             @PathVariable("target") String target,
             @RequestBody EstimateRequest estimateRequest
