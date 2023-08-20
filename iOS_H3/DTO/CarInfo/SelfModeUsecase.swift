@@ -86,10 +86,12 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
         var elements = currentEstimateSummary.elements
         if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
-            let newElement = EstimateSummaryElement(stepName: step.title,
-                                                    selectedOption: selectedOption.title,
-                                                    category: selectedOption.title,
-                                                    price: Int(selectedOption.priceString) ?? 0)
+            let newElement = EstimateSummaryElement(
+                stepName: step.title,
+                selectedOption: selectedOption.title,
+                category: elements[index].category,
+                price: Int(selectedOption.priceString) ?? 0
+            )
             elements[index] = newElement
         }
 
