@@ -14,7 +14,7 @@ enum SelfModeUsecaseError: Error {
 }
 
 protocol SelfModeUsecaseProtocol {
-    func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never>
+    func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, SelfModeUsecaseError>
 
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
 

@@ -10,15 +10,26 @@ import Combine
 class SelfModeUsecase: SelfModeUsecaseProtocol {
 
     private let carInfoRepository: CarInfoRepositoryProtocol
+    private let introRepsitory: IntroRepositoryProtocol
     private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
 
-    init(carInfoRepository: CarInfoRepositoryProtocol) {
+    init(carInfoRepository: CarInfoRepositoryProtocol,
+         introRepsitory: IntroRepositoryProtocol) {
         self.carInfoRepository = carInfoRepository
+        self.introRepsitory = introRepsitory
     }
 
-    func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, Never> {
-        return carInfoRepository
+    func fetchInitialEstimate() -> AnyPublisher<EstimateSummary, SelfModeUsecaseError> {
+        return introRepsitory
             .fetchEstimate()
+            .mapError { error -> SelfModeUsecaseError in
+                switch error {
+                case is IntroRepositoryError:
+                    return .conversionError
+                default:
+                    return .networkError
+                }
+            }
             .handleEvents(receiveOutput: { estimate in
                 self.currentEstimateSummary = estimate
             })
