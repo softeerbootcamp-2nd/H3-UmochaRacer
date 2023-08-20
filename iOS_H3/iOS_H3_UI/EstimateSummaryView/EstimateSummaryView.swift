@@ -18,6 +18,13 @@ final class EstimateSummaryView: UIScrollView {
         static let collectionViewHeaderHeight = 38.0
         static let collectionViewSectionInset = UIEdgeInsets(top: 27, left: 0, bottom: 27, right: 0)
         static let collectionViewTopOffset = 36.0
+        static let collectionViewItemSpacing = 10.0
+
+        static let collectionViewDefaultHeight = (
+            collectionViewHeaderHeight +
+            collectionViewSectionInset.top +
+            collectionViewSectionInset.bottom
+        ) * Double(CarMakingCategory.allCases.count)
     }
 
     typealias DiffableDataSource = UICollectionViewDiffableDataSource<CarMakingCategory, EstimateSummaryElement>
@@ -35,6 +42,10 @@ final class EstimateSummaryView: UIScrollView {
     private lazy var screenSize = window?.windowScene?.screen.bounds.size ?? UIWindow().screen.bounds.size
 
     private var dataSource: DiffableDataSource!
+
+    private lazy var collectionViewHeightConstraint = collectionView.heightAnchor.constraint(
+        equalToConstant: Constants.collectionViewDefaultHeight
+    )
 
     // MARK: - Lifecycles
 
@@ -55,6 +66,7 @@ final class EstimateSummaryView: UIScrollView {
     func configure(_ data: EstimateSummary) {
         updatePriceLabel(data)
         updateSnapshot(item: data.elements)
+        updateCollectionViewHeight(data.elements)
     }
 }
 
@@ -77,7 +89,18 @@ extension EstimateSummaryView {
             snapshot.appendItems([element], toSection: element.category)
         }
 
-        dataSource.apply(snapshot)
+        DispatchQueue.main.async { [weak self] in
+            self?.dataSource.apply(snapshot)
+        }
+    }
+
+    private func updateCollectionViewHeight(_ item: [EstimateSummaryElement]) {
+        var newHeight = Constants.collectionViewDefaultHeight
+        newHeight += (Constants.collectionViewCellHeight + Constants.collectionViewItemSpacing) * Double(item.count)
+        newHeight -= Double(CarMakingCategory.allCases.count) * Constants.collectionViewItemSpacing
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionViewHeightConstraint.constant = newHeight
+        }
     }
 }
 
@@ -131,6 +154,7 @@ extension EstimateSummaryView {
     private func createFlowLayout() -> UICollectionViewFlowLayout {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = CGSize(width: screenSize.width, height: Constants.collectionViewCellHeight)
+        flowLayout.minimumInteritemSpacing = Constants.collectionViewItemSpacing
         flowLayout.headerReferenceSize = CGSize(width: screenSize.width, height: Constants.collectionViewHeaderHeight)
         flowLayout.sectionInset = Constants.collectionViewSectionInset
         return flowLayout
@@ -199,8 +223,7 @@ extension EstimateSummaryView {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             contentLayoutGuide.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentLayoutGuide.bottomAnchor.constraint(equalTo: bottomAnchor)
+            contentLayoutGuide.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         setupTitleLabelConstraints()
         setupPriceLabelConstraints()
@@ -231,7 +254,8 @@ extension EstimateSummaryView {
             ),
             collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: contentLayoutGuide.bottomAnchor),
+            collectionViewHeightConstraint
         ])
     }
 }
