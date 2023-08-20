@@ -9,21 +9,74 @@ import UIKit
 
 class NoImageDetailPopupViewController: UIViewController {
 
+    // MARK: - UI properties
+    @IBOutlet weak var exitButton: UIButton!
+
+    @IBOutlet weak var subTitleLabel: UILabel!
+
+    @IBOutlet weak var titleLabel: UILabel!
+
+    @IBOutlet weak var additionalInfoContainerView: UIView!
+    
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    @IBOutlet weak var additionalInfoLabel: UILabel!
+    
+    @IBOutlet weak var infoContainerHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var pageControlContainerView: UIView!
+    
+    
+    // MARK: - Properties
+    
+    // MARK: - Lifecycles
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        setupViews()
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    
+    // MARK: - Helpers
+    
+    @IBAction func didTapExitButton(_ sender: UIButton) {
+        self.dismiss(animated: false)
     }
-    */
-
+    
 }
+
+extension NoImageDetailPopupViewController{
+    private func setupViews(){
+        setupFonts()
+        setupColors()
+        setupPagingControlView(pageCount: 3)
+    }
+    
+    private func setupFonts(){
+        self.subTitleLabel.font = Fonts.regularTitle6
+        self.titleLabel.font = Fonts.mediumTitle4
+        self.descriptionTextView.font = Fonts.regularBody2
+        additionalInfoLabel.font = Fonts.regularBody2
+    }
+    
+    private func setupColors(){
+        additionalInfoContainerView.backgroundColor = Colors.coolGrey1
+        self.subTitleLabel.textColor = Colors.coolGrey3
+        additionalInfoLabel.textColor = Colors.coolGrey4
+    }
+    
+    private func setupPagingControlView(pageCount : Int) {
+        let pagingControlView = PagingControlView(frame: .zero)
+        pageControlContainerView.addSubview(pagingControlView)
+        pagingControlView.setCurrentPage(0)
+        pagingControlView.setNumberOfPages(pageCount)
+        pagingControlView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pagingControlView.topAnchor.constraint(equalTo: pageControlContainerView.topAnchor),
+            pagingControlView.bottomAnchor.constraint(equalTo: pageControlContainerView.bottomAnchor),
+            pagingControlView.leadingAnchor.constraint(equalTo: pageControlContainerView.leadingAnchor),
+            pagingControlView.trailingAnchor.constraint(equalTo: pageControlContainerView.trailingAnchor)
+        ])
+    }
+}
+
