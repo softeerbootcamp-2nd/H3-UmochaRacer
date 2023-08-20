@@ -53,7 +53,7 @@ final class EstimateSummaryView: UIScrollView {
     // MARK: - Helpers
 
     func configure(_ data: EstimateSummary) {
-        print("[EstimateSummaryView]", #function, " \(data) // 메소드 구현 필요")
+        updateSnapshot(item: data.elements)
     }
 }
 
