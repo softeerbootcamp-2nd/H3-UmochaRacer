@@ -11,7 +11,6 @@ enum CarOptionToEntityError: LocalizedError {
     case missingID
     case missingName
     case missingTitle
-    case missingSubTitle
 
     var errorDescription: String? {
         switch self {
@@ -21,8 +20,7 @@ enum CarOptionToEntityError: LocalizedError {
             return "이름 값이 없습니다."
         case .missingTitle:
             return "제목 값이 없습니다."
-        case .missingSubTitle:
-            return "부제목 값이 없습니다."
+
         }
     }
 }
@@ -48,10 +46,6 @@ extension CarOptionData {
 
         guard let name = self.name else {
             throw CarOptionToEntityError.missingName
-        }
-
-        guard let label = self.label else {
-            throw CarOptionToEntityError.missingTitle
         }
 
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
