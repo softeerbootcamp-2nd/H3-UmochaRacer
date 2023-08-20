@@ -16,6 +16,7 @@ final class CarMakingViewModel {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
+        var optionCategoryDidChanged: PassthroughSubject<OptionCategoryType, Never>
     }
 
     // MARK: - Output
@@ -30,25 +31,45 @@ final class CarMakingViewModel {
     // MARK: - Properties
 
     private var cancellables = Set<AnyCancellable>()
+
+    private let selfModeUsecase: SelfModeUsecaseProtocol
+
     var feedbackTitle: String = ""
     var feedbackDescription: String = ""
+
+    // MARK: - Lifecycles
+
+    init(selfModeUsecase: SelfModeUsecaseProtocol) {
+        self.selfModeUsecase = selfModeUsecase
+    }
+
     // MARK: - Helpers
 
     func transform(_ input: Input) -> Output {
         let output = Output()
 
         input.viewDidLoad
-            .sink(receiveValue: { [weak self] _ in
-                guard let self else { return }
-                let estimateSummary = requestEstimateSummary()
-                output.estimateSummary.send(estimateSummary)
+            .flatMap { [weak self] _ -> AnyPublisher<EstimateSummary, Never> in
+                guard let self = self else {
+                    return Just(EstimateSummary(elements: []))
+                        .eraseToAnyPublisher()
+                }
+                return self.requestEstimateSummary()
+            }
+            .sink(receiveValue: { summary in
+                output.estimateSummary.send(summary)
             })
             .store(in: &cancellables)
 
         input.carMakingStepDidChanged
-            .sink(receiveValue: { [weak self] step in
-                guard let self else { return }
-                let carMakingStepInfo = requestCurrentStepInfo(step)
+            .flatMap { [weak self] step -> AnyPublisher<CarMakingStepInfo, Never> in
+                guard let self = self else {
+                    return Just(CarMakingStepInfo(step: step))
+                        .eraseToAnyPublisher()
+                }
+                return self.requestCurrentStepInfo(step)
+            }
+            .sink(receiveValue: { carMakingStepInfo in
                 output.currentStepInfo.send(carMakingStepInfo)
             })
             .store(in: &cancellables)
@@ -71,26 +92,38 @@ final class CarMakingViewModel {
             }
             .store(in: &cancellables)
 
+        input.optionCategoryDidChanged
+            .sink { newCategory in
+//                let optionStepInfo = usecase.requestOptionStepInfo(category)
+//                output.currentStepInfo.send(optionStepInfo)
+                print("option category did changed to \(newCategory)")
+            }
+            .store(in: &cancellables)
+
         return output
     }
 
-    private func requestEstimateSummary() -> EstimateSummary {
+    private func requestEstimateSummary() -> AnyPublisher<EstimateSummary, Never> {
         // usecase에 디폴트값 데이터 요청
-        return EstimateSummary(elements: [])
+        return selfModeUsecase.fetchInitialEstimate()
+            .eraseToAnyPublisher()
     }
 
-    private func requestCurrentStepInfo(_ step: CarMakingStep) -> CarMakingStepInfo {
-        // usecase에 데이터 요청. ex) usecase.getStepInfo(of: stepIndex)
-        // 전달된 옵션들 중 디폴트로 선택된 옵션의 isSelected 값 수정해서 전달
-        // 그러기 위해선 viewDidLoad 시점에 받은 견적요약 데이터 저장해놓고 수정하기? 근데 이건 usecase에서 해야할 거 같기도
-
-        let stepIndex = step.rawValue
-        let carMakingStepInfo = CarMakingStepInfo(
-            step: step,
-            optionCardInfoArray: CarMakingMockData.mockOption[stepIndex]
-        )
-        return carMakingStepInfo
+    private func updateEstimateSummary(step: CarMakingStep,
+                                       selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
+        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption)
+            .eraseToAnyPublisher()
     }
+
+    private func requestCurrentStepInfo(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
+        return selfModeUsecase.fetchOptionInfo(step: step)
+            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
+                return Just(CarMakingStepInfo(step: step))
+                    .eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
+
 }
 
 struct CarMakingMockData {

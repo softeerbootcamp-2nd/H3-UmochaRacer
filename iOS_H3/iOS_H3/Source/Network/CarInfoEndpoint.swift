@@ -16,6 +16,8 @@ enum CarInfoEndpoint: Endpoint {
     case wheel
     case additionalOption(category: String)
     case singleExteriorColor(optionId: Int)
+    // TODO: Intro Endpoint분리
+    case estimate
 
     var baseURL: String { ConstantKey.baseURL }
     var httpMethod: HTTPMethod { .GET }
@@ -24,21 +26,23 @@ enum CarInfoEndpoint: Endpoint {
     var path: String {
         switch self {
         case .powertrain:
-            return "/powertrain"
+            return "info/powertrain"
         case .drivingSystem:
-            return "/driving-system"
+            return "info/driving-system"
         case .bodyType:
-            return "/bodytype"
+            return "info/bodytype"
         case .exteriorColor:
-            return "/exterior-color"
+            return "info/exterior-color"
         case .interiorColor:
-            return "/interior-color"
+            return "info/interior-color"
         case .wheel:
-            return "/wheel"
+            return "info/wheel"
         case .additionalOption:
-            return "/additional-option"
+            return "info/additional-option"
         case .singleExteriorColor(let optionId):
-            return "/exterior-color/\(optionId)"
+            return "info/exterior-color/\(optionId)"
+        case .estimate:
+            return "intro/estimate"
         }
     }
 
@@ -48,6 +52,8 @@ enum CarInfoEndpoint: Endpoint {
             return .query(["model": model, "type": type])
         case .additionalOption(let category):
             return .query(["category": category])
+        case .interiorColor:
+            return .query(["exteriorColorId": "6"])
         default:
             return nil
         }
