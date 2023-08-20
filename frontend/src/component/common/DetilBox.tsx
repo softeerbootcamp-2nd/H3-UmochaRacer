@@ -19,46 +19,28 @@ interface DetailData {
 interface DetailBoxProps {
   isOpen: boolean;
   id: number;
-  isHovered: boolean;
+  descriptionData: DetailData | null;
 }
-function DetailBox({isOpen, id, isHovered}: DetailBoxProps) {
-  const {option} = useContext(OptionContext);
-  const [data, setData] = useState<DetailData | null>(null);
-  const [cache, setCache] = useState<DetailData | null>(null);
+function DetailBox({isOpen, id, descriptionData}: DetailBoxProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const categoryName = getCategory(option);
-  console.log('TEST');
-  useEffect(() => {
-    if (isHovered && !cache) {
-      const endpoint = `/detail/${categoryName}/${id}`;
-      fetchData(endpoint)
-        .then((fetchedData) => {
-          setData(fetchedData);
-          setCache(fetchedData);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    }
-  }, [isHovered, categoryName, id, cache]);
-
-  const displayData = cache || data;
 
   let info: React.JSX.Element[] = [];
-  if (displayData?.info) {
-    info = JSON.parse(displayData?.info).map((elem: Info, index: number) => (
-      <Info key={index}>
-        <InfoTitle>{elem.title}</InfoTitle>
-        <InfoDescription>{elem.description}</InfoDescription>
-      </Info>
-    ));
+  if (descriptionData?.info) {
+    info = JSON.parse(descriptionData?.info).map(
+      (elem: Info, index: number) => (
+        <Info key={index}>
+          <InfoTitle>{elem.title}</InfoTitle>
+          <InfoDescription>{elem.description}</InfoDescription>
+        </Info>
+      ),
+    );
   }
 
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
-        <DescriptionBox>{displayData?.description}</DescriptionBox>
-        {displayData?.info && <InfoBox>{info}</InfoBox>}
+        <DescriptionBox>{descriptionData?.description}</DescriptionBox>
+        {descriptionData?.info && <InfoBox>{info}</InfoBox>}
       </DetailContent>
     </Wrapper>
   );

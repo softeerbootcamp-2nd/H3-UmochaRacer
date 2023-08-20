@@ -84,7 +84,7 @@ function Content() {
     } else {
       setcardData([]);
     }
-  }, [option, fetchedResponse]);
+  }, [option, fetchedResponse.data]);
   const {selectedOptions} = useContext(SelectedOptionContext);
   useEffect(() => {
     const currentKey = keyMapping[option];
