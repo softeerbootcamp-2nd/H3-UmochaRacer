@@ -24,7 +24,5 @@ enum IntroRepositoryError: LocalizedError {
 
 protocol IntroRepositoryProtocol {
 
-    typealias APIResult<T> = AnyPublisher<Result<T, Error>, Never>
-
     func fetchEstimate() -> AnyPublisher<EstimateSummary, Error>
 }
