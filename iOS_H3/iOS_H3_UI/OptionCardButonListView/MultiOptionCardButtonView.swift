@@ -88,7 +88,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         }
     }
 
-    func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
+    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
         let visibleIndexPaths = optionCardCollectionView.indexPathsForVisibleItems
         var animationsCompletedCount = 0
 
@@ -97,7 +97,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
                 continue
             }
 
-            cell.playFeedbackAnimation(title: title, description: description) {
+            cell.playFeedbackAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription) {
                 animationsCompletedCount += 1
 
                 if animationsCompletedCount == visibleIndexPaths.count {

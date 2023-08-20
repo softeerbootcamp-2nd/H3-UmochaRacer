@@ -213,8 +213,8 @@ class OptionCardButton: UIButton {
         moreInfoButton.isHidden = !isShow
     }
 
-    func animateButton(title: String, description: String, completion: (() -> Void)? = nil) {
-        animatedView.showWithAnimation(title: title, description: description, completion: completion)
+    func animateButton(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+        animatedView.showWithAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription, completion: completion)
     }
 
     func resetAnimatedView() {

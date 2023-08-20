@@ -108,7 +108,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
         if let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable {
-            optionButtonListView.playFeedbackAnimation(title: title, description: description, completion: completion)
+            optionButtonListView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description, completion: completion)
         }
     }
 }
