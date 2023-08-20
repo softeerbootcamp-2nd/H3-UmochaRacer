@@ -40,7 +40,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         case .wheelSelection:
             return carInfoRepository.fetchWheel()
         case .optionSelection:
-            return carInfoRepository.fetchAdditionalOption(category: "")
+            return carInfoRepository.fetchAdditionalOption(category: "system")
         default:
             return nil
         }

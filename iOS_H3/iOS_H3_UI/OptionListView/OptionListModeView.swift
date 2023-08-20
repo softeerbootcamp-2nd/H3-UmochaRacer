@@ -86,7 +86,7 @@ final class OptionListModeView: UIView {
     }
 
     // MARK: - Helpers
-    func updateAllViews(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo]) {
         updateSnapshot(item: cardInfos)
     }
 }

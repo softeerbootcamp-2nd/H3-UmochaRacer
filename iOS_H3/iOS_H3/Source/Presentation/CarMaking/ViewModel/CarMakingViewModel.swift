@@ -15,6 +15,7 @@ final class CarMakingViewModel {
     struct Input {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
+        var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
     }
 
     // MARK: - Output
@@ -22,6 +23,7 @@ final class CarMakingViewModel {
     struct Output {
         var estimateSummary = PassthroughSubject<EstimateSummary, Never>()
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
+        var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
     }
 
@@ -66,6 +68,25 @@ final class CarMakingViewModel {
                 output.currentStepInfo.send(carMakingStepInfo)
             })
             .store(in: &cancellables)
+
+        input.optionDidSelected
+            .sink { (step, optionIndex) in
+                let stepIndex = step.rawValue
+
+                switch step {
+                case .optionSelection:
+                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected.toggle()
+                default:
+                    CarMakingMockData.mockOption[stepIndex].enumerated().forEach { (optionIndex, _) in
+                        CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = false
+                    }
+                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = true
+                }
+
+                output.optionInfoDidUpdated.send(CarMakingMockData.mockOption[stepIndex])
+            }
+            .store(in: &cancellables)
+
         return output
     }
 
@@ -103,7 +124,7 @@ struct CarMakingMockData {
          "https://itimg.chosun.com/sitedata/image/202112/03/2021120301496_0.jpg"
     ].compactMap { URL(string: $0) }
 
-    static let mockOption = [
+    static var mockOption = [
             [OptionCardInfo.init(title: "디젤 2.2",
                                  subTitle: "구매자의 63%가 선택한",
                                  priceString: "+ 3,456,789원",
@@ -173,8 +194,7 @@ struct CarMakingMockData {
             [OptionCardInfo.init(title: "가솔린 3.8",
                                  subTitle: "구매자의 63%가 선택한",
                                  priceString: "+ 0 원",
-                                 bannerImageURL: mockURL[1],
-                                 isSelected: true),
+                                 bannerImageURL: mockURL[1]),
              OptionCardInfo.init(title: "가솔린 3.8",
                                  subTitle: "구매자의 63%가 선택한",
                                  priceString: "+ 0 원",

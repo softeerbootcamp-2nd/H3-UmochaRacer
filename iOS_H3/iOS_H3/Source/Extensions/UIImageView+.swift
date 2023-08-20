@@ -9,7 +9,10 @@ import UIKit
 
 extension UIImageView {
     func loadCachedImage(of url: URL?, showLoading: Bool = true) {
-        guard let url else { return }
+        guard let url else {
+            image = .remove
+            return
+        }
 
         let key = url.lastPathComponent
         if let cachedImage = ImageCacheManager.shared.object(forKey: key as NSString) {

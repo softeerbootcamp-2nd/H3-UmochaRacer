@@ -33,6 +33,8 @@ final class CarMakingViewController: UIViewController {
 
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
 
+    private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -71,7 +73,8 @@ extension CarMakingViewController {
     private func bind() {
         let input = CarMakingViewModel.Input(
             viewDidLoad: viewDidLoadSubject,
-            carMakingStepDidChanged: stepDidChanged
+            carMakingStepDidChanged: stepDidChanged,
+            optionDidSelected: optionDidSelected
         )
         let output = viewModel.transform(input)
 
@@ -84,6 +87,12 @@ extension CarMakingViewController {
         output.currentStepInfo
             .sink { [weak self] info in
                 self?.updateCurrentStepInfo(with: info)
+            }
+            .store(in: &cancellables)
+
+        output.optionInfoDidUpdated
+            .sink { [weak self] optionInfo in
+                self?.carMakingContentView.updateOptionCard(with: optionInfo)
             }
             .store(in: &cancellables)
 
@@ -100,7 +109,7 @@ extension CarMakingViewController {
     }
 
     private func updateCurrentStepInfo(with info: CarMakingStepInfo) {
-        carMakingContentView.updateCurrentStepInfo(info)
+        carMakingContentView.configureCurrentStep(with: info)
     }
 
     private func showIndicator(_ show: Bool) {
@@ -140,6 +149,12 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
     func carMakingContentView(stepDidChanged stepIndex: Int) {
         if let step = CarMakingStep(rawValue: stepIndex) {
             stepDidChanged.send(step)
+        }
+    }
+
+    func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int) {
+        if let step = CarMakingStep(rawValue: stepIndex) {
+            optionDidSelected.send((step, optionIndex))
         }
     }
 }

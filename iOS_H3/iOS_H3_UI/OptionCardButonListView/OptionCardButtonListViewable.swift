@@ -7,6 +7,20 @@
 
 import UIKit
 
+protocol OptionCardButtonListViewDelegate: AnyObject {
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didSelectOptionAt index: Int
+    )
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        didDisplayOptionAt index: Int
+    )
+}
+
 protocol OptionCardButtonListViewable: UIView {
-    func updateAllViews(with cardInfos: [OptionCardInfo])
+    var delegate: OptionCardButtonListViewDelegate? { get set }
+
+    func configure(with cardInfos: [OptionCardInfo])
+    func reloadOptionCards(with cardInfos: [OptionCardInfo])
 }

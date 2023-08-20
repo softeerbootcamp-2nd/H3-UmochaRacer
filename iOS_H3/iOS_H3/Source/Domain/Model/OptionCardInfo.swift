@@ -12,7 +12,7 @@ struct OptionCardInfo: Hashable {
     let title: String
     let subTitle: String
     let priceString: String     // 예시) "+ 100,000원"
-    let bannerImageURL: URL    // 옵션 카드 상단 큰 이미지
+    let bannerImageURL: URL?    // 옵션 카드 상단 큰 이미지
     let iconImageURL: URL?          // 내장 색상 옵션에만 존재하는 이미지
     let color: URColor?
     let hasMoreInfo: Bool       // 자세히보기 여부
@@ -22,7 +22,7 @@ struct OptionCardInfo: Hashable {
         title: String,
         subTitle: String,
         priceString: String,
-        bannerImageURL: URL,
+        bannerImageURL: URL? = nil,
         iconImageURL: URL? = nil,
         color: URColor? = nil,
         hasMoreInfo: Bool = false,
