@@ -76,19 +76,4 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
-
-    // TODO: IntroRepository로 분리
-    func fetchEstimate() -> AnyPublisher<EstimateSummary, Never> {
-        networkService.request(CarInfoEndpoint.estimate)
-            .map { (result: Result<APIResponse<[EstimateElementData]>, Error>) -> EstimateSummary in
-                switch result {
-                case .success(let data):
-                    let array = data.data.map { $0.toDomain() }
-                    return EstimateSummary(elements: array)
-                case .failure(let error):
-                    return EstimateSummary(elements: [])
-                }
-            }
-            .eraseToAnyPublisher()
-    }
 }

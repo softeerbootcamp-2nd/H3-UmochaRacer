@@ -39,6 +39,4 @@ protocol CarInfoRepositoryProtocol {
     func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
-    // TODO: Intro Repository 분리
-    func fetchEstimate() -> AnyPublisher<EstimateSummary, Never>
 }
