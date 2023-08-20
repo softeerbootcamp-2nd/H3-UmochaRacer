@@ -52,20 +52,12 @@ extension EstimateElementData {
             throw EstimateElementToEntityError.negativePrice
         }
 
-        #warning("서버 응답에 따른 임시 코드입니다. 서버 수정 되면 주석 코드로 수정 필요")
-        guard let carMakingCategory = CarMakingCategory(rawValue: value) else {
+        guard let carMakingCategory = CarMakingCategory(rawValue: category) else {
             throw EstimateElementToEntityError.invalidCategory
         }
-        return EstimateSummaryElement(stepName: category,
-                                      selectedOption: key,
+        return EstimateSummaryElement(stepName: key,
+                                      selectedOption: value,
                                       category: carMakingCategory,
                                       price: price)
-//        guard let carMakingCategory = CarMakingCategory(rawValue: category) else {
-//            throw EstimateElementToEntityError.invalidCategory
-//        }
-//        return EstimateSummaryElement(stepName: key,
-//                                      selectedOption: value,
-//                                      category: carMakingCategory,
-//                                      price: price)
     }
 }
