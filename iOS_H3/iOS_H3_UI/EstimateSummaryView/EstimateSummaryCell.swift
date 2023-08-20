@@ -15,6 +15,8 @@ final class EstimateSummaryCell: UICollectionViewCell {
         static let titleLabelLeadingOffset = 10.0
     }
 
+    static let identifier = "EstimateSummaryCell"
+
     // MARK: - UI properties
 
     private let carMakingStepLabel = UILabel()
