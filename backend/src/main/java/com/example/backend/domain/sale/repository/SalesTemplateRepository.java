@@ -30,7 +30,7 @@ public class SalesTemplateRepository {
 
     public List<RatioSummary> findSaleRatio(String columnId) {
         String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count " +
-                "FROM SALES s " +
+                "FROM SALES s WHERE s.model_id IN (SELECT id FROM MODEL WHERE trim_id = 1)\n" +
                 "GROUP BY s." + columnId + " WITH ROLLUP";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
