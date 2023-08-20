@@ -53,11 +53,19 @@ final class EstimateSummaryView: UIScrollView {
     // MARK: - Helpers
 
     func configure(_ data: EstimateSummary) {
+        updatePriceLabel(data)
         updateSnapshot(item: data.elements)
     }
 }
 
 extension EstimateSummaryView {
+
+    private func updatePriceLabel(_ estimateSummary: EstimateSummary) {
+        let price = estimateSummary.elements.reduce(0) { $0 + $1.price }
+        DispatchQueue.main.async { [weak self] in
+            self?.priceLabel.text = "\(String.priceString(from: price))원"
+        }
+    }
 
     private func updateSnapshot(item: [EstimateSummaryElement]) {
         var snapshot = dataSource.snapshot()
