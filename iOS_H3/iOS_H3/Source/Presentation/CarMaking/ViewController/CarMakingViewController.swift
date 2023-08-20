@@ -35,6 +35,8 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
+    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -47,10 +49,12 @@ final class CarMakingViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         self.mode = .selfMode
-        self.viewModel = CarMakingViewModel(selfModeUsecase:
-                                                SelfModeUsecase(carInfoRepository:
-                                                                    CarInfoRepository(networkService:
-                                                                                        NetworkService()), introRepsitory: IntroRepository(networkService: NetworkService())))
+        self.viewModel = CarMakingViewModel(
+            selfModeUsecase: SelfModeUsecase(
+                carInfoRepository: CarInfoRepository(networkService: NetworkService()),
+                introRepsitory: IntroRepository(networkService: NetworkService())
+            )
+        )
         super.init(coder: coder)
     }
 
@@ -74,7 +78,8 @@ extension CarMakingViewController {
         let input = CarMakingViewModel.Input(
             viewDidLoad: viewDidLoadSubject,
             carMakingStepDidChanged: stepDidChanged,
-            optionDidSelected: optionDidSelected
+            optionDidSelected: optionDidSelected,
+            optionCategoryDidChanged: optionCategoryDidChanged
         )
         let output = viewModel.transform(input)
 
@@ -157,6 +162,10 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
             optionDidSelected.send((step, optionIndex))
         }
     }
+
+    func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
+        optionCategoryDidChanged.send(category)
+    }
 }
 
 // MARK: - BottomModalView Delegate
@@ -168,7 +177,9 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        carMakingContentView.moveNextStep()
+
+        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
+                                          feedbackDescription: viewModel.feedbackDescription)
     }
 }
 

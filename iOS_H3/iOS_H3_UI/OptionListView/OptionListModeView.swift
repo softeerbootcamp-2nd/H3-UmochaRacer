@@ -9,12 +9,10 @@ import UIKit
 import Combine
 
 protocol OptionListModeViewDelegate: AnyObject {
-    func optionListModeView(with optionListModeView: OptionListModeView,
-                            didSelectedIndex: Int)
     func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView)
 }
 
-final class OptionListModeView: UIView {
+final class OptionListModeView: UIView, OptionCardButtonListViewable {
 
     enum Constants {
         static let cellHeight = 150.0
@@ -58,12 +56,16 @@ final class OptionListModeView: UIView {
     private var collectionView: UICollectionView!
 
     // MARK: - Properties
+
     private let carMakingMode: CarMakingMode
+
     private var dataSource: CollectionViewDiffableDataSource!
 
     private var buttonTapCancellableByIndex: [Int: AnyCancellable] = [:]
 
-    weak var delegate: OptionListModeViewDelegate?
+    weak var listModeViewDelegate: OptionListModeViewDelegate?
+
+    weak var delegate: OptionCardButtonListViewDelegate?
 
     // MARK: - Lifecycles
 
@@ -86,10 +88,46 @@ final class OptionListModeView: UIView {
     }
 
     // MARK: - Helpers
+
     func configure(with cardInfos: [OptionCardInfo]) {
         updateSnapshot(item: cardInfos)
     }
+
+    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+        cardInfos.enumerated().forEach { (index, info) in
+            let indexPath = IndexPath(row: index, section: 0)
+            guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                return
+            }
+            cell.configure(carMakingMode: carMakingMode, info: info)
+        }
+    }
+
+    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        var animationsCompletedCount = 0
+
+        for indexPath in visibleIndexPaths {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                continue
+            }
+
+            cell.playFeedbackAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription) {
+                animationsCompletedCount += 1
+
+                if animationsCompletedCount == visibleIndexPaths.count {
+                    completion?()
+                }
+            }
+        }
+
+        if visibleIndexPaths.isEmpty {
+            completion?()
+        }
+    }
 }
+
+// MARK: - Setup
 
 extension OptionListModeView {
     private func setupViews() {
@@ -152,7 +190,7 @@ extension OptionListModeView {
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
                     guard let self else { return }
-                    delegate?.optionListModeView(with: self, didSelectedIndex: indexPath.row)
+                    delegate?.optionCardButtonListView(self, didSelectOptionAt: indexPath.row)
                 }
 
             return cell
@@ -214,6 +252,6 @@ extension OptionListModeView {
     }
 
     @objc func tapImageModeButton() {
-        delegate?.optionListModeViewDidTapImageModeButton(with: self)
+        listModeViewDelegate?.optionListModeViewDidTapImageModeButton(with: self)
     }
 }

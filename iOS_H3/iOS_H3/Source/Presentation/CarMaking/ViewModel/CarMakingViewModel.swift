@@ -16,6 +16,7 @@ final class CarMakingViewModel {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
+        var optionCategoryDidChanged: PassthroughSubject<OptionCategoryType, Never>
     }
 
     // MARK: - Output
@@ -30,7 +31,11 @@ final class CarMakingViewModel {
     // MARK: - Properties
 
     private var cancellables = Set<AnyCancellable>()
+
     private let selfModeUsecase: SelfModeUsecaseProtocol
+
+    var feedbackTitle: String = ""
+    var feedbackDescription: String = ""
 
     // MARK: - Lifecycles
 
@@ -84,6 +89,14 @@ final class CarMakingViewModel {
                 }
 
                 output.optionInfoDidUpdated.send(CarMakingMockData.mockOption[stepIndex])
+            }
+            .store(in: &cancellables)
+
+        input.optionCategoryDidChanged
+            .sink { newCategory in
+//                let optionStepInfo = usecase.requestOptionStepInfo(category)
+//                output.currentStepInfo.send(optionStepInfo)
+                print("option category did changed to \(newCategory)")
             }
             .store(in: &cancellables)
 

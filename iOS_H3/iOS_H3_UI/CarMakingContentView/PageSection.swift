@@ -11,6 +11,7 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
 
     case twoButton = 0
     case multipleButton
+    case optionSelection
 
     init?(sectionIndex: Int) {
         self.init(rawValue: sectionIndex)
@@ -22,6 +23,8 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
             return CarMakingTwoOptionCell.identifier
         case .multipleButton:
             return CarMakingMultipleOptionCell.identifier
+        case .optionSelection:
+            return CarMakingOptionSelectStepCell.identifier
         }
     }
 
@@ -30,7 +33,9 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
         case .twoButton:
             return 0..<3
         case .multipleButton:
-            return 3..<8
+            return 3..<6
+        case .optionSelection:
+            return 6..<8
         }
     }
 
@@ -45,9 +50,11 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     }
 
     private func itemIndex(for globalIndex: Int) -> Int {
-        if self == .multipleButton {
-            return globalIndex - PageSection.twoButton.range.count
+        let sectionIndex = PageSection.section(for: globalIndex).rawValue
+        var itemIndex = globalIndex
+        (0..<sectionIndex).forEach {
+            itemIndex -= PageSection.allCases[$0].range.count
         }
-        return globalIndex
+        return itemIndex
     }
 }

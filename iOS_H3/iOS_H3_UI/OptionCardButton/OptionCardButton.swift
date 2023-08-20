@@ -213,13 +213,14 @@ class OptionCardButton: UIButton {
         moreInfoButton.isHidden = !isShow
     }
 
-    func animateButton(title: String, description: String) {
-        animatedView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        animatedView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    func animateButton(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+        animatedView.showWithAnimation(feedbackTitle: feedbackTitle,
+                                       feedbackDescription: feedbackDescription,
+                                       completion: completion)
+    }
 
-        animatedView.showWithAnimation(title: title, description: description)
+    func resetAnimatedView() {
+        animatedView.isHidden = true
     }
 }
 
@@ -300,6 +301,7 @@ extension OptionCardButton {
         setupMoreInfoButtonConstraint()
         setupImageViewConstraint()
         setupColorViewConstraint()
+        setupAnimatedView()
     }
 
     private func setupCheckImageViewConstraint() {
@@ -367,6 +369,13 @@ extension OptionCardButton {
         colorView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         colorView.trailingAnchor.constraint(equalTo: self.trailingAnchor,
                                             constant: Constants.colorViewTrailingMargin).isActive = true
+    }
+
+    private func setupAnimatedView() {
+        animatedView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        animatedView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        animatedView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        animatedView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
     }
 
     private func addMoreInfoButtonTarget() {
