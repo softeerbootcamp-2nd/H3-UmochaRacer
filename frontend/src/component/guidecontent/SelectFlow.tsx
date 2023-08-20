@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {selectData} from './GuidData';
 import GridList from './selectflow/GridList';
 import CardList from './selectflow/CardList';
+import {flexCenter} from '@/style/common';
 
 interface FlowDescription {
   comment: string;
@@ -33,7 +34,7 @@ const flowTextArr: FlowDescription[] = [
 const LAST_FLOW_NUM: number = 2;
 const FLOW_NUM = 3;
 
-const CircleIcon = () => {
+const CircleIcon = (isSelect: boolean) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +43,12 @@ const CircleIcon = () => {
       viewBox="0 0 33 33"
       fill="none"
     >
-      <circle cx="16.5" cy="16.5" r="16.5" fill="#DFDFDF" />
+      <circle
+        cx="16.5"
+        cy="16.5"
+        r="16.5"
+        fill={isSelect ? colors.Main_Hyundai_Blue : '#DFDFDF'}
+      />
     </svg>
   );
 };
@@ -52,39 +58,119 @@ interface Props {
 }
 
 const isMove = (prevLevel: number, currLevel: number) => {
+  let move: boolean = true;
   const category: string[] = ['age', 'gender'];
   if (prevLevel < currLevel) {
-    return selectData[category[prevLevel]] !== undefined;
+    Array.from({length: currLevel - prevLevel}).map((_, index) => {
+      console.log(currLevel + index);
+      if (!selectData[category[prevLevel + index]]) {
+        move = false;
+      }
+    });
   }
-  return true;
+  return move;
+};
+
+const DISTANCE_BETWEEN = 48.99;
+
+const CircleSwap = (
+  leftCircle: HTMLDivElement | null,
+  rightCircle: HTMLDivElement | null,
+  swapLevel: number,
+) => {
+  const SWAP_PIXEL: number = DISTANCE_BETWEEN * swapLevel;
+  if (leftCircle && rightCircle) {
+    leftCircle.style.transform = `translateX(${SWAP_PIXEL}px)`;
+    rightCircle.style.transform = `translateX(-${SWAP_PIXEL}px)`;
+  }
 };
 
 function SelectFlow({setComplete}: Props) {
-  const [flowLevel, setFlowLevel] = useState(0);
+  const [flowLevel, setFlowLevel] = useState<number>(0);
+  const artistRef = useRef<null[] | HTMLDivElement[]>([]);
+  const prevFlowRef = useRef<number>(0);
+  const swapTargetRef = useRef<HTMLDivElement | null>();
+
   const handleCardClick = (nextFlow: number) => {
     setFlowLevel(nextFlow);
   };
+
+  const handleSwapEnd = (e: React.TransitionEvent, index: number) => {
+    const target = e.target as HTMLDivElement;
+    target.style.transition = 'none';
+    target.style.transform = '';
+
+    const circle = target.firstChild?.firstChild as HTMLElement;
+    if (index === flowLevel) {
+      circle.style.fill = colors.Main_Hyundai_Blue;
+    } else {
+      circle.style.fill = '#DFDFDF';
+    }
+
+    prevFlowRef.current = flowLevel;
+  };
+
+  if (artistRef.current) {
+    let leftElem: HTMLDivElement | null,
+      rightElem: HTMLDivElement | null,
+      swapLevel: number;
+
+    if (prevFlowRef.current !== undefined) {
+      swapTargetRef.current = artistRef.current[prevFlowRef.current];
+
+      if (prevFlowRef.current > flowLevel) {
+        leftElem = artistRef.current[flowLevel];
+        rightElem = swapTargetRef.current;
+        swapLevel = prevFlowRef.current - flowLevel;
+      } else {
+        leftElem = swapTargetRef.current;
+        rightElem = artistRef.current[flowLevel];
+        swapLevel = flowLevel - prevFlowRef.current;
+      }
+
+      if (leftElem && rightElem) {
+        leftElem.style.transition = '0.5s';
+        rightElem.style.transition = '0.5s';
+      }
+
+      CircleSwap(leftElem, rightElem, swapLevel);
+    }
+  }
 
   const icons: React.JSX.Element[] = Array.from({length: FLOW_NUM}).map(
     (_, index) => {
       return (
         <Left.IconBox
           key={index}
+          style={{transition: 'all 0.5s'}}
           onClick={() => {
             if (!isMove(flowLevel, index)) return;
             handleCardClick(index);
           }}
+          onTransitionEnd={(e) => {
+            handleSwapEnd(e, index);
+          }}
+          ref={(element) => {
+            artistRef.current[index] = element;
+          }}
         >
-          {CircleIcon()}
+          {CircleIcon(index === prevFlowRef.current)}
         </Left.IconBox>
       );
     },
   );
 
+  const levels: React.JSX.Element[] = Array.from({length: FLOW_NUM}).map(
+    (_, index) => <Left.IconBox key={index}>{index + 1}</Left.IconBox>,
+  );
+
   return (
     <Wrapper>
       <FlowContainer.Left>
-        <Left.Level>{icons}</Left.Level>
+        <Left.Level>
+          {icons}
+          <Left.LevelBox>{levels}</Left.LevelBox>
+        </Left.Level>
         <Left.Comment>{flowTextArr[flowLevel].comment}</Left.Comment>
         <Left.SelectionText>
           {flowTextArr[flowLevel].suggest}
@@ -145,11 +231,35 @@ const Left = {
   Level: styled.div`
     display: inline-flex;
     align-items: flex-start;
+    position: relative;
     width: 131px;
     height: 33px;
     gap: 16px;
   `,
+
+  LevelBox: styled.div`
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+    div {
+      ${Title1_Medium}
+      font-size: 20px;
+      font-weight: 400;
+      ${flexCenter}
+      color: ${colors.Hyundai_White};
+    }
+  `,
   IconBox: styled.div`
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    transition: transform 0.5s;
+  `,
+  FlowBtn: styled.button`
     width: 33px;
     height: 33px;
     cursor: pointer;
