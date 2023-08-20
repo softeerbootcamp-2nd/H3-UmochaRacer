@@ -16,8 +16,6 @@ enum CarInfoEndpoint: Endpoint {
     case wheel
     case additionalOption(category: String)
     case singleExteriorColor(optionId: Int)
-    // TODO: Intro Endpoint분리
-    case estimate
 
     var baseURL: String { ConstantKey.baseURL }
     var httpMethod: HTTPMethod { .GET }
@@ -41,8 +39,6 @@ enum CarInfoEndpoint: Endpoint {
             return "info/additional-option"
         case .singleExteriorColor(let optionId):
             return "info/exterior-color/\(optionId)"
-        case .estimate:
-            return "intro/estimate"
         }
     }
 
