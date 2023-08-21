@@ -31,9 +31,9 @@ public class TagOptionRepository {
 
     public List<Long> findOptionIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
-        String query = "SELECT m." + category_id + ", COUNT(*) as select_count FROM SALES s use INDEX (age_index)\n" +
-                "JOIN (SELECT id, " + category_id + " FROM MODEL WHERE trim_id = 1) m on s.model_id = m.id\n" +
-                "WHERE " + gender.getQueryString() + age + "<= s.age AND s.age <=" + (age+9) +
+        String query = "SELECT m." + category_id + ", COUNT(*) as select_count FROM MODEL m\n" +
+                "INNER JOIN SALES s ON s.model_id = m.id\n" +
+                "WHERE " + gender.getQueryString() + " m.trim_id = 1 AND " + age + "<= s.age AND s.age <=" + (age+9) +
                 " GROUP BY m." + category_id + " ORDER BY select_count DESC LIMIT 1";
 
         return jdbcTemplate.query(query, getRowMapperOfField(category));
@@ -41,18 +41,18 @@ public class TagOptionRepository {
 
     public List<Long> findColorIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
-        String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM SALES s\n" +
-                "WHERE s.model_id IN (SELECT id FROM MODEL WHERE trim_id = 1)" +
-                "AND " + gender.getQueryString() + age + "<= s.age AND s.age <=" + (age+9) +
+        String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM MODEL m\n" +
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                "WHERE " + gender.getQueryString() + " m.trim_id = 1 AND " + age + "<= s.age AND s.age <=" + (age+9) +
                 " GROUP BY s." + category_id + " ORDER BY select_count DESC LIMIT 1";
 
         return jdbcTemplate.query(query, getRowMapperOfField(category));
     }
 
     public List<Long> findWheelIdByGenderAge(Gender gender, int age) {
-        String query = "SELECT s.wheel_id, COUNT(*) as select_count FROM SALES s\n" +
-                "WHERE s.model_id IN (SELECT id FROM MODEL WHERE trim_id = 1) " +
-                "AND (s.wheel_id = 2 OR s.wheel_id = 3) AND " + gender.getQueryString() +
+        String query = "SELECT s.wheel_id, COUNT(*) as select_count FROM MODEL m\n" +
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                "WHERE " + gender.getQueryString() + " m.trim_id = 1 AND s.wheel_id IN (2,3) AND " +
                 age + "<= s.age AND s.age <=" + (age+9) +
                 " GROUP BY s.wheel_id ORDER BY select_count DESC LIMIT 1";
 
