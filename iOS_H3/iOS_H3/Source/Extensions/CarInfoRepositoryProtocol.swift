@@ -36,7 +36,7 @@ protocol CarInfoRepositoryProtocol {
 
     func fetchWheel() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
+    func fetchAdditionalOption(category: OptionCategoryType) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 }
