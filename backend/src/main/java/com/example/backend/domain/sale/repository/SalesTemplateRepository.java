@@ -1,7 +1,6 @@
 package com.example.backend.domain.sale.repository;
 
 import com.example.backend.domain.guide.dto.EstimateRequest;
-import com.example.backend.domain.sale.entity.Sales;
 import com.example.backend.domain.sale.entity.SalesSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -60,14 +59,8 @@ public class SalesTemplateRepository {
         return namedTemplate.query(query, params, new SelectionRatioRowMapper());
 */
         String targetId = transUriToColumnId(target);
-        long tag1 = estimateRequest.getTag1();
-        long tag2 = estimateRequest.getTag2();
-        long tag3 = estimateRequest.getTag3();
-        int age = estimateRequest.getAge();
-        String gender = estimateRequest.getGender();
-
         String query = getQueryDependsOn(targetId)
-                + getWhereQuery(targetId, tag1, tag2, tag3, age, gender);
+                + getWhereQuery(targetId, estimateRequest);
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
@@ -88,15 +81,20 @@ public class SalesTemplateRepository {
     }
 
     public List<SalesSummary> findSelectionRatioOfAdditionalOption(EstimateRequest estimateRequest) {
-        long tag1 = estimateRequest.getTag1();
-        long tag2 = estimateRequest.getTag2();
-        long tag3 = estimateRequest.getTag3();
-        int age = estimateRequest.getAge();
-        String gender = estimateRequest.getGender();
-
         String query = getWithQueryWithAdditionalOption(ADDITIONAL_OPTION_ID)
-                + getWhereQuery(ADDITIONAL_OPTION_ID, tag1, tag2, tag3, age, gender);
+                + getWhereQuery(ADDITIONAL_OPTION_ID, estimateRequest);
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
+
+    private String getWhereQuery(String targetId, EstimateRequest estimateRequest) {
+        return getWhereQuery(
+                targetId, 
+                estimateRequest.getTag1(),
+                estimateRequest.getTag2(),
+                estimateRequest.getTag3(),
+                estimateRequest.getAge(), 
+                estimateRequest.getGender()
+        );
     }
 
     private String getQueryDependsOn(String targetId) {
