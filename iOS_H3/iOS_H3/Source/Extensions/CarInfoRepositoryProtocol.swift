@@ -24,19 +24,19 @@ enum CarInfoRepositoryError: LocalizedError {
 
 protocol CarInfoRepositoryProtocol {
     typealias APIResult<T> = AnyPublisher<Result<T, Error>, Never>
-    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchBodyType() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchBodyType() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchWheel() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchWheel() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 }
