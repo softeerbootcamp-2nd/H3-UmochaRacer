@@ -7,7 +7,7 @@ import {SelectionLayout} from '../estimateInterface';
 interface SelectionProps {
   selectionLayout: SelectionLayout;
   title: string;
-  name: string;
+  name?: string;
   price: number;
 }
 

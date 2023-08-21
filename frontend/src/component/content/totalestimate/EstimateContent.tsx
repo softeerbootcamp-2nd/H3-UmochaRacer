@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Top from './estimatecontent/Top';
 import Middle from './estimatecontent/Middle';
@@ -6,9 +6,8 @@ import Bottom from './estimatecontent/Bottom';
 import Firework from './estimatecontent/FireWork';
 import {colors} from '@/style/theme';
 import {Body2_Medium} from '@/style/fonts';
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 
-const LEFT = 'left';
-const RIGHT = 'right';
 interface ButtonLayout {
   text: string;
   background: string;
@@ -40,7 +39,16 @@ const contents: ButtonLayout[] = [
   },
 ];
 
+const DEFAULT_PRICE = 43460000;
+
 function EstimateContent() {
+  const {selectedOptions} = useContext(SelectedOptionContext);
+  let totalPrice = DEFAULT_PRICE;
+
+  selectedOptions.forEach((elem) => {
+    totalPrice += elem.price;
+  });
+
   const buttons: React.JSX.Element[] = contents.map((elem, index) => {
     return (
       <Button
@@ -58,9 +66,9 @@ function EstimateContent() {
     <Wrapper>
       <Top></Top>
       <Firework number={10} width={266} height={480}></Firework>
-      <Middle></Middle>
+      <Middle totalPrice={totalPrice}></Middle>
       <ButtonBox>{buttons}</ButtonBox>
-      <Bottom></Bottom>
+      <Bottom totalPrice={totalPrice}></Bottom>
     </Wrapper>
   );
 }
