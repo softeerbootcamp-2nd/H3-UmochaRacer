@@ -9,4 +9,6 @@ public interface SelectionRatioWithSimilarUsersService {
     List<SalesSummaryResponse> calculateSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest);
 
     List<SalesSummaryResponse> calculateSelectionRatioWitSameAgeAndGender(String target, EstimateRequest estimateRequest);
+
+    List<SalesSummaryResponse> calculateSelectionRatioWithAdditionalOption(EstimateRequest estimateRequest);
 }

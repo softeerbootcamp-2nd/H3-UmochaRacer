@@ -62,6 +62,13 @@ public class SaleRatioController {
         return mapToOKResponse(result);
     }
 
+    @PostMapping("/additional-option/tag")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+            @RequestBody EstimateRequest estimateRequest
+    ) {
+        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithAdditionalOption(estimateRequest);
+        return mapToOKResponse(result);
+    }
     private <T> ResponseEntity<ResponseDto<T>> mapToOKResponse(T t) {
         ResponseDto<T> body = ResponseDto.of(t, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);

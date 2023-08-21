@@ -1,6 +1,7 @@
 package com.example.backend.domain.sale.repository;
 
 import com.example.backend.domain.guide.dto.EstimateRequest;
+import com.example.backend.domain.sale.entity.Sales;
 import com.example.backend.domain.sale.entity.SalesSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import static com.example.backend.domain.global.utils.StringUtils.transUriToColu
 @RequiredArgsConstructor
 public class SalesTemplateRepository {
     private final JdbcTemplate jdbcTemplate;
+    private final String ADDITIONAL_OPTION_ID = "additional_option_id";
 
     public List<SalesSummary> findVehicleSpecificationSalesRatio(String columnId) {
         String query = "SELECT\n" +
@@ -85,6 +87,18 @@ public class SalesTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
+    public List<SalesSummary> findSelectionRatioOfAdditionalOption(EstimateRequest estimateRequest) {
+        long tag1 = estimateRequest.getTag1();
+        long tag2 = estimateRequest.getTag2();
+        long tag3 = estimateRequest.getTag3();
+        int age = estimateRequest.getAge();
+        String gender = estimateRequest.getGender();
+
+        String query = getWithQueryWithAdditionalOption(ADDITIONAL_OPTION_ID)
+                + getWhereQuery(ADDITIONAL_OPTION_ID, tag1, tag2, tag3, age, gender);
+        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
+
     private String getQueryDependsOn(String targetId) {
         if (targetId.equals("wheel_id")) {
             return getWithQuery(targetId);
@@ -98,6 +112,13 @@ public class SalesTemplateRepository {
                 "                         join MODEL m on s.model_id = m.id\n" +
                 "                where m.trim_id = 1\n" +
                 "                )\n";
+    }
+
+    private String getWithQueryWithAdditionalOption(String targetId) {
+        return "with joined as (select " + targetId + ", age, gender, tag1, tag2, tag3\n" +
+                "          from SALES s \n" +
+                "join SALES_OPTIONS opt on s.id = opt.sales_id" +
+                ")\n";
     }
 
     private String getWithQuery(String targetId) {

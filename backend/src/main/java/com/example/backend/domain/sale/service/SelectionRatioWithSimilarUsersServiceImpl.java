@@ -29,6 +29,12 @@ public class SelectionRatioWithSimilarUsersServiceImpl implements SelectionRatio
         return getSortedSalesSummaryResponses(summaries);
     }
 
+    @Override
+    public List<SalesSummaryResponse> calculateSelectionRatioWithAdditionalOption(EstimateRequest estimateRequest) {
+        List<SalesSummary> summaries = repository.findSelectionRatioOfAdditionalOption(estimateRequest);
+        return getSortedSalesSummaryResponses(summaries);
+    }
+
     private List<SalesSummaryResponse> getSortedSalesSummaryResponses(List<SalesSummary> summaries) {
         List<SalesSummaryResponse> result = summaryMapper.map(summaries);
         Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
