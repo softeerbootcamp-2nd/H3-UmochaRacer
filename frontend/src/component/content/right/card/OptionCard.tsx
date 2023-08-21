@@ -8,6 +8,8 @@ import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
 import {OptionContext} from '@/provider/optionProvider';
+import {fetchData} from '@/api/fetchData';
+import {getCategory} from '@/component/util/getCategory';
 
 interface CardProps {
   selected: boolean;
@@ -15,7 +17,11 @@ interface CardProps {
   onClick: () => void;
   data: cardDataType;
 }
-
+interface DetailData {
+  title: string;
+  description: string;
+  info?: string;
+}
 const SelectIcon = () => {
   return (
     <svg
@@ -59,7 +65,10 @@ const hasDetail = (option: number) => {
 function OptionCard({selected, onClick, data, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false);
   const {option} = useContext(OptionContext);
-
+  const [descriptionData, setDescriptionData] = useState<DetailData | null>(
+    null,
+  );
+  const [isHoverDetail, setIsHoverDetail] = useState<boolean>(false);
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -67,11 +76,24 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
     },
     [toggle],
   );
+  const handleToggleHover = () => {
+    if (hasDetail(option) && !descriptionData) {
+      const endpoint = `/detail/${categoryName}/${data.id}`;
+      fetchData(endpoint)
+        .then((response) => {
+          setDescriptionData(response);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }
+  };
 
+  const handleToggleHoverEnd = () => {};
+  const categoryName = getCategory(option);
   useEffect(() => {
     setToggle(false);
   }, [selected]);
-
   return (
     <Wrapper onClick={onClick} $selected={selected}>
       <Container>
@@ -106,6 +128,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           <DetailBox
             isOpen={toggle && selected && !isSaved}
             id={data.id}
+            descriptionData={descriptionData}
           ></DetailBox>
         )}
 
@@ -117,7 +140,9 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
               onClick={clickedToggle}
               opened={toggle && selected && !isSaved}
               selected={selected}
-            ></DetailToggle>
+              onHover={handleToggleHover}
+              onHoverEnd={handleToggleHoverEnd}
+            />
           ) : (
             ''
           )}
