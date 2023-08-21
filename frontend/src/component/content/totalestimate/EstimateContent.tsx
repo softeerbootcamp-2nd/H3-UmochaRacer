@@ -57,8 +57,7 @@ function EstimateContent() {
   return (
     <Wrapper>
       <Top></Top>
-      <Firework direction={LEFT} number={10}></Firework>
-      <Firework direction={RIGHT} number={10}></Firework>
+      <Firework number={10} width={266} height={480}></Firework>
       <Middle></Middle>
       <ButtonBox>{buttons}</ButtonBox>
       <Bottom></Bottom>
