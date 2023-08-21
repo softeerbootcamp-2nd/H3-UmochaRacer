@@ -19,4 +19,10 @@ struct CarMakingStepInfoEntity {
     func toPresentation(optionCardInfoArray: [OptionCardInfo]) -> CarMakingStepInfo {
         CarMakingStepInfo(step: step, optionCardInfoArray: optionCardInfoArray)
     }
+
+    mutating func selectFirstOption() {
+        if !optionCardInfoEntityArray.isEmpty {
+            optionCardInfoEntityArray[0].isSelected = true
+        }
+    }
 }
