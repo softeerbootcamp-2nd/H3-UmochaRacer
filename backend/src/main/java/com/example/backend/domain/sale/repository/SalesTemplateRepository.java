@@ -64,13 +64,50 @@ public class SalesTemplateRepository {
         int age = estimateRequest.getAge();
         String gender = estimateRequest.getGender();
 
-        String query = "with joined as (select m." + targetId + ", age, gender, tag1, tag2, tag3\n" +
+        String query = getQueryDependsOn(targetId)
+                + getWhereQuery(targetId, tag1, tag2, tag3, age, gender);
+        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
+
+    public List<SalesSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
+        String targetId = transUriToColumnId(target);
+        int age = estimateRequest.getAge();
+
+        String query = getWithQuery(targetId) +
+                "select " + targetId + " as id,\n" +
+                "             count(" + targetId + ") as select_count \n" +
+                "      from joined\n" +
+                "      WHERE\n" +
+                "              (" + age + "<=age and age<=" + (age + 9) + " and gender = 'MALE')\n" +
+                "      group by " + targetId + "\n" +
+                "with rollup";
+
+        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
+
+    private String getQueryDependsOn(String targetId) {
+        if (targetId.equals("wheel_id")) {
+            return getWithQuery(targetId);
+        }
+        return getWithQueryWhenModelJoined(targetId);
+    }
+
+    private String getWithQueryWhenModelJoined(String targetId) {
+        return "with joined as (select m." + targetId + ", age, gender, tag1, tag2, tag3\n" +
                 "                from SALES s\n" +
                 "                         join MODEL m on s.model_id = m.id\n" +
                 "                where m.trim_id = 1\n" +
-                "                )\n" +
-                "\n" +
-                "select " + targetId + "       as id,\n" +
+                "                )\n";
+    }
+
+    private String getWithQuery(String targetId) {
+        return "with joined as (select " + targetId + ", age, gender, tag1, tag2, tag3\n" +
+                "                from SALES s" +
+                "               )\n";
+    }
+
+    private String getWhereQuery(String targetId, long tag1, long tag2, long tag3, int age, String gender) {
+        return "select " + targetId + "       as id,\n" +
                 "       count(" + targetId + ") as select_count\n" +
                 "from joined\n" +
                 "WHERE (\n" +
@@ -114,26 +151,5 @@ public class SalesTemplateRepository {
                 "    )\n" +
                 "group by " + targetId + "\n" +
                 "with rollup";
-        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
-    }
-
-    public List<SalesSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
-        String targetId = transUriToColumnId(target);
-        int age = estimateRequest.getAge();
-
-        String query = "with joined as (select " + targetId + ", age, gender\n" +
-                "                from SALES s\n" +
-                "                         join MODEL m on s.model_id = m.id\n" +
-                "                where m.trim_id = 1)\n" +
-                "\n" +
-                "select " + targetId + " as id,\n" +
-                "             count(" + targetId + ") as select_count \n" +
-                "      from joined\n" +
-                "      WHERE\n" +
-                "              (" + age + "<=age and age<=" + (age + 9) + " and gender = 'MALE')\n" +
-                "      group by " + targetId + "\n" +
-                "with rollup";
-
-        return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 }
