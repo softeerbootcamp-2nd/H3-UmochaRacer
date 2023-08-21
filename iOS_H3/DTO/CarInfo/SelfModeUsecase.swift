@@ -83,6 +83,24 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
+    func fetchAdditionalOptionInfo(category: String) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        carInfoRepository.fetchAdditionalOption(category: category)
+            .mapError { [weak self] error in
+                guard let self else { return .errorMappingError }
+                return convertToSelfModeUsecaseError(from: error)
+            }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
+
+                var stepInfoEntity = stepInfoEntity
+
+                stepInfoEntity.selectFirstOption()
+
+                return findCardbWordAndReturn(from: stepInfoEntity)
+            }
+            .eraseToAnyPublisher()
+    }
+
     private func publisherForStep(
         _ step: CarMakingStep
     ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>? {
