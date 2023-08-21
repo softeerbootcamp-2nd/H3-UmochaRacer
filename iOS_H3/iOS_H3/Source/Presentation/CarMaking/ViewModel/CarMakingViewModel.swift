@@ -93,10 +93,17 @@ final class CarMakingViewModel {
             .store(in: &cancellables)
 
         input.optionCategoryDidChanged
-            .sink { newCategory in
-//                let optionStepInfo = usecase.requestOptionStepInfo(category)
-//                output.currentStepInfo.send(optionStepInfo)
-                print("option category did changed to \(newCategory)")
+            .flatMap { [weak self] newCategory -> AnyPublisher<CarMakingStepInfo, Never> in
+                guard let self else { return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher() }
+                return selfModeUsecase.fetchAdditionalOptionInfo(category: newCategory)
+                    .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
+                        // error handling : output.error.send(error)
+                        return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
+                    }
+                    .eraseToAnyPublisher()
+            }
+            .sink { additionalOptionStepInfo in
+                output.currentStepInfo.send(additionalOptionStepInfo)
             }
             .store(in: &cancellables)
 
