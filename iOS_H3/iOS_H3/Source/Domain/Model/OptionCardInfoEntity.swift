@@ -36,4 +36,17 @@ struct OptionCardInfoEntity {
         self.hasMoreInfo = hasMoreInfo
         self.isSelected = isSelected
     }
+
+    func toPresentation(URTitle: URString, URSubTitle: URString) -> OptionCardInfo {
+        OptionCardInfo(
+            title: URTitle,
+            subTitle: URSubTitle,
+            priceString: priceString,
+            bannerImageURL: bannerImageURL,
+            iconImageURL: iconImageURL,
+            color: color,
+            hasMoreInfo: hasMoreInfo,
+            isSelected: isSelected
+        )
+    }
 }
