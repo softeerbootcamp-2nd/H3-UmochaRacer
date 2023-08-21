@@ -46,20 +46,14 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 guard let self else { return .errorMappingError }
                 return convertToSelfModeUsecaseError(from: error)
             }
-            .map { stepInfo in
-                var mutableStepInfo = stepInfo
-                if !mutableStepInfo.optionCardInfoArray.isEmpty {
-                    mutableStepInfo.optionCardInfoArray[0].isSelected = true
-                }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
 
-                // temp
-                let optionCardInfoModelArray = mutableStepInfo.optionCardInfoArray.map { info in
-                    info.toPresentation(
-                        URTitle: URString(fullText: info.title),
-                        URSubTitle: URString(fullText: info.subTitle)
-                    )
-                }
-                return mutableStepInfo.toPresentation(optionCardInfoArray: optionCardInfoModelArray)
+                var stepInfoEntity = stepInfoEntity
+
+                stepInfoEntity.selectFirstOption()
+
+                return findBackCarDictionaryWordAndReturn(from: stepInfoEntity)
             }
             .eraseToAnyPublisher()
     }
@@ -112,5 +106,15 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         case .conversionError:
             return .conversionError(error: error)
         }
+    }
+
+    private func findBackCarDictionaryWordAndReturn(from stepInfoEntity: CarMakingStepInfoEntity) -> CarMakingStepInfo {
+        let convertedOptionInfos = stepInfoEntity.optionCardInfoEntityArray.map { info in
+            info.toPresentation(
+                URTitle: info.title.toURString(),
+                URSubTitle: info.subTitle.toURString()
+            )
+        }
+        return stepInfoEntity.toPresentation(optionCardInfoArray: convertedOptionInfos)
     }
 }
