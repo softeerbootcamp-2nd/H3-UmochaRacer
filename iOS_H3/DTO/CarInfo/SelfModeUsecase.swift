@@ -36,27 +36,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-    private func publisherForStep(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>? {
-        switch step {
-        case .powertrain:
-            return carInfoRepository.fetchPowertrain(model: "asdf", type: "타입명")
-        case .driveMethod:
-            return carInfoRepository.fetchDrivingSystem()
-        case .bodyType:
-            return carInfoRepository.fetchBodyType()
-        case .externalColor:
-            return carInfoRepository.fetchExteriorColor()
-        case .internalColor:
-            return carInfoRepository.fetchInteriorColor()
-        case .wheelSelection:
-            return carInfoRepository.fetchWheel()
-        case .optionSelection:
-            return carInfoRepository.fetchAdditionalOption(category: "system")
-        default:
-            return nil
-        }
-    }
-
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
         guard let publisher = publisherForStep(step) else {
             return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
@@ -97,5 +76,26 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         currentEstimateSummary = updatedSummary
 
         return Just(updatedSummary).eraseToAnyPublisher()
+    }
+
+    private func publisherForStep(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>? {
+        switch step {
+        case .powertrain:
+            return carInfoRepository.fetchPowertrain(model: "asdf", type: "타입명")
+        case .driveMethod:
+            return carInfoRepository.fetchDrivingSystem()
+        case .bodyType:
+            return carInfoRepository.fetchBodyType()
+        case .externalColor:
+            return carInfoRepository.fetchExteriorColor()
+        case .internalColor:
+            return carInfoRepository.fetchInteriorColor()
+        case .wheelSelection:
+            return carInfoRepository.fetchWheel()
+        case .optionSelection:
+            return carInfoRepository.fetchAdditionalOption(category: "system")
+        default:
+            return nil
+        }
     }
 }
