@@ -29,9 +29,9 @@ public class TagRatioTemplateRepository {
 
     public List<RatioSummary> findBaseOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
-        String query = "SELECT * FROM (SELECT m." + category_id + " AS id, COUNT(*) AS select_count FROM SALES s \n" +
-                "JOIN MODEL m ON s.model_id = m.id \n" +
-                " WHERE (s.tag1 = " + tagId + " OR s.tag2 = " + tagId + " OR s.tag3 = " + tagId + " )\n" +
+        String query = "SELECT * FROM (SELECT m." + category_id + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
+                "JOIN SALES s ON s.model_id = m.id \n" +
+                " WHERE m.trim_id = 1 AND " + tagId + " IN (tag1, tag2, tag3)\n" +
                 "GROUP BY m." + category_id + " WITH ROLLUP) AS count_table \n" +
                 "WHERE id = " + optionId + " OR id IS NULL";
 
@@ -50,9 +50,11 @@ public class TagRatioTemplateRepository {
 
     public List<RatioSummary> findAdditionalOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
-        String query = "SELECT * FROM (SELECT so." + category_id + " AS id, COUNT(*) AS select_count FROM SALES s \n" +
-                        "JOIN SALES_OPTIONS so ON s.id = so.sales_id \n" +
-                        " WHERE (s.tag1 = " + tagId + " OR s.tag2 = " + tagId + " OR s.tag3 = " + tagId + " )\n" +
+        String query = "SELECT * FROM (SELECT so." + category_id + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
+                        "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                        "INNER JOIN SALES_OPTIONS so ON s.id = so.sales_id \n" +
+                        " WHERE m.trim_id = 1 AND \n" +
+                        tagId + " IN (s.tag1, s.tag2, s.tag3) \n" +
                         "GROUP BY so." + category_id + " WITH ROLLUP) AS count_table \n" +
                         "WHERE id = " + optionId + " OR id IS NULL";
 
