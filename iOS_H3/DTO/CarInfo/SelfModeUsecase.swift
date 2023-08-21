@@ -53,7 +53,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
                 stepInfoEntity.selectFirstOption()
 
-                return findBackCarDictionaryWordAndReturn(from: stepInfoEntity)
+                return findCardbWordAndReturn(from: stepInfoEntity)
             }
             .eraseToAnyPublisher()
     }
@@ -108,7 +108,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         }
     }
 
-    private func findBackCarDictionaryWordAndReturn(from stepInfoEntity: CarMakingStepInfoEntity) -> CarMakingStepInfo {
+    private func findCardbWordAndReturn(from stepInfoEntity: CarMakingStepInfoEntity) -> CarMakingStepInfo {
         let convertedOptionInfos = stepInfoEntity.optionCardInfoEntityArray.map { info in
             info.toPresentation(
                 URTitle: info.title.toURString(),
