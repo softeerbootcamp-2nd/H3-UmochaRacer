@@ -9,11 +9,11 @@ import Foundation
 
 struct CarMakingStepInfoEntity {
     let step: CarMakingStep
-    var optionCardInfoArray: [OptionCardInfoEntity]
+    var optionCardInfoEntityArray: [OptionCardInfoEntity]
 
     init(step: CarMakingStep, optionCardInfoArray: [OptionCardInfoEntity] = []) {
         self.step = step
-        self.optionCardInfoArray = optionCardInfoArray
+        self.optionCardInfoEntityArray = optionCardInfoArray
     }
 
     func toPresentation(optionCardInfoArray: [OptionCardInfo]) -> CarMakingStepInfo {
