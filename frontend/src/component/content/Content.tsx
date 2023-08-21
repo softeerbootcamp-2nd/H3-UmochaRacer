@@ -66,6 +66,7 @@ function Content() {
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
   const [additionalOptionList, setAddOptionList] = useState<CardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  console.log(cardData);
   const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
 
@@ -86,7 +87,6 @@ function Content() {
     setIndex(nextIndex);
     updateTempOption(nextIndex);
   };
-  console.log('T');
   const urlEndpoint: OptionUrls = {
     0: '/info/powertrain',
     1: '/info/driving-system',
@@ -126,12 +126,14 @@ function Content() {
   }, []);
   const {selectedOptions} = useContext(SelectedOptionContext);
   useEffect(() => {
-    const currentKey = keyMapping[option];
-    const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
-    if (foundOption) {
-      setNewIndex(foundOption.id - 1);
+    if (option !== 6) {
+      const currentKey = keyMapping[option];
+      const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
+      if (foundOption) {
+        setNewIndex(foundOption.id - 1);
+      }
+      setcardData(cardDataList[option]);
     }
-    setcardData(cardDataList[option]);
   }, [option]);
   return (
     <Wrapper>
