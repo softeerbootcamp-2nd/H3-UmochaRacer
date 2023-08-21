@@ -15,9 +15,9 @@ enum CarInfoRepositoryError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .networkError(let error):
-            return "네트워크 오류: \(error.localizedDescription)"
+            return "[CarInfoRepositoryError] 네트워크 오류: \(error.localizedDescription)"
         case .conversionError(let error):
-            return "변환 오류: \(error.localizedDescription)"
+            return "[CarInfoRepositoryError] 변환 오류: \(error.localizedDescription)"
         }
     }
 }

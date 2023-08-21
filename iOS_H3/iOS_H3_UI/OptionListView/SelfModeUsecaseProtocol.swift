@@ -5,12 +5,24 @@
 //  Created by KoJeongMin  on 2023/08/16.
 //
 
+import Foundation
 import Combine
 
-enum SelfModeUsecaseError: Error {
-    case networkError
-    case conversionError
+enum SelfModeUsecaseError: LocalizedError {
+    case networkError(error: Error)
+    case conversionError(error: Error)
     case invalidStep
+
+    var errorDescription: String? {
+        switch self {
+        case .networkError(let error):
+            return "[SelfModeUsecaseError] \(error.localizedDescription)"
+        case .conversionError(let error):
+            return "[SelfModeUsecaseError] \(error.localizedDescription)"
+        case .invalidStep:
+            return "[SelfModeUsecaseError] 유효하지 않은 내차만들기 단계입니다."
+        }
+    }
 }
 
 protocol SelfModeUsecaseProtocol {

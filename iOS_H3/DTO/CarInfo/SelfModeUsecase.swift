@@ -25,9 +25,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .mapError { error -> SelfModeUsecaseError in
                 switch error {
                 case IntroRepositoryError.conversionError:
-                    return .conversionError
+                    return .conversionError(error: error)
                 default:
-                    return .networkError
+                    return .networkError(error: error)
                 }
             }
             .handleEvents(receiveOutput: { estimate in
@@ -66,9 +66,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .mapError { error -> SelfModeUsecaseError in
                 switch error {
                 case .networkError:
-                    return .networkError
+                    return .networkError(error: error)
                 case .conversionError:
-                    return .conversionError
+                    return .conversionError(error: error)
                 }
             }
             .map { stepInfo in
