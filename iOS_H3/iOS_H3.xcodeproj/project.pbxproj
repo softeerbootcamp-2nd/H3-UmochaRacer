@@ -130,6 +130,12 @@
 		5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */; };
 		5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */; };
 		5F4DB0F12A89A9B900E905A7 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
+		5F5891D92A92D9D600ACFFAD /* DetailPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */; };
+		5F5891DB2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */; };
+		5F5891DD2A92DB3500ACFFAD /* DetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DC2A92DB3500ACFFAD /* DetailInfo.swift */; };
+		5F5891DF2A92E06100ACFFAD /* DetailPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */; };
+		5F5891E02A92E06A00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */; };
+		5F5891E12A92E06F00ACFFAD /* DetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DC2A92DB3500ACFFAD /* DetailInfo.swift */; };
 		5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */; };
 		5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */; };
 		5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C82A8C72AA007A0E3C /* OptionListModeViewController.swift */; };
@@ -281,6 +287,9 @@
 		5F4D33B12A8751E500942517 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		5F4D33B42A8758FF00942517 /* PageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSection.swift; sourceTree = "<group>"; };
 		5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
+		5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopupViewModel.swift; sourceTree = "<group>"; };
+		5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailPopupUsecaseProtocol.swift; path = iOS_H3/Source/Presentation/OptionDetail/ViewModel/DetailPopupUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
+		5F5891DC2A92DB3500ACFFAD /* DetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfo.swift; sourceTree = "<group>"; };
 		5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListModeView.swift; sourceTree = "<group>"; };
 		5F5AE0C82A8C72AA007A0E3C /* OptionListModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListModeViewController.swift; sourceTree = "<group>"; };
 		5F5E21122A78DD21003C1185 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -539,6 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				5F4834AB2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift */,
+				5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -550,6 +560,7 @@
 				471917FB2A83338D00B67D54 /* URColor.swift */,
 				473309942A8BECBB00906FFB /* CarMakingStepInfo.swift */,
 				473309972A8C695B00906FFB /* EstimateSummary.swift */,
+				5F5891DC2A92DB3500ACFFAD /* DetailInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -679,6 +690,7 @@
 		5F1E30B42A921193004D229F /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1173,10 +1185,12 @@
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
+				5F5891DD2A92DB3500ACFFAD /* DetailInfo.swift in Sources */,
 				5F1E30B72A923FC6004D229F /* PagingControlView.swift in Sources */,
 				5F2116E92A8EE5C4008FC7D2 /* EstimateElementData.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
 				5F4834AC2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift in Sources */,
+				5F5891D92A92D9D600ACFFAD /* DetailPopupViewModel.swift in Sources */,
 				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				5F1E30BB2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
@@ -1197,6 +1211,7 @@
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
 				5F64B55D2A9070F300B5AE08 /* SelfModeUsecase.swift in Sources */,
 				473309952A8BECBB00906FFB /* CarMakingStepInfo.swift in Sources */,
+				5F5891DB2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
 				5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
@@ -1252,8 +1267,10 @@
 				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
+				5F5891DF2A92E06100ACFFAD /* DetailPopupViewModel.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
 				473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */,
+				5F5891E02A92E06A00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
@@ -1264,6 +1281,7 @@
 				4700964A2A8791FE003711F2 /* EstimateSummaryView.swift in Sources */,
 				471917FD2A83338D00B67D54 /* URColor.swift in Sources */,
 				473309932A8BC98E00906FFB /* OptionCardInfo.swift in Sources */,
+				5F5891E12A92E06F00ACFFAD /* DetailInfo.swift in Sources */,
 				471917F02A82371100B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,

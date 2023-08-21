@@ -114,7 +114,7 @@ class ComponentMainViewController: UIViewController {
         button.addTarget(self, action: #selector(didTapNoImageDetailViewButton), for: .touchUpInside)
         return button
     }()
-    
+
     lazy private var imageDetailViewButton: UIButton = {
         let button = UIButton()
         button.setTitle("imageDetailView 보기", for: .normal)
@@ -240,13 +240,13 @@ class ComponentMainViewController: UIViewController {
     }
 
     @objc func didTapNoImageDetailViewButton() {
-        let viewController = NoImageDetailPopupViewController()
+        let viewController = NoImageDetailPopupViewController(viewModel: DetailPopupViewModel())
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: false)
     }
-    
+
     @objc func didTapImageDetailViewButton() {
-        let viewController = ImageDetailPopupViewController()
+        let viewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel())
         viewController.modalPresentationStyle = .overFullScreen
         self.present(viewController, animated: false)
     }
