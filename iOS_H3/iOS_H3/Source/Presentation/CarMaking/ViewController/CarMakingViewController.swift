@@ -156,6 +156,9 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
     func carMakingContentView(stepDidChanged stepIndex: Int) {
         if let step = CarMakingStep(rawValue: stepIndex) {
             stepDidChanged.send(step)
+            if step == .optionSelection {
+                optionCategoryDidChanged.send(.system)
+            }
         }
     }
 
