@@ -44,7 +44,7 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
                 }
             }
             .eraseToAnyPublisher()
-    }ㅒ
+    }
 
     func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.powertrain(model: model, type: type), step: .powertrain)
