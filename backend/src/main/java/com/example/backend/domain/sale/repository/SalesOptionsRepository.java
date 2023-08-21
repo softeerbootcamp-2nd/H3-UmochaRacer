@@ -18,6 +18,9 @@ public interface SalesOptionsRepository extends CrudRepository<SalesOptions, Lon
                     "WHERE so.additional_option_id IN (SELECT id\n" +
                     "                                  FROM ADDITIONAL_OPTION\n" +
                     "                                  WHERE category = :category)\n" +
+                    "AND so.sales_id IN \n" +
+                    "    (SELECT id FROM SALES WHERE model_id IN\n" +
+                    "            (SELECT id FROM MODEL WHERE trim_id = 1))\n" +
                     "GROUP BY so.additional_option_id",
             rowMapperClass = SelectionRatioRowMapper.class
     )

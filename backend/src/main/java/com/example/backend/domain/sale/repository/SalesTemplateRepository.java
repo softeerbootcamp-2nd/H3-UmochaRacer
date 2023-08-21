@@ -14,24 +14,19 @@ public class SalesTemplateRepository {
     private final JdbcTemplate jdbcTemplate;
 
     public List<RatioSummary> findVehicleSpecificationSalesRatio(String columnId) {
-        String query = "SELECT\n" +
-                "    m." + columnId + " AS id,\n" +
-                "    COUNT(*) AS select_count\n" +
-                "FROM SALES s\n" +
-                "   JOIN MODEL m ON s.model_id = m.id\n" +
-                "   JOIN POWERTRAIN pt ON m.powertrain_id = pt.id\n" +
-                "   JOIN DRIVING_SYSTEM ds ON m.driving_system_id = ds.id\n" +
-                "   JOIN BODYTYPE bt ON m.bodytype_id = bt.id\n" +
+        String query = "SELECT m." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE m.trim_id = 1\n" +
-                "GROUP BY m." + columnId + "\n" +
-                "WITH ROLLUP";
+                "GROUP BY m." + columnId + " WITH ROLLUP ";
+
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
     public List<RatioSummary> findSaleRatio(String columnId) {
-        String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count " +
-                "FROM SALES s WHERE s.model_id IN (SELECT id FROM MODEL WHERE trim_id = 1)\n" +
-                "GROUP BY s." + columnId + " WITH ROLLUP";
+        String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                "WHERE m.trim_id = 1\n" +
+                "GROUP BY s." + columnId + " WITH ROLLUP ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
