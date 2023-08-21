@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct URString {
+struct URString: Hashable {
     let fullText: String
     let cardbRange: [Range<Int>]
 }
