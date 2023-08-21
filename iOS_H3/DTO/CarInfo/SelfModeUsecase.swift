@@ -51,7 +51,15 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 if !mutableStepInfo.optionCardInfoArray.isEmpty {
                     mutableStepInfo.optionCardInfoArray[0].isSelected = true
                 }
-                return mutableStepInfo
+
+                // temp
+                let optionCardInfoModelArray = mutableStepInfo.optionCardInfoArray.map { info in
+                    info.toPresentation(
+                        URTitle: URString(fullText: info.title),
+                        URSubTitle: URString(fullText: info.subTitle)
+                    )
+                }
+                return mutableStepInfo.toPresentation(optionCardInfoArray: optionCardInfoModelArray)
             }
             .eraseToAnyPublisher()
     }
