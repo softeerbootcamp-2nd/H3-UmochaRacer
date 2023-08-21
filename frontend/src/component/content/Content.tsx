@@ -43,6 +43,21 @@ const categoryMapping: Record<number, string> = {
 };
 
 function Content() {
+  // 새로고침 막기 변수
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = '나갈거임?';
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
   const [selectedIndex, setIndex] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
