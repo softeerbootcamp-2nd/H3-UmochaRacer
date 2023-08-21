@@ -51,18 +51,20 @@ function OptionCardList({
     setNewIndex(index);
   };
   useEffect(() => {
-    if (cardData.length > 0) scrollIntoSelected(ulRef, selectedIndex);
+    if (cardData) scrollIntoSelected(ulRef, selectedIndex);
   }, [selectedIndex, cardData]);
 
-  const cards: React.JSX.Element[] = cardData.map((elem, index) => (
-    <OptionCard
-      key={index}
-      selected={selectedIndex === index}
-      isSaved={isSaved}
-      onClick={() => handleItemClick(index)}
-      data={elem}
-    ></OptionCard>
-  ));
+  const cards: React.JSX.Element[] =
+    cardData &&
+    cardData.map((elem, index) => (
+      <OptionCard
+        key={index}
+        selected={selectedIndex === index}
+        isSaved={isSaved}
+        onClick={() => handleItemClick(index)}
+        data={elem}
+      ></OptionCard>
+    ));
 
   return (
     <Wrapper key={option}>

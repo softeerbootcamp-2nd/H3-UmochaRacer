@@ -68,7 +68,6 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
   const [descriptionData, setDescriptionData] = useState<DetailData | null>(
     null,
   );
-  const [isHoverDetail, setIsHoverDetail] = useState<boolean>(false);
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
