@@ -73,16 +73,13 @@ private extension UILabel {
         }
     }
 
-    func createLayoutManager() -> NSLayoutManager {
+    func createTextLayoutComponents() -> (layoutManager: NSLayoutManager,
+                                          textContainer: NSTextContainer) {
         let layoutManager = NSLayoutManager()
         let textContainer = NSTextContainer(size: bounds.size)
         textContainer.lineFragmentPadding = 0.0
         layoutManager.addTextContainer(textContainer)
-        if let attributedText = attributedText {
-            let textStorage = NSTextStorage(attributedString: attributedText)
-            textStorage.addLayoutManager(layoutManager)
-        }
-        return layoutManager
+        return (layoutManager, textContainer)
     }
 }
 
@@ -130,47 +127,43 @@ extension UILabel {
     }
 
     func addLink(on range: NSRange, linkAction: @escaping () -> Void) {
-            guard let text = self.text else { return }
-            let mutableAttributedString = createMutableAttributedString()
-            let urlKey = "CustomLinkActionKey"
-            mutableAttributedString.addAttribute(NSAttributedString.Key(rawValue: urlKey),
-                                                 value: linkAction,
-                                                 range: range)
-            self.attributedText = mutableAttributedString
+        let mutableAttributedString = createMutableAttributedString()
+        let urlKey = "CustomLinkActionKey"
+        mutableAttributedString.addAttribute(NSAttributedString.Key(rawValue: urlKey),
+                                             value: linkAction,
+                                             range: range)
+        self.attributedText = mutableAttributedString
 
-            let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleLabelTap(_:)))
-            self.isUserInteractionEnabled = true
-            self.addGestureRecognizer(recognizer)
-        }
+        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleLabelTap(_:)))
+        self.isUserInteractionEnabled = true
+        self.addGestureRecognizer(recognizer)
+    }
 
-        @objc private func handleLabelTap(_ sender: UITapGestureRecognizer) {
-            let point = sender.location(in: self)
-            guard let selectedIndex = textIndex(at: point) else { return }
-            guard let attr = attributedText?.attributes(at: selectedIndex,
-                                                        effectiveRange: nil),
-                  let urlAction = attr[NSAttributedString
-                    .Key(rawValue: "CustomLinkActionKey")] as? () -> Void else { return }
+    @objc private func handleLabelTap(_ sender: UITapGestureRecognizer) {
+        let point = sender.location(in: self)
+        guard let selectedIndex = textIndex(at: point) else { return }
+        guard let attr = attributedText?.attributes(at: selectedIndex,
+                                                    effectiveRange: nil),
+              let urlAction = attr[NSAttributedString
+                .Key(rawValue: "CustomLinkActionKey")] as? () -> Void else { return }
 
-            urlAction()
-        }
-        private func textIndex(at point: CGPoint) -> Int? {
-            guard let attributedText = attributedText else { return nil }
+        urlAction()
+    }
 
-            let layoutManager = NSLayoutManager()
-            let textContainer = NSTextContainer(size: self.bounds.size)
-            let textStorage = NSTextStorage(attributedString: attributedText)
+    private func textIndex(at point: CGPoint) -> Int? {
+        guard let attributedText = attributedText else { return nil }
 
-            textStorage.addLayoutManager(layoutManager)
-            textContainer.lineFragmentPadding = 0.0
-            layoutManager.addTextContainer(textContainer)
+        let (layoutManager, textContainer) = createTextLayoutComponents()
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        textStorage.addLayoutManager(layoutManager)
 
-            let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(
-                forGlyphRange: layoutManager.glyphRange(for: textContainer),
-                in: textContainer).size.width) / 2
-            let newPoint = CGPoint(x: point.x - (paddingWidth > 0 ? paddingWidth : 0), y: point.y)
+        let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(
+            forGlyphRange: layoutManager.glyphRange(for: textContainer),
+            in: textContainer).size.width) / 2
+        let newPoint = CGPoint(x: point.x - (paddingWidth > 0 ? paddingWidth : 0), y: point.y)
 
-            return layoutManager.glyphIndex(for: newPoint, in: textContainer)
-        }
+        return layoutManager.glyphIndex(for: newPoint, in: textContainer)
+    }
 
     func applyAttributes(imageName: String,
                          range: NSRange,
