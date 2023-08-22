@@ -28,9 +28,9 @@ public class BodytypeService implements InformationStrategy {
 
     @Override
     public CommonResponse findInformationById(long id) {
-        Optional<Bodytype> target = bodytypeRepository.findById(id);
-        if (target.isEmpty()) throw new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID);
-        return informationMapper.map(target.get());
+        Bodytype target = bodytypeRepository.findById(id)
+                .orElseThrow(() -> new RestApiException(ResultCode.NO_CAR_INFORMATION_WITH_ID));
+        return informationMapper.map(target);
     }
 
     @Override
