@@ -155,7 +155,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           )}
         </CardSection>
       </Container>
-      {isSaved && selected && <FeedBack></FeedBack>}
+      {isSaved && selected && <FeedBack id={data.id}></FeedBack>}
     </Wrapper>
   );
 }

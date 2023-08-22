@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {HeaderLayout, SelectionLayout} from './estimateInterface';
+import {Option, SelectedOptionContext} from '@/provider/selectedOptionProvider';
+import {TempOptionContext} from '@/provider/tempOptionProvider';
 import Estimate from './estimate/Estimate';
 
-interface Option {
-  title: string;
-  name: string;
-  price: number;
+interface HeaderTitle {
+  [key: string]: string;
+}
+interface TotalEstimateData {
+  [key: string]: Option[];
+  car: Option[];
+  color: Option[];
 }
 
 interface Props {
@@ -16,28 +21,13 @@ interface Props {
   selectionLayout: SelectionLayout;
 }
 
-const headerTitles: string[] = ['팰리세이드 Le Blanc (르블랑)', '색상', '옵션'];
-const prices: number[] = [43460000, 100000, 2570000];
+const headerTitles: HeaderTitle = {
+  car: '팰리세이드 Le Blanc (르블랑)',
+  color: '색상',
+  // selectOption: '옵션',
+};
 
-const first: Option[] = [
-  {title: '파워트레인', name: '디젤 2.2', price: 1480000},
-  {title: '구동 방식', name: '2WD', price: 0},
-  {title: '바디 타입', name: '7인승', price: 0},
-];
-
-const second: Option[] = [
-  {title: '외장 색상', name: '크리미 화이트 펄', price: 0},
-  {title: '내장 색상', name: '2WD', price: 0},
-];
-
-const third: Option[] = [
-  {title: '선택옵션', name: '컴포트 2', price: 1090000},
-  {title: '', name: '현대스마트센스 1', price: 790000},
-  {title: '', name: '주차보조 시스템 2', price: 690000},
-  {title: '', name: '프로텍션 매트 패키지 1', price: 250000},
-];
-
-const options = [first, second, third];
+const DEFAULT_PRICE = 43460000;
 
 function EstimateList({
   gap,
@@ -45,24 +35,69 @@ function EstimateList({
   headerLayout,
   selectionLayout,
 }: Props) {
-  const estimates: React.JSX.Element[] = headerTitles.map((elem, index) => {
-    const haederProps = {
-      height: headerLayout.height,
-      fontSize: headerLayout.fontSize,
-      title: elem,
-      price: prices[index],
-    };
+  const {selectedOptions} = useContext(SelectedOptionContext);
+  const {tempOption} = useContext(TempOptionContext);
 
-    return (
-      <Estimate
-        key={index}
-        sidePadding={sidePadding}
-        header={haederProps}
-        selectionLayout={selectionLayout}
-        options={options[index]}
-      ></Estimate>
-    );
+  const [estimateDatas, setEstimateDatas] = useState<TotalEstimateData>({
+    car: [],
+    color: [],
   });
+
+  useEffect(() => {
+    if (!tempOption) return;
+    const nextEstimateDatas: TotalEstimateData = {
+      car: [],
+      color: [],
+    };
+    let copyOption = selectedOptions.slice();
+
+    if (tempOption !== null) {
+      copyOption = copyOption.map((elem) => {
+        if (elem.key === tempOption.key) {
+          return tempOption;
+        } else {
+          return elem;
+        }
+      });
+    }
+
+    copyOption.forEach((elem) => {
+      nextEstimateDatas[elem.category].push(elem);
+    });
+
+    setEstimateDatas(nextEstimateDatas);
+  }, [tempOption]);
+
+  const getTotalPirce = (key: string) => {
+    let totalPrice = key === 'car' ? DEFAULT_PRICE : 0;
+
+    estimateDatas[key].forEach((elem) => {
+      totalPrice += elem.price;
+    });
+
+    return totalPrice;
+  };
+
+  const estimates: React.JSX.Element[] = Object.keys(headerTitles).map(
+    (key, index) => {
+      const haederProps = {
+        height: headerLayout.height,
+        fontSize: headerLayout.fontSize,
+        title: headerTitles[key],
+        price: getTotalPirce(key),
+      };
+
+      return (
+        <Estimate
+          key={index}
+          sidePadding={sidePadding}
+          header={haederProps}
+          selectionLayout={selectionLayout}
+          options={estimateDatas[key]}
+        ></Estimate>
+      );
+    },
+  );
   return <Wrapper $gap={gap}>{estimates}</Wrapper>;
 }
 

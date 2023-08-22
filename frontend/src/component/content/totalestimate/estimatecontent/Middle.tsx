@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import EstimateHeader from './EstimateHeader';
 import EstimateList from '@/component/common/EstimateList';
 
-function Middle() {
+interface Props {
+  totalPrice: number;
+}
+function Middle({totalPrice}: Props) {
   const headerLayout = {
     height: 57,
     fontSize: 22,
@@ -15,12 +18,11 @@ function Middle() {
     fontSize: 16,
   };
 
-  const price = 47270000;
   return (
     <Wrapper>
       <EstimateHeader
         text={'견적 요약'}
-        price={price}
+        price={totalPrice}
         padding={24}
       ></EstimateHeader>
       <EstimateList

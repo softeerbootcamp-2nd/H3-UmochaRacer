@@ -1,6 +1,7 @@
 import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {OptionContext} from '@/provider/optionProvider';
+import {Option} from '@/provider/selectedOptionProvider';
 
 import {
   Title1_Medium,
@@ -14,11 +15,8 @@ import DetailBox from '@/component/common/DetilBox';
 
 interface Props {
   detailOpen: boolean;
-  optionName: string;
-  optionTitle: string;
   optionIndex: number;
-  imgSrc: string;
-  price: number;
+  option: Option;
 }
 
 const EditIcon = () => {
@@ -38,14 +36,7 @@ const EditIcon = () => {
   );
 };
 
-function DetailEstimate({
-  detailOpen,
-  optionName,
-  optionTitle,
-  optionIndex,
-  imgSrc,
-  price,
-}: Props) {
+function DetailEstimate({detailOpen, optionIndex, option}: Props) {
   const {setOption} = useContext(OptionContext);
 
   const handleButtonClick = () => {
@@ -55,20 +46,20 @@ function DetailEstimate({
   return (
     <Wrapper>
       <Header>
-        <LeftText>{optionName}</LeftText>
-        <RightPrice>{optionTitle}</RightPrice>
+        <LeftText>{option.key}</LeftText>
+        <RightPrice>{option.price.toLocaleString()}원</RightPrice>
       </Header>
       <DetailContent>
-        <ImageBox $src={imgSrc}></ImageBox>
+        <ImageBox $src={option.imgSrc}></ImageBox>
         <ContentBox>
           <ContentLeft>
-            {optionTitle}
+            {option.value}
             <DeatailBoxWrapper>
               {/* <DetailBox isOpen={detailOpen} id={1}></DetailBox> */}
             </DeatailBoxWrapper>
           </ContentLeft>
           <ContentRight>
-            {`+ ${price.toLocaleString()}원`}
+            {`+ ${option.price.toLocaleString()}원`}
             <EditButton onClick={handleButtonClick}>
               <IconBox>{EditIcon()}</IconBox>
               수정
