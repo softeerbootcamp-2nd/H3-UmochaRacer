@@ -3,6 +3,7 @@ package com.example.backend.domain.sale.repository;
 import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,7 @@ public class TagRatioTemplateRepository {
         });
     }
 
+    @Cacheable(cacheNames = "TagSelectionCount")
     public List<RatioSummary> findBaseOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT m." + category_id + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
@@ -48,6 +50,7 @@ public class TagRatioTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
+    @Cacheable(cacheNames = "TagSelectionCount")
     public List<RatioSummary> findAdditionalOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT so." + category_id + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
