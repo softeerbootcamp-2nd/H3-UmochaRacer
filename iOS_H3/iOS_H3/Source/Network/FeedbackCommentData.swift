@@ -20,4 +20,11 @@ enum FeedbackDataToEntityError: LocalizedError {
 
 struct FeedbackCommentData: Decodable {
     let comment: String?
+
+    func toDomain() throws -> FeedbackCommentEntity {
+        guard let comment else {
+            throw FeedbackDataToEntityError.missingComment
+        }
+        return FeedbackCommentEntity(comment: comment)
+    }
 }
