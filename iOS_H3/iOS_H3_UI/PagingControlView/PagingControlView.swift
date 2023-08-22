@@ -63,22 +63,15 @@ class PagingControlView: UIView {
         return control
     }()
 
-    var currentPage: Int {
-        return _currentPage
-    }
-    var numberOfPages: Int {
-        return _numberOfPages
-    }
-
-    private var _currentPage: Int = 0 {
+    private var currentPage: Int = 0 {
         didSet {
-            pageControl.currentPage = _currentPage
+            pageControl.currentPage = currentPage
         }
     }
 
-    private var _numberOfPages: Int = 0 {
+    var numberOfPages: Int = 0 {
         didSet {
-            pageControl.numberOfPages = _numberOfPages
+            pageControl.numberOfPages = numberOfPages
         }
     }
 
@@ -110,11 +103,11 @@ class PagingControlView: UIView {
     }
 
     func setCurrentPage(_ page: Int) {
-        _currentPage = page
+        currentPage = page
     }
 
     func setNumberOfPages(_ count: Int) {
-        _numberOfPages = count
+        numberOfPages = count
     }
 }
 
@@ -141,10 +134,12 @@ extension PagingControlView {
     }
 
     private func setupGestures() {
-        let previousTapGesture = UITapGestureRecognizer(target: self, action: #selector(handlePreviousButtonTap))
+        let previousTapGesture = UITapGestureRecognizer(target: self,
+                                                        action: #selector(handlePreviousButtonTap))
         previousButtonView.addGestureRecognizer(previousTapGesture)
 
-        let nextTapGesture = UITapGestureRecognizer(target: self, action: #selector(handleNextButtonTap))
+        let nextTapGesture = UITapGestureRecognizer(target: self,
+                                                    action: #selector(handleNextButtonTap))
         nextButtonView.addGestureRecognizer(nextTapGesture)
     }
 

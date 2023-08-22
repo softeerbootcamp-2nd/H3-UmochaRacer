@@ -150,7 +150,7 @@ extension ImageDetailPopupViewController: PagingControlViewDelegate {
     }
 
     func didTapNextButton() {
-        let nextPage = min(pagingControlView.currentPage + 1, pagingControlView.numberOfPages - 1)
+        let nextPage = min(pageDidChangeSubject.value + 1, pagingControlView.numberOfPages - 1)
         pageDidChangeSubject.send(nextPage)
     }
 }
