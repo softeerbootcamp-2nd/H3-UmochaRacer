@@ -76,20 +76,10 @@ final class CarMakingViewModel {
             .store(in: &cancellables)
 
         input.optionDidSelected
-            .sink { (step, optionIndex) in
-                let stepIndex = step.rawValue
-
-                switch step {
-                case .optionSelection:
-                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected.toggle()
-                default:
-                    CarMakingMockData.mockOption[stepIndex].enumerated().forEach { (optionIndex, _) in
-                        CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = false
-                    }
-                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = true
-                }
-
-                output.optionInfoDidUpdated.send(CarMakingMockData.mockOption[stepIndex])
+            .sink { [weak self] (_, optionIndex) in
+                guard let self else { return }
+                let changedOptionInfo = selfModeUsecase.selectOption(of: optionIndex)
+                output.optionInfoDidUpdated.send(changedOptionInfo)
             }
             .store(in: &cancellables)
 
