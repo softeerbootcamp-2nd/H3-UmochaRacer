@@ -192,7 +192,7 @@ extension UILabel {
         applyAttributes(imageName: "dictionary_selected_img",
                         range: range,
                         weight: .bold,
-                        backgroundColor: .orange,
+                        backgroundColor: Colors.iconYellow,
                         textColor: .black,
                         linkAction: linkAction)
     }
