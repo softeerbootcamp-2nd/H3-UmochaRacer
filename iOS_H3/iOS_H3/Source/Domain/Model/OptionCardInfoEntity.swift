@@ -42,6 +42,7 @@ struct OptionCardInfoEntity {
 
     func toPresentation(URTitle: URString, URSubTitle: URString) -> OptionCardInfo {
         OptionCardInfo(
+            id: id,
             title: URTitle,
             subTitle: URSubTitle,
             priceString: priceString,
