@@ -68,6 +68,11 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.configure(with: optionInfoArray)
         currentOptionInfo = optionInfoArray
+
+        if !optionInfoArray.isEmpty {
+            guard let listView = optionButtonListView as? MultiOptionCardButtonView else { return }
+            listView.showFirstOptionCard()
+        }
     }
 
     override func update(optionInfoArray: [OptionCardInfo]) {
