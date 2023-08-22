@@ -5,10 +5,10 @@ import OptionInfo from './right/OptionInfo';
 import TotalEstimate from './totalestimate/TotalEstimate';
 
 import {OptionContext} from '@/provider/optionProvider';
+import useFetch from '../hooks/useFetch';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {flexCenter} from '@/style/common';
-import {fetchData} from '@/api/fetchData';
 type cardData = {
   id: number;
   name: string;
@@ -43,22 +43,28 @@ const categoryMapping: Record<number, string> = {
 };
 
 function Content() {
+  // 새로고침 막기 변수
+  const preventClose = (e: BeforeUnloadEvent) => {
+    e.preventDefault();
+    e.returnValue = '나갈거임?';
+  };
+
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
   const [selectedIndex, setIndex] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
   const [cardData, setcardData] = useState<cardData[]>([]);
-  const urlEndpoint: OptionUrls = {
-    0: '/info/powertrain',
-    1: '/info/driving-system',
-    2: '/info/bodytype',
-    3: '/info/exterior-color',
-    4: '/info/interior-color?exteriorColorId=1',
-    5: '/info/wheel',
-    6: '',
-    7: '',
-  };
-  const updateTempOption = (index: number, cardData: cardData[]) => {
+  const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
+
     if (selectedCardData) {
       const tempOpt: Option = {
         key: keyMapping[option],
@@ -74,9 +80,26 @@ function Content() {
   };
   const setNewIndex = (nextIndex: number) => {
     setIndex(nextIndex);
-    updateTempOption(nextIndex, cardData);
+    updateTempOption(nextIndex);
   };
-
+  const urlEndpoint: OptionUrls = {
+    0: '/info/powertrain',
+    1: '/info/driving-system',
+    2: '/info/bodytype',
+    3: '/info/exterior-color',
+    4: '/info/interior-color?exteriorColorId=1',
+    5: '/info/wheel',
+    6: '',
+    7: '',
+  };
+  const fetchedResponse = useFetch<cardData[]>(urlEndpoint[option]);
+  useEffect(() => {
+    if (fetchedResponse.data) {
+      setcardData(fetchedResponse.data);
+    } else {
+      setcardData([]);
+    }
+  }, [option, fetchedResponse.data]);
   const {selectedOptions} = useContext(SelectedOptionContext);
   useEffect(() => {
     const currentKey = keyMapping[option];
@@ -84,20 +107,7 @@ function Content() {
     if (foundOption) {
       setNewIndex(foundOption.id - 1);
     }
-    const fetchingData = async () => {
-      const response = await fetchData(urlEndpoint[option]);
-      if (response) {
-        setcardData(response);
-        if (foundOption) {
-          updateTempOption(foundOption.id - 1, response);
-        }
-      } else {
-        setcardData([]);
-      }
-    };
-    fetchingData();
   }, [option]);
-  useEffect(() => {}, [selectedIndex]);
   return (
     <Wrapper>
       <Container $option={option}>
