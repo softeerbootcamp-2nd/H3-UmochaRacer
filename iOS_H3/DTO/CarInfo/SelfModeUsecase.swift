@@ -54,14 +54,13 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
+                currentStepInfoEntity = stepInfoEntity
 
-                var stepInfoEntity = stepInfoEntity
-
-                if stepInfoEntity.step != .optionSelection {
-                    stepInfoEntity.selectFirstOption()
+                if currentStepInfoEntity.step != .optionSelection {
+                    currentStepInfoEntity.selectFirstOption()
                 }
 
-                return findCardbWordAndReturn(from: stepInfoEntity)
+                return findCardbWordAndReturn(from: currentStepInfoEntity)
             }
             .eraseToAnyPublisher()
     }
