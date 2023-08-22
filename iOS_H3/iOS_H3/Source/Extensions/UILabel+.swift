@@ -61,3 +61,27 @@ extension UILabel {
         self.attributedText = attributedString
     }
 }
+
+private extension UILabel {
+    func createMutableAttributedString() -> NSMutableAttributedString {
+        if let currentAttributedText = attributedText {
+            return NSMutableAttributedString(attributedString: currentAttributedText)
+        } else if let text = text {
+            return NSMutableAttributedString(string: text)
+        } else {
+            return NSMutableAttributedString()
+        }
+    }
+
+    func createLayoutManager() -> NSLayoutManager {
+        let layoutManager = NSLayoutManager()
+        let textContainer = NSTextContainer(size: bounds.size)
+        textContainer.lineFragmentPadding = 0.0
+        layoutManager.addTextContainer(textContainer)
+        if let attributedText = attributedText {
+            let textStorage = NSTextStorage(attributedString: attributedText)
+            textStorage.addLayoutManager(layoutManager)
+        }
+        return layoutManager
+    }
+}
