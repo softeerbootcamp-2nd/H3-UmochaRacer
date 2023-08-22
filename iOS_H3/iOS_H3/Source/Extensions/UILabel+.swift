@@ -175,4 +175,37 @@ extension UILabel {
             return layoutManager.glyphIndex(for: newPoint, in: textContainer)
         }
 
+    func applyAttributes(imageName: String,
+                         range: NSRange,
+                         weight: UIFont.Weight,
+                         backgroundColor: UIColor,
+                         textColor: UIColor,
+                         linkAction: @escaping () -> Void) {
+        insertImage(named: imageName, before: range)
+        setAttributes(on: range, weight: weight, backgroundColor: backgroundColor, textColor: textColor)
+        addLink(on: range, linkAction: linkAction)
+    }
+
+    // 백카사전 On
+    func highlightForDictionaryActivation(range: NSRange,
+                                          linkAction: @escaping () -> Void) {
+        applyAttributes(imageName: "dictionary_selected_img",
+                        range: range,
+                        weight: .bold,
+                        backgroundColor: .orange,
+                        textColor: .black,
+                        linkAction: linkAction)
+    }
+
+    // 백카사전 단어 선택
+    func highlightForDictionarySelection(range: NSRange,
+                                         linkAction: @escaping () -> Void) {
+        applyAttributes(imageName: "dictionary_unselected_img",
+                        range: range,
+                        weight: .bold,
+                        backgroundColor: .black,
+                        textColor: .white,
+                        linkAction: linkAction)
+    }
+
 }
