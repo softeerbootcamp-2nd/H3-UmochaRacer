@@ -5,12 +5,11 @@ import OptionInfo from './right/OptionInfo';
 import TotalEstimate from './totalestimate/TotalEstimate';
 
 import {OptionContext} from '@/provider/optionProvider';
-import useFetch from '../hooks/useFetch';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {flexCenter} from '@/style/common';
 import {fetchData} from '@/api/fetchData';
-import {url} from 'inspector';
+import Spinner from '../common/Spinner';
 type cardData = {
   id: number;
   name: string;
@@ -50,23 +49,22 @@ function Content() {
     e.returnValue = '나갈거임?';
   };
 
-  useEffect(() => {
-    (() => {
-      window.addEventListener('beforeunload', preventClose);
-    })();
+  // useEffect(() => {
+  //   (() => {
+  //     window.addEventListener('beforeunload', preventClose);
+  //   })();
 
-    return () => {
-      window.removeEventListener('beforeunload', preventClose);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener('beforeunload', preventClose);
+  //   };
+  // }, []);
   const [selectedIndex, setIndex] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
   const [cardData, setcardData] = useState<cardData[]>([]);
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
-  const [additionalOptionList, setAddOptionList] = useState<CardData[][]>([]);
+  const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  console.log(additionalOptionList);
   const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
 
@@ -137,6 +135,7 @@ function Content() {
   }, [option]);
   return (
     <Wrapper>
+      {!isLoading && <Spinner />}
       <Container $option={option}>
         {option < 7 ? (
           <>
@@ -166,7 +165,6 @@ function Content() {
 }
 
 export default Content;
-
 const Wrapper = styled.section`
   width: 100%;
   flex-grow: 1;
