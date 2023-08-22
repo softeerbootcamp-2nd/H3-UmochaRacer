@@ -63,9 +63,9 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
-    private var optionSelectCancellableByIndex = [Int: AnyCancellable]()
+    private var optionSelectCancellableByIndexPath = [IndexPath: AnyCancellable]()
 
-    private var optionCategoryTapCancellableByIndex = [Int: AnyCancellable]()
+    private var optionCategoryTapCancellableByIndexPath = [IndexPath: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -248,22 +248,22 @@ extension CarMakingContentView {
     }
 
     private func subscribeCellEvent(of cell: CarMakingCollectionViewCell, indexPath: IndexPath) {
-        subscribe(optionSelection: cell.optionDidSelected, stepIndex: indexPath.row)
+        subscribe(optionSelection: cell.optionDidSelected, indexPath: indexPath)
         if let optionSelectStepCell = cell as? CarMakingOptionSelectStepCell {
-            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, stepIndex: indexPath.row)
+            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, indexPath: indexPath)
         }
     }
 
-    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, stepIndex: Int) {
-        optionSelectCancellableByIndex[stepIndex] = optionSelection
+    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, indexPath: IndexPath) {
+        optionSelectCancellableByIndexPath[indexPath] = optionSelection
             .sink { [weak self] optionIndex in
                 guard let self else { return }
                 delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
             }
     }
 
-    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, stepIndex: Int) {
-        optionCategoryTapCancellableByIndex[stepIndex] = optionCategoryTap
+    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, indexPath: IndexPath) {
+        optionCategoryTapCancellableByIndexPath[indexPath] = optionCategoryTap
             .sink { [weak self] category in
                 self?.delegate?.carMakingContentView(categoryDidSelected: category)
             }
