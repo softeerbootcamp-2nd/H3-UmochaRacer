@@ -82,7 +82,9 @@
 
 </details>
 
+## 📖 Wiki
 
+[Wiki 링크](https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/wiki)
 
 ## 👩‍🎨 기획 및 디자인
 

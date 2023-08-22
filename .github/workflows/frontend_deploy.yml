@@ -1,0 +1,59 @@
+name: FrontEnd Deploy When Pushed
+
+on:
+  push:
+    branches: 
+      - develop-cd
+    paths: 'frontend/**'
+
+defaults:
+  run:
+    working-directory: frontend
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 20
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build
+        run: npm run build --if-present
+
+      - name: Create zip
+        run: |
+          mkdir deploy
+          cp -r ./dist ./deploy/
+          cp -r ../nginx ./deploy/
+          cp ./deploy_files/* ./deploy/
+          zip -r ./frontend-build.zip ./deploy
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: |
+          aws s3 cp \
+            --region ap-northeast-2 \
+             ./frontend-build.zip s3://umocharacerjar
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name umocharacer-deploy
+          --deployment-config-name CodeDeployDefault.OneAtATime
+          --deployment-group-name umocharacer-web-deploy-group
+          --s3-location bucket=umocharacerjar,bundleType=zip,key=frontend-build.zip
+
+        
