@@ -22,7 +22,7 @@ public class SalesTemplateRepository {
         String query = "SELECT m." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE m.trim_id = 1\n" +
-                "GROUP BY m." + columnId + " WITH ROLLUP ";
+                "GROUP BY m." + columnId + " WITH ROLLUP ORDER BY select_count DESC ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
@@ -31,7 +31,7 @@ public class SalesTemplateRepository {
         String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE m.trim_id = 1\n" +
-                "GROUP BY s." + columnId + " WITH ROLLUP ";
+                "GROUP BY s." + columnId + " WITH ROLLUP ORDER BY select_count DESC";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
