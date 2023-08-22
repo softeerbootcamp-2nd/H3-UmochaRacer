@@ -93,4 +93,15 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
+
+    func fetchFeedbackComment(
+        step: CarMakingStep,
+        optionID: Int
+    ) -> AnyPublisher<FeedbackCommentEntity, CarInfoRepositoryError> {
+        Just(
+            FeedbackCommentEntity(comment: "temp")
+        )
+        .setFailureType(to: CarInfoRepositoryError.self)
+        .eraseToAnyPublisher()
+    }
 }
