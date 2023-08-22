@@ -83,7 +83,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
-    func fetchAdditionalOptionInfo(category: OptionCategoryType) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+    func fetchAdditionalOptionInfo(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
         carInfoRepository.fetchAdditionalOption(category: category)
             .mapError { [weak self] error in
                 guard let self else { return .errorMappingError }
