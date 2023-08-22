@@ -24,7 +24,7 @@ then # blue라면
   done;
 
   echo "4. nginx 재가동"
-  sudo cp /nginx/nginx.green.conf /etc/nginx/nginx.conf
+  sudo cp /nginx.green.conf /etc/nginx/nginx.conf
   sudo nginx -s rel
 
   echo "5. blue 컨테이너 내림"
@@ -50,7 +50,7 @@ else
   done;
 
   echo "4. nginx 재가동" 
-  sudo cp /nginx/nginx.blue.conf /etc/nginx/nginx.conf
+  sudo cp /nginx.blue.conf /etc/nginx/nginx.conf
   sudo nginx -s reload
 
   echo "5. green 컨테이너 내림"
