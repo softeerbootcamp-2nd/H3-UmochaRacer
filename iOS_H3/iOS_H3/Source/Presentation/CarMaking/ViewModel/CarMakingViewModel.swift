@@ -68,6 +68,10 @@ final class CarMakingViewModel {
                     return Just(CarMakingStepInfo(step: step))
                         .eraseToAnyPublisher()
                 }
+                if step == .optionSelection {
+                    let currentCategory = input.optionCategoryDidChanged.value
+                    return fetchAdditionalOptionInfo(category: currentCategory)
+                }
                 return requestCurrentStepInfo(step)
             }
             .sink(receiveValue: { carMakingStepInfo in
