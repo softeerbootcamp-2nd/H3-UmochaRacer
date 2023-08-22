@@ -5,5 +5,3 @@ COPY ./nginx.conf /etc/nginx/conf.d/
 
 EXPOSE 80
 CMD [ "nginx", "-g", "daemon off;"]
-
-# 볼륨을 써도 됨 (마운팅)
