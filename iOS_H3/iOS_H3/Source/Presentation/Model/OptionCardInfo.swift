@@ -2,15 +2,15 @@
 //  OptionCardInfo.swift
 //  iOS_H3
 //
-//  Created by  sangyeon on 2023/08/07.
+//  Created by  sangyeon on 2023/08/21.
 //
 
 import Foundation
 
 struct OptionCardInfo: Hashable {
     private let id = UUID()
-    let title: String
-    let subTitle: String
+    let title: URString
+    let subTitle: URString
     let priceString: String     // 예시) "+ 100,000원"
     let bannerImageURL: URL?    // 옵션 카드 상단 큰 이미지
     let iconImageURL: URL?          // 내장 색상 옵션에만 존재하는 이미지
@@ -19,8 +19,8 @@ struct OptionCardInfo: Hashable {
     var isSelected: Bool
 
     init(
-        title: String,
-        subTitle: String,
+        title: URString,
+        subTitle: URString,
         priceString: String,
         bannerImageURL: URL? = nil,
         iconImageURL: URL? = nil,
