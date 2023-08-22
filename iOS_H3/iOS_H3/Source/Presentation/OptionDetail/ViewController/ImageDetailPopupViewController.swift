@@ -39,7 +39,6 @@ class ImageDetailPopupViewController: UIViewController {
         super.init(coder: coder)
     }
 
-    // MARK: - Helpers
     override func viewDidLoad() {
         super.viewDidLoad()
 
