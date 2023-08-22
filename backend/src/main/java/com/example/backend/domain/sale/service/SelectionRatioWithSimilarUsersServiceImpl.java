@@ -1,8 +1,8 @@
 package com.example.backend.domain.sale.service;
 
 import com.example.backend.domain.guide.dto.EstimateRequest;
-import com.example.backend.domain.sale.dto.SalesSummaryResponse;
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.dto.RatioSummaryResponse;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.mapper.SummaryMapper;
 import com.example.backend.domain.sale.repository.SalesTemplateRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,25 +18,25 @@ public class SelectionRatioWithSimilarUsersServiceImpl implements SelectionRatio
     private final SummaryMapper summaryMapper;
 
     @Override
-    public List<SalesSummaryResponse> calculateSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest) {
-        List<SalesSummary> summaries = repository.findSelectionRatioWithSimilarUsers(target, estimateRequest);
-        return getSortedSalesSummaryResponses(summaries);
+    public List<RatioSummaryResponse> calculateSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest) {
+        List<RatioSummary> summaries = repository.findSelectionRatioWithSimilarUsers(target, estimateRequest);
+        return getSortedRatioSummaryResponses(summaries);
     }
 
     @Override
-    public List<SalesSummaryResponse> calculateSelectionRatioWitSameAgeAndGender(String target, EstimateRequest estimateRequest) {
-        List<SalesSummary> summaries = repository.findSelectionRatioWithSameAgeAndGender(target, estimateRequest);
-        return getSortedSalesSummaryResponses(summaries);
+    public List<RatioSummaryResponse> calculateSelectionRatioWitSameAgeAndGender(String target, EstimateRequest estimateRequest) {
+        List<RatioSummary> summaries = repository.findSelectionRatioWithSameAgeAndGender(target, estimateRequest);
+        return getSortedRatioSummaryResponses(summaries);
     }
 
     @Override
-    public List<SalesSummaryResponse> calculateSelectionRatioWithAdditionalOption(EstimateRequest estimateRequest) {
-        List<SalesSummary> summaries = repository.findSelectionRatioOfAdditionalOption(estimateRequest);
-        return getSortedSalesSummaryResponses(summaries);
+    public List<RatioSummaryResponse> calculateSelectionRatioWithAdditionalOption(EstimateRequest estimateRequest) {
+        List<RatioSummary> summaries = repository.findSelectionRatioOfAdditionalOption(estimateRequest);
+        return getSortedRatioSummaryResponses(summaries);
     }
 
-    private List<SalesSummaryResponse> getSortedSalesSummaryResponses(List<SalesSummary> summaries) {
-        List<SalesSummaryResponse> result = summaryMapper.map(summaries);
+    private List<RatioSummaryResponse> getSortedRatioSummaryResponses(List<RatioSummary> summaries) {
+        List<RatioSummaryResponse> result = summaryMapper.map(summaries);
         Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
         return result;
     }

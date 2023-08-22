@@ -1,8 +1,8 @@
 package com.example.backend.domain.sale.repository;
 
-import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.guide.dto.EstimateRequest;
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
+import com.example.backend.domain.sale.entity.enums.Gender;
 import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -36,7 +36,7 @@ public class SalesTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
-    public List<SalesSummary> findSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest) {
+    public List<RatioSummary> findSelectionRatioWithSimilarUsers(String target, EstimateRequest estimateRequest) {
 /*
         String rowFile = readSQLFile("sql/selectCountWithSimilarUsers.sql");
         String query = String.format(rowFile, transUriToColumnId(target));
@@ -60,7 +60,7 @@ public class SalesTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
-    public List<SalesSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
+    public List<RatioSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
         String targetId = transUriToColumnId(target);
         int age = estimateRequest.getAge();
 
@@ -76,7 +76,7 @@ public class SalesTemplateRepository {
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
-    public List<SalesSummary> findSelectionRatioOfAdditionalOption(EstimateRequest estimateRequest) {
+    public List<RatioSummary> findSelectionRatioOfAdditionalOption(EstimateRequest estimateRequest) {
         String query = getWithQueryWithAdditionalOption(ADDITIONAL_OPTION_ID)
                 + getWhereQuery(ADDITIONAL_OPTION_ID, estimateRequest);
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
@@ -121,7 +121,7 @@ public class SalesTemplateRepository {
                 "               )\n";
     }
 
-    private String getWhereQuery(String targetId, long tag1, long tag2, long tag3, int age, String gender) {
+    private String getWhereQuery(String targetId, long tag1, long tag2, long tag3, int age, Gender gender) {
         return "select " + targetId + "       as id,\n" +
                 "       count(" + targetId + ") as select_count\n" +
                 "from joined\n" +
@@ -134,14 +134,14 @@ public class SalesTemplateRepository {
                 "                                      (tag3, tag2, tag1)\n" +
                 "            )\n" +
                 "        and (\n" +
-                "                    (" + age + " <= age and age<= " + (age + 9) + " and gender != '" + gender + "')\n" +
-                "                    or ((" + (age - 1) + " <= age or age >= " + (age + 10) + ") and gender = '" + gender + "')\n" +
-                "                    or (" + age + " <= age and age <= " + (age + 9) + " and gender = '" + gender + "')\n" +
+                "                    (" + age + " <= age and age<= " + (age + 9) + " and gender != '" + gender.name() + "')\n" +
+                "                    or ((" + (age - 1) + " <= age or age >= " + (age + 10) + ") and gender = '" + gender.name() + "')\n" +
+                "                    or (" + age + " <= age and age <= " + (age + 9) + " and gender = '" + gender.name() + "')\n" +
                 "                )\n" +
                 "    )\n" +
                 "   or (\n" +
                 "         " + age + " <= age  and age <= " + (age + 9) + "\n" +
-                "        and gender = '" + gender + "'\n" +
+                "        and gender = '" + gender.name() + "'\n" +
                 "        and (\n" +
                 "                            (" + tag1 + ", " + tag2 + ") in ((tag1, tag2), (tag1, tag3),\n" +
                 "                                               (tag2, tag1), (tag2, tag3),\n" +

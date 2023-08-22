@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 public class EstimateRequest {
     private int age;
-    private String gender;
+    private Gender gender;
     private long tag1;
     private long tag2;
     private long tag3;
