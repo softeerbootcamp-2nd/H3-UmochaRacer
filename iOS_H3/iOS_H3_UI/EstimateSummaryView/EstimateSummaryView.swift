@@ -74,9 +74,7 @@ extension EstimateSummaryView {
 
     private func updatePriceLabel(_ estimateSummary: EstimateSummary) {
         let price = estimateSummary.elements.reduce(0) { $0 + $1.price }
-        DispatchQueue.main.async { [weak self] in
-            self?.priceLabel.text = "\(String.priceString(from: price))원"
-        }
+        priceLabel.text = "\(String.priceString(from: price))원"
     }
 
     private func updateSnapshot(item: [EstimateSummaryElement]) {
@@ -89,18 +87,15 @@ extension EstimateSummaryView {
             snapshot.appendItems([element], toSection: element.category)
         }
 
-        DispatchQueue.main.async { [weak self] in
-            self?.dataSource.apply(snapshot)
-        }
+        dataSource.apply(snapshot)
     }
 
     private func updateCollectionViewHeight(_ item: [EstimateSummaryElement]) {
         var newHeight = Constants.collectionViewDefaultHeight
         newHeight += (Constants.collectionViewCellHeight + Constants.collectionViewItemSpacing) * Double(item.count)
         newHeight -= Double(CarMakingCategory.allCases.count) * Constants.collectionViewItemSpacing
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionViewHeightConstraint.constant = newHeight
-        }
+
+        collectionViewHeightConstraint.constant = newHeight
     }
 }
 

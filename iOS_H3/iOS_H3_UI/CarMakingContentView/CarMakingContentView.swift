@@ -146,9 +146,7 @@ extension CarMakingContentView {
         sectionItems[currentItemIndex] = info
 
         snapshot.appendItems(sectionItems, toSection: section)
-        DispatchQueue.main.async { [weak self] in
-            self?.collectionViewDataSource.apply(snapshot)
-        }
+        collectionViewDataSource.apply(snapshot)
     }
 }
 
