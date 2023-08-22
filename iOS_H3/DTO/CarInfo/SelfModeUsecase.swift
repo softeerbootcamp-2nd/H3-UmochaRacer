@@ -40,32 +40,10 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     }
 
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
-        guard let publisher = publisherForStep(step) else {
-            return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
+        if let stepInfo = carMakingTotalInfo[step] {
+            return Just(stepInfo).setFailureType(to: SelfModeUsecaseError.self).eraseToAnyPublisher()
         }
-
-        return publisher
-            .mapError { error in
-                switch error {
-                case .networkError:
-                    return .networkError(error: error)
-                case .conversionError:
-                    return .conversionError(error: error)
-                }
-            }
-            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
-                guard let self else { return nil }
-
-                var stepInfoEntity = stepInfoEntity
-                if stepInfoEntity.step != .optionSelection {
-                    stepInfoEntity.selectFirstOption()
-                }
-
-                currentStepInfo = findCardbWordAndReturn(from: stepInfoEntity)
-
-                return currentStepInfo
-            }
-            .eraseToAnyPublisher()
+        return fetchOptionInfoFromServer(step: step)
     }
 
     func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
@@ -124,6 +102,35 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         currentStepInfo.optionCardInfoArray = optionInfos
 
         return optionInfos
+    }
+
+    private func fetchOptionInfoFromServer(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        guard let publisher = publisherForStep(step) else {
+            return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
+        }
+
+        return publisher
+            .mapError { error in
+                switch error {
+                case .networkError:
+                    return .networkError(error: error)
+                case .conversionError:
+                    return .conversionError(error: error)
+                }
+            }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
+
+                var stepInfoEntity = stepInfoEntity
+                if stepInfoEntity.step != .optionSelection {
+                    stepInfoEntity.selectFirstOption()
+                }
+
+                carMakingTotalInfo[step] = findCardbWordAndReturn(from: stepInfoEntity)
+
+                return carMakingTotalInfo[step]
+            }
+            .eraseToAnyPublisher()
     }
 
     private func publisherForStep(
