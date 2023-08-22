@@ -39,11 +39,11 @@ class TopAlignedLabel: UIView {
     func setText(_ text: String) {
         label.text = text
     }
-    
+
     func setTextColor(_ color: UIColor) {
         label.textColor = color
     }
-    
+
     func setFont(_ font: UIFont) {
         label.font = font
     }
