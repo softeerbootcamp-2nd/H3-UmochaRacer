@@ -131,10 +131,7 @@ extension UILabel {
 
     func addLink(on range: NSRange, linkAction: @escaping () -> Void) {
             guard let text = self.text else { return }
-
-            let mutableAttributedString = self.attributedText?
-            .mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(string: text)
-
+            let mutableAttributedString = createMutableAttributedString()
             let urlKey = "CustomLinkActionKey"
             mutableAttributedString.addAttribute(NSAttributedString.Key(rawValue: urlKey),
                                                  value: linkAction,
