@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {Popup_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
@@ -7,6 +7,8 @@ interface props {
   onClick: (event: React.MouseEvent) => void;
   opened: boolean;
   selected: boolean;
+  onHover: () => void;
+  onHoverEnd: () => void;
 }
 
 const DetailIcon = (isOpen: boolean) => {
@@ -28,11 +30,22 @@ const DetailIcon = (isOpen: boolean) => {
   );
 };
 
-function DetailToggle({onClick, opened, selected}: props) {
+function DetailToggle({onClick, opened, selected, onHover, onHoverEnd}: props) {
   const buttonText: string = opened ? '접기' : '자세히보기';
-
+  const [isHovered, setIsHovered] = useState(false);
   return (
-    <Wrapper onClick={onClick} $selected={selected.toString()}>
+    <Wrapper
+      onClick={onClick}
+      $selected={selected.toString()}
+      onMouseEnter={() => {
+        setIsHovered(true);
+        onHover();
+      }}
+      onMouseLeave={() => {
+        setIsHovered(false);
+        onHoverEnd();
+      }}
+    >
       {buttonText}
       {DetailIcon(opened)}
     </Wrapper>

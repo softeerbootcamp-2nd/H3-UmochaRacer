@@ -1,56 +1,46 @@
 import {colors} from '@/style/theme';
-import React, {useContext, useRef} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
-import {getCategory} from '../util/getCategory';
-import useFetch from '../hooks/useFetch';
 import {Label2_Regular} from '@/style/fonts';
-import {OptionContext} from '@/provider/optionProvider';
 
 interface Info {
   title: string;
   description: string;
 }
-interface DeatailData {
+interface DetailData {
   title: string;
   description: string;
   info?: string;
 }
 
-interface Props {
+interface DetailBoxProps {
   isOpen: boolean;
   id: number;
+  descriptionData: DetailData | null;
 }
-
-function DetailBox({isOpen, id}: Props) {
-  const {option} = useContext(OptionContext);
+function DetailBox({isOpen, id, descriptionData}: DetailBoxProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-  const categoryName = getCategory(option);
-  const fetchedDetails = useFetch<DeatailData>(`/detail/${categoryName}/${id}`);
   let info: React.JSX.Element[] = [];
-  if (!fetchedDetails.data) return;
-  if (fetchedDetails.data?.info) {
-    info = JSON.parse(fetchedDetails.data?.info).map(
-      (elem: Info, index: number) => {
-        return (
-          <Info key={index}>
-            <InfoTitle>{elem.title}</InfoTitle>
-            <InfoDescription>{elem.description}</InfoDescription>
-          </Info>
-        );
-      },
+  if (descriptionData?.info) {
+    info = JSON.parse(descriptionData?.info).map(
+      (elem: Info, index: number) => (
+        <Info key={index}>
+          <InfoTitle>{elem.title}</InfoTitle>
+          <InfoDescription>{elem.description}</InfoDescription>
+        </Info>
+      ),
     );
   }
 
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
-        <DescriptionBox>{fetchedDetails.data?.description}</DescriptionBox>
-        {fetchedDetails.data?.info && info && <InfoBox>{info}</InfoBox>}
+        <DescriptionBox>{descriptionData?.description}</DescriptionBox>
+        {descriptionData?.info && <InfoBox>{info}</InfoBox>}
       </DetailContent>
     </Wrapper>
   );
 }
-
 export default DetailBox;
 
 const Wrapper = styled.div<{$isOpen: boolean; $height?: number}>`

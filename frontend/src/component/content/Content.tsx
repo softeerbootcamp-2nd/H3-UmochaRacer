@@ -5,17 +5,18 @@ import OptionInfo from './right/OptionInfo';
 import TotalEstimate from './totalestimate/TotalEstimate';
 
 import {OptionContext} from '@/provider/optionProvider';
-import useFetch from '../hooks/useFetch';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
-import {flexCenter} from '@/style/common';
+import {fetchData} from '@/api/fetchData';
+import Spinner from '../common/Spinner';
+import SelectedOptionContent from './SelectedOptionContent';
 type cardData = {
   id: number;
   name: string;
   imageSrc: string;
   price: number;
 };
-type OptionUrls = Record<number, string>;
+type OptionUrls = Record<number, string | string[]>;
 interface Option {
   key: string;
   value: string;
@@ -41,7 +42,6 @@ const categoryMapping: Record<number, string> = {
   4: 'color',
   5: 'car',
 };
-
 function Content() {
   // 새로고침 막기 변수
   const preventClose = (e: BeforeUnloadEvent) => {
@@ -62,6 +62,10 @@ function Content() {
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
   const [cardData, setcardData] = useState<cardData[]>([]);
+  const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
+  const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {selectedOptions} = useContext(SelectedOptionContext);
   const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
 
@@ -89,27 +93,51 @@ function Content() {
     3: '/info/exterior-color',
     4: '/info/interior-color?exteriorColorId=1',
     5: '/info/wheel',
-    6: '',
+    6: [
+      '/info/additional-option?category=system',
+      '/info/additional-option?category=temperature',
+      '/info/additional-option?category=outer_device',
+      '/info/additional-option?category=inner_device',
+    ],
     7: '',
   };
-  const fetchedResponse = useFetch<cardData[]>(urlEndpoint[option]);
   useEffect(() => {
-    if (fetchedResponse.data) {
-      setcardData(fetchedResponse.data);
+    const fetchAllData = async () => {
+      const results = await Promise.all(
+        Object.values(urlEndpoint).map(async (endpoint) => {
+          if (typeof endpoint === 'string' && endpoint) {
+            return fetchData(endpoint);
+          } else if (Array.isArray(endpoint)) {
+            return Promise.all(endpoint.map(fetchData));
+          }
+        }),
+      );
+      const newCardDataList = results.slice(0, 6) as cardData[][];
+      const newAdditionalOptionList = results[6] as cardData[][];
+
+      setCardDataList(newCardDataList);
+      setAddOptionList(newAdditionalOptionList);
+      setcardData(newCardDataList[option]);
+    };
+
+    fetchAllData();
+    setIsLoading(true);
+  }, []);
+  useEffect(() => {
+    if (option !== 6) {
+      const currentKey = keyMapping[option];
+      const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
+      if (foundOption) {
+        setNewIndex(foundOption.id - 1);
+      }
+      setcardData(cardDataList[option]);
     } else {
-      setcardData([]);
-    }
-  }, [option, fetchedResponse.data]);
-  const {selectedOptions} = useContext(SelectedOptionContext);
-  useEffect(() => {
-    const currentKey = keyMapping[option];
-    const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
-    if (foundOption) {
-      setNewIndex(foundOption.id - 1);
+      setNewIndex(0);
     }
   }, [option]);
   return (
     <Wrapper>
+      {!isLoading && <Spinner />}
       <Container $option={option}>
         {option < 7 ? (
           <>
@@ -127,7 +155,11 @@ function Content() {
                 />
               </>
             ) : (
-              <Temp>옵션 선택 페이지는 수정 중 입니다.</Temp>
+              <SelectedOptionContent
+                selectedOptionData={additionalOptionList}
+                setNewIndex={(index: number) => setNewIndex(index)}
+                selectedIndex={selectedIndex}
+              />
             )}
           </>
         ) : (
@@ -150,10 +182,4 @@ const Container = styled.div<{$option: number}>`
   display: flex;
   width: 100%;
   height: 100%;
-`;
-
-const Temp = styled.div`
-  width: 100%;
-  height: 100%;
-  ${flexCenter}
 `;
