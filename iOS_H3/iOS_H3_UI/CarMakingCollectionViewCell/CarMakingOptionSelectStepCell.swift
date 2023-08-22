@@ -65,7 +65,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     override func configure(optionInfoArray: [OptionCardInfo]) {
         super.configure(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.configure(with: optionInfoArray)
         currentOptionInfo = optionInfoArray
 
@@ -77,7 +76,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     override func update(optionInfoArray: [OptionCardInfo]) {
         super.update(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.reloadOptionCards(with: optionInfoArray)
         currentOptionInfo = optionInfoArray
     }
@@ -87,9 +85,8 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         listModeView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description)
     }
 
-    private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
-        let selectedOptionCount = optionInfoArray.filter { $0.isSelected }.count
-        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(selectedOptionCount)"
+    func updateSelectedOptionCountLabel(to count: Int) {
+        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(count)"
     }
 
     private func showListModeView(isHidden: Bool) {
