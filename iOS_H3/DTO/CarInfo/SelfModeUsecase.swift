@@ -87,9 +87,13 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
         carInfoRepository.fetchAdditionalOption(category: category)
-            .mapError { [weak self] error in
-                guard let self else { return .errorMappingError }
-                return convertToSelfModeUsecaseError(from: error)
+            .mapError { error in
+                switch error {
+                case .networkError:
+                    return .networkError(error: error)
+                case .conversionError:
+                    return .conversionError(error: error)
+                }
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
