@@ -8,6 +8,7 @@ const colors = {
   Cool_Grey_003: '#AEB1B7',
   Cool_Grey_002: '#DBDEE3',
   Cool_Grey_001: '#F2F4F7',
+  Hyundai_White: '#fff',
 };
 
 export {colors};

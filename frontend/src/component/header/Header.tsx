@@ -22,8 +22,6 @@ const Wrapper = styled.div`
 `;
 
 const Content = styled.div`
-  width: 100%;
+  width: 1024px;
   ${flexBetween};
-  margin-left: 128px;
-  margin-right: 127px;
 `;
