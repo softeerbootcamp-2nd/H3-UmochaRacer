@@ -38,4 +38,6 @@ protocol SelfModeUsecaseProtocol {
     func fetchAdditionalOptionInfo(
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
+
+    func selectOption(of optionIndex: Int) -> [OptionCardInfo]
 }
