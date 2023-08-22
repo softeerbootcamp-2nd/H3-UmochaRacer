@@ -107,6 +107,24 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
+    func selectOption(of optionIndex: Int) -> [OptionCardInfo] {
+        var optionInfos = currentStepInfo.optionCardInfoArray
+
+        switch currentStepInfo.step {
+        case .optionSelection:
+            optionInfos[optionIndex].isSelected.toggle()
+        default:
+            optionInfos.enumerated().forEach { (index, _) in
+                optionInfos[index].isSelected = false
+            }
+            optionInfos[optionIndex].isSelected = true
+        }
+
+        currentStepInfo.optionCardInfoArray = optionInfos
+
+        return optionInfos
+    }
+
     private func publisherForStep(
         _ step: CarMakingStep
     ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>? {
