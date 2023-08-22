@@ -120,8 +120,18 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     func fetchFeedbackComment(
         step: CarMakingStep,
         optionID: Int
-    ) -> AnyPublisher<FeedbackComment, SelfModeUsecaseError> {
-        let commentEntity = carInfoRepository.fetchFeedbackComment(step: step, optionID: optionID)
+    ) -> AnyPublisher<FeedbackComment, Error> {
+        carInfoRepository.fetchFeedbackComment(step: step, optionID: optionID)
+            .mapError { $0 }
+            .compactMap { commentEntity in
+                let splittedComment = commentEntity.comment.split(separator: "!").map { String($0) }
+
+                let title = splittedComment.count > 0 ? "\(splittedComment[0])!": ""
+                let subTitle = splittedComment.count > 1 ? splittedComment[1]: ""
+
+                return FeedbackComment(title: title, subTitle: subTitle)
+            }
+            .eraseToAnyPublisher()
     }
 
     private func fetchOptionInfoFromServer(
