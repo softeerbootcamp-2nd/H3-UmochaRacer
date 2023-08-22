@@ -2,10 +2,9 @@ package com.example.backend.domain.sale.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.model.enums.ResultCode;
+import com.example.backend.domain.guide.dto.EstimateRequest;
 import com.example.backend.domain.sale.dto.RatioSummaryResponse;
 import com.example.backend.domain.sale.dto.TagRatioRequest;
-import com.example.backend.domain.guide.dto.EstimateRequest;
-import com.example.backend.domain.sale.dto.SalesSummaryResponse;
 import com.example.backend.domain.sale.service.SelectionRatioWithSimilarUsersService;
 import com.example.backend.domain.sale.service.SelfModeServiceFactory;
 import com.example.backend.domain.sale.service.TagSelectionRatioService;
@@ -58,33 +57,35 @@ public class SaleRatioController {
 
     private ResponseEntity<ResponseDto<List<RatioSummaryResponse>>> mapToOKResponse(List<RatioSummaryResponse> result) {
         ResponseDto<List<RatioSummaryResponse>> body = ResponseDto.of(result, ResultCode.SUCCESS);
+        return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
 
     @PostMapping("/{target:powertrain|bodytype|driving-system|wheel}/tag")
-    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedCarComponentSalesRatio(
+    public ResponseEntity<ResponseDto<List<RatioSummaryResponse>>> returnOrderedCarComponentSalesRatio(
             @PathVariable("target") String target,
             @RequestBody EstimateRequest estimateRequest
     ) {
-        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithSimilarUsers(target, estimateRequest);
+        List<RatioSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithSimilarUsers(target, estimateRequest);
         return mapToOKResponse(result);
     }
 
     @PostMapping("/{target:exterior-color|interior-color}/tag")
-    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+    public ResponseEntity<ResponseDto<List<RatioSummaryResponse>>> returnOrderedColorSalesRatio(
             @PathVariable("target") String target,
             @RequestBody EstimateRequest estimateRequest
     ) {
-        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWitSameAgeAndGender(target, estimateRequest);
+        List<RatioSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWitSameAgeAndGender(target, estimateRequest);
         return mapToOKResponse(result);
     }
 
     @PostMapping("/additional-option/tag")
-    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+    public ResponseEntity<ResponseDto<List<RatioSummaryResponse>>> returnOrderedColorSalesRatio(
             @RequestBody EstimateRequest estimateRequest
     ) {
-        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithAdditionalOption(estimateRequest);
+        List<RatioSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithAdditionalOption(estimateRequest);
         return mapToOKResponse(result);
     }
-      
+
     private <T> ResponseEntity<ResponseDto<T>> mapToOKResponse(T t) {
         ResponseDto<T> body = ResponseDto.of(t, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
