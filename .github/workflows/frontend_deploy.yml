@@ -2,7 +2,7 @@ name: FrontEnd Deploy When Pushed
 
 on:
   push:
-    branches:
+    branches: 
       - develop-cd
     paths: 'frontend/**'
 
