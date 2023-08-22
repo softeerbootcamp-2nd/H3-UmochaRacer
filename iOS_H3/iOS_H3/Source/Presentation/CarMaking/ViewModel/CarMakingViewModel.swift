@@ -83,8 +83,16 @@ final class CarMakingViewModel {
         input.optionDidSelected
             .sink { [weak self] (step, optionIndex) in
                 guard let self else { return }
-                let changedOptionInfo = selfModeUsecase.selectOption(of: optionIndex, in: step)
-                output.optionInfoDidUpdated.send(changedOptionInfo)
+
+                if step == .optionSelection {
+                    let currentCategory = input.optionCategoryDidChanged.value
+                    let (optionInfo, numberOfSelectedOption) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: currentCategory)
+                    output.optionInfoDidUpdated.send(optionInfo)
+                    output.numberOfSelectedAdditionalOption.send(numberOfSelectedOption)
+                } else {
+                    let changedOptionInfo = selfModeUsecase.selectOption(of: optionIndex, in: step)
+                    output.optionInfoDidUpdated.send(changedOptionInfo)
+                }
             }
             .store(in: &cancellables)
 
