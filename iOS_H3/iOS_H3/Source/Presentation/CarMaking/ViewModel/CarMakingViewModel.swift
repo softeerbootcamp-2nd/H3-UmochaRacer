@@ -55,7 +55,7 @@ final class CarMakingViewModel {
                     return Just(EstimateSummary(elements: []))
                         .eraseToAnyPublisher()
                 }
-                return self.requestEstimateSummary()
+                return requestEstimateSummary()
             }
             .sink(receiveValue: { summary in
                 output.estimateSummary.send(summary)
@@ -68,7 +68,7 @@ final class CarMakingViewModel {
                     return Just(CarMakingStepInfo(step: step))
                         .eraseToAnyPublisher()
                 }
-                return self.requestCurrentStepInfo(step)
+                return requestCurrentStepInfo(step)
             }
             .sink(receiveValue: { carMakingStepInfo in
                 output.currentStepInfo.send(carMakingStepInfo)
