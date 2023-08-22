@@ -55,7 +55,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
                 var stepInfoEntity = stepInfoEntity
 
-                stepInfoEntity.selectFirstOption()
+                if stepInfoEntity.step != .optionSelection {
+                    stepInfoEntity.selectFirstOption()
+                }
 
                 return findCardbWordAndReturn(from: stepInfoEntity)
             }
@@ -97,11 +99,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
-
-                var stepInfoEntity = stepInfoEntity
-
-                stepInfoEntity.selectFirstOption()
-
                 return findCardbWordAndReturn(from: stepInfoEntity)
             }
             .eraseToAnyPublisher()
