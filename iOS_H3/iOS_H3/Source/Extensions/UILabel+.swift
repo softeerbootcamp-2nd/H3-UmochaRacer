@@ -87,7 +87,9 @@ private extension UILabel {
 }
 
 extension UILabel {
-    func insertImage(named imageName: String, before range: NSRange, imageSize: CGSize = CGSize(width: 20, height: 20)) {
+    func insertImage(named imageName: String,
+                     before range: NSRange,
+                     imageSize: CGSize = CGSize(width: 20, height: 20)) {
         guard let text = self.text, range.location != NSNotFound, range.location < text.count else { return }
 
         let attributedString = createMutableAttributedString()
@@ -126,5 +128,51 @@ extension UILabel {
 
         self.attributedText = mutableAttributedString
     }
+
+    func addLink(on range: NSRange, linkAction: @escaping () -> Void) {
+            guard let text = self.text else { return }
+
+            let mutableAttributedString = self.attributedText?
+            .mutableCopy() as? NSMutableAttributedString ?? NSMutableAttributedString(string: text)
+
+            let urlKey = "CustomLinkActionKey"
+            mutableAttributedString.addAttribute(NSAttributedString.Key(rawValue: urlKey),
+                                                 value: linkAction,
+                                                 range: range)
+            self.attributedText = mutableAttributedString
+
+            let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleLabelTap(_:)))
+            self.isUserInteractionEnabled = true
+            self.addGestureRecognizer(recognizer)
+        }
+
+        @objc private func handleLabelTap(_ sender: UITapGestureRecognizer) {
+            let point = sender.location(in: self)
+            guard let selectedIndex = textIndex(at: point) else { return }
+            guard let attr = attributedText?.attributes(at: selectedIndex,
+                                                        effectiveRange: nil),
+                  let urlAction = attr[NSAttributedString
+                    .Key(rawValue: "CustomLinkActionKey")] as? () -> Void else { return }
+
+            urlAction()
+        }
+        private func textIndex(at point: CGPoint) -> Int? {
+            guard let attributedText = attributedText else { return nil }
+
+            let layoutManager = NSLayoutManager()
+            let textContainer = NSTextContainer(size: self.bounds.size)
+            let textStorage = NSTextStorage(attributedString: attributedText)
+
+            textStorage.addLayoutManager(layoutManager)
+            textContainer.lineFragmentPadding = 0.0
+            layoutManager.addTextContainer(textContainer)
+
+            let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(
+                forGlyphRange: layoutManager.glyphRange(for: textContainer),
+                in: textContainer).size.width) / 2
+            let newPoint = CGPoint(x: point.x - (paddingWidth > 0 ? paddingWidth : 0), y: point.y)
+
+            return layoutManager.glyphIndex(for: newPoint, in: textContainer)
+        }
 
 }
