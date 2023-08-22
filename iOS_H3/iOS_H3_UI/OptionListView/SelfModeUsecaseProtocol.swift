@@ -49,5 +49,5 @@ protocol SelfModeUsecaseProtocol {
 	func fetchFeedbackComment(
         step: CarMakingStep,
         optionID: Int
-    ) -> AnyPublisher<FeedbackComment, SelfModeUsecaseError>
+    ) -> AnyPublisher<FeedbackComment, Error>
 }
