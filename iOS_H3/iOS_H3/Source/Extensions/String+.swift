@@ -10,7 +10,9 @@ import Foundation
 extension String {
     /// String으로부터 <cardb> 태그로 감싸진 백카사전 단어를 찾고 URString으로 리턴
     func toURString() -> URString {
-        let pattern = "<cardb>[^<]+</cardb>"
+        let openTag = "<cardb>", closeTag = "</cardb>"
+
+        let pattern = "\(openTag)[^<]+\(closeTag)"
         guard let regex = try? NSRegularExpression(pattern: pattern) else {
             return URString(fullText: self)
         }
@@ -22,8 +24,8 @@ extension String {
             guard let match = regex.firstMatch(in: string, range: NSRange(location: 0, length: string.count)) else {
                 break
             }
-            let startIndexOfTarget = string.index(string.startIndex, offsetBy: match.range.lowerBound + 7)
-            let endIndexOfTarget = string.index(string.startIndex, offsetBy: match.range.upperBound - 8)
+            let startIndexOfTarget = string.index(string.startIndex, offsetBy: match.range.lowerBound + openTag.count)
+            let endIndexOfTarget = string.index(string.startIndex, offsetBy: match.range.upperBound - closeTag.count)
             let targetWordIndexRange = startIndexOfTarget..<endIndexOfTarget
 
             let targetWord = string[targetWordIndexRange]
