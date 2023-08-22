@@ -1,9 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Regular, Body2_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {flexCenter} from '@/style/common';
-import {GridData, gridData, selectData, MAX_LENGTH} from '../GuidData';
+import {
+  useGuideFlowDispatch,
+  useGuideFlowState,
+  GridData,
+  Tag,
+  UPDATE_OPTIONS,
+} from '@/provider/guideFlowProvider';
 
 const Circle = () => {
   return (
@@ -19,59 +25,64 @@ const Circle = () => {
   );
 };
 
+const MAX_LENGTH = 3;
+
 function GirdList() {
-  const [selectArr, setSelectArr] = useState<string[]>([]);
+  const giudeFlowState = useGuideFlowState();
+  const giudeFlowDipatch = useGuideFlowDispatch();
+  let selectArr = giudeFlowState.dataObject.options;
 
   const handleClickCard = (e: React.MouseEvent) => {
     const target = e.currentTarget as HTMLDivElement;
-    const firstChild = target.firstChild as HTMLElement;
+    const dataSet = Number(target.dataset.id);
+    const selectedIndex = selectArr?.indexOf(dataSet);
 
-    const selectedIndex = selectData.option?.indexOf(firstChild.innerHTML);
-
-    if (selectedIndex > -1) {
-      selectData.option = selectData.option.filter(
-        (elem) => elem !== firstChild.innerHTML,
-      );
+    if (selectedIndex !== undefined && selectedIndex > -1) {
+      selectArr = selectArr?.filter((elem) => elem !== dataSet);
     } else {
-      selectData.option = selectArr.concat([firstChild.innerHTML]);
+      selectArr = selectArr?.concat([dataSet]);
     }
 
-    setSelectArr(selectData.option);
+    giudeFlowDipatch({
+      type: UPDATE_OPTIONS,
+      payload: {dataObject: {options: selectArr}},
+    });
   };
 
-  const GridList: React.JSX.Element[] = gridData.map(
+  const GridList: React.JSX.Element[] = giudeFlowState.optionTag.map(
     (gridData: GridData, gridIndex: number) => {
       return (
         <Grid.Container key={gridIndex}>
-          <Grid.Comment>{gridData.comment}</Grid.Comment>
+          <Grid.Comment>{gridData.category}</Grid.Comment>
           <Grid.GridBox>
-            {gridData.category.map(
-              (categoryData: string, categoryIndex: number) => {
-                let selectedIndex: number;
-                if (selectData.option) {
-                  selectedIndex = selectData.option.indexOf(categoryData);
-                } else {
-                  selectedIndex = -1;
-                }
+            {gridData.tags.map((tag: Tag, categoryIndex: number) => {
+              let selectedIndex: number;
+              if (selectArr) {
+                selectedIndex = selectArr.indexOf(tag.id);
+              } else {
+                selectedIndex = -1;
+              }
 
-                return (
-                  <Grid.GridCard
-                    key={categoryIndex}
-                    onClick={handleClickCard}
-                    $isSelected={selectedIndex > -1}
-                    $isSelectDone={selectData.option.length === MAX_LENGTH}
+              if (selectArr === undefined) return;
+
+              return (
+                <Grid.GridCard
+                  key={categoryIndex}
+                  data-id={tag.id}
+                  onClick={handleClickCard}
+                  $isSelected={selectedIndex > -1}
+                  $isSelectDone={selectArr.length === MAX_LENGTH}
+                >
+                  <Card.Option>{tag.name}</Card.Option>
+                  <Card.IconBox
+                    $number={selectArr.length}
+                    $selectedIndex={selectedIndex}
                   >
-                    <Card.Option>{categoryData}</Card.Option>
-                    <Card.IconBox
-                      $number={selectArr.length}
-                      $selectedIndex={selectedIndex}
-                    >
-                      {Circle()}
-                    </Card.IconBox>
-                  </Grid.GridCard>
-                );
-              },
-            )}
+                    {Circle()}
+                  </Card.IconBox>
+                </Grid.GridCard>
+              );
+            })}
           </Grid.GridBox>
         </Grid.Container>
       );

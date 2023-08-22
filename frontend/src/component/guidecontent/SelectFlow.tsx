@@ -2,10 +2,10 @@ import React, {useRef, useState} from 'react';
 import styled, {css} from 'styled-components';
 import {Body1_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
-import {selectData, MAX_LENGTH} from './GuidData';
 import GridList from './selectflow/GridList';
 import CardList from './selectflow/CardList';
 import {flexCenter} from '@/style/common';
+import {useGuideFlowState, GuideFlowState} from '@/provider/guideFlowProvider';
 
 interface FlowDescription {
   comment: string;
@@ -57,16 +57,17 @@ interface Props {
   setComplete: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const isMove = (prevLevel: number, currLevel: number) => {
-  let move: boolean = true;
-  const category: string[] = ['age', 'gender'];
+const isMove = (
+  prevLevel: number,
+  currLevel: number,
+  state: GuideFlowState,
+) => {
+  let move: boolean | number | string | undefined = true;
+
   if (prevLevel < currLevel) {
-    Array.from({length: currLevel - prevLevel}).map((_, index) => {
-      if (!selectData[category[prevLevel + index]]) {
-        move = false;
-      }
-    });
+    move = prevLevel === 0 ? state.dataObject.age : state.dataObject.gender;
   }
+
   return move;
 };
 
@@ -84,8 +85,11 @@ const CircleSwap = (
   }
 };
 
+const MAX_LENGTH = 3;
+
 function SelectFlow({setComplete}: Props) {
   const [flowLevel, setFlowLevel] = useState<number>(0);
+  const guideFlowState = useGuideFlowState();
   const artistRef = useRef<null[] | HTMLDivElement[]>([]);
   const prevFlowRef = useRef<number>(0);
   const swapTargetRef = useRef<HTMLDivElement | null>();
@@ -143,7 +147,7 @@ function SelectFlow({setComplete}: Props) {
           key={index}
           style={{transition: 'all 0.5s'}}
           onClick={() => {
-            if (!isMove(flowLevel, index)) return;
+            if (!isMove(flowLevel, index, guideFlowState)) return;
             handleCardClick(index);
           }}
           onTransitionEnd={(e) => {
@@ -178,7 +182,9 @@ function SelectFlow({setComplete}: Props) {
         <Left.Button
           $isVisible={flowLevel === LAST_FLOW_NUM}
           onClick={() => {
-            if (selectData.option.length < MAX_LENGTH) return;
+            const selectArr = guideFlowState.dataObject.options;
+            if (selectArr !== undefined && selectArr.length < MAX_LENGTH)
+              return;
             setComplete(true);
           }}
         >
