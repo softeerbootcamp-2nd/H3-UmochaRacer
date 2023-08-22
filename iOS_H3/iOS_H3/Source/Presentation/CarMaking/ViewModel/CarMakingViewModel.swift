@@ -122,4 +122,12 @@ final class CarMakingViewModel {
             .eraseToAnyPublisher()
     }
 
+    private func fetchAdditionalOptionInfo(category: OptionCategoryType) -> AnyPublisher<CarMakingStepInfo, Never> {
+        selfModeUsecase.fetchAdditionalOptionInfo(category: category)
+            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
+                // error handling : output.error.send(error)
+                return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
+            }
+            .eraseToAnyPublisher()
+    }
 }
