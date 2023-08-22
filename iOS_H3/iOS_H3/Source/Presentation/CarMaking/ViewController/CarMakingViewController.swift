@@ -35,7 +35,7 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
-    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+    private let optionCategoryDidChanged = CurrentValueSubject<OptionCategoryType, Never>(.system)
 
     private var cancellables = Set<AnyCancellable>()
 

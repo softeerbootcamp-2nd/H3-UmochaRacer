@@ -16,7 +16,7 @@ final class CarMakingViewModel {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
-        var optionCategoryDidChanged: PassthroughSubject<OptionCategoryType, Never>
+        var optionCategoryDidChanged: CurrentValueSubject<OptionCategoryType, Never>
     }
 
     // MARK: - Output
