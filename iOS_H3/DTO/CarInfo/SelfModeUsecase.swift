@@ -46,27 +46,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return fetchOptionInfoFromServer(step: step)
     }
 
-    func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
-    -> AnyPublisher<EstimateSummary, Never> {
-
-        var elements = currentEstimateSummary.elements
-        if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
-            let newElement = EstimateSummaryElement(
-                stepName: step.title,
-                selectedOption: selectedOption.title.fullText,
-                category: elements[index].category,
-                price: Int(selectedOption.priceString) ?? 0     // OptionCardInfo의 priceString을 price: Int로 수정?
-            )
-
-            elements[index] = newElement
-        }
-
-        let updatedSummary = EstimateSummary(elements: elements)
-        currentEstimateSummary = updatedSummary
-
-        return Just(updatedSummary).eraseToAnyPublisher()
-    }
-
     func fetchAdditionalOptionInfo(
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
@@ -93,6 +72,27 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         carMakingTotalInfo[step] = CarMakingStepInfo(step: step, optionCardInfoArray: optionInfos)
 
         return optionInfos
+    }
+
+    func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
+    -> AnyPublisher<EstimateSummary, Never> {
+
+        var elements = currentEstimateSummary.elements
+        if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
+            let newElement = EstimateSummaryElement(
+                stepName: step.title,
+                selectedOption: selectedOption.title.fullText,
+                category: elements[index].category,
+                price: Int(selectedOption.priceString) ?? 0     // OptionCardInfo의 priceString을 price: Int로 수정?
+            )
+
+            elements[index] = newElement
+        }
+
+        let updatedSummary = EstimateSummary(elements: elements)
+        currentEstimateSummary = updatedSummary
+
+        return Just(updatedSummary).eraseToAnyPublisher()
     }
 
     private func fetchOptionInfoFromServer(

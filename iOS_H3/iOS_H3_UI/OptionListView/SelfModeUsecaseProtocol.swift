@@ -30,14 +30,14 @@ protocol SelfModeUsecaseProtocol {
 
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
 
-    func updateEstimateSummary(
-        step: CarMakingStep,
-        selectedOption: OptionCardInfo
-    ) -> AnyPublisher<EstimateSummary, Never>
-
     func fetchAdditionalOptionInfo(
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
 
     func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo]
+
+    func updateEstimateSummary(
+        step: CarMakingStep,
+        selectedOption: OptionCardInfo
+    ) -> AnyPublisher<EstimateSummary, Never>
 }
