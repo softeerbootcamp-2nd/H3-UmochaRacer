@@ -125,6 +125,14 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
         cell.configure(optionInfoArray: info)
     }
+
+    func updateSelectedOptionCountLabel(to count: Int) {
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
+            return
+        }
+        cell.updateSelectedOptionCountLabel(to: count)
+    }
 }
 
 extension CarMakingContentView {
