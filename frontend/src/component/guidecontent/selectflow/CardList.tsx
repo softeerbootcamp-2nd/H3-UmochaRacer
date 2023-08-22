@@ -1,8 +1,14 @@
 import {Body2_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
-import React, {useState} from 'react';
+import React from 'react';
 import styled, {css} from 'styled-components';
-import {selectData} from '../GuidData';
+
+import {
+  useGuideFlowState,
+  useGuideFlowDispatch,
+  UPDATE_AGE,
+  UPDATE_GENDER,
+} from '@/provider/guideFlowProvider';
 
 const Selecticon = () => {
   return (
@@ -37,10 +43,20 @@ const DefaultIcon = () => {
   );
 };
 
-const ageArr: string[] = ['20대', '30대', '40대', '50대', '60대', '70대'];
-const gendersArr: string[] = ['여성', '남성', '선택 안함'];
+interface MapType {
+  [key: string]: string;
+}
+const ageMap: MapType = {
+  20: '20대',
+  30: '30대',
+  40: '40대',
+  50: '50대',
+  60: '60대',
+  70: '70대',
+};
+
+const gendersMap: MapType = {FEMALE: '여성', MALE: '남성', NONE: '선택 안함'};
 const FIRST_FLOW: number = 0;
-const SECOND_FLOW: number = 1;
 
 interface Props {
   flowLevel: number;
@@ -48,32 +64,43 @@ interface Props {
 }
 
 function CardList({flowLevel, onClick}: Props) {
-  const [selectedIndex, setSelectedIndex] = useState<number>(-1);
+  const giudeFlowState = useGuideFlowState();
+  const giudeFlowDipatch = useGuideFlowDispatch();
 
-  const handleClickCard = (nextIndex: number) => {
-    if (flowLevel === FIRST_FLOW) selectData.age = nextIndex;
-    else selectData.gender = nextIndex;
-
-    setSelectedIndex(nextIndex);
+  const handleClickCard = (nextOption: string | number) => {
+    if (typeof nextOption === 'number')
+      giudeFlowDipatch({
+        type: UPDATE_AGE,
+        payload: {dataObject: {age: nextOption}},
+      });
+    else
+      giudeFlowDipatch({
+        type: UPDATE_GENDER,
+        payload: {dataObject: {gender: nextOption}},
+      });
   };
 
-  const dataArr = flowLevel === 0 ? ageArr : gendersArr;
+  const dataMap = flowLevel === FIRST_FLOW ? ageMap : gendersMap;
+  const dataArr =
+    flowLevel === FIRST_FLOW ? giudeFlowState.ages : giudeFlowState.genders;
+
   const cards = dataArr.map((elem, index) => {
     let isSelected: boolean;
 
-    if (flowLevel === 0) isSelected = selectData.age === index;
-    else isSelected = selectData.gender === index;
+    if (flowLevel === FIRST_FLOW)
+      isSelected = elem === giudeFlowState.dataObject.age;
+    else isSelected = elem === giudeFlowState.dataObject.gender;
 
     return (
       <Card.Container
         key={index}
         $isSelected={isSelected}
         onClick={() => {
-          handleClickCard(index);
+          handleClickCard(elem);
           onClick(flowLevel + 1);
         }}
       >
-        <Card.Category>{elem}</Card.Category>
+        <Card.Category>{dataMap[elem]}</Card.Category>
         <Card.Icon>{isSelected ? Selecticon() : DefaultIcon()}</Card.Icon>
       </Card.Container>
     );
