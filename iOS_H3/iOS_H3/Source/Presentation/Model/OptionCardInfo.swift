@@ -8,7 +8,7 @@
 import Foundation
 
 struct OptionCardInfo: Hashable {
-    private let id = UUID()
+    let id: Int
     let title: URString
     let subTitle: URString
     let priceString: String     // 예시) "+ 100,000원"
@@ -19,6 +19,7 @@ struct OptionCardInfo: Hashable {
     var isSelected: Bool
 
     init(
+        id: Int,
         title: URString,
         subTitle: URString,
         priceString: String,
@@ -28,6 +29,7 @@ struct OptionCardInfo: Hashable {
         hasMoreInfo: Bool = false,
         isSelected: Bool = false
     ) {
+        self.id = id
         self.title = title
         self.subTitle = subTitle
         self.priceString = priceString
