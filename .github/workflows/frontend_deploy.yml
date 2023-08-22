@@ -33,7 +33,6 @@ jobs:
         run: |
           mkdir deploy
           cp -r ./dist ./deploy/
-          cp -r ../nginx ./deploy/
           cp ./deploy_files/* ./deploy/
           zip -r ./frontend-build.zip ./deploy
 
