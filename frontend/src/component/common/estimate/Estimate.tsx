@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Title4_Medium} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import {SelectionLayout} from '../estimateInterface';
+import {Option} from '@/provider/selectedOptionProvider';
 
 import Selection from './Selection';
 
@@ -10,12 +11,6 @@ interface HeaderProps {
   height: number;
   fontSize: number;
   title: string;
-  price: number;
-}
-
-interface Option {
-  title: string;
-  name: string;
   price: number;
 }
 
@@ -32,8 +27,8 @@ function Estimate({sidePadding, header, selectionLayout, options}: Props) {
       <Selection
         key={index}
         selectionLayout={selectionLayout}
-        title={elem.title}
-        name={elem.name}
+        title={elem.key}
+        name={elem.value}
         price={elem.price}
       ></Selection>
     );

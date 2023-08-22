@@ -1,7 +1,6 @@
 import {colors} from '@/style/theme';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
-import {getCategory} from '../util/getCategory';
 import {Label2_Regular} from '@/style/fonts';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
@@ -25,7 +24,6 @@ interface DetailBoxProps {
 
 function DetailBox({isOpen, id, descriptionData}: DetailBoxProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
   let info: React.JSX.Element[] = [];
   if (descriptionData?.info) {
     info = JSON.parse(descriptionData?.info).map(
