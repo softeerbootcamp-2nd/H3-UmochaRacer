@@ -14,13 +14,22 @@ public class OptionRecommendationHandlerImpl implements OptionRecommendationHand
     private final TagOptionRepository tagOptionRepository;
 
     @Override
-    public List<Long> findByTag(String category, List<Long> tagIds) {
+    public List<Long> findBaseOptionByTag(String category, List<Long> tagIds) {
         for(Long tagId: tagIds) {
             List<Long> optionList = tagOptionRepository.findOptionIdByTagId(category, tagId);
             if(optionList.size() != 0)
                 return optionList;
         }
         return new ArrayList<>();
+    }
+
+    @Override
+    public List<Long> findAdditionalOptionByTag(String category, List<Long> tagIds) {
+        List<Long> result = new ArrayList<>();
+        for(Long tagId: tagIds) {
+            result.addAll(tagOptionRepository.findOptionIdByTagId(category, tagId));
+        }
+        return result;
     }
 
     @Override

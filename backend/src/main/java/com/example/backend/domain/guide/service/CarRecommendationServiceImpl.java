@@ -32,6 +32,8 @@ public class CarRecommendationServiceImpl implements CarRecommendationService {
             return getRecommendWheelList(field, estimate);
         if (field.contains("color"))
             return optionRecommendationHandler.findTopSalesCountOfColor(field, estimate.getGender(), estimate.getAge());
+        if (field.contains("option"))
+            return optionRecommendationHandler.findAdditionalOptionByTag(field, estimate.getTagList());
         return getRecommendBaseOptionList(field, estimate);
     }
 
@@ -46,8 +48,8 @@ public class CarRecommendationServiceImpl implements CarRecommendationService {
 
 
     private List<Long> getRecommendBaseOptionList(String field, EstimateRequest estimate) {
-        List<Long> optionList = optionRecommendationHandler.findByTag(field, estimate.getTagList());
-        if (optionList.size() == 0 && !field.contains("option"))
+        List<Long> optionList = optionRecommendationHandler.findBaseOptionByTag(field, estimate.getTagList());
+        if (optionList.size() == 0)
             return optionRecommendationHandler.findTopSalesCount(field, estimate.getGender(), estimate.getAge());
         return optionList;
     }
