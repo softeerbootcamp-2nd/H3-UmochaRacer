@@ -112,7 +112,7 @@ extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
 
 extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
     func tabBarButtonDidTapped(didSelectItemAt index: Int) {
-        guard let category = OptionCategoryType(rawValue: index + 1) else {
+        guard let category = OptionCategoryType(rawValue: index) else {
             return
         }
 
