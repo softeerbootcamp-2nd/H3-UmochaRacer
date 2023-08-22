@@ -36,8 +36,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     private var currentOptionInfo = [OptionCardInfo]()
 
-    private var currentCategory = OptionCategoryType.system
-
     var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
 
     // MARK: - Lifecycles
@@ -60,7 +58,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         super.prepareForReuse()
         listModeView.isHidden = true
         currentOptionInfo = []
-        currentCategory = OptionCategoryType.system
         optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
     }
 
@@ -115,11 +112,7 @@ extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
         guard let category = OptionCategoryType(rawValue: index) else {
             return
         }
-
-        if currentCategory != category {
-            currentCategory = category
-            optionCategoryTapSubject.send(category)
-        }
+        optionCategoryTapSubject.send(category)
     }
 }
 
