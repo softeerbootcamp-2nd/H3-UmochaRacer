@@ -109,6 +109,8 @@
 		5F496DFD2A9447990024E5B8 /* DictionaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFB2A9447990024E5B8 /* DictionaryString.swift */; };
 		5F496DFF2A9447EB0024E5B8 /* TextEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */; };
 		5F496E002A9447EB0024E5B8 /* TextEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */; };
+		5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E022A9448D10024E5B8 /* URLabel.swift */; };
+		5F496E042A9448D10024E5B8 /* URLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E022A9448D10024E5B8 /* URLabel.swift */; };
 		5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */; };
 		5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB8CB82A79F1DE004B24AD /* Fonts.swift */; };
 		5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50B82A79EDA900158E96 /* Colors.swift */; };
@@ -274,6 +276,7 @@
 		5F4834AB2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SelfModeUsecaseProtocol.swift; path = iOS_H3_UI/OptionListView/SelfModeUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5F496DFB2A9447990024E5B8 /* DictionaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryString.swift; sourceTree = "<group>"; };
 		5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEffectManager.swift; sourceTree = "<group>"; };
+		5F496E022A9448D10024E5B8 /* URLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLabel.swift; sourceTree = "<group>"; };
 		5F4D33AE2A87519600942517 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		5F4D33B12A8751E500942517 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		5F4D33B42A8758FF00942517 /* PageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSection.swift; sourceTree = "<group>"; };
@@ -697,6 +700,14 @@
 			path = OhMyCarSetButton;
 			sourceTree = "<group>";
 		};
+		5F496E012A9448B50024E5B8 /* URLabel */ = {
+			isa = PBXGroup;
+			children = (
+				5F496E022A9448D10024E5B8 /* URLabel.swift */,
+			);
+			path = URLabel;
+			sourceTree = "<group>";
+		};
 		5F4975592A8119C9008FFFE5 /* TitleBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -739,6 +750,7 @@
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
 			isa = PBXGroup;
 			children = (
+				5F496E012A9448B50024E5B8 /* URLabel */,
 				473A83372A8F5BDF00C4EED9 /* EstimateSummaryView */,
 				473A83362A8F5BD400C4EED9 /* BottomModalView */,
 				5F5AE0C42A8C5F4C007A0E3C /* OptionListView */,
@@ -1129,6 +1141,7 @@
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
+				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
@@ -1228,6 +1241,7 @@
 				471917FD2A83338D00B67D54 /* URColor.swift in Sources */,
 				473309932A8BC98E00906FFB /* OptionCardInfo.swift in Sources */,
 				471917F02A82371100B67D54 /* OptionCardButtonListViewable.swift in Sources */,
+				5F496E042A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
