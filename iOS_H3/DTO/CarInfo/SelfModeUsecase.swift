@@ -13,7 +13,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     private let introRepsitory: IntroRepositoryProtocol
 
     private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
-    private var currentStepInfoEntity: CarMakingStepInfoEntity = CarMakingStepInfoEntity(step: .powertrain)
+    private var currentStepInfo: CarMakingStepInfo = CarMakingStepInfo(step: .powertrain)
 
     init(carInfoRepository: CarInfoRepositoryProtocol,
          introRepsitory: IntroRepositoryProtocol) {
@@ -54,13 +54,15 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
-                currentStepInfoEntity = stepInfoEntity
 
-                if currentStepInfoEntity.step != .optionSelection {
-                    currentStepInfoEntity.selectFirstOption()
+                var stepInfoEntity = stepInfoEntity
+                if stepInfoEntity.step != .optionSelection {
+                    stepInfoEntity.selectFirstOption()
                 }
 
-                return findCardbWordAndReturn(from: currentStepInfoEntity)
+                currentStepInfo = findCardbWordAndReturn(from: stepInfoEntity)
+
+                return currentStepInfo
             }
             .eraseToAnyPublisher()
     }
