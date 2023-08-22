@@ -19,17 +19,61 @@ final class OptionListModeViewController: UIViewController {
 
     // MARK: - Properties
     var cardInfos: [OptionCardInfo] = [
-        .init(title: "20인치 알로이 휠 & 타이어", subTitle: "구매자의 95%가 선택한", priceString: "+ 0원"),
-            .init(title: "20인치 블랙톤 전면 가공 휠", subTitle: "구매자의 2%가 선택한", priceString: "+ 0원"),
-            .init(title: "가죽 시트", subTitle: "구매자의 60%가 선택한", priceString: "+ 200,000원"),
-            .init(title: "선루프", subTitle: "구매자의 30%가 선택한", priceString: "+ 500,000원"),
-            .init(title: "하이 엔드 오디오 시스템", subTitle: "구매자의 10%가 선택한", priceString: "+ 300,000원"),
-            .init(title: "내비게이션 시스템", subTitle: "구매자의 75%가 선택한", priceString: "+ 100,000원"),
-            .init(title: "후방 카메라", subTitle: "구매자의 50%가 선택한", priceString: "+ 150,000원"),
-            .init(title: "히터 내장 사이드 미러", subTitle: "구매자의 20%가 선택한", priceString: "+ 50,000원"),
-            .init(title: "자동 에어컨", subTitle: "구매자의 40%가 선택한", priceString: "+ 250,000원"),
-            .init(title: "헤드 업 디스플레이", subTitle: "구매자의 15%가 선택한", priceString: "+ 400,000원"),
-            .init(title: "무선 충전 패드", subTitle: "구매자의 25%가 선택한", priceString: "+ 80,000원")
+        .init(
+            title: URString(fullText: "20인치 알로이 휠 & 타이어"),
+            subTitle: URString(fullText: "구매자의 95%가 선택한"),
+            priceString: "+ 0원"
+        ),
+        .init(
+                title: URString(fullText: "20인치 블랙톤 전면 가공 휠"),
+                subTitle: URString(fullText: "구매자의 2%가 선택한"),
+                priceString: "+ 0원"
+            ),
+            .init(
+                title: URString(fullText: "가죽 시트"),
+                subTitle: URString(fullText: "구매자의 60%가 선택한"),
+                priceString: "+ 200,000원"
+            ),
+        .init(
+            title: URString(fullText: "선루프"),
+            subTitle: URString(fullText: "구매자의 30%가 선택한"),
+            priceString: "+ 500,000원"
+        ),
+            .init(
+                title: URString(fullText: "하이 엔드 오디오 시스템"),
+                subTitle: URString(fullText: "구매자의 10%가 선택한"),
+                priceString: "+ 300,000원"
+            ),
+            .init(
+                title: URString(fullText: "내비게이션 시스템"),
+                subTitle: URString(fullText: "구매자의 75%가 선택한"),
+                priceString: "+ 100,000원"
+            ),
+            .init(
+                title: URString(fullText: "후방 카메라"),
+                subTitle: URString(fullText: "구매자의 50%가 선택한"),
+                priceString: "+ 150,000원"
+            ),
+            .init(
+                title: URString(fullText: "히터 내장 사이드 미러"),
+                subTitle: URString(fullText: "구매자의 20%가 선택한"),
+                priceString: "+ 50,000원"
+            ),
+            .init(
+                title: URString(fullText: "자동 에어컨"),
+                subTitle: URString(fullText: "구매자의 40%가 선택한"),
+                priceString: "+ 250,000원"
+            ),
+            .init(
+                title: URString(fullText: "헤드 업 디스플레이"),
+                subTitle: URString(fullText: "구매자의 15%가 선택한"),
+                priceString: "+ 400,000원"
+            ),
+            .init(
+                title: URString(fullText: "무선 충전 패드"),
+                subTitle: URString(fullText: "구매자의 25%가 선택한"),
+                priceString: "+ 80,000원"
+            )
     ]
 
     // MARK: - Lifecycles
