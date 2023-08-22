@@ -26,6 +26,7 @@ final class CarMakingViewModel {
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
+        var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
     }
 
