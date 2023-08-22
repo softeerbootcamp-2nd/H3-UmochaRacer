@@ -110,6 +110,13 @@ extension CarMakingViewController {
             }
             .store(in: &cancellables)
 
+        output.numberOfSelectedAdditionalOption
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedOptionCount in
+                self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
+            }
+            .store(in: &cancellables)
+
         output.showIndicator
             .sink { [weak self] showIndicator in
                 self?.showIndicator(showIndicator)
