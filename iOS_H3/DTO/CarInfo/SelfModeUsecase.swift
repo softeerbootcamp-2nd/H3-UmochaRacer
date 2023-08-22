@@ -105,7 +105,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return optionInfos
     }
 
-    private func fetchOptionInfoFromServer(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+    private func fetchOptionInfoFromServer(
+        step: CarMakingStep
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
         guard let publisher = publisherForStep(step) else {
             return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
         }
