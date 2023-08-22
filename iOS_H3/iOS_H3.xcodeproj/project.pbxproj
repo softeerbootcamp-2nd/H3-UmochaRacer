@@ -123,6 +123,9 @@
 		5F496E002A9447EB0024E5B8 /* TextEffectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */; };
 		5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E022A9448D10024E5B8 /* URLabel.swift */; };
 		5F496E042A9448D10024E5B8 /* URLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E022A9448D10024E5B8 /* URLabel.swift */; };
+		5F496E0B2A948E8B0024E5B8 /* TextBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E0A2A948E8B0024E5B8 /* TextBoxView.swift */; };
+		5F496E0C2A948E8B0024E5B8 /* TextBoxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E0A2A948E8B0024E5B8 /* TextBoxView.swift */; };
+		5F496E0E2A948FAA0024E5B8 /* TextBoxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496E0D2A948FAA0024E5B8 /* TextBoxViewController.swift */; };
 		5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */; };
 		5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47CB8CB82A79F1DE004B24AD /* Fonts.swift */; };
 		5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50B82A79EDA900158E96 /* Colors.swift */; };
@@ -169,6 +172,8 @@
 		5F6A82F52A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */; };
 		5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8EBC492A81203C00C885CE /* OhMyCarSetTitleBar.swift */; };
 		5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F8EBC492A81203C00C885CE /* OhMyCarSetTitleBar.swift */; };
+		5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */; };
+		5F93C1312A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */; };
 		5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */; };
@@ -295,6 +300,8 @@
 		5F496DFB2A9447990024E5B8 /* DictionaryString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryString.swift; sourceTree = "<group>"; };
 		5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextEffectManager.swift; sourceTree = "<group>"; };
 		5F496E022A9448D10024E5B8 /* URLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLabel.swift; sourceTree = "<group>"; };
+		5F496E0A2A948E8B0024E5B8 /* TextBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxView.swift; sourceTree = "<group>"; };
+		5F496E0D2A948FAA0024E5B8 /* TextBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxViewController.swift; sourceTree = "<group>"; };
 		5F4D33AE2A87519600942517 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		5F4D33B12A8751E500942517 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		5F4D33B42A8758FF00942517 /* PageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSection.swift; sourceTree = "<group>"; };
@@ -325,6 +332,7 @@
 		5F6603EE2A8380C8000E393D /* CarMakingMultipleOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingMultipleOptionCell.swift; sourceTree = "<group>"; };
 		5F6A82F32A887B0B0025D5A4 /* OptionCategoryTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCategoryTabBar.swift; sourceTree = "<group>"; };
 		5F8EBC492A81203C00C885CE /* OhMyCarSetTitleBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OhMyCarSetTitleBar.swift; sourceTree = "<group>"; };
+		5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlignedLabel.swift; sourceTree = "<group>"; };
 		5F99F0622A85171600C38555 /* CarMakingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentView.swift; sourceTree = "<group>"; };
 		5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -740,6 +748,16 @@
 			path = URLabel;
 			sourceTree = "<group>";
 		};
+		5F496E092A948E550024E5B8 /* TextBox */ = {
+			isa = PBXGroup;
+			children = (
+				5F496E0A2A948E8B0024E5B8 /* TextBoxView.swift */,
+				5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */,
+				5F496E0D2A948FAA0024E5B8 /* TextBoxViewController.swift */,
+			);
+			path = TextBox;
+			sourceTree = "<group>";
+		};
 		5F4975592A8119C9008FFFE5 /* TitleBar */ = {
 			isa = PBXGroup;
 			children = (
@@ -782,6 +800,7 @@
 		5F6203672A7BC59500D09531 /* iOS_H3_UI */ = {
 			isa = PBXGroup;
 			children = (
+				5F496E092A948E550024E5B8 /* TextBox */,
 				5F496E012A9448B50024E5B8 /* URLabel */,
 				473A83372A8F5BDF00C4EED9 /* EstimateSummaryView */,
 				473A83362A8F5BD400C4EED9 /* BottomModalView */,
@@ -1173,9 +1192,11 @@
 				471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
+				5F496E0B2A948E8B0024E5B8 /* TextBoxView.swift in Sources */,
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
+				5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
 				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
@@ -1289,9 +1310,12 @@
 				5F496E042A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
+				5F93C1312A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
 				5F39EF422A81B7A3004B0C97 /* OptionMotionView.swift in Sources */,
+				5F496E0C2A948E8B0024E5B8 /* TextBoxView.swift in Sources */,
 				5F6603F02A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
+				5F496E0E2A948FAA0024E5B8 /* TextBoxViewController.swift in Sources */,
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
 				5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */,
 				471917E92A82367800B67D54 /* CarMakingProgressBarViewController.swift in Sources */,

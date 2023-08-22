@@ -107,6 +107,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var textBoxButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("textBox 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapTextBoxButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -150,6 +158,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
         stackView.addArrangedSubview(optionListModeButton)
+        stackView.addArrangedSubview(textBoxButton)
 
         let buttons = [
             titleBarButton,
@@ -161,7 +170,8 @@ class ComponentMainViewController: UIViewController {
             multiOptionCardButtonViewButton,
             carMakingContentViewButton,
             optionCategoryTabbarButton,
-            optionListModeButton
+            optionListModeButton,
+            textBoxButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -218,4 +228,10 @@ class ComponentMainViewController: UIViewController {
         let viewController = OptionListModeViewController()
         self.present(viewController, animated: false)
     }
+
+    @objc func didTapTextBoxButton() {
+        let viewController = TextBoxViewController()
+        self.present(viewController, animated: false)
+    }
+
 }
