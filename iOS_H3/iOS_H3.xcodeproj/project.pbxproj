@@ -84,6 +84,7 @@
 		479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */; };
 		479B09172A95318C00AA10A0 /* FeedbackCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */; };
 		479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */; };
+		479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -268,6 +269,7 @@
 		479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEndpoint.swift; sourceTree = "<group>"; };
 		479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedbackCommentData.swift; path = iOS_H3/Source/Network/FeedbackCommentData.swift; sourceTree = SOURCE_ROOT; };
 		479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCommentEntity.swift; sourceTree = "<group>"; };
+		479B091A2A95357A00AA10A0 /* FeedbackComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackComment.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -651,6 +653,7 @@
 			children = (
 				479B09012A9351C900AA10A0 /* OptionCardInfo.swift */,
 				479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */,
+				479B091A2A95357A00AA10A0 /* FeedbackComment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1174,6 +1177,7 @@
 				479B09022A9351C900AA10A0 /* OptionCardInfo.swift in Sources */,
 				5F2116E72A8EE54E008FC7D2 /* CarOptionData.swift in Sources */,
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
+				479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */,
 				5F448A6B2A91D664005D04FF /* IntroRepository.swift in Sources */,
 				5F60E4BB2A8B43FD00531462 /* CarInfoRepository.swift in Sources */,
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
