@@ -125,7 +125,8 @@ extension OptionCategoryTabBar {
 
     @objc
     private func progressBarButtonDidTapped(_ sender: UIButton) {
-        guard let index = progressBarButtons.firstIndex(where: { $0 == sender }) else {
+        guard let index = progressBarButtons.firstIndex(where: { $0 == sender }),
+              selectedButtonIndex != index else {
             return
         }
         selectedButtonIndex = index
