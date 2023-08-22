@@ -85,3 +85,24 @@ private extension UILabel {
         return layoutManager
     }
 }
+
+extension UILabel {
+    func insertImage(named imageName: String, before range: NSRange, imageSize: CGSize = CGSize(width: 20, height: 20)) {
+        guard let text = self.text, range.location != NSNotFound, range.location < text.count else { return }
+
+        let attributedString = createMutableAttributedString()
+
+        let imageAttachment = NSTextAttachment()
+        imageAttachment.image = UIImage(named: imageName)
+        let mid = font?.descender ?? 0 + (font?.capHeight ?? 0.0) - imageSize.height / 2
+        imageAttachment.bounds = CGRect(origin: CGPoint(x: 0, y: mid), size: imageSize)
+
+        let attributedImage = NSAttributedString(attachment: imageAttachment)
+
+        attributedString.insert(attributedImage, at: range.location)
+
+        self.attributedText = attributedString
+    }
+
+    
+}

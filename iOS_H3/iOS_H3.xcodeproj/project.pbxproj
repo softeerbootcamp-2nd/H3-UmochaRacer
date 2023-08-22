@@ -92,7 +92,6 @@
 		5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F371BAE2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift */; };
 		5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */; };
 		5F371BB22A88B99800E6CFCD /* OptionCategoryType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */; };
-		5F39EF3B2A81B476004B0C97 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */; };
 		5F39EF3C2A81B483004B0C97 /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */; };
 		5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F2593DD2A7FB3FD001B2D84 /* TagListView.swift */; };
@@ -127,6 +126,7 @@
 		5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */; };
 		5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C82A8C72AA007A0E3C /* OptionListModeViewController.swift */; };
 		5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 5F5E21122A78DD21003C1185 /* .swiftlint.yml */; };
+		5F5F218B2A9384E8007DE3C4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F00FBFD2A777BDF0055A4FA /* Assets.xcassets */; };
 		5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F724C2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift */; };
 		5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5F72502A7E13600084AFD4 /* OptionCardButton.swift */; };
 		5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */; };
@@ -1026,7 +1026,7 @@
 				5F4975622A811F56008FFFE5 /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				5F6203752A7BC59600D09531 /* LaunchScreen.storyboard in Resources */,
 				5F4975612A811F56008FFFE5 /* HyundaiSansTextKROTFRegular.otf in Resources */,
-				5F39EF3B2A81B476004B0C97 /* Assets.xcassets in Resources */,
+				5F5F218B2A9384E8007DE3C4 /* Assets.xcassets in Resources */,
 				5F6203722A7BC59600D09531 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1110,7 +1110,6 @@
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
 				4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */,
-
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F2116E52A8EE45B008FC7D2 /* APIResponse.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
@@ -1119,7 +1118,6 @@
 				5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
-
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
