@@ -25,6 +25,7 @@ final class CarMakingViewModel {
         var estimateSummary = PassthroughSubject<EstimateSummary, Never>()
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
+        var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
     }
 
@@ -103,7 +104,7 @@ final class CarMakingViewModel {
                     .eraseToAnyPublisher()
             }
             .sink { additionalOptionStepInfo in
-                output.currentStepInfo.send(additionalOptionStepInfo)
+                output.optionInfoForCategory.send(additionalOptionStepInfo.optionCardInfoArray)
             }
             .store(in: &cancellables)
 
