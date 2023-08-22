@@ -12,16 +12,14 @@ import java.util.List;
 @Repository
 public interface SalesOptionsRepository extends CrudRepository<SalesOptions, Long> {
     @Query(
-            value = "SELECT so.additional_option_id      AS id,\n" +
+            value = "SELECT * FROM (SELECT so.additional_option_id      AS id,\n" +
                     "       COUNT(*)                     AS select_count\n" +
-                    "FROM SALES_OPTIONS so\n" +
-                    "WHERE so.additional_option_id IN (SELECT id\n" +
-                    "                                  FROM ADDITIONAL_OPTION\n" +
-                    "                                  WHERE category = :category)\n" +
-                    "AND so.sales_id IN \n" +
-                    "    (SELECT id FROM SALES WHERE model_id IN\n" +
-                    "            (SELECT id FROM MODEL WHERE trim_id = 1))\n" +
-                    "GROUP BY so.additional_option_id",
+                    "FROM SALES s\n" +
+                    "INNER JOIN MODEL m ON s.model_id = m.id \n" +
+                    "INNER JOIN SALES_OPTIONS ON s.id = so.sales_id\n" +
+                    "WHERE m.trim_id = 1\n" +
+                    "GROUP BY so.additional_option_id) ao, ADDITIONAL_OPTION\n" +
+                    "WHERE ao.id = ADDITIONAL_OPTION.id AND ADDITIONAL_OPTION.category = :category)\n",
             rowMapperClass = SelectionRatioRowMapper.class
     )
     List<RatioSummary> findSalesRatio(String category);
