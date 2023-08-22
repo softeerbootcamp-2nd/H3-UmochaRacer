@@ -42,9 +42,13 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         }
 
         return publisher
-            .mapError { [weak self] error in
-                guard let self else { return .errorMappingError }
-                return convertToSelfModeUsecaseError(from: error)
+            .mapError { error in
+                switch error {
+                case .networkError:
+                    return .networkError(error: error)
+                case .conversionError:
+                    return .conversionError(error: error)
+                }
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
@@ -96,15 +100,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             return carInfoRepository.fetchAdditionalOption(category: "system")
         default:
             return nil
-        }
-    }
-
-    private func convertToSelfModeUsecaseError(from error: CarInfoRepositoryError) -> SelfModeUsecaseError {
-        switch error {
-        case .networkError:
-            return .networkError(error: error)
-        case .conversionError:
-            return .conversionError(error: error)
         }
     }
 
