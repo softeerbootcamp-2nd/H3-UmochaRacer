@@ -70,7 +70,9 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .wheelSelection)
     }
 
-    func fetchAdditionalOption(category: OptionCategoryType) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
+    func fetchAdditionalOption(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         var stringCategory = ""
         switch category {
         case .system:
@@ -82,7 +84,10 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
         case .internalDevice:
             stringCategory = "inner_device"
         }
-        return fetchCarMakingStepInfo(for: CarInfoEndpoint.additionalOption(category: stringCategory), step: .optionSelection)
+        return fetchCarMakingStepInfo(
+            for: CarInfoEndpoint.additionalOption(category: stringCategory),
+            step: .optionSelection
+        )
     }
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
