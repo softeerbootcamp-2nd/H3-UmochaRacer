@@ -12,8 +12,6 @@
 		470096472A87630A003711F2 /* BottomModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096432A874A0D003711F2 /* BottomModalView.swift */; };
 		4700964A2A8791FE003711F2 /* EstimateSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096492A8791FE003711F2 /* EstimateSummaryView.swift */; };
 		4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 470096492A8791FE003711F2 /* EstimateSummaryView.swift */; };
-		4700964D2A880372003711F2 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700964C2A880372003711F2 /* Int+.swift */; };
-		4700964E2A880457003711F2 /* Int+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4700964C2A880372003711F2 /* Int+.swift */; };
 		471917C22A7E422900B67D54 /* OhMyCarSetButtonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */; };
 		471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */; };
 		471917C62A7EA8C800B67D54 /* CarMakingProgressBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */; };
@@ -47,7 +45,17 @@
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
+
+		4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
+		4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
+		4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
+		4762D4602A921B22007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
+		4762D4622A92504A007F312D /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4612A92504A007F312D /* String+.swift */; };
+		4762D4642A92533B007F312D /* EstimateSummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */; };
+		4762D4652A9256A4007F312D /* EstimateSummaryHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */; };
+
 		4762D4672A93023B007F312D /* URString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4662A93023B007F312D /* URString.swift */; };
+
 		477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620C42A7B80B900D60B59 /* UILabel+.swift */; };
 		477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */; };
 		479023962A8A3DB000DECB70 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 479023952A8A3DB000DECB70 /* Assets.xcassets */; };
@@ -214,7 +222,6 @@
 		470096432A874A0D003711F2 /* BottomModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalView.swift; sourceTree = "<group>"; };
 		470096452A876305003711F2 /* BottomModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomModalViewController.swift; sourceTree = "<group>"; };
 		470096492A8791FE003711F2 /* EstimateSummaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryView.swift; sourceTree = "<group>"; };
-		4700964C2A880372003711F2 /* Int+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+.swift"; sourceTree = "<group>"; };
 		471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButtonViewController.swift; sourceTree = "<group>"; };
 		471917C32A7EA5A700B67D54 /* CarMakingProgressBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBar.swift; sourceTree = "<group>"; };
 		471917C52A7EA8C700B67D54 /* CarMakingProgressBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingProgressBarButton.swift; sourceTree = "<group>"; };
@@ -233,7 +240,14 @@
 		473309942A8BECBB00906FFB /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
+
+		4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryCell.swift; sourceTree = "<group>"; };
+		4762D45E2A9219DC007F312D /* CarMakingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingCategory.swift; sourceTree = "<group>"; };
+		4762D4612A92504A007F312D /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryHeaderView.swift; sourceTree = "<group>"; };
+
 		4762D4662A93023B007F312D /* URString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URString.swift; sourceTree = "<group>"; };
+
 		477620C42A7B80B900D60B59 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		477620F42A7BECC400D60B59 /* OhMyCarSetButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OhMyCarSetButton.swift; sourceTree = "<group>"; };
 		4790238A2A8A3DAF00DECB70 /* NetworkLayerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkLayerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -417,6 +431,8 @@
 			isa = PBXGroup;
 			children = (
 				470096492A8791FE003711F2 /* EstimateSummaryView.swift */,
+				4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */,
+				4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */,
 			);
 			path = EstimateSummaryView;
 			sourceTree = "<group>";
@@ -426,12 +442,11 @@
 			children = (
 				5F3B50BA2A79EDE900158E96 /* UIColor+.swift */,
 				477620C42A7B80B900D60B59 /* UILabel+.swift */,
-				4700964C2A880372003711F2 /* Int+.swift */,
 				5F4D33B12A8751E500942517 /* UIImageView+.swift */,
 				5F4DB0EE2A89A6C200E905A7 /* UIView+.swift */,
 				479023B52A8B231200DECB70 /* URL+.swift */,
 				479023B82A8B231D00DECB70 /* URLRequest+.swift */,
-				479B09072A93903700AA10A0 /* String+.swift */,
+				4762D4612A92504A007F312D /* String+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -490,9 +505,13 @@
 				5F371BB02A88B99800E6CFCD /* OptionCategoryType.swift */,
 				479023BD2A8B4D8B00DECB70 /* CarMakingMode.swift */,
 				5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */,
+
+				4762D45E2A9219DC007F312D /* CarMakingCategory.swift */,
+
 				4762D4662A93023B007F312D /* URString.swift */,
 				5F496DFB2A9447990024E5B8 /* DictionaryString.swift */,
 				5F496DFE2A9447EB0024E5B8 /* TextEffectManager.swift */,
+
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -1144,7 +1163,11 @@
 				5F5F72512A7E13600084AFD4 /* OptionCardButton.swift in Sources */,
 				4762D4672A93023B007F312D /* URString.swift in Sources */,
 				5F2593DE2A7FB3FD001B2D84 /* TagListView.swift in Sources */,
+
+				4762D4602A921B22007F312D /* CarMakingCategory.swift in Sources */,
+
 				479B09022A9351C900AA10A0 /* OptionCardInfo.swift in Sources */,
+
 				5F2116E72A8EE54E008FC7D2 /* CarOptionData.swift in Sources */,
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
 				5F448A6B2A91D664005D04FF /* IntroRepository.swift in Sources */,
@@ -1163,6 +1186,7 @@
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
+				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
@@ -1173,12 +1197,13 @@
 				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
 				5F2116E92A8EE5C4008FC7D2 /* EstimateElementData.swift in Sources */,
+				4762D4622A92504A007F312D /* String+.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
+				4762D4652A9256A4007F312D /* EstimateSummaryHeaderView.swift in Sources */,
 				5F4834AC2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift in Sources */,
 				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				5F496DFF2A9447EB0024E5B8 /* TextEffectManager.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
-				4700964D2A880372003711F2 /* Int+.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
@@ -1233,6 +1258,7 @@
 				471917EC2A8236EE00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				5F496DFD2A9447990024E5B8 /* DictionaryString.swift in Sources */,
 				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
+				4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */,
 				5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */,
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
 				5F6A82F52A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
@@ -1251,6 +1277,7 @@
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471918062A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
+				4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
@@ -1260,6 +1287,7 @@
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
+				4762D4642A92533B007F312D /* EstimateSummaryHeaderView.swift in Sources */,
 				5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */,
 				4700964A2A8791FE003711F2 /* EstimateSummaryView.swift in Sources */,
 				471917FD2A83338D00B67D54 /* URColor.swift in Sources */,
@@ -1270,7 +1298,6 @@
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
 				5F39EF422A81B7A3004B0C97 /* OptionMotionView.swift in Sources */,
-				4700964E2A880457003711F2 /* Int+.swift in Sources */,
 				5F6603F02A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
 				5F4DB0F02A89A6C200E905A7 /* UIView+.swift in Sources */,

@@ -84,12 +84,14 @@ extension CarMakingViewController {
         let output = viewModel.transform(input)
 
         output.estimateSummary
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] summary in
                 self?.updateBottomModalView(with: summary)
             }
             .store(in: &cancellables)
 
         output.currentStepInfo
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
                 self?.updateCurrentStepInfo(with: info)
             }

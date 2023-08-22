@@ -100,7 +100,7 @@ final class BottomModalView: UIView {
     // MARK: - Helpers
 
     func updateEstimatePrice(_ price: Int) {
-        priceLabel.text = "\(price.toPriceString()) 원"
+        priceLabel.text = String.priceStringWithoutPlus(from: price)
     }
 
     func updateEstimateSummary(_ estimateSummary: EstimateSummary) {
@@ -197,7 +197,6 @@ extension BottomModalView {
 
     private func updateHeightConstraint(_ height: CGFloat) {
         heightConstraint.constant = height
-        layoutIfNeeded()
     }
 
     private func addModalHandleSubLayer() {

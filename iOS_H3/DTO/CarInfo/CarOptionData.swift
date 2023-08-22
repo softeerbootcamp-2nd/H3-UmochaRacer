@@ -55,7 +55,7 @@ extension CarOptionData {
         return OptionCardInfoEntity(
             title: self.name ?? "",
             subTitle: self.label ?? "",
-            priceString: "+ \(self.price ?? 0)원",
+            priceString: String.priceStringWithPlus(from: price ?? 0),
             bannerImageURL: bannerImageURL, // 옵셔널로 처리
             iconImageURL: iconImageURL, // 옵셔널로 처리
             color: color,

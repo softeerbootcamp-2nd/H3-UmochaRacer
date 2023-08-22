@@ -2,12 +2,28 @@
 //  String+.swift
 //  iOS_H3
 //
-//  Created by  sangyeon on 2023/08/21.
-//
+
+//  Created by  sangyeon on 2023/08/20.
 
 import Foundation
 
 extension String {
+
+
+    static func priceStringWithoutPlus(from price: Int) -> String {
+        return "\(decimalStyle(from: price))원"
+    }
+
+    static func priceStringWithPlus(from price: Int) -> String {
+        return "+ \(priceStringWithoutPlus(from: price))"
+    }
+
+    static func decimalStyle(from price: Int) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        return numberFormatter.string(from: NSNumber(value: price)) ?? ""
+    }
+
     /// String으로부터 <cardb> 태그로 감싸진 백카사전 단어를 찾고 URString으로 리턴
     func toURString() -> URString {
         let openTag = "<cardb>", closeTag = "</cardb>"
@@ -39,5 +55,6 @@ extension String {
             string.replaceSubrange(startIndexOfReplaced..<endIndexOfReplaced, with: targetWord)
         }
         return URString(fullText: string, cardbRange: ranges)
+
     }
 }

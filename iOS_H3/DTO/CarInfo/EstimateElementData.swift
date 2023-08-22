@@ -12,6 +12,7 @@ enum EstimateElementToEntityError: LocalizedError {
     case missingKey
     case missingValue
     case negativePrice
+    case invalidCategory
 
     var errorDescription: String? {
         switch self {
@@ -23,6 +24,8 @@ enum EstimateElementToEntityError: LocalizedError {
             return "타입 값이 없습니다."
         case .negativePrice:
             return "가격 값이 음수일 수 없습니다."
+        case .invalidCategory:
+            return "유효하지 않은 카테고리입니다."
         }
     }
 }
@@ -49,9 +52,12 @@ extension EstimateElementData {
             throw EstimateElementToEntityError.negativePrice
         }
 
+        guard let carMakingCategory = CarMakingCategory(rawValue: category) else {
+            throw EstimateElementToEntityError.invalidCategory
+        }
         return EstimateSummaryElement(stepName: key,
                                       selectedOption: value,
-                                      category: category,
+                                      category: carMakingCategory,
                                       price: price)
     }
 }

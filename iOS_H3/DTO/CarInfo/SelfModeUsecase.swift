@@ -67,10 +67,13 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
         var elements = currentEstimateSummary.elements
         if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
-            let newElement = EstimateSummaryElement(stepName: step.title,
-                                                    selectedOption: selectedOption.title.fullText,
-                                                    category: selectedOption.title.fullText,
-                                                    price: Int(selectedOption.priceString) ?? 0)
+            let newElement = EstimateSummaryElement(
+                stepName: step.title,
+                selectedOption: selectedOption.title,
+                category: elements[index].category,
+                price: Int(selectedOption.priceString) ?? 0     // OptionCardInfo의 priceString을 price: Int로 수정?
+            )
+
             elements[index] = newElement
         }
 
