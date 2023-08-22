@@ -104,5 +104,27 @@ extension UILabel {
         self.attributedText = attributedString
     }
 
-    
+    func setAttributes(on range: NSRange, weight: UIFont.Weight, backgroundColor: UIColor, textColor: UIColor) {
+        guard let originalFont = font, let text = self.text else { return }
+
+        let actualRange = NSRange(location: range.location, length: min(range.length, text.count - range.location))
+        guard actualRange.location != NSNotFound,
+              actualRange.location + actualRange.length <= text.count else { return }
+
+        let mutableAttributedString = createMutableAttributedString()
+        let newFont = UIFont.systemFont(ofSize: originalFont.pointSize, weight: weight)
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = self.textAlignment
+
+        mutableAttributedString.addAttributes([
+            .font: newFont,
+            .backgroundColor: backgroundColor,
+            .foregroundColor: textColor,
+            .paragraphStyle: paragraphStyle
+        ], range: actualRange)
+
+        self.attributedText = mutableAttributedString
+    }
+
 }
