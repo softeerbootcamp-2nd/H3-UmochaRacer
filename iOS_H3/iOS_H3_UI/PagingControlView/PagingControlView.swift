@@ -69,20 +69,18 @@ class PagingControlView: UIView {
     var numberOfPages: Int {
         return _numberOfPages
     }
-    
+
     private var _currentPage: Int = 0 {
         didSet {
             pageControl.currentPage = _currentPage
         }
     }
-    
+
     private var _numberOfPages: Int = 0 {
         didSet {
             pageControl.numberOfPages = _numberOfPages
         }
     }
-    
-    
 
     // MARK: - Lifecycles
 
