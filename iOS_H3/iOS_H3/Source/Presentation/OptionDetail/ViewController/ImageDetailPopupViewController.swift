@@ -21,7 +21,7 @@ class ImageDetailPopupViewController: UIViewController {
     @IBOutlet weak var infoContainerHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var pageControlContainerView: UIView!
     private let pagingControlView = PagingControlView(frame: .zero)
-    
+
     // MARK: - Properties
     private var viewModel: DetailPopupViewModel!
     private var cancellables = Set<AnyCancellable>()
@@ -29,16 +29,16 @@ class ImageDetailPopupViewController: UIViewController {
     private let pageDidChangeSubject = CurrentValueSubject<Int, Never>(0)
 
     // MARK: - Lifecycles
-    init(viewModel : DetailPopupViewModel){
+    init(viewModel: DetailPopupViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         self.viewModel = DetailPopupViewModel()
         super.init(coder: coder)
     }
-    
+
     // MARK: - Helpers
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,12 +144,12 @@ extension ImageDetailPopupViewController {
     }
 }
 
-extension ImageDetailPopupViewController : PagingControlViewDelegate {
+extension ImageDetailPopupViewController: PagingControlViewDelegate {
     func didTapPreviousButton() {
         let previousPage = max(pageDidChangeSubject.value - 1, 0)
         pageDidChangeSubject.send(previousPage)
     }
-    
+
     func didTapNextButton() {
         let nextPage = min(pagingControlView.currentPage + 1, pagingControlView.numberOfPages - 1)
         pageDidChangeSubject.send(nextPage)
