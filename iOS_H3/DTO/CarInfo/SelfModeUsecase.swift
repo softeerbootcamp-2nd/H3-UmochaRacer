@@ -123,6 +123,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             return carInfoRepository.fetchInteriorColor()
         case .wheelSelection:
             return carInfoRepository.fetchWheel()
+        case .optionSelection:
+            return carInfoRepository.fetchAdditionalOption(category: OptionCategoryType.system)
         default:
             return nil
         }
