@@ -7,7 +7,7 @@ import org.springframework.data.jdbc.repository.config.EnableJdbcRepositories;
 @SpringBootApplication
 @EnableJdbcRepositories
 public class BackendApplication {
- 
+
     public static void main(String[] args) {
         SpringApplication.run(BackendApplication.class, args);
     }
