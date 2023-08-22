@@ -79,15 +79,14 @@ struct CarMakingMockRepositoryData {
         "https://pimg.daara.co.kr/kidd/photo/2021/01/08/thumbs/thumb_520390_1610089971_11.jpg",
         "https://itimg.chosun.com/sitedata/image/202112/03/2021120301496_0.jpg"
     ].compactMap { URL(string: $0) }
-    
+
     static var mockOption = [
         [OptionCardInfoEntity.init(
             id: 0,
             title: "디젤 2.2",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
-            bannerImageURL: mockURL[0],
-            isSelected: true),
+            bannerImageURL: mockURL[0]),
          OptionCardInfoEntity.init(
             id: 1,
             title: "가솔린 3.8",
@@ -99,8 +98,7 @@ struct CarMakingMockRepositoryData {
             title: "2WD",
             subTitle: "구매자의 72%가 선택한",
             priceString: "+ 3,456,789원",
-            bannerImageURL: mockURL[2],
-            isSelected: true),
+            bannerImageURL: mockURL[2]),
          OptionCardInfoEntity.init(
             id: 3,
             title: "4WD",
@@ -112,8 +110,7 @@ struct CarMakingMockRepositoryData {
             title: "7인승",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
-            bannerImageURL: mockURL[1],
-            isSelected: true),
+            bannerImageURL: mockURL[1]),
          OptionCardInfoEntity.init(
             id: 5,
             title: "8인승",
@@ -126,8 +123,7 @@ struct CarMakingMockRepositoryData {
             subTitle: "구매자의 88%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[4],
-            color: URColor(red: 0, green: 0, blue: 0),
-            isSelected: true),
+            color: URColor(red: 0, green: 0, blue: 0)),
          OptionCardInfoEntity.init(
             id: 7,
             title: "LK-99 3.8",
@@ -141,8 +137,7 @@ struct CarMakingMockRepositoryData {
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[5],
             // swiftlint:disable:next line_length
-            iconImageURL: URL(string: "https://github.com/sangyeon3/kakao_pathfinder_assignment/assets/68235938/fe0d0580-f5b2-47fe-80ff-bab37e6f4815"),
-            isSelected: true),
+            iconImageURL: URL(string: "https://github.com/sangyeon3/kakao_pathfinder_assignment/assets/68235938/fe0d0580-f5b2-47fe-80ff-bab37e6f4815")),
          OptionCardInfoEntity.init(
             id: 9,
             title: "가솔린 3.8",
@@ -154,8 +149,7 @@ struct CarMakingMockRepositoryData {
             title: "가솔린 3.8",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
-            bannerImageURL: mockURL[0],
-            isSelected: true),
+            bannerImageURL: mockURL[0]),
          OptionCardInfoEntity.init(
             id: 11,
             title: "가솔린 3.8",
@@ -167,8 +161,7 @@ struct CarMakingMockRepositoryData {
             title: "가솔린 3.8",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
-            bannerImageURL: mockURL[3],
-            isSelected: true),
+            bannerImageURL: mockURL[3]),
          OptionCardInfoEntity.init(
             id: 13,
             title: "가솔린 3.8",
