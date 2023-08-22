@@ -9,11 +9,13 @@ import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
 import Footer from './Footer';
+import CardbModal from '@/component/common/CardbModal';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
 import {Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {cardDataType} from '../contentInterface';
 import {OptionContext} from '@/provider/optionProvider';
+import {textParse} from '@/component/common/textParse';
 
 interface cardDataProps {
   cardData: cardDataType[];
@@ -26,8 +28,8 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
   const [isSaved, setIsSaved] = useState(false);
   const {option} = useContext(OptionContext);
   const menuItems = [
-    '파워트레인',
-    '구동 방식',
+    '<cardb>파워트레인</cardb>',
+    '<cardb>구동방식</cardb>',
     '바디 타입',
     '외장 색상',
     '내장 색상',
@@ -47,7 +49,7 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
   return (
     <Wrapper>
       <Container>
-        <OptionTitle>{menuItems[option]}</OptionTitle>
+        <OptionTitle>{textParse(menuItems[option])}</OptionTitle>
         <Text>을 선택해주세요.</Text>
         <OptionCardList
           cardData={cardData}
@@ -63,6 +65,7 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
           setIsSaved={setIsSaved}
           isOpen={isModalOpen}
         ></Footer>
+        <CardbModal></CardbModal>
       </Container>
     </Wrapper>
   );
@@ -113,8 +116,9 @@ const Container = styled.div`
   }
 `;
 
-const OptionTitle = styled.span`
+const OptionTitle = styled.div`
   ${Title1_Medium}
+  display: inline-block;
   font-size: 24px;
 `;
 
