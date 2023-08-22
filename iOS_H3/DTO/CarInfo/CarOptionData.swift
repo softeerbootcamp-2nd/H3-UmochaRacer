@@ -38,7 +38,7 @@ struct CarOptionData: Decodable {
 }
 
 extension CarOptionData {
-    func toDomain() throws -> OptionCardInfo {
+    func toDomain() throws -> OptionCardInfoEntity {
 
         guard let id = self.id else {
             throw CarOptionToEntityError.missingID
@@ -52,7 +52,7 @@ extension CarOptionData {
         let iconImageURL = URL(string: self.iconSrc ?? "")
         let color = self.colorCode.flatMap { URColor(hex: $0) }
 
-        return OptionCardInfo(
+        return OptionCardInfoEntity(
             title: self.name ?? "",
             subTitle: self.label ?? "",
             priceString: String.priceStringWithPlus(from: price ?? 0),
