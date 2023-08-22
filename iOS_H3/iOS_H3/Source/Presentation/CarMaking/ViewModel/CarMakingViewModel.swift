@@ -51,33 +51,22 @@ final class CarMakingViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .flatMap { [weak self] _ -> AnyPublisher<EstimateSummary, Never> in
-                guard let self = self else {
-                    return Just(EstimateSummary(elements: []))
-                        .eraseToAnyPublisher()
-                }
-                return requestEstimateSummary()
+            .sink { [weak self] _ in
+                self?.fetchEstimateSummary(to: output.estimateSummary)
             }
-            .sink(receiveValue: { summary in
-                output.estimateSummary.send(summary)
-            })
             .store(in: &cancellables)
 
         input.carMakingStepDidChanged
-            .flatMap { [weak self] step -> AnyPublisher<CarMakingStepInfo, Never> in
-                guard let self = self else {
-                    return Just(CarMakingStepInfo(step: step))
-                        .eraseToAnyPublisher()
+            .sink { [weak self] newStep in
+                if newStep != .optionSelection {
+                    self?.fetchCarMakingStepInfo(of: newStep, to: output.currentStepInfo)
+                } else {
+                    self?.fetchOptionSelectionStepInfo(
+                        for: input.optionCategoryDidChanged.value,
+                        to: output.currentStepInfo
+                    )
                 }
-                if step == .optionSelection {
-                    let currentCategory = input.optionCategoryDidChanged.value
-                    return fetchAdditionalOptionInfo(category: currentCategory)
-                }
-                return requestCurrentStepInfo(step)
             }
-            .sink(receiveValue: { carMakingStepInfo in
-                output.currentStepInfo.send(carMakingStepInfo)
-            })
             .store(in: &cancellables)
 
         input.optionDidSelected
@@ -85,59 +74,87 @@ final class CarMakingViewModel {
                 guard let self else { return }
 
                 if step == .optionSelection {
-                    let currentCategory = input.optionCategoryDidChanged.value
-                    let (optionInfo, numberOfSelectedOption) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: currentCategory)
-                    output.optionInfoDidUpdated.send(optionInfo)
-                    output.numberOfSelectedAdditionalOption.send(numberOfSelectedOption)
+                    let (updatedOptionInfo, selectedOptionCount) = selectOptionSelectionStepOption(
+                        of: optionIndex,
+                        category: input.optionCategoryDidChanged.value
+                    )
+                    output.optionInfoDidUpdated.send(updatedOptionInfo)
+                    output.numberOfSelectedAdditionalOption.send(selectedOptionCount)
                 } else {
-                    let changedOptionInfo = selfModeUsecase.selectOption(of: optionIndex, in: step)
-                    output.optionInfoDidUpdated.send(changedOptionInfo)
+                    let updatedOptionInfo = selectOption(of: optionIndex, in: step)
+                    output.optionInfoDidUpdated.send(updatedOptionInfo)
                 }
             }
             .store(in: &cancellables)
 
         input.optionCategoryDidChanged
-            .flatMap { [weak self] newCategory -> AnyPublisher<CarMakingStepInfo, Never> in
-                guard let self = self else {
-                    return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
-                }
-                return fetchAdditionalOptionInfo(category: newCategory)
-            }
-            .sink { additionalOptionStepInfo in
-                output.optionInfoForCategory.send(additionalOptionStepInfo.optionCardInfoArray)
+            .sink { [weak self] newCategory in
+                self?.fetchOptionSelectionStepInfo(for: newCategory, to: output.optionInfoForCategory)
             }
             .store(in: &cancellables)
 
         return output
     }
 
-    private func requestEstimateSummary() -> AnyPublisher<EstimateSummary, Never> {
-        return selfModeUsecase.fetchInitialEstimate()
+    private func fetchEstimateSummary(to estimateSummary: PassthroughSubject<EstimateSummary, Never>) {
+        selfModeUsecase.fetchInitialEstimate()
             .catch { _ in Just(EstimateSummary(elements: [])) }
-            .eraseToAnyPublisher()
-    }
-
-    private func updateEstimateSummary(step: CarMakingStep,
-                                       selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
-        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption)
-            .eraseToAnyPublisher()
-    }
-
-    private func requestCurrentStepInfo(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
-        return selfModeUsecase.fetchOptionInfo(step: step)
-            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
-                return Just(CarMakingStepInfo(step: step))
-                    .eraseToAnyPublisher()
+            .sink { summary in
+                estimateSummary.send(summary)
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
     }
 
-    private func fetchAdditionalOptionInfo(category: OptionCategoryType) -> AnyPublisher<CarMakingStepInfo, Never> {
+    private func fetchCarMakingStepInfo(
+        of step: CarMakingStep,
+        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+    ) {
+        selfModeUsecase.fetchOptionInfo(step: step)
+            .catch { _ in  Just(CarMakingStepInfo(step: step)) }
+            .sink { carMakingStepInfo in
+                currentStepInfo.send(carMakingStepInfo)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func fetchOptionSelectionStepInfo(
+        for category: OptionCategoryType,
+        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+    ) {
         selfModeUsecase.fetchAdditionalOptionInfo(category: category)
-            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
-                // error handling : output.error.send(error)
-                return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
+            .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
+            .sink { optionSelectionStepInfo in
+                currentStepInfo.send(optionSelectionStepInfo)
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
+    }
+
+    private func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
+        return selfModeUsecase.selectOption(of: optionIndex, in: step)
+    }
+
+    private func selectOptionSelectionStepOption(
+        of optionIndex: Int,
+        category: OptionCategoryType
+    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
+        return selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+    }
+
+    private func fetchOptionSelectionStepInfo(
+        for category: OptionCategoryType,
+        to optionInfoForCategory: PassthroughSubject<[OptionCardInfo], Never>
+    ) {
+        selfModeUsecase.fetchAdditionalOptionInfo(category: category)
+            .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
+            .sink { optionSelectionStepInfo in
+                optionInfoForCategory.send(optionSelectionStepInfo.optionCardInfoArray)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateEstimateSummary(
+        step: CarMakingStep,
+        selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
+        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption).eraseToAnyPublisher()
     }
 }
