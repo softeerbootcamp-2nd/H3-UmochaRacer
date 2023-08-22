@@ -74,7 +74,10 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return optionInfos
     }
 
-    func selectAdditionalOption(of optionIndex: Int, in category: OptionCategoryType) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
+    func selectAdditionalOption(
+        of optionIndex: Int,
+        in category: OptionCategoryType
+    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
         var selectedOptionCount = optionSelectionStepInfo.reduce(0) {
             $0 + $1.value.optionCardInfoArray.filter { $0.isSelected }.count
         }
@@ -84,8 +87,11 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         categoryOptionInfos[optionIndex].isSelected.toggle()
 
         selectedOptionCount += categoryOptionInfos[optionIndex].isSelected ? 1 : -1
-        
-        optionSelectionStepInfo[category] = CarMakingStepInfo(step: .optionSelection, optionCardInfoArray: categoryOptionInfos)
+
+        optionSelectionStepInfo[category] = CarMakingStepInfo(
+            step: .optionSelection,
+            optionCardInfoArray: categoryOptionInfos
+        )
 
         return (categoryOptionInfos, selectedOptionCount)
     }

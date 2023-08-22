@@ -36,7 +36,10 @@ protocol SelfModeUsecaseProtocol {
 
     func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo]
 
-    func selectAdditionalOption(of optionIndex: Int, in category: OptionCategoryType) -> (infos: [OptionCardInfo], selectedOptionCount: Int)
+    func selectAdditionalOption(
+        of optionIndex: Int,
+        in category: OptionCategoryType
+    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int)
 
     func updateEstimateSummary(
         step: CarMakingStep,
