@@ -200,4 +200,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         }
         return stepInfoEntity.toPresentation(optionCardInfoArray: convertedOptionInfos)
     }
+
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<(title: String, subTitle: String), SelfModeUsecaseError> {
+        return Just(("", "")).setFailureType(to: SelfModeUsecaseError.self).eraseToAnyPublisher()
+    }
 }
