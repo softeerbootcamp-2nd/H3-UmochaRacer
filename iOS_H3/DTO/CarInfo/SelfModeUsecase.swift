@@ -11,7 +11,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
     private let carInfoRepository: CarInfoRepositoryProtocol
     private let introRepsitory: IntroRepositoryProtocol
+
     private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
+    private var currentStepInfoEntity: CarMakingStepInfoEntity = CarMakingStepInfoEntity(step: .powertrain)
 
     init(carInfoRepository: CarInfoRepositoryProtocol,
          introRepsitory: IntroRepositoryProtocol) {
