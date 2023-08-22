@@ -70,20 +70,10 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     func fetchAdditionalOptionInfo(
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
-        carInfoRepository.fetchAdditionalOption(category: category)
-            .mapError { error in
-                switch error {
-                case .networkError:
-                    return .networkError(error: error)
-                case .conversionError:
-                    return .conversionError(error: error)
-                }
-            }
-            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
-                guard let self else { return nil }
-                return findCardbWordAndReturn(from: stepInfoEntity)
-            }
-            .eraseToAnyPublisher()
+        if let stepInfo = optionSelectionStepInfo[category] {
+            return Just(stepInfo).setFailureType(to: SelfModeUsecaseError.self).eraseToAnyPublisher()
+        }
+        return fetchAdditionalOptionInfoFromServer(category: category)
     }
 
     func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
@@ -132,6 +122,26 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 carMakingTotalInfo[step] = findCardbWordAndReturn(from: stepInfoEntity)
 
                 return carMakingTotalInfo[step]
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private func fetchAdditionalOptionInfoFromServer(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        carInfoRepository.fetchAdditionalOption(category: category)
+            .mapError { error in
+                switch error {
+                case .networkError:
+                    return .networkError(error: error)
+                case .conversionError:
+                    return .conversionError(error: error)
+                }
+            }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
+                optionSelectionStepInfo[category] = findCardbWordAndReturn(from: stepInfoEntity)
+                return optionSelectionStepInfo[category]
             }
             .eraseToAnyPublisher()
     }
