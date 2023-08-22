@@ -10,4 +10,10 @@ public enum Gender {
     Gender(String korean) {
         this.korean = korean;
     }
+
+    public String getQueryString() {
+        if(this == NONE)
+            return " ";
+        return "gender = \'" + this.name() + "\' AND ";
+    }
 }

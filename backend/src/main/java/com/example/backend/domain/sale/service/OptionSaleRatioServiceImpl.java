@@ -1,6 +1,6 @@
 package com.example.backend.domain.sale.service;
 
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.repository.SalesOptionsRepository;
 import com.example.backend.domain.sale.repository.SalesRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,10 +15,10 @@ public class OptionSaleRatioServiceImpl implements RatioService {
     private final SalesRepository salesRepository;
 
     @Override
-    public List<SalesSummary> findSaleRatio(String category) {
-        List<SalesSummary> result = salesOptionsRepository.findSalesRatio(category.toUpperCase());
+    public List<RatioSummary> findSaleRatio(String category) {
+        List<RatioSummary> result = salesOptionsRepository.findSalesRatio(category.toUpperCase());
         Integer totalSales = salesRepository.getTotalSales();
-        result.add(new SalesSummary(Long.MAX_VALUE, totalSales));
+        result.add(new RatioSummary(Long.MAX_VALUE, totalSales));
         return result;
     }
 }

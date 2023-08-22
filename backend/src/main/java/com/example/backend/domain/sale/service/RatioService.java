@@ -1,9 +1,9 @@
 package com.example.backend.domain.sale.service;
 
-import com.example.backend.domain.sale.entity.SalesSummary;
+import com.example.backend.domain.sale.entity.RatioSummary;
 
 import java.util.List;
 
 public interface RatioService {
-    List<SalesSummary> findSaleRatio(String columnId);
+    List<RatioSummary> findSaleRatio(String columnId);
 }
