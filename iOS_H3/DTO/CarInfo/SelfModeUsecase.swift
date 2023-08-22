@@ -14,6 +14,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
     private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
     private var carMakingTotalInfo: [CarMakingStep: CarMakingStepInfo] = [:]
+    private var optionSelectionStepInfo: [OptionCategoryType: CarMakingStepInfo] = [:]
 
     init(carInfoRepository: CarInfoRepositoryProtocol,
          introRepsitory: IntroRepositoryProtocol) {
