@@ -8,6 +8,7 @@ import {ModalProvider} from './provider/modalProvider';
 import Modal from './component/modal/Modal';
 import SelectedOptionProvider from './provider/selectedOptionProvider';
 import TempOptionProvider from './provider/tempOptionProvider';
+import {CardbProvider} from './provider/cardbProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -29,6 +30,7 @@ function App() {
         ModalProvider,
         SelectedOptionProvider,
         TempOptionProvider,
+        CardbProvider,
       ]}
     >
       <BrowserRouter>
