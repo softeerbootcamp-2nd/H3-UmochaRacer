@@ -26,7 +26,6 @@ class NoImageDetailPopupViewController: UIViewController {
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
     private let pageDidChangeSubject = CurrentValueSubject<Int, Never>(0)
     private var cancellables = Set<AnyCancellable>()
-    
     // MARK: - Lifecycles
 
     init(viewModel: DetailPopupViewModel) {
@@ -43,7 +42,7 @@ class NoImageDetailPopupViewController: UIViewController {
         super.viewDidLoad()
 
         setupViews()
-        bind() 
+        bind()
         viewDidLoadSubject.send(())
     }
 
@@ -135,12 +134,12 @@ extension NoImageDetailPopupViewController {
     }
 }
 
-extension NoImageDetailPopupViewController : PagingControlViewDelegate {
+extension NoImageDetailPopupViewController: PagingControlViewDelegate {
     func didTapPreviousButton() {
         let previousPage = max(pageDidChangeSubject.value - 1, 0)
         pageDidChangeSubject.send(previousPage)
     }
-    
+
     func didTapNextButton() {
         let nextPage = min(pagingControlView.currentPage + 1, pagingControlView.numberOfPages - 1)
         pageDidChangeSubject.send(nextPage)
