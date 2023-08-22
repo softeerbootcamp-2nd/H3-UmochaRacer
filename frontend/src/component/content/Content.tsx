@@ -7,9 +7,9 @@ import TotalEstimate from './totalestimate/TotalEstimate';
 import {OptionContext} from '@/provider/optionProvider';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
-import {flexCenter} from '@/style/common';
 import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
+import SelectedOptionContent from './SelectedOptionContent';
 type cardData = {
   id: number;
   name: string;
@@ -49,15 +49,15 @@ function Content() {
     e.returnValue = '나갈거임?';
   };
 
-  // useEffect(() => {
-  //   (() => {
-  //     window.addEventListener('beforeunload', preventClose);
-  //   })();
+  useEffect(() => {
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
 
-  //   return () => {
-  //     window.removeEventListener('beforeunload', preventClose);
-  //   };
-  // }, []);
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
   const [selectedIndex, setIndex] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
@@ -65,6 +65,7 @@ function Content() {
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const {selectedOptions} = useContext(SelectedOptionContext);
   const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
 
@@ -122,7 +123,6 @@ function Content() {
     fetchAllData();
     setIsLoading(true);
   }, []);
-  const {selectedOptions} = useContext(SelectedOptionContext);
   useEffect(() => {
     if (option !== 6) {
       const currentKey = keyMapping[option];
@@ -131,6 +131,8 @@ function Content() {
         setNewIndex(foundOption.id - 1);
       }
       setcardData(cardDataList[option]);
+    } else {
+      setNewIndex(0);
     }
   }, [option]);
   return (
@@ -153,7 +155,11 @@ function Content() {
                 />
               </>
             ) : (
-              <Temp>옵션 선택 페이지는 수정 중 입니다.</Temp>
+              <SelectedOptionContent
+                selectedOptionData={additionalOptionList}
+                setNewIndex={(index: number) => setNewIndex(index)}
+                selectedIndex={selectedIndex}
+              />
             )}
           </>
         ) : (
@@ -165,6 +171,7 @@ function Content() {
 }
 
 export default Content;
+
 const Wrapper = styled.section`
   width: 100%;
   flex-grow: 1;
@@ -175,10 +182,4 @@ const Container = styled.div<{$option: number}>`
   display: flex;
   width: 100%;
   height: 100%;
-`;
-
-const Temp = styled.div`
-  width: 100%;
-  height: 100%;
-  ${flexCenter}
 `;

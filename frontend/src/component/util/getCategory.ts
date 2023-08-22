@@ -7,6 +7,7 @@ export const getCategory = (optionNum: number) => {
     3: 'exterior-color',
     4: 'interior-color',
     5: 'wheel',
+    6: 'additional-option',
   };
   return categoryName[optionNum];
 };
