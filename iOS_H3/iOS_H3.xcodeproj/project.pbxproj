@@ -80,6 +80,7 @@
 		479B090D2A94889300AA10A0 /* URString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4662A93023B007F312D /* URString.swift */; };
 		479B090E2A9488A600AA10A0 /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */; };
 		479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09012A9351C900AA10A0 /* OptionCardInfo.swift */; };
+		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
 		479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */; };
 		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
@@ -262,6 +263,7 @@
 		479B09012A9351C900AA10A0 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
 		479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfo.swift; sourceTree = "<group>"; };
 		479B090A2A94874000AA10A0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoMockRepository.swift; sourceTree = "<group>"; };
 		479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEndpoint.swift; sourceTree = "<group>"; };
 		479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoMockRepository.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
