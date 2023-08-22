@@ -89,13 +89,10 @@ final class CarMakingViewModel {
 
         input.optionCategoryDidChanged
             .flatMap { [weak self] newCategory -> AnyPublisher<CarMakingStepInfo, Never> in
-                guard let self else { return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher() }
-                return selfModeUsecase.fetchAdditionalOptionInfo(category: newCategory)
-                    .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
-                        // error handling : output.error.send(error)
-                        return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
-                    }
-                    .eraseToAnyPublisher()
+                guard let self = self else {
+                    return Just(CarMakingStepInfo(step: .optionSelection)).eraseToAnyPublisher()
+                }
+                return fetchAdditionalOptionInfo(category: newCategory)
             }
             .sink { additionalOptionStepInfo in
                 output.optionInfoForCategory.send(additionalOptionStepInfo.optionCardInfoArray)
