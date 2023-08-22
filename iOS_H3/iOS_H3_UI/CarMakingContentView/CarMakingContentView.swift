@@ -117,6 +117,14 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
         cell.update(optionInfoArray: info)
     }
+
+    func updateOptionCardForCategory(with info: [OptionCardInfo]) {
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
+            return
+        }
+        cell.configure(optionInfoArray: info)
+    }
 }
 
 extension CarMakingContentView {
