@@ -2,7 +2,9 @@ package com.example.backend.domain.sale.controller;
 
 import com.example.backend.domain.global.dto.ResponseDto;
 import com.example.backend.domain.global.model.enums.ResultCode;
+import com.example.backend.domain.guide.dto.EstimateRequest;
 import com.example.backend.domain.sale.dto.SalesSummaryResponse;
+import com.example.backend.domain.sale.service.SelectionRatioWithSimilarUsersService;
 import com.example.backend.domain.sale.service.SelfModeServiceFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/v1/sale")
 public class SaleRatioController {
     private final SelfModeServiceFactory selfModeServiceFactory;
+    private final SelectionRatioWithSimilarUsersService selectionRatioWithSimilarUsersService;
 
     @GetMapping("{target:exterior-color|interior-color|wheel}/select")
     public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnSelectionRatioInSelfMode(
@@ -41,8 +44,33 @@ public class SaleRatioController {
         return mapToOKResponse(result);
     }
 
-    private ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> mapToOKResponse(List<SalesSummaryResponse> result) {
-        ResponseDto<List<SalesSummaryResponse>> body = ResponseDto.of(result, ResultCode.SUCCESS);
+    @PostMapping("/{target:powertrain|bodytype|driving-system|wheel}/tag")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedCarComponentSalesRatio(
+            @PathVariable("target") String target,
+            @RequestBody EstimateRequest estimateRequest
+    ) {
+        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithSimilarUsers(target, estimateRequest);
+        return mapToOKResponse(result);
+    }
+
+    @PostMapping("/{target:exterior-color|interior-color}/tag")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+            @PathVariable("target") String target,
+            @RequestBody EstimateRequest estimateRequest
+    ) {
+        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWitSameAgeAndGender(target, estimateRequest);
+        return mapToOKResponse(result);
+    }
+
+    @PostMapping("/additional-option/tag")
+    public ResponseEntity<ResponseDto<List<SalesSummaryResponse>>> returnOrderedColorSalesRatio(
+            @RequestBody EstimateRequest estimateRequest
+    ) {
+        List<SalesSummaryResponse> result = selectionRatioWithSimilarUsersService.calculateSelectionRatioWithAdditionalOption(estimateRequest);
+        return mapToOKResponse(result);
+    }
+    private <T> ResponseEntity<ResponseDto<T>> mapToOKResponse(T t) {
+        ResponseDto<T> body = ResponseDto.of(t, ResultCode.SUCCESS);
         return ResponseEntity.status(HttpStatus.OK).body(body);
     }
 }
