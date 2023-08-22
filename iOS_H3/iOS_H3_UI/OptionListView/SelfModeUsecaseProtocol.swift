@@ -46,5 +46,8 @@ protocol SelfModeUsecaseProtocol {
         selectedOption: OptionCardInfo
     ) -> AnyPublisher<EstimateSummary, Never>
 
-	func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<(title: String, subTitle: String), SelfModeUsecaseError>
+	func fetchFeedbackComment(
+        step: CarMakingStep,
+        optionID: Int
+    ) -> AnyPublisher<(title: String, subTitle: String), SelfModeUsecaseError>
 }

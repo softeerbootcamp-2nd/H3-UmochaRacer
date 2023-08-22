@@ -38,4 +38,3 @@ enum CommentEndpoint: Endpoint {
 
     var parameters: HTTPParameter? { nil }
 }
-

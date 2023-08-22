@@ -121,7 +121,7 @@ struct CarMakingContentMockData {
         "https://pimg.daara.co.kr/kidd/photo/2021/01/08/thumbs/thumb_520390_1610089971_11.jpg",
          "https://itimg.chosun.com/sitedata/image/202112/03/2021120301496_0.jpg"
     ].map { URL(string: $0)! }
-    
+
     static var mockOption = [
             [OptionCardInfo.init(id: 0,
                                  title: URString(fullText: "디젤 2.2"),
