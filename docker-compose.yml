@@ -3,7 +3,7 @@ services:
   back:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_compose
     restart: always
     ports:
       - 8080:8080

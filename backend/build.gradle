@@ -2,6 +2,9 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.14'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+
+    id 'com.epages.restdocs-api-spec' version '0.16.0'
+    id 'org.hidetake.swagger.generator' version '2.18.2'
 }
 
 group = 'com.example'
@@ -21,8 +24,13 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 
     runtimeOnly 'com.h2database:h2:1.4.197'
 
@@ -32,8 +40,39 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.2'
+    implementation "org.springdoc:springdoc-openapi-ui:1.6.11"
 }
 
-tasks.named('test') {
+test {
+    outputs.dir snippetsDir
     useJUnitPlatform()
+}
+
+
+tasks.withType(GenerateSwaggerUI) {
+    dependsOn 'openapi3'
+
+//    delete file('src/main/resources/static/docs/')
+    copy {
+        from 'build/resources/main/static/docs'
+        into 'src/main/resources/static/docs/'
+    }
+}
+
+openapi3 {
+    server = 'http://43.202.37.97:9999/api/'
+    title = '유모차레이서 API Docs'
+    description 'Rest API Documentation'
+    version = '1.0'
+    outputFileNamePrefix = 'rest-docs'
+    format = 'yaml'
+    outputDirectory = 'build/resources/main/static/docs'
+}
+
+bootJar {
+    dependsOn 'openapi3'
+    dependsOn 'test'
 }
