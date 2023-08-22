@@ -56,6 +56,7 @@ jobs:
           cp ./deploy_files/* ./deploy/
           cp ./Dockerfile ./deploy/
           cp ./build/libs/*.jar ./deploy/
+          cp ../docker-compose.yml ./deploy/
           zip -r -qq -j ./backend-build.zip ./deploy
 
       - name: Configure AWS credentials

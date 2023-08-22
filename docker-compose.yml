@@ -1,18 +1,20 @@
-version: "1"
+version: "2"
+
 services:
-  back:
+  green:
+    container_name: green
     build:
-      context: ./backend
-      dockerfile: Dockerfile_compose
+      context: ./
+      dockerfile: Dockerfile
     restart: always
     ports:
       - 8080:8080
-  
-  nginx:
+
+  blue:
+    container_name: blue
     build:
-      context: ./nginx
+      context: ./
       dockerfile: Dockerfile
-    volumes:
-      - ./frontend/dist:/usr/share/nginx/html
+    restart: always
     ports:
-      - 80:80
+      - 8081:8080
