@@ -55,15 +55,37 @@ public class SalesTemplateRepository {
         return namedTemplate.query(query, params, new SelectionRatioRowMapper());
 */
         String targetId = transUriToColumnId(target);
-        String query = getQueryDependsOn(targetId)
-                + getWhereQuery(targetId, estimateRequest);
+//        String query = getQueryDependsOn(targetId)
+//                + getWhereQuery(targetId, estimateRequest);
+        String query = "SELECT "+ targetId + " AS id, COUNT(*) as select_count FROM MODEL m\n" +
+                "INNER JOIN SALES s ON s.model_id = m.id\n" +
+                "WHERE m.trim_id = 1\n" +
+                "AND(\n" +
+                estimateRequest.getGender().getQueryString() + "\n" +
+                estimateRequest.getAge() + " <= s.age AND s.age <= " + (estimateRequest.getAge() + 9) + "\n" +
+                "AND (s.tag1, s.tag2, s.tag3) IN (\n" +
+                makeTagListCombination(estimateRequest.getTagList()) +
+                "        )\n" +
+                "    )\n" +
+                "GROUP BY "+ targetId + " WITH ROLLUP ORDER BY select_count DESC ";
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
+    }
+
+    private String makeTagListCombination(List<Long> tagList) {
+        Long tag1 = tagList.get(0);
+        Long tag2 = tagList.get(1);
+        Long tag3 = tagList.get(2);
+        return String.format("(%d,%d,%d),(%d,%d,%d),(%d,%d,%d),(%d,%d,%d),(%d,%d,%d),(%d,%d,%d)",
+                tag1, tag2, tag3, tag1, tag3, tag2,
+                tag2, tag1, tag3, tag2, tag3, tag1,
+                tag3, tag1, tag2, tag3, tag2, tag1);
     }
 
     public List<RatioSummary> findSelectionRatioWithSameAgeAndGender(String target, EstimateRequest estimateRequest) {
         String targetId = transUriToColumnId(target);
+        Gender gender = estimateRequest.getGender();
         int age = estimateRequest.getAge();
-
+/*
         String query = getWithQuery(targetId) +
                 "select " + targetId + " as id,\n" +
                 "             count(" + targetId + ") as select_count \n" +
@@ -72,13 +94,32 @@ public class SalesTemplateRepository {
                 "              (" + age + "<=age and age<=" + (age + 9) + " and gender = 'MALE')\n" +
                 "      group by " + targetId + "\n" +
                 "with rollup";
+ */
+        String query = "SELECT s." + targetId + " as id, COUNT(*) as select_count FROM MODEL m \n" +
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                "WHERE " + gender.getQueryString() + " m.trim_id = 1 AND " + age + " <= s.age AND s.age <= " + (age+9) + "\n"+
+                " GROUP BY s." + targetId + " WITH ROLLUP ORDER BY select_count DESC ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
     public List<RatioSummary> findSelectionRatioOfAdditionalOption(EstimateRequest estimateRequest) {
-        String query = getWithQueryWithAdditionalOption(ADDITIONAL_OPTION_ID)
-                + getWhereQuery(ADDITIONAL_OPTION_ID, estimateRequest);
+//        String query = getWithQueryWithAdditionalOption(ADDITIONAL_OPTION_ID)
+//                + getWhereQuery(ADDITIONAL_OPTION_ID, estimateRequest);
+        Gender gender = estimateRequest.getGender();
+        int age = estimateRequest.getAge();
+
+        String query = "SELECT "+ ADDITIONAL_OPTION_ID +" AS id, COUNT(*) as select_count FROM MODEL m\n" +
+                "INNER JOIN SALES s ON s.model_id = m.id\n" +
+                "INNER JOIN SALES_OPTIONS so ON s.id = so.sales_id\n" +
+                "WHERE m.trim_id = 1\n" +
+                "AND(\n" +
+                gender.getQueryString() + age + " <= s.age AND s.age <= " + (age+9) + "\n" +
+                "    AND (s.tag1, s.tag2, s.tag3) IN (\n" +
+                makeTagListCombination(estimateRequest.getTagList()) +
+                "        )\n" +
+                "    )\n" +
+                "GROUP BY "+ ADDITIONAL_OPTION_ID + " WITH ROLLUP ORDER BY select_count desc";
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
