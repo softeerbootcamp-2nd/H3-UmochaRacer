@@ -8,16 +8,17 @@
 import Foundation
 
 extension String {
-
-
+    /// price = 1000일 때 "1,000원"을 반환
     static func priceStringWithoutPlus(from price: Int) -> String {
         return "\(decimalStyle(from: price))원"
     }
 
+    /// price = 1000일 때 "+ 1,000원"을 반환
     static func priceStringWithPlus(from price: Int) -> String {
         return "+ \(priceStringWithoutPlus(from: price))"
     }
 
+    /// price = 1000일 때 "1,000"을 반환
     static func decimalStyle(from price: Int) -> String {
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
