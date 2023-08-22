@@ -66,7 +66,7 @@ function Content() {
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
   const [additionalOptionList, setAddOptionList] = useState<CardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  console.log(cardData);
+  console.log(additionalOptionList);
   const updateTempOption = (index: number) => {
     const selectedCardData = cardData[index];
 
