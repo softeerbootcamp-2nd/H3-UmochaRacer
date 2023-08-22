@@ -32,8 +32,8 @@ final class DetailPopupViewModel {
     private let usecase: DetailPopupUsecaseProtocol
 
     // MARK: - Lifecycles
-    init(usecase: DetailPopupUsecaseProtocol? = MockDetailPopupUsecase() ) {
-        self.usecase = usecase!
+    init(usecase: DetailPopupUsecaseProtocol = MockDetailPopupUsecase()) {
+        self.usecase = usecase
     }
 
     // MARK: - Helpers
