@@ -86,10 +86,11 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             .eraseToAnyPublisher()
     }
 
-    func selectOption(of optionIndex: Int) -> [OptionCardInfo] {
-        var optionInfos = currentStepInfo.optionCardInfoArray
+    func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
+        guard let stepInfo = carMakingTotalInfo[step] else { return [] }
+        var optionInfos = stepInfo.optionCardInfoArray
 
-        switch currentStepInfo.step {
+        switch step {
         case .optionSelection:
             optionInfos[optionIndex].isSelected.toggle()
         default:
@@ -99,7 +100,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             optionInfos[optionIndex].isSelected = true
         }
 
-        currentStepInfo.optionCardInfoArray = optionInfos
+        carMakingTotalInfo[step] = CarMakingStepInfo(step: step, optionCardInfoArray: optionInfos)
 
         return optionInfos
     }
