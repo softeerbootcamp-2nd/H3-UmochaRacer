@@ -90,7 +90,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 stepName: step.title,
                 selectedOption: selectedOption.title,
                 category: elements[index].category,
-                price: Int(selectedOption.priceString) ?? 0
+                price: Int(selectedOption.priceString) ?? 0     // OptionCardInfo의 priceString을 price: Int로 수정?
             )
             elements[index] = newElement
         }

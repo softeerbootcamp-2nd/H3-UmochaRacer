@@ -48,7 +48,6 @@ extension CarOptionData {
             throw CarOptionToEntityError.missingName
         }
 
-        let priceString = String.priceString(from: price ?? 0)
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
         let iconImageURL = URL(string: self.iconSrc ?? "")
         let color = self.colorCode.flatMap { URColor(hex: $0) }
@@ -56,7 +55,7 @@ extension CarOptionData {
         return OptionCardInfo(
             title: self.name ?? "",
             subTitle: self.label ?? "",
-            priceString: "+ \(priceString)원",
+            priceString: String.priceStringWithPlus(from: price ?? 0),
             bannerImageURL: bannerImageURL, // 옵셔널로 처리
             iconImageURL: iconImageURL, // 옵셔널로 처리
             color: color,

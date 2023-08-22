@@ -41,7 +41,7 @@ final class EstimateSummaryHeaderView: UICollectionReusableView {
 
     func configure(title: String, price: Int) {
         titleLabel.text = title
-        priceLabel.text = "+ \(String.priceString(from: price))원"
+        priceLabel.text = String.priceStringWithPlus(from: price)
     }
 }
 

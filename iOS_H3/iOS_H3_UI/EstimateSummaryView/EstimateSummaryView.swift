@@ -74,7 +74,7 @@ extension EstimateSummaryView {
 
     private func updatePriceLabel(_ estimateSummary: EstimateSummary) {
         let price = estimateSummary.elements.reduce(0) { $0 + $1.price }
-        priceLabel.text = "\(String.priceString(from: price))원"
+        priceLabel.text = String.priceStringWithoutPlus(from: price)
     }
 
     private func updateSnapshot(item: [EstimateSummaryElement]) {
