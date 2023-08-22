@@ -103,6 +103,13 @@ extension CarMakingViewController {
             }
             .store(in: &cancellables)
 
+        output.optionInfoForCategory
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionInfo in
+                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo)
+            }
+            .store(in: &cancellables)
+
         output.showIndicator
             .sink { [weak self] showIndicator in
                 self?.showIndicator(showIndicator)
