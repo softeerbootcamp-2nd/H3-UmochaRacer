@@ -128,6 +128,7 @@ function Content() {
     setIsLoading(true);
   }, []);
   useEffect(() => {
+    if (option === 7) return;
     if (option !== 6) {
       const currentKey = keyMapping[option];
       const foundOption = selectedOptions.find((opt) => opt.key === currentKey);

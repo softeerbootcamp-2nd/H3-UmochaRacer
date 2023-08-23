@@ -4,6 +4,7 @@ import {colors} from '@/style/theme';
 import selector from '@/assets/icons/selector.svg';
 import {Title3_Medium} from '@/style/fonts';
 import {useModalContext} from '@/provider/modalProvider';
+
 function getTitleByPath(path: string) {
   switch (path) {
     case '/self':
@@ -26,8 +27,15 @@ function ModeSelector() {
   };
   return (
     <Wrapper onClick={handleWrapperClick}>
-      <ModeName>{currentTitle}</ModeName>
-      {currentTitle !== '내 차 만들기' && <ModeSelect src={selector} />}
+      <ModeName $isGuide={window.location.pathname === '/guide'}>
+        {currentTitle}
+      </ModeName>
+      {currentTitle !== '내 차 만들기' && (
+        <ModeSelect
+          src={selector}
+          $isGuide={window.location.pathname === '/guide'}
+        />
+      )}
     </Wrapper>
   );
 }
@@ -37,8 +45,13 @@ const Wrapper = styled.div`
   display: flex;
   cursor: pointer;
 `;
-const ModeName = styled.p`
+const ModeName = styled.p<{$isGuide: boolean}>`
   ${Title3_Medium};
-  color: ${colors.Cool_Grey};
+  color: ${({$isGuide}) =>
+    $isGuide ? colors.Sub_Active_Blue : colors.Cool_Grey};
 `;
-const ModeSelect = styled.img``;
+const ModeSelect = styled.img<{$isGuide: boolean}>`
+  ${({$isGuide}) =>
+    $isGuide &&
+    'filter: invert(74%) sepia(11%) saturate(4376%) hue-rotate(167deg) brightness(87%) contrast(83%);'}
+`;
