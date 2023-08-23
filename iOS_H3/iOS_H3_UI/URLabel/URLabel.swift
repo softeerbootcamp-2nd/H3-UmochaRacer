@@ -19,7 +19,7 @@ enum HighlightState {
 }
 
 class URLabel: UILabel {
-    var urLabel: URString?
+    var urString: URString?
     weak var delegate: URLabelDelegate?
     private var originalAttributedText: NSAttributedString?
 
@@ -46,8 +46,8 @@ class URLabel: UILabel {
         }
     }
 
-    func setURString(_ urString: URString, isOn: Bool) {
-        urLabel = urString
+    func setURString(_ newURString: URString, isOn: Bool) {
+        urString = newURString
         if isOn {
             originalAttributedText = self.attributedText
             updateHighlights()
@@ -58,7 +58,7 @@ class URLabel: UILabel {
     }
 
     func updateHighlights() {
-        guard let urLabel = urLabel,
+        guard let urLabel = urString,
                 let attributedText = originalAttributedText?
             .mutableCopy() as? NSMutableAttributedString else { return }
 
@@ -132,7 +132,7 @@ class URLabel: UILabel {
     @objc private func handleLabelTap(_ sender: UITapGestureRecognizer) {
         let point = sender.location(in: self)
         guard let selectedIndex = textIndex(at: point) else { return }
-        for range in urLabel?.cardbRange ?? [] {
+        for range in urString?.cardbRange ?? [] {
             let nsRange = NSRange(range)
             if NSLocationInRange(selectedIndex, nsRange) {
                 if selectedRange == nsRange {
