@@ -70,8 +70,24 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.wheel, step: .wheelSelection)
     }
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
-        fetchCarMakingStepInfo(for: CarInfoEndpoint.additionalOption(category: category), step: .optionSelection)
+    func fetchAdditionalOption(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
+        var stringCategory = ""
+        switch category {
+        case .system:
+            stringCategory = "system"
+        case .temperatureManagement:
+            stringCategory = "temperature"
+        case .externalDevice:
+            stringCategory = "outer_device"
+        case .internalDevice:
+            stringCategory = "inner_device"
+        }
+        return fetchCarMakingStepInfo(
+            for: CarInfoEndpoint.additionalOption(category: stringCategory),
+            step: .optionSelection
+        )
     }
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {

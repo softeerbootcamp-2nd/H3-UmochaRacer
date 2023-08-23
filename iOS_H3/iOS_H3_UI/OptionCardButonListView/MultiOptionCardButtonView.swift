@@ -110,6 +110,14 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
             completion?()
         }
     }
+
+    func showFirstOptionCard() {
+        optionCardCollectionView.scrollToItem(
+            at: IndexPath(item: 0, section: 0),
+            at: .centeredHorizontally,
+            animated: true
+        )
+    }
 }
 
 // MARK: - OptionCardButton Delegate

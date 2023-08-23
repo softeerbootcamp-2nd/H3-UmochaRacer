@@ -43,10 +43,8 @@ final class OptionCategoryTabBar: UIScrollView {
 
     private var selectedButtonIndex: Int = 0 {
         didSet {
-            progressBarButtons[oldValue].isSelected = false
             progressBarButtons[oldValue].changeColor(titleColor: Colors.coolGrey3,
                                                      backgroundColor: Colors.coolGrey1)
-            progressBarButtons[selectedButtonIndex].isSelected = true
             progressBarButtons[selectedButtonIndex].changeColor(titleColor: .white,
                                                                 backgroundColor: Colors.mainHyundaiBlue)
         }
@@ -125,7 +123,8 @@ extension OptionCategoryTabBar {
 
     @objc
     private func progressBarButtonDidTapped(_ sender: UIButton) {
-        guard let index = progressBarButtons.firstIndex(where: { $0 == sender }) else {
+        guard let index = progressBarButtons.firstIndex(where: { $0 == sender }),
+              selectedButtonIndex != index else {
             return
         }
         selectedButtonIndex = index

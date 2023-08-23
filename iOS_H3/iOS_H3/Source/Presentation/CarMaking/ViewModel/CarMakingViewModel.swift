@@ -16,7 +16,7 @@ final class CarMakingViewModel {
         var viewDidLoad: PassthroughSubject<Void, Never>
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
-        var optionCategoryDidChanged: PassthroughSubject<OptionCategoryType, Never>
+        var optionCategoryDidChanged: CurrentValueSubject<OptionCategoryType, Never>
     }
 
     // MARK: - Output
@@ -25,6 +25,8 @@ final class CarMakingViewModel {
         var estimateSummary = PassthroughSubject<EstimateSummary, Never>()
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
+        var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
+        var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
     }
 
@@ -49,82 +51,111 @@ final class CarMakingViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .flatMap { [weak self] _ -> AnyPublisher<EstimateSummary, Never> in
-                guard let self = self else {
-                    return Just(EstimateSummary(elements: []))
-                        .eraseToAnyPublisher()
-                }
-                return self.requestEstimateSummary()
+            .sink { [weak self] _ in
+                self?.fetchEstimateSummary(to: output.estimateSummary)
             }
-            .sink(receiveValue: { summary in
-                output.estimateSummary.send(summary)
-            })
             .store(in: &cancellables)
 
         input.carMakingStepDidChanged
-            .flatMap { [weak self] step -> AnyPublisher<CarMakingStepInfo, Never> in
-                guard let self = self else {
-                    return Just(CarMakingStepInfo(step: step))
-                        .eraseToAnyPublisher()
-                }
-                return self.requestCurrentStepInfo(step)
+            .sink { [weak self] newStep in
+                self?.fetchCarMakingStepInfo(
+                    of: newStep,
+                    category: input.optionCategoryDidChanged.value,
+                    output: output.currentStepInfo
+                )
             }
-            .sink(receiveValue: { carMakingStepInfo in
-                output.currentStepInfo.send(carMakingStepInfo)
-            })
             .store(in: &cancellables)
 
         input.optionDidSelected
-            .sink { (step, optionIndex) in
-                let stepIndex = step.rawValue
-
-                switch step {
-                case .optionSelection:
-                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected.toggle()
-                default:
-                    CarMakingMockData.mockOption[stepIndex].enumerated().forEach { (optionIndex, _) in
-                        CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = false
-                    }
-                    CarMakingMockData.mockOption[stepIndex][optionIndex].isSelected = true
+            .sink { [weak self] (step, optionIndex) in
+                guard let self else { return }
+                if step == .optionSelection {
+                    selectOptionSelectionStepOption(
+                        of: optionIndex,
+                        category: input.optionCategoryDidChanged.value,
+                        updatedOptionInfoOutput: output.optionInfoDidUpdated,
+                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption
+                    )
+                } else {
+                    selectOption(of: optionIndex, in: step, updatedOptionInfoOutput: output.optionInfoDidUpdated)
                 }
-
-                output.optionInfoDidUpdated.send(CarMakingMockData.mockOption[stepIndex])
             }
             .store(in: &cancellables)
 
         input.optionCategoryDidChanged
-            .sink { newCategory in
-//                let optionStepInfo = usecase.requestOptionStepInfo(category)
-//                output.currentStepInfo.send(optionStepInfo)
-                print("option category did changed to \(newCategory)")
+            .sink { [weak self] newCategory in
+                self?.fetchOptionSelectionStepInfo(for: newCategory, to: output.optionInfoForCategory)
             }
             .store(in: &cancellables)
 
         return output
     }
 
-    private func requestEstimateSummary() -> AnyPublisher<EstimateSummary, Never> {
-        return selfModeUsecase.fetchInitialEstimate()
+    private func fetchEstimateSummary(to estimateSummary: PassthroughSubject<EstimateSummary, Never>) {
+        selfModeUsecase.fetchInitialEstimate()
             .catch { _ in Just(EstimateSummary(elements: [])) }
-            .eraseToAnyPublisher()
-    }
-
-    private func updateEstimateSummary(step: CarMakingStep,
-                                       selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
-        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption)
-            .eraseToAnyPublisher()
-    }
-
-    private func requestCurrentStepInfo(_ step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, Never> {
-        return selfModeUsecase.fetchOptionInfo(step: step)
-            .catch { error -> AnyPublisher<CarMakingStepInfo, Never> in
-                return Just(CarMakingStepInfo(step: step))
-                    .eraseToAnyPublisher()
+            .sink { summary in
+                estimateSummary.send(summary)
             }
-            .eraseToAnyPublisher()
+            .store(in: &cancellables)
     }
 
-}
+    private func fetchCarMakingStepInfo(
+        of step: CarMakingStep,
+        category: OptionCategoryType,
+        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+    ) {
+        var stepInfoPublisher: AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
+        if step != .optionSelection {
+            stepInfoPublisher = selfModeUsecase.fetchOptionInfo(step: step)
+        } else {
+            stepInfoPublisher = selfModeUsecase.fetchAdditionalOptionInfo(category: category)
+        }
+        stepInfoPublisher
+            .catch { _ in  Just(CarMakingStepInfo(step: step)) }
+            .sink { carMakingStepInfo in
+                currentStepInfo.send(carMakingStepInfo)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func selectOption(
+        of optionIndex: Int,
+        in step: CarMakingStep,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>
+    ) {
+        updatedOptionInfoOutput.send(selfModeUsecase.selectOption(of: optionIndex, in: step))
+    }
+
+    private func selectOptionSelectionStepOption(
+        of optionIndex: Int,
+        category: OptionCategoryType,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
+        selectedOptionCountOutput: PassthroughSubject<Int, Never>
+    ) {
+        let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+        updatedOptionInfoOutput.send(infos)
+        selectedOptionCountOutput.send(selectedOptionCount)
+    }
+
+
+    private func fetchOptionSelectionStepInfo(
+        for category: OptionCategoryType,
+        to optionInfoForCategory: PassthroughSubject<[OptionCardInfo], Never>
+    ) {
+        selfModeUsecase.fetchAdditionalOptionInfo(category: category)
+            .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
+            .sink { optionSelectionStepInfo in
+                optionInfoForCategory.send(optionSelectionStepInfo.optionCardInfoArray)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func updateEstimateSummary(
+        step: CarMakingStep,
+        selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
+        return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption).eraseToAnyPublisher()
+    }
 
 struct CarMakingMockData {
     static let mockURL = [
@@ -229,4 +260,5 @@ struct CarMakingMockData {
                                  priceString: "+ 0 원",
                                  bannerImageURL: mockURL[2])]
     ]
+
 }

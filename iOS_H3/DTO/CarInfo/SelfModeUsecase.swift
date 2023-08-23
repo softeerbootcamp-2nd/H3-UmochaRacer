@@ -11,7 +11,10 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
     private let carInfoRepository: CarInfoRepositoryProtocol
     private let introRepsitory: IntroRepositoryProtocol
+
     private var currentEstimateSummary: EstimateSummary = EstimateSummary(elements: [])
+    private var carMakingTotalInfo: [CarMakingStep: CarMakingStepInfo] = [:]
+    private var optionSelectionStepInfo: [OptionCategoryType: CarMakingStepInfo] = [:]
 
     init(carInfoRepository: CarInfoRepositoryProtocol,
          introRepsitory: IntroRepositoryProtocol) {
@@ -37,29 +40,60 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     }
 
     func fetchOptionInfo(step: CarMakingStep) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
-        guard let publisher = publisherForStep(step) else {
-            return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
+        if let stepInfo = carMakingTotalInfo[step] {
+            return Just(stepInfo).setFailureType(to: SelfModeUsecaseError.self).eraseToAnyPublisher()
+        }
+        return fetchOptionInfoFromServer(step: step)
+    }
+
+    func fetchAdditionalOptionInfo(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        if let stepInfo = optionSelectionStepInfo[category] {
+            return Just(stepInfo).setFailureType(to: SelfModeUsecaseError.self).eraseToAnyPublisher()
+        }
+        return fetchAdditionalOptionInfoFromServer(category: category)
+    }
+
+    func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
+        guard let stepInfo = carMakingTotalInfo[step] else { return [] }
+        var optionInfos = stepInfo.optionCardInfoArray
+
+        switch step {
+        case .optionSelection:
+            optionInfos[optionIndex].isSelected.toggle()
+        default:
+            optionInfos.enumerated().forEach { (index, _) in
+                optionInfos[index].isSelected = false
+            }
+            optionInfos[optionIndex].isSelected = true
         }
 
-        return publisher
-            .mapError { error in
-                switch error {
-                case .networkError:
-                    return .networkError(error: error)
-                case .conversionError:
-                    return .conversionError(error: error)
-                }
-            }
-            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
-                guard let self else { return nil }
+        carMakingTotalInfo[step] = CarMakingStepInfo(step: step, optionCardInfoArray: optionInfos)
 
-                var stepInfoEntity = stepInfoEntity
+        return optionInfos
+    }
 
-                stepInfoEntity.selectFirstOption()
+    func selectAdditionalOption(
+        of optionIndex: Int,
+        in category: OptionCategoryType
+    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
+        var selectedOptionCount = optionSelectionStepInfo.reduce(0) {
+            $0 + $1.value.optionCardInfoArray.filter { $0.isSelected }.count
+        }
+        guard let categoryInfo = optionSelectionStepInfo[category] else { return ([], selectedOptionCount) }
 
-                return findCardbWordAndReturn(from: stepInfoEntity)
-            }
-            .eraseToAnyPublisher()
+        var categoryOptionInfos = categoryInfo.optionCardInfoArray
+        categoryOptionInfos[optionIndex].isSelected.toggle()
+
+        selectedOptionCount += categoryOptionInfos[optionIndex].isSelected ? 1 : -1
+
+        optionSelectionStepInfo[category] = CarMakingStepInfo(
+            step: .optionSelection,
+            optionCardInfoArray: categoryOptionInfos
+        )
+
+        return (categoryOptionInfos, selectedOptionCount)
     }
 
     func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
@@ -83,6 +117,49 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
+    private func fetchOptionInfoFromServer(
+        step: CarMakingStep
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        guard let publisher = publisherForStep(step) else {
+            return Fail(error: SelfModeUsecaseError.invalidStep).eraseToAnyPublisher()
+        }
+
+        return publisher
+            .mapError { [weak self] error in
+                guard let self else { return SelfModeUsecaseError.notExistSelf }
+                return convertToSelfModeUsecaseError(from: error)
+            }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
+
+                var stepInfoEntity = stepInfoEntity
+                if stepInfoEntity.step != .optionSelection {
+                    stepInfoEntity.selectFirstOption()
+                }
+
+                carMakingTotalInfo[step] = findCardbWordAndReturn(from: stepInfoEntity)
+
+                return carMakingTotalInfo[step]
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private func fetchAdditionalOptionInfoFromServer(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
+        carInfoRepository.fetchAdditionalOption(category: category)
+            .mapError { [weak self] error in
+                guard let self else { return SelfModeUsecaseError.notExistSelf }
+                return convertToSelfModeUsecaseError(from: error)
+            }
+            .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
+                guard let self else { return nil }
+                optionSelectionStepInfo[category] = findCardbWordAndReturn(from: stepInfoEntity)
+                return optionSelectionStepInfo[category]
+            }
+            .eraseToAnyPublisher()
+    }
+
     private func publisherForStep(
         _ step: CarMakingStep
     ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>? {
@@ -100,9 +177,18 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         case .wheelSelection:
             return carInfoRepository.fetchWheel()
         case .optionSelection:
-            return carInfoRepository.fetchAdditionalOption(category: "system")
+            return carInfoRepository.fetchAdditionalOption(category: OptionCategoryType.system)
         default:
             return nil
+        }
+    }
+
+    private func convertToSelfModeUsecaseError(from error: CarInfoRepositoryError) -> SelfModeUsecaseError {
+        switch error {
+        case .networkError:
+            return .networkError(error: error)
+        case .conversionError:
+            return .conversionError(error: error)
         }
     }
 

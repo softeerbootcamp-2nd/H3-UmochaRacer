@@ -93,6 +93,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     func configure(optionInfoArray: [OptionCardInfo]) {
         bannerImagesOfOption = optionInfoArray.map { $0.bannerImageURL }
+        if !bannerImagesOfOption.isEmpty { configure(bannerImageURL: bannerImagesOfOption[0]) }
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
