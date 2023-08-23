@@ -24,4 +24,13 @@ enum DetailRepositoryError: LocalizedError {
 
 protocol DetailRepositoryProtocol {
     func fetchPowertrainDetailInfo(id : Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+
+    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+
+    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+
+    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+
+    func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+
 }
