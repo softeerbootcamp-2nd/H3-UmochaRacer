@@ -37,6 +37,8 @@ final class CarMakingViewController: UIViewController {
 
     private let optionCategoryDidChanged = CurrentValueSubject<OptionCategoryType, Never>(.system)
 
+    private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -79,7 +81,8 @@ extension CarMakingViewController {
             viewDidLoad: viewDidLoadSubject,
             carMakingStepDidChanged: stepDidChanged,
             optionDidSelected: optionDidSelected,
-            optionCategoryDidChanged: optionCategoryDidChanged
+            optionCategoryDidChanged: optionCategoryDidChanged,
+            nextButtonDidTapped: nextButtonDidTapped
         )
         let output = viewModel.transform(input)
 
@@ -114,6 +117,14 @@ extension CarMakingViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] selectedOptionCount in
                 self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
+            }
+            .store(in: &cancellables)
+
+        output.feedbackComment
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] feedbackComment in
+                self?.carMakingContentView.moveNextStep(feedbackTitle: feedbackComment.title,
+                                                  feedbackDescription: feedbackComment.subTitle)
             }
             .store(in: &cancellables)
 
@@ -193,9 +204,7 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-
-        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
-                                          feedbackDescription: viewModel.feedbackDescription)
+        nextButtonDidTapped.send(())
     }
 }
 
