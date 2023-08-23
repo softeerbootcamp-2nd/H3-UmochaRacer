@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+struct DetailOptionData: Decodable {
+    let title: String?
+    let description: String?
+    let info: String?
+    let imageSrc: Int?
+}
+
+struct DetailOptionEntity {
+    let title: String
+    let description: String
+    let info: String?
+    let imageSrc: Int?
+}
