@@ -79,9 +79,11 @@
 		479B090D2A94889300AA10A0 /* URString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4662A93023B007F312D /* URString.swift */; };
 		479B090E2A9488A600AA10A0 /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */; };
 		479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09012A9351C900AA10A0 /* OptionCardInfo.swift */; };
+		479B091E2A95CDD700AA10A0 /* TrimListBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091D2A95CDD700AA10A0 /* TrimListBar.swift */; };
 		479B09202A95CE0500AA10A0 /* TrimListBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */; };
 		479B09222A95CE4C00AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
 		479B09232A95D19400AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
+		479B09242A95D19700AA10A0 /* TrimListBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091D2A95CDD700AA10A0 /* TrimListBar.swift */; };
 		479B09252A95D19A00AA10A0 /* TrimListBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */; };
 		479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */; };
 		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
@@ -292,6 +294,7 @@
 		479B09012A9351C900AA10A0 /* OptionCardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfo.swift; sourceTree = "<group>"; };
 		479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfo.swift; sourceTree = "<group>"; };
 		479B090A2A94874000AA10A0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		479B091D2A95CDD700AA10A0 /* TrimListBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBar.swift; sourceTree = "<group>"; };
 		479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarButton.swift; sourceTree = "<group>"; };
 		479B09212A95CE4C00AA10A0 /* TrimCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCategory.swift; sourceTree = "<group>"; };
 		479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarViewController.swift; sourceTree = "<group>"; };
@@ -922,6 +925,7 @@
 				5F6203712A7BC59600D09531 /* Assets.xcassets */,
 				5F6203732A7BC59600D09531 /* LaunchScreen.storyboard */,
 				5F6203762A7BC59600D09531 /* Info.plist */,
+				479B091D2A95CDD700AA10A0 /* TrimListBar.swift */,
 				479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */,
 				479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */,
 			);
@@ -1355,6 +1359,7 @@
 				5F5891DB2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
+				479B09242A95D19700AA10A0 /* TrimListBar.swift in Sources */,
 				5F496DFC2A9447990024E5B8 /* DictionaryString.swift in Sources */,
 				5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 			);
@@ -1399,6 +1404,7 @@
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
 				479B09202A95CE0500AA10A0 /* TrimListBarButton.swift in Sources */,
 				5F6A82F52A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
+				479B091E2A95CDD700AA10A0 /* TrimListBar.swift in Sources */,
 				5F39EF3E2A81B79A004B0C97 /* OptionCardButton.swift in Sources */,
 				5F49755E2A811ABE008FFFE5 /* UIColor+.swift in Sources */,
 				471917EE2A8236F200B67D54 /* TwoOptionCardButtonViewController.swift in Sources */,
