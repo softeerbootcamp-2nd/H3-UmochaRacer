@@ -41,18 +41,21 @@ final class DetailPopupViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .sink { _ in
-                output.title.send("Title")
-                output.subTitle.send("Subtitle")
-                output.description.send("Description goes here.")
-                output.additionalInfo.send("Additional Info")
-                output.pageCount.send(5) // 예시 카운트
-
-                if input.isImageDetail {
-                    if let url = URL(string: "https://example.com/image.jpg") {
-                        output.imageURL.send(url)
-                    }
+            .flatMap { [weak self] in
+                guard let self = self else {
+                    return Just(DetailInfo(title: "", subTitle: "", description: "", additionalInfo: "", imageURL: nil))
+                        .eraseToAnyPublisher()
                 }
+                return self.usecase.fetchDetailInfo(forPage: 0)
+            }
+            .sink { detailInfo in
+                output.title.send(detailInfo.title)
+                output.subTitle.send(detailInfo.subTitle)
+                output.description.send(detailInfo.description)
+                output.additionalInfo.send(detailInfo.additionalInfo)
+                output.imageURL.send(detailInfo.imageURL)
+                output.pageCount.send(3) //임시 페이지
+                print("\(detailInfo.title) 페이지")
             }
             .store(in: &cancellables)
 
