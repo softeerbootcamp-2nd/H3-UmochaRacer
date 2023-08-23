@@ -85,6 +85,7 @@
 		479B09172A95318C00AA10A0 /* FeedbackCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */; };
 		479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */; };
 		479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
+		479B091C2A95A79A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -1266,6 +1267,7 @@
 				5F62036D2A7BC59500D09531 /* ComponentMainViewController.swift in Sources */,
 				471917EC2A8236EE00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				5F496DFD2A9447990024E5B8 /* DictionaryString.swift in Sources */,
+				479B091C2A95A79A00AA10A0 /* FeedbackComment.swift in Sources */,
 				479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */,
 				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */,
