@@ -74,6 +74,13 @@ extension TrimListBar {
             button.widthAnchor.constraint(equalToConstant: Constants.barButtonWidth).isActive = true
         }
         trimListBarButtons.first?.isSelected = true
+        disabledNotUsedTrimButton()
+    }
+
+    private func disabledNotUsedTrimButton() {
+        TrimCategory.allCases.filter { !($0 == .guideMode || $0 == .leBlanc) }.forEach { category in
+            trimListBarButtons[category.rawValue].isEnabled = false
+        }
     }
 
     private func setupStackViewConstraints() {
