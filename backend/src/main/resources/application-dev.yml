@@ -16,3 +16,8 @@ spring:
       mode: always
       schema-locations: classpath:sql/scheme.sql
       data-locations: classpath:sql/data.sql
+  cache:
+    type: redis
+  redis:
+    host: 127.0.0.1
+    port: 63

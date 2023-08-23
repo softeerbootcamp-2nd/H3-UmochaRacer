@@ -4,6 +4,7 @@ import com.example.backend.domain.sale.entity.RatioSummary;
 import com.example.backend.domain.sale.repository.SalesOptionsRepository;
 import com.example.backend.domain.sale.repository.SalesRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,10 +16,11 @@ public class OptionSaleRatioServiceImpl implements RatioService {
     private final SalesRepository salesRepository;
 
     @Override
+    @Cacheable(cacheNames = "optionSelectionRatio", key="#category")
     public List<RatioSummary> findSaleRatio(String category) {
         List<RatioSummary> result = salesOptionsRepository.findSalesRatio(category.toUpperCase());
         Integer totalSales = salesRepository.getTotalSales();
-        result.add(new RatioSummary(Long.MAX_VALUE, totalSales));
+        result.add(0, new RatioSummary(Long.MAX_VALUE, totalSales));
         return result;
     }
 }
