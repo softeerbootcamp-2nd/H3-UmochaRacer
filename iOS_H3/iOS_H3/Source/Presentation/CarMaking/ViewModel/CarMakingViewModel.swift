@@ -167,7 +167,10 @@ final class CarMakingViewModel {
         return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption).eraseToAnyPublisher()
     }
 
-    private func fetchFeedbackComment(for step: CarMakingStep, to feedbackCommentSubject: PassthroughSubject<FeedbackComment, Never>) {
+    private func fetchFeedbackComment(
+        for step: CarMakingStep,
+        to feedbackCommentSubject: PassthroughSubject<FeedbackComment, Never>
+    ) {
         selfModeUsecase.fetchFeedbackComment(step: step)
             .catch { _ in Just(FeedbackComment(title: "", subTitle: "")).eraseToAnyPublisher() }
             .sink { feedbackComment in
