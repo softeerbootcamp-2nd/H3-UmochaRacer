@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TrimListBarDelegate: AnyObject {
+    func trimListBarButtonDidTapped(didSelectItemAt index: Int)
+}
+
 final class TrimListBar: UIScrollView {
 
     enum Constants {
@@ -30,6 +34,8 @@ final class TrimListBar: UIScrollView {
     }
 
     // MARK: - Properties
+
+    weak var trimListBarDelegate: TrimListBarDelegate?
 
     private var selectedButtonIndex: Int = 0
 
@@ -99,6 +105,8 @@ extension TrimListBar {
 
         trimListBarButtons[previousSelectedIndex].isSelected = false
         trimListBarButtons[selectedButtonIndex].isSelected = true
+
+        trimListBarDelegate?.trimListBarButtonDidTapped(didSelectItemAt: index)
     }
 
     private func createSideSpacingView() -> UIView {
