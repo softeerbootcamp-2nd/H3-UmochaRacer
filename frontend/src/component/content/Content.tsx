@@ -10,6 +10,7 @@ import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
+
 type cardData = {
   id: number;
   name: string;
@@ -67,19 +68,22 @@ function Content() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
   const updateTempOption = (index: number) => {
-    const selectedCardData = cardData[index];
+    if (cardData !== cardDataList[option]) return;
+    if (option !== 6) {
+      const selectedCardData = cardData[index];
 
-    if (selectedCardData) {
-      const tempOpt: Option = {
-        key: keyMapping[option],
-        value: selectedCardData.name,
-        category: categoryMapping[option],
-        price: selectedCardData.price,
-        id: selectedCardData.id,
-        imgSrc: selectedCardData.imageSrc,
-      };
+      if (selectedCardData) {
+        const tempOpt: Option = {
+          key: keyMapping[option],
+          value: selectedCardData.name,
+          category: categoryMapping[option],
+          price: selectedCardData.price,
+          id: selectedCardData.id,
+          imgSrc: selectedCardData.imageSrc,
+        };
 
-      setTempOption(tempOpt);
+        setTempOption(tempOpt);
+      }
     }
   };
   const setNewIndex = (nextIndex: number) => {

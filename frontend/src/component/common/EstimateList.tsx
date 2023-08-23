@@ -46,29 +46,26 @@ function EstimateList({
   });
 
   useEffect(() => {
-    if (!tempOption && option !== 7) return;
     const nextEstimateDatas: TotalEstimateData = {
       car: [],
       color: [],
     };
     let copyOption = selectedOptions.slice();
 
-    if (tempOption !== null) {
-      copyOption = copyOption.map((elem) => {
-        if (elem.key === tempOption.key) {
-          return tempOption;
-        } else {
-          return elem;
-        }
-      });
-    }
+    copyOption = copyOption.map((elem) => {
+      if (elem.key === tempOption.key) {
+        return tempOption;
+      } else {
+        return elem;
+      }
+    });
 
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);
     });
 
     setEstimateDatas(nextEstimateDatas);
-  }, [tempOption]);
+  }, [tempOption, option]);
 
   const getTotalPirce = (key: string) => {
     let totalPrice = key === 'car' ? DEFAULT_PRICE : 0;
