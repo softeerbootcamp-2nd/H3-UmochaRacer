@@ -6,28 +6,168 @@
 //
 
 import UIKit
+import Combine
+
+protocol URLabelDelegate: AnyObject {
+    func label(_ label: URLabel, didSelectRange range: NSRange?)
+}
+
+enum HighlightState {
+    case none
+    case activation
+    case selection
+}
 
 class URLabel: UILabel {
-    var discriptionLabel: DictionaryString?
-    private var selectedRange: NSRange?
+    var urLabel: URString?
+    weak var delegate: URLabelDelegate?
+    private var originalAttributedText: NSAttributedString?
 
-    func setURString(_ urString: DictionaryString) {
-        let attributedString = NSMutableAttributedString(string: urString.fullText)
+    private var tapRecognizer: UITapGestureRecognizer?
+    var selectedRangeSubject = PassthroughSubject<NSRange?, Never>()
+    var selectedRange: NSRange? {
+        didSet {
+            selectedRangeSubject.send(selectedRange)
+            updateHighlights()
+        }
+    }
 
-        for range in urString.cardbRange {
-            let nsRange = NSRange(range, in: urString.fullText)
-            if nsRange == selectedRange {
-                highlightForDictionarySelection(range: nsRange, linkAction: {
-                    self.selectedRange = nil
-                    self.setURString(urString)
-                })
-            } else {
-                highlightForDictionaryActivation(range: nsRange, linkAction: {
-                    self.selectedRange = nsRange
-                    self.setURString(urString)
-                })
+    func removeDictionaryEffects() {
+        selectedRange = nil
+        self.attributedText = originalAttributedText
+        removeTapRecognizer()
+        originalAttributedText = nil
+    }
+
+    private func removeTapRecognizer() {
+        if let tapRecognizer = tapRecognizer {
+            self.removeGestureRecognizer(tapRecognizer)
+            self.tapRecognizer = nil
+        }
+    }
+
+    func setURString(_ urString: URString, isOn: Bool) {
+        urLabel = urString
+        if isOn {
+            originalAttributedText = self.attributedText
+            updateHighlights()
+            setupTapRecognizer()
+        } else {
+            removeDictionaryEffects()
+        }
+    }
+
+    func updateHighlights() {
+        guard let urLabel = urLabel,
+                let attributedText = originalAttributedText?
+            .mutableCopy() as? NSMutableAttributedString else { return }
+
+        for range in urLabel.cardbRange {
+            let nsRange = NSRange(range)
+            let highlightFunction = nsRange == selectedRange ? highlightForDictionarySelection : highlightForDictionaryActivation
+            highlightFunction(nsRange, attributedText)
+        }
+
+        self.attributedText = attributedText
+    }
+
+    private func highlightForDictionarySelection(range: NSRange, in attributedText: NSMutableAttributedString) {
+        applyAttributes(imageName: "dictionary_unselected_img",
+                        range: range,
+                        weight: .bold,
+                        backgroundColor: .black, textColor: .white, in: attributedText)
+    }
+
+    private func highlightForDictionaryActivation(range: NSRange,
+                                                  in attributedText: NSMutableAttributedString) {
+        applyAttributes(imageName: "dictionary_selected_img",
+                        range: range,
+                        weight: .bold,
+                        backgroundColor: Colors.iconYellow,
+                        textColor: .black,
+                        in: attributedText)
+    }
+
+    private func applyAttributes(imageName: String,
+                                 range: NSRange,
+                                 weight: UIFont.Weight,
+                                 backgroundColor: UIColor,
+                                 textColor: UIColor,
+                                 in attributedText: NSMutableAttributedString) {
+        removeImage(in: range, from: attributedText)
+        insertImage(named: imageName, before: range, in: attributedText)
+        setAttributes(on: range,
+                      weight: weight,
+                      backgroundColor: backgroundColor,
+                      textColor: textColor,
+                      in: attributedText)
+    }
+
+    private func insertImage(named imageName: String,
+                             before range: NSRange,
+                             in attributedText: NSMutableAttributedString) {
+        guard let image = UIImage(named: imageName) else { return }
+        let attachment = NSTextAttachment()
+        attachment.image = image
+        attributedText.insert(NSAttributedString(attachment: attachment), at: range.location)
+    }
+
+    private func removeImage(in range: NSRange, from attributedText: NSMutableAttributedString) {
+        // 이미지 제거 로직 구현
+    }
+
+    private func setAttributes(on range: NSRange, weight: UIFont.Weight, backgroundColor: UIColor, textColor: UIColor, in attributedText: NSMutableAttributedString) {
+        let font = UIFont.systemFont(ofSize: self.font.pointSize, weight: weight)
+        attributedText.addAttributes([.backgroundColor: backgroundColor, .foregroundColor: textColor, .font: font], range: range)
+    }
+
+    private func setupTapRecognizer() {
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleLabelTap(_:)))
+        self.isUserInteractionEnabled = true
+        if let tapRecognizer = tapRecognizer {
+            self.addGestureRecognizer(tapRecognizer)
+        }
+    }
+
+    @objc private func handleLabelTap(_ sender: UITapGestureRecognizer) {
+        let point = sender.location(in: self)
+        guard let selectedIndex = textIndex(at: point) else { return }
+        for range in urLabel?.cardbRange ?? [] {
+            let nsRange = NSRange(range)
+            if NSLocationInRange(selectedIndex, nsRange) {
+                if selectedRange == nsRange {
+                    selectedRange = nil
+                } else {
+                    selectedRange = nsRange
+                }
+                showTextBox(for: nsRange)
+                delegate?.label(self, didSelectRange: selectedRange)
+                break
             }
         }
-        self.attributedText = attributedString
+    }
+
+    private func showTextBox(for range: NSRange) {
+        guard let viewController = self.findViewController() else { return }
+        let selectedText = (text! as NSString).substring(with: range)
+
+        let textBoxViewController = TextBoxViewController(viewModel: TextBoxViewModel())
+        textBoxViewController.modalPresentationStyle = .overCurrentContext
+        textBoxViewController.setTitle(title: selectedText)
+        textBoxViewController.onDismiss = { [weak self] in
+            self?.selectedRange = nil
+            self?.updateHighlights()
+        }
+        viewController.present(textBoxViewController, animated: false)
+    }
+
+    func textIndex(at point: CGPoint) -> Int? {
+        guard let attributedText = attributedText else { return nil }
+        let (layoutManager, textContainer) = createTextLayoutComponents()
+        let textStorage = NSTextStorage(attributedString: attributedText)
+        textStorage.addLayoutManager(layoutManager)
+        let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(forGlyphRange: layoutManager.glyphRange(for: textContainer), in: textContainer).size.width) / 2
+        let newPoint = CGPoint(x: point.x - (paddingWidth > 0 ? paddingWidth : 0), y: point.y)
+        return layoutManager.glyphIndex(for: newPoint, in: textContainer)
     }
 }
