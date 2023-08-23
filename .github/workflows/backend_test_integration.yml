@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - develop-be
+      - develop
     paths: 'backend/**'
   pull_request:
     branches:
       - develop-be
+      - develop
     paths: 'backend/**'
 
 defaults:
