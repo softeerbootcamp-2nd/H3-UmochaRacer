@@ -114,6 +114,9 @@
 		5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50B82A79EDA900158E96 /* Colors.swift */; };
 		5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3B50BA2A79EDE900158E96 /* UIColor+.swift */; };
 		5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */; };
+		5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */; };
+		5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */; };
+		5F3E67262A95FB36002BF48A /* DetailOptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67252A95FB36002BF48A /* DetailOptionData.swift */; };
 		5F448A672A91D000005D04FF /* IntroEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A662A91D000005D04FF /* IntroEndpoint.swift */; };
 		5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */; };
 		5F448A6B2A91D664005D04FF /* IntroRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A6A2A91D664005D04FF /* IntroRepository.swift */; };
@@ -290,6 +293,9 @@
 		5F3B50B82A79EDA900158E96 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		5F3B50BA2A79EDE900158E96 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepository.swift; path = iOS_H3/Source/DetailRepository.swift; sourceTree = SOURCE_ROOT; };
+		5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepositoryProtocol.swift; path = iOS_H3/Source/DetailRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
+		5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEndPoint.swift; sourceTree = "<group>"; };
+		5F3E67252A95FB36002BF48A /* DetailOptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailOptionData.swift; path = DTO/Detail/DetailOptionData.swift; sourceTree = SOURCE_ROOT; };
 		5F448A662A91D000005D04FF /* IntroEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroEndpoint.swift; sourceTree = "<group>"; };
 		5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntroRepositoryProtocol.swift; path = iOS_H3/Source/Network/IntroRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5F448A6A2A91D664005D04FF /* IntroRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntroRepository.swift; path = iOS_H3/Source/Network/IntroRepository.swift; sourceTree = SOURCE_ROOT; };
@@ -540,6 +546,7 @@
 		478B267E2A78FD0E00598902 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				5F3E67272A95FB3C002BF48A /* Detail */,
 				5F60E4A92A8B403600531462 /* CarInfo */,
 			);
 			path = DTO;
@@ -549,6 +556,7 @@
 			isa = PBXGroup;
 			children = (
 				5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */,
+				5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */,
 				5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */,
 				5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */,
 			);
@@ -634,6 +642,7 @@
 				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
 				5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */,
 				5F448A662A91D000005D04FF /* IntroEndpoint.swift */,
+				5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -733,6 +742,14 @@
 				471917C12A7E422900B67D54 /* OhMyCarSetButtonViewController.swift */,
 			);
 			path = OhMyCarSetButton;
+			sourceTree = "<group>";
+		};
+		5F3E67272A95FB3C002BF48A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				5F3E67252A95FB36002BF48A /* DetailOptionData.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 		5F496E012A9448B50024E5B8 /* URLabel */ = {
@@ -1145,6 +1162,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */,
 				5F4D33B22A8751E500942517 /* UIImageView+.swift in Sources */,
 				479023BC2A8B4BE600DECB70 /* CarMakingViewController.swift in Sources */,
 				5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */,
@@ -1177,6 +1195,7 @@
 				5F60E4A82A8B401500531462 /* CarInfoRepositoryProtocol.swift in Sources */,
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
+				5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
@@ -1198,6 +1217,7 @@
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
+				5F3E67262A95FB36002BF48A /* DetailOptionData.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
 				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
