@@ -12,12 +12,6 @@ protocol URLabelDelegate: AnyObject {
     func label(_ label: URLabel, didSelectRange range: NSRange?)
 }
 
-enum HighlightState {
-    case none
-    case activation
-    case selection
-}
-
 class URLabel: UILabel {
     var urString: URString?
     weak var delegate: URLabelDelegate?
