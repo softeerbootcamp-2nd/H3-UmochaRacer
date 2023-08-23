@@ -9,7 +9,7 @@ interface Option {
   imgSrc: string;
 }
 
-const initailOption: Option = {
+const initialOption: Option = {
   key: '',
   value: '',
   category: '',
@@ -19,7 +19,7 @@ const initailOption: Option = {
 };
 
 export const TempOptionContext = createContext({
-  tempOption: Option,
+  tempOption: initialOption,
   setTempOption: (option: Option) => {},
 });
 
@@ -28,7 +28,7 @@ interface TempOptionProviderProps {
 }
 
 const TempOptionProvider = ({children}: TempOptionProviderProps) => {
-  const [tempOptionState, setTempOptionState] = useState<Option>(initailOption);
+  const [tempOptionState, setTempOptionState] = useState<Option>(initialOption);
 
   const setTempOption = (option: Option) => {
     setTempOptionState(option);
