@@ -36,8 +36,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     private var currentOptionInfo = [OptionCardInfo]()
 
-    private var currentCategory = OptionCategoryType.system
-
     var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
 
     // MARK: - Lifecycles
@@ -60,7 +58,6 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         super.prepareForReuse()
         listModeView.isHidden = true
         currentOptionInfo = []
-        currentCategory = OptionCategoryType.system
         optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
     }
 
@@ -68,14 +65,17 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     override func configure(optionInfoArray: [OptionCardInfo]) {
         super.configure(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.configure(with: optionInfoArray)
         currentOptionInfo = optionInfoArray
+
+        if !optionInfoArray.isEmpty {
+            guard let listView = optionButtonListView as? MultiOptionCardButtonView else { return }
+            listView.showFirstOptionCard()
+        }
     }
 
     override func update(optionInfoArray: [OptionCardInfo]) {
         super.update(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
         listModeView.reloadOptionCards(with: optionInfoArray)
         currentOptionInfo = optionInfoArray
     }
@@ -85,9 +85,8 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         listModeView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description)
     }
 
-    private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
-        let selectedOptionCount = optionInfoArray.filter { $0.isSelected }.count
-        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(selectedOptionCount)"
+    func updateSelectedOptionCountLabel(to count: Int) {
+        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(count)"
     }
 
     private func showListModeView(isHidden: Bool) {
@@ -112,14 +111,10 @@ extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
 
 extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
     func tabBarButtonDidTapped(didSelectItemAt index: Int) {
-        guard let category = OptionCategoryType(rawValue: index + 1) else {
+        guard let category = OptionCategoryType(rawValue: index) else {
             return
         }
-
-        if currentCategory != category {
-            currentCategory = category
-            optionCategoryTapSubject.send(category)
-        }
+        optionCategoryTapSubject.send(category)
     }
 }
 

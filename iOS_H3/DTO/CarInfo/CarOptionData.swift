@@ -53,11 +53,12 @@ extension CarOptionData {
         let color = self.colorCode.flatMap { URColor(hex: $0) }
 
         return OptionCardInfoEntity(
-            title: self.name ?? "",
+            id: id,
+            title: name,
             subTitle: self.label ?? "",
             priceString: String.priceStringWithPlus(from: price ?? 0),
-            bannerImageURL: bannerImageURL, // 옵셔널로 처리
-            iconImageURL: iconImageURL, // 옵셔널로 처리
+            bannerImageURL: bannerImageURL,
+            iconImageURL: iconImageURL,
             color: color,
             hasMoreInfo: false
         )

@@ -102,6 +102,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     func configure(optionInfoArray: [OptionCardInfo]) {
         bannerImagesOfOption = optionInfoArray.map { $0.bannerImageURL }
+        if !bannerImagesOfOption.isEmpty { configure(bannerImageURL: bannerImagesOfOption[0]) }
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
@@ -133,7 +134,7 @@ extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
         didSelectOptionAt index: Int
     ) {
         optionDidSelected.send(index)
-        if optionCardButtonListView is TwoOptionCardButtonView {
+        if optionCardButtonListView is TwoOptionCardButtonView, index < bannerImagesOfOption.count {
             configure(bannerImageURL: bannerImagesOfOption[index])
         }
     }

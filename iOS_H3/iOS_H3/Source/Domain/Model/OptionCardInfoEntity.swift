@@ -8,6 +8,7 @@
 import Foundation
 
 struct OptionCardInfoEntity {
+    let id: Int
     let title: String
     let subTitle: String
     let priceString: String     // 예시) "+ 100,000원"
@@ -18,6 +19,7 @@ struct OptionCardInfoEntity {
     var isSelected: Bool
 
     init(
+        id: Int,
         title: String,
         subTitle: String,
         priceString: String,
@@ -27,6 +29,7 @@ struct OptionCardInfoEntity {
         hasMoreInfo: Bool = false,
         isSelected: Bool = false
     ) {
+        self.id = id
         self.title = title
         self.subTitle = subTitle
         self.priceString = priceString
@@ -39,6 +42,7 @@ struct OptionCardInfoEntity {
 
     func toPresentation(URTitle: URString, URSubTitle: URString) -> OptionCardInfo {
         OptionCardInfo(
+            id: id,
             title: URTitle,
             subTitle: URSubTitle,
             priceString: priceString,

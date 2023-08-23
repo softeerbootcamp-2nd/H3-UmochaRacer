@@ -37,7 +37,7 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
-    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+    private let optionCategoryDidChanged = CurrentValueSubject<OptionCategoryType, Never>(.system)
 
     private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
 
@@ -112,6 +112,20 @@ extension CarMakingViewController {
                         self?.textEffectManager.applyEffect(true, on: view)
                     }
                 }
+            }
+            .store(in: &cancellables)
+
+        output.optionInfoForCategory
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionInfo in
+                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo)
+            }
+            .store(in: &cancellables)
+
+        output.numberOfSelectedAdditionalOption
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedOptionCount in
+                self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
             }
             .store(in: &cancellables)
 

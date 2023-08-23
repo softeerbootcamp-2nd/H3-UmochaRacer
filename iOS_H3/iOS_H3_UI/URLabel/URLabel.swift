@@ -27,6 +27,7 @@ class URLabel: UILabel {
             }
         }
     }
+
     func removeDictionaryEffects() {
         selectedRange = nil
         self.attributedText = originalAttributedText

@@ -84,7 +84,7 @@ class TextBoxView: UIView {
         super.init(coder: coder)
         setupView()
     }
-    
+
     override func layoutSubviews() {
         super.layoutSubviews()
         setDividerLayerFrame()
@@ -169,7 +169,7 @@ extension TextBoxView {
         let dividerWidth = bounds.width - 2 * Constants.leadingTrailingPadding
         let dividerHeight = Constants.dividerHeight
         let dividerY = titleLabel.frame.maxY + Constants.dividerTopPadding
-        
+
         divider.frame = CGRect(x: dividerX, y: dividerY, width: dividerWidth, height: dividerHeight)
     }
 
