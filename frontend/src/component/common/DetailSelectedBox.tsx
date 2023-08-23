@@ -2,11 +2,13 @@ import {colors} from '@/style/theme';
 import React, {useState, useRef, useEffect} from 'react';
 import styled from 'styled-components';
 import {Label1_Medium, Label2_Regular} from '@/style/fonts';
+import {useImageSrcDispatch} from '@/provider/tempImageProvider';
 
 interface DetailData {
   title: string;
   description: string;
   info?: string;
+  imageSrc?: string;
 }
 
 interface DetailSelectedBoxProps {
@@ -23,9 +25,15 @@ function DetailSelectedBox({
   const contentRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(0);
   const [selectedDataIndex, setSelectedDataIndex] = useState<number>(0);
-  const handleTitleClick = (event: React.MouseEvent, index: number) => {
+  const dispatch = useImageSrcDispatch();
+  const handleTitleClick = (
+    event: React.MouseEvent,
+    index: number,
+    image?: string,
+  ) => {
     event.stopPropagation();
     setSelectedDataIndex(index);
+    dispatch({type: 'SET_IMAGE_SRC', payload: {imgSrc: image}});
   };
   useEffect(() => {
     setSelectedDataIndex(0);
@@ -40,7 +48,7 @@ function DetailSelectedBox({
           {descriptionData?.map((data, index) => (
             <Title
               key={index}
-              onClick={(event) => handleTitleClick(event, index)}
+              onClick={(event) => handleTitleClick(event, index, data.imageSrc)}
               $isSelected={selectedDataIndex === index}
             >
               {data.title}
