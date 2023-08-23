@@ -84,8 +84,8 @@ class OptionMotionView: UIView {
 
     }
 
-    func showWithAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        prepareViews(title: feedbackTitle, description: feedbackDescription)
+    func showWithAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        prepareViews(title: feedbackComment.title, description: feedbackComment.subTitle)
 
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1.0

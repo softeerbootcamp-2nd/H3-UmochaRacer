@@ -67,13 +67,9 @@ final class OptionCardCell: UICollectionViewCell {
         optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info)
     }
 
-    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         if optionCardButton.isSelected {
-            optionCardButton.animateButton(
-                feedbackTitle: feedbackTitle,
-                feedbackDescription: feedbackDescription,
-                completion: completion
-            )
+            optionCardButton.animateButton(with: feedbackComment, completion: completion)
         } else {
             completion?()
         }

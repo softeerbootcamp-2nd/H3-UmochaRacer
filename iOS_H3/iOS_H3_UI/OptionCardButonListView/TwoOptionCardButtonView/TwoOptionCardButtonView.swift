@@ -67,13 +67,9 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
         configure(with: cardInfos)
     }
 
-    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         for button in optionCardButtons where button.isSelected {
-            button.animateButton(
-                feedbackTitle: feedbackTitle,
-                feedbackDescription: feedbackDescription,
-                completion: completion
-            )
+            button.animateButton(with: feedbackComment, completion: completion)
         }
     }
 }

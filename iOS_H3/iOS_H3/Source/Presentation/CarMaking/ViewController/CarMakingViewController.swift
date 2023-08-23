@@ -123,8 +123,7 @@ extension CarMakingViewController {
         output.feedbackComment
             .receive(on: DispatchQueue.main)
             .sink { [weak self] feedbackComment in
-                self?.carMakingContentView.moveNextStep(feedbackTitle: feedbackComment.title,
-                                                  feedbackDescription: feedbackComment.subTitle)
+                self?.carMakingContentView.moveNextStep(with: feedbackComment)
             }
             .store(in: &cancellables)
 

@@ -118,9 +118,8 @@ class OptionCardButtonViewController: UIViewController {
 
     // 애니메이션 테스트 버튼 액션
     @objc private func animateButtons() {
-        self.selfModeBasicButton.animateButton(feedbackTitle: "디젤 엔진은 효율이 좋아요!",
-                                               feedbackDescription: "효율을 중시한다면, 탁월한 선택입니다.")
-        self.guideModeBasicButton.animateButton(feedbackTitle: "디젤 엔진은 효율이 좋아요!",
-                                                feedbackDescription: "효율을 중시한다면, 탁월한 선택입니다.")
+        let feedbackComment = FeedbackComment(title: "디젤 엔진은 효율이 좋아요!", subTitle: "효율을 중시한다면, 탁월한 선택입니다.")
+        self.selfModeBasicButton.animateButton(with: feedbackComment)
+        self.guideModeBasicButton.animateButton(with: feedbackComment)
     }
 }
