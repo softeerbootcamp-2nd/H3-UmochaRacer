@@ -28,7 +28,6 @@ class TextBoxView: UIView {
     }
 
     // MARK: - UI properties
-
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "dictionary_unselected_img")
@@ -72,7 +71,6 @@ class TextBoxView: UIView {
     }()
 
     // MARK: - Properties
-
     weak var delegate: TextBoxViewDelegate?
 
     // MARK: - Lifecycles
@@ -88,8 +86,11 @@ class TextBoxView: UIView {
     }
 
     // MARK: - Helpers
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
 
-    func setText(_ text: String) {
+    func updateText(_ text: String) {
         textLabel.setText(text)
     }
 
