@@ -68,14 +68,11 @@ final class CarInfoMockRepository: CarInfoRepositoryProtocol {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
 
-    func fetchFeedbackComment(
-        step: CarMakingStep,
-        optionID: Int
-    ) -> AnyPublisher<FeedbackCommentEntity, CarInfoRepositoryError> {
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<FeedbackCommentEntity, Error> {
         Just(
             FeedbackCommentEntity(comment: "디젤 엔진은 효율이 좋아요! 효율을 중시한다면, 탁월한 선택입니다.")
         )
-        .setFailureType(to: CarInfoRepositoryError.self)
+        .setFailureType(to: Error.self)
         .eraseToAnyPublisher()
     }
 }
