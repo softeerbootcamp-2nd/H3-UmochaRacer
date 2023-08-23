@@ -10,6 +10,8 @@ import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 type cardData = {
   id: number;
   name: string;
@@ -66,20 +68,26 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
+  const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
   const updateTempOption = (index: number) => {
-    const selectedCardData = cardData[index];
+    if (option !== 6) {
+      const selectedCardData = cardData[index];
 
-    if (selectedCardData) {
-      const tempOpt: Option = {
-        key: keyMapping[option],
-        value: selectedCardData.name,
-        category: categoryMapping[option],
-        price: selectedCardData.price,
-        id: selectedCardData.id,
-        imgSrc: selectedCardData.imageSrc,
-      };
+      if (selectedCardData) {
+        const tempOpt: Option = {
+          key: keyMapping[option],
+          value: selectedCardData.name,
+          category: categoryMapping[option],
+          price: selectedCardData.price,
+          id: selectedCardData.id,
+          imgSrc: selectedCardData.imageSrc,
+        };
 
-      setTempOption(tempOpt);
+        setTempOption(tempOpt);
+      }
     }
   };
   const setNewIndex = (nextIndex: number) => {
@@ -134,6 +142,7 @@ function Content() {
     } else {
       setNewIndex(0);
     }
+    setAdditionalOptions(selectedAdditionalOption);
   }, [option]);
   return (
     <Wrapper>
