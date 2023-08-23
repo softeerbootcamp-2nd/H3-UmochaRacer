@@ -45,8 +45,5 @@ protocol CarInfoRepositoryProtocol {
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchFeedbackComment(
-        step: CarMakingStep,
-        optionID: Int
-    ) -> AnyPublisher<FeedbackCommentEntity, CarInfoRepositoryError>
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<FeedbackCommentEntity, Error>
 }
