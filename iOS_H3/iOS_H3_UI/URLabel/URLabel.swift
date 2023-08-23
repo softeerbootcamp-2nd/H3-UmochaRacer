@@ -105,7 +105,7 @@ class URLabel: UILabel {
                                  backgroundColor: UIColor,
                                  textColor: UIColor,
                                  in attributedText: NSMutableAttributedString) {
-        removeImage(in: range, from: attributedText)
+
         insertImage(named: imageName, before: range, in: attributedText)
         setAttributes(on: range,
                       weight: weight,
@@ -123,13 +123,15 @@ class URLabel: UILabel {
         attributedText.insert(NSAttributedString(attachment: attachment), at: range.location)
     }
 
-    private func removeImage(in range: NSRange, from attributedText: NSMutableAttributedString) {
-        // 이미지 제거 로직 구현
-    }
-
-    private func setAttributes(on range: NSRange, weight: UIFont.Weight, backgroundColor: UIColor, textColor: UIColor, in attributedText: NSMutableAttributedString) {
+    private func setAttributes(on range: NSRange,
+                               weight: UIFont.Weight,
+                               backgroundColor: UIColor,
+                               textColor: UIColor,
+                               in attributedText: NSMutableAttributedString) {
         let font = UIFont.systemFont(ofSize: self.font.pointSize, weight: weight)
-        attributedText.addAttributes([.backgroundColor: backgroundColor, .foregroundColor: textColor, .font: font], range: range)
+        attributedText.addAttributes([.backgroundColor: backgroundColor,
+            .foregroundColor: textColor,
+            .font: font], range: range)
     }
 
     private func setupTapRecognizer() {
@@ -177,7 +179,9 @@ class URLabel: UILabel {
         let (layoutManager, textContainer) = createTextLayoutComponents()
         let textStorage = NSTextStorage(attributedString: attributedText)
         textStorage.addLayoutManager(layoutManager)
-        let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(forGlyphRange: layoutManager.glyphRange(for: textContainer), in: textContainer).size.width) / 2
+        let paddingWidth = (self.bounds.size.width - layoutManager.boundingRect(
+            forGlyphRange: layoutManager.glyphRange(for: textContainer),
+            in: textContainer).size.width) / 2
         let newPoint = CGPoint(x: point.x - (paddingWidth > 0 ? paddingWidth : 0), y: point.y)
         return layoutManager.glyphIndex(for: newPoint, in: textContainer)
     }
