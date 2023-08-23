@@ -5,6 +5,7 @@ export const INIT_DATA = 'INIT_DATA';
 export const UPDATE_AGE = 'UPDATE_AGE';
 export const UPDATE_GENDER = 'UPDATE_GENDER';
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
+export const GUIDE_TOGGLE = 'GUIDE_TOGGLE';
 
 export interface Tag {
   id: number;
@@ -27,10 +28,16 @@ export interface GuideFlowState {
   ages: number[];
   genders: string[];
   optionTag: GridData[];
+  showGuide: boolean;
 }
 
 interface GuideFlowAction {
-  type: 'INIT_DATA' | 'UPDATE_AGE' | 'UPDATE_GENDER' | 'UPDATE_OPTIONS';
+  type:
+    | 'INIT_DATA'
+    | 'UPDATE_AGE'
+    | 'UPDATE_GENDER'
+    | 'UPDATE_OPTIONS'
+    | 'GUIDE_TOGGLE';
   payload?: {
     dataObject?: SelectData;
     optionTag?: GridData[];
@@ -42,6 +49,7 @@ const initialState: GuideFlowState = {
   ages: [20, 30, 40, 50, 60, 70],
   genders: ['FEMALE', 'MALE', 'NONE'],
   optionTag: [],
+  showGuide: false,
 };
 
 type GuideFlowDispatch = (action: GuideFlowAction) => void;
@@ -85,6 +93,12 @@ const carDictReducer = (
       return {
         ...state,
         dataObject: {...state.dataObject, options: optionData},
+      };
+    }
+    case 'GUIDE_TOGGLE': {
+      return {
+        ...state,
+        showGuide: !state.showGuide,
       };
     }
     default:
