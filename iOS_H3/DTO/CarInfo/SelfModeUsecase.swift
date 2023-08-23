@@ -150,6 +150,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                     return .networkError(error: error)
                 case .conversionError:
                     return .conversionError(error: error)
+                default:
+                    return .undefinedError(error: error)
                 }
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
@@ -177,6 +179,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                     return .networkError(error: error)
                 case .conversionError:
                     return .conversionError(error: error)
+                default:
+                    return .undefinedError(error: error)
                 }
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
