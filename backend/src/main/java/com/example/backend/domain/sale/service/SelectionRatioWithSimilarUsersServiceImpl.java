@@ -37,7 +37,7 @@ public class SelectionRatioWithSimilarUsersServiceImpl implements SelectionRatio
 
     private List<RatioSummaryResponse> getSortedRatioSummaryResponses(List<RatioSummary> summaries) {
         List<RatioSummaryResponse> result = summaryMapper.map(summaries);
-//        Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
+        Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
         return result;
     }
 }

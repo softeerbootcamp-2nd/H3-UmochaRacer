@@ -20,7 +20,7 @@ public class OptionSaleRatioServiceImpl implements RatioService {
     public List<RatioSummary> findSaleRatio(String category) {
         List<RatioSummary> result = salesOptionsRepository.findSalesRatio(category.toUpperCase());
         Integer totalSales = salesRepository.getTotalSales();
-        result.add(0, new RatioSummary(Long.MAX_VALUE, totalSales));
+        result.add(new RatioSummary(Long.MAX_VALUE, totalSales));
         return result;
     }
 }
