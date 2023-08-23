@@ -54,7 +54,7 @@ final class DetailPopupViewModel {
                 output.description.send(detailInfo.description)
                 output.additionalInfo.send(detailInfo.additionalInfo)
                 output.imageURL.send(detailInfo.imageURL)
-                output.pageCount.send(3) //임시 페이지
+                output.pageCount.send(3)    // 임시 페이지
                 print("\(detailInfo.title) 페이지")
             }
             .store(in: &cancellables)

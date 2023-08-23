@@ -23,4 +23,5 @@ protocol OptionCardButtonListViewable: UIView {
 
     func configure(with cardInfos: [OptionCardInfo])
     func reloadOptionCards(with cardInfos: [OptionCardInfo])
+    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)?)
 }

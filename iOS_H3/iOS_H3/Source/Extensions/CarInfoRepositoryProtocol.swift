@@ -15,30 +15,28 @@ enum CarInfoRepositoryError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .networkError(let error):
-            return "네트워크 오류: \(error.localizedDescription)"
+            return "[CarInfoRepositoryError] 네트워크 오류: \(error.localizedDescription)"
         case .conversionError(let error):
-            return "변환 오류: \(error.localizedDescription)"
+            return "[CarInfoRepositoryError] 변환 오류: \(error.localizedDescription)"
         }
     }
 }
 
 protocol CarInfoRepositoryProtocol {
     typealias APIResult<T> = AnyPublisher<Result<T, Error>, Never>
-    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchPowertrain(model: String, type: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchDrivingSystem() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchBodyType() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchBodyType() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchExteriorColor() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchInteriorColor() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchWheel() -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchWheel() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
+    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfo, CarInfoRepositoryError>
-    // TODO: Intro Repository 분리
-    func fetchEstimate() -> AnyPublisher<EstimateSummary, Never>
+    func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 }

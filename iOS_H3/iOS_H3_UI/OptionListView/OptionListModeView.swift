@@ -102,6 +102,29 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
             cell.configure(carMakingMode: carMakingMode, info: info)
         }
     }
+
+    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        var animationsCompletedCount = 0
+
+        for indexPath in visibleIndexPaths {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
+                continue
+            }
+
+            cell.playFeedbackAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription) {
+                animationsCompletedCount += 1
+
+                if animationsCompletedCount == visibleIndexPaths.count {
+                    completion?()
+                }
+            }
+        }
+
+        if visibleIndexPaths.isEmpty {
+            completion?()
+        }
+    }
 }
 
 // MARK: - Setup

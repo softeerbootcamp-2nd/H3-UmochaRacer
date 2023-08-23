@@ -49,10 +49,12 @@ final class CarMakingViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         self.mode = .selfMode
-        self.viewModel = CarMakingViewModel(selfModeUsecase:
-                                                SelfModeUsecase(carInfoRepository:
-                                                                    CarInfoRepository(networkService:
-                                                                                        NetworkService())))
+        self.viewModel = CarMakingViewModel(
+            selfModeUsecase: SelfModeUsecase(
+                carInfoRepository: CarInfoRepository(networkService: NetworkService()),
+                introRepsitory: IntroRepository(networkService: NetworkService())
+            )
+        )
         super.init(coder: coder)
     }
 
@@ -82,12 +84,14 @@ extension CarMakingViewController {
         let output = viewModel.transform(input)
 
         output.estimateSummary
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] summary in
                 self?.updateBottomModalView(with: summary)
             }
             .store(in: &cancellables)
 
         output.currentStepInfo
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
                 self?.updateCurrentStepInfo(with: info)
             }
@@ -175,7 +179,9 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        carMakingContentView.moveNextStep()
+
+        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
+                                          feedbackDescription: viewModel.feedbackDescription)
     }
 }
 
