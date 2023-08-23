@@ -7,8 +7,10 @@ import Content from '@/component/content/Content';
 function Self() {
   return (
     <Wrapper>
-      <Header />
-      <Progress />
+      <TopWrapper>
+        <Header />
+        <Progress />
+      </TopWrapper>
       <Content />
     </Wrapper>
   );
@@ -20,4 +22,12 @@ const Wrapper = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+`;
+
+const TopWrapper = styled.div`
+  width: 100%;
+  min-height: 111px;
+  position: fixed;
+  background: white;
+  z-index: 999999;
 `;
