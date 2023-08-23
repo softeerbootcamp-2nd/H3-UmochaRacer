@@ -14,5 +14,5 @@ permissions:
 hooks:
   ApplicationStart:
     - location: run_new_was.sh
-      timeout: 60
+      timeout: 120
       runas: ubuntu
