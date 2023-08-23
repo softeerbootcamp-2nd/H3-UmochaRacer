@@ -33,10 +33,28 @@ const upperButton = (isModalOpen: boolean) => {
   );
 };
 
+const DEFAULT_PRICE = 43460000;
 function Footer({onClick, isOpen, setIsSaved}: props) {
   const {option, setOption} = useContext(OptionContext);
   const {tempOption} = useContext(TempOptionContext);
-  const {addOption} = useContext(SelectedOptionContext);
+  const {selectedOptions, addOption} = useContext(SelectedOptionContext);
+
+  let totalPrice = DEFAULT_PRICE;
+  let copyOption = selectedOptions.slice();
+
+  if (tempOption !== null) {
+    copyOption = copyOption.map((elem) => {
+      if (elem.key === tempOption.key) {
+        return tempOption;
+      } else {
+        return elem;
+      }
+    });
+  }
+  copyOption.map((elem) => {
+    totalPrice += elem.price;
+  });
+
   return (
     <Wrapper>
       <Total>
@@ -44,7 +62,7 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
           총 견적금액
           <IconBox>{upperButton(isOpen)}</IconBox>
         </ModalToggle>
-        <TotalPrice>47,270,000 원</TotalPrice>
+        <TotalPrice>{totalPrice.toLocaleString()} 원</TotalPrice>
       </Total>
       <OptionSwitcher>
         <PrevOptionButton onClick={() => setOption(option - 1)}>
@@ -98,6 +116,7 @@ const ModalToggle = styled.button`
 
 const TotalPrice = styled.div`
   ${Title1_Medium};
+  text-wrap: nowrap;
 `;
 
 const OptionSwitcher = styled.div`

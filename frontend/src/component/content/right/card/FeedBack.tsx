@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body3_Regular, Title2_Medium} from '@/style/fonts';
+import {fetchData} from '@/api/fetchData';
+import {OptionContext} from '@/provider/optionProvider';
 
 const SmileIcon = () => {
   return (
@@ -96,7 +98,44 @@ const GoodIcon = () => {
   );
 };
 
-function FeedBack() {
+interface Props {
+  id: number;
+}
+
+interface FeedbackData {
+  title: string;
+  description: string;
+}
+
+const urlMap: Record<number, string> = {
+  0: '/comment/powertrain',
+  1: '/comment/driving-system',
+  2: '/comment/bodytype',
+  3: '/comment/exterior-color',
+  4: '/comment/interior-color',
+  5: '/comment/wheel',
+};
+
+function FeedBack({id}: Props) {
+  const [comment, setComment] = useState<FeedbackData>({
+    title: '',
+    description: '',
+  });
+
+  const {option} = useContext(OptionContext);
+  useEffect(() => {
+    const getComment = async () => {
+      const response = await fetchData(`${urlMap[option]}/${id}`);
+      const feedbackDatas = response.comment.split('! ');
+      const title = feedbackDatas[0];
+      const description = feedbackDatas[1];
+
+      setComment({title, description});
+    };
+
+    getComment();
+  }, []);
+
   return (
     <Wrapper>
       <IconContainer>
@@ -104,11 +143,8 @@ function FeedBack() {
         <IconBox className="smile2">{SmileIcon2()}</IconBox>
         <IconBox className="good">{GoodIcon()}</IconBox>
       </IconContainer>
-      <TitleBox>디젤엔진은 효율이 좋아요!</TitleBox>
-      <Description>
-        알콘(alcon) 단조 브레이크 & 20인치 휠 패키지는 뛰어난 제동력이
-        강점이에요! 안전과 디자인을 모두 원하신다면, 탁월한 선택입니다.
-      </Description>
+      <TitleBox>{comment.title}!</TitleBox>
+      <Description>{comment.description}</Description>
     </Wrapper>
   );
 }
@@ -177,7 +213,6 @@ const IconBox = styled.div`
 
 const TitleBox = styled.div`
   ${Title2_Medium}
-  height: 26px;
   margin-top: 14px;
   color: ${colors.Hyundai_White};
 `;

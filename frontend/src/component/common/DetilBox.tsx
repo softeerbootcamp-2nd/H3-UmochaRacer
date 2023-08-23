@@ -1,10 +1,10 @@
 import {colors} from '@/style/theme';
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
-import {getCategory} from '../util/getCategory';
 import {Label2_Regular} from '@/style/fonts';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
+import {textParse} from './textParse';
 
 interface Info {
   title: string;
@@ -21,16 +21,16 @@ interface DetailBoxProps {
   id: number;
   descriptionData: DetailData | null;
 }
+
 function DetailBox({isOpen, id, descriptionData}: DetailBoxProps) {
   const contentRef = useRef<HTMLDivElement>(null);
-
   let info: React.JSX.Element[] = [];
   if (descriptionData?.info) {
     info = JSON.parse(descriptionData?.info).map(
       (elem: Info, index: number) => (
         <Info key={index}>
-          <InfoTitle>{elem.title}</InfoTitle>
-          <InfoDescription>{elem.description}</InfoDescription>
+          <InfoTitle>{textParse(elem.title)}</InfoTitle>
+          <InfoDescription>{textParse(elem.description)}</InfoDescription>
         </Info>
       ),
     );
@@ -39,7 +39,9 @@ function DetailBox({isOpen, id, descriptionData}: DetailBoxProps) {
   return (
     <Wrapper $isOpen={isOpen} $height={contentRef?.current?.clientHeight}>
       <DetailContent ref={contentRef}>
-        <DescriptionBox>{descriptionData?.description}</DescriptionBox>
+        <DescriptionBox>
+          {descriptionData && textParse(descriptionData.description)}
+        </DescriptionBox>
         {descriptionData?.info && <InfoBox>{info}</InfoBox>}
       </DetailContent>
     </Wrapper>

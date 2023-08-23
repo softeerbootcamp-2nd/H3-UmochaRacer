@@ -41,36 +41,40 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
     prevRef.current = selectedIndex;
   });
 
-  const imageList = cardData.map((elem, index) => {
-    return (
-      <ImageBox
-        key={index}
-        $isActive={index === selectedIndex}
-        style={{
-          display:
-            index === selectedIndex || index === prevRef.current ? '' : 'none',
-        }}
-        onAnimationEnd={() => {
-          if (prevRef.current !== undefined && wrapperRef.current) {
-            const prevImgBox = wrapperRef.current.childNodes[prevRef.current];
-            const currImgBox = wrapperRef.current.childNodes[selectedIndex];
-            if (
-              prevImgBox instanceof HTMLElement &&
-              currImgBox instanceof HTMLElement
-            ) {
-              if (prevRef.current !== selectedIndex) {
-                prevImgBox.style.display = 'none';
-                currImgBox.style.zIndex = '';
+  const imageList =
+    cardData &&
+    cardData.map((elem, index) => {
+      return (
+        <ImageBox
+          key={index}
+          $isActive={index === selectedIndex}
+          style={{
+            display:
+              index === selectedIndex || index === prevRef.current
+                ? ''
+                : 'none',
+          }}
+          onAnimationEnd={() => {
+            if (prevRef.current !== undefined && wrapperRef.current) {
+              const prevImgBox = wrapperRef.current.childNodes[prevRef.current];
+              const currImgBox = wrapperRef.current.childNodes[selectedIndex];
+              if (
+                prevImgBox instanceof HTMLElement &&
+                currImgBox instanceof HTMLElement
+              ) {
+                if (prevRef.current !== selectedIndex) {
+                  prevImgBox.style.display = 'none';
+                  currImgBox.style.zIndex = '';
+                }
               }
+              prevRef.current = selectedIndex;
             }
-            prevRef.current = selectedIndex;
-          }
-        }}
-      >
-        <ImageBoxImg src={elem.imageSrc}></ImageBoxImg>
-      </ImageBox>
-    );
-  });
+          }}
+        >
+          <ImageBoxImg src={elem.imageSrc}></ImageBoxImg>
+        </ImageBox>
+      );
+    });
 
   return (
     <Wrapper $currheight={wrapperRef.current?.clientHeight}>

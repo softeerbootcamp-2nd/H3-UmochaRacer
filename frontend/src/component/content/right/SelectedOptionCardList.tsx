@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useRef} from 'react';
+import React, {useEffect, useContext, useRef, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
@@ -38,7 +38,7 @@ const scrollIntoSelected = (
   }
 };
 
-function OptionCardList({
+function SelectedOptionCardList({
   cardData,
   setNewIndex,
   isSaved,
@@ -46,8 +46,18 @@ function OptionCardList({
 }: cardListProps) {
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
+  const [selectedItems, setSelectedItems] = useState<cardDataType[]>([]);
 
   const handleItemClick = (index: number) => {
+    const clickedItem = cardData[index];
+    // 선택된 아이템 배열에 이미 해당 아이템이 존재하는지 확인
+    if (selectedItems.includes(clickedItem)) {
+      // 선택 취소: 배열에서 아이템 제거
+      setSelectedItems((prev) => prev.filter((item) => item !== clickedItem));
+    } else {
+      // 선택: 배열에 아이템 추가
+      setSelectedItems((prev) => [...prev, clickedItem]);
+    }
     setNewIndex(index);
   };
   useEffect(() => {
@@ -59,7 +69,7 @@ function OptionCardList({
     cardData.map((elem, index) => (
       <OptionCard
         key={index}
-        selected={selectedIndex === index}
+        selected={selectedItems.includes(elem)}
         isSaved={isSaved}
         onClick={() => handleItemClick(index)}
         data={elem}
@@ -73,7 +83,7 @@ function OptionCardList({
   );
 }
 
-export default OptionCardList;
+export default SelectedOptionCardList;
 
 const Wrapper = styled.div`
   &::-webkit-scrollbar {

@@ -10,6 +10,7 @@ import FeedBack from './FeedBack';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import {getCategory} from '@/component/util/getCategory';
+import DetailSelectedBox from '@/component/common/DetailSelectedBox';
 
 interface CardProps {
   selected: boolean;
@@ -65,10 +66,9 @@ const hasDetail = (option: number) => {
 function OptionCard({selected, onClick, data, isSaved}: CardProps) {
   const [toggle, setToggle] = useState(false);
   const {option} = useContext(OptionContext);
-  const [descriptionData, setDescriptionData] = useState<DetailData | null>(
-    null,
-  );
-  const [isHoverDetail, setIsHoverDetail] = useState<boolean>(false);
+  const [descriptionData, setDescriptionData] = useState<
+    DetailData | DetailData[] | null
+  >(null);
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -88,7 +88,6 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
         });
     }
   };
-
   const handleToggleHoverEnd = () => {};
   const categoryName = getCategory(option);
   useEffect(() => {
@@ -123,14 +122,22 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
             ''
           )}
         </CardSection>
-
-        {hasDetail(option) && (
-          <DetailBox
-            isOpen={toggle && selected && !isSaved}
-            id={data.id}
-            descriptionData={descriptionData}
-          ></DetailBox>
-        )}
+        {hasDetail(option) &&
+          (option !== 6
+            ? !Array.isArray(descriptionData) && (
+                <DetailBox
+                  isOpen={toggle && selected && !isSaved}
+                  id={data.id}
+                  descriptionData={descriptionData}
+                />
+              )
+            : Array.isArray(descriptionData) && (
+                <DetailSelectedBox
+                  isOpen={toggle && selected && !isSaved}
+                  id={data.id}
+                  descriptionData={descriptionData}
+                />
+              ))}
 
         <CardSection $height={26} $end={true}>
           <Price className="blue">{`+ ${data.price.toLocaleString()}원`}</Price>
@@ -148,7 +155,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           )}
         </CardSection>
       </Container>
-      {isSaved && selected && <FeedBack></FeedBack>}
+      {isSaved && selected && <FeedBack id={data.id}></FeedBack>}
     </Wrapper>
   );
 }
