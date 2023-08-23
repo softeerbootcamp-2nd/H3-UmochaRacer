@@ -169,7 +169,7 @@ class URLabel: UILabel {
         textBoxViewController.setTitle(title: selectedText)
         textBoxViewController.onDismiss = { [weak self] in
             self?.selectedRange = nil
-            self?.updateHighlights()
+            self?.revertHighlightForSelection(from: range)
         }
         viewController.present(textBoxViewController, animated: false)
     }
