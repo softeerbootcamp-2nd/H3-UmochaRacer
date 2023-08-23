@@ -94,7 +94,7 @@ function EstimateList({
       });
     });
     setEstimateDatas(nextEstimateDatas);
-  }, [tempOption]);
+  }, [tempOption, additionOptions]);
 
   const getTotalPirce = (key: string) => {
     let totalPrice = key === 'car' ? DEFAULT_PRICE : 0;
