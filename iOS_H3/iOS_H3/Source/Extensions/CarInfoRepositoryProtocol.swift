@@ -10,7 +10,7 @@ import Combine
 
 enum CarInfoRepositoryError: LocalizedError {
     case networkError(Error)
-    case conversionError(CarOptionToEntityError)
+    case conversionError(Error)
     case notExistCommentEndpoint(step: CarMakingStep)
 
     var errorDescription: String? {
