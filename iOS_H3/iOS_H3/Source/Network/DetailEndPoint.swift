@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 enum DetailEndPoint: Endpoint {
     case powertrain(id: Int)
     case drivingSystem(id: Int)
