@@ -69,17 +69,15 @@ final class CarMakingViewModel {
         input.optionDidSelected
             .sink { [weak self] (step, optionIndex) in
                 guard let self else { return }
-
                 if step == .optionSelection {
-                    let (updatedOptionInfo, selectedOptionCount) = selectOptionSelectionStepOption(
+                    selectOptionSelectionStepOption(
                         of: optionIndex,
-                        category: input.optionCategoryDidChanged.value
+                        category: input.optionCategoryDidChanged.value,
+                        updatedOptionInfoOutput: output.optionInfoDidUpdated,
+                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption
                     )
-                    output.optionInfoDidUpdated.send(updatedOptionInfo)
-                    output.numberOfSelectedAdditionalOption.send(selectedOptionCount)
                 } else {
-                    let updatedOptionInfo = selectOption(of: optionIndex, in: step)
-                    output.optionInfoDidUpdated.send(updatedOptionInfo)
+                    selectOption(of: optionIndex, in: step, updatedOptionInfoOutput: output.optionInfoDidUpdated)
                 }
             }
             .store(in: &cancellables)
@@ -138,15 +136,23 @@ final class CarMakingViewModel {
             .store(in: &cancellables)
     }
 
-    private func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
-        return selfModeUsecase.selectOption(of: optionIndex, in: step)
+    private func selectOption(
+        of optionIndex: Int,
+        in step: CarMakingStep,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>
+    ) {
+        updatedOptionInfoOutput.send(selfModeUsecase.selectOption(of: optionIndex, in: step))
     }
 
     private func selectOptionSelectionStepOption(
         of optionIndex: Int,
-        category: OptionCategoryType
-    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
-        return selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+        category: OptionCategoryType,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
+        selectedOptionCountOutput: PassthroughSubject<Int, Never>
+    ) {
+        let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+        updatedOptionInfoOutput.send(infos)
+        selectedOptionCountOutput.send(selectedOptionCount)
     }
 
     private func fetchOptionSelectionStepInfo(
