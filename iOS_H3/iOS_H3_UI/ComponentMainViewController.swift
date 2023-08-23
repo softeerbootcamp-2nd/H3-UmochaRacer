@@ -272,7 +272,7 @@ class ComponentMainViewController: UIViewController {
     }
 
     @objc func didTapTextBoxButton() {
-        let viewController = TextBoxViewController()
+        let viewController = TextBoxViewController(viewModel: TextBoxViewModel())
         self.present(viewController, animated: false)
     }
 
