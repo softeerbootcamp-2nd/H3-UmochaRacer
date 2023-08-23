@@ -1,0 +1,137 @@
+import {fetchData} from '@/api/fetchData';
+import React, {createContext, useContext, useEffect, useReducer} from 'react';
+
+export const INIT_DATA = 'INIT_DATA';
+export const UPDATE_AGE = 'UPDATE_AGE';
+export const UPDATE_GENDER = 'UPDATE_GENDER';
+export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
+
+export interface Tag {
+  id: number;
+  name: string;
+}
+
+export interface GridData {
+  category: string;
+  tags: Tag[];
+}
+
+interface SelectData {
+  age?: number;
+  gender?: string;
+  options?: number[];
+}
+
+export interface GuideFlowState {
+  dataObject: SelectData;
+  ages: number[];
+  genders: string[];
+  optionTag: GridData[];
+}
+
+interface GuideFlowAction {
+  type: 'INIT_DATA' | 'UPDATE_AGE' | 'UPDATE_GENDER' | 'UPDATE_OPTIONS';
+  payload?: {
+    dataObject?: SelectData;
+    optionTag?: GridData[];
+  };
+}
+
+const initialState: GuideFlowState = {
+  dataObject: {age: 0, gender: '', options: []},
+  ages: [20, 30, 40, 50, 60, 70],
+  genders: ['FEMALE', 'MALE', 'NONE'],
+  optionTag: [],
+};
+
+type GuideFlowDispatch = (action: GuideFlowAction) => void;
+
+const carDictReducer = (
+  state: GuideFlowState,
+  action: GuideFlowAction,
+): GuideFlowState => {
+  switch (action.type) {
+    case 'INIT_DATA': {
+      const newDataObject = action.payload?.dataObject ?? {
+        age: 0,
+        gender: '',
+        options: [],
+      };
+      return {
+        ...state,
+        dataObject: newDataObject,
+        optionTag: action.payload?.optionTag ?? [],
+      };
+    }
+    case 'UPDATE_AGE': {
+      const ageData = action.payload?.dataObject?.age ?? 0;
+
+      return {
+        ...state,
+        dataObject: {...state.dataObject, age: ageData},
+      };
+    }
+    case 'UPDATE_GENDER': {
+      const genderData = action.payload?.dataObject?.gender ?? '';
+
+      return {
+        ...state,
+        dataObject: {...state.dataObject, gender: genderData},
+      };
+    }
+    case 'UPDATE_OPTIONS': {
+      const optionData = action.payload?.dataObject?.options ?? [];
+
+      return {
+        ...state,
+        dataObject: {...state.dataObject, options: optionData},
+      };
+    }
+    default:
+      return state;
+  }
+};
+
+const GuideFlowStateContext = createContext<GuideFlowState | undefined>(
+  undefined,
+);
+const GuideFlowDispatchContext = createContext<GuideFlowDispatch | undefined>(
+  undefined,
+);
+
+export const useGuideFlowState = () => {
+  const state = useContext(GuideFlowStateContext);
+  if (!state) throw new Error('Cannot find CardbContext');
+  return state;
+};
+
+export const useGuideFlowDispatch = () => {
+  const dispatch = useContext(GuideFlowDispatchContext);
+  if (!dispatch) throw new Error('Cannot find CardbContext');
+  return dispatch;
+};
+
+export const GiudFlowProvider = ({children}: {children: React.ReactNode}) => {
+  const [state, dispatch] = useReducer(carDictReducer, initialState);
+
+  const fetchOptionTag = async () => {
+    try {
+      const response = await fetchData('/guide/tag');
+      dispatch({type: 'INIT_DATA', payload: {optionTag: response}});
+    } catch (error) {
+      console.error('Error fetching car dictionary data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchOptionTag();
+  }, []);
+
+  return (
+    <GuideFlowStateContext.Provider value={state}>
+      <GuideFlowDispatchContext.Provider value={dispatch}>
+        {children}
+      </GuideFlowDispatchContext.Provider>
+    </GuideFlowStateContext.Provider>
+  );
+};
