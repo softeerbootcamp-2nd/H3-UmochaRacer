@@ -5,6 +5,9 @@ import {Title2_Medium, Title3_Medium} from '@/style/fonts';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import EstimateList from '@/component/common/EstimateList';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
+import {getTotalPrice} from '@/component/util/getTotPrice';
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 
 interface props {
   onClick: () => void;
@@ -27,8 +30,6 @@ const IconClose = () => {
   );
 };
 
-const DEFAULT_PRICE = 43460000;
-
 const headerLayout = {
   height: 38,
   fontSize: 16,
@@ -44,21 +45,17 @@ function Modal({onClick}: props) {
   const {selectedOptions} = useContext(SelectedOptionContext);
   const {tempOption} = useContext(TempOptionContext);
 
-  let totalPrice = DEFAULT_PRICE;
-  let copyOption = selectedOptions.slice();
+  const {additionOptions} = useContext(TempAdditionalOptionsContext);
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
 
-  if (tempOption !== null) {
-    copyOption = copyOption.map((elem) => {
-      if (elem.key === tempOption.key) {
-        return tempOption;
-      } else {
-        return elem;
-      }
-    });
-  }
-  copyOption.map((elem) => {
-    totalPrice += elem.price;
-  });
+  const totalPrice = getTotalPrice(
+    selectedOptions,
+    tempOption,
+    additionOptions,
+    selectedAdditionalOption,
+  );
 
   return (
     <>
