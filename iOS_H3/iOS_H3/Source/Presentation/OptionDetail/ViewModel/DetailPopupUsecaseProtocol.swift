@@ -19,20 +19,20 @@ class MockDetailPopupUsecase: DetailPopupUsecaseProtocol {
         case 0:
             detailInfo = DetailInfo(title: "Title Page 0",
                                     subTitle: "Subtitle Page 0",
-                                    description: "Description`",
-                                    additionalInfo: "AB",
+                                    description: "0번째 설명`",
+                                    additionalInfo: "AAAA",
                                     imageURL: URL(string: "https://example.com/image0.jpg"))
         case 1:
             detailInfo = DetailInfo(title: "Title Page 1",
                                     subTitle: "Subtitle Page 1",
-                                    description: "Description2",
-                                    additionalInfo: "B",
+                                    description: "1번째 설명",
+                                    additionalInfo: "BBBB",
                                     imageURL: URL(string: "https://example.com/image1.jpg"))
         case 2:
             detailInfo = DetailInfo(title: "Title Page 2",
                                     subTitle: "Subtitle Page 2",
-                                    description: "Description3",
-                                    additionalInfo: "B",
+                                    description: "2번째 설명",
+                                    additionalInfo: "CCCC",
                                     imageURL: URL(string: "https://example.com/image2.jpg"))
         default:
             detailInfo = DetailInfo(title: "", subTitle: "", description: "", additionalInfo: "", imageURL: nil)
