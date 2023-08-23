@@ -46,7 +46,7 @@ const categoryMapping: Record<number, string> = {
   5: 'car',
 };
 
-const getGiudeOption = async (giudeData) => {
+const getGiudeOption = async (giudeData: object) => {
   if (!giudeData) return [];
   return Promise.all(
     Object.entries(giudeData).map(async ([key, value]) => {

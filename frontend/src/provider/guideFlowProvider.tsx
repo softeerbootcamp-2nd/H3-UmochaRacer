@@ -1,11 +1,13 @@
-import {fetchData} from '@/api/fetchData';
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
+import {fetchData} from '@/api/fetchData';
+import {postFetchData} from '@/api/postFetchData';
 
 export const INIT_DATA = 'INIT_DATA';
 export const UPDATE_AGE = 'UPDATE_AGE';
 export const UPDATE_GENDER = 'UPDATE_GENDER';
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
 export const GUIDE_TOGGLE = 'GUIDE_TOGGLE';
+const UPDATE_RATE = 'UPDATE_RATE';
 
 export interface Tag {
   id: number;
@@ -23,12 +25,18 @@ interface SelectData {
   options?: number[];
 }
 
+interface SelectionRate {
+  id: number;
+  selectionRatio: number;
+}
+
 export interface GuideFlowState {
   dataObject: SelectData;
   ages: number[];
   genders: string[];
   optionTag: GridData[];
   showGuide: boolean;
+  selectionRateArr: SelectionRate[][];
 }
 
 interface GuideFlowAction {
@@ -37,10 +45,12 @@ interface GuideFlowAction {
     | 'UPDATE_AGE'
     | 'UPDATE_GENDER'
     | 'UPDATE_OPTIONS'
-    | 'GUIDE_TOGGLE';
+    | 'GUIDE_TOGGLE'
+    | 'UPDATE_RATE';
   payload?: {
     dataObject?: SelectData;
     optionTag?: GridData[];
+    selectionRateArr?: SelectionRate[][];
   };
 }
 
@@ -50,6 +60,7 @@ const initialState: GuideFlowState = {
   genders: ['FEMALE', 'MALE', 'NONE'],
   optionTag: [],
   showGuide: false,
+  selectionRateArr: [],
 };
 
 type GuideFlowDispatch = (action: GuideFlowAction) => void;
@@ -101,6 +112,14 @@ const carDictReducer = (
         showGuide: !state.showGuide,
       };
     }
+    case 'UPDATE_RATE': {
+      const rateData = action.payload?.selectionRateArr ?? [];
+
+      return {
+        ...state,
+        selectionRateArr: rateData,
+      };
+    }
     default:
       return state;
   }
@@ -137,9 +156,50 @@ export const GiudFlowProvider = ({children}: {children: React.ReactNode}) => {
     }
   };
 
+  const getTags = async (params: object) => {
+    const endpoints = [
+      '/sale/powertrain/tag',
+      '/sale/driving-system/tag',
+      '/sale/bodytype/tag',
+      '/sale/exterior-color/tag',
+      '/sale/interior-color/tag',
+      '/sale/wheel/tag',
+    ];
+    return Promise.all(
+      endpoints.map(async (url: string) => {
+        return postFetchData(url, params);
+      }),
+    );
+  };
+
   useEffect(() => {
     fetchOptionTag();
   }, []);
+
+  useEffect(() => {
+    const fetchTag = async () => {
+      if (state.dataObject.options === undefined) return;
+
+      const requestBody = {
+        age: state.dataObject.age,
+        gender: state.dataObject.gender,
+        tag1: state.dataObject.options[0],
+        tag2: state.dataObject.options[1],
+        tag3: state.dataObject.options[2],
+      };
+
+      const selectionRateArr = await getTags(requestBody);
+
+      dispatch({
+        type: UPDATE_RATE,
+        payload: {selectionRateArr: selectionRateArr},
+      });
+    };
+
+    if (state.showGuide) {
+      fetchTag();
+    }
+  }, [state.showGuide]);
 
   return (
     <GuideFlowStateContext.Provider value={state}>
