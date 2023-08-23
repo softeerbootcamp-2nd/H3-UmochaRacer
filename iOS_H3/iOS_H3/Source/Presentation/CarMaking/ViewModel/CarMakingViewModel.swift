@@ -27,7 +27,7 @@ final class CarMakingViewModel {
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
-        var isDictionaryFeatureEnabled: CurrentValueSubject<Bool, Never> = CurrentValueSubject<Bool, Never>(false)
+        var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
 
     // MARK: - Properties
