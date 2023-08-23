@@ -46,7 +46,8 @@ final class TrimListBarButton: UIButton {
     override var isSelected: Bool {
         didSet {
             if isSelected {
-                checkImageView.image = UIImage(named: Constants.checkedImageName)
+                checkImageView.image = UIImage(named: Constants.checkedImageName)?
+                    .withTintColor(Constants.selectedTintColor, renderingMode: .alwaysTemplate)
                 changeColor(tintColor: Constants.selectedTintColor, backgroundColor: Constants.selectedBackgroundColor)
             } else {
                 checkImageView.image = UIImage(named: Constants.uncheckedImageName)
