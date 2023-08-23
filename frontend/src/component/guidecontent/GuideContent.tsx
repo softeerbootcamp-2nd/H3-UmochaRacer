@@ -5,6 +5,7 @@ import GuideEstimate from './GuideEstimate';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
+import {postFetchData} from '@/api/postFetchData';
 
 interface Url {
   [key: string]: string;
@@ -95,17 +96,7 @@ function GuideContent() {
         tag3: dataObject.options[2],
       };
 
-      const guideId = await fetch('http://43.202.84.133:9999/api/v1/guide', {
-        method: 'POST',
-        headers: {
-          accept: '*/*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-        .then((response) => response.json())
-        .then((res) => res.data);
-
+      const guideId = await postFetchData('/guide', requestBody);
       const guideDataArr: GuideData[] = await getGiudeOption(guideId);
       setGiudeOption(guideDataArr.slice(0, -1), addOption);
     }
