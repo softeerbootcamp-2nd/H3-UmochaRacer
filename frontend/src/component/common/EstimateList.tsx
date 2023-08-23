@@ -4,6 +4,7 @@ import {HeaderLayout, SelectionLayout} from './estimateInterface';
 import {Option, SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import Estimate from './estimate/Estimate';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface HeaderTitle {
   [key: string]: string;
@@ -37,6 +38,7 @@ function EstimateList({
 }: Props) {
   const {selectedOptions} = useContext(SelectedOptionContext);
   const {tempOption} = useContext(TempOptionContext);
+  const {option} = useContext(OptionContext);
 
   const [estimateDatas, setEstimateDatas] = useState<TotalEstimateData>({
     car: [],
@@ -44,7 +46,7 @@ function EstimateList({
   });
 
   useEffect(() => {
-    if (!tempOption) return;
+    if (!tempOption && option !== 7) return;
     const nextEstimateDatas: TotalEstimateData = {
       car: [],
       color: [],

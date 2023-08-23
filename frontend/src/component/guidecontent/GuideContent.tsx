@@ -2,6 +2,8 @@ import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import SelectFlow from './SelectFlow';
 import GuideEstimate from './GuideEstimate';
+import EstimateContent from '../content/totalestimate/EstimateContent';
+import Content from '../content/Content';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
@@ -45,7 +47,8 @@ const categoryMapping: Record<number, string> = {
   5: 'car',
 };
 
-const getGiudeOption = async (giudeData: GuideData) => {
+const getGiudeOption = async (giudeData: GuideData | null) => {
+  if (!giudeData) return [];
   return Promise.all(
     Object.entries(giudeData).map(async ([key, value]) => {
       const category = key.slice(0, -2);
@@ -59,7 +62,6 @@ const getGiudeOption = async (giudeData: GuideData) => {
     }),
   );
 };
-
 const setGiudeOption = (
   dataArray: GuideData[],
   addOption: (option: Option) => void,
@@ -94,7 +96,7 @@ function GuideContent() {
         tag3: dataObject.options[2],
       };
 
-      const giudeId = await fetch('http://43.202.84.133:9999/api/v1/guide', {
+      const guideId = await fetch('http://43.202.84.133:9999/api/v1/guide', {
         method: 'POST',
         headers: {
           accept: '*/*',
@@ -105,7 +107,7 @@ function GuideContent() {
         .then((response) => response.json())
         .then((res) => res.data);
 
-      const guideDataArr: GuideData[] = await getGiudeOption(giudeId);
+      const guideDataArr: GuideData[] = await getGiudeOption(guideId);
       setGiudeOption(guideDataArr, addOption);
     }
   };
@@ -134,7 +136,7 @@ export default GuideContent;
 const Wrapper = styled.div`
   width: 100%;
   flex-grow: 1;
-  padding-top: 111px;
+  // padding-top: 111px;
 `;
 
 const Container = styled.div`
