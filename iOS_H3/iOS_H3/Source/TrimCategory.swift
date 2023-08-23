@@ -13,7 +13,7 @@ enum TrimCategory {
     case exclusive
     case prestige
     case calligraphy
-    
+
     var title: String {
         switch self {
         case .guideMode:
