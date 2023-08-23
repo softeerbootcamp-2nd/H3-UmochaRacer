@@ -105,33 +105,16 @@ final class CarMakingViewModel {
         category: OptionCategoryType,
         output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
     ) {
+        var stepInfoPublisher: AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
         if step != .optionSelection {
-            fetchCarMakingStepInfo(of: step, output: currentStepInfo)
+            stepInfoPublisher = selfModeUsecase.fetchOptionInfo(step: step)
         } else {
-            fetchOptionSelectionStepInfo(for: category, output: currentStepInfo)
+            stepInfoPublisher = selfModeUsecase.fetchAdditionalOptionInfo(category: category)
         }
-    }
-
-    private func fetchCarMakingStepInfo(
-        of step: CarMakingStep,
-        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
-    ) {
-        selfModeUsecase.fetchOptionInfo(step: step)
+        stepInfoPublisher
             .catch { _ in  Just(CarMakingStepInfo(step: step)) }
             .sink { carMakingStepInfo in
                 currentStepInfo.send(carMakingStepInfo)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func fetchOptionSelectionStepInfo(
-        for category: OptionCategoryType,
-        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
-    ) {
-        selfModeUsecase.fetchAdditionalOptionInfo(category: category)
-            .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
-            .sink { optionSelectionStepInfo in
-                currentStepInfo.send(optionSelectionStepInfo)
             }
             .store(in: &cancellables)
     }
