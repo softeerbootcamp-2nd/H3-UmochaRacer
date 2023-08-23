@@ -9,7 +9,6 @@ interface cardListProps {
   isSaved: boolean;
   setNewIndex: (index: number) => void;
   selectedIndex: number;
-  onClick: () => void;
 }
 
 const moveTop = keyframes`
