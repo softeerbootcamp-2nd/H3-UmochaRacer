@@ -1,4 +1,4 @@
-import React, {useEffect, useContext, useRef, useState} from 'react';
+import React, {useEffect, useContext, useRef} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
@@ -9,7 +9,10 @@ interface cardListProps {
   isSaved: boolean;
   setNewIndex: (index: number) => void;
   selectedIndex: number;
-  onClick: () => void;
+  selectedItems: cardDataType[];
+  setSelectedItems: (
+    item: cardDataType[] | ((prev: cardDataType[]) => cardDataType[]),
+  ) => void;
 }
 
 const moveTop = keyframes`
@@ -44,23 +47,33 @@ function SelectedOptionCardList({
   setNewIndex,
   isSaved,
   selectedIndex,
+  selectedItems,
+  setSelectedItems,
 }: cardListProps) {
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
-  const [selectedItems, setSelectedItems] = useState<cardDataType[]>([]);
 
   const handleItemClick = (index: number) => {
     const clickedItem = cardData[index];
+
     // 선택된 아이템 배열에 이미 해당 아이템이 존재하는지 확인
-    if (selectedItems.includes(clickedItem)) {
+    const isItemIncluded = selectedItems.some(
+      (item) => item.id === clickedItem.id,
+    );
+
+    if (isItemIncluded) {
       // 선택 취소: 배열에서 아이템 제거
-      setSelectedItems((prev) => prev.filter((item) => item !== clickedItem));
+      setSelectedItems((prev) =>
+        prev.filter((item) => item.id !== clickedItem.id),
+      );
     } else {
       // 선택: 배열에 아이템 추가
       setSelectedItems((prev) => [...prev, clickedItem]);
     }
+
     setNewIndex(index);
   };
+
   useEffect(() => {
     if (cardData) scrollIntoSelected(ulRef, selectedIndex);
   }, [selectedIndex, cardData]);
