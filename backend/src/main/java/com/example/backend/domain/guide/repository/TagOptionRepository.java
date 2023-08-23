@@ -2,6 +2,7 @@ package com.example.backend.domain.guide.repository;
 
 import com.example.backend.domain.sale.entity.enums.Gender;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -29,6 +30,7 @@ public class TagOptionRepository {
         };
     }
 
+    @Cacheable(cacheNames = "GuideOption")
     public List<Long> findOptionIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT m." + category_id + ", COUNT(*) as select_count FROM MODEL m\n" +
@@ -39,6 +41,7 @@ public class TagOptionRepository {
         return jdbcTemplate.query(query, getRowMapperOfField(category));
     }
 
+    @Cacheable(cacheNames = "GuideColor")
     public List<Long> findColorIdByGenderAge(String category, Gender gender, int age) {
         String category_id = category + "_id";
         String query = "SELECT s." + category_id + ", COUNT(*) as select_count FROM MODEL m\n" +
@@ -49,6 +52,7 @@ public class TagOptionRepository {
         return jdbcTemplate.query(query, getRowMapperOfField(category));
     }
 
+    @Cacheable(cacheNames = "GuideWheel")
     public List<Long> findWheelIdByGenderAge(Gender gender, int age) {
         String query = "SELECT s.wheel_id, COUNT(*) as select_count FROM MODEL m\n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
