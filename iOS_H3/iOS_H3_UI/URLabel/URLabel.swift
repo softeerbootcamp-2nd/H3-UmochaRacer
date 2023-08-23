@@ -24,14 +24,15 @@ class URLabel: UILabel {
     private var originalAttributedText: NSAttributedString?
 
     private var tapRecognizer: UITapGestureRecognizer?
-    var selectedRangeSubject = PassthroughSubject<NSRange?, Never>()
+
     var selectedRange: NSRange? {
         didSet {
-            selectedRangeSubject.send(selectedRange)
-            updateHighlights()
+            if selectedRange != oldValue {
+                revertHighlightForSelection(from: oldValue)
+                applySelectedHighlight(for: selectedRange)
+            }
         }
     }
-
     func removeDictionaryEffects() {
         selectedRange = nil
         self.attributedText = originalAttributedText
@@ -59,14 +60,30 @@ class URLabel: UILabel {
 
     func updateHighlights() {
         guard let urLabel = urString,
-                let attributedText = originalAttributedText?
-            .mutableCopy() as? NSMutableAttributedString else { return }
+              let attributedText = originalAttributedText?.mutableCopy() as? NSMutableAttributedString else { return }
 
         for range in urLabel.cardbRange {
             let nsRange = NSRange(range)
-            let highlightFunction = nsRange == selectedRange ? highlightForDictionarySelection : highlightForDictionaryActivation
-            highlightFunction(nsRange, attributedText)
+            highlightForDictionaryActivation(range: nsRange, in: attributedText)
         }
+
+        self.attributedText = attributedText
+    }
+
+    func applySelectedHighlight(for range: NSRange?) {
+        guard let nsRange = range,
+              let attributedText = originalAttributedText?.mutableCopy() as? NSMutableAttributedString else { return }
+
+        highlightForDictionarySelection(range: nsRange, in: attributedText)
+
+        self.attributedText = attributedText
+    }
+
+    func revertHighlightForSelection(from oldRange: NSRange?) {
+        guard let nsRange = oldRange,
+              let attributedText = originalAttributedText?.mutableCopy() as? NSMutableAttributedString else { return }
+
+        highlightForDictionaryActivation(range: nsRange, in: attributedText)
 
         self.attributedText = attributedText
     }
