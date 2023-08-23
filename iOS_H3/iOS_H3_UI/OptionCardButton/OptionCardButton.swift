@@ -59,8 +59,8 @@ class OptionCardButton: UIButton {
         label.textColor = Colors.coolGrey3
         return label
     }()
-    private let optionTitleLabel: UILabel = {
-        let label = UILabel()
+    private let optionTitleLabel: URLabel = {
+        let label = URLabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.mediumTitle2
         label.setupLineHeight(FontLineHeights.mediumTitle2)
@@ -168,6 +168,7 @@ class OptionCardButton: UIButton {
 
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title.fullText
+            self.optionTitleLabel.urLabel = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
             showMoreInfoButton(cardInfo.hasMoreInfo)
