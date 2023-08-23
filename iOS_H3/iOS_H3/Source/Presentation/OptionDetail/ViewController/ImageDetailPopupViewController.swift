@@ -44,6 +44,7 @@ class ImageDetailPopupViewController: UIViewController {
 
         setupViews()
         bind()
+        viewDidLoadSubject.send()
 
     }
 
