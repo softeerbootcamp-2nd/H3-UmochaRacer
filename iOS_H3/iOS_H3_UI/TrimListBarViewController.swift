@@ -20,7 +20,11 @@ class TrimListBarViewController: UIViewController {
         return button
     }()
 
-//    let progressBar = CarMakingProgressBar()
+    private lazy var trimListBar: TrimListBar = {
+        let trimListBar = TrimListBar()
+        trimListBar.trimListBarDelegate = self
+        return trimListBar
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,13 +54,19 @@ class TrimListBarViewController: UIViewController {
             selectedLeBlancButton.heightAnchor.constraint(equalToConstant: 85)
         ])
 
-//        progressBar.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(progressBar)
-//        NSLayoutConstraint.activate([
-//            progressBar.topAnchor.constraint(equalTo: selectedLeBlancButton.bottomAnchor, constant: 10),
-//            progressBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            progressBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            progressBar.heightAnchor.constraint(equalTo: deselectedLeBlancButton.heightAnchor)
-//        ])
+        trimListBar.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(trimListBar)
+        NSLayoutConstraint.activate([
+            trimListBar.topAnchor.constraint(equalTo: selectedLeBlancButton.bottomAnchor, constant: 10),
+            trimListBar.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            trimListBar.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            trimListBar.heightAnchor.constraint(equalTo: deselectedLeBlancButton.heightAnchor)
+        ])
+    }
+}
+
+extension TrimListBarViewController: TrimListBarDelegate {
+    func trimListBarButtonDidTapped(didSelectItemAt index: Int) {
+        print("TrimLitsBar \(index)번 버튼 클릭")
     }
 }
