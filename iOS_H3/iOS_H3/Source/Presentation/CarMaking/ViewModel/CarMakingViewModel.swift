@@ -58,14 +58,11 @@ final class CarMakingViewModel {
 
         input.carMakingStepDidChanged
             .sink { [weak self] newStep in
-                if newStep != .optionSelection {
-                    self?.fetchCarMakingStepInfo(of: newStep, to: output.currentStepInfo)
-                } else {
-                    self?.fetchOptionSelectionStepInfo(
-                        for: input.optionCategoryDidChanged.value,
-                        to: output.currentStepInfo
-                    )
-                }
+                self?.fetchCarMakingStepInfo(
+                    of: newStep,
+                    category: input.optionCategoryDidChanged.value,
+                    output: output.currentStepInfo
+                )
             }
             .store(in: &cancellables)
 
@@ -107,7 +104,19 @@ final class CarMakingViewModel {
 
     private func fetchCarMakingStepInfo(
         of step: CarMakingStep,
-        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+        category: OptionCategoryType,
+        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+    ) {
+        if step != .optionSelection {
+            fetchCarMakingStepInfo(of: step, output: currentStepInfo)
+        } else {
+            fetchOptionSelectionStepInfo(for: category, output: currentStepInfo)
+        }
+    }
+
+    private func fetchCarMakingStepInfo(
+        of step: CarMakingStep,
+        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
     ) {
         selfModeUsecase.fetchOptionInfo(step: step)
             .catch { _ in  Just(CarMakingStepInfo(step: step)) }
@@ -119,7 +128,7 @@ final class CarMakingViewModel {
 
     private func fetchOptionSelectionStepInfo(
         for category: OptionCategoryType,
-        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
     ) {
         selfModeUsecase.fetchAdditionalOptionInfo(category: category)
             .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
