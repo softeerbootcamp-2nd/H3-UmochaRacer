@@ -23,7 +23,7 @@ class TextBoxView: UIView {
         static let buttonHeight: CGFloat = 26
         static let dividerHeight: CGFloat = 1
         static let dividerTopPadding: CGFloat = 13
-        static let textTopPadding: CGFloat = 14
+        static let textTopPadding: CGFloat = 27
         static let minimumTextLabelHeight: CGFloat = 90
     }
 
@@ -56,10 +56,10 @@ class TextBoxView: UIView {
         return button
     }()
 
-    private let divider: UIView = {
-       let view = UIView()
-        view.backgroundColor = Colors.coolGrey4
-        return view
+    private let divider: CALayer = {
+        let layer = CALayer()
+        layer.backgroundColor = Colors.coolGrey4.cgColor
+        return layer
     }()
 
     private let textLabel: TopAlignedLabel = {
@@ -84,6 +84,11 @@ class TextBoxView: UIView {
         super.init(coder: coder)
         setupView()
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        setDividerLayerFrame()
+    }
 
     // MARK: - Helpers
     func setTitle(_ title: String) {
@@ -107,14 +112,13 @@ extension TextBoxView {
         [iconImageView,
          titleLabel,
          understoodButton,
-         divider,
          textLabel
         ]
             .forEach {
                 $0.translatesAutoresizingMaskIntoConstraints = false
                 addSubview($0)
             }
-
+        layer.addSublayer(divider)
         setConstraints()
     }
 
@@ -127,7 +131,6 @@ extension TextBoxView {
         setIconImageViewConstraints()
         setTitleLabelConstraints()
         setUnderstoodButtonConstraints()
-        setDividerConstraints()
         setTextLabelConstraints()
     }
 
@@ -161,13 +164,13 @@ extension TextBoxView {
         ])
     }
 
-    private func setDividerConstraints() {
-        NSLayoutConstraint.activate([
-            divider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingTrailingPadding),
-            divider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.leadingTrailingPadding),
-            divider.heightAnchor.constraint(equalToConstant: Constants.dividerHeight),
-            divider.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.dividerTopPadding)
-        ])
+    private func setDividerLayerFrame() {
+        let dividerX = Constants.leadingTrailingPadding
+        let dividerWidth = bounds.width - 2 * Constants.leadingTrailingPadding
+        let dividerHeight = Constants.dividerHeight
+        let dividerY = titleLabel.frame.maxY + Constants.dividerTopPadding
+        
+        divider.frame = CGRect(x: dividerX, y: dividerY, width: dividerWidth, height: dividerHeight)
     }
 
     private func setTextLabelConstraints() {
@@ -179,7 +182,7 @@ extension TextBoxView {
         NSLayoutConstraint.activate([
             textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.leadingTrailingPadding),
             textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -Constants.leadingTrailingPadding),
-            textLabel.topAnchor.constraint(equalTo: divider.bottomAnchor, constant: Constants.textTopPadding),
+            textLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.textTopPadding),
             textLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Constants.leadingTrailingPadding)
         ])
     }
