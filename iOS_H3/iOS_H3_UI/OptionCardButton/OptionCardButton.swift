@@ -168,7 +168,7 @@ class OptionCardButton: UIButton {
 
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title.fullText
-            self.optionTitleLabel.urLabel = cardInfo.title
+            self.optionTitleLabel.urString = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
             showMoreInfoButton(cardInfo.hasMoreInfo)

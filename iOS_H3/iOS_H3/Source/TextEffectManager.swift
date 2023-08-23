@@ -17,7 +17,7 @@ class TextEffectManager {
 
     func applyEffect(_ isOn: Bool, on view: UIView) {
         for subview in view.subviews {
-            if let label = subview as? URLabel, let dictionaryStr = label.urLabel {
+            if let label = subview as? URLabel, let dictionaryStr = label.urString {
                 observeLabel(label)
                 label.setURString(dictionaryStr, isOn: isOn)
             } else {

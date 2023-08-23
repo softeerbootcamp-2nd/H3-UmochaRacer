@@ -93,7 +93,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     }
 
     func configure(urString: URString?) {
-        self.descriptionLabel.urLabel = urString
+        self.descriptionLabel.urString = urString
     }
 
     func configure(bannerImageURL: URL?) {
