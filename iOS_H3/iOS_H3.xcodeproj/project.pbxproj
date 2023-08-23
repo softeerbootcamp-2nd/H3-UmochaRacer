@@ -79,6 +79,8 @@
 		479B090D2A94889300AA10A0 /* URString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D4662A93023B007F312D /* URString.swift */; };
 		479B090E2A9488A600AA10A0 /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */; };
 		479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09012A9351C900AA10A0 /* OptionCardInfo.swift */; };
+		479B09222A95CE4C00AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
+		479B09232A95D19400AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
 		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
@@ -1417,6 +1419,7 @@
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F1E30BC2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
+				479B09232A95D19400AA10A0 /* TrimCategory.swift in Sources */,
 				4762D4642A92533B007F312D /* EstimateSummaryHeaderView.swift in Sources */,
 				5F49755C2A811AAC008FFFE5 /* Fonts.swift in Sources */,
 				4700964A2A8791FE003711F2 /* EstimateSummaryView.swift in Sources */,
