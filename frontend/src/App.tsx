@@ -9,6 +9,9 @@ import Modal from './component/modal/Modal';
 import SelectedOptionProvider from './provider/selectedOptionProvider';
 import TempOptionProvider from './provider/tempOptionProvider';
 import {CardbProvider} from './provider/cardbProvider';
+import {GiudFlowProvider} from './provider/guideFlowProvider';
+import TempAdditionalOptionProvider from './provider/tempAdditionalOptionProvider';
+import SelectedAdditionalOptionProvider from './provider/additionalOptionProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -31,6 +34,9 @@ function App() {
         SelectedOptionProvider,
         TempOptionProvider,
         CardbProvider,
+        GiudFlowProvider,
+        TempAdditionalOptionProvider,
+        SelectedAdditionalOptionProvider,
       ]}
     >
       <BrowserRouter>

@@ -11,17 +11,16 @@ import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import {getCategory} from '@/component/util/getCategory';
 import DetailSelectedBox from '@/component/common/DetailSelectedBox';
-
+interface DetailData {
+  title: string;
+  description: string;
+  info?: string;
+}
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
   onClick: () => void;
   data: cardDataType;
-}
-interface DetailData {
-  title: string;
-  description: string;
-  info?: string;
 }
 const SelectIcon = () => {
   return (
@@ -155,7 +154,9 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           )}
         </CardSection>
       </Container>
-      {isSaved && selected && <FeedBack id={data.id}></FeedBack>}
+      {isSaved && option !== 6 && selected && (
+        <FeedBack id={data.id}></FeedBack>
+      )}
     </Wrapper>
   );
 }

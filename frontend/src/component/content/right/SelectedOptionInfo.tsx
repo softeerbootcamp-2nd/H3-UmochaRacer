@@ -6,7 +6,6 @@ import React, {
   useState,
 } from 'react';
 import styled from 'styled-components';
-import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
 import Footer from './Footer';
 import {flexBetween, flexCenter} from '../../../style/common';
@@ -34,7 +33,6 @@ function SelectedOptionInfo({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const {option} = useContext(OptionContext);
-
   const modalRef = useRef<HTMLDivElement>(null);
   const handleModalView = useCallback(() => {
     setIsModalOpen((prev) => !prev);
