@@ -117,11 +117,13 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
-    func fetchFeedbackComment(
-        step: CarMakingStep,
-        optionID: Int
-    ) -> AnyPublisher<FeedbackComment, Error> {
-        carInfoRepository.fetchFeedbackComment(step: step, optionID: optionID)
+    func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment, Error> {
+        guard let selectedOption = carMakingTotalInfo[step]?.optionCardInfoArray.first(where: { $0.isSelected }) else {
+            return Fail(error: SelfModeUsecaseError.notExistSelectedOption).eraseToAnyPublisher()
+        }
+        let selectedOptionID = selectedOption.id
+
+        return carInfoRepository.fetchFeedbackComment(step: step, optionID: selectedOptionID)
             .mapError { $0 }
             .compactMap { commentEntity in
                 let splittedComment = commentEntity.comment.split(separator: "!").map { String($0) }
