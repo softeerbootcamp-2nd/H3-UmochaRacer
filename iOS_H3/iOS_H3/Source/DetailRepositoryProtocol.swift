@@ -23,5 +23,5 @@ enum DetailRepositoryError: LocalizedError {
 }
 
 protocol DetailRepositoryProtocol {
-    func fetchPowertrainDetailInfo() -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>
+    func fetchPowertrainDetailInfo(id : Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
 }

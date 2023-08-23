@@ -16,30 +16,30 @@ class DetailRepository: DetailRepositoryProtocol {
         self.networkService = networkService
     }
 
-    func fetchPowertrainDetailInfo() -> AnyPublisher<DetailOptionEntity, DetailRepositoryError> {
-        networkService.request(DetailEndPoint.powertrain(id: 1))
-            .flatMap { (result: Result<APIResponse<DetailOptionData>, Error>)
-                -> AnyPublisher<DetailOptionEntity, DetailRepositoryError> in
+    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError> {
+        networkService.request(DetailEndPoint.powertrain(id: id))
+            .flatMap { (result: Result<APIResponse<[DetailOptionData]>, Error>)
+                -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError> in
                 switch result {
                 case .success(let data):
                     do {
-                        let detailOptionEntity = try data.data.toDomain()
-                        return Just(detailOptionEntity)
+                        let detailOptionEntities = try data.data.map { try $0.toDomain() }
+                        return Just(detailOptionEntities)
                             .setFailureType(to: DetailRepositoryError.self)
                             .eraseToAnyPublisher()
                     } catch let error as DetailOptionToEntityError {
-                        return Fail(outputType: DetailOptionEntity.self,
+                        return Fail(outputType: [DetailOptionEntity].self,
                                     failure: DetailRepositoryError.conversionError(error))
-                            .eraseToAnyPublisher()
+                        .eraseToAnyPublisher()
                     } catch {
-                        return Fail(outputType: DetailOptionEntity.self,
+                        return Fail(outputType: [DetailOptionEntity].self,
                                     failure: DetailRepositoryError.networkError(error))
-                            .eraseToAnyPublisher()
+                        .eraseToAnyPublisher()
                     }
                 case .failure(let error):
-                    return Fail(outputType: DetailOptionEntity.self,
+                    return Fail(outputType: [DetailOptionEntity].self,
                                 failure: DetailRepositoryError.networkError(error))
-                        .eraseToAnyPublisher()
+                    .eraseToAnyPublisher()
                 }
             }
             .eraseToAnyPublisher()
