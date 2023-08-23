@@ -1,8 +1,10 @@
-import React, {RefObject} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import {Title2_Medium, Title3_Medium} from '@/style/fonts';
-import Estimate from './Estimate';
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
+import EstimateList from '@/component/common/EstimateList';
+import {TempOptionContext} from '@/provider/tempOptionProvider';
 
 interface props {
   onClick: () => void;
@@ -25,20 +27,53 @@ const IconClose = () => {
   );
 };
 
+const DEFAULT_PRICE = 43460000;
+
+const headerLayout = {
+  height: 38,
+  fontSize: 16,
+};
+
+const selectionLayout = {
+  flexWidth: 215,
+  gap: 12,
+  fontSize: 14,
+};
+
 function Modal({onClick}: props) {
+  const {selectedOptions} = useContext(SelectedOptionContext);
+  const {tempOption} = useContext(TempOptionContext);
+
+  let totalPrice = DEFAULT_PRICE;
+  let copyOption = selectedOptions.slice();
+
+  if (tempOption !== null) {
+    copyOption = copyOption.map((elem) => {
+      if (elem.key === tempOption.key) {
+        return tempOption;
+      } else {
+        return elem;
+      }
+    });
+  }
+  copyOption.map((elem) => {
+    totalPrice += elem.price;
+  });
+
   return (
     <>
       <IconBox onClick={onClick}>{IconClose()}</IconBox>
       <Title>
         <SummaryText>견적요약</SummaryText>
-        <SummaryPrice>46,030,000원</SummaryPrice>
+        <SummaryPrice>{totalPrice.toLocaleString()}원</SummaryPrice>
       </Title>
       <Container>
-        <EstimateList>
-          <Estimate></Estimate>
-          <Estimate></Estimate>
-          <Estimate></Estimate>
-        </EstimateList>
+        <EstimateList
+          gap={36}
+          sidePadding={20}
+          headerLayout={headerLayout}
+          selectionLayout={selectionLayout}
+        ></EstimateList>
       </Container>
     </>
   );
@@ -83,11 +118,11 @@ const Container = styled.div`
   overflow-y: scroll;
 `;
 
-const EstimateList = styled.ul`
-  display: inline-flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  gap: 36px;
-  flex-shrink: 0;
-`;
+// const EstimateList = styled.ul`
+//   display: inline-flex;
+//   flex-direction: column;
+//   align-items: center;
+//   width: 100%;
+//   gap: 36px;
+//   flex-shrink: 0;
+// `;

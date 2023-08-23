@@ -9,33 +9,31 @@ import styled from 'styled-components';
 import OptionCardList from './OptionCardList';
 import Modal from './optioninfo/Modal';
 import Footer from './Footer';
-import CardbModal from '@/component/common/CardbModal';
-import {flexCenter} from '../../../style/common';
+import {flexBetween, flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
-import {Title1_Medium, Title3_Regular} from '@/style/fonts';
+import {Body2_Medium, Title1_Medium, Title3_Regular} from '@/style/fonts';
 import {cardDataType} from '../contentInterface';
 import {OptionContext} from '@/provider/optionProvider';
-import {textParse} from '@/component/common/textParse';
+import SelectedOptionCardList from './SelectedOptionCardList';
 
 interface cardDataProps {
   cardData: cardDataType[];
   setNewIndex: (index: number) => void;
   selectedIndex: number;
+  setCategory: (index: number) => void;
+  selectedCategory: number;
 }
 
-function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
+function SelectedOptionInfo({
+  cardData,
+  setNewIndex,
+  selectedIndex,
+  setCategory,
+  selectedCategory,
+}: cardDataProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSaved, setIsSaved] = useState(false);
   const {option} = useContext(OptionContext);
-  const menuItems = [
-    '<cardb>파워트레인</cardb>',
-    '<cardb>구동방식</cardb>',
-    '바디 타입',
-    '외장 색상',
-    '내장 색상',
-    '휠',
-    '옵션',
-  ];
 
   const modalRef = useRef<HTMLDivElement>(null);
   const handleModalView = useCallback(() => {
@@ -45,18 +43,35 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
   useEffect(() => {
     setIsSaved(false);
   }, [option]);
-
+  const categories = ['시스템', '온도관리', '외부장치', '내부장치'];
+  const handleCategoryClick = (idx: number) => {
+    setCategory(idx);
+    setNewIndex(0);
+  };
   return (
     <Wrapper>
+      <Category.Wrapper>
+        {categories.map((category, idx) => (
+          <Category.Button
+            key={idx}
+            $isSelected={idx === selectedCategory}
+            onClick={() => handleCategoryClick(idx)}
+          >
+            <Category.ButtonP $isSelected={idx === selectedCategory}>
+              {category}
+            </Category.ButtonP>
+          </Category.Button>
+        ))}
+      </Category.Wrapper>
       <Container>
-        <OptionTitle>{textParse(menuItems[option])}</OptionTitle>
+        <OptionTitle>옵션</OptionTitle>
         <Text>을 선택해주세요.</Text>
-        <OptionCardList
+        <SelectedOptionCardList
           cardData={cardData}
           isSaved={isSaved}
           setNewIndex={setNewIndex}
           selectedIndex={selectedIndex}
-        ></OptionCardList>
+        ></SelectedOptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
         </ModalWrapper>
@@ -65,17 +80,17 @@ function OptionInfo({cardData, setNewIndex, selectedIndex}: cardDataProps) {
           setIsSaved={setIsSaved}
           isOpen={isModalOpen}
         ></Footer>
-        <CardbModal></CardbModal>
       </Container>
     </Wrapper>
   );
 }
 
-export default OptionInfo;
+export default SelectedOptionInfo;
 
 const Wrapper = styled.div`
-  ${flexCenter}
+  ${flexCenter};
   flex: 4;
+  flex-direction: column;
 `;
 
 const ModalWrapper = styled.div<{$isopen: string}>`
@@ -93,6 +108,26 @@ const ModalWrapper = styled.div<{$isopen: string}>`
   transition: margin 0.5s;
 `;
 
+const Category = {
+  Wrapper: styled.div`
+    width: 375px;
+    ${flexBetween};
+    gap: 8px;
+  `,
+  Button: styled.div<{$isSelected: boolean}>`
+    ${flexCenter}
+    padding: 6px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: ${(props) =>
+      props.$isSelected ? colors.Main_Hyundai_Blue : colors.Cool_Grey_001};
+  `,
+  ButtonP: styled.p<{$isSelected: boolean}>`
+    color: ${(props) =>
+      props.$isSelected ? colors.Hyundai_White : colors.Cool_Grey_003};
+    ${Body2_Medium};
+  `,
+};
 const Container = styled.div`
   position: relative;
   width: 375px;
@@ -116,9 +151,8 @@ const Container = styled.div`
   }
 `;
 
-const OptionTitle = styled.div`
+const OptionTitle = styled.span`
   ${Title1_Medium}
-  display: inline-block;
   font-size: 24px;
 `;
 

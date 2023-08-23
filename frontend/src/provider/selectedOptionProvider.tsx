@@ -1,6 +1,6 @@
 import React, {useState, createContext} from 'react';
 
-interface Option {
+export interface Option {
   key: string;
   value?: string;
   name?: string;
@@ -58,7 +58,7 @@ const initialOptions: Option[] = [
     price: 0,
     id: 1,
     imgSrc:
-      'https://h3cardb.s3.ap-northeast-2.amazonaws.com/interior_color/%E1%84%82%E1%85%A2%E1%84%8C%E1%85%A1%E1%86%BC_%E1%84%8F%E1%85%AF%E1%86%AF%E1%84%90%E1%85%B5%E1%86%BC%E1%84%8E%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%A7%E1%86%AB(%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A2%E1%86%A8).png',
+      'https://h3cardb.s3.ap-northeast-2.amazonaws.com/interior_color/%E1%84%82%E1%85%A2%E1%84%8C%E1%85%A1%E1%86%BC_%E1%84%8F%E1%85%AF%E1%86%AF%E1%84%90%E1%85%B5%E1%86%BC%E1%84%8E%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%A7%E1%86%AB_%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A2%E1%86%A8.png',
   },
   {
     key: '휠',
@@ -86,6 +86,14 @@ interface SelectedOptionProviderProps {
 const SelectedOptionProvider = ({children}: SelectedOptionProviderProps) => {
   const [selectedOptionsState, setSelectedOptionsState] =
     useState<Option[]>(initialOptions);
+  const order = [
+    '파워트레인',
+    '구동 방식',
+    '바디 타입',
+    '외장 색상',
+    '내장 색상',
+    '휠',
+  ];
 
   const addOption = (newOption: Option) => {
     setSelectedOptionsState((prevOptions) => {
@@ -94,7 +102,11 @@ const SelectedOptionProvider = ({children}: SelectedOptionProviderProps) => {
         (opt) => opt.key !== newOption.key,
       );
       // 새로운 아이템 추가
-      return [...filteredOptions, newOption];
+      const sortedOptions = [...filteredOptions, newOption].sort((a, b) => {
+        return order.indexOf(a.key) - order.indexOf(b.key);
+      });
+
+      return sortedOptions;
     });
   };
 
