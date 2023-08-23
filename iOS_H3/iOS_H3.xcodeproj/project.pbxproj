@@ -83,6 +83,7 @@
 		479B09222A95CE4C00AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
 		479B09232A95D19400AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
 		479B09252A95D19A00AA10A0 /* TrimListBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */; };
+		479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */; };
 		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
@@ -293,6 +294,7 @@
 		479B090A2A94874000AA10A0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarButton.swift; sourceTree = "<group>"; };
 		479B09212A95CE4C00AA10A0 /* TrimCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCategory.swift; sourceTree = "<group>"; };
+		479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarViewController.swift; sourceTree = "<group>"; };
 		479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoMockRepository.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
@@ -921,6 +923,7 @@
 				5F6203732A7BC59600D09531 /* LaunchScreen.storyboard */,
 				5F6203762A7BC59600D09531 /* Info.plist */,
 				479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */,
+				479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */,
 			);
 			path = iOS_H3_UI;
 			sourceTree = "<group>";
@@ -1382,6 +1385,7 @@
 				5F4D33B32A8751E500942517 /* UIImageView+.swift in Sources */,
 				5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */,
 				471917EA2A82369E00B67D54 /* CarMakingStep.swift in Sources */,
+				479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */,
 				5F49755F2A811AC1008FFFE5 /* UILabel+.swift in Sources */,
 				5F1FC1CB2A82577C00C54EBE /* CarMakingCollectionViewCell.swift in Sources */,
 				5F62036D2A7BC59500D09531 /* ComponentMainViewController.swift in Sources */,

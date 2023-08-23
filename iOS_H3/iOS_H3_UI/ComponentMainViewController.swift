@@ -131,6 +131,14 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var trimListBarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("TrimListBar 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapTrimListBarButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -177,6 +185,7 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(noImageDetailViewButton)
         stackView.addArrangedSubview(imageDetailViewButton)
         stackView.addArrangedSubview(textBoxButton)
+        stackView.addArrangedSubview(trimListBarButton)
 
         let buttons = [
             titleBarButton,
@@ -191,7 +200,8 @@ class ComponentMainViewController: UIViewController {
             optionListModeButton,
             noImageDetailViewButton,
             imageDetailViewButton,
-            textBoxButton
+            textBoxButton,
+            trimListBarButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -263,6 +273,11 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapTextBoxButton() {
         let viewController = TextBoxViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapTrimListBarButton() {
+        let viewController = TrimListBarViewController()
         self.present(viewController, animated: false)
     }
 }
