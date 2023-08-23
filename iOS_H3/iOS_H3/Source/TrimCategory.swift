@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum TrimCategory {
+enum TrimCategory: CaseIterable {
     case guideMode
     case leBlanc
     case exclusive
