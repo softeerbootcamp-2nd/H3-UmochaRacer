@@ -17,6 +17,7 @@ final class CarMakingViewModel {
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
         var optionCategoryDidChanged: PassthroughSubject<OptionCategoryType, Never>
+        var dictionaryButtonPressed: PassthroughSubject<Void, Never>
     }
 
     // MARK: - Output
@@ -26,6 +27,7 @@ final class CarMakingViewModel {
         var currentStepInfo = CurrentValueSubject<CarMakingStepInfo, Never>(CarMakingStepInfo(step: .powertrain))
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
+        var isDictionaryFeatureEnabled: CurrentValueSubject<Bool, Never> = CurrentValueSubject<Bool, Never>(false)
     }
 
     // MARK: - Properties
@@ -67,6 +69,7 @@ final class CarMakingViewModel {
                     return Just(CarMakingStepInfo(step: step))
                         .eraseToAnyPublisher()
                 }
+                output.isDictionaryFeatureEnabled.send(false)
                 return self.requestCurrentStepInfo(step)
             }
             .sink(receiveValue: { carMakingStepInfo in
@@ -100,6 +103,12 @@ final class CarMakingViewModel {
             }
             .store(in: &cancellables)
 
+        input.dictionaryButtonPressed
+            .sink { _ in
+                let currentValue = output.isDictionaryFeatureEnabled.value
+                output.isDictionaryFeatureEnabled.send(!currentValue)
+            }
+            .store(in: &cancellables)
         return output
     }
 
