@@ -11,7 +11,6 @@ class DictionaryOptionUsecase: DictionaryUsecaseProtocol {
     func fetchDetailedOption() -> Future<String, Error> {
         Future { promise in
             promise(.success(String("설명이 오는 텍스트입니다.")))
-                
         }
     }
 }
