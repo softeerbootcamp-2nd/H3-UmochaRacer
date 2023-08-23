@@ -125,7 +125,7 @@ extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
         didSelectOptionAt index: Int
     ) {
         optionDidSelected.send(index)
-        if optionCardButtonListView is TwoOptionCardButtonView {
+        if optionCardButtonListView is TwoOptionCardButtonView, index < bannerImagesOfOption.count {
             configure(bannerImageURL: bannerImagesOfOption[index])
         }
     }
