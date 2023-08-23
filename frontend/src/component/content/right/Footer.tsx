@@ -8,6 +8,7 @@ import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
 import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+import {getTotalPrice} from '@/component/util/getTotPrice';
 interface props {
   onClick: () => void;
   setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
@@ -34,30 +35,21 @@ const upperButton = (isModalOpen: boolean) => {
   );
 };
 
-const DEFAULT_PRICE = 43460000;
 function Footer({onClick, isOpen, setIsSaved}: props) {
   const {option, setOption} = useContext(OptionContext);
   const {tempOption} = useContext(TempOptionContext);
   const {selectedOptions, addOption} = useContext(SelectedOptionContext);
   const {additionOptions} = useContext(TempAdditionalOptionsContext);
-  const {setSelectedAdditionalOption} = useContext(
+  const {selectedAdditionalOption, setSelectedAdditionalOption} = useContext(
     SelectedAdditionalOptionsContext,
   );
-  let totalPrice = DEFAULT_PRICE;
-  let copyOption = selectedOptions.slice();
 
-  if (tempOption !== null) {
-    copyOption = copyOption.map((elem) => {
-      if (elem.key === tempOption.key) {
-        return tempOption;
-      } else {
-        return elem;
-      }
-    });
-  }
-  copyOption.map((elem) => {
-    totalPrice += elem.price;
-  });
+  const totalPrice = getTotalPrice(
+    selectedOptions,
+    tempOption,
+    additionOptions,
+    selectedAdditionalOption,
+  );
   const handleSelectComplete = () => {
     setIsSaved(true);
     if (option !== 6) {

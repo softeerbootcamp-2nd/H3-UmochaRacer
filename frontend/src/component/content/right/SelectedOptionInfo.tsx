@@ -69,6 +69,7 @@ function SelectedOptionInfo({
           isSaved={isSaved}
           setNewIndex={setNewIndex}
           selectedIndex={selectedIndex}
+          categoryIdx={selectedCategory}
         ></SelectedOptionCardList>
         <ModalWrapper ref={modalRef} $isopen={isModalOpen.toString()}>
           <Modal onClick={handleModalView}></Modal>
