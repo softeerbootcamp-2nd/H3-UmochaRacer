@@ -125,13 +125,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         }
 
         return publisher
-            .mapError { error in
-                switch error {
-                case .networkError:
-                    return .networkError(error: error)
-                case .conversionError:
-                    return .conversionError(error: error)
-                }
+            .mapError { [weak self] error in
+                guard let self else { return SelfModeUsecaseError.notExistSelf }
+                return convertToSelfModeUsecaseError(from: error)
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
@@ -152,13 +148,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         category: OptionCategoryType
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
         carInfoRepository.fetchAdditionalOption(category: category)
-            .mapError { error in
-                switch error {
-                case .networkError:
-                    return .networkError(error: error)
-                case .conversionError:
-                    return .conversionError(error: error)
-                }
+            .mapError { [weak self] error in
+                guard let self else { return SelfModeUsecaseError.notExistSelf }
+                return convertToSelfModeUsecaseError(from: error)
             }
             .compactMap { [weak self] stepInfoEntity -> CarMakingStepInfo? in
                 guard let self else { return nil }
@@ -188,6 +180,15 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             return carInfoRepository.fetchAdditionalOption(category: OptionCategoryType.system)
         default:
             return nil
+        }
+    }
+
+    private func convertToSelfModeUsecaseError(from error: CarInfoRepositoryError) -> SelfModeUsecaseError {
+        switch error {
+        case .networkError:
+            return .networkError(error: error)
+        case .conversionError:
+            return .conversionError(error: error)
         }
     }
 
