@@ -190,7 +190,7 @@ extension TrimListBarButton {
             checkImageView.topAnchor.constraint(equalTo: topAnchor, constant: Constants.checkImageViewTopOffset),
             checkImageView.trailingAnchor.constraint(
                 equalTo: trailingAnchor,
-                constant: Constants.checkImageViewTrailingOffset
+                constant: -Constants.checkImageViewTrailingOffset
             ),
             checkImageView.heightAnchor.constraint(equalToConstant: Constants.checkImageViewSize),
             checkImageView.widthAnchor.constraint(equalToConstant: Constants.checkImageViewSize)
