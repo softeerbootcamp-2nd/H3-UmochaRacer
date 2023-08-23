@@ -7,6 +7,7 @@ export type ModalType =
   | 'type_change'
   | 'mode_to_self'
   | 'mode_to_guide'
+  | 'mode_change'
   | null;
 
 interface ModalContextType {
@@ -27,6 +28,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({children}) => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
 
   function openModal(type: ModalType) {
+    closeModal();
     setActiveModal(type);
     setIsVisible(true);
   }

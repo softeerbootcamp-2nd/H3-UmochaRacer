@@ -13,3 +13,4 @@ export {ReactComponent as OptionSeparator} from './optionSeparator.svg';
 export {ReactComponent as ArrowBottom} from './arrow_bottom.svg';
 export {ReactComponent as Sad} from './sad.svg';
 export {ReactComponent as Change} from './change.svg';
+export {ReactComponent as Fix} from './Fix.svg';
