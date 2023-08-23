@@ -129,7 +129,10 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 let splittedComment = commentEntity.comment.split(separator: "!").map { String($0) }
 
                 let title = splittedComment.count > 0 ? "\(splittedComment[0])!": ""
-                let subTitle = splittedComment.count > 1 ? splittedComment[1]: ""
+                var subTitle = splittedComment.count > 1 ? splittedComment[1]: ""
+                if subTitle.count > 0, subTitle[subTitle.startIndex] == " " {
+                    subTitle.remove(at: subTitle.startIndex)
+                }
 
                 return FeedbackComment(title: title, subTitle: subTitle)
             }
