@@ -1,12 +1,13 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
 import {Title1_Medium, Title4_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 
 function Top() {
-  const [imgsrc, setImgsrc] = useState('/image/white.png');
-
+  const {selectedOptions} = useContext(SelectedOptionContext);
+  const [imgsrc, setImgsrc] = useState(selectedOptions[3].imgSrc);
   const buttonClick = (url: string) => {
     setImgsrc(url);
   };
@@ -19,14 +20,14 @@ function Top() {
       </ImageBox>
       <ButtonBox>
         <ImageButton
-          onClick={() => buttonClick('/image/white.png')}
+          onClick={() => buttonClick(selectedOptions[3].imgSrc)}
           $background={colors.Main_Hyundai_Blue}
           $color={colors.Hyundai_White}
         >
           외부
         </ImageButton>
         <ImageButton
-          onClick={() => buttonClick('/image/inner.png')}
+          onClick={() => buttonClick(selectedOptions[4].imgSrc)}
           $background={'#F2F2F2'}
           $color={colors.Main_Hyundai_Blue}
         >
