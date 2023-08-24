@@ -66,7 +66,7 @@ function EstimateList({
         return elem;
       }
     });
-    console.log(copyOption);
+
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);
     });
