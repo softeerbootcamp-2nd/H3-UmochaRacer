@@ -13,7 +13,7 @@ import SelectedOptionContent from './SelectedOptionContent';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {postFetchData} from '@/api/postFetchData';
 import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
-import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider'
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 type cardData = {
   id: number;
   name: string;
@@ -47,7 +47,11 @@ const categoryMapping: Record<number, string> = {
   5: 'car',
 };
 
-let selectionRateArr;
+interface SelectionRate {
+  id: number;
+  selectionRatio: number;
+}
+let selectionRateArr: SelectionRate[][] = [];
 
 function Content() {
   // 새로고침 막기 변수
@@ -73,12 +77,12 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
-  const {showGuide, dataObject} = useGuideFlowState(); 
+  const {showGuide, dataObject} = useGuideFlowState();
   const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
   const {selectedAdditionalOption} = useContext(
     SelectedAdditionalOptionsContext,
   );
- const updateTempOption = (index: number) => {
+  const updateTempOption = (index: number) => {
     if (cardData !== cardDataList[option]) return;
     if (option !== 6) {
       const selectedCardData = cardData[index];
@@ -118,12 +122,12 @@ function Content() {
   };
   const sortBySelectionRate = (array: cardData[], index: number) => {
     const sortedCardDataArray: cardData[] = selectionRateArr[index]
-      .map((rate) => {
+      .map((rate: {id: number; selectionRatio: number}) => {
         const card = array.find((card) => rate.id === card.id);
 
         if (card) return card;
       })
-      .filter((card): card is cardData => card !== undefined);
+      .filter((card: cardData | undefined): card is cardData => !!card);
 
     return sortedCardDataArray;
   };
@@ -140,7 +144,7 @@ function Content() {
         }),
       );
 
-      if (showGuide) {
+      if (showGuide && dataObject.options) {
         const requestBody = {
           age: dataObject.age,
           gender: dataObject.gender,

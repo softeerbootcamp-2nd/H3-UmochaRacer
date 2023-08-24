@@ -25,8 +25,15 @@ function ModeSelector() {
 
   return (
     <Wrapper onClick={() => openModal('mode_change')}>
-      <ModeName $isGuide={window.location.pathname === '/guide'}>{getTitleContent(currentTitle)}</ModeName>
-      {currentTitle !== 'none' && <ModeSelect src={selector} />}
+      <ModeName $isGuide={window.location.pathname === '/guide'}>
+        {getTitleContent(currentTitle)}
+      </ModeName>
+      {currentTitle !== 'none' && (
+        <ModeSelect
+          $isGuide={window.location.pathname === '/guide'}
+          src={selector}
+        />
+      )}
     </Wrapper>
   );
 }
