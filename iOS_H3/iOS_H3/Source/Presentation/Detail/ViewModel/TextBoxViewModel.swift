@@ -39,7 +39,7 @@ final class TextBoxViewModel {
                 guard let self = self else {
                     return Just("").eraseToAnyPublisher()
                 }
-                return self.detailedOptionUsecase.fetchDetailedOption()
+                return self.detailedOptionUsecase.fetchDictionaryDescription(for: "powertrain")
                     .catch { _ -> Just<String> in
                         return Just("")
                     }
