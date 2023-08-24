@@ -5,7 +5,6 @@ import {cardDataType} from '../contentInterface';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import {getCategory} from '@/component/util/getCategory';
-import Spinner from '@/component/common/Spinner';
 
 interface cardListProps {
   cardData: cardDataType[];
@@ -53,7 +52,7 @@ function OptionCardList({
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
   const [ratioList, setRatioList] = useState<SelectionRatioProps[]>([]);
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+
   const handleItemClick = (index: number) => {
     setNewIndex(index);
   };
@@ -67,7 +66,6 @@ function OptionCardList({
       setRatioList(getRatioList);
     };
     fetchRateList();
-    setIsLoaded(true);
   }, [cardData]);
   const cards: React.JSX.Element[] =
     cardData &&
@@ -84,7 +82,6 @@ function OptionCardList({
 
   return (
     <>
-      {!isLoaded && <Spinner />}
       <Wrapper key={option}>
         <Container ref={ulRef}>{cards}</Container>
       </Wrapper>
