@@ -12,10 +12,10 @@ enum DictionaryEndpoint: Endpoint {
 
     var baseURL: String { ConstantKey.baseURL }
     var httpMethod: HTTPMethod { .GET }
-    var headers: [String : String] { [:] }
-    
+    var headers: [String: String] { [:] }
+
     var path: String { "cardb" }
-    
+
     var parameters: HTTPParameter? {
         switch self {
         case .cardb(let keyword):
