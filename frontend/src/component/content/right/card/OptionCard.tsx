@@ -125,7 +125,9 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
         <CardSection $height={60}>
           <TextBox>
             <Text1 className="blue" $isGiude={showGuide}>
-              구매자의 {rate}%가 선택했어요!
+              {data.saleRate
+                ? `나와 비슷한 ${data.saleRate}%가 선택한`
+                : `구매자의 ${rate}%가 선택했어요!`}
             </Text1>
             <Text2 className="black">{data.name}</Text2>
           </TextBox>

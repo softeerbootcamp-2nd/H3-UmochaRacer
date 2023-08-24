@@ -19,6 +19,7 @@ type cardData = {
   name: string;
   imageSrc: string;
   price: number;
+  saleRate?: number;
 };
 type OptionUrls = Record<number, string | string[]>;
 interface Option {
@@ -122,7 +123,7 @@ function Content() {
       (rate: {id: number; selectionRatio: number}) => {
         const card = array.find((card) => rate.id === card.id);
 
-        if (card) return card;
+        if (card) return {...card, saleRate: rate.selectionRatio};
       },
     );
 
@@ -219,7 +220,7 @@ function Content() {
               <>
                 <OptionImage
                   key={option}
-                  cardData={cardData}
+                  cardData={cardDataList[option]}
                   selectedIndex={selectedIndex}
                 />
                 <OptionInfo
