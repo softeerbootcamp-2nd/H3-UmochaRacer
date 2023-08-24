@@ -11,6 +11,7 @@ import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import DetailSelectedBox from '@/component/common/DetailSelectedBox';
 import {getCategory} from '@/component/util/getCategory';
+import {useImageSrcDispatch} from '@/provider/tempImageProvider';
 interface DetailData {
   title: string;
   description: string;
@@ -74,7 +75,7 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
     DetailData | DetailData[] | null
   >(null);
   const [rate, setRate] = useState<number>(0);
-
+  const dispatch = useImageSrcDispatch();
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -98,6 +99,7 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
   const handleToggleHoverEnd = () => {};
   useEffect(() => {
     setToggle(false);
+    dispatch({type: 'RESET_IMAGE_SRC'});
   }, [selected]);
   useEffect(() => {
     const matchIdRatio = ratioList.find(

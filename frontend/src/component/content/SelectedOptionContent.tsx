@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import OptionImage from './left/OptionImage';
 import SelectedOptionInfo from './right/SelectedOptionInfo';
-
+import AdditionalOptionImage from './left/AdditionalOptionImage';
 interface cardData {
   id: number;
   name: string;
@@ -24,7 +23,7 @@ function SelectedOptionContent({
     useState<number>(0);
   return (
     <>
-      <OptionImage
+      <AdditionalOptionImage
         cardData={selectedOptionData[selectedOptionCategory]}
         selectedIndex={selectedIndex}
       />
