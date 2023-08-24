@@ -166,7 +166,7 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백버튼 클릭 액션 구현 필요")
+        navigationController?.popViewController(animated: true)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
