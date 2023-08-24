@@ -25,4 +25,15 @@ struct URDictionaryData: Decodable {
     let keyword: String?
     let description: String?
     let imageSrc: String?
+
+    func toDomain() throws -> URDictionaryEntity {
+        guard let keyword else {
+            throw URDictionaryDataToEntityError.missingKeyword
+        }
+        guard let description else {
+            throw URDictionaryDataToEntityError.missingDescription
+        }
+        let url = (imageSrc == nil) ? nil : URL(string: imageSrc!)
+        return URDictionaryEntity(keyword: keyword, description: description, imageURL: url)
+    }
 }
