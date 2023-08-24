@@ -124,8 +124,18 @@ function Content() {
     const sortedCardDataArray: cardData[] = selectionRateArr[index]
       .map((rate: {id: number; selectionRatio: number}) => {
         const card = array.find((card) => rate.id === card.id);
-      
-        if (card) return card;
+        let reulstData: cardData = {
+          id: 0,
+          name: '',
+          imageSrc: '',
+          price: 0,
+          saleRate: 0,
+        };
+
+        if (card) {
+          reulstData = {...card, saleRate: rate.selectionRatio};
+          return reulstData;
+        }
       })
       .filter((card): card is cardData => card !== undefined);
 
