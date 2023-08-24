@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum URDictionaryDataToEntityError: LocalizedError {
+enum DictionaryDescriptionDataToEntityError: LocalizedError {
     case missingKeyword
     case missingDescription
 
@@ -21,19 +21,18 @@ enum URDictionaryDataToEntityError: LocalizedError {
     }
 }
 
-struct URDictionaryData: Decodable {
+struct DictionaryDescriptionData: Decodable {
     let keyword: String?
     let description: String?
     let imageSrc: String?
 
-    func toDomain() throws -> URDictionaryEntity {
+    func toDomain() throws -> DictionaryDescription {
         guard let keyword else {
-            throw URDictionaryDataToEntityError.missingKeyword
+            throw DictionaryDescriptionDataToEntityError.missingKeyword
         }
         guard let description else {
-            throw URDictionaryDataToEntityError.missingDescription
+            throw DictionaryDescriptionDataToEntityError.missingDescription
         }
-        let url = (imageSrc == nil) ? nil : URL(string: imageSrc!)
-        return URDictionaryEntity(keyword: keyword, description: description, imageURL: url)
+        return DictionaryDescription(keyword: keyword, description: description, imageURL: URL(string: imageSrc ?? ""))
     }
 }

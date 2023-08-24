@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct URDictionaryEntity {
+struct DictionaryDescription {
     let keyword: String
     let description: String
     let imageURL: URL?

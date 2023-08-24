@@ -16,9 +16,9 @@ final class DictionaryRepository: DictionaryRepositoryProtocol {
         self.networkService = networkService
     }
 
-    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<URDictionaryEntity, Error> {
-        typealias ResultType = Result<APIResponse<URDictionaryData>, Error>
-        typealias ReturnType = AnyPublisher<URDictionaryEntity, Error>
+    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<DictionaryDescription, Error> {
+        typealias ResultType = Result<APIResponse<DictionaryDescriptionData>, Error>
+        typealias ReturnType = AnyPublisher<DictionaryDescription, Error>
 
         let endpoint = DictionaryEndpoint.cardb(keyword: keyword)
         return networkService.request(endpoint)

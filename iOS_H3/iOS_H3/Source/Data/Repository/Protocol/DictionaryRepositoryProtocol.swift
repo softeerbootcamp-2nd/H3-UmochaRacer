@@ -23,5 +23,5 @@ enum DictionaryRepositoryError: LocalizedError {
 }
 
 protocol DictionaryRepositoryProtocol {
-    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<URDictionaryEntity, Error>
+    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<DictionaryDescription, Error>
 }
