@@ -52,7 +52,6 @@ function EstimateList({
   });
 
   useEffect(() => {
-    if (!tempOption && option !== 7) return;
     const nextEstimateDatas: TotalEstimateData = {
       car: [],
       color: [],
@@ -60,15 +59,13 @@ function EstimateList({
     };
     let copyOption = selectedOptions.slice();
 
-    if (tempOption !== null) {
-      copyOption = copyOption.map((elem) => {
-        if (elem.key === tempOption.key) {
-          return tempOption;
-        } else {
-          return elem;
-        }
-      });
-    }
+    copyOption = copyOption.map((elem) => {
+      if (elem.key === tempOption.key) {
+        return tempOption;
+      } else {
+        return elem;
+      }
+    });
 
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);

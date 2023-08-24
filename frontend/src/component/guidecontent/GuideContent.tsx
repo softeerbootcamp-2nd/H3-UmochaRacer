@@ -2,11 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import SelectFlow from './SelectFlow';
 import GuideEstimate from './GuideEstimate';
-import EstimateContent from '../content/totalestimate/EstimateContent';
-import Content from '../content/Content';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
+import {postFetchData} from '@/api/postFetchData';
 
 interface Url {
   [key: string]: string;
@@ -31,8 +30,8 @@ const urlEndPoint: Url = {
 
 const keyMapping: Record<number, string> = {
   0: '파워트레인',
-  1: '구동 방식',
-  2: '바디 타입',
+  1: '바디 타입',
+  2: '구동 방식',
   3: '외장 색상',
   4: '내장 색상',
   5: '휠',
@@ -47,7 +46,7 @@ const categoryMapping: Record<number, string> = {
   5: 'car',
 };
 
-const getGiudeOption = async (giudeData: GuideData | null) => {
+const getGiudeOption = async (giudeData: object) => {
   if (!giudeData) return [];
   return Promise.all(
     Object.entries(giudeData).map(async ([key, value]) => {
@@ -62,6 +61,7 @@ const getGiudeOption = async (giudeData: GuideData | null) => {
     }),
   );
 };
+
 const setGiudeOption = (
   dataArray: GuideData[],
   addOption: (option: Option) => void,
@@ -96,19 +96,9 @@ function GuideContent() {
         tag3: dataObject.options[2],
       };
 
-      const guideId = await fetch('http://43.202.84.133:9999/api/v1/guide', {
-        method: 'POST',
-        headers: {
-          accept: '*/*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
-      })
-        .then((response) => response.json())
-        .then((res) => res.data);
-
+      const guideId = await postFetchData('/guide', requestBody);
       const guideDataArr: GuideData[] = await getGiudeOption(guideId);
-      setGiudeOption(guideDataArr, addOption);
+      setGiudeOption(guideDataArr.slice(0, -1), addOption);
     }
   };
 
@@ -136,7 +126,7 @@ export default GuideContent;
 const Wrapper = styled.div`
   width: 100%;
   flex-grow: 1;
-  // padding-top: 111px;
+  padding-top: 111px;
 `;
 
 const Container = styled.div`

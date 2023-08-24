@@ -25,7 +25,7 @@ function ModeSelector() {
 
   return (
     <Wrapper onClick={() => openModal('mode_change')}>
-      <ModeName>{getTitleContent(currentTitle)}</ModeName>
+      <ModeName $isGuide={window.location.pathname === '/guide'}>{getTitleContent(currentTitle)}</ModeName>
       {currentTitle !== 'none' && <ModeSelect src={selector} />}
     </Wrapper>
   );
@@ -36,8 +36,13 @@ const Wrapper = styled.div`
   display: flex;
   cursor: pointer;
 `;
-const ModeName = styled.p`
+const ModeName = styled.p<{$isGuide: boolean}>`
   ${Title3_Medium};
-  color: ${colors.Cool_Grey};
+  color: ${({$isGuide}) =>
+    $isGuide ? colors.Sub_Active_Blue : colors.Cool_Grey};
 `;
-const ModeSelect = styled.img``;
+const ModeSelect = styled.img<{$isGuide: boolean}>`
+  ${({$isGuide}) =>
+    $isGuide &&
+    'filter: invert(74%) sepia(11%) saturate(4376%) hue-rotate(167deg) brightness(87%) contrast(83%);'}
+`;

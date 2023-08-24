@@ -10,8 +10,10 @@ import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
+import {useGuideFlowState} from '@/provider/guideFlowProvider';
+import {postFetchData} from '@/api/postFetchData';
 import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
-import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider'
 type cardData = {
   id: number;
   name: string;
@@ -44,6 +46,9 @@ const categoryMapping: Record<number, string> = {
   4: 'color',
   5: 'car',
 };
+
+let selectionRateArr;
+
 function Content() {
   // 새로고침 막기 변수
   const preventClose = (e: BeforeUnloadEvent) => {
@@ -68,11 +73,13 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
+  const {showGuide, dataObject} = useGuideFlowState(); 
   const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
   const {selectedAdditionalOption} = useContext(
     SelectedAdditionalOptionsContext,
   );
-  const updateTempOption = (index: number) => {
+ const updateTempOption = (index: number) => {
+    if (cardData !== cardDataList[option]) return;
     if (option !== 6) {
       const selectedCardData = cardData[index];
 
@@ -91,8 +98,8 @@ function Content() {
     }
   };
   const setNewIndex = (nextIndex: number) => {
-    setIndex(nextIndex);
     updateTempOption(nextIndex);
+    setIndex(nextIndex);
   };
   const urlEndpoint: OptionUrls = {
     0: '/info/powertrain',
@@ -109,6 +116,18 @@ function Content() {
     ],
     7: '',
   };
+  const sortBySelectionRate = (array: cardData[], index: number) => {
+    const sortedCardDataArray: cardData[] = selectionRateArr[index]
+      .map((rate) => {
+        const card = array.find((card) => rate.id === card.id);
+
+        if (card) return card;
+      })
+      .filter((card): card is cardData => card !== undefined);
+
+    return sortedCardDataArray;
+  };
+
   useEffect(() => {
     const fetchAllData = async () => {
       const results = await Promise.all(
@@ -120,23 +139,67 @@ function Content() {
           }
         }),
       );
-      const newCardDataList = results.slice(0, 6) as cardData[][];
-      const newAdditionalOptionList = results[6] as cardData[][];
 
-      setCardDataList(newCardDataList);
-      setAddOptionList(newAdditionalOptionList);
-      setcardData(newCardDataList[option]);
+      if (showGuide) {
+        const requestBody = {
+          age: dataObject.age,
+          gender: dataObject.gender,
+          tag1: dataObject.options[0],
+          tag2: dataObject.options[1],
+          tag3: dataObject.options[2],
+        };
+
+        const endpoints = [
+          '/sale/powertrain/tag',
+          '/sale/driving-system/tag',
+          '/sale/bodytype/tag',
+          '/sale/exterior-color/tag',
+          '/sale/interior-color/tag',
+          '/sale/wheel/tag',
+        ];
+
+        selectionRateArr = await Promise.all(
+          endpoints.map(async (url: string) => {
+            return postFetchData(url, requestBody);
+          }),
+        );
+
+        const sortCardArr = results
+          .slice(0, 6)
+          .map((card, index) => sortBySelectionRate(card, index));
+        setCardDataList(sortCardArr);
+
+        if (option !== 7) {
+          setcardData(sortCardArr[option]);
+        }
+      } else {
+        const newCardDataList = results.slice(0, 6) as cardData[][];
+        const newAdditionalOptionList = results[6] as cardData[][];
+
+        setCardDataList(newCardDataList);
+        setAddOptionList(newAdditionalOptionList);
+        setcardData(newCardDataList[option]);
+      }
     };
 
     fetchAllData();
     setIsLoading(true);
   }, []);
   useEffect(() => {
+    if (option === 7) return;
+    if (!cardDataList[option]) return;
     if (option !== 6) {
       const currentKey = keyMapping[option];
       const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
+
       if (foundOption) {
-        setNewIndex(foundOption.id - 1);
+        const targetIndex = cardDataList[option].findIndex(
+          (card) => card.id === foundOption.id,
+        );
+
+        if (targetIndex > -1) {
+          setNewIndex(targetIndex);
+        }
       }
       setcardData(cardDataList[option]);
     } else {
@@ -144,6 +207,7 @@ function Content() {
     }
     setAdditionalOptions(selectedAdditionalOption);
   }, [option]);
+
   return (
     <Wrapper>
       {!isLoading && <Spinner />}

@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import LoadingAnimation from '@/component/loding/LoadingAnimation';
 import EstimateContent from './EstimateContent';
 import {flexCenter} from '@/style/common';
+import {useGuideFlowState} from '@/provider/guideFlowProvider';
 
 function TotalEstimate() {
-  const [loaded, setLoaded] = useState(false);
+  const {showGuide} = useGuideFlowState();
+  const [loaded, setLoaded] = useState(showGuide);
 
   return (
     <Wrapper>
