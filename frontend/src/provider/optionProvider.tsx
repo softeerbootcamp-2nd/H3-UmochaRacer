@@ -2,7 +2,7 @@ import React, {useState, createContext} from 'react';
 
 export const OptionContext = createContext({
   option: 0,
-  setOption: (option: number) => {}, // 초기값으로 빈 함수 설정
+  setOption: (option: number) => {},
 });
 
 interface OptionProviderProps {

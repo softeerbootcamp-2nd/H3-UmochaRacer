@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {colors} from '../../../style/theme';
@@ -9,6 +9,8 @@ import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
 import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 import {getTotalPrice} from '@/component/util/getTotPrice';
+import Warning from '@/component/common/Warning';
+
 interface props {
   onClick: () => void;
   setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
@@ -43,7 +45,9 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
   const {selectedAdditionalOption, setSelectedAdditionalOption} = useContext(
     SelectedAdditionalOptionsContext,
   );
-
+  const [isWarning, setIsWarning] = useState<boolean>(true);
+  const [warningText, setWarningText] = useState<string>('');
+  const [warningIndex, setWarningIndex] = useState<number>(0);
   const totalPrice = getTotalPrice(
     selectedOptions,
     tempOption,
@@ -53,39 +57,68 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
   const handleSelectComplete = () => {
     setIsSaved(true);
     if (option !== 6) {
-      if (tempOption) addOption(tempOption);
+      console.log(option);
+      if (tempOption) {
+        const updatedTempOption = {
+          ...tempOption,
+          userSelect: true,
+        };
+        addOption(updatedTempOption);
+      }
       document.body.style.pointerEvents = 'none';
       setTimeout(() => {
         setOption(option + 1);
         document.body.style.pointerEvents = '';
       }, 2500);
     } else {
-      if (additionOptions) setSelectedAdditionalOption(additionOptions);
-      setOption(option + 1);
+      const notSelectedOptions = selectedOptions.filter(
+        (option) => option.userSelect !== true,
+      );
+      if (notSelectedOptions.length > 0) {
+        const notSelectedIndex = selectedOptions.findIndex(
+          (option) => option.key === notSelectedOptions[0].key,
+        );
+        setIsWarning(false);
+        setWarningText(notSelectedOptions[0].key);
+        setWarningIndex(notSelectedIndex);
+      } else {
+        if (additionOptions) setSelectedAdditionalOption(additionOptions);
+        setOption(option + 1);
+      }
     }
   };
   return (
-    <Wrapper>
-      <Total>
-        <ModalToggle onClick={onClick}>
-          총 견적금액
-          <IconBox>{upperButton(isOpen)}</IconBox>
-        </ModalToggle>
-        <TotalPrice>{totalPrice.toLocaleString()} 원</TotalPrice>
-      </Total>
-      <OptionSwitcher>
-        <PrevOptionButton onClick={() => setOption(option - 1)}>
-          이전
-        </PrevOptionButton>
-        <NextOptionButton
-          onClick={() => {
-            handleSelectComplete();
-          }}
-        >
-          선택 완료
-        </NextOptionButton>
-      </OptionSwitcher>
-    </Wrapper>
+    <>
+      {!isWarning && (
+        <Warning
+          text={warningText}
+          index={warningIndex}
+          onClick={setOption}
+          onPopup={setIsWarning}
+        />
+      )}
+      <Wrapper>
+        <Total>
+          <ModalToggle onClick={onClick}>
+            총 견적금액
+            <IconBox>{upperButton(isOpen)}</IconBox>
+          </ModalToggle>
+          <TotalPrice>{totalPrice.toLocaleString()} 원</TotalPrice>
+        </Total>
+        <OptionSwitcher>
+          <PrevOptionButton onClick={() => setOption(option - 1)}>
+            이전
+          </PrevOptionButton>
+          <NextOptionButton
+            onClick={() => {
+              handleSelectComplete();
+            }}
+          >
+            선택 완료
+          </NextOptionButton>
+        </OptionSwitcher>
+      </Wrapper>
+    </>
   );
 }
 
