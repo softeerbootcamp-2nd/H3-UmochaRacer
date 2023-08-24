@@ -800,6 +800,22 @@
 			path = OhMyCarSetButton;
 			sourceTree = "<group>";
 		};
+		5F3E670E2A95CD9B002BF48A /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				5F3E670F2A95CDA4002BF48A /* ViewModel */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		5F3E670F2A95CDA4002BF48A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		5F448A6C2A91FBD0005D04FF /* OptionDetail */ = {
 			isa = PBXGroup;
 			children = (
@@ -818,22 +834,6 @@
 				5F1E30BA2A9240C5004D229F /* ImageDetailPopupViewController.xib */,
 			);
 			path = ViewController;
-			sourceTree = "<group>";
-		};
-		5F3E670E2A95CD9B002BF48A /* Detail */ = {
-			isa = PBXGroup;
-			children = (
-				5F3E670F2A95CDA4002BF48A /* ViewModel */,
-			);
-			path = Detail;
-			sourceTree = "<group>";
-		};
-		5F3E670F2A95CDA4002BF48A /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */,
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		5F496E012A9448B50024E5B8 /* URLabel */ = {
@@ -1394,7 +1394,6 @@
 				5F496E002A9447EB0024E5B8 /* TextEffectManager.swift in Sources */,
 				4719180C2A83651500B67D54 /* MultiOptionCardButtonViewController.swift in Sources */,
 				5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */,
-				473309962A8BED4D00906FFB /* CarMakingStepInfoEntity.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
