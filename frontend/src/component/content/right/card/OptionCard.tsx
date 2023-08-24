@@ -7,6 +7,7 @@ import {cardDataType} from '../../contentInterface';
 import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
+import TagBox from './Tag';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import DetailSelectedBox from '@/component/common/DetailSelectedBox';
@@ -112,9 +113,9 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
   return (
     <Wrapper onClick={onClick} $selected={selected} $isGiude={showGuide}>
       <Container>
-        <CardSection>
+        <CardSection $height={24}>
           <IconBox>{selected ? SelectIcon(showGuide) : DefaultIcon()}</IconBox>
-
+          {showGuide && <TagBox id={data.id}></TagBox>}
           {data.partsSrc ? (
             <Parts $url={data.partsSrc} $selected={selected}></Parts>
           ) : (
