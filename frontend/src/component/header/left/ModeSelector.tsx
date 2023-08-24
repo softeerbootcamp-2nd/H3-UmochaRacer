@@ -4,30 +4,36 @@ import {colors} from '@/style/theme';
 import selector from '@/assets/icons/selector.svg';
 import {Title3_Medium} from '@/style/fonts';
 import {useModalContext} from '@/provider/modalProvider';
-function getTitleByPath(path: string) {
-  switch (path) {
-    case '/self':
-      return '내 차 만들기 - 셀프모드';
-    case '/guide':
-      return '내 차 만들기 - 가이드모드';
-    default:
-      return '내 차 만들기';
-  }
-}
+import {getTitleByPath} from '@/component/util/getTitleByPath';
+
 function ModeSelector() {
   const {openModal} = useModalContext();
   const currentTitle = getTitleByPath(window.location.pathname);
-  const handleWrapperClick = () => {
-    if (currentTitle === '내 차 만들기 - 셀프모드') {
-      openModal('mode_to_guide');
-    } else if (currentTitle === '내 차 만들기 - 가이드모드') {
-      openModal('mode_to_self');
+
+  const getTitleContent = (title: string) => {
+    switch (title) {
+      case 'none':
+        return '';
+      case 'self':
+        return '내 차 만들기 - 셀프 모드';
+      case 'guide':
+        return '내 차 만들기 - 가이드 모드';
+      default:
+        return title;
     }
   };
+
   return (
-    <Wrapper onClick={handleWrapperClick}>
-      <ModeName>{currentTitle}</ModeName>
-      {currentTitle !== '내 차 만들기' && <ModeSelect src={selector} />}
+    <Wrapper onClick={() => openModal('mode_change')}>
+      <ModeName $isGuide={window.location.pathname === '/guide'}>
+        {getTitleContent(currentTitle)}
+      </ModeName>
+      {currentTitle !== 'none' && (
+        <ModeSelect
+          $isGuide={window.location.pathname === '/guide'}
+          src={selector}
+        />
+      )}
     </Wrapper>
   );
 }
@@ -37,8 +43,13 @@ const Wrapper = styled.div`
   display: flex;
   cursor: pointer;
 `;
-const ModeName = styled.p`
+const ModeName = styled.p<{$isGuide: boolean}>`
   ${Title3_Medium};
-  color: ${colors.Cool_Grey};
+  color: ${({$isGuide}) =>
+    $isGuide ? colors.Sub_Active_Blue : colors.Cool_Grey};
 `;
-const ModeSelect = styled.img``;
+const ModeSelect = styled.img<{$isGuide: boolean}>`
+  ${({$isGuide}) =>
+    $isGuide &&
+    'filter: invert(74%) sepia(11%) saturate(4376%) hue-rotate(167deg) brightness(87%) contrast(83%);'}
+`;

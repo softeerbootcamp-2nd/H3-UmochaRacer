@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import Firework from '@/component/content/totalestimate/estimatecontent/FireWork';
 import {colors} from '@/style/theme';
@@ -10,6 +10,8 @@ import {
   Title2_Medium,
 } from '@/style/fonts';
 import {flexCenter} from '@/style/common';
+import {GUIDE_TOGGLE, useGuideFlowDispatch} from '@/provider/guideFlowProvider';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface ButtonData {
   text: string;
@@ -33,12 +35,25 @@ const TOP_HEIGHT: number = 309;
 const TOP_WIDTH: number = 180;
 
 function EstimateContent() {
+  const dispatch = useGuideFlowDispatch();
+  const {setOption} = useContext(OptionContext);
+
+  const handleClickButton = (index: number) => {
+    if (!index) {
+      setOption(7);
+    }
+    dispatch({type: GUIDE_TOGGLE});
+  };
+
   const buttons = buttonDatas.map((elem: ButtonData, index: number) => {
     return (
       <Bottom.Button
         key={index}
         $background={elem.background}
         $color={elem.color}
+        onClick={() => {
+          handleClickButton(index);
+        }}
       >
         {elem.text}
       </Bottom.Button>

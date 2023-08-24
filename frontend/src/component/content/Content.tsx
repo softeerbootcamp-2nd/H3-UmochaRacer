@@ -10,11 +10,16 @@ import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
+import {useGuideFlowState} from '@/provider/guideFlowProvider';
+import {postFetchData} from '@/api/postFetchData';
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 type cardData = {
   id: number;
   name: string;
   imageSrc: string;
   price: number;
+  saleRate?: number;
 };
 type OptionUrls = Record<number, string | string[]>;
 interface Option {
@@ -24,6 +29,7 @@ interface Option {
   price: number;
   id: number;
   imgSrc: string;
+  userSelect: boolean;
 }
 const keyMapping: Record<number, string> = {
   0: '파워트레인',
@@ -42,13 +48,17 @@ const categoryMapping: Record<number, string> = {
   4: 'color',
   5: 'car',
 };
-function Content() {
-  // 새로고침 막기 변수
-  const preventClose = (e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    e.returnValue = '나갈거임?';
-  };
 
+interface SelectionRate {
+  id: number;
+  selectionRatio: number;
+}
+let selectionRateArr: SelectionRate[][] = [];
+export const preventClose = (e: BeforeUnloadEvent) => {
+  e.preventDefault();
+  e.returnValue = '나갈거임?';
+};
+function Content() {
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -66,25 +76,34 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
+  const {showGuide, dataObject} = useGuideFlowState();
+  const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
   const updateTempOption = (index: number) => {
-    const selectedCardData = cardData[index];
-
-    if (selectedCardData) {
-      const tempOpt: Option = {
-        key: keyMapping[option],
-        value: selectedCardData.name,
-        category: categoryMapping[option],
-        price: selectedCardData.price,
-        id: selectedCardData.id,
-        imgSrc: selectedCardData.imageSrc,
-      };
-
-      setTempOption(tempOpt);
+    if (cardData !== cardDataList[option]) return;
+    console.log(option);
+    if (option !== 6) {
+      const selectedCardData = cardData[index];
+      if (selectedCardData) {
+        const tempOpt: Option = {
+          key: keyMapping[option],
+          value: selectedCardData.name,
+          category: categoryMapping[option],
+          price: selectedCardData.price,
+          id: selectedCardData.id,
+          imgSrc: selectedCardData.imageSrc,
+          userSelect: false,
+        };
+        setTempOption(tempOpt);
+      }
     }
   };
   const setNewIndex = (nextIndex: number) => {
-    setIndex(nextIndex);
+    // if (nextIndex === selectedIndex) return;
     updateTempOption(nextIndex);
+    setIndex(nextIndex);
   };
   const urlEndpoint: OptionUrls = {
     0: '/info/powertrain',
@@ -101,6 +120,18 @@ function Content() {
     ],
     7: '',
   };
+  const sortBySelectionRate = (array: cardData[], index: number) => {
+    const sortedCardDataArray: cardData[] = selectionRateArr[index]
+      .map((rate: {id: number; selectionRatio: number}) => {
+        const card = array.find((card) => rate.id === card.id);
+      
+        if (card) return card;
+      })
+      .filter((card): card is cardData => card !== undefined);
+
+    return sortedCardDataArray;
+  };
+
   useEffect(() => {
     const fetchAllData = async () => {
       const results = await Promise.all(
@@ -112,29 +143,73 @@ function Content() {
           }
         }),
       );
-      const newCardDataList = results.slice(0, 6) as cardData[][];
-      const newAdditionalOptionList = results[6] as cardData[][];
 
-      setCardDataList(newCardDataList);
-      setAddOptionList(newAdditionalOptionList);
-      setcardData(newCardDataList[option]);
+      if (showGuide && dataObject.options) {
+        const requestBody = {
+          age: dataObject.age,
+          gender: dataObject.gender,
+          tag1: dataObject.options[0],
+          tag2: dataObject.options[1],
+          tag3: dataObject.options[2],
+        };
+
+        const endpoints = [
+          '/sale/powertrain/tag',
+          '/sale/driving-system/tag',
+          '/sale/bodytype/tag',
+          '/sale/exterior-color/tag',
+          '/sale/interior-color/tag',
+          '/sale/wheel/tag',
+        ];
+
+        selectionRateArr = await Promise.all(
+          endpoints.map(async (url: string) => {
+            return postFetchData(url, requestBody);
+          }),
+        );
+
+        const sortCardArr = results
+          .slice(0, 6)
+          .map((card, index) => sortBySelectionRate(card, index));
+        setCardDataList(sortCardArr);
+
+        if (option !== 7) {
+          setcardData(sortCardArr[option]);
+        }
+      } else {
+        const newCardDataList = results.slice(0, 6) as cardData[][];
+        const newAdditionalOptionList = results[6] as cardData[][];
+
+        setCardDataList(newCardDataList);
+        setAddOptionList(newAdditionalOptionList);
+        setcardData(newCardDataList[option]);
+      }
+      setIsLoading(true);
     };
 
     fetchAllData();
-    setIsLoading(true);
   }, []);
   useEffect(() => {
+    if (option === 7) return;
+    if (!cardDataList[option]) return;
     if (option !== 6) {
       const currentKey = keyMapping[option];
       const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
       if (foundOption) {
-        setNewIndex(foundOption.id - 1);
+        const targetIndex = cardDataList[option].findIndex(
+          (card) => card.id === foundOption.id,
+        );
+        if (targetIndex > -1) {
+          setNewIndex(targetIndex);
+        }
+      } else {
+        setNewIndex(0);
       }
       setcardData(cardDataList[option]);
-    } else {
-      setNewIndex(0);
     }
-  }, [option]);
+    setAdditionalOptions(selectedAdditionalOption);
+  }, [option, cardDataList, cardData]);
+
   return (
     <Wrapper>
       {!isLoading && <Spinner />}
@@ -145,7 +220,7 @@ function Content() {
               <>
                 <OptionImage
                   key={option}
-                  cardData={cardData}
+                  cardData={cardDataList[option]}
                   selectedIndex={selectedIndex}
                 />
                 <OptionInfo

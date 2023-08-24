@@ -17,6 +17,7 @@ const getOptionArr = (array: Option[]) => {
       price: 43460000,
       id: 1,
       imgSrc: '/image/white.png',
+      userSelect: false,
     },
     ...array,
   ];

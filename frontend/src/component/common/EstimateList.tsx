@@ -5,7 +5,8 @@ import {Option, SelectedOptionContext} from '@/provider/selectedOptionProvider';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import Estimate from './estimate/Estimate';
 import {OptionContext} from '@/provider/optionProvider';
-
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
 interface HeaderTitle {
   [key: string]: string;
 }
@@ -13,6 +14,7 @@ interface TotalEstimateData {
   [key: string]: Option[];
   car: Option[];
   color: Option[];
+  selectOption: Option[];
 }
 
 interface Props {
@@ -25,7 +27,7 @@ interface Props {
 const headerTitles: HeaderTitle = {
   car: '팰리세이드 Le Blanc (르블랑)',
   color: '색상',
-  // selectOption: '옵션',
+  selectOption: '옵션',
 };
 
 const DEFAULT_PRICE = 43460000;
@@ -36,39 +38,61 @@ function EstimateList({
   headerLayout,
   selectionLayout,
 }: Props) {
+  const {option} = useContext(OptionContext);
   const {selectedOptions} = useContext(SelectedOptionContext);
   const {tempOption} = useContext(TempOptionContext);
-  const {option} = useContext(OptionContext);
-
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
+  const {additionOptions} = useContext(TempAdditionalOptionsContext);
   const [estimateDatas, setEstimateDatas] = useState<TotalEstimateData>({
     car: [],
     color: [],
+    selectOption: [],
   });
 
   useEffect(() => {
-    if (!tempOption && option !== 7) return;
     const nextEstimateDatas: TotalEstimateData = {
       car: [],
       color: [],
+      selectOption: [],
     };
     let copyOption = selectedOptions.slice();
 
-    if (tempOption !== null) {
-      copyOption = copyOption.map((elem) => {
-        if (elem.key === tempOption.key) {
-          return tempOption;
-        } else {
-          return elem;
-        }
-      });
-    }
-
+    copyOption = copyOption.map((elem) => {
+      if (elem.key === tempOption.key) {
+        return tempOption;
+      } else {
+        return elem;
+      }
+    });
+    console.log(copyOption);
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);
     });
-
+    const totAdditionalOptions = [
+      ...additionOptions,
+      ...selectedAdditionalOption,
+    ];
+    const additionalOptions = totAdditionalOptions.filter(
+      (value, index, self) =>
+        self.findIndex((item) => item.id === value.id) === index,
+    );
+    additionalOptions.sort((a, b) => a.id - b.id);
+    additionOptions.forEach((elem, index) => {
+      nextEstimateDatas['selectOption'].push({
+        key: index === 0 ? '선택 옵션' : '',
+        value: elem.name,
+        name: elem.name,
+        category: '선택 옵션',
+        price: elem.price,
+        id: elem.id,
+        imgSrc: elem.imageSrc,
+        userSelect: true,
+      });
+    });
     setEstimateDatas(nextEstimateDatas);
-  }, [tempOption]);
+  }, [tempOption, additionOptions]);
 
   const getTotalPirce = (key: string) => {
     let totalPrice = key === 'car' ? DEFAULT_PRICE : 0;

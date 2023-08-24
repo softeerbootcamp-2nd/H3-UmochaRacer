@@ -10,7 +10,9 @@ import SelectedOptionProvider from './provider/selectedOptionProvider';
 import TempOptionProvider from './provider/tempOptionProvider';
 import {CardbProvider} from './provider/cardbProvider';
 import {GiudFlowProvider} from './provider/guideFlowProvider';
-
+import TempAdditionalOptionProvider from './provider/tempAdditionalOptionProvider';
+import SelectedAdditionalOptionProvider from './provider/additionalOptionProvider';
+import {ImageSrcProvider} from './provider/tempImageProvider';
 interface AppProviderProps {
   contexts: React.ElementType[];
   children: React.ReactNode;
@@ -34,6 +36,9 @@ function App() {
         TempOptionProvider,
         CardbProvider,
         GiudFlowProvider,
+        TempAdditionalOptionProvider,
+        SelectedAdditionalOptionProvider,
+        ImageSrcProvider,
       ]}
     >
       <BrowserRouter>

@@ -1,8 +1,16 @@
-import React, {useEffect, useContext, useRef} from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
 import {OptionContext} from '@/provider/optionProvider';
+import {fetchData} from '@/api/fetchData';
+import {getCategory} from '@/component/util/getCategory';
 
 interface cardListProps {
   cardData: cardDataType[];
@@ -37,7 +45,10 @@ const scrollIntoSelected = (
     scrollItem.scrollIntoView(scrollBlock);
   }
 };
-
+interface SelectionRatioProps {
+  id: number;
+  selectionRatio: number;
+}
 function OptionCardList({
   cardData,
   setNewIndex,
@@ -46,13 +57,23 @@ function OptionCardList({
 }: cardListProps) {
   const {option} = useContext(OptionContext);
   const ulRef = useRef<HTMLUListElement>(null);
+  const [ratioList, setRatioList] = useState<SelectionRatioProps[]>([]);
 
   const handleItemClick = (index: number) => {
     setNewIndex(index);
   };
+
   useEffect(() => {
     if (cardData) scrollIntoSelected(ulRef, selectedIndex);
   }, [selectedIndex, cardData]);
+  const categoryName = getCategory(option);
+  useEffect(() => {
+    const fetchRateList = async () => {
+      const getRatioList = await fetchData(`/sale/${categoryName}/select`);
+      setRatioList(getRatioList);
+    };
+    fetchRateList();
+  }, [cardData]);
 
   const cards: React.JSX.Element[] =
     cardData &&
@@ -61,15 +82,20 @@ function OptionCardList({
         key={index}
         selected={selectedIndex === index}
         isSaved={isSaved}
-        onClick={() => handleItemClick(index)}
+        onClick={() => {
+          handleItemClick(index);
+        }}
         data={elem}
+        ratioList={ratioList}
       />
     ));
 
   return (
-    <Wrapper key={option}>
-      <Container ref={ulRef}>{cards}</Container>
-    </Wrapper>
+    <>
+      <Wrapper key={option}>
+        <Container ref={ulRef}>{cards}</Container>
+      </Wrapper>
+    </>
   );
 }
 

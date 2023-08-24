@@ -17,4 +17,5 @@ export interface cardDataType {
   name: string;
   imageSrc: string;
   price: number;
+  saleRate?: number;
 }
