@@ -8,7 +8,7 @@ import ModelChangeModal from './modelChange/ModelChangeModal';
 import PowerTrainModal from './powerTrainChange/PowerTrainModal';
 import SelfChangeModal from './modeChange/SelfChangeModal';
 import GuideChangeModal from './modeChange/GuideChangeModal';
-
+import ModeChangeModal from './modeChange/ModeChangeModal';
 type NonNullableModalType = Exclude<ModalType, null>;
 const ModalContent: Record<NonNullableModalType, React.FC> = {
   exit: () => <ExitModal />,
@@ -17,6 +17,7 @@ const ModalContent: Record<NonNullableModalType, React.FC> = {
   type_change: () => <div>타입 바꾸는 모달</div>,
   mode_to_self: () => <SelfChangeModal />,
   mode_to_guide: () => <GuideChangeModal />,
+  mode_change: () => <ModeChangeModal />,
 };
 function Modal() {
   const {isVisible, activeModal, closeModal} = useModalContext();
@@ -54,10 +55,10 @@ export default Modal;
 const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
-  position: fixed; // 위치를 fixed로 변경
+  position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999999; // z-index를 높게 설정
+  z-index: 9999999;
   ${flexCenter}
 `;
 
