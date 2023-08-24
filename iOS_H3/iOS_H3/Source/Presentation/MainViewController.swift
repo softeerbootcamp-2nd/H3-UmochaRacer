@@ -44,6 +44,8 @@ final class MainViewController: UIViewController {
 
     // MARK: - Properties
 
+    private var isCarDictionaryOn = false
+
     private let textEffectManager = TextEffectManager()
 
     private var selectedTrim = TrimCategory.guideMode
@@ -72,8 +74,12 @@ extension MainViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print(#function)
-        textEffectManager.applyEffect(true, on: view)
+        isCarDictionaryOn.toggle()
+        if isCarDictionaryOn {
+            textEffectManager.applyEffect(true, on: view)
+        } else {
+            textEffectManager.applyEffect(false, on: view)
+        }
     }
 }
 
