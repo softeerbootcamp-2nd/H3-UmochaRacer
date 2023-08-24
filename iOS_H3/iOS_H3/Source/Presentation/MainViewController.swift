@@ -203,7 +203,6 @@ extension MainViewController {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: -safeAreaInset.top),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: safeAreaInset.bottom),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
