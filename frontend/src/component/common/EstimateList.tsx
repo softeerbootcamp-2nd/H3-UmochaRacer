@@ -66,7 +66,7 @@ function EstimateList({
         return elem;
       }
     });
-
+    console.log(copyOption);
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);
     });
@@ -88,6 +88,7 @@ function EstimateList({
         price: elem.price,
         id: elem.id,
         imgSrc: elem.imageSrc,
+        userSelect: true,
       });
     });
     setEstimateDatas(nextEstimateDatas);

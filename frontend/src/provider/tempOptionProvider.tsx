@@ -7,6 +7,7 @@ interface Option {
   price: number;
   id: number;
   imgSrc: string;
+  userSelect: boolean;
 }
 
 const initialOption: Option = {
@@ -16,6 +17,7 @@ const initialOption: Option = {
   price: 0,
   id: 0,
   imgSrc: '',
+  userSelect: false,
 };
 
 export const TempOptionContext = createContext({

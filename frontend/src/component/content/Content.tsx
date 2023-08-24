@@ -29,6 +29,7 @@ interface Option {
   price: number;
   id: number;
   imgSrc: string;
+  userSelect: boolean;
 }
 const keyMapping: Record<number, string> = {
   0: '파워트레인',
@@ -82,9 +83,9 @@ function Content() {
   );
   const updateTempOption = (index: number) => {
     if (cardData !== cardDataList[option]) return;
+    console.log(option);
     if (option !== 6) {
       const selectedCardData = cardData[index];
-
       if (selectedCardData) {
         const tempOpt: Option = {
           key: keyMapping[option],
@@ -93,13 +94,14 @@ function Content() {
           price: selectedCardData.price,
           id: selectedCardData.id,
           imgSrc: selectedCardData.imageSrc,
+          userSelect: false,
         };
-
         setTempOption(tempOpt);
       }
     }
   };
   const setNewIndex = (nextIndex: number) => {
+    // if (nextIndex === selectedIndex) return;
     updateTempOption(nextIndex);
     setIndex(nextIndex);
   };
@@ -119,13 +121,13 @@ function Content() {
     7: '',
   };
   const sortBySelectionRate = (array: cardData[], index: number) => {
-    const sortedCardDataArray: cardData[] = selectionRateArr[index].map(
-      (rate: {id: number; selectionRatio: number}) => {
+    const sortedCardDataArray: cardData[] = selectionRateArr[index]
+      .map((rate: {id: number; selectionRatio: number}) => {
         const card = array.find((card) => rate.id === card.id);
-
-        if (card) return {...card, saleRate: rate.selectionRatio};
-      },
-    );
+      
+        if (card) return card;
+      })
+      .filter((card): card is cardData => card !== undefined);
 
     return sortedCardDataArray;
   };
@@ -193,22 +195,20 @@ function Content() {
     if (option !== 6) {
       const currentKey = keyMapping[option];
       const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
-
       if (foundOption) {
         const targetIndex = cardDataList[option].findIndex(
           (card) => card.id === foundOption.id,
         );
-
         if (targetIndex > -1) {
           setNewIndex(targetIndex);
         }
+      } else {
+        setNewIndex(0);
       }
       setcardData(cardDataList[option]);
-    } else {
-      setNewIndex(0);
     }
     setAdditionalOptions(selectedAdditionalOption);
-  }, [option]);
+  }, [option, cardDataList, cardData]);
 
   return (
     <Wrapper>
