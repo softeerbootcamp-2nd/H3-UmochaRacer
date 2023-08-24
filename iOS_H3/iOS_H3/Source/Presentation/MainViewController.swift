@@ -50,7 +50,9 @@ final class MainViewController: UIViewController {
 
     private lazy var screenWidth = view.window?.windowScene?.screen.bounds.width ?? UIWindow().screen.bounds.size.width
 
-    private lazy var imageViewHeightConstraint = backgroundImageView.heightAnchor.constraint(equalToConstant: screenWidth * Constants.guideModeImageRatio)   // 임시
+    private lazy var imageViewHeightConstraint = backgroundImageView.heightAnchor.constraint(
+        equalToConstant: screenWidth * Constants.guideModeImageRatio
+    )
 
     // MARK: - Lifecycles
 
@@ -189,7 +191,8 @@ extension MainViewController {
             scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: -safeAreaInset.top),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: safeAreaInset.bottom),
+//            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: safeAreaInset.bottom),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             scrollView.contentLayoutGuide.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             scrollView.contentLayoutGuide.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor)
         ])
@@ -235,14 +238,20 @@ extension MainViewController {
             backgroundImageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -Constants.selectCompletionButtonHeight - 20),
+            backgroundImageView.bottomAnchor.constraint(
+                equalTo: scrollView.contentLayoutGuide.bottomAnchor,
+                constant: -Constants.selectCompletionButtonHeight
+            ),
             imageViewHeightConstraint
         ])
     }
 
     private func setupSelectCompletionButtonConstraints() {
         NSLayoutConstraint.activate([
-            selectCompletionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -Constants.selectCompletionButtonBottomOffset),
+            selectCompletionButton.bottomAnchor.constraint(
+                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+                constant: -Constants.selectCompletionButtonBottomOffset
+            ),
             selectCompletionButton.leadingAnchor.constraint(
                 equalTo: scrollView.leadingAnchor,
                 constant: Constants.selectCompletionButtonInset
