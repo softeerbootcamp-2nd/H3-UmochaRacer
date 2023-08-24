@@ -6,7 +6,6 @@ import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
 import {postFetchData} from '@/api/postFetchData';
-import {cardDataType} from '@/component/content/contentInterface';
 import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 
 interface Url {
