@@ -19,6 +19,16 @@ class URLabel: UILabel {
 
     private var tapRecognizer: UITapGestureRecognizer?
 
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.numberOfLines = 0
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.numberOfLines = 0
+    }
+
     var selectedRange: NSRange? {
         didSet {
             if selectedRange != oldValue {

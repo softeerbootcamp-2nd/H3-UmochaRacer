@@ -6,7 +6,7 @@
 //
 
 import Foundation
-struct DetailInfo {
+struct DetailInfoEntity {
     let title: String
     let subTitle: String
     let description: String
