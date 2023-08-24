@@ -75,6 +75,7 @@ const setGiudeOption = (
       price: elem.price,
       id: elem.id,
       imgSrc: elem.imageSrc,
+      userSelect: true,
     };
 
     addOption(newOption);
