@@ -83,7 +83,7 @@ function Content() {
   );
   const updateTempOption = (index: number) => {
     if (cardData !== cardDataList[option]) return;
-    console.log(option);
+
     if (option !== 6) {
       const selectedCardData = cardData[index];
       if (selectedCardData) {
@@ -182,6 +182,9 @@ function Content() {
           .slice(0, 6)
           .map((card, index) => sortBySelectionRate(card, index));
         setCardDataList(sortCardArr);
+
+        const newAdditionalOptionList = results[6] as cardData[][];
+        setAddOptionList(newAdditionalOptionList);
 
         if (option !== 7) {
           setcardData(sortCardArr[option]);
