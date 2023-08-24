@@ -1,3 +1,4 @@
+import {preventClose} from '@/component/content/Content';
 import React, {createContext, useContext, ReactNode, useState} from 'react';
 
 export type ModalType =
@@ -26,7 +27,11 @@ interface ModalProviderProps {
 export const ModalProvider: React.FC<ModalProviderProps> = ({children}) => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeModal, setActiveModal] = useState<ModalType>(null);
-
+  if (isVisible) {
+    window.removeEventListener('beforeunload', preventClose);
+  } else {
+    window.addEventListener('beforeunload', preventClose);
+  }
   function openModal(type: ModalType) {
     closeModal();
     setActiveModal(type);

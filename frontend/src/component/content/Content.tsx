@@ -52,14 +52,11 @@ interface SelectionRate {
   selectionRatio: number;
 }
 let selectionRateArr: SelectionRate[][] = [];
-
+export const preventClose = (e: BeforeUnloadEvent) => {
+  e.preventDefault();
+  e.returnValue = '나갈거임?';
+};
 function Content() {
-  // 새로고침 막기 변수
-  const preventClose = (e: BeforeUnloadEvent) => {
-    e.preventDefault();
-    e.returnValue = '나갈거임?';
-  };
-
   useEffect(() => {
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -121,13 +118,13 @@ function Content() {
     7: '',
   };
   const sortBySelectionRate = (array: cardData[], index: number) => {
-    const sortedCardDataArray: cardData[] = selectionRateArr[index]
-      .map((rate: {id: number; selectionRatio: number}) => {
+    const sortedCardDataArray: cardData[] = selectionRateArr[index].map(
+      (rate: {id: number; selectionRatio: number}) => {
         const card = array.find((card) => rate.id === card.id);
 
         if (card) return card;
-      })
-      .filter((card: cardData | undefined): card is cardData => !!card);
+      },
+    );
 
     return sortedCardDataArray;
   };
@@ -184,10 +181,10 @@ function Content() {
         setAddOptionList(newAdditionalOptionList);
         setcardData(newCardDataList[option]);
       }
+      setIsLoading(true);
     };
 
     fetchAllData();
-    setIsLoading(true);
   }, []);
   useEffect(() => {
     if (option === 7) return;
