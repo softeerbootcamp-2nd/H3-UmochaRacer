@@ -172,7 +172,13 @@ extension MainViewController {
 
     @objc
     private func selectCompletionButtonDidTapped(_ sender: UIButton) {
-        print(#function)
+        let networkService = NetworkService()
+        let carInfoRepository = CarInfoRepository(networkService: networkService)
+        let introRepository = IntroRepository(networkService: networkService)
+        let selfModeUsecase = SelfModeUsecase(carInfoRepository: carInfoRepository, introRepsitory: introRepository)
+        let carMakingViewModel = CarMakingViewModel(selfModeUsecase: selfModeUsecase)
+        let viewController = CarMakingViewController(mode: .selfMode, viewModel: carMakingViewModel)
+        navigationController?.pushViewController(viewController, animated: true)
     }
 
     private func addSubviews() {
