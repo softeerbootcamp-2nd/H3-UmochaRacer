@@ -15,8 +15,8 @@ public class SummaryMapper {
 
     public List<RatioSummaryResponse> map(List<RatioSummary> dto) {
         int size = dto.size();
-        int totalCount = dto.get(0).getSelectionCount();
-        return IntStream.range(1, size)
+        int totalCount = dto.get(size-1).getSelectionCount();
+        return IntStream.range(0, size-1)
                 .mapToObj(dto::get)
                 .map(d -> calculateRatio(d, totalCount))
                 .collect(Collectors.toList());

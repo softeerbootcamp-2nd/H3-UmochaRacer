@@ -9,6 +9,7 @@ import com.example.backend.domain.sale.mapper.SummaryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -38,7 +39,9 @@ public class SelfModeServiceFactory {
 
     private List<RatioSummaryResponse> mapToResponse(List<RatioSummary> saleSummaries) {
         if (saleSummaries.isEmpty()) throw new RestApiException(ResultCode.SALES_NOT_FOUND);
-        return summaryMapper.map(saleSummaries);
+        List<RatioSummaryResponse> result = summaryMapper.map(saleSummaries);
+        Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
+        return result;
     }
 
 }

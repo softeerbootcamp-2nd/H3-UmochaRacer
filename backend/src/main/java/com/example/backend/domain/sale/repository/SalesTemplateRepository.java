@@ -22,7 +22,7 @@ public class SalesTemplateRepository {
         String query = "SELECT m." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE m.trim_id = 1\n" +
-                "GROUP BY m." + columnId + " WITH ROLLUP ORDER BY select_count DESC ";
+                "GROUP BY m." + columnId + " WITH ROLLUP ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
@@ -31,7 +31,7 @@ public class SalesTemplateRepository {
         String query = "SELECT s." + columnId + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE m.trim_id = 1\n" +
-                "GROUP BY s." + columnId + " WITH ROLLUP ORDER BY select_count DESC";
+                "GROUP BY s." + columnId + " WITH ROLLUP ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
@@ -67,7 +67,7 @@ public class SalesTemplateRepository {
                 makeTagListCombination(estimateRequest.getTagList()) +
                 "        )\n" +
                 "    )\n" +
-                "GROUP BY "+ targetId + " WITH ROLLUP ORDER BY select_count DESC ";
+                "GROUP BY "+ targetId + " WITH ROLLUP ";
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 
@@ -98,7 +98,7 @@ public class SalesTemplateRepository {
         String query = "SELECT s." + targetId + " as id, COUNT(*) as select_count FROM MODEL m \n" +
                 "INNER JOIN SALES s ON s.model_id = m.id \n" +
                 "WHERE " + gender.getQueryString() + " m.trim_id = 1 AND " + age + " <= s.age AND s.age <= " + (age+9) + "\n"+
-                " GROUP BY s." + targetId + " WITH ROLLUP ORDER BY select_count DESC ";
+                " GROUP BY s." + targetId + " WITH ROLLUP ";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
@@ -119,7 +119,7 @@ public class SalesTemplateRepository {
                 makeTagListCombination(estimateRequest.getTagList()) +
                 "        )\n" +
                 "    )\n" +
-                "GROUP BY "+ ADDITIONAL_OPTION_ID + " WITH ROLLUP ORDER BY select_count desc";
+                "GROUP BY "+ ADDITIONAL_OPTION_ID + " WITH ROLLUP ";
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
 

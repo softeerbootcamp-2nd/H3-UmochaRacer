@@ -40,8 +40,8 @@ jobs:
         run: |
           cd ./src/main
           cd ./resources
-          touch ./application-dev.yml
-          echo "${{ secrets.APPLICATION }}" > ./application-dev.yml
+          touch ./application.yml
+          echo "${{ secrets.APPLICATION }}" > ./application.yml
         shell: bash
 
       - name: Grant exec permission for gradlew
