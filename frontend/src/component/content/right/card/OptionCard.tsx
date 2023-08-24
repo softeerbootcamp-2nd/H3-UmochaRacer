@@ -7,11 +7,13 @@ import {cardDataType} from '../../contentInterface';
 import DetailBox from '@/component/common/DetilBox';
 import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
+import TagBox from './Tag';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
 import DetailSelectedBox from '@/component/common/DetailSelectedBox';
 import {getCategory} from '@/component/util/getCategory';
 import {useImageSrcDispatch} from '@/provider/tempImageProvider';
+import {useGuideFlowState} from '@/provider/guideFlowProvider';
 interface DetailData {
   title: string;
   description: string;
@@ -28,7 +30,7 @@ interface SelectionRatioProps {
   id: number;
   selectionRatio: number;
 }
-const SelectIcon = () => {
+const SelectIcon = (isGuide: boolean) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +41,7 @@ const SelectIcon = () => {
     >
       <path
         d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM10.643 16.243L17.713 9.172L16.299 7.758L10.643 13.415L7.814 10.586L6.4 12L10.643 16.243Z"
-        fill="#0E2B5C"
+        fill={isGuide ? colors.Sub_Active_Blue : '#0E2B5C'}
       />
     </svg>
   );
@@ -71,6 +73,7 @@ const hasDetail = (option: number) => {
 function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
   const [toggle, setToggle] = useState(false);
   const {option} = useContext(OptionContext);
+  const {showGuide} = useGuideFlowState();
   const [descriptionData, setDescriptionData] = useState<
     DetailData | DetailData[] | null
   >(null);
@@ -108,11 +111,11 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
     if (matchIdRatio) setRate(matchIdRatio.selectionRatio);
   }, [ratioList]);
   return (
-    <Wrapper onClick={onClick} $selected={selected}>
+    <Wrapper onClick={onClick} $selected={selected} $isGiude={showGuide}>
       <Container>
-        <CardSection>
-          <IconBox>{selected ? SelectIcon() : DefaultIcon()}</IconBox>
-
+        <CardSection $height={24}>
+          <IconBox>{selected ? SelectIcon(showGuide) : DefaultIcon()}</IconBox>
+          {showGuide && <TagBox id={data.id}></TagBox>}
           {data.partsSrc ? (
             <Parts $url={data.partsSrc} $selected={selected}></Parts>
           ) : (
@@ -122,7 +125,11 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
 
         <CardSection $height={60}>
           <TextBox>
-            <Text1 className="blue">구매자의 {rate}%가 선택했어요!</Text1>
+            <Text1 className="blue" $isGiude={showGuide}>
+              {data.saleRate
+                ? `나와 비슷한 ${data.saleRate}%가 선택한`
+                : `구매자의 ${rate}%가 선택했어요!`}
+            </Text1>
             <Text2 className="black">{data.name}</Text2>
           </TextBox>
           {data.iconSrc ? (
@@ -183,11 +190,13 @@ const flexBetween = css`
   justify-content: space-between;
 `;
 
-const Select = css`
-  border: 2px solid ${colors.Main_Hyundai_Blue};
+const Select = css<{$isGiude: boolean}>`
+  border: 2px solid
+    ${({$isGiude}) =>
+      $isGiude ? colors.Sub_Active_Blue : colors.Main_Hyundai_Blue};
 `;
 
-const Default = css`
+const Default = css<{$isGiude: boolean}>`
   background: ${colors.Cool_Grey_001};
   border: 2px solid transparent;
   cursor: pointer;
@@ -195,7 +204,8 @@ const Default = css`
   &:hover {
     border: 2px solid ${colors.Cool_Grey_003};
     .blue {
-      color: ${colors.Main_Hyundai_Blue};
+      color: ${({$isGiude}) =>
+        $isGiude ? colors.Sub_Active_Blue : colors.Main_Hyundai_Blue};
     }
     .black {
       color: ${colors.Cool_Grey};
@@ -207,7 +217,7 @@ const Default = css`
   }
 `;
 
-const Wrapper = styled.li<{$selected: boolean}>`
+const Wrapper = styled.li<{$selected: boolean; $isGiude: boolean}>`
   display: flex;
   flex-shrink: 0;
   flex-direction: column;
@@ -266,13 +276,14 @@ const TextBox = styled.div`
   gap: 4px;
 `;
 
-const Text1 = styled.div`
+const Text1 = styled.div<{$isGiude: boolean}>`
   ${Popup_Regular}
   font-size: 12px;
   line-height: 130%;
   height: 16px;
   margin-top: 10px;
-  color: ${colors.Main_Hyundai_Blue};
+  color: ${({$isGiude}) =>
+    $isGiude ? colors.Sub_Active_Blue : colors.Main_Hyundai_Blue};
 `;
 
 const Text2 = styled.div`
