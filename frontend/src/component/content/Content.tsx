@@ -11,6 +11,7 @@ import {fetchData} from '@/api/fetchData';
 import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
+import {postFetchData} from '@/api/postFetchData';
 
 type cardData = {
   id: number;
@@ -45,6 +46,8 @@ const categoryMapping: Record<number, string> = {
   5: 'car',
 };
 
+let selectionRateArr;
+
 function Content() {
   // 새로고침 막기 변수
   const preventClose = (e: BeforeUnloadEvent) => {
@@ -69,7 +72,7 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
-  const {showGuide, selectionRateArr} = useGuideFlowState();
+  const {showGuide, dataObject} = useGuideFlowState();
 
   const updateTempOption = (index: number) => {
     if (cardData !== cardDataList[option]) return;
@@ -91,8 +94,8 @@ function Content() {
     }
   };
   const setNewIndex = (nextIndex: number) => {
-    setIndex(nextIndex);
     updateTempOption(nextIndex);
+    setIndex(nextIndex);
   };
   const urlEndpoint: OptionUrls = {
     0: '/info/powertrain',
@@ -109,8 +112,8 @@ function Content() {
     ],
     7: '',
   };
-  const sortBySelectionRate = (array: cardData[]): cardData[] => {
-    const sortedCardDataArray: cardData[] = selectionRateArr[option]
+  const sortBySelectionRate = (array: cardData[], index: number) => {
+    const sortedCardDataArray: cardData[] = selectionRateArr[index]
       .map((rate) => {
         const card = array.find((card) => rate.id === card.id);
 
@@ -120,6 +123,7 @@ function Content() {
 
     return sortedCardDataArray;
   };
+
   useEffect(() => {
     const fetchAllData = async () => {
       const results = await Promise.all(
@@ -131,17 +135,45 @@ function Content() {
           }
         }),
       );
-      const newCardDataList = results.slice(0, 6) as cardData[][];
-      const newAdditionalOptionList = results[6] as cardData[][];
 
-      setCardDataList(newCardDataList);
-      setAddOptionList(newAdditionalOptionList);
       if (showGuide) {
-        if (option === 7) return;
+        const requestBody = {
+          age: dataObject.age,
+          gender: dataObject.gender,
+          tag1: dataObject.options[0],
+          tag2: dataObject.options[1],
+          tag3: dataObject.options[2],
+        };
 
-        const sortCardArr = sortBySelectionRate(newCardDataList[option]);
-        setcardData(sortCardArr);
+        const endpoints = [
+          '/sale/powertrain/tag',
+          '/sale/driving-system/tag',
+          '/sale/bodytype/tag',
+          '/sale/exterior-color/tag',
+          '/sale/interior-color/tag',
+          '/sale/wheel/tag',
+        ];
+
+        selectionRateArr = await Promise.all(
+          endpoints.map(async (url: string) => {
+            return postFetchData(url, requestBody);
+          }),
+        );
+
+        const sortCardArr = results
+          .slice(0, 6)
+          .map((card, index) => sortBySelectionRate(card, index));
+        setCardDataList(sortCardArr);
+
+        if (option !== 7) {
+          setcardData(sortCardArr[option]);
+        }
       } else {
+        const newCardDataList = results.slice(0, 6) as cardData[][];
+        const newAdditionalOptionList = results[6] as cardData[][];
+
+        setCardDataList(newCardDataList);
+        setAddOptionList(newAdditionalOptionList);
         setcardData(newCardDataList[option]);
       }
     };
@@ -151,18 +183,21 @@ function Content() {
   }, []);
   useEffect(() => {
     if (option === 7) return;
+    if (!cardDataList[option]) return;
     if (option !== 6) {
       const currentKey = keyMapping[option];
       const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
+
       if (foundOption) {
-        setNewIndex(foundOption.id - 1);
+        const targetIndex = cardDataList[option].findIndex(
+          (card) => card.id === foundOption.id,
+        );
+
+        if (targetIndex > -1) {
+          setNewIndex(targetIndex);
+        }
       }
-      if (showGuide) {
-        const sortCardArr = sortBySelectionRate(cardDataList[option]);
-        setcardData(sortCardArr);
-      } else {
-        setcardData(cardDataList[option]);
-      }
+      setcardData(cardDataList[option]);
     } else {
       setNewIndex(0);
     }

@@ -1,13 +1,11 @@
 import React, {createContext, useContext, useEffect, useReducer} from 'react';
 import {fetchData} from '@/api/fetchData';
-import {postFetchData} from '@/api/postFetchData';
 
 export const INIT_DATA = 'INIT_DATA';
 export const UPDATE_AGE = 'UPDATE_AGE';
 export const UPDATE_GENDER = 'UPDATE_GENDER';
 export const UPDATE_OPTIONS = 'UPDATE_OPTIONS';
 export const GUIDE_TOGGLE = 'GUIDE_TOGGLE';
-const UPDATE_RATE = 'UPDATE_RATE';
 
 export interface Tag {
   id: number;
@@ -156,50 +154,9 @@ export const GiudFlowProvider = ({children}: {children: React.ReactNode}) => {
     }
   };
 
-  const getTags = async (params: object) => {
-    const endpoints = [
-      '/sale/powertrain/tag',
-      '/sale/driving-system/tag',
-      '/sale/bodytype/tag',
-      '/sale/exterior-color/tag',
-      '/sale/interior-color/tag',
-      '/sale/wheel/tag',
-    ];
-    return Promise.all(
-      endpoints.map(async (url: string) => {
-        return postFetchData(url, params);
-      }),
-    );
-  };
-
   useEffect(() => {
     fetchOptionTag();
   }, []);
-
-  useEffect(() => {
-    const fetchTag = async () => {
-      if (state.dataObject.options === undefined) return;
-
-      const requestBody = {
-        age: state.dataObject.age,
-        gender: state.dataObject.gender,
-        tag1: state.dataObject.options[0],
-        tag2: state.dataObject.options[1],
-        tag3: state.dataObject.options[2],
-      };
-
-      const selectionRateArr = await getTags(requestBody);
-
-      dispatch({
-        type: UPDATE_RATE,
-        payload: {selectionRateArr: selectionRateArr},
-      });
-    };
-
-    if (state.showGuide) {
-      fetchTag();
-    }
-  }, [state.showGuide]);
 
   return (
     <GuideFlowStateContext.Provider value={state}>
