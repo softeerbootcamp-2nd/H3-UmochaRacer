@@ -44,6 +44,7 @@
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		4741C3662A964A59009FD883 /* CarMakingStepInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */; };
+		4741C36E2A977BB9009FD883 /* DictionaryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */; };
 		4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
 		4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
 		4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
@@ -267,6 +268,7 @@
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
+		4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEndpoint.swift; sourceTree = "<group>"; };
 		4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryCell.swift; sourceTree = "<group>"; };
 		4762D45E2A9219DC007F312D /* CarMakingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingCategory.swift; sourceTree = "<group>"; };
 		4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryHeaderView.swift; sourceTree = "<group>"; };
@@ -680,6 +682,7 @@
 				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
 				5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */,
 				5F448A662A91D000005D04FF /* IntroEndpoint.swift */,
+				4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1299,6 +1302,7 @@
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
+				4741C36E2A977BB9009FD883 /* DictionaryEndpoint.swift in Sources */,
 				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
