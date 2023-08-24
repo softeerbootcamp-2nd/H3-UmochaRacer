@@ -4,38 +4,29 @@ import {colors} from '@/style/theme';
 import selector from '@/assets/icons/selector.svg';
 import {Title3_Medium} from '@/style/fonts';
 import {useModalContext} from '@/provider/modalProvider';
+import {getTitleByPath} from '@/component/util/getTitleByPath';
 
-function getTitleByPath(path: string) {
-  switch (path) {
-    case '/self':
-      return '내 차 만들기 - 셀프모드';
-    case '/guide':
-      return '내 차 만들기 - 가이드모드';
-    default:
-      return '내 차 만들기';
-  }
-}
 function ModeSelector() {
   const {openModal} = useModalContext();
   const currentTitle = getTitleByPath(window.location.pathname);
-  const handleWrapperClick = () => {
-    if (currentTitle === '내 차 만들기 - 셀프모드') {
-      openModal('mode_to_guide');
-    } else if (currentTitle === '내 차 만들기 - 가이드모드') {
-      openModal('mode_to_self');
+
+  const getTitleContent = (title: string) => {
+    switch (title) {
+      case 'none':
+        return '';
+      case 'self':
+        return '내 차 만들기 - 셀프 모드';
+      case 'guide':
+        return '내 차 만들기 - 가이드 모드';
+      default:
+        return title;
     }
   };
+
   return (
-    <Wrapper onClick={handleWrapperClick}>
-      <ModeName $isGuide={window.location.pathname === '/guide'}>
-        {currentTitle}
-      </ModeName>
-      {currentTitle !== '내 차 만들기' && (
-        <ModeSelect
-          src={selector}
-          $isGuide={window.location.pathname === '/guide'}
-        />
-      )}
+    <Wrapper onClick={() => openModal('mode_change')}>
+      <ModeName $isGuide={window.location.pathname === '/guide'}>{getTitleContent(currentTitle)}</ModeName>
+      {currentTitle !== 'none' && <ModeSelect src={selector} />}
     </Wrapper>
   );
 }

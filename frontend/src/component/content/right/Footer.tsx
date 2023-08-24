@@ -6,7 +6,9 @@ import {Body2_Medium, Title1_Medium} from '@/style/fonts';
 import {OptionContext} from '@/provider/optionProvider';
 import {TempOptionContext} from '@/provider/tempOptionProvider';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
-
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+import {getTotalPrice} from '@/component/util/getTotPrice';
 interface props {
   onClick: () => void;
   setIsSaved: React.Dispatch<React.SetStateAction<boolean>>;
@@ -33,28 +35,35 @@ const upperButton = (isModalOpen: boolean) => {
   );
 };
 
-const DEFAULT_PRICE = 43460000;
 function Footer({onClick, isOpen, setIsSaved}: props) {
   const {option, setOption} = useContext(OptionContext);
   const {tempOption} = useContext(TempOptionContext);
   const {selectedOptions, addOption} = useContext(SelectedOptionContext);
+  const {additionOptions} = useContext(TempAdditionalOptionsContext);
+  const {selectedAdditionalOption, setSelectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
 
-  let totalPrice = DEFAULT_PRICE;
-  let copyOption = selectedOptions.slice();
-
-  if (tempOption !== null) {
-    copyOption = copyOption.map((elem) => {
-      if (elem.key === tempOption.key) {
-        return tempOption;
-      } else {
-        return elem;
-      }
-    });
-  }
-  copyOption.map((elem) => {
-    totalPrice += elem.price;
-  });
-
+  const totalPrice = getTotalPrice(
+    selectedOptions,
+    tempOption,
+    additionOptions,
+    selectedAdditionalOption,
+  );
+  const handleSelectComplete = () => {
+    setIsSaved(true);
+    if (option !== 6) {
+      if (tempOption) addOption(tempOption);
+      document.body.style.pointerEvents = 'none';
+      setTimeout(() => {
+        setOption(option + 1);
+        document.body.style.pointerEvents = '';
+      }, 2500);
+    } else {
+      if (additionOptions) setSelectedAdditionalOption(additionOptions);
+      setOption(option + 1);
+    }
+  };
   return (
     <Wrapper>
       <Total>
@@ -70,13 +79,7 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
         </PrevOptionButton>
         <NextOptionButton
           onClick={() => {
-            setIsSaved(true);
-            if (tempOption) addOption(tempOption);
-            document.body.style.pointerEvents = 'none';
-            setTimeout(() => {
-              setOption(option + 1);
-              document.body.style.pointerEvents = '';
-            }, 2500);
+            handleSelectComplete();
           }}
         >
           선택 완료

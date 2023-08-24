@@ -9,19 +9,24 @@ import DetailToggle from './DetailToggle';
 import FeedBack from './FeedBack';
 import {OptionContext} from '@/provider/optionProvider';
 import {fetchData} from '@/api/fetchData';
-import {getCategory} from '@/component/util/getCategory';
 import DetailSelectedBox from '@/component/common/DetailSelectedBox';
-
+import {getCategory} from '@/component/util/getCategory';
+import {useImageSrcDispatch} from '@/provider/tempImageProvider';
+interface DetailData {
+  title: string;
+  description: string;
+  info?: string;
+}
 interface CardProps {
   selected: boolean;
   isSaved: boolean;
   onClick: () => void;
   data: cardDataType;
+  ratioList: SelectionRatioProps[];
 }
-interface DetailData {
-  title: string;
-  description: string;
-  info?: string;
+interface SelectionRatioProps {
+  id: number;
+  selectionRatio: number;
 }
 const SelectIcon = () => {
   return (
@@ -63,12 +68,14 @@ const hasDetail = (option: number) => {
   return DetailOption.has(option);
 };
 
-function OptionCard({selected, onClick, data, isSaved}: CardProps) {
+function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
   const [toggle, setToggle] = useState(false);
   const {option} = useContext(OptionContext);
   const [descriptionData, setDescriptionData] = useState<
     DetailData | DetailData[] | null
   >(null);
+  const [rate, setRate] = useState<number>(0);
+  const dispatch = useImageSrcDispatch();
   const clickedToggle = useCallback(
     (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -76,6 +83,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
     },
     [toggle],
   );
+  const categoryName = getCategory(option);
   const handleToggleHover = () => {
     if (hasDetail(option) && !descriptionData) {
       const endpoint = `/detail/${categoryName}/${data.id}`;
@@ -89,10 +97,16 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
     }
   };
   const handleToggleHoverEnd = () => {};
-  const categoryName = getCategory(option);
   useEffect(() => {
     setToggle(false);
+    dispatch({type: 'RESET_IMAGE_SRC'});
   }, [selected]);
+  useEffect(() => {
+    const matchIdRatio = ratioList.find(
+      (item: SelectionRatioProps) => item.id === data.id,
+    );
+    if (matchIdRatio) setRate(matchIdRatio.selectionRatio);
+  }, [ratioList]);
   return (
     <Wrapper onClick={onClick} $selected={selected}>
       <Container>
@@ -108,7 +122,7 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
 
         <CardSection $height={60}>
           <TextBox>
-            <Text1 className="blue">구매자의 63%가 선택했어요!</Text1>
+            <Text1 className="blue">구매자의 {rate}%가 선택했어요!</Text1>
             <Text2 className="black">{data.name}</Text2>
           </TextBox>
           {data.iconSrc ? (
@@ -155,7 +169,9 @@ function OptionCard({selected, onClick, data, isSaved}: CardProps) {
           )}
         </CardSection>
       </Container>
-      {isSaved && selected && <FeedBack id={data.id}></FeedBack>}
+      {isSaved && option !== 6 && selected && (
+        <FeedBack id={data.id}></FeedBack>
+      )}
     </Wrapper>
   );
 }

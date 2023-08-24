@@ -1,4 +1,4 @@
-export const fetchData = async (url : string) =>{
+export const fetchData = async (url: string) => {
   try {
     const response = await fetch(import.meta.env.VITE_API_URL + url, {
       method: 'GET',
@@ -17,4 +17,4 @@ export const fetchData = async (url : string) =>{
   } catch (error) {
     throw new Error('Error fetching data');
   }
-}
+};

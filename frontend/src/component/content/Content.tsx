@@ -12,7 +12,8 @@ import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {postFetchData} from '@/api/postFetchData';
-
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider'
 type cardData = {
   id: number;
   name: string;
@@ -72,9 +73,12 @@ function Content() {
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const {selectedOptions} = useContext(SelectedOptionContext);
-  const {showGuide, dataObject} = useGuideFlowState();
-
-  const updateTempOption = (index: number) => {
+  const {showGuide, dataObject} = useGuideFlowState(); 
+  const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
+ const updateTempOption = (index: number) => {
     if (cardData !== cardDataList[option]) return;
     if (option !== 6) {
       const selectedCardData = cardData[index];
@@ -201,6 +205,7 @@ function Content() {
     } else {
       setNewIndex(0);
     }
+    setAdditionalOptions(selectedAdditionalOption);
   }, [option]);
 
   return (
