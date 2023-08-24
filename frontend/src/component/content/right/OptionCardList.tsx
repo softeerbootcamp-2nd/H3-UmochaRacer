@@ -1,4 +1,10 @@
-import React, {useEffect, useContext, useRef, useState} from 'react';
+import React, {
+  useEffect,
+  useContext,
+  useRef,
+  useState,
+  useCallback,
+} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';
@@ -56,6 +62,7 @@ function OptionCardList({
   const handleItemClick = (index: number) => {
     setNewIndex(index);
   };
+
   useEffect(() => {
     if (cardData) scrollIntoSelected(ulRef, selectedIndex);
   }, [selectedIndex, cardData]);
@@ -67,6 +74,7 @@ function OptionCardList({
     };
     fetchRateList();
   }, [cardData]);
+
   const cards: React.JSX.Element[] =
     cardData &&
     cardData.map((elem, index) => (
@@ -74,7 +82,9 @@ function OptionCardList({
         key={index}
         selected={selectedIndex === index}
         isSaved={isSaved}
-        onClick={() => handleItemClick(index)}
+        onClick={() => {
+          handleItemClick(index);
+        }}
         data={elem}
         ratioList={ratioList}
       />
