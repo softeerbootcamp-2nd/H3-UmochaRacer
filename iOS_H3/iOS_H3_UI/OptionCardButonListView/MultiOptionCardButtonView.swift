@@ -36,6 +36,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     // MARK: - Properties
 
     private let carMakingMode: CarMakingMode
+    private var currentStep: CarMakingStep = .powertrain
 
     private var dataSource: CollectionViewDiffableDataSource!
 
@@ -47,7 +48,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Lifecycles
 
-    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step : CarMakingStep) {
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
         super.init(frame: frame)
 
@@ -73,12 +74,13 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Helpers
 
-    func configure(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
+    func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         dotIndicator.numberOfPages = cardInfos.count
+        currentStep = step
         updateSnapshot(item: cardInfos)
     }
 
-    func reloadOptionCards(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         cardInfos.enumerated().forEach { (index, info) in
             let indexPath = IndexPath(row: index, section: 0)
             guard let cell = optionCardCollectionView.cellForItem(at: indexPath) as? OptionCardCell else {
@@ -120,14 +122,6 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
     }
 }
 
-// MARK: - OptionCardButton Delegate
-
-extension MultiOptionCardButtonView: OptionCardButtonDelegate {
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton, option: OptionCardInfo, step : CarMakingStep) {
-        print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
-    }
-}
-
 // MARK: - UICollectionView Delegate
 
 extension MultiOptionCardButtonView: UICollectionViewDelegate {
@@ -156,7 +150,7 @@ extension MultiOptionCardButtonView: UICollectionViewDelegate {
 
 extension MultiOptionCardButtonView {
 
-    private func setupOptionCardCollectionView(step : CarMakingStep) {
+    private func setupOptionCardCollectionView(step: CarMakingStep) {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
         optionCardCollectionView.delegate = self
@@ -201,7 +195,7 @@ extension MultiOptionCardButtonView {
         optionCardCollectionView.register(OptionCardCell.self, forCellWithReuseIdentifier: OptionCardCell.identifier)
     }
 
-    private func setupCollectionViewDataSource(step : CarMakingStep) {
+    private func setupCollectionViewDataSource(step: CarMakingStep) {
         dataSource = CollectionViewDiffableDataSource(
             collectionView: optionCardCollectionView
         ) { [weak self] (collectionView, indexPath, item) in
@@ -213,7 +207,7 @@ extension MultiOptionCardButtonView {
                 return OptionCardCell()
             }
 
-            cell.configure(carMakingMode: carMakingMode, info: item, step: step)
+            cell.configure(carMakingMode: carMakingMode, info: item, step: currentStep)
 
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in
