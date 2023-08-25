@@ -68,13 +68,12 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         optionImageView.image = nil
         optionDidSelected = PassthroughSubject<Int, Never>()
-        configure(urString: nil)
     }
 
     // MARK: - Helpers
     func configure(carMakingStepInfo: CarMakingStepInfo) {
         configure(carMakingStepTitle: carMakingStepInfo.step.title)
-        configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
+        configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray, step: carMakingStepInfo.step)
 
         if carMakingStepInfo.step == .powertrain {
             configure(urString: URString(fullText: carMakingStepInfo.step.title, cardbRange: [.init(0...5)]))
@@ -100,20 +99,20 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         optionImageView.loadCachedImage(of: bannerImageURL)
     }
 
-    func configure(optionInfoArray: [OptionCardInfo]) {
+    func configure(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
         bannerImagesOfOption = optionInfoArray.map { $0.bannerImageURL }
         if !bannerImagesOfOption.isEmpty { configure(bannerImageURL: bannerImagesOfOption[0]) }
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
-        optionButtonListView.configure(with: optionInfoArray)
+        optionButtonListView.configure(with: optionInfoArray, step: step)
     }
 
-    func update(optionInfoArray: [OptionCardInfo]) {
+    func update(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
-        optionButtonListView.reloadOptionCards(with: optionInfoArray)
+        optionButtonListView.reloadOptionCards(with: optionInfoArray, step: step)
     }
 
     func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
@@ -145,6 +144,14 @@ extension CarMakingCollectionViewCell: OptionCardButtonListViewDelegate {
     ) {
         if optionCardButtonListView is MultiOptionCardButtonView {
             configure(bannerImageURL: bannerImagesOfOption[index])
+        }
+    }
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable, detailOptionId: Int
+    ) {
+        if optionCardButtonListView is MultiOptionCardButtonView {
+           print("자세히 보기 버튼 구현 필요")
         }
     }
 }

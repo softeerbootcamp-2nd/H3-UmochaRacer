@@ -63,8 +63,8 @@ final class OptionCardCell: UICollectionViewCell {
 
     // MARK: - Helpers
 
-    func configure(carMakingMode: CarMakingMode, info: OptionCardInfo) {
-        optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info)
+    func configure(carMakingMode: CarMakingMode, info: OptionCardInfo, step : CarMakingStep) {
+        optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info, step: step)
     }
 
     func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {

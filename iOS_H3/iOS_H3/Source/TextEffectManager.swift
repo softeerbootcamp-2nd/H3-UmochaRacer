@@ -9,13 +9,17 @@ import UIKit
 import Combine
 
 class TextEffectManager {
-    var selectedLabel: URLabel?
+    static let shared = TextEffectManager()
+    private init() { }
+    private var selectedLabel: URLabel?
+    private (set) var isDictionaryFunctionActive: Bool = false
 
     func observeLabel(_ label: URLabel) {
         label.delegate = self
     }
 
     func applyEffect(_ isOn: Bool, on view: UIView) {
+        isDictionaryFunctionActive = isOn
         for subview in view.subviews {
             if let label = subview as? URLabel, let dictionaryStr = label.urString {
                 observeLabel(label)

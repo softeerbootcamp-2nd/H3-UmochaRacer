@@ -8,72 +8,89 @@
 import Combine
 import Foundation
 
-final class DetailPopupViewModel {
+class DetailPopupViewModel {
 
     // MARK: - Input
     struct Input {
-        var viewDidLoad: PassthroughSubject<Void, Never>
+        var viewDidLoad: PassthroughSubject<Int, Never>
         var pageDidChange: CurrentValueSubject<Int, Never>
+        let selectedURStringRange: PassthroughSubject<NSRange, Never>
         var isImageDetail: Bool
+        let id: Int
+        let step : CarMakingStep
     }
 
     // MARK: - Output
     struct Output {
         var title = CurrentValueSubject<String, Never>("")
         var subTitle = CurrentValueSubject<String, Never>("")
-        var description = CurrentValueSubject<String, Never>("")
-        var additionalInfo = CurrentValueSubject<String, Never>("")
+        var description = CurrentValueSubject<URString, Never>(URString(fullText: ""))
+        var additionalInfo = CurrentValueSubject<[URString], Never>([])
         var pageCount = CurrentValueSubject<Int, Never>(0)
-        var imageURL = CurrentValueSubject<URL?, Never>(nil)
+        var imageURL = CurrentValueSubject<String?, Never>(nil)
+        var selectedURStringRange = PassthroughSubject<NSRange, Never>()
     }
 
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     private let usecase: DetailPopupUsecaseProtocol
+    private var currentOutput: Output?
 
     // MARK: - Lifecycles
-    init(usecase: DetailPopupUsecaseProtocol = MockDetailPopupUsecase()) {
+    init(usecase: DetailPopupUsecaseProtocol = DetailPopupUsecase()) {
         self.usecase = usecase
     }
 
     // MARK: - Helpers
+
     func transform(_ input: Input) -> Output {
         let output = Output()
-
+        self.currentOutput = output
         input.viewDidLoad
-            .flatMap { [weak self] in
+            .flatMap { [weak self] _ -> AnyPublisher<DetailOptionInfo, Never> in
                 guard let self = self else {
-                    return Just(DetailInfo(title: "", subTitle: "", description: "", additionalInfo: "", imageURL: nil))
+                    return Just(DetailOptionEntity(title: "",
+                                                   description: "",
+                                                   info: nil,
+                                                   imageSrc: nil).toPresentation())
                         .eraseToAnyPublisher()
                 }
-                return self.usecase.fetchDetailInfo(forPage: 0)
+                return self.usecase.fetchAllDetails(step: input.step, id: input.id)
             }
-            .sink { detailInfo in
-                output.title.send(detailInfo.title)
-                output.subTitle.send(detailInfo.subTitle)
-                output.description.send(detailInfo.description)
-                output.additionalInfo.send(detailInfo.additionalInfo)
-                output.imageURL.send(detailInfo.imageURL)
-                output.pageCount.send(3)    // 임시 페이지
-                print("\(detailInfo.title) 페이지")
-            }
+            .receive(on: DispatchQueue.main)
+            .sink(receiveValue: { (allDetails: DetailOptionInfo) in
+                output.pageCount.send(1)
+                output.title.send(allDetails.title.fullText)
+                output.description.send(allDetails.description)
+                let infoArray = allDetails.info.map {
+                    URString(fullText: "\($0["title"] ?? ""), \($0["description"] ?? "")")
+                }
+                output.additionalInfo.send(infoArray)
+                print(infoArray)
+                output.imageURL.send(allDetails.imageSrc)
+            })
             .store(in: &cancellables)
 
         input.pageDidChange
-            .flatMap { [weak self] page -> AnyPublisher<DetailInfo, Never> in
+            .flatMap { [weak self] page -> AnyPublisher<DetailOptionInfo, Never> in
                 guard let self = self else {
-                    return Just(DetailInfo(title: "", subTitle: "", description: "", additionalInfo: "", imageURL: nil))
+                    return Just(DetailOptionEntity(title: "",
+                                                   description: "",
+                                                   info: nil,
+                                                   imageSrc: nil)
+                        .toPresentation())
                         .eraseToAnyPublisher()
                 }
                 return self.usecase.fetchDetailInfo(forPage: page)
             }
             .sink { detailInfo in
-                output.title.send(detailInfo.title)
-                output.subTitle.send(detailInfo.subTitle)
+                output.title.send(detailInfo.title.fullText)
                 output.description.send(detailInfo.description)
-                output.additionalInfo.send(detailInfo.additionalInfo)
-                output.imageURL.send(detailInfo.imageURL)
-                print("\(detailInfo.title) 페이지")
+                let infoArray = detailInfo.info.map {
+                    URString(fullText: "\($0["title"] ?? ""), \($0["description"] ?? "")")
+                }
+                output.additionalInfo.send(infoArray)
+                output.imageURL.send(detailInfo.imageSrc)
             }
             .store(in: &cancellables)
 

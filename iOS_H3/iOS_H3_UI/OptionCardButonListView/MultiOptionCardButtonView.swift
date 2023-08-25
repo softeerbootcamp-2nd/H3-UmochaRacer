@@ -47,11 +47,11 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Lifecycles
 
-    init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step : CarMakingStep) {
         self.carMakingMode = carMakingMode
         super.init(frame: frame)
 
-        setupOptionCardCollectionView()
+        setupOptionCardCollectionView(step: step)
         setupViews()
     }
 
@@ -59,7 +59,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         carMakingMode = .selfMode
         super.init(frame: frame)
 
-        setupOptionCardCollectionView()
+        setupOptionCardCollectionView(step: .powertrain)
         setupViews()
     }
 
@@ -67,24 +67,24 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
         carMakingMode = .selfMode
         super.init(coder: coder)
 
-        setupOptionCardCollectionView()
+        setupOptionCardCollectionView(step: .powertrain)
         setupViews()
     }
 
     // MARK: - Helpers
 
-    func configure(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
         dotIndicator.numberOfPages = cardInfos.count
         updateSnapshot(item: cardInfos)
     }
 
-    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
         cardInfos.enumerated().forEach { (index, info) in
             let indexPath = IndexPath(row: index, section: 0)
             guard let cell = optionCardCollectionView.cellForItem(at: indexPath) as? OptionCardCell else {
                 return
             }
-            cell.configure(carMakingMode: carMakingMode, info: info)
+            cell.configure(carMakingMode: carMakingMode, info: info, step: step)
         }
     }
 
@@ -123,8 +123,7 @@ final class MultiOptionCardButtonView: UIView, OptionCardButtonListViewable {
 // MARK: - OptionCardButton Delegate
 
 extension MultiOptionCardButtonView: OptionCardButtonDelegate {
-
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton) {
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton, option: OptionCardInfo, step : CarMakingStep) {
         print("[MultiOptionCardButtonView]", #function, "- show alert 구현 필요")
     }
 }
@@ -157,7 +156,7 @@ extension MultiOptionCardButtonView: UICollectionViewDelegate {
 
 extension MultiOptionCardButtonView {
 
-    private func setupOptionCardCollectionView() {
+    private func setupOptionCardCollectionView(step : CarMakingStep) {
         optionCardCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         optionCardCollectionView.translatesAutoresizingMaskIntoConstraints = false
         optionCardCollectionView.delegate = self
@@ -165,7 +164,7 @@ extension MultiOptionCardButtonView {
         optionCardCollectionView.bounces = false
 
         registerCollectionViewCell()
-        setupCollectionViewDataSource()
+        setupCollectionViewDataSource(step: step)
         setupSnapshot()
     }
 
@@ -202,7 +201,7 @@ extension MultiOptionCardButtonView {
         optionCardCollectionView.register(OptionCardCell.self, forCellWithReuseIdentifier: OptionCardCell.identifier)
     }
 
-    private func setupCollectionViewDataSource() {
+    private func setupCollectionViewDataSource(step : CarMakingStep) {
         dataSource = CollectionViewDiffableDataSource(
             collectionView: optionCardCollectionView
         ) { [weak self] (collectionView, indexPath, item) in
@@ -214,7 +213,7 @@ extension MultiOptionCardButtonView {
                 return OptionCardCell()
             }
 
-            cell.configure(carMakingMode: carMakingMode, info: item)
+            cell.configure(carMakingMode: carMakingMode, info: item, step: step)
 
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in

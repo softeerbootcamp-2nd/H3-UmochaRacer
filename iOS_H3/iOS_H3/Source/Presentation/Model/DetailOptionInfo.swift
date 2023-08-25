@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+struct DetailOptionInfo {
+    let title: URString
+    let description: URString
+    let info: [[String: String]]
+    let imageSrc: String?
+}

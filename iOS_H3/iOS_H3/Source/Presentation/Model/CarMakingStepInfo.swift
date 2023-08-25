@@ -13,6 +13,24 @@ struct CarMakingStepInfo: Hashable {
 
     init(step: CarMakingStep, optionCardInfoArray: [OptionCardInfo] = []) {
         self.step = step
-        self.optionCardInfoArray = optionCardInfoArray
+
+        switch step {
+        case .externalColor, .internalColor:
+            self.optionCardInfoArray = optionCardInfoArray
+        default:
+            self.optionCardInfoArray = optionCardInfoArray.map { optionCard in
+                OptionCardInfo(
+                    id: optionCard.id,
+                    title: optionCard.title,
+                    subTitle: optionCard.subTitle,
+                    priceString: optionCard.priceString,
+                    bannerImageURL: optionCard.bannerImageURL,
+                    iconImageURL: optionCard.iconImageURL,
+                    color: optionCard.color,
+                    hasMoreInfo: true,
+                    isSelected: optionCard.isSelected
+                )
+            }
+        }
     }
 }

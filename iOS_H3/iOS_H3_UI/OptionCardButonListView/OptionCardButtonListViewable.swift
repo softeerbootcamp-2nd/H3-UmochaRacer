@@ -21,7 +21,7 @@ protocol OptionCardButtonListViewDelegate: AnyObject {
 protocol OptionCardButtonListViewable: UIView {
     var delegate: OptionCardButtonListViewDelegate? { get set }
 
-    func configure(with cardInfos: [OptionCardInfo])
-    func reloadOptionCards(with cardInfos: [OptionCardInfo])
+    func configure(with cardInfos: [OptionCardInfo], step : CarMakingStep)
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step : CarMakingStep)
     func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)?)
 }

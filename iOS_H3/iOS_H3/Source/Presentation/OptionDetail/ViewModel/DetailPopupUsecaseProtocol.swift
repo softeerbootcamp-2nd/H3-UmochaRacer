@@ -9,35 +9,33 @@ import Combine
 import Foundation
 
 protocol DetailPopupUsecaseProtocol {
-    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailInfo, Never>
+    func fetchAllDetails(step: CarMakingStep, id: Int) -> AnyPublisher<DetailOptionInfo, Never>
+    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailOptionInfo, Never>
 }
 
-class MockDetailPopupUsecase: DetailPopupUsecaseProtocol {
-    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailInfo, Never> {
-        let detailInfo: DetailInfo
-        switch page {
-        case 0:
-            detailInfo = DetailInfo(title: "Title Page 0",
-                                    subTitle: "Subtitle Page 0",
-                                    description: "0번째 설명`",
-                                    additionalInfo: "AAAA",
-                                    imageURL: URL(string: "https://example.com/image0.jpg"))
-        case 1:
-            detailInfo = DetailInfo(title: "Title Page 1",
-                                    subTitle: "Subtitle Page 1",
-                                    description: "1번째 설명",
-                                    additionalInfo: "BBBB",
-                                    imageURL: URL(string: "https://example.com/image1.jpg"))
-        case 2:
-            detailInfo = DetailInfo(title: "Title Page 2",
-                                    subTitle: "Subtitle Page 2",
-                                    description: "2번째 설명",
-                                    additionalInfo: "CCCC",
-                                    imageURL: URL(string: "https://example.com/image2.jpg"))
-        default:
-            detailInfo = DetailInfo(title: "", subTitle: "", description: "", additionalInfo: "", imageURL: nil)
-        }
+final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
+    private let detailRepository: DetailRepositoryProtocol
+    private var details: DetailOptionEntity = DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil)
+    private var cancellables = Set<AnyCancellable>()
 
-        return Just(detailInfo).eraseToAnyPublisher()
+    init(repository: DetailRepositoryProtocol = DetailRepository(networkService: NetworkService())) {
+        self.detailRepository = repository
+    }
+
+    func fetchAllDetails(step: CarMakingStep, id: Int) -> AnyPublisher<DetailOptionInfo, Never> {
+        return detailRepository.fetchPowertrainDetailInfo(id: id)
+            .catch { _ in Just(DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil)) }
+            .map { originalDetail -> DetailOptionInfo in
+                return originalDetail.toPresentation()
+            }
+            .eraseToAnyPublisher()
+    }
+
+    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailOptionInfo, Never> {
+        guard page < 2 else {
+            return Just(DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil).toPresentation())
+                .eraseToAnyPublisher()
+        }
+        return Just(details.toPresentation()).eraseToAnyPublisher()
     }
 }

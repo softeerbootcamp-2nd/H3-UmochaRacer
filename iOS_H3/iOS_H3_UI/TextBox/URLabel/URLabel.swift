@@ -42,7 +42,6 @@ class URLabel: UILabel {
         selectedRange = nil
         self.attributedText = originalAttributedText
         removeTapRecognizer()
-        originalAttributedText = nil
     }
 
     private func removeTapRecognizer() {

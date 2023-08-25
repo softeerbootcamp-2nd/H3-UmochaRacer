@@ -115,15 +115,15 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingCollectionViewCell else {
             return
         }
-        cell.update(optionInfoArray: info)
+        cell.update(optionInfoArray: info, step: CarMakingStep(rawValue: currentStep) ?? .powertrain)
     }
 
-    func updateOptionCardForCategory(with info: [OptionCardInfo]) {
+    func updateOptionCardForCategory(with info: [OptionCardInfo], step: CarMakingStep) {
         let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
         guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
             return
         }
-        cell.configure(optionInfoArray: info)
+        cell.configure(optionInfoArray: info, step: step)
     }
 
     func updateSelectedOptionCountLabel(to count: Int) {

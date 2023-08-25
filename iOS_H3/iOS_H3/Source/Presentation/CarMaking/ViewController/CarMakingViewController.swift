@@ -29,7 +29,7 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
-    private let textEffectManager = TextEffectManager()
+    private let textEffectManager = TextEffectManager.shared
 
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
@@ -118,7 +118,7 @@ extension CarMakingViewController {
         output.optionInfoForCategory
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionInfo in
-                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo)
+                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo, step: self?.stepDidChanged.value ?? .powertrain)
             }
             .store(in: &cancellables)
 

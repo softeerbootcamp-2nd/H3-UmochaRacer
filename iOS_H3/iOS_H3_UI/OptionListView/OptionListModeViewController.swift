@@ -148,4 +148,11 @@ extension OptionListModeViewController: OptionCardButtonListViewDelegate {
         didDisplayOptionAt index: Int
     ) {
     }
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        detailOptionId: Int
+    ) {
+        print("구현 필요.")
+    }
 }

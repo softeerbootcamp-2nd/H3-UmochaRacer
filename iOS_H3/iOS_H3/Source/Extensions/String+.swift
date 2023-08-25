@@ -48,7 +48,7 @@ extension String {
             let targetWord = string[targetWordIndexRange]
 
             let startIntIndex = match.range.lowerBound
-            let targetWordRangeExceptForTag = startIntIndex..<startIntIndex + targetWord.count
+            let targetWordRangeExceptForTag = startIntIndex..<startIntIndex + targetWord.count + 1
             ranges.append(targetWordRangeExceptForTag)
 
             let startIndexOfReplaced = string.index(string.startIndex, offsetBy: match.range.lowerBound)
