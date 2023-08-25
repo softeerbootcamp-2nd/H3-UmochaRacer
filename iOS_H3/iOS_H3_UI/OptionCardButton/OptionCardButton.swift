@@ -115,8 +115,8 @@ class OptionCardButton: UIButton {
     }()
 
     private var carMakingMode: CarMakingMode
-    private var step : CarMakingStep = .powertrain
-    private var optionInfo: OptionCardInfo? = nil
+    private var step: CarMakingStep = .powertrain
+    private var optionInfo: OptionCardInfo?
 
     weak var delegate: OptionCardButtonDelegate?
 
@@ -134,7 +134,7 @@ class OptionCardButton: UIButton {
         setupViews()
     }
 
-    init(carMakingMode: CarMakingMode, info: OptionCardInfo, step : CarMakingStep) {
+    init(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
         self.optionInfo = info
         self.step = step
@@ -166,17 +166,15 @@ class OptionCardButton: UIButton {
     }
 
     // MARK: - Helpers
-    func update(carMakingMode: CarMakingMode? = nil, cardInfo: OptionCardInfo? = nil, step : CarMakingStep) {
+    func update(carMakingMode: CarMakingMode? = nil,
+                cardInfo: OptionCardInfo? = nil,
+                step: CarMakingStep) {
         if let carMakingMode = carMakingMode {
             self.carMakingMode = carMakingMode
-            self.step = step
         }
-        print("button update()", cardInfo)
-
+        self.step = step
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title.fullText
-//            self.optionTitleLabel.urString = .init(fullText: cardInfo.title.fullText, cardbRange: [.init(0...cardInfo.title.fullText.count)])
-//                // optionTitleLabel.setURString(.init(fullText: cardInfo.title.fullText, cardbRange: [.init(0...4)]), isOn: true)
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
             self.optionInfo = cardInfo
