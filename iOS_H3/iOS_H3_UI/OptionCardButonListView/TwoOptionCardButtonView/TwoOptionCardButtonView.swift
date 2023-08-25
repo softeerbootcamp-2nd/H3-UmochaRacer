@@ -50,7 +50,9 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     // MARK: - Helpers
 
     /// index에 해당하는 옵션 카드의 view를 업데이트
-    func configureOptionCard(at index: Int, with cardInfo: OptionCardInfo, step :CarMakingStep) {
+    func configureOptionCard(at index: Int,
+                             with cardInfo: OptionCardInfo,
+                             step: CarMakingStep) {
         if !isValidateIndex(index) { return }
         optionCardButtons[index].update(cardInfo: cardInfo, step: step)
     }
@@ -82,7 +84,9 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 // MARK: - OptionCardButton Delegate
 
 extension TwoOptionCardButtonView: OptionCardButtonDelegate {
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton, option: OptionCardInfo, step : CarMakingStep) {
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton,
+                                              option: OptionCardInfo,
+                                              step: CarMakingStep) {
         let detailViewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel(),
                                                                   info: option, carMakingStep: step)
         detailViewController.modalPresentationStyle = .overFullScreen
