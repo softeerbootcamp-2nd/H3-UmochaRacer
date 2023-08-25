@@ -50,7 +50,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="타이틀" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7v-gC-DIO">
-                            <rect key="frame" x="20" y="37.666666666666686" width="44" height="17.666666666666671"/>
+                            <rect key="frame" x="20" y="37.666666666666686" width="298" height="17.666666666666671"/>
                             <fontDescription key="fontDescription" name="HyundaiSansHeadKRMedium" family="Hyundai Sans Head KR" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -114,6 +114,7 @@
                         <constraint firstItem="O49-f9-tgU" firstAttribute="top" secondItem="zAg-x5-HPu" secondAttribute="bottom" constant="80" id="Kgq-Yh-eUp"/>
                         <constraint firstItem="zAg-x5-HPu" firstAttribute="top" secondItem="t7v-gC-DIO" secondAttribute="bottom" constant="24" id="Z4i-mG-h8n"/>
                         <constraint firstItem="t7v-gC-DIO" firstAttribute="leading" secondItem="Iw1-23-OoB" secondAttribute="leading" constant="20" id="ZgZ-3p-8XC"/>
+                        <constraint firstItem="fAc-To-bYd" firstAttribute="trailing" secondItem="t7v-gC-DIO" secondAttribute="trailing" id="a2j-rc-LgK"/>
                         <constraint firstItem="CAD-74-ubH" firstAttribute="leading" secondItem="Iw1-23-OoB" secondAttribute="leading" constant="20" id="aEF-Um-qbp"/>
                         <constraint firstItem="0iR-vp-gpY" firstAttribute="leading" secondItem="Iw1-23-OoB" secondAttribute="leading" id="bBy-nn-rKT"/>
                         <constraint firstAttribute="trailing" secondItem="O49-f9-tgU" secondAttribute="trailing" constant="20" id="bh1-5v-0gu"/>
