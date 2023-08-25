@@ -14,7 +14,7 @@ permissions:
 
 hooks:
   ApplicationStart:
-    - location: deploy.sh
+    - location: run_new_nginx.sh
       timeout: 60
       runas: ubuntu
 

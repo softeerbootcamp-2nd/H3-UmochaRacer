@@ -112,6 +112,7 @@ const ImageBox = styled.div<{$isActive: boolean}>`
       animation-delay: 0.2s;
     `}
 `;
+
 const ImageBoxImg = styled.img<{$option: number}>`
   object-fit: cover;
   height: ${({$option}) => ($option === 3 ? 80 : 100)}%;

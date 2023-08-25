@@ -5,22 +5,27 @@ import {colors} from '@/style/theme';
 import {Label2_Regular, Title4_Medium} from '@/style/fonts';
 interface warningProps {
   text: string;
-  index: number;
-  onClick: (index: number) => void;
   onPopup: (state: boolean) => void;
+  onNext: () => void;
 }
-function Warning({text, index, onClick, onPopup}: warningProps) {
-  const handleClickPopup = () => {
-    onClick(index);
-    onPopup(false);
-  };
+function Warning({text, onPopup, onNext}: warningProps) {
   return (
     <Warnings.Wrapper>
       <Warnings.Box>
-        <Warnings.Text>{text}을(를) 선택 완료 눌러주세요.</Warnings.Text>
-        <Warnings.Confrim onClick={() => handleClickPopup()}>
-          <Warnings.ConfirmP>확인</Warnings.ConfirmP>
-        </Warnings.Confrim>
+        <Warnings.Text>
+          {text}을 <br />
+          선택 완료하지 않으셨습니다.
+          <br />
+          <br /> 그래도 견적을 보시겠습니까?
+        </Warnings.Text>
+        <Warnings.ButtonWrapper>
+          <Warnings.Cancel onClick={() => onPopup(true)}>
+            <Warnings.CancelP>아니오</Warnings.CancelP>
+          </Warnings.Cancel>
+          <Warnings.Confrim onClick={() => onNext()}>
+            <Warnings.ConfirmP>예</Warnings.ConfirmP>
+          </Warnings.Confrim>
+        </Warnings.ButtonWrapper>
       </Warnings.Box>
     </Warnings.Wrapper>
   );
@@ -40,16 +45,27 @@ const Warnings = {
     justify-content: center;
   `,
   Box: styled.div`
-    width: 300px;
     height: 200px;
     ${flexCenter};
     flex-direction: column;
     background-color: white;
     border-radius: 8px;
+    padding: 20px;
   `,
   Text: styled.p`
     color: ${colors.Main_Hyundai_Blue};
     ${Title4_Medium};
+    text-align: center;
+  `,
+  Cancel: styled.div`
+    width: 50px;
+    height: 30px;
+    background-color: ${colors.Cool_Grey_001};
+    border-radius: 8px;
+    ${flexCenter};
+    margin-top: 16px;
+    cursor: pointer;
+    border: 1px solid ${colors.Cool_Grey_002};
   `,
   Confrim: styled.div`
     width: 50px;
@@ -60,8 +76,16 @@ const Warnings = {
     margin-top: 16px;
     cursor: pointer;
   `,
+  CancelP: styled.p`
+    color: black;
+    ${Label2_Regular};
+  `,
   ConfirmP: styled.p`
     color: white;
     ${Label2_Regular};
+  `,
+  ButtonWrapper: styled.div`
+    ${flexCenter};
+    gap: 16px;
   `,
 };
