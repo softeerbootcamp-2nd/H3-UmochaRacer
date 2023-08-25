@@ -81,7 +81,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
         setupViews(step: .powertrain)
     }
 
-    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step : CarMakingStep) {
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
         super.init(frame: frame)
         setupViews(step: step)
@@ -89,11 +89,11 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
 
     // MARK: - Helpers
 
-    func configure(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
+    func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         updateSnapshot(item: cardInfos)
     }
 
-    func reloadOptionCards(with cardInfos: [OptionCardInfo], step : CarMakingStep) {
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         cardInfos.enumerated().forEach { (index, info) in
             let indexPath = IndexPath(row: index, section: 0)
             guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
@@ -130,7 +130,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
 // MARK: - Setup
 
 extension OptionListModeView {
-    private func setupViews(step : CarMakingStep) {
+    private func setupViews(step: CarMakingStep) {
         addSubviews()
         setupCollectionView(step: step)
         setupConstraints()
@@ -142,7 +142,7 @@ extension OptionListModeView {
         containerView.addSubview(imageModeButton)
     }
 
-    private func setupCollectionView(step : CarMakingStep) {
+    private func setupCollectionView(step: CarMakingStep) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         containerView.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
