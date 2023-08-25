@@ -8,34 +8,30 @@
 import Combine
 import Foundation
 
-protocol DetailPopupUsecaseProtocol {
-    func fetchAllDetails(step: CarMakingStep, id: Int) -> AnyPublisher<DetailOptionInfo, Never>
-    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailOptionInfo, Never>
-}
+enum DetailUsecaseError: LocalizedError {
+    case networkError(error: Error)
+    case conversionError(error: Error)
+    case invalidStep
+    case notExistSelf
 
-final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
-    private let detailRepository: DetailRepositoryProtocol
-    private var details: DetailOptionEntity = DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil)
-    private var cancellables = Set<AnyCancellable>()
-
-    init(repository: DetailRepositoryProtocol = DetailRepository(networkService: NetworkService())) {
-        self.detailRepository = repository
-    }
-
-    func fetchAllDetails(step: CarMakingStep, id: Int) -> AnyPublisher<DetailOptionInfo, Never> {
-        return detailRepository.fetchPowertrainDetailInfo(id: id)
-            .catch { _ in Just(DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil)) }
-            .map { originalDetail -> DetailOptionInfo in
-                return originalDetail.toPresentation()
-            }
-            .eraseToAnyPublisher()
-    }
-
-    func fetchDetailInfo(forPage page: Int) -> AnyPublisher<DetailOptionInfo, Never> {
-        guard page < 2 else {
-            return Just(DetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil).toPresentation())
-                .eraseToAnyPublisher()
+    var errorDescription: String? {
+        switch self {
+        case .networkError(let error):
+            return "[DetailUsecaseError] \(error.localizedDescription)"
+        case .conversionError(let error):
+            return "[DetailUsecaseError] \(error.localizedDescription)"
+        case .invalidStep:
+            return "[DetailUsecaseError] 유효하지 않은 내차만들기 단계입니다."
+        case .notExistSelf:
+            return "[DetailUsecaseError] notExistSelf Error"
         }
-        return Just(details.toPresentation()).eraseToAnyPublisher()
     }
 }
+
+protocol DetailPopupUsecaseProtocol {
+    func fetchAllDetails(step: CarMakingStep, id: Int)
+    -> AnyPublisher<DetailOptionInfo, DetailUsecaseError>
+    func fetchAllAdditionalOptions(id: Int)
+    -> AnyPublisher<[DetailOptionInfo], DetailUsecaseError>
+}
+
