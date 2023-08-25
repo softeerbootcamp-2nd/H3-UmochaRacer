@@ -35,7 +35,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
     // MARK: - Properties
 
     private var currentOptionInfo = [OptionCardInfo]()
-    private var step : CarMakingStep = .powertrain
+    private var step: CarMakingStep = .powertrain
 
     var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
 
@@ -64,7 +64,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     // MARK: - Helpers
 
-    override func configure(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
+    override func configure(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
         super.configure(optionInfoArray: optionInfoArray, step: step)
         listModeView.configure(with: optionInfoArray, step: step)
         currentOptionInfo = optionInfoArray
@@ -75,7 +75,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         }
     }
 
-    override func update(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
+    override func update(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
         self.step = step
         super.update(optionInfoArray: optionInfoArray, step: step)
         listModeView.reloadOptionCards(with: optionInfoArray, step: step)
@@ -91,7 +91,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(count)"
     }
 
-    private func showListModeView(isHidden: Bool, step :CarMakingStep) {
+    private func showListModeView(isHidden: Bool, step: CarMakingStep) {
         if isHidden {
             super.configure(optionInfoArray: currentOptionInfo, step: step)
         }
