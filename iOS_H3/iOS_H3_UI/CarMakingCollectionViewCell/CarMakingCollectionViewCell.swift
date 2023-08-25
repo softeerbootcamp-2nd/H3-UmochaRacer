@@ -99,7 +99,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         optionImageView.loadCachedImage(of: bannerImageURL)
     }
 
-    func configure(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
+    func configure(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
         bannerImagesOfOption = optionInfoArray.map { $0.bannerImageURL }
         if !bannerImagesOfOption.isEmpty { configure(bannerImageURL: bannerImagesOfOption[0]) }
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
@@ -108,7 +108,7 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         optionButtonListView.configure(with: optionInfoArray, step: step)
     }
 
-    func update(optionInfoArray: [OptionCardInfo], step : CarMakingStep) {
+    func update(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
         guard let optionButtonListView = optionButtonListView as? OptionCardButtonListViewable else {
             return
         }
