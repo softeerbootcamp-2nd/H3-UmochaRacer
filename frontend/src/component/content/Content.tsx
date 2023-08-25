@@ -120,24 +120,31 @@ function Content() {
     ],
     7: '',
   };
-  const sortBySelectionRate = (array: cardData[], index: number) => {
-    const sortedCardDataArray: cardData[] = selectionRateArr[index]
-      .map((rate: {id: number; selectionRatio: number}) => {
-        const card = array.find((card) => rate.id === card.id);
-        let reulstData: cardData = {
-          id: 0,
-          name: '',
-          imageSrc: '',
-          price: 0,
-          saleRate: 0,
-        };
+  const sortBySelectionRate = (array: cardData[], index: number, selectArr) => {
+    const sortedCardDataArray: cardData[] = array.map((card) => {
+      const rateData = selectArr[index].find(
+        (rate: {id: number; selectionRatio: number}) => rate.id === card.id,
+      );
 
-        if (card) {
-          reulstData = {...card, saleRate: rate.selectionRatio};
-          return reulstData;
-        }
-      })
-      .filter((card): card is cardData => card !== undefined);
+      let reulstData: cardData = {
+        id: 0,
+        name: '',
+        imageSrc: '',
+        price: 0,
+        saleRate: 0,
+      };
+
+      if (rateData) {
+        reulstData = {...card, saleRate: rateData.selectionRatio};
+        return reulstData;
+      } else {
+        return {...card, saleRate: 0};
+      }
+    });
+
+    sortedCardDataArray.sort(
+      (a: cardData, b: cardData) => b.saleRate - a.saleRate,
+    );
 
     return sortedCardDataArray;
   };
@@ -170,6 +177,7 @@ function Content() {
           '/sale/exterior-color/tag',
           '/sale/interior-color/tag',
           '/sale/wheel/tag',
+          '/sale/additional-option/tag',
         ];
 
         selectionRateArr = await Promise.all(
@@ -180,7 +188,9 @@ function Content() {
 
         const sortCardArr = results
           .slice(0, 6)
-          .map((card, index) => sortBySelectionRate(card, index));
+          .map((card, index) =>
+            sortBySelectionRate(card, index, selectionRateArr.slice(0, 6)),
+          );
         setCardDataList(sortCardArr);
 
         const newAdditionalOptionList = results[6] as cardData[][];
