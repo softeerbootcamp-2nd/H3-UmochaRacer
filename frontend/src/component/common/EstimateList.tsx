@@ -66,7 +66,7 @@ function EstimateList({
         return elem;
       }
     });
-    console.log(copyOption);
+
     copyOption.forEach((elem) => {
       nextEstimateDatas[elem.category].push(elem);
     });
@@ -78,6 +78,7 @@ function EstimateList({
       (value, index, self) =>
         self.findIndex((item) => item.id === value.id) === index,
     );
+
     additionalOptions.sort((a, b) => a.id - b.id);
     additionOptions.forEach((elem, index) => {
       nextEstimateDatas['selectOption'].push({
@@ -91,6 +92,21 @@ function EstimateList({
         userSelect: true,
       });
     });
+
+    if (nextEstimateDatas.selectOption.length === 0) {
+      additionalOptions.forEach((elem, index) => {
+        nextEstimateDatas['selectOption'].push({
+          key: index === 0 ? '선택 옵션' : '',
+          value: elem.name,
+          name: elem.name,
+          category: '선택 옵션',
+          price: elem.price,
+          id: elem.id,
+          imgSrc: elem.imageSrc,
+          userSelect: true,
+        });
+      });
+    }
     setEstimateDatas(nextEstimateDatas);
   }, [tempOption, additionOptions]);
 

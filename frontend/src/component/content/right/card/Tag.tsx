@@ -45,7 +45,7 @@ function TagBox({id}: Props) {
 
         const tagIds = await postFetchData('/sale/tag', requestBody);
 
-        const tags = tagIds.map((elem: SelectionRate) => {
+        const tags = tagIds.map((elem: SelectionRate, index: number) => {
           let keyword = undefined;
           optionTag.forEach((data) => {
             data.tags.forEach((tag) => {
@@ -53,7 +53,7 @@ function TagBox({id}: Props) {
             });
           });
           return (
-            <Tag>
+            <Tag key={index}>
               <div>{keyword}</div>
               <div>{elem.selectionRatio}%</div>
             </Tag>
