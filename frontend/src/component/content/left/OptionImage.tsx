@@ -111,6 +111,7 @@ const ImageBox = styled.div<{$isActive: boolean}>`
     `}
 `;
 const ImageBoxImg = styled.img`
-  /* object-fit: cover; */
+  object-fit: cover;
   width: 100%;
+  height: 80%;
 `;

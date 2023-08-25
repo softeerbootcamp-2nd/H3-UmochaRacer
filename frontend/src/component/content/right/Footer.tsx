@@ -54,6 +54,10 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
     additionOptions,
     selectedAdditionalOption,
   );
+  const nextStep = () => {
+    if (additionOptions) setSelectedAdditionalOption(additionOptions);
+    setOption(option + 1);
+  };
   const handleSelectComplete = () => {
     setIsSaved(true);
     if (option !== 6) {
@@ -79,23 +83,17 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
           (option) => option.key === notSelectedOptions[0].key,
         );
         setIsWarning(false);
-        setWarningText(notSelectedOptions[0].key);
+        setWarningText(notSelectedOptions.map((item) => item.key).join(','));
         setWarningIndex(notSelectedIndex);
       } else {
-        if (additionOptions) setSelectedAdditionalOption(additionOptions);
-        setOption(option + 1);
+        nextStep();
       }
     }
   };
   return (
     <>
       {!isWarning && (
-        <Warning
-          text={warningText}
-          index={warningIndex}
-          onClick={setOption}
-          onPopup={setIsWarning}
-        />
+        <Warning text={warningText} onPopup={setIsWarning} onNext={nextStep} />
       )}
       <Wrapper>
         <Total>
