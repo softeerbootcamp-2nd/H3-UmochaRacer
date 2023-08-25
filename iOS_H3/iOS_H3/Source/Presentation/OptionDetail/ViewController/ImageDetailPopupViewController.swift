@@ -35,7 +35,7 @@ class ImageDetailPopupViewController: UIViewController {
     private var step: CarMakingStep?
     private let textEffectManager = TextEffectManager.shared
     // MARK: - Lifecycles
-    init(viewModel: DetailPopupViewModel, info: OptionCardInfo, carMakingStep : CarMakingStep) {
+    init(viewModel: DetailPopupViewModel, info: OptionCardInfo, carMakingStep: CarMakingStep) {
         self.viewModel = viewModel
         self.info = info
         self.step = carMakingStep
@@ -73,26 +73,41 @@ class ImageDetailPopupViewController: UIViewController {
             id: info?.id ?? 1,
             step: step ?? .powertrain
         )
+
         let output = viewModel.transform(input)
 
+//        output.title
+//            .sink { [weak self] result in
+//                self?.updateDescriptionView(with: result.toURString())
+//                self?.titleLabel.text = result
+//            }
+//            .store(in: &cancellables)
         output.title
-            .map { $0 }
-            .assign(to: \.text, on: titleLabel)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                self?.updateDescriptionView(with: result.toURString())
+                self?.titleLabel.text = result
+            }
             .store(in: &cancellables)
 
         output.subTitle
-            .map { $0 }
-            .assign(to: \.text, on: subTitleLabel)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] result in
+                self?.updateDescriptionView(with: result.toURString())
+                self?.subTitleLabel.text = self?.step?.title ?? ""
+            }
             .store(in: &cancellables)
 
         output.description
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
                 self?.updateDescriptionView(with: result)
             }
             .store(in: &cancellables)
 
         output.additionalInfo
-            .sink { [weak self] info in
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (info: [URString]) in
                 if info.isEmpty {
                     self?.additionalInfoContainerView.isHidden = true
                 } else {
@@ -101,32 +116,37 @@ class ImageDetailPopupViewController: UIViewController {
                     if let infoView = self?.additionalInfoContainerView {
                         self?.applyDictionaryEffectIfNeeded(view: infoView)
                     }
-
-                    print("결과 \(info)")
                 }
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
 
         output.pageCount
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] pageCount in
                 self?.configurePagingControlView(pageCount: pageCount)
             }
             .store(in: &cancellables)
 
         output.imageURL
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] imageURL in
                 guard let self = self else { return }
-                if let url = URL(string: imageURL ?? ""), UIImage(contentsOfFile: url.path) != nil {
+                print("이미지 url : ",imageURL ?? "")
+                if let url = URL(string: imageURL ?? ""){
                     self.optionImageView.loadCachedImage(of: url)
                     self.animateImageViewHeight(to: 179)
                     self.exitButton.tintColor = Colors.coolGrey3
+                    print("이미지 존재")
                 } else {
                     self.optionImageView.image = nil
                     self.animateImageViewHeight(to: 0)
+                    print("이미지 없음")
                 }
             }
             .store(in: &cancellables)
 
         output.selectedURStringRange
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] range in
                 self?.descriptionTextView.selectedRange = range
             }
@@ -157,6 +177,7 @@ class ImageDetailPopupViewController: UIViewController {
 
 extension ImageDetailPopupViewController {
     private func setupViews() {
+        titleLabel.numberOfLines = 0
         setupFonts()
         setupColors()
         setupPagingControlView()
