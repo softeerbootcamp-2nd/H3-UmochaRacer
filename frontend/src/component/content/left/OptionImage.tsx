@@ -1,7 +1,8 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import styled, {css, keyframes} from 'styled-components';
 import {flexCenter} from '../../../style/common';
 import {cardDataType} from '../contentInterface';
+import {OptionContext} from '@/provider/optionProvider';
 
 interface ImageProps {
   cardData: cardDataType[];
@@ -21,6 +22,7 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const prevRef = useRef<number | undefined>(undefined);
   const imgBox = wrapperRef.current?.childNodes[selectedIndex];
+  const {option} = useContext(OptionContext);
 
   if (prevRef.current !== undefined) {
     const prevImgBox = wrapperRef.current?.childNodes[
@@ -71,7 +73,7 @@ function OptionImage({cardData, selectedIndex}: ImageProps) {
             }
           }}
         >
-          <ImageBoxImg src={elem.imageSrc}></ImageBoxImg>
+          <ImageBoxImg src={elem.imageSrc} $option={option}></ImageBoxImg>
         </ImageBox>
       );
     });
@@ -110,8 +112,8 @@ const ImageBox = styled.div<{$isActive: boolean}>`
       animation-delay: 0.2s;
     `}
 `;
-const ImageBoxImg = styled.img`
+
+const ImageBoxImg = styled.img<{$option: number}>`
   object-fit: cover;
-  width: 100%;
-  height: 80%;
+  height: ${({$option}) => ($option === 3 ? 80 : 100)}%;
 `;
