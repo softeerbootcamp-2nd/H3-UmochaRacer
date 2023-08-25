@@ -7,7 +7,7 @@ import Firework from './estimatecontent/FireWork';
 import {colors} from '@/style/theme';
 import {Body2_Medium} from '@/style/fonts';
 import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
-
+import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 interface ButtonLayout {
   text: string;
   background: string;
@@ -43,9 +43,15 @@ const DEFAULT_PRICE = 43460000;
 
 function EstimateContent() {
   const {selectedOptions} = useContext(SelectedOptionContext);
+  const {selectedAdditionalOption} = useContext(
+    SelectedAdditionalOptionsContext,
+  );
   let totalPrice = DEFAULT_PRICE;
 
   selectedOptions.forEach((elem) => {
+    totalPrice += elem.price;
+  });
+  selectedAdditionalOption.forEach((elem) => {
     totalPrice += elem.price;
   });
 
