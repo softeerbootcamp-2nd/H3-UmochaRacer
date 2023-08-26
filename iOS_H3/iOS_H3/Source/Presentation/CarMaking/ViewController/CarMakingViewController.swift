@@ -172,7 +172,9 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "title 버튼 클릭 액션 구현 필요")
+        let modeChangePopupViewController = ModeChangePopupViewController(currentMode: self.mode)
+        modeChangePopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(modeChangePopupViewController, animated: false)
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {

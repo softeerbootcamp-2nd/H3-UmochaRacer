@@ -203,6 +203,9 @@
 		5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */; };
 		5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */; };
 		5FFE54082A9A617D00DAC4C8 /* ModelChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */; };
+		5FFE540C2A9A644900DAC4C8 /* ModeChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */; };
+		5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */; };
+		5FFE540F2A9A663900DAC4C8 /* ModeChangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -377,6 +380,9 @@
 		5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPopupViewController.xib; sourceTree = "<group>"; };
 		5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelChangePopupViewController.swift; sourceTree = "<group>"; };
 		5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelChangePopupViewController.xib; sourceTree = "<group>"; };
+		5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangePopupViewController.swift; sourceTree = "<group>"; };
+		5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChangePopupViewController.xib; sourceTree = "<group>"; };
+		5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -965,6 +971,7 @@
 		5FFE53FE2A9A554C00DAC4C8 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				5FFE54092A9A643100DAC4C8 /* ModeChangePopup */,
 				5FFE54042A9A616200DAC4C8 /* ModelChangePopup */,
 				5FFE53FF2A9A560000DAC4C8 /* ExitPopup */,
 			);
@@ -987,6 +994,16 @@
 				5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */,
 			);
 			path = ModelChangePopup;
+			sourceTree = "<group>";
+		};
+		5FFE54092A9A643100DAC4C8 /* ModeChangePopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */,
+				5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */,
+				5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */,
+			);
+			path = ModeChangePopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1193,6 +1210,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */,
+				5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */,
 				5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */,
 				5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */,
 				5F1E30BD2A9240C5004D229F /* ImageDetailPopupViewController.xib in Resources */,
@@ -1324,6 +1342,7 @@
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
 				4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */,
+				5FFE540F2A9A663900DAC4C8 /* ModeChangeButton.swift in Sources */,
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F2116E52A8EE45B008FC7D2 /* APIResponse.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
@@ -1365,6 +1384,7 @@
 				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
 				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
 				5F448A702A91FC16005D04FF /* NoImageDetailPopupViewController.swift in Sources */,
+				5FFE540C2A9A644900DAC4C8 /* ModeChangePopupViewController.swift in Sources */,
 				5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */,
 				479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
