@@ -211,7 +211,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             return .networkError(error: error)
         case .conversionError:
             return .conversionError(error: error)
-		default:
+        default:
             return .undefinedError(error: error)
         }
     }

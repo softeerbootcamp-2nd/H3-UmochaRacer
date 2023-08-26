@@ -130,6 +130,10 @@
 		5F3E67142A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
 		5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
 		5F3E67172A95CF37002BF48A /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */; };
+		5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */; };
+		5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */; };
+		5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */; };
+		5F3E67262A95FB36002BF48A /* DetailOptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67252A95FB36002BF48A /* DetailOptionData.swift */; };
 		5F448A672A91D000005D04FF /* IntroEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A662A91D000005D04FF /* IntroEndpoint.swift */; };
 		5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */; };
 		5F448A6B2A91D664005D04FF /* IntroRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A6A2A91D664005D04FF /* IntroRepository.swift */; };
@@ -331,6 +335,10 @@
 		5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxViewModel.swift; sourceTree = "<group>"; };
 		5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryUsecaseProtocol.swift; path = iOS_H3/Source/Presentation/Detail/ViewModel/DictionaryUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryOptionUsecase.swift; path = iOS_H3/Source/Domain/UseCase/DictionaryOptionUsecase.swift; sourceTree = SOURCE_ROOT; };
+		5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepository.swift; path = iOS_H3/Source/DetailRepository.swift; sourceTree = SOURCE_ROOT; };
+		5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepositoryProtocol.swift; path = iOS_H3/Source/DetailRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
+		5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEndPoint.swift; sourceTree = "<group>"; };
+		5F3E67252A95FB36002BF48A /* DetailOptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailOptionData.swift; path = DTO/Detail/DetailOptionData.swift; sourceTree = SOURCE_ROOT; };
 		5F448A662A91D000005D04FF /* IntroEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroEndpoint.swift; sourceTree = "<group>"; };
 		5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntroRepositoryProtocol.swift; path = iOS_H3/Source/Network/IntroRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5F448A6A2A91D664005D04FF /* IntroRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntroRepository.swift; path = iOS_H3/Source/Network/IntroRepository.swift; sourceTree = SOURCE_ROOT; };
@@ -592,6 +600,7 @@
 		478B267E2A78FD0E00598902 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
+				5F3E67272A95FB3C002BF48A /* Detail */,
 				5F60E4A92A8B403600531462 /* CarInfo */,
 			);
 			path = DTO;
@@ -600,6 +609,8 @@
 		478B267F2A78FD2400598902 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */,
+				5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */,
 				5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */,
 				5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */,
 			);
@@ -691,6 +702,7 @@
 				5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */,
 				5F448A662A91D000005D04FF /* IntroEndpoint.swift */,
 				479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */,
+				5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -833,6 +845,7 @@
 			isa = PBXGroup;
 			children = (
 				5F3E670F2A95CDA4002BF48A /* ViewModel */,
+				5F3E67252A95FB36002BF48A /* DetailOptionData.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1272,6 +1285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */,
 				5F4D33B22A8751E500942517 /* UIImageView+.swift in Sources */,
 				479023BC2A8B4BE600DECB70 /* CarMakingViewController.swift in Sources */,
 				5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */,
@@ -1311,6 +1325,7 @@
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				5F496E0B2A948E8B0024E5B8 /* TextBoxView.swift in Sources */,
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
+				5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
@@ -1337,6 +1352,7 @@
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
+				5F3E67262A95FB36002BF48A /* DetailOptionData.swift in Sources */,
 				471917D02A80E69A00B67D54 /* TwoOptionCardButtonView.swift in Sources */,
 				479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */,
 				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
@@ -1345,6 +1361,7 @@
 				5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */,
 				479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
+				5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
 				479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */,
