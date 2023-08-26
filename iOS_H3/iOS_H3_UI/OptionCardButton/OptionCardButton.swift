@@ -59,8 +59,8 @@ class OptionCardButton: UIButton {
         label.textColor = Colors.coolGrey3
         return label
     }()
-    private let optionTitleLabel: UILabel = {
-        let label = UILabel()
+    private let optionTitleLabel: URLabel = {
+        let label = URLabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.mediumTitle2
         label.setupLineHeight(FontLineHeights.mediumTitle2)
@@ -168,6 +168,7 @@ class OptionCardButton: UIButton {
 
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title.fullText
+            self.optionTitleLabel.urString = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
             showMoreInfoButton(cardInfo.hasMoreInfo)
@@ -213,10 +214,8 @@ class OptionCardButton: UIButton {
         moreInfoButton.isHidden = !isShow
     }
 
-    func animateButton(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        animatedView.showWithAnimation(feedbackTitle: feedbackTitle,
-                                       feedbackDescription: feedbackDescription,
-                                       completion: completion)
+    func animateButton(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        animatedView.showWithAnimation(with: feedbackComment, completion: completion)
     }
 
     func resetAnimatedView() {

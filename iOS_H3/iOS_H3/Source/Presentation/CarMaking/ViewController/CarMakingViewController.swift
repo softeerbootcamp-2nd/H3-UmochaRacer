@@ -29,13 +29,19 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
+    private let textEffectManager = TextEffectManager()
+
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
-    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+    private let optionCategoryDidChanged = CurrentValueSubject<OptionCategoryType, Never>(.system)
+
+    private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
+
+    private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -79,7 +85,9 @@ extension CarMakingViewController {
             viewDidLoad: viewDidLoadSubject,
             carMakingStepDidChanged: stepDidChanged,
             optionDidSelected: optionDidSelected,
-            optionCategoryDidChanged: optionCategoryDidChanged
+            optionCategoryDidChanged: optionCategoryDidChanged,
+            dictionaryButtonPressed: dictionaryButtonPressed,
+            nextButtonDidTapped: nextButtonDidTapped
         )
         let output = viewModel.transform(input)
 
@@ -93,6 +101,7 @@ extension CarMakingViewController {
         output.currentStepInfo
             .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
+                self?.titleBar.resetDictionary()
                 self?.updateCurrentStepInfo(with: info)
             }
             .store(in: &cancellables)
@@ -100,6 +109,33 @@ extension CarMakingViewController {
         output.optionInfoDidUpdated
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
+                if let view = self?.view {
+                    if output.isDictionaryFeatureEnabled.value {
+                        self?.textEffectManager.applyEffect(false, on: view)
+                        self?.textEffectManager.applyEffect(true, on: view)
+                    }
+                }
+            }
+            .store(in: &cancellables)
+
+        output.optionInfoForCategory
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionInfo in
+                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo)
+            }
+            .store(in: &cancellables)
+
+        output.numberOfSelectedAdditionalOption
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedOptionCount in
+                self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
+            }
+            .store(in: &cancellables)
+
+        output.feedbackComment
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] feedbackComment in
+                self?.carMakingContentView.moveNextStep(with: feedbackComment)
             }
             .store(in: &cancellables)
 
@@ -108,10 +144,17 @@ extension CarMakingViewController {
                 self?.showIndicator(showIndicator)
             }
             .store(in: &cancellables)
+
+        output.isDictionaryFeatureEnabled
+            .sink { [weak self] isEnabled in
+                if let view = self?.view {
+                    self?.textEffectManager.applyEffect(isEnabled, on: view)
+                }
+            }
+            .store(in: &cancellables)
     }
 
     private func updateBottomModalView(with estimateData: EstimateSummary) {
-        // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
         bottomModalView.updateEstimateSummary(estimateData)
     }
 
@@ -141,7 +184,7 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백카사전 버튼 클릭 액션 구현 필요")
+        dictionaryButtonPressed.send(())
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
@@ -179,9 +222,7 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-
-        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
-                                          feedbackDescription: viewModel.feedbackDescription)
+        nextButtonDidTapped.send(())
     }
 }
 

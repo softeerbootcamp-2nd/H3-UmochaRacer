@@ -63,9 +63,9 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
-    private var optionSelectCancellableByIndex = [Int: AnyCancellable]()
+    private var optionSelectCancellableByIndexPath = [IndexPath: AnyCancellable]()
 
-    private var optionCategoryTapCancellableByIndex = [Int: AnyCancellable]()
+    private var optionCategoryTapCancellableByIndexPath = [IndexPath: AnyCancellable]()
 
     // MARK: - Lifecycles
 
@@ -89,13 +89,11 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Helpers
 
-    func moveNextStep(feedbackTitle: String, feedbackDescription: String) {
+    func moveNextStep(with feedbackCommment: FeedbackComment) {
         guard currentStep < CarMakingStep.allCases.count - 1 else { return }
         let indexPath = Section.indexPath(for: currentStep)
         if let cell = collectionView.cellForItem(at: indexPath) as? CarMakingCollectionViewCell {
-            cell.playFeedbackAnimation(title: feedbackTitle,
-                                       description: feedbackDescription,
-                                       completion: {[weak self] in
+            cell.playFeedbackAnimation(with: feedbackCommment, completion: {[weak self] in
                 self?.currentStep += 1
             })
         }
@@ -116,6 +114,22 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
             return
         }
         cell.update(optionInfoArray: info)
+    }
+
+    func updateOptionCardForCategory(with info: [OptionCardInfo]) {
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
+            return
+        }
+        cell.configure(optionInfoArray: info)
+    }
+
+    func updateSelectedOptionCountLabel(to count: Int) {
+        let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
+        guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
+            return
+        }
+        cell.updateSelectedOptionCountLabel(to: count)
     }
 }
 
@@ -248,22 +262,22 @@ extension CarMakingContentView {
     }
 
     private func subscribeCellEvent(of cell: CarMakingCollectionViewCell, indexPath: IndexPath) {
-        subscribe(optionSelection: cell.optionDidSelected, stepIndex: indexPath.row)
+        subscribe(optionSelection: cell.optionDidSelected, indexPath: indexPath)
         if let optionSelectStepCell = cell as? CarMakingOptionSelectStepCell {
-            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, stepIndex: indexPath.row)
+            subscribe(optionCategoryTap: optionSelectStepCell.optionCategoryTapSubject, indexPath: indexPath)
         }
     }
 
-    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, stepIndex: Int) {
-        optionSelectCancellableByIndex[stepIndex] = optionSelection
+    private func subscribe(optionSelection: PassthroughSubject<Int, Never>, indexPath: IndexPath) {
+        optionSelectCancellableByIndexPath[indexPath] = optionSelection
             .sink { [weak self] optionIndex in
                 guard let self else { return }
                 delegate?.carMakingContentView(optionDidSelectedAt: optionIndex, in: currentStep)
             }
     }
 
-    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, stepIndex: Int) {
-        optionCategoryTapCancellableByIndex[stepIndex] = optionCategoryTap
+    private func subscribe(optionCategoryTap: PassthroughSubject<OptionCategoryType, Never>, indexPath: IndexPath) {
+        optionCategoryTapCancellableByIndexPath[indexPath] = optionCategoryTap
             .sink { [weak self] category in
                 self?.delegate?.carMakingContentView(categoryDidSelected: category)
             }

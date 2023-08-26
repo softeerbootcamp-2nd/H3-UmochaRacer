@@ -107,6 +107,30 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
+    lazy private var noImageDetailViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("noImageDetailView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapNoImageDetailViewButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var imageDetailViewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("imageDetailView 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapImageDetailViewButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var textBoxButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("textBox 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapTextBoxButton), for: .touchUpInside)
+        return button
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -150,6 +174,9 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
         stackView.addArrangedSubview(optionListModeButton)
+        stackView.addArrangedSubview(noImageDetailViewButton)
+        stackView.addArrangedSubview(imageDetailViewButton)
+        stackView.addArrangedSubview(textBoxButton)
 
         let buttons = [
             titleBarButton,
@@ -161,7 +188,10 @@ class ComponentMainViewController: UIViewController {
             multiOptionCardButtonViewButton,
             carMakingContentViewButton,
             optionCategoryTabbarButton,
-            optionListModeButton
+            optionListModeButton,
+            noImageDetailViewButton,
+            imageDetailViewButton,
+            textBoxButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -216,6 +246,23 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapOptionListModeButton() {
         let viewController = OptionListModeViewController()
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapNoImageDetailViewButton() {
+        let viewController = NoImageDetailPopupViewController(viewModel: DetailPopupViewModel())
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapImageDetailViewButton() {
+        let viewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel())
+        viewController.modalPresentationStyle = .overFullScreen
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapTextBoxButton() {
+        let viewController = TextBoxViewController()
         self.present(viewController, animated: false)
     }
 }
