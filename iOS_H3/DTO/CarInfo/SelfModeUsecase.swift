@@ -117,6 +117,28 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
+    func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment, Error> {
+        guard let selectedOption = carMakingTotalInfo[step]?.optionCardInfoArray.first(where: { $0.isSelected }) else {
+            return Fail(error: SelfModeUsecaseError.notExistSelectedOption).eraseToAnyPublisher()
+        }
+        let selectedOptionID = selectedOption.id
+
+        return carInfoRepository.fetchFeedbackComment(step: step, optionID: selectedOptionID)
+            .mapError { $0 }
+            .compactMap { commentEntity in
+                let splittedComment = commentEntity.comment.split(separator: "!").map { String($0) }
+
+                let title = splittedComment.count > 0 ? "\(splittedComment[0])!": ""
+                var subTitle = splittedComment.count > 1 ? splittedComment[1]: ""
+                if subTitle.count > 0, subTitle[subTitle.startIndex] == " " {
+                    subTitle.remove(at: subTitle.startIndex)
+                }
+
+                return FeedbackComment(title: title, subTitle: subTitle)
+            }
+            .eraseToAnyPublisher()
+    }
+
     private func fetchOptionInfoFromServer(
         step: CarMakingStep
     ) -> AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError> {
@@ -189,6 +211,8 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
             return .networkError(error: error)
         case .conversionError:
             return .conversionError(error: error)
+		default:
+            return .undefinedError(error: error)
         }
     }
 

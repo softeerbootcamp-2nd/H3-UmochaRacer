@@ -18,6 +18,7 @@ final class CarMakingViewModel {
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
         var optionCategoryDidChanged: CurrentValueSubject<OptionCategoryType, Never>
         var dictionaryButtonPressed: PassthroughSubject<Void, Never>
+        var nextButtonDidTapped: PassthroughSubject<Void, Never>
     }
 
     // MARK: - Output
@@ -28,6 +29,7 @@ final class CarMakingViewModel {
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
         var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
+        var feedbackComment = PassthroughSubject<FeedbackComment, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
         var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
@@ -97,6 +99,14 @@ final class CarMakingViewModel {
                 output.isDictionaryFeatureEnabled.send(!currentValue)
             }
             .store(in: &cancellables)
+
+        input.nextButtonDidTapped
+            .sink { [weak self] in
+                guard let self else { return }
+                fetchFeedbackComment(for: input.carMakingStepDidChanged.value, to: output.feedbackComment)
+            }
+            .store(in: &cancellables)
+
         return output
     }
 
@@ -164,5 +174,17 @@ final class CarMakingViewModel {
         selectedOption: OptionCardInfo
     ) -> AnyPublisher<EstimateSummary, Never> {
         return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption).eraseToAnyPublisher()
+    }
+
+    private func fetchFeedbackComment(
+        for step: CarMakingStep,
+        to feedbackCommentSubject: PassthroughSubject<FeedbackComment, Never>
+    ) {
+        selfModeUsecase.fetchFeedbackComment(step: step)
+            .catch { _ in Just(FeedbackComment(title: "", subTitle: "")).eraseToAnyPublisher() }
+            .sink { feedbackComment in
+                feedbackCommentSubject.send(feedbackComment)
+            }
+            .store(in: &cancellables)
     }
 }
