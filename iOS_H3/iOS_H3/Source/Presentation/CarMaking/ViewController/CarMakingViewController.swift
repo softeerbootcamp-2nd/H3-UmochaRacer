@@ -166,7 +166,6 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백버튼 클릭 액션 구현 필요")
         let exitPopupViewController = ExitPopupViewController()
         exitPopupViewController.modalPresentationStyle = .overFullScreen
         self.present(exitPopupViewController, animated: false)
@@ -181,7 +180,9 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "모드변경 버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ModelChangePopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 }
 

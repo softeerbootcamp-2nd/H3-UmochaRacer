@@ -201,6 +201,8 @@
 		5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */; };
 		5FFE54022A9A562900DAC4C8 /* ExitPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */; };
 		5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */; };
+		5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */; };
+		5FFE54082A9A617D00DAC4C8 /* ModelChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -373,6 +375,8 @@
 		5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentViewController.swift; sourceTree = "<group>"; };
 		5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitPopupViewController.swift; sourceTree = "<group>"; };
 		5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPopupViewController.xib; sourceTree = "<group>"; };
+		5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelChangePopupViewController.swift; sourceTree = "<group>"; };
+		5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelChangePopupViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -961,6 +965,7 @@
 		5FFE53FE2A9A554C00DAC4C8 /* Popup */ = {
 			isa = PBXGroup;
 			children = (
+				5FFE54042A9A616200DAC4C8 /* ModelChangePopup */,
 				5FFE53FF2A9A560000DAC4C8 /* ExitPopup */,
 			);
 			path = Popup;
@@ -973,6 +978,15 @@
 				5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */,
 			);
 			path = ExitPopup;
+			sourceTree = "<group>";
+		};
+		5FFE54042A9A616200DAC4C8 /* ModelChangePopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */,
+				5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */,
+			);
+			path = ModelChangePopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1187,6 +1201,7 @@
 				47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				5F00FBFE2A777BDF0055A4FA /* Assets.xcassets in Resources */,
 				47CB8CB72A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf in Resources */,
+				5FFE54082A9A617D00DAC4C8 /* ModelChangePopupViewController.xib in Resources */,
 				4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */,
 				47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */,
 			);
@@ -1367,6 +1382,7 @@
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
 				5F496DFC2A9447990024E5B8 /* DictionaryString.swift in Sources */,
+				5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */,
 				5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
