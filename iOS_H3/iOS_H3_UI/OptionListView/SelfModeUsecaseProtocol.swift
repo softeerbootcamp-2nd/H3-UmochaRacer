@@ -14,6 +14,7 @@ enum SelfModeUsecaseError: LocalizedError {
     case invalidStep
     case notExistSelectedOption
     case undefinedError(error: Error)
+    case notExistSelf
 
     var errorDescription: String? {
         switch self {
@@ -27,6 +28,8 @@ enum SelfModeUsecaseError: LocalizedError {
             return "[SelfModeUsecaseError] 선택된 옵션이 없습니다."
         case .undefinedError(let error):
             return "[SelfModeUsecaseError] 정의되지 않은 에러입니다. \(error)"
+        case .notExistSelf:
+            return "[SelfModeUsecaseError] notExistSelf Error"
         }
     }
 }

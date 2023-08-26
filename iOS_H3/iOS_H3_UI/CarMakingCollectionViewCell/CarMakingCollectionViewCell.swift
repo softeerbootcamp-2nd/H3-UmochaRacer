@@ -28,8 +28,8 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
 
-    let descriptionLabel: UILabel = {
-        let label = UILabel()
+    let descriptionLabel: URLabel = {
+        let label = URLabel()
         label.text = "옵션을 골라주세요."
         label.font = Fonts.regularTitle3
         label.setupLineHeight(FontLineHeights.regularTitle3)
@@ -68,12 +68,17 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         optionImageView.image = nil
         optionDidSelected = PassthroughSubject<Int, Never>()
+        configure(urString: nil)
     }
 
     // MARK: - Helpers
     func configure(carMakingStepInfo: CarMakingStepInfo) {
         configure(carMakingStepTitle: carMakingStepInfo.step.title)
         configure(optionInfoArray: carMakingStepInfo.optionCardInfoArray)
+
+        if carMakingStepInfo.step == .powertrain {
+            configure(urString: URString(fullText: carMakingStepInfo.step.title, cardbRange: [.init(0...5)]))
+        }
 
         if !carMakingStepInfo.optionCardInfoArray.isEmpty {
             let optionIndexToShowBanner = carMakingStepInfo.optionCardInfoArray.firstIndex { $0.isSelected } ?? 0
@@ -85,6 +90,10 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
         self.descriptionLabel.text = carMakingStepTitle + Constants.descriptionSuffix
         self.descriptionLabel.applyBoldToString(targetString: carMakingStepTitle,
                                                 font: Fonts.mediumTitle3 ?? .systemFont(ofSize: 10.0))
+    }
+
+    func configure(urString: URString?) {
+        self.descriptionLabel.urString = urString
     }
 
     func configure(bannerImageURL: URL?) {

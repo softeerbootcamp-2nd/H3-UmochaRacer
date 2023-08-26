@@ -17,6 +17,7 @@ final class CarMakingViewModel {
         var carMakingStepDidChanged: CurrentValueSubject<CarMakingStep, Never>
         var optionDidSelected: PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>
         var optionCategoryDidChanged: CurrentValueSubject<OptionCategoryType, Never>
+        var dictionaryButtonPressed: PassthroughSubject<Void, Never>
         var nextButtonDidTapped: PassthroughSubject<Void, Never>
     }
 
@@ -30,6 +31,7 @@ final class CarMakingViewModel {
         var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
         var feedbackComment = PassthroughSubject<FeedbackComment, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
+        var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
 
     // MARK: - Properties
@@ -60,31 +62,27 @@ final class CarMakingViewModel {
 
         input.carMakingStepDidChanged
             .sink { [weak self] newStep in
-                if newStep != .optionSelection {
-                    self?.fetchCarMakingStepInfo(of: newStep, to: output.currentStepInfo)
-                } else {
-                    self?.fetchOptionSelectionStepInfo(
-                        for: input.optionCategoryDidChanged.value,
-                        to: output.currentStepInfo
-                    )
-                }
+                self?.fetchCarMakingStepInfo(
+                    of: newStep,
+                    category: input.optionCategoryDidChanged.value,
+                    output: output.currentStepInfo
+                )
+                output.isDictionaryFeatureEnabled.send(false)
             }
             .store(in: &cancellables)
 
         input.optionDidSelected
             .sink { [weak self] (step, optionIndex) in
                 guard let self else { return }
-
                 if step == .optionSelection {
-                    let (updatedOptionInfo, selectedOptionCount) = selectOptionSelectionStepOption(
+                    selectOptionSelectionStepOption(
                         of: optionIndex,
-                        category: input.optionCategoryDidChanged.value
+                        category: input.optionCategoryDidChanged.value,
+                        updatedOptionInfoOutput: output.optionInfoDidUpdated,
+                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption
                     )
-                    output.optionInfoDidUpdated.send(updatedOptionInfo)
-                    output.numberOfSelectedAdditionalOption.send(selectedOptionCount)
                 } else {
-                    let updatedOptionInfo = selectOption(of: optionIndex, in: step)
-                    output.optionInfoDidUpdated.send(updatedOptionInfo)
+                    selectOption(of: optionIndex, in: step, updatedOptionInfoOutput: output.optionInfoDidUpdated)
                 }
             }
             .store(in: &cancellables)
@@ -92,6 +90,13 @@ final class CarMakingViewModel {
         input.optionCategoryDidChanged
             .sink { [weak self] newCategory in
                 self?.fetchOptionSelectionStepInfo(for: newCategory, to: output.optionInfoForCategory)
+            }
+            .store(in: &cancellables)
+
+        input.dictionaryButtonPressed
+            .sink { _ in
+                let currentValue = output.isDictionaryFeatureEnabled.value
+                output.isDictionaryFeatureEnabled.send(!currentValue)
             }
             .store(in: &cancellables)
 
@@ -116,9 +121,16 @@ final class CarMakingViewModel {
 
     private func fetchCarMakingStepInfo(
         of step: CarMakingStep,
-        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+        category: OptionCategoryType,
+        output currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
     ) {
-        selfModeUsecase.fetchOptionInfo(step: step)
+        var stepInfoPublisher: AnyPublisher<CarMakingStepInfo, SelfModeUsecaseError>
+        if step != .optionSelection {
+            stepInfoPublisher = selfModeUsecase.fetchOptionInfo(step: step)
+        } else {
+            stepInfoPublisher = selfModeUsecase.fetchAdditionalOptionInfo(category: category)
+        }
+        stepInfoPublisher
             .catch { _ in  Just(CarMakingStepInfo(step: step)) }
             .sink { carMakingStepInfo in
                 currentStepInfo.send(carMakingStepInfo)
@@ -126,27 +138,23 @@ final class CarMakingViewModel {
             .store(in: &cancellables)
     }
 
-    private func fetchOptionSelectionStepInfo(
-        for category: OptionCategoryType,
-        to currentStepInfo: CurrentValueSubject<CarMakingStepInfo, Never>
+    private func selectOption(
+        of optionIndex: Int,
+        in step: CarMakingStep,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>
     ) {
-        selfModeUsecase.fetchAdditionalOptionInfo(category: category)
-            .catch { _ in Just(CarMakingStepInfo(step: .optionSelection)) }
-            .sink { optionSelectionStepInfo in
-                currentStepInfo.send(optionSelectionStepInfo)
-            }
-            .store(in: &cancellables)
-    }
-
-    private func selectOption(of optionIndex: Int, in step: CarMakingStep) -> [OptionCardInfo] {
-        return selfModeUsecase.selectOption(of: optionIndex, in: step)
+        updatedOptionInfoOutput.send(selfModeUsecase.selectOption(of: optionIndex, in: step))
     }
 
     private func selectOptionSelectionStepOption(
         of optionIndex: Int,
-        category: OptionCategoryType
-    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
-        return selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+        category: OptionCategoryType,
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
+        selectedOptionCountOutput: PassthroughSubject<Int, Never>
+    ) {
+        let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
+        updatedOptionInfoOutput.send(infos)
+        selectedOptionCountOutput.send(selectedOptionCount)
     }
 
     private func fetchOptionSelectionStepInfo(
@@ -163,7 +171,8 @@ final class CarMakingViewModel {
 
     private func updateEstimateSummary(
         step: CarMakingStep,
-        selectedOption: OptionCardInfo) -> AnyPublisher<EstimateSummary, Never> {
+        selectedOption: OptionCardInfo
+    ) -> AnyPublisher<EstimateSummary, Never> {
         return selfModeUsecase.updateEstimateSummary(step: step, selectedOption: selectedOption).eraseToAnyPublisher()
     }
 
