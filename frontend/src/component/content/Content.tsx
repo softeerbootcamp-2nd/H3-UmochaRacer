@@ -120,7 +120,11 @@ function Content() {
     ],
     7: '',
   };
-  const sortBySelectionRate = (array: cardData[], index: number, selectArr) => {
+  const sortBySelectionRate = (
+    array: cardData[],
+    index: number,
+    selectArr: SelectionRate[][],
+  ) => {
     const sortedCardDataArray: cardData[] = array.map((card) => {
       const rateData = selectArr[index].find(
         (rate: {id: number; selectionRatio: number}) => rate.id === card.id,
@@ -143,7 +147,7 @@ function Content() {
     });
 
     sortedCardDataArray.sort(
-      (a: cardData, b: cardData) => b.saleRate - a.saleRate,
+      (a: cardData, b: cardData) => (b.saleRate || 0) - (a.saleRate || 0),
     );
 
     return sortedCardDataArray;
