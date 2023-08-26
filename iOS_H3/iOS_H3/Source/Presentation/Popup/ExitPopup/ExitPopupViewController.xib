@@ -11,6 +11,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExitPopupViewController" customModule="iOS_H3" customModuleProvider="target">
             <connections>
+                <outlet property="cancelButton" destination="wLX-fY-EYd" id="3wl-qq-zX9"/>
+                <outlet property="exitButton" destination="Ndo-B1-kMi" id="PeP-Ee-0Zn"/>
+                <outlet property="popupDescriptionLabel" destination="QZ4-oX-X4u" id="Irx-Gl-YFs"/>
+                <outlet property="popupTitleLabel" destination="qTc-LQ-Lse" id="1Bu-ch-YFf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -20,10 +24,72 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YG5-I1-SX3">
-                    <rect key="frame" x="16" y="286" width="361" height="280"/>
+                    <rect key="frame" x="16" y="309.66666666666669" width="361" height="233.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exit_popup_img" translatesAutoresizingMaskIntoConstraints="NO" id="sEa-iS-mcP">
+                            <rect key="frame" x="162.66666666666666" y="26" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="e2p-8h-TsF"/>
+                                <constraint firstAttribute="width" constant="36" id="mPh-fN-TYu"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 차 만들기에서 나가시겠어요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTc-LQ-Lse">
+                            <rect key="frame" x="53" y="70" width="255" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QZ4-oX-X4u">
+                            <rect key="frame" x="59" y="103" width="243" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="ep5-XM-H4g"/>
+                            </constraints>
+                            <string key="text">완료까지 얼마 남지 않았어요! 
+지금 종료하면 선택사항은 저장되지 않아요.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ndo-B1-kMi" customClass="OhMyCarSetButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="18" y="169" width="158.66666666666666" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="1q0-fd-tYC"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <connections>
+                                <action selector="didTapExitButton:" destination="-1" eventType="touchUpInside" id="MWx-cV-fYX"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLX-fY-EYd" customClass="OhMyCarSetButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="184.66666666666663" y="169" width="158.33333333333337" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="b0q-yN-Ecu"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <connections>
+                                <action selector="didTapCancelButton:" destination="-1" eventType="touchUpInside" id="TC5-5Y-d7T"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="280" id="jxQ-aq-7Ig"/>
+                        <constraint firstItem="QZ4-oX-X4u" firstAttribute="leading" secondItem="YG5-I1-SX3" secondAttribute="leading" constant="59" id="302-6h-bLL"/>
+                        <constraint firstItem="sEa-iS-mcP" firstAttribute="top" secondItem="YG5-I1-SX3" secondAttribute="top" constant="26" id="9fg-B2-0XD"/>
+                        <constraint firstItem="Ndo-B1-kMi" firstAttribute="leading" secondItem="YG5-I1-SX3" secondAttribute="leading" constant="18" id="FxW-hA-wPh"/>
+                        <constraint firstItem="Ndo-B1-kMi" firstAttribute="top" secondItem="QZ4-oX-X4u" secondAttribute="bottom" constant="24" id="Mm1-Lc-Qj2"/>
+                        <constraint firstAttribute="trailing" secondItem="QZ4-oX-X4u" secondAttribute="trailing" constant="59" id="Upj-ph-v7s"/>
+                        <constraint firstItem="wLX-fY-EYd" firstAttribute="width" secondItem="Ndo-B1-kMi" secondAttribute="width" id="Wox-HF-JBv"/>
+                        <constraint firstAttribute="bottom" secondItem="wLX-fY-EYd" secondAttribute="bottom" constant="18" id="ZNo-NG-OzZ"/>
+                        <constraint firstItem="wLX-fY-EYd" firstAttribute="leading" secondItem="Ndo-B1-kMi" secondAttribute="trailing" constant="8" id="beo-8Q-YrA"/>
+                        <constraint firstAttribute="trailing" secondItem="wLX-fY-EYd" secondAttribute="trailing" constant="18" id="fo0-gN-gqk"/>
+                        <constraint firstAttribute="trailing" secondItem="qTc-LQ-Lse" secondAttribute="trailing" constant="53" id="jQh-cO-GZ4"/>
+                        <constraint firstItem="wLX-fY-EYd" firstAttribute="top" secondItem="QZ4-oX-X4u" secondAttribute="bottom" constant="24" id="moU-JK-kL3"/>
+                        <constraint firstItem="QZ4-oX-X4u" firstAttribute="top" secondItem="qTc-LQ-Lse" secondAttribute="bottom" constant="12" id="osO-Kg-W0W"/>
+                        <constraint firstItem="qTc-LQ-Lse" firstAttribute="leading" secondItem="YG5-I1-SX3" secondAttribute="leading" constant="53" id="s1h-Wg-fXa"/>
+                        <constraint firstItem="sEa-iS-mcP" firstAttribute="centerX" secondItem="YG5-I1-SX3" secondAttribute="centerX" id="ulX-Ib-Ttk"/>
+                        <constraint firstItem="qTc-LQ-Lse" firstAttribute="top" secondItem="sEa-iS-mcP" secondAttribute="bottom" constant="8" id="ywU-39-f1P"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -39,10 +105,11 @@
                 <constraint firstItem="YG5-I1-SX3" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="KAN-7s-8Lk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="YG5-I1-SX3" secondAttribute="trailing" constant="16" id="bbl-Un-OSZ"/>
             </constraints>
-            <point key="canvasLocation" x="132" y="-11"/>
+            <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
+        <image name="exit_popup_img" width="36" height="36"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
