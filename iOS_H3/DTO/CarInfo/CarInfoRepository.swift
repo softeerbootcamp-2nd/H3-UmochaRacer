@@ -93,4 +93,46 @@ final class CarInfoRepository: CarInfoRepositoryProtocol {
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
+
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<FeedbackCommentEntity, Error> {
+        typealias ResultType = Result<APIResponse<FeedbackCommentData>, Error>
+
+        guard let endpoint = createCommentEndpoint(step: step, optionID: optionID) else {
+            return Fail(error: CarInfoRepositoryError.notExistCommentEndpoint(step: step)).eraseToAnyPublisher()
+        }
+        return networkService.request(endpoint)
+            .flatMap { (result: ResultType) -> AnyPublisher<FeedbackCommentEntity, Error> in
+                switch result {
+                case .success(let response):
+                    do {
+                        let commentEntity = try response.data.toDomain()
+                        return Just(commentEntity).setFailureType(to: Error.self).eraseToAnyPublisher()
+                    } catch {
+                        return Fail(error: CarInfoRepositoryError.conversionError(error)).eraseToAnyPublisher()
+                    }
+                case .failure(let error):
+                    return Fail(error: CarInfoRepositoryError.networkError(error)).eraseToAnyPublisher()
+                }
+            }
+            .eraseToAnyPublisher()
+    }
+
+    private func createCommentEndpoint(step: CarMakingStep, optionID: Int) -> CommentEndpoint? {
+        switch step {
+        case .powertrain:
+            return CommentEndpoint.powertrain(id: optionID)
+        case .driveMethod:
+            return CommentEndpoint.drivingSystem(id: optionID)
+        case .bodyType:
+            return CommentEndpoint.bodyType(id: optionID)
+        case .externalColor:
+            return CommentEndpoint.exteriorColor(id: optionID)
+        case .internalColor:
+            return CommentEndpoint.interiorColor(id: optionID)
+        case .wheelSelection:
+            return CommentEndpoint.wheel(id: optionID)
+        default:
+            return nil
+        }
+    }
 }
