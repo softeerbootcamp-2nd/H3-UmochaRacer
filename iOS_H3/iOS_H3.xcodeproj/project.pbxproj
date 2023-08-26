@@ -206,6 +206,8 @@
 		5FFE540C2A9A644900DAC4C8 /* ModeChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */; };
 		5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */; };
 		5FFE540F2A9A663900DAC4C8 /* ModeChangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */; };
+		5FFE54132A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */; };
+		5FFE54142A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -383,6 +385,8 @@
 		5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangePopupViewController.swift; sourceTree = "<group>"; };
 		5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChangePopupViewController.xib; sourceTree = "<group>"; };
 		5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeButton.swift; sourceTree = "<group>"; };
+		5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeCheckPopupViewController.swift; sourceTree = "<group>"; };
+		5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChangeCheckPopupViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -999,11 +1003,21 @@
 		5FFE54092A9A643100DAC4C8 /* ModeChangePopup */ = {
 			isa = PBXGroup;
 			children = (
+				5FFE54102A9A74CB00DAC4C8 /* ModeChangeCheckPopup */,
 				5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */,
 				5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */,
 				5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */,
 			);
 			path = ModeChangePopup;
+			sourceTree = "<group>";
+		};
+		5FFE54102A9A74CB00DAC4C8 /* ModeChangeCheckPopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */,
+				5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */,
+			);
+			path = ModeChangeCheckPopup;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1212,6 +1226,7 @@
 				47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */,
 				5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */,
 				5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */,
+				5FFE54142A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib in Resources */,
 				5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */,
 				5F1E30BD2A9240C5004D229F /* ImageDetailPopupViewController.xib in Resources */,
 				5F00FC012A777BDF0055A4FA /* LaunchScreen.storyboard in Resources */,
@@ -1360,6 +1375,7 @@
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
+				5FFE54132A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift in Sources */,
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				479B09042A935F7B00AA10A0 /* CarMakingStepInfo.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,

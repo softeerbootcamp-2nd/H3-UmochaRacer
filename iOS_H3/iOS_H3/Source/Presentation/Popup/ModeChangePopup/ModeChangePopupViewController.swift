@@ -62,7 +62,7 @@ class ModeChangePopupViewController: UIViewController {
 
     @objc func selfModeButtonTapped() {
         if currentMode != .selfMode {
-            presentOtherPopup()
+            presentOtherPopup(currentMode: .selfMode)
         } else {
             self.dismiss(animated: false)
         }
@@ -70,15 +70,18 @@ class ModeChangePopupViewController: UIViewController {
 
     @objc func guideModeButtonTapped() {
         if currentMode != .guideMode {
-            presentOtherPopup()
+            presentOtherPopup(currentMode: .guideMode)
         } else {
             self.dismiss(animated: false)
         }
     }
 
-    func presentOtherPopup() {
-        self.dismiss(animated: false)
-        // let otherPopupVC = OtherPopupViewController()
-        // self.present(otherPopupVC, animated: true, completion: nil)
+    func presentOtherPopup(currentMode: CarMakingMode) {
+        let modeChangePopupVC = ModeChangeCheckPopupViewController(currentMode: currentMode)
+        modeChangePopupVC.modalPresentationStyle = .overFullScreen
+        let presentingVC = self.presentingViewController
+        self.dismiss(animated: false, completion: {
+            presentingVC?.present(modeChangePopupVC, animated: false, completion: nil)
+        })
     }
 }
