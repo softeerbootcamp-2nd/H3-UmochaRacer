@@ -167,6 +167,9 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         print("[CarMakingViewController]", #function, "백버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ExitPopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
