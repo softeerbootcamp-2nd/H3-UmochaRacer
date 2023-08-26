@@ -95,7 +95,10 @@ function SelectedOptionCardList({
     cardData.map((elem, index) => (
       <OptionCard
         key={index}
-        selected={additionOptions.includes(elem)}
+        selected={
+          additionOptions.find((element) => elem.id === element.id) !==
+          undefined
+        }
         isSaved={isSaved}
         onClick={() => handleItemClick(index)}
         data={elem}

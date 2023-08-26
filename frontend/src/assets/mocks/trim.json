@@ -4,7 +4,7 @@
     "name": "Guide Mode",
     "tag": "나만을 위한 팰리세이드",
     "price": 38960000,
-    "route": "/",
+    "route": "/guide",
     "description": {
       "title": "나에게 딱맞는 구성으로,",
       "hasDescription": true,

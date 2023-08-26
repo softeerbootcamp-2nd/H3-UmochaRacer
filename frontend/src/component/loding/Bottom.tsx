@@ -29,7 +29,7 @@ function Bottom({setLoaded}: Props) {
         onAnimationEnd = () => {
           setTimeout(() => {
             setLoaded(true);
-          }, 1500);
+          }, 800);
         };
       }
 

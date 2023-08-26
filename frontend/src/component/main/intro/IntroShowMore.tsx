@@ -3,7 +3,20 @@ import {flexCenter} from '@/style/common';
 import {Title5_Regular} from '@/style/fonts';
 import {colors} from '@/style/theme';
 import React from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
+const bounce = keyframes`
+  0% {
+    transform: rotate(0deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(0deg) translate(0px, 20px);
+    opacity: 0;
+  }
+`;
 function IntroShowMore() {
   return (
     <ShowMore.Wrapper>
@@ -35,6 +48,7 @@ const ShowMore = {
     ${flexCenter}
     flex-direction: column;
     position: relative;
+    animation: ${bounce} 1.5s infinite;
   `,
   Abs: styled.div`
     position: absolute;

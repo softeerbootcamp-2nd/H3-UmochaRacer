@@ -14,9 +14,10 @@ import {colors} from '@/style/theme';
 import {Body1_Medium, Title5_Regular} from '@/style/fonts';
 import Icon from '../common/icons';
 import {useScroll} from '../hooks/useScroll';
+import {useNavigate} from 'react-router-dom';
 function MainContainer() {
   const scrollPosition = useScroll();
-
+  const navigate = useNavigate();
   return (
     <>
       <Intro.Wrapper>
@@ -46,19 +47,47 @@ function MainContainer() {
       </Trim.OptionWrapper>
       <Trim.CarMakeWrapper>
         <Trim.CarMake>
-          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+          <Trim.CarMakeP
+            onClick={() => {
+              navigate('/self');
+            }}
+          >
+            내 차 만들기
+          </Trim.CarMakeP>
         </Trim.CarMake>
         <Trim.CarMake>
-          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+          <Trim.CarMakeP
+            onClick={() => {
+              navigate('/self');
+            }}
+          >
+            내 차 만들기
+          </Trim.CarMakeP>
         </Trim.CarMake>
         <Trim.CarMake>
-          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+          <Trim.CarMakeP
+            onClick={() => {
+              navigate('/self');
+            }}
+          >
+            내 차 만들기
+          </Trim.CarMakeP>
         </Trim.CarMake>
         <Trim.CarMake>
-          <Trim.CarMakeP>내 차 만들기</Trim.CarMakeP>
+          <Trim.CarMakeP
+            onClick={() => {
+              navigate('/self');
+            }}
+          >
+            내 차 만들기
+          </Trim.CarMakeP>
         </Trim.CarMake>
       </Trim.CarMakeWrapper>
-      <GuideModeButton.Wrapper>
+      <GuideModeButton.Wrapper
+        onClick={() => {
+          navigate('/guide');
+        }}
+      >
         <GuideModeButton.Suggest>
           무엇을 골라야 할 지 모르겠다면?
         </GuideModeButton.Suggest>

@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import styled from 'styled-components';
 import Firework from '@/component/content/totalestimate/estimatecontent/FireWork';
 import {colors} from '@/style/theme';
@@ -12,7 +12,7 @@ import {
 import {flexCenter} from '@/style/common';
 import {GUIDE_TOGGLE, useGuideFlowDispatch} from '@/provider/guideFlowProvider';
 import {OptionContext} from '@/provider/optionProvider';
-
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
 interface ButtonData {
   text: string;
   background: string;
@@ -44,7 +44,7 @@ function EstimateContent() {
     }
     dispatch({type: GUIDE_TOGGLE});
   };
-
+  const {selectedOptions} = useContext(SelectedOptionContext);
   const buttons = buttonDatas.map((elem: ButtonData, index: number) => {
     return (
       <Bottom.Button
@@ -63,7 +63,7 @@ function EstimateContent() {
   return (
     <Wrapper>
       <Top.Container>
-        <Top.Image src="/image/white.png"></Top.Image>
+        <Top.Image src={selectedOptions[3].imgSrc}></Top.Image>
       </Top.Container>
       <Firework number={10} width={TOP_WIDTH} height={TOP_HEIGHT}></Firework>
       <Comment.Container>나만의 팰리세이드 견적 준비 완료!</Comment.Container>
@@ -150,7 +150,7 @@ const Bottom = {
   Container: styled.div`
     display: flex;
     justify-content: center;
-    margin-top: 38px;
+    margin-top: 18px;
     width: 100%;
     gap: 12px;
     button {
