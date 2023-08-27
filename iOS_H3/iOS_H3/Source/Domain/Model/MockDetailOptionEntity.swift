@@ -155,7 +155,7 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
                         .eraseToAnyPublisher()
                     }
                 case .failure(let error):
-                  
+
                     return Fail(outputType: [MockDetailOptionEntity].self,
                                 failure: MockDetailRepositoryError.networkError(error))
                     .eraseToAnyPublisher()
@@ -173,7 +173,7 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
                 case .success(let data):
                     do {
                         let detailOptionEntities = try data.data.toDomain()// { try  }
-                       
+
                         return Just(detailOptionEntities)
                             .setFailureType(to: MockDetailRepositoryError.self)
                             .eraseToAnyPublisher()
@@ -247,18 +247,6 @@ enum MockDetailEndPoint: Endpoint {
     }
 
     var parameters: HTTPParameter? {
-        switch self {
-
-        case .powertrain:
-            return nil
-        case .drivingSystem:
-            return nil
-        case .bodyType:
-            return nil
-        case .wheel:
-            return nil
-        case .additionalOption:
-            return nil
-        }
+       return nil
     }
 }
