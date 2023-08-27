@@ -44,10 +44,6 @@ final class MainViewController: UIViewController {
 
     // MARK: - Properties
 
-    private var isCarDictionaryOn = false
-
-    private let textEffectManager = TextEffectManager()
-
     private var selectedTrim = TrimCategory.guideMode
 
     private lazy var screenWidth = view.window?.windowScene?.screen.bounds.width ?? UIWindow().screen.bounds.size.width
@@ -74,12 +70,8 @@ extension MainViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        isCarDictionaryOn.toggle()
-        if isCarDictionaryOn {
-            textEffectManager.applyEffect(true, on: view)
-        } else {
-            textEffectManager.applyEffect(false, on: view)
-        }
+        let isDictionaryOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffect(!isDictionaryOn, on: view)
     }
 }
 
@@ -143,7 +135,7 @@ extension MainViewController {
     private func setupTitleLabel() {
         let titleText = "원하는 트림을 선택해주세요"
         titleURLabel.text = titleText
-        titleURLabel.urString = URString(fullText: titleText, cardbRange: [(4..<6)])
+        titleURLabel.urString = URString(fullText: titleText, cardbRange: [(4..<7)])
         titleURLabel.font = Fonts.regularTitle3
         titleURLabel.applyBoldToString(targetString: "원하는 트림", font: Fonts.mediumTitle3 ?? .boldSystemFont(ofSize: 18))
         titleURLabel.textColor = Colors.coolGreyBlack

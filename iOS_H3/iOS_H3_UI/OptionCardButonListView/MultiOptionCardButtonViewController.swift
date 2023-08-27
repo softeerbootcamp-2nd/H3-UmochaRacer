@@ -17,15 +17,15 @@ final class MultiOptionCardButtonViewController: UIViewController {
     // MARK: - UI properties
 
     private lazy var selfModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
-        let view = MultiOptionCardButtonView(carMakingMode: .selfMode)
-        view.configure(with: self.cardInfos)
+        let view = MultiOptionCardButtonView(carMakingMode: .selfMode, step: .powertrain)
+        view.configure(with: self.cardInfos, step: .powertrain)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private lazy var guideModeMultiOptionCardButtonView: MultiOptionCardButtonView = {
-        let view = MultiOptionCardButtonView(carMakingMode: .guideMode)
-        view.configure(with: self.cardInfos)
+        let view = MultiOptionCardButtonView(carMakingMode: .guideMode, step: .powertrain)
+        view.configure(with: self.cardInfos, step: .powertrain)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -102,7 +102,7 @@ extension MultiOptionCardButtonViewController: OptionCardButtonListViewDelegate 
         didSelectOptionAt index: Int
     ) {
         cardInfos[index].isSelected.toggle()
-        selfModeMultiOptionCardButtonView.configure(with: cardInfos)
+        selfModeMultiOptionCardButtonView.configure(with: cardInfos, step: .powertrain)
     }
 
     func optionCardButtonListView(

@@ -63,8 +63,8 @@ final class OptionCardCell: UICollectionViewCell {
 
     // MARK: - Helpers
 
-    func configure(carMakingMode: CarMakingMode, info: OptionCardInfo) {
-        optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info)
+    func configure(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
+        optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info, step: step)
     }
 
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
@@ -86,6 +86,7 @@ extension OptionCardCell {
             optionCardButton.trailingAnchor.constraint(equalTo: self.trailingAnchor),
             optionCardButton.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ])
+        optionCardButton.delegate = self
     }
 
     private func setupButtonTapSubject() {
@@ -103,5 +104,17 @@ extension OptionCardCell {
         optionCardButton.setImage(url: nil)
         optionCardButton.showMoreInfoButton(false)
         optionCardButton.resetAnimatedView()
+    }
+}
+
+extension OptionCardCell: OptionCardButtonDelegate {
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton,
+                                              option: OptionCardInfo,
+                                              step: CarMakingStep) {
+        let detailViewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel(),
+                                                                  info: option, carMakingStep: step)
+        detailViewController.modalPresentationStyle = .overFullScreen
+        self.findViewController()?.present(detailViewController,
+                                           animated: false)
     }
 }

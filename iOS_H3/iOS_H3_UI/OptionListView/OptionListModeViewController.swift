@@ -12,7 +12,7 @@ final class OptionListModeViewController: UIViewController {
     // MARK: - UI properties
 
     private lazy var selfModeOptionModeListView: OptionListModeView = {
-        let view = OptionListModeView(carMakingMode: .selfMode)
+        let view = OptionListModeView(carMakingMode: .selfMode, step: .powertrain)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -94,7 +94,7 @@ final class OptionListModeViewController: UIViewController {
 
         setupDelegate()
         setupViews()
-        self.selfModeOptionModeListView.configure(with: cardInfos)
+        self.selfModeOptionModeListView.configure(with: cardInfos, step: .powertrain)
     }
 
     // MARK: - Helpers
@@ -140,12 +140,19 @@ extension OptionListModeViewController: OptionCardButtonListViewDelegate {
         didSelectOptionAt index: Int
     ) {
         cardInfos[index].isSelected.toggle()
-        selfModeOptionModeListView.configure(with: cardInfos)
+        selfModeOptionModeListView.configure(with: cardInfos, step: .powertrain)
     }
 
     func optionCardButtonListView(
         _ optionCardButtonListView: OptionCardButtonListViewable,
         didDisplayOptionAt index: Int
     ) {
+    }
+
+    func optionCardButtonListView(
+        _ optionCardButtonListView: OptionCardButtonListViewable,
+        detailOptionId: Int
+    ) {
+        print("구현 필요.")
     }
 }
