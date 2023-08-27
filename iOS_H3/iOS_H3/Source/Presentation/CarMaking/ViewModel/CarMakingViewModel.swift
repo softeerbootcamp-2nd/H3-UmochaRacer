@@ -31,7 +31,6 @@ final class CarMakingViewModel {
         var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
         var feedbackComment = PassthroughSubject<FeedbackComment, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
-        var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
 
     // MARK: - Properties
@@ -64,7 +63,6 @@ final class CarMakingViewModel {
                     category: input.optionCategoryDidChanged.value,
                     output: output.currentStepInfo
                 )
-                output.isDictionaryFeatureEnabled.send(false)
             }
             .store(in: &cancellables)
 
@@ -87,13 +85,6 @@ final class CarMakingViewModel {
         input.optionCategoryDidChanged
             .sink { [weak self] newCategory in
                 self?.fetchOptionSelectionStepInfo(for: newCategory, to: output.optionInfoForCategory)
-            }
-            .store(in: &cancellables)
-
-        input.dictionaryButtonPressed
-            .sink { _ in
-                let currentValue = output.isDictionaryFeatureEnabled.value
-                output.isDictionaryFeatureEnabled.send(!currentValue)
             }
             .store(in: &cancellables)
 

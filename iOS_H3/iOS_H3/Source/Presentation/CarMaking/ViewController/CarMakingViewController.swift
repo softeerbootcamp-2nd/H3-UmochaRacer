@@ -99,7 +99,6 @@ extension CarMakingViewController {
         output.currentStepInfo
             .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
-                self?.titleBar.resetDictionary()
                 self?.updateCurrentStepInfo(with: info)
             }
             .store(in: &cancellables)
@@ -142,14 +141,6 @@ extension CarMakingViewController {
                 self?.showIndicator(showIndicator)
             }
             .store(in: &cancellables)
-
-        output.isDictionaryFeatureEnabled
-            .sink { [weak self] isEnabled in
-                if let view = self?.view {
-                    TextEffectManager.shared.applyEffect(isEnabled, on: view)
-                }
-            }
-            .store(in: &cancellables)
     }
 
     private func updateBottomModalView(with estimateData: EstimateSummary) {
@@ -182,7 +173,8 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        dictionaryButtonPressed.send(())
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffect(!isOn, on: self.view)
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
