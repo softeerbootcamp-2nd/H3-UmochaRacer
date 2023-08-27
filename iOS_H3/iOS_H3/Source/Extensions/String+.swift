@@ -58,4 +58,10 @@ extension String {
         return URString(fullText: string, cardbRange: ranges)
 
     }
+
+    func convertPriceStringToInt() -> Int? {
+        let nonNumberSet = CharacterSet.decimalDigits.inverted
+        let numberString = self.components(separatedBy: nonNumberSet).joined()
+        return Int(numberString)
+    }
 }
