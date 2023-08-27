@@ -38,20 +38,20 @@
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
+		47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
+		47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
+		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
+		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		4741C3662A964A59009FD883 /* CarMakingStepInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */; };
-
+		4741C3682A9678EE009FD883 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3672A9678EE009FD883 /* MainViewController.swift */; };
+		4741C36A2A968407009FD883 /* OptionCardInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */; };
+		4741C36B2A96843E009FD883 /* TextBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */; };
 		4741C36E2A977BB9009FD883 /* DictionaryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */; };
 		4741C3702A977F9E009FD883 /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */; };
 		4741C3722A977FA4009FD883 /* DictionaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */; };
 		4741C3742A978162009FD883 /* DictionaryDescriptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */; };
-
-		4741C3682A9678EE009FD883 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3672A9678EE009FD883 /* MainViewController.swift */; };
-		4741C36A2A968407009FD883 /* OptionCardInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */; };
-		4741C36B2A96843E009FD883 /* TextBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */; };
-		4741C36C2A968440009FD883 /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */; };
-
 		4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
 		4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */; };
 		4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4762D45E2A9219DC007F312D /* CarMakingCategory.swift */; };
@@ -88,11 +88,11 @@
 		479B090E2A9488A600AA10A0 /* CarMakingStepInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */; };
 		479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09012A9351C900AA10A0 /* OptionCardInfo.swift */; };
 		479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */; };
-
-		479DDB602A97CE3F0022846F /* DictionaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */; };
-		479DDB612A97CE810022846F /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */; };
-
-
+		479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */; };
+		479B09172A95318C00AA10A0 /* FeedbackCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */; };
+		479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */; };
+		479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
+		479B091C2A95A79A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
 		479B091E2A95CDD700AA10A0 /* TrimListBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091D2A95CDD700AA10A0 /* TrimListBar.swift */; };
 		479B09202A95CE0500AA10A0 /* TrimListBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */; };
 		479B09222A95CE4C00AA10A0 /* TrimCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09212A95CE4C00AA10A0 /* TrimCategory.swift */; };
@@ -100,14 +100,7 @@
 		479B09242A95D19700AA10A0 /* TrimListBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091D2A95CDD700AA10A0 /* TrimListBar.swift */; };
 		479B09252A95D19A00AA10A0 /* TrimListBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */; };
 		479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */; };
-
-		479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */; };
-		479B09172A95318C00AA10A0 /* FeedbackCommentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */; };
-		479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */; };
-		479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
-		479B091C2A95A79A00AA10A0 /* FeedbackComment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479B091A2A95357A00AA10A0 /* FeedbackComment.swift */; };
-
-
+		479DDB602A97CE3F0022846F /* DictionaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */; };
 		47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
 		47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */; };
 		47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
@@ -152,7 +145,6 @@
 		5F3E67112A95CDBF002BF48A /* TextBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */; };
 		5F3E67142A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
 		5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
-		5F3E67172A95CF37002BF48A /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */; };
 		5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */; };
 		5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */; };
 		5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */; };
@@ -169,7 +161,6 @@
 		5F47E0E72A9B46E00076D7AD /* URL+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B52A8B231200DECB70 /* URL+.swift */; };
 		5F47E0E82A9B46E90076D7AD /* URLRequest+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479023B82A8B231D00DECB70 /* URLRequest+.swift */; };
 		5F47E0EA2A9B47490076D7AD /* ConstantKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F60E4BE2A8B4DE700531462 /* ConstantKey.swift */; };
-		5F47E0EB2A9B47830076D7AD /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */; };
 		5F4834AC2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4834AB2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift */; };
 		5F496DFC2A9447990024E5B8 /* DictionaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFB2A9447990024E5B8 /* DictionaryString.swift */; };
 		5F496DFD2A9447990024E5B8 /* DictionaryString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F496DFB2A9447990024E5B8 /* DictionaryString.swift */; };
@@ -200,10 +191,8 @@
 		5F5132CE2A98EC7B00C01C70 /* DetailPopupUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5132CD2A98EC7B00C01C70 /* DetailPopupUsecase.swift */; };
 		5F5891D92A92D9D600ACFFAD /* DetailPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */; };
 		5F5891DB2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */; };
-		5F5891DD2A92DB3500ACFFAD /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DC2A92DB3500ACFFAD /* MockDetailOptionEntity.swift */; };
 		5F5891DF2A92E06100ACFFAD /* DetailPopupViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */; };
 		5F5891E02A92E06A00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */; };
-		5F5891E12A92E06F00ACFFAD /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5891DC2A92DB3500ACFFAD /* MockDetailOptionEntity.swift */; };
 		5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */; };
 		5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */; };
 		5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F5AE0C82A8C72AA007A0E3C /* OptionListModeViewController.swift */; };
@@ -303,17 +292,16 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewModel.swift; sourceTree = "<group>"; };
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
+		47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryOptionUsecase.swift; sourceTree = "<group>"; };
+		47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
-
+		4741C3672A9678EE009FD883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfoEntity.swift; sourceTree = "<group>"; };
 		4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryEndpoint.swift; sourceTree = "<group>"; };
 		4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepository.swift; sourceTree = "<group>"; };
 		4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryRepositoryProtocol.swift; sourceTree = "<group>"; };
 		4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDescriptionData.swift; sourceTree = "<group>"; };
-
-		4741C3672A9678EE009FD883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionCardInfoEntity.swift; sourceTree = "<group>"; };
-
 		4762D45B2A920A95007F312D /* EstimateSummaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryCell.swift; sourceTree = "<group>"; };
 		4762D45E2A9219DC007F312D /* CarMakingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingCategory.swift; sourceTree = "<group>"; };
 		4762D4632A92533B007F312D /* EstimateSummaryHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummaryHeaderView.swift; sourceTree = "<group>"; };
@@ -336,21 +324,15 @@
 		479B09032A935F7B00AA10A0 /* CarMakingStepInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfo.swift; sourceTree = "<group>"; };
 		479B090A2A94874000AA10A0 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarInfoMockRepository.swift; sourceTree = "<group>"; };
-
-		479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryUsecase.swift; sourceTree = "<group>"; };
-
-
-		479B091D2A95CDD700AA10A0 /* TrimListBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBar.swift; sourceTree = "<group>"; };
-		479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarButton.swift; sourceTree = "<group>"; };
-		479B09212A95CE4C00AA10A0 /* TrimCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCategory.swift; sourceTree = "<group>"; };
-		479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarViewController.swift; sourceTree = "<group>"; };
-
 		479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentEndpoint.swift; sourceTree = "<group>"; };
 		479B09162A95318C00AA10A0 /* FeedbackCommentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FeedbackCommentData.swift; path = iOS_H3/Source/Network/FeedbackCommentData.swift; sourceTree = SOURCE_ROOT; };
 		479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackCommentEntity.swift; sourceTree = "<group>"; };
 		479B091A2A95357A00AA10A0 /* FeedbackComment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackComment.swift; sourceTree = "<group>"; };
-
-
+		479B091D2A95CDD700AA10A0 /* TrimListBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBar.swift; sourceTree = "<group>"; };
+		479B091F2A95CE0500AA10A0 /* TrimListBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarButton.swift; sourceTree = "<group>"; };
+		479B09212A95CE4C00AA10A0 /* TrimCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimCategory.swift; sourceTree = "<group>"; };
+		479B09262A95E06000AA10A0 /* TrimListBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimListBarViewController.swift; sourceTree = "<group>"; };
+		479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryUsecase.swift; sourceTree = "<group>"; };
 		47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRMedium.ttf; sourceTree = "<group>"; };
 		47CB8CB22A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansHeadKRRegular.ttf; sourceTree = "<group>"; };
 		47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = HyundaiSansTextKROTFMedium.otf; sourceTree = "<group>"; };
@@ -384,7 +366,6 @@
 		5F3E60BC2A9678B900BB5FCE /* DetailOptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOptionInfo.swift; sourceTree = "<group>"; };
 		5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxViewModel.swift; sourceTree = "<group>"; };
 		5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryUsecaseProtocol.swift; path = iOS_H3/Source/Presentation/Detail/ViewModel/DictionaryUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
-		5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryOptionUsecase.swift; path = iOS_H3/Source/Domain/UseCase/DictionaryOptionUsecase.swift; sourceTree = SOURCE_ROOT; };
 		5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepository.swift; path = iOS_H3/Source/DetailRepository.swift; sourceTree = SOURCE_ROOT; };
 		5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepositoryProtocol.swift; path = iOS_H3/Source/DetailRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
 		5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEndPoint.swift; sourceTree = "<group>"; };
@@ -405,7 +386,6 @@
 		5F5132CD2A98EC7B00C01C70 /* DetailPopupUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopupUsecase.swift; sourceTree = "<group>"; };
 		5F5891D82A92D9D600ACFFAD /* DetailPopupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPopupViewModel.swift; sourceTree = "<group>"; };
 		5F5891DA2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailPopupUsecaseProtocol.swift; path = iOS_H3/Source/Presentation/OptionDetail/ViewModel/DetailPopupUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
-		5F5891DC2A92DB3500ACFFAD /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
 		5F5AE0C52A8C5FA9007A0E3C /* OptionListModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListModeView.swift; sourceTree = "<group>"; };
 		5F5AE0C82A8C72AA007A0E3C /* OptionListModeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionListModeViewController.swift; sourceTree = "<group>"; };
 		5F5E21122A78DD21003C1185 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -522,6 +502,14 @@
 			path = OptionCardButonListView;
 			sourceTree = "<group>";
 		};
+		47342E602A9BAE2500A1FCBE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				5F3E67252A95FB36002BF48A /* DetailOptionData.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		473A83362A8F5BD400C4EED9 /* BottomModalView */ = {
 			isa = PBXGroup;
 			children = (
@@ -573,7 +561,6 @@
 				479B09002A9351B600AA10A0 /* Model */,
 				5F448A6C2A91FBD0005D04FF /* OptionDetail */,
 				478B26832A78FD4000598902 /* CarMaking */,
-				5F00FBF82A777BDE0055A4FA /* ViewController.swift */,
 				4741C3672A9678EE009FD883 /* MainViewController.swift */,
 			);
 			path = Presentation;
@@ -652,7 +639,6 @@
 		478B267E2A78FD0E00598902 /* DTO */ = {
 			isa = PBXGroup;
 			children = (
-				5F3E67272A95FB3C002BF48A /* Detail */,
 				5F60E4A92A8B403600531462 /* CarInfo */,
 				4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */,
 			);
@@ -675,8 +661,8 @@
 			isa = PBXGroup;
 			children = (
 				478B26812A78FD3400598902 /* Protocol */,
+				47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */,
 				5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */,
-				5F3E67162A95CF37002BF48A /* DictionaryOptionUsecase.swift */,
 				479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */,
 				5F5132CD2A98EC7B00C01C70 /* DetailPopupUsecase.swift */,
 			);
@@ -698,16 +684,11 @@
 			children = (
 				471917FB2A83338D00B67D54 /* URColor.swift */,
 				473309972A8C695B00906FFB /* EstimateSummary.swift */,
-				5F5891DC2A92DB3500ACFFAD /* MockDetailOptionEntity.swift */,
+				47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */,
 				4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */,
-
 				476913A62A97AD9500C9C352 /* DictionaryDescription.swift */,
-
-
 				4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */,
-
 				479B09182A95326700AA10A0 /* FeedbackCommentEntity.swift */,
-
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -763,12 +744,9 @@
 				479023AE2A8AA18600DECB70 /* EndPoint.swift */,
 				5F60E4BC2A8B469C00531462 /* CarInfoEndpoint.swift */,
 				5F448A662A91D000005D04FF /* IntroEndpoint.swift */,
-
 				4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */,
-
 				479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */,
 				5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */,
-
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -807,6 +785,7 @@
 				5F6203882A7BC59700D09531 /* iOS_H3_UIUITests */,
 				4790238B2A8A3DAF00DECB70 /* NetworkLayerTest */,
 				5F00FBF22A777BDE0055A4FA /* Products */,
+				47342E602A9BAE2500A1FCBE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1356,7 +1335,6 @@
 				5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */,
 				479B09252A95D19A00AA10A0 /* TrimListBarButton.swift in Sources */,
 				473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */,
-				5F3E67172A95CF37002BF48A /* DictionaryOptionUsecase.swift in Sources */,
 				5F5F724D2A7E03460084AFD4 /* OhMyCarSetTitleBarViewController.swift in Sources */,
 				471917DE2A81F9A200B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				5F1FC1CA2A82577C00C54EBE /* CarMakingCollectionViewCell.swift in Sources */,
@@ -1406,15 +1384,11 @@
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				479B09042A935F7B00AA10A0 /* CarMakingStepInfo.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
-
 				4741C3722A977FA4009FD883 /* DictionaryRepositoryProtocol.swift in Sources */,
-
 				4741C3682A9678EE009FD883 /* MainViewController.swift in Sources */,
-
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
-				5F5891DD2A92DB3500ACFFAD /* MockDetailOptionEntity.swift in Sources */,
 				5F1E30B72A923FC6004D229F /* PagingControlView.swift in Sources */,
 				5F2116E92A8EE5C4008FC7D2 /* EstimateElementData.swift in Sources */,
 				5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */,
@@ -1426,6 +1400,7 @@
 				476913A72A97AD9500C9C352 /* DictionaryDescription.swift in Sources */,
 				5F1E30BB2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
+				47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				5F5132CE2A98EC7B00C01C70 /* DetailPopupUsecase.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
@@ -1445,6 +1420,7 @@
 				5F60E4BD2A8B469C00531462 /* CarInfoEndpoint.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
+				47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */,
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
 				5F64B55D2A9070F300B5AE08 /* SelfModeUsecase.swift in Sources */,
 				5F3E670D2A959983002BF48A /* TextBoxViewController.swift in Sources */,
@@ -1509,6 +1485,8 @@
 				5F47E0EA2A9B47490076D7AD /* ConstantKey.swift in Sources */,
 				5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
+				47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */,
+				47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
@@ -1523,10 +1501,8 @@
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F5891DF2A92E06100ACFFAD /* DetailPopupViewModel.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
-				479DDB612A97CE810022846F /* DictionaryOptionUsecase.swift in Sources */,
 				473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */,
 				5F5891E02A92E06A00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
-				5F47E0EB2A9B47830076D7AD /* DictionaryOptionUsecase.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
@@ -1540,10 +1516,7 @@
 				4700964A2A8791FE003711F2 /* EstimateSummaryView.swift in Sources */,
 				471917FD2A83338D00B67D54 /* URColor.swift in Sources */,
 				479B090E2A9488A600AA10A0 /* CarMakingStepInfo.swift in Sources */,
-				5F5891E12A92E06F00ACFFAD /* DetailInfo.swift in Sources */,
-				473309932A8BC98E00906FFB /* OptionCardInfoEntity.swift in Sources */,
 				5F47E0E72A9B46E00076D7AD /* URL+.swift in Sources */,
-				5F5891E12A92E06F00ACFFAD /* MockDetailOptionEntity.swift in Sources */,
 				471917F02A82371100B67D54 /* OptionCardButtonListViewable.swift in Sources */,
 				5F496E042A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F5AE0C92A8C72AA007A0E3C /* OptionListModeViewController.swift in Sources */,
@@ -1556,7 +1529,6 @@
 				5F496E0C2A948E8B0024E5B8 /* TextBoxView.swift in Sources */,
 				5F6603F02A8380C8000E393D /* CarMakingMultipleOptionCell.swift in Sources */,
 				5F496E0E2A948FAA0024E5B8 /* TextBoxViewController.swift in Sources */,
-				4741C36C2A968440009FD883 /* DictionaryOptionUsecase.swift in Sources */,
 				5F47E0E32A9B469F0076D7AD /* EndPoint.swift in Sources */,
 				5F47E0E62A9B46C70076D7AD /* NetworkError.swift in Sources */,
 				5F62036B2A7BC59500D09531 /* SceneDelegate.swift in Sources */,
