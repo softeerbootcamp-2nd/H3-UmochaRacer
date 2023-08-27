@@ -74,6 +74,27 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return optionInfos
     }
 
+//    func selectAdditionalOption(
+//        of optionIndex: Int,
+//        in category: OptionCategoryType
+//    ) -> (infos: [OptionCardInfo], selectedOptionCount: Int) {
+//        var selectedOptionCount = optionSelectionStepInfo.reduce(0) {
+//            $0 + $1.value.optionCardInfoArray.filter { $0.isSelected }.count
+//        }
+//        guard let categoryInfo = optionSelectionStepInfo[category] else { return ([], selectedOptionCount) }
+//
+//        var categoryOptionInfos = categoryInfo.optionCardInfoArray
+//        categoryOptionInfos[optionIndex].isSelected.toggle()
+//
+//        selectedOptionCount += categoryOptionInfos[optionIndex].isSelected ? 1 : -1
+//
+//        optionSelectionStepInfo[category] = CarMakingStepInfo(
+//            step: .optionSelection,
+//            optionCardInfoArray: categoryOptionInfos
+//        )
+//
+//        return (categoryOptionInfos, selectedOptionCount)
+//    }
     func selectAdditionalOption(
         of optionIndex: Int,
         in category: OptionCategoryType
@@ -84,7 +105,20 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         guard let categoryInfo = optionSelectionStepInfo[category] else { return ([], selectedOptionCount) }
 
         var categoryOptionInfos = categoryInfo.optionCardInfoArray
+        let wasSelected = categoryOptionInfos[optionIndex].isSelected // 현재 선택 상태를 저장
         categoryOptionInfos[optionIndex].isSelected.toggle()
+
+        var newElements = currentEstimateSummary.elements
+
+        if wasSelected { // 만약 선택 해제된 경우
+            if let index = newElements.firstIndex(where: {
+                $0.selectedOption == categoryOptionInfos[optionIndex].title.fullText
+            }) {
+                newElements.remove(at: index)
+            }
+        }
+
+        currentEstimateSummary = EstimateSummary(elements: newElements)
 
         selectedOptionCount += categoryOptionInfos[optionIndex].isSelected ? 1 : -1
 
@@ -96,25 +130,72 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return (categoryOptionInfos, selectedOptionCount)
     }
 
+//    func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
+//    -> AnyPublisher<EstimateSummary, Never> {
+//
+//        var elements = currentEstimateSummary.elements
+//
+//        if step == .optionSelection {
+//            if !elements.contains(where: {
+//                $0.stepName == step.title && $0.selectedOption == selectedOption.title.fullText }) {
+//                let newElement = EstimateSummaryElement(
+//                    stepName: step.title,
+//                    selectedOption: selectedOption.title.fullText,
+//                    category: .optionInfo,
+//                    price: (selectedOption.priceString.convertPriceStringToInt() ?? 0)
+//                )
+//
+//                elements.append(newElement)
+//            }
+//        } else {
+//
+//            if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
+//                let newElement = EstimateSummaryElement(
+//                    stepName: step.title,
+//                    selectedOption: selectedOption.title.fullText,
+//                    category: elements[index].category,
+//                    price: selectedOption.priceString.convertPriceStringToInt() ?? 0
+//                )
+//                elements[index] = newElement
+//            } else {
+//                let newElement = EstimateSummaryElement(
+//                    stepName: step.title,
+//                    selectedOption: selectedOption.title.fullText,
+//                    category: .optionInfo,
+//                    price: selectedOption.priceString.convertPriceStringToInt() ?? 0
+//                )
+//                elements.append(newElement)
+//            }
+//        }
+//
+//        let updatedSummary = EstimateSummary(elements: elements)
+//        currentEstimateSummary = updatedSummary
+//
+//        return Just(updatedSummary).eraseToAnyPublisher()
+//    }
+
     func updateEstimateSummary(step: CarMakingStep, selectedOption: OptionCardInfo)
     -> AnyPublisher<EstimateSummary, Never> {
 
         var elements = currentEstimateSummary.elements
 
         if step == .optionSelection {
-            if !elements.contains(where: {
-                $0.stepName == step.title && $0.selectedOption == selectedOption.title.fullText }) {
+            if let index = elements.firstIndex(where: {
+                $0.stepName == step.title && $0.selectedOption == selectedOption.title.fullText
+            }) {
+                if !selectedOption.isSelected {
+                    elements.remove(at: index)
+                }
+            } else if selectedOption.isSelected {
                 let newElement = EstimateSummaryElement(
                     stepName: step.title,
                     selectedOption: selectedOption.title.fullText,
                     category: .optionInfo,
                     price: (selectedOption.priceString.convertPriceStringToInt() ?? 0)
                 )
-
                 elements.append(newElement)
             }
         } else {
-
             if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
                 let newElement = EstimateSummaryElement(
                     stepName: step.title,
@@ -139,6 +220,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
 
         return Just(updatedSummary).eraseToAnyPublisher()
     }
+
 
     func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment, Error> {
         guard let selectedOption = carMakingTotalInfo[step]?.optionCardInfoArray.first(where: { $0.isSelected }) else {
