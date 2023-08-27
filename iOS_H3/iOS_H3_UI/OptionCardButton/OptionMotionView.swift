@@ -84,17 +84,19 @@ class OptionMotionView: UIView {
 
     }
 
-    func showWithAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        prepareViews(title: feedbackTitle, description: feedbackDescription)
+    func showWithAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        prepareViews(title: feedbackComment.title, description: feedbackComment.subTitle)
 
         UIView.animate(withDuration: 0.3, animations: {
             self.alpha = 1.0
         }, completion: { _ in
-            self.performFirstAnimation(completion: {
-                self.performSecondAnimation(completion: {
+            UIView.transition(with: self, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                self.showGoodImageView()
+            }, completion: { _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    self.hideView()
                     completion?()
-                    self.hideGoodImageView()
-                })
+                }
             })
         })
     }
@@ -109,26 +111,13 @@ class OptionMotionView: UIView {
         isHidden = false
     }
 
-    private func performFirstAnimation(completion: @escaping () -> Void) {
-        UIView.animate(withDuration: 1.7, animations: {
-            self.smileImageView.image = UIImage(named: "feedback_motion_face_second") ?? .remove
-            self.goodImageView.isHidden = false
-        }, completion: { _ in
-            completion()
-        })
+    private func showGoodImageView() {
+        self.smileImageView.image = UIImage(named: "feedback_motion_face_second") ?? .remove
+        self.goodImageView.isHidden = false
     }
 
-    private func performSecondAnimation(completion: @escaping () -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            completion()
-        }
-    }
-
-    private func hideGoodImageView() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-            self.goodImageView.isHidden = false
-            self.isHidden = true
-        }
+    private func hideView() {
+        isHidden = true
     }
 
 }

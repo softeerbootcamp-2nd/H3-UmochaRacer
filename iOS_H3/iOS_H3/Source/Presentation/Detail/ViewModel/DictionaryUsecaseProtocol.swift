@@ -5,8 +5,9 @@
 //  Created by KoJeongMin  on 2023/08/23.
 //
 
+import Foundation
 import Combine
 
 protocol DictionaryUsecaseProtocol {
-    func fetchDetailedOption() -> Future<String, Error>
+    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<String, Error>
 }

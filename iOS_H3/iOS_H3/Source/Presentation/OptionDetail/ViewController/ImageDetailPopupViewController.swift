@@ -222,7 +222,6 @@ extension ImageDetailPopupViewController {
         ])
     }
 
-
     private func updateAdditionalInfoViews(with infos: [URString]) {
         clearPreviousInfoViews()
 

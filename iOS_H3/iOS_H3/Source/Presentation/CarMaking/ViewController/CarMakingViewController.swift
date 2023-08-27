@@ -41,6 +41,8 @@ final class CarMakingViewController: UIViewController {
 
     private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
 
+    private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
+
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
@@ -84,7 +86,8 @@ extension CarMakingViewController {
             carMakingStepDidChanged: stepDidChanged,
             optionDidSelected: optionDidSelected,
             optionCategoryDidChanged: optionCategoryDidChanged,
-            dictionaryButtonPressed: dictionaryButtonPressed
+            dictionaryButtonPressed: dictionaryButtonPressed,
+            nextButtonDidTapped: nextButtonDidTapped
         )
         let output = viewModel.transform(input)
 
@@ -118,7 +121,10 @@ extension CarMakingViewController {
         output.optionInfoForCategory
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionInfo in
-                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo, step: self?.stepDidChanged.value ?? .powertrain)
+                self?.carMakingContentView.updateOptionCardForCategory(
+                    with: optionInfo,
+                    step: self?.stepDidChanged.value ?? .powertrain
+                )
             }
             .store(in: &cancellables)
 
@@ -126,6 +132,13 @@ extension CarMakingViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] selectedOptionCount in
                 self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
+            }
+            .store(in: &cancellables)
+
+        output.feedbackComment
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] feedbackComment in
+                self?.carMakingContentView.moveNextStep(with: feedbackComment)
             }
             .store(in: &cancellables)
 
@@ -166,7 +179,7 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백버튼 클릭 액션 구현 필요")
+        navigationController?.popViewController(animated: true)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
@@ -212,9 +225,7 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-
-        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
-                                          feedbackDescription: viewModel.feedbackDescription)
+        nextButtonDidTapped.send(())
     }
 }
 

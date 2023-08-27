@@ -82,9 +82,9 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         currentOptionInfo = optionInfoArray
     }
 
-    override func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
-        super.playFeedbackAnimation(title: title, description: description, completion: completion)
-        listModeView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description)
+    override func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        super.playFeedbackAnimation(with: feedbackComment, completion: completion)
+        listModeView.playFeedbackAnimation(with: feedbackComment)
     }
 
     func updateSelectedOptionCountLabel(to count: Int) {

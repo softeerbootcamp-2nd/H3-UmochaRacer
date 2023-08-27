@@ -103,7 +103,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
         }
     }
 
-    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         var animationsCompletedCount = 0
 
@@ -112,7 +112,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
                 continue
             }
 
-            cell.playFeedbackAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription) {
+            cell.playFeedbackAnimation(with: feedbackComment) {
                 animationsCompletedCount += 1
 
                 if animationsCompletedCount == visibleIndexPaths.count {

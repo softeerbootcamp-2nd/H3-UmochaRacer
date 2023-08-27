@@ -34,4 +34,3 @@ protocol DetailPopupUsecaseProtocol {
     func fetchAllAdditionalOptions(id: Int)
     -> AnyPublisher<[DetailOptionInfo], DetailUsecaseError>
 }
-
