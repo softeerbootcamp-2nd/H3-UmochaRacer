@@ -76,12 +76,6 @@ class ImageDetailPopupViewController: UIViewController {
 
         let output = viewModel.transform(input)
 
-//        output.title
-//            .sink { [weak self] result in
-//                self?.updateDescriptionView(with: result.toURString())
-//                self?.titleLabel.text = result
-//            }
-//            .store(in: &cancellables)
         output.title
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
