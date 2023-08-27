@@ -79,10 +79,13 @@ final class CarMakingViewModel {
                         of: optionIndex,
                         category: input.optionCategoryDidChanged.value,
                         updatedOptionInfoOutput: output.optionInfoDidUpdated,
-                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption
+                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption,
+                        estimateSummaryOutput: output.estimateSummary
                     )
                 } else {
-                    selectOption(of: optionIndex, in: step, updatedOptionInfoOutput: output.optionInfoDidUpdated)
+                    selectOption(of: optionIndex, in: step,
+                                 updatedOptionInfoOutput: output.optionInfoDidUpdated,
+                                 estimateSummaryOutput: output.estimateSummary)
                 }
             }
             .store(in: &cancellables)
@@ -141,20 +144,39 @@ final class CarMakingViewModel {
     private func selectOption(
         of optionIndex: Int,
         in step: CarMakingStep,
-        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
+        estimateSummaryOutput: PassthroughSubject<EstimateSummary, Never>
     ) {
-        updatedOptionInfoOutput.send(selfModeUsecase.selectOption(of: optionIndex, in: step))
+        let selectedOptions = selfModeUsecase.selectOption(of: optionIndex, in: step)
+        updatedOptionInfoOutput.send(selectedOptions)
+        if let selectedOption = selectedOptions.first(where: { $0.isSelected }) {
+            updateEstimateSummary(step: step, selectedOption: selectedOption)
+                .sink { updatedEstimate in
+                    estimateSummaryOutput.send(updatedEstimate)
+                }
+                .store(in: &cancellables)
+        }
     }
 
     private func selectOptionSelectionStepOption(
         of optionIndex: Int,
         category: OptionCategoryType,
         updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
-        selectedOptionCountOutput: PassthroughSubject<Int, Never>
+        selectedOptionCountOutput: PassthroughSubject<Int, Never>,
+        estimateSummaryOutput: PassthroughSubject<EstimateSummary, Never>
     ) {
         let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
         updatedOptionInfoOutput.send(infos)
         selectedOptionCountOutput.send(selectedOptionCount)
+
+        if let selectedOption = infos.first {
+          
+            updateEstimateSummary(step: .optionSelection, selectedOption: selectedOption)
+                .sink { updatedEstimate in
+                    estimateSummaryOutput.send(updatedEstimate)
+                }
+                .store(in: &cancellables)
+        }
     }
 
     private func fetchOptionSelectionStepInfo(
