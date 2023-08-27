@@ -168,15 +168,13 @@ final class CarMakingViewModel {
         let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
         updatedOptionInfoOutput.send(infos)
         selectedOptionCountOutput.send(selectedOptionCount)
+        let recentlyChangedOption = infos[optionIndex]
 
-        if let selectedOption = infos.first {
-          
-            updateEstimateSummary(step: .optionSelection, selectedOption: selectedOption)
-                .sink { updatedEstimate in
-                    estimateSummaryOutput.send(updatedEstimate)
-                }
-                .store(in: &cancellables)
-        }
+        updateEstimateSummary(step: .optionSelection, selectedOption: recentlyChangedOption)
+            .sink { updatedEstimate in
+                estimateSummaryOutput.send(updatedEstimate)
+            }
+            .store(in: &cancellables)
     }
 
     private func fetchOptionSelectionStepInfo(
