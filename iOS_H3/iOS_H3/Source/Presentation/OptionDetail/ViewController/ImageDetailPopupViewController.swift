@@ -12,7 +12,7 @@ class ImageDetailPopupViewController: UIViewController {
 
     // MARK: - UI properties
     @IBOutlet weak var optionImageView: UIImageView!
-    
+
     @IBOutlet weak var optionImageViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var exitButton: UIButton!
     @IBOutlet weak var subTitleLabel: UILabel!
@@ -20,7 +20,6 @@ class ImageDetailPopupViewController: UIViewController {
     @IBOutlet weak var additionalInfoContainerView: UIView!
 
     @IBOutlet weak var descriptionTextView: URLabel!
-    
     @IBOutlet weak var infoStackView: UIStackView!
     @IBOutlet weak var pageControlContainerView: UIView!
     private let pagingControlView = PagingControlView(frame: .zero)
@@ -75,66 +74,71 @@ class ImageDetailPopupViewController: UIViewController {
         )
 
         let output = viewModel.transform(input)
+        bindOutput(output)
+    }
 
-        output.title
+    private func bindOutput(_ output: DetailPopupViewModel.Output) {
+           bindLabel(output.title, to: titleLabel)
+           bindLabel(output.subTitle, to: subTitleLabel)
+           bindTextView(output.description, to: descriptionTextView)
+
+           output.additionalInfo
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] info in
+                   self?.handleAdditionalInfo(info)
+               }
+               .store(in: &cancellables)
+
+           output.pageCount
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] pageCount in
+                   self?.configurePagingControlView(pageCount: pageCount)
+               }
+               .store(in: &cancellables)
+
+           output.imageURL
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] imageURL in
+                   self?.handleImageURL(imageURL)
+               }
+               .store(in: &cancellables)
+       }
+
+       private func handleAdditionalInfo(_ info: [URString]) {
+           if info.isEmpty {
+               additionalInfoContainerView.isHidden = true
+           } else {
+               additionalInfoContainerView.isHidden = false
+               updateAdditionalInfoViews(with: info)
+               applyDictionaryEffectIfNeeded(view: additionalInfoContainerView)
+           }
+       }
+
+       private func handleImageURL(_ imageURL: String?) {
+           if let url = URL(string: imageURL ?? "") {
+               optionImageView.loadCachedImage(of: url)
+               animateImageViewHeight(to: 179)
+               exitButton.tintColor = Colors.coolGrey3
+           } else {
+               optionImageView.image = nil
+               animateImageViewHeight(to: 0)
+           }
+       }
+
+       private func bindLabel(_ subject: CurrentValueSubject<String, Never>, to label: UILabel) {
+           subject
+               .receive(on: DispatchQueue.main)
+               .sink { [weak self] text in
+                   self?.updateLabel(label, with: URString(fullText: text))
+               }
+               .store(in: &cancellables)
+       }
+
+    private func bindTextView(_ subject: CurrentValueSubject<URString, Never>, to textView: URLabel) {
+        subject
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                guard let self = self else { return }
-                self.updateLabel(self.titleLabel, with: result.toURString())
-            }
-            .store(in: &cancellables)
-
-        output.subTitle
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                guard let self = self else { return }
-                self.updateLabel(self.subTitleLabel, with: result.toURString())
-            }
-            .store(in: &cancellables)
-
-        output.description
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] result in
-                guard let self = self else { return }
-                self.updateLabel(self.descriptionTextView, with: result)
-            }
-            .store(in: &cancellables)
-
-        output.additionalInfo
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] (info: [URString]) in
-                if info.isEmpty {
-                    self?.additionalInfoContainerView.isHidden = true
-                } else {
-                    self?.additionalInfoContainerView.isHidden = false
-                    self?.updateAdditionalInfoViews(with: info)
-                    if let infoView = self?.additionalInfoContainerView {
-                        self?.applyDictionaryEffectIfNeeded(view: infoView)
-                    }
-                }
-            }
-            .store(in: &cancellables)
-
-        output.pageCount
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] pageCount in
-                self?.configurePagingControlView(pageCount: pageCount)
-            }
-            .store(in: &cancellables)
-
-        output.imageURL
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] imageURL in
-                guard let self = self else { return }
-
-                if let url = URL(string: imageURL ?? "") {
-                    self.optionImageView.loadCachedImage(of: url)
-                    self.animateImageViewHeight(to: 179)
-                    self.exitButton.tintColor = Colors.coolGrey3
-                } else {
-                    self.optionImageView.image = nil
-                    self.animateImageViewHeight(to: 0)
-                }
+            .sink { [weak self] text in
+                self?.updateLabel(textView, with: text)
             }
             .store(in: &cancellables)
     }
@@ -202,6 +206,8 @@ extension ImageDetailPopupViewController {
     private func configurePagingControlView(pageCount: Int) {
         if pageCount <= 1 {
             pagingControlView.isHidden = true
+        } else {
+            pagingControlView.isHidden = false
         }
         pagingControlView.setNumberOfPages(pageCount)
     }
@@ -216,53 +222,76 @@ extension ImageDetailPopupViewController {
         ])
     }
 
+
     private func updateAdditionalInfoViews(with infos: [URString]) {
-        for view in infoStackView.arrangedSubviews {
+        clearPreviousInfoViews()
+
+        infos.forEach { info in
+            let (titleLabel, descriptionLabel) = createTitleAndDescriptionLabels(from: info)
+            let containerView = setupContainerView(with: titleLabel, and: descriptionLabel)
+            infoStackView.addArrangedSubview(containerView)
+        }
+    }
+
+    private func clearPreviousInfoViews() {
+        infoStackView.arrangedSubviews.forEach { view in
             infoStackView.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
-
-        for info in infos {
-            let view = UIView()
-            let titleLabel = URLabel()
-            let descriptionLabel = URLabel()
-            view.translatesAutoresizingMaskIntoConstraints = false
-            titleLabel.translatesAutoresizingMaskIntoConstraints = false
-            descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-
-            titleLabel.font = Fonts.regularBody2
-            titleLabel.textColor = Colors.coolGrey4
-            descriptionLabel.font = Fonts.regularBody2
-            descriptionLabel.textColor = Colors.coolGrey4
-
-            view.addSubview(titleLabel)
-            view.addSubview(descriptionLabel)
-            NSLayoutConstraint.activate([
-                titleLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-                titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
-                titleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
-            ])
-
-            NSLayoutConstraint.activate([
-                descriptionLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 8),
-                descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
-                descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
-                descriptionLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -8)
-            ])
-            let fullTextArr = info.fullText.split(separator: ",")
-                .map { String($0) }
-
-            if let first = fullTextArr.first, let last = fullTextArr.last {
-                let titleText = first.toURString()
-                let descriptionText = last.toURString()
-                titleLabel.setURString(titleText, isOn: false)
-                descriptionLabel.setURString(descriptionText, isOn: false)
-                titleLabel.text = titleText.fullText
-                descriptionLabel.text = descriptionText.fullText
-            }
-            infoStackView.addArrangedSubview(view)
-        }
     }
+
+    private func createTitleAndDescriptionLabels(from info: URString) -> (URLabel, URLabel) {
+        let titleLabel = setupLabel()
+        let descriptionLabel = setupLabel()
+
+        let fullTextArr = info.fullText.split(separator: ",").map(String.init)
+        if let first = fullTextArr.first, let last = fullTextArr.last {
+            setTitleAndDescription(for: titleLabel,
+                                   titleText: first.toURString(),
+                                   and: descriptionLabel,
+                                   descriptionText: last.toURString())
+        }
+
+        return (titleLabel, descriptionLabel)
+    }
+
+    private func setupLabel() -> URLabel {
+        let label = URLabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = Fonts.regularBody2
+        label.textColor = Colors.coolGrey4
+        return label
+    }
+
+    private func setTitleAndDescription(for titleLabel: URLabel,
+                                        titleText: URString,
+                                        and descriptionLabel: URLabel,
+                                        descriptionText: URString) {
+        titleLabel.setURString(titleText, isOn: false)
+        descriptionLabel.setURString(descriptionText, isOn: false)
+        titleLabel.text = titleText.fullText
+        descriptionLabel.text = descriptionText.fullText
+    }
+
+    private func setupContainerView(with titleLabel: URLabel, and descriptionLabel: URLabel) -> UIView {
+        let containerView = UIView()
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(titleLabel)
+        containerView.addSubview(descriptionLabel)
+
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 8),
+            titleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8),
+            descriptionLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 8),
+            descriptionLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: 8),
+            descriptionLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -8),
+            descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -8)
+        ])
+
+        return containerView
+    }
+
 }
 
 extension ImageDetailPopupViewController: PagingControlViewDelegate {
