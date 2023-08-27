@@ -79,23 +79,24 @@ class ImageDetailPopupViewController: UIViewController {
         output.title
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
-                self?.updateDescriptionView(with: result.toURString())
-                self?.titleLabel.text = result
+                guard let self = self else { return }
+                self.updateLabel(self.titleLabel, with: result.toURString())
             }
             .store(in: &cancellables)
 
         output.subTitle
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
-                self?.updateDescriptionView(with: result.toURString())
-                self?.subTitleLabel.text = self?.step?.title ?? ""
+                guard let self = self else { return }
+                self.updateLabel(self.subTitleLabel, with: result.toURString())
             }
             .store(in: &cancellables)
 
         output.description
             .receive(on: DispatchQueue.main)
             .sink { [weak self] result in
-                self?.updateDescriptionView(with: result)
+                guard let self = self else { return }
+                self.updateLabel(self.descriptionTextView, with: result)
             }
             .store(in: &cancellables)
 
@@ -125,16 +126,14 @@ class ImageDetailPopupViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] imageURL in
                 guard let self = self else { return }
-                print("이미지 url : ",imageURL ?? "")
-                if let url = URL(string: imageURL ?? ""){
+
+                if let url = URL(string: imageURL ?? "") {
                     self.optionImageView.loadCachedImage(of: url)
                     self.animateImageViewHeight(to: 179)
                     self.exitButton.tintColor = Colors.coolGrey3
-                    print("이미지 존재")
                 } else {
                     self.optionImageView.image = nil
                     self.animateImageViewHeight(to: 0)
-                    print("이미지 없음")
                 }
             }
             .store(in: &cancellables)
@@ -156,11 +155,19 @@ class ImageDetailPopupViewController: UIViewController {
         }
     }
 
-    private func updateDescriptionView(with result: URString) {
-        descriptionTextView.setURString(result, isOn: false)
-        descriptionTextView.text = result.fullText
+    private func updateLabel(_ view: UIView, with result: URString) {
+        switch view {
+        case let label as UILabel:
+            label.text = result.fullText
 
-        applyDictionaryEffectIfNeeded(view: descriptionTextView)
+        case let textView as URLabel:
+            textView.setURString(result, isOn: false)
+            textView.text = result.fullText
+            applyDictionaryEffectIfNeeded(view: textView)
+
+        default:
+            break
+        }
     }
 
     private func applyDictionaryEffectIfNeeded(view: UIView) {
@@ -181,13 +188,11 @@ extension ImageDetailPopupViewController {
         self.subTitleLabel.font = Fonts.regularTitle6
         self.titleLabel.font = Fonts.mediumTitle4
         self.descriptionTextView.font = Fonts.regularBody2
-//
     }
 
     private func setupColors() {
         additionalInfoContainerView.backgroundColor = Colors.coolGrey1
         self.subTitleLabel.textColor = Colors.coolGrey3
-//
     }
 
     private func setupPagingControlView() {
@@ -253,7 +258,7 @@ extension ImageDetailPopupViewController {
             ])
             let fullTextArr = info.fullText.split(separator: ",")
                 .map { String($0) }
-            
+
             if let first = fullTextArr.first, let last = fullTextArr.last {
                 let titleText = first.toURString()
                 let descriptionText = last.toURString()
