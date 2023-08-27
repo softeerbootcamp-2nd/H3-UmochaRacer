@@ -97,6 +97,11 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         }
     }
 
+    func moveNextStep() {
+        guard currentStep < CarMakingStep.allCases.count - 1 else { return }
+        currentStep += 1
+    }
+
     func movePrevStep() {
         guard currentStep > 0 else { return }
         currentStep -= 1
