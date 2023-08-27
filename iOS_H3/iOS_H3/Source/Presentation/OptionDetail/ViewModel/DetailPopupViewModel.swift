@@ -125,7 +125,6 @@ class DetailPopupViewModel {
         var additionalInfo = CurrentValueSubject<[URString], Never>([])
         var pageCount = CurrentValueSubject<Int, Never>(0)
         var imageURL = CurrentValueSubject<String?, Never>(nil)
-        var selectedURStringRange = PassthroughSubject<NSRange, Never>()
     }
 
     // MARK: - Properties

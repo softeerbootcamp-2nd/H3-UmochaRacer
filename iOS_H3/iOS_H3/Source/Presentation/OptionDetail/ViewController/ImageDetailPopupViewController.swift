@@ -137,13 +137,6 @@ class ImageDetailPopupViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
-
-        output.selectedURStringRange
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] range in
-                self?.descriptionTextView.selectedRange = range
-            }
-            .store(in: &cancellables)
     }
 
     private func animateImageViewHeight(to height: CGFloat) {
