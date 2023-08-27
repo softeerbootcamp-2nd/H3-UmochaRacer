@@ -25,21 +25,9 @@ final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
                 .eraseToAnyPublisher()
         }
 
-        let errorMappedPublisher: AnyPublisher<MockDetailOptionEntity, DetailUsecaseError> = publisher
-            .mapError { error in
-                return self.convertToDetailUsecaseError(from: error)
-            }
-            .eraseToAnyPublisher()
-
-        let caughtPublisher: AnyPublisher<MockDetailOptionEntity, Never> = errorMappedPublisher
-            .catch { error -> Just<MockDetailOptionEntity> in
-                print("Error: \(error.localizedDescription)")
-                return Just(MockDetailOptionEntity(title: "", description: "", info: nil, imageSrc: nil))
-            }
-            .eraseToAnyPublisher()
-
-        return caughtPublisher.map { $0.toPresentation() }
-            .setFailureType(to: DetailUsecaseError.self)
+        return publisher
+            .mapError { self.convertToDetailUsecaseError(from: $0) }
+            .map { $0.toPresentation() }
             .eraseToAnyPublisher()
     }
 
