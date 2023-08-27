@@ -108,10 +108,7 @@ extension CarMakingViewController {
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
                 if let view = self?.view {
-                    if output.isDictionaryFeatureEnabled.value {
-                        TextEffectManager.shared.applyEffect(false, on: view)
-                        TextEffectManager.shared.applyEffect(true, on: view)
-                    }
+                    TextEffectManager.shared.applyEffect(TextEffectManager.shared.isDictionaryFunctionActive, on: view)
                 }
             }
             .store(in: &cancellables)
