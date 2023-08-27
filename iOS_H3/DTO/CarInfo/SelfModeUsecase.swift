@@ -34,6 +34,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 }
             }
             .handleEvents(receiveOutput: { estimate in
+                print("usecase 첫 견적 : \(estimate)")
                 self.currentEstimateSummary = estimate
             })
             .eraseToAnyPublisher()
@@ -100,15 +101,37 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     -> AnyPublisher<EstimateSummary, Never> {
 
         var elements = currentEstimateSummary.elements
-        if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
-            let newElement = EstimateSummaryElement(
-                stepName: step.title,
-                selectedOption: selectedOption.title.fullText,
-                category: elements[index].category,
-                price: Int(selectedOption.priceString) ?? 0     // OptionCardInfo의 priceString을 price: Int로 수정?
-            )
 
-            elements[index] = newElement
+        if step == .optionSelection {
+            if !elements.contains(where: {
+                $0.stepName == step.title && $0.selectedOption == selectedOption.title.fullText }) {
+                let newElement = EstimateSummaryElement(
+                    stepName: step.title,
+                    selectedOption: selectedOption.title.fullText,
+                    category: .optionInfo,
+                    price: Int(selectedOption.priceString) ?? 0
+                )
+                elements.append(newElement)
+            }
+        } else {
+
+            if let index = elements.firstIndex(where: { $0.stepName == step.title }) {
+                let newElement = EstimateSummaryElement(
+                    stepName: step.title,
+                    selectedOption: selectedOption.title.fullText,
+                    category: elements[index].category,
+                    price: Int(selectedOption.priceString) ?? 0
+                )
+                elements[index] = newElement
+            } else {
+                let newElement = EstimateSummaryElement(
+                    stepName: step.title,
+                    selectedOption: selectedOption.title.fullText,
+                    category: .optionInfo,
+                    price: Int(selectedOption.priceString) ?? 0
+                )
+                elements.append(newElement)
+            }
         }
 
         let updatedSummary = EstimateSummary(elements: elements)
