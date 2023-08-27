@@ -29,8 +29,6 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
-    private let textEffectManager = TextEffectManager.shared
-
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
@@ -111,8 +109,8 @@ extension CarMakingViewController {
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
                 if let view = self?.view {
                     if output.isDictionaryFeatureEnabled.value {
-                        self?.textEffectManager.applyEffect(false, on: view)
-                        self?.textEffectManager.applyEffect(true, on: view)
+                        TextEffectManager.shared.applyEffect(false, on: view)
+                        TextEffectManager.shared.applyEffect(true, on: view)
                     }
                 }
             }
@@ -151,7 +149,7 @@ extension CarMakingViewController {
         output.isDictionaryFeatureEnabled
             .sink { [weak self] isEnabled in
                 if let view = self?.view {
-                    self?.textEffectManager.applyEffect(isEnabled, on: view)
+                    TextEffectManager.shared.applyEffect(isEnabled, on: view)
                 }
             }
             .store(in: &cancellables)
