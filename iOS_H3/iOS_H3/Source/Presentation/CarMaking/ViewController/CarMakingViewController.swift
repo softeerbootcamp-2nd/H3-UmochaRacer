@@ -138,7 +138,9 @@ extension CarMakingViewController {
         output.feedbackComment
             .receive(on: DispatchQueue.main)
             .sink { [weak self] feedbackComment in
-                self?.carMakingContentView.moveNextStep(with: feedbackComment)
+                self?.carMakingContentView.playFeedbackAnimation(with: feedbackComment) { [weak self] in
+                    self?.carMakingContentView.moveNextStep()
+                }
             }
             .store(in: &cancellables)
 
