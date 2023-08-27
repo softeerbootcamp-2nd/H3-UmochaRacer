@@ -34,7 +34,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                 }
             }
             .handleEvents(receiveOutput: { estimate in
-                print("usecase 첫 견적 : \(estimate)")
                 self.currentEstimateSummary = estimate
             })
             .eraseToAnyPublisher()
@@ -109,8 +108,9 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                     stepName: step.title,
                     selectedOption: selectedOption.title.fullText,
                     category: .optionInfo,
-                    price: Int(selectedOption.priceString) ?? 0
+                    price: (selectedOption.priceString.convertPriceStringToInt() ?? 0)
                 )
+
                 elements.append(newElement)
             }
         } else {
@@ -120,7 +120,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                     stepName: step.title,
                     selectedOption: selectedOption.title.fullText,
                     category: elements[index].category,
-                    price: Int(selectedOption.priceString) ?? 0
+                    price: selectedOption.priceString.convertPriceStringToInt() ?? 0
                 )
                 elements[index] = newElement
             } else {
@@ -128,7 +128,7 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
                     stepName: step.title,
                     selectedOption: selectedOption.title.fullText,
                     category: .optionInfo,
-                    price: Int(selectedOption.priceString) ?? 0
+                    price: selectedOption.priceString.convertPriceStringToInt() ?? 0
                 )
                 elements.append(newElement)
             }
