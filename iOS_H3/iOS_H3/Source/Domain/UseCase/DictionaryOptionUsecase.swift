@@ -8,9 +8,7 @@
 import Combine
 
 class DictionaryOptionUsecase: DictionaryUsecaseProtocol {
-    func fetchDetailedOption() -> Future<String, Error> {
-        Future { promise in
-            promise(.success(String("설명이 오는 텍스트입니다.")))
-        }
+    func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<String, Error> {
+        Just("설명이 오는 텍스트입니다.").setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
