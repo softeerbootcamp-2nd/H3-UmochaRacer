@@ -40,9 +40,6 @@ final class CarMakingViewModel {
 
     private let selfModeUsecase: SelfModeUsecaseProtocol
 
-    var feedbackTitle: String = ""
-    var feedbackDescription: String = ""
-
     // MARK: - Lifecycles
 
     init(selfModeUsecase: SelfModeUsecaseProtocol) {
