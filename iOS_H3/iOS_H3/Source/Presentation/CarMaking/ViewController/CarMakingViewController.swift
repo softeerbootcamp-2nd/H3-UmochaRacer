@@ -140,6 +140,11 @@ extension CarMakingViewController {
         output.feedbackComment
             .receive(on: DispatchQueue.main)
             .sink { [weak self] feedbackComment in
+                guard let feedbackComment else {
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                    return
+                }
                 self?.carMakingContentView.playFeedbackAnimation(with: feedbackComment) { [weak self] in
                     self?.carMakingContentView.moveNextStep()
                     self?.isBlockedNextButton = false
