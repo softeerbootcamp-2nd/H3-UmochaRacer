@@ -42,7 +42,7 @@ class ModeChangeCheckPopupViewController: UIViewController {
         let presentingViewController = presentingViewController
         self.dismiss(animated: false) {
             if let navigationController = presentingViewController as? UINavigationController {
-                navigationController.popViewController(animated: false)
+                navigationController.popViewController(animated: true)
             }
         }
     }
