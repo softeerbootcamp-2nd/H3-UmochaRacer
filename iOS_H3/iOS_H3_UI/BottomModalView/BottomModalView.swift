@@ -105,6 +105,8 @@ final class BottomModalView: UIView {
 
     func updateEstimateSummary(_ estimateSummary: EstimateSummary) {
         estimateSummaryView.configure(estimateSummary)
+        let price = estimateSummary.elements.reduce(0) { $0 + $1.price }
+        updateEstimatePrice(price)
     }
 }
 
@@ -151,7 +153,7 @@ extension BottomModalView {
     }
 
     private func setupPriceLabel() {
-        priceLabel.text = "43,460,000 원"
+        priceLabel.text = "0 원"
         priceLabel.font = Fonts.mediumTitle1
         priceLabel.setupLineHeight(FontLineHeights.mediumTitle1)
         priceLabel.textColor = Colors.coolGreyBlack
