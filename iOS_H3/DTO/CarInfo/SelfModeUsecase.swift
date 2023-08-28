@@ -222,7 +222,11 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
     }
 
 
-    func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment, Error> {
+    func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment?, Error> {
+        if step == .optionSelection || step == .makingEstimate {
+            return Just(nil).setFailureType(to: Error.self).eraseToAnyPublisher()
+        }
+
         guard let selectedOption = carMakingTotalInfo[step]?.optionCardInfoArray.first(where: { $0.isSelected }) else {
             return Fail(error: SelfModeUsecaseError.notExistSelectedOption).eraseToAnyPublisher()
         }

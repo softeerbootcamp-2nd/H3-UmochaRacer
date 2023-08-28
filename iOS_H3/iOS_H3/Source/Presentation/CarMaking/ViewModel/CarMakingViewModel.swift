@@ -29,7 +29,7 @@ final class CarMakingViewModel {
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
         var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
-        var feedbackComment = PassthroughSubject<FeedbackComment, Never>()
+        var feedbackComment = PassthroughSubject<FeedbackComment?, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
         var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
@@ -198,7 +198,7 @@ final class CarMakingViewModel {
 
     private func fetchFeedbackComment(
         for step: CarMakingStep,
-        to feedbackCommentSubject: PassthroughSubject<FeedbackComment, Never>
+        to feedbackCommentSubject: PassthroughSubject<FeedbackComment?, Never>
     ) {
         selfModeUsecase.fetchFeedbackComment(step: step)
             .catch { _ in Just(FeedbackComment(title: "", subTitle: "")).eraseToAnyPublisher() }

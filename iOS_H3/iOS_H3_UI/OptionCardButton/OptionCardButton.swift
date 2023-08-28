@@ -8,7 +8,11 @@
 import UIKit
 
 protocol OptionCardButtonDelegate: AnyObject {
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton)
+    func optionCardButtonMoreInfoButtonDidTap(
+        _ optionCardButton: OptionCardButton,
+        option: OptionCardInfo,
+        step: CarMakingStep
+    )
 }
 
 class OptionCardButton: UIButton {
@@ -115,6 +119,8 @@ class OptionCardButton: UIButton {
     }()
 
     private var carMakingMode: CarMakingMode
+    private var step: CarMakingStep = .powertrain
+    private var optionInfo: OptionCardInfo?
 
     weak var delegate: OptionCardButtonDelegate?
 
@@ -132,15 +138,18 @@ class OptionCardButton: UIButton {
         setupViews()
     }
 
-    init(carMakingMode: CarMakingMode, info: OptionCardInfo) {
+    init(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
+        self.optionInfo = info
+        self.step = step
         super.init(frame: .zero)
         setupViews()
-        update(carMakingMode: carMakingMode, cardInfo: info)
+        update(carMakingMode: carMakingMode, cardInfo: info, step: step)
         addMoreInfoButtonTarget()
     }
 
-    init(mode: CarMakingMode,
+    init(
+         mode: CarMakingMode,
          optionTitle: String = "옵션 타이틀",
          optionSubTitle: String = "옵션 서브 타이틀",
          price: String = "+ 0원",
@@ -161,16 +170,18 @@ class OptionCardButton: UIButton {
     }
 
     // MARK: - Helpers
-    func update(carMakingMode: CarMakingMode? = nil, cardInfo: OptionCardInfo? = nil) {
+    func update(carMakingMode: CarMakingMode? = nil,
+                cardInfo: OptionCardInfo? = nil,
+                step: CarMakingStep) {
         if let carMakingMode = carMakingMode {
             self.carMakingMode = carMakingMode
         }
-
+        self.step = step
         if let cardInfo = cardInfo {
             self.optionTitleLabel.text = cardInfo.title.fullText
-            self.optionTitleLabel.urString = cardInfo.title
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
+            self.optionInfo = cardInfo
             showMoreInfoButton(cardInfo.hasMoreInfo)
             isSelected = cardInfo.isSelected
             setColor(cardInfo.color)
@@ -388,6 +399,8 @@ extension OptionCardButton {
 
     @objc
     private func moreInfoButtonTapped() {
-        delegate?.optionCardButtonMoreInfoButtonDidTap(self)
+        if let optionInfo = optionInfo {
+            delegate?.optionCardButtonMoreInfoButtonDidTap(self, option: optionInfo, step: self.step)
+        }
     }
 }

@@ -29,7 +29,7 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
-    private let textEffectManager = TextEffectManager()
+    private let textEffectManager = TextEffectManager.shared
 
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
@@ -42,6 +42,8 @@ final class CarMakingViewController: UIViewController {
     private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
 
     private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
+
+    private var isBlockedNextButton = false
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -121,7 +123,10 @@ extension CarMakingViewController {
         output.optionInfoForCategory
             .receive(on: DispatchQueue.main)
             .sink { [weak self] optionInfo in
-                self?.carMakingContentView.updateOptionCardForCategory(with: optionInfo)
+                self?.carMakingContentView.updateOptionCardForCategory(
+                    with: optionInfo,
+                    step: self?.stepDidChanged.value ?? .powertrain
+                )
             }
             .store(in: &cancellables)
 
@@ -135,7 +140,15 @@ extension CarMakingViewController {
         output.feedbackComment
             .receive(on: DispatchQueue.main)
             .sink { [weak self] feedbackComment in
-                self?.carMakingContentView.moveNextStep(with: feedbackComment)
+                guard let feedbackComment else {
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                    return
+                }
+                self?.carMakingContentView.playFeedbackAnimation(with: feedbackComment) { [weak self] in
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                }
             }
             .store(in: &cancellables)
 
@@ -222,7 +235,10 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        nextButtonDidTapped.send(())
+        if !isBlockedNextButton {
+            nextButtonDidTapped.send(())
+            isBlockedNextButton = true
+        }
     }
 }
 
