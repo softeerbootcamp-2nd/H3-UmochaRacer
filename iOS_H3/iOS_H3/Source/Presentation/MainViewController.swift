@@ -59,7 +59,20 @@ final class MainViewController: UIViewController {
         setupViews()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyTextEffectIfNeeded()
+    }
+
     // MARK: - Helpers
+
+    private func applyTextEffectIfNeeded() {
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        if titleBar.isDictionaryButtonOn != isOn {
+            titleBar.isDictionaryButtonOn = isOn
+            TextEffectManager.shared.applyEffect(isOn, on: view)
+        }
+    }
 }
 
 // MARK: - OhMyCarSetTitleBar Delegate
