@@ -38,8 +38,6 @@
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
-		47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
-		47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
 		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
@@ -301,7 +299,6 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewModel.swift; sourceTree = "<group>"; };
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
-		47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryOptionUsecase.swift; sourceTree = "<group>"; };
 		47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
@@ -680,7 +677,6 @@
 			isa = PBXGroup;
 			children = (
 				478B26812A78FD3400598902 /* Protocol */,
-				47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */,
 				5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */,
 				479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */,
 				5F5132CD2A98EC7B00C01C70 /* DetailPopupUsecase.swift */,
@@ -1474,7 +1470,6 @@
 				476913A72A97AD9500C9C352 /* DictionaryDescription.swift in Sources */,
 				5F1E30BB2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
-				47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				5F5132CE2A98EC7B00C01C70 /* DetailPopupUsecase.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
@@ -1562,7 +1557,6 @@
 				5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
 				47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */,
-				47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
