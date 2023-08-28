@@ -179,6 +179,8 @@
 		5F4975602A811F56008FFFE5 /* HyundaiSansTextKROTFMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB42A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf */; };
 		5F4975612A811F56008FFFE5 /* HyundaiSansTextKROTFRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB62A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf */; };
 		5F4975622A811F56008FFFE5 /* HyundaiSansHeadKRMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47CB8CB02A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf */; };
+		5F4B43DD2A9BB63700E89C23 /* CarMakingEstimateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B43DC2A9BB63700E89C23 /* CarMakingEstimateCell.swift */; };
+		5F4B43DE2A9BB63700E89C23 /* CarMakingEstimateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4B43DC2A9BB63700E89C23 /* CarMakingEstimateCell.swift */; };
 		5F4D33AF2A87519600942517 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4D33AE2A87519600942517 /* ImageCacheManager.swift */; };
 		5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4D33AE2A87519600942517 /* ImageCacheManager.swift */; };
 		5F4D33B22A8751E500942517 /* UIImageView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F4D33B12A8751E500942517 /* UIImageView+.swift */; };
@@ -379,6 +381,7 @@
 		5F496E022A9448D10024E5B8 /* URLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLabel.swift; sourceTree = "<group>"; };
 		5F496E0A2A948E8B0024E5B8 /* TextBoxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxView.swift; sourceTree = "<group>"; };
 		5F496E0D2A948FAA0024E5B8 /* TextBoxViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxViewController.swift; sourceTree = "<group>"; };
+		5F4B43DC2A9BB63700E89C23 /* CarMakingEstimateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingEstimateCell.swift; sourceTree = "<group>"; };
 		5F4D33AE2A87519600942517 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		5F4D33B12A8751E500942517 /* UIImageView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+.swift"; sourceTree = "<group>"; };
 		5F4D33B42A8758FF00942517 /* PageSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageSection.swift; sourceTree = "<group>"; };
@@ -854,6 +857,7 @@
 				5F6603EB2A837F96000E393D /* CarMakingTwoOptionCell.swift */,
 				5F6603EE2A8380C8000E393D /* CarMakingMultipleOptionCell.swift */,
 				473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */,
+				5F4B43DC2A9BB63700E89C23 /* CarMakingEstimateCell.swift */,
 			);
 			path = CarMakingCollectionViewCell;
 			sourceTree = "<group>";
@@ -1375,6 +1379,7 @@
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F3E60BD2A9678B900BB5FCE /* DetailOptionInfo.swift in Sources */,
+				5F4B43DD2A9BB63700E89C23 /* CarMakingEstimateCell.swift in Sources */,
 				5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
 				4741C36E2A977BB9009FD883 /* DictionaryEndpoint.swift in Sources */,
 				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
@@ -1509,6 +1514,7 @@
 				5F47E0E22A9B46870076D7AD /* DetailPopupUsecase.swift in Sources */,
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F1E30BC2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
+				5F4B43DE2A9BB63700E89C23 /* CarMakingEstimateCell.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
 				479B09232A95D19400AA10A0 /* TrimCategory.swift in Sources */,
 				4762D4642A92533B007F312D /* EstimateSummaryHeaderView.swift in Sources */,
