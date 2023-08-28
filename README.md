@@ -16,8 +16,12 @@
 
 ## 📖 프로젝트 소개
 현대 자동차의 내차만들기 전반적인 과정 속에서, 사용자의 옆을 지키며 모르는게 있으면 알려주고, **최적의 구성으로 가이드**해주는 길잡이의 역할을 하며 사용자 맞춤 경험 제공을 통해 ‘내 차 만들기'의 이탈률을 줄이고자 기획했습니다.
-<br><br>
+<br>
+## 👩‍🎨 기획 및 디자인
 
+[기획 및 디자인 링크](https://www.figma.com/file/aTK27d8JGjSAp8qttQSwgy/Oh%2C-my-car-set_Handoff?type=design&node-id=0-1&mode=design&t=dQfXEfryUoqLUiNQ-0)
+
+<br>
 ## 👦 팀원 소개
 <table style="border: 0.5px solid gray">
  <tr>
@@ -46,46 +50,6 @@
 <br/>
 
 
-## 🧱 System Architecture
-![Alt text](https://user-images.githubusercontent.com/75351686/263621613-8b4c3096-31ae-4f21-94ab-963c0482823d.png)
-
-
-
-
-## ⭐️ 핵심 기능
-![핵심 기능](https://user-images.githubusercontent.com/75351686/263622046-716e37b3-b333-4baf-bdfc-d7a5c078aac0.png)
-
-### <b>셀프모드</b>
-직접 옵션을 골라 나만의 차를 완성하는 셀프 모드
-- 현대 자동차 **팰리세이드 르블랑을 커스텀**
-- 부품 옵션의 **자세한 정보**와 옵션 선택에 대한 **코멘트**를 제공
-- 부품 옵션의 **판매량** 제공
-
-<img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
-
-### <b>가이드모드</b>
-자동차 구매가 생소하신가요? 저희가 만들어드리겠습니다!
-- 선택한 나이, 성별, 나의 키워드를 바탕으로 옵션 추천
-- '나와 유사한 사용자의 선택률' 제공
-
-<img src = "https://im3.ezgif.com/tmp/ezgif-3-e29cc98608.gif">
-
-### <b>백카사전</b>
-생소한 **자동차 용어를 설명**해주는 백카사전
-- 화면 우측 상단에 백카사전 아이콘을 클릭하면 백카사전 On/Off 전환
-- 어려운 단어에 하이라이팅
-- 하이라이팅 된 단어를 클릭하면 
-<img width="1279" alt="스크린샷 2023-08-28 오후 4 15 37" src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
-<br/>
-
-<br>
-<br>
-
-## 데모 영상
-[![H3 데모 영상 유튜브 링크](https://img.youtube.com/vi/mN9wjPd5lsA/0.jpg)](https://www.youtube.com/watch?v=mN9wjPd5lsA&ab_channel=%EA%B9%80%EC%A0%95%ED%9B%88)
-
-<br/>
-
 ## 🛠️ 기술 스택
 
 ### iOS
@@ -93,6 +57,9 @@
 <img src="https://img.shields.io/badge/swift-F05138?style=flat&logo=swift&logoColor=white">
 <img src="https://img.shields.io/badge/uikit-2396F3?style=flat&logo=uikit&logoColor=white">
 <img src="https://img.shields.io/badge/combine-F05138?style=flat&logo=swift&logoColor=white">
+<img src="https://img.shields.io/badge/MVVM-F05138?style=flat&logo=swift&logoColor=white">
+<img src="https://img.shields.io/badge/CleanArchitectu-F05138?style=flat&logo=swift&logoColor=white">
+
 
 ### FE
 <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white">
@@ -119,25 +86,74 @@
 <br/>
 <br/>
 
+
+## 🧱 System Architecture
+![Alt text](https://user-images.githubusercontent.com/75351686/263621613-8b4c3096-31ae-4f21-94ab-963c0482823d.png)
+
+
+
+## ⭐️ 핵심 기능
+![핵심 기능](https://user-images.githubusercontent.com/75351686/263622046-716e37b3-b333-4baf-bdfc-d7a5c078aac0.png)
+
+<br>
+
+### <b>셀프모드</b>
+직접 옵션을 골라 나만의 차를 완성하는 셀프 모드
+- 현대 자동차 **팰리세이드 르블랑을 커스텀**
+- 부품 옵션의 **자세한 정보**와 옵션 선택에 대한 **코멘트**를 제공
+- 부품 옵션의 **판매량** 제공
+
+<img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
+
+<img width = "393px" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+
+<br>
+
+### <b>가이드모드</b>
+자동차 구매가 생소하신가요? 저희가 만들어드리겠습니다!
+- 선택한 나이, 성별, 나의 키워드를 바탕으로 옵션 추천
+- '나와 유사한 사용자의 선택률' 제공
+
+<img src = "https://im3.ezgif.com/tmp/ezgif-3-e29cc98608.gif">
+
+<br>
+
+### <b>백카사전</b>
+생소한 **자동차 용어를 설명**해주는 백카사전
+- 화면 우측 상단에 백카사전 아이콘을 클릭하면 백카사전 On/Off 전환
+- 어려운 단어에 하이라이팅
+- 하이라이팅 된 단어를 클릭하면 
+
+<img src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
+<img width="393px;" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+
+<br/>
+
+<br>
+<br>
+
+## 데모 영상
+[![H3 데모 영상 유튜브 링크](https://img.youtube.com/vi/mN9wjPd5lsA/0.jpg)](https://www.youtube.com/watch?v=mN9wjPd5lsA&ab_channel=%EA%B9%80%EC%A0%95%ED%9B%88)
+
+<br/>
+
 ## 📖 Wiki
 
 [Wiki 링크](https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/wiki)
 
 
+## 👨‍💻 스크럼, 회의, 회고록
+
+[노션 회의록](https://coral-mice-402.notion.site/a723fd11e9a04cc6ae582012c8381e70?v=0dbfc16570224d7e8f0cf5d77c053e4d&pvs=4)
+
 ## 🧚 BackLog
 
 [백로그](https://www.notion.so/c1da1c14138a4ed49d61c288c015305d?pvs=4)
 
-## 👩‍🎨 기획 및 디자인
-
-[기획 및 디자인 링크](https://www.figma.com/file/aTK27d8JGjSAp8qttQSwgy/Oh%2C-my-car-set_Handoff?type=design&node-id=0-1&mode=design&t=dQfXEfryUoqLUiNQ-0)
-
-## 👨‍💻 스크럼, 회의, 회고록
-
-[노션 회의록](https://coral-mice-402.notion.site/a723fd11e9a04cc6ae582012c8381e70?v=0dbfc16570224d7e8f0cf5d77c053e4d&pvs=4)
 
 ## 🛠️ 기술 포스트 및 트러블 슈팅
 
 [기술 포스트](https://www.notion.so/994c1ced0e9948cfb266d82a588996bc?pvs=4)
 
 [트러블 슈팅](https://www.notion.so/2eac0487e6964295b20550e19f96f40a?pvs=4)
+
