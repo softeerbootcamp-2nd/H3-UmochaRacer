@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import {colors} from '@/style/theme';
 import {Body2_Regular} from '@/style/fonts';
 import {SelectionLayout} from '../estimateInterface';
+import {textParse} from '../textParse';
 
 interface SelectionProps {
   selectionLayout: SelectionLayout;
   title: string;
-  name?: string;
+  name: string | '';
   price: number;
 }
 
@@ -16,7 +17,7 @@ function Selection({selectionLayout, title, name, price}: SelectionProps) {
     <Wrapper $fontSize={selectionLayout.fontSize}>
       <Option $width={selectionLayout.flexWidth}>
         <OptionTitle>{title}</OptionTitle>
-        <OptionName>{name}</OptionName>
+        <OptionName>{textParse(name)}</OptionName>
       </Option>
       <OptionPrice>{`+ ${price.toLocaleString()}`} 원</OptionPrice>
     </Wrapper>
