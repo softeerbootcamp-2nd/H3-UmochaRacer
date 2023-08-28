@@ -65,7 +65,7 @@ final class OptionCardCell: UICollectionViewCell {
 
     func configure(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
         optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info, step: step)
-        TextEffectManager.shared.applyEffect(TextEffectManager.shared.isDictionaryFunctionActive, on: optionCardButton)
+        TextEffectManager.shared.applyEffectSubviews(TextEffectManager.shared.isDictionaryFunctionActive, on: optionCardButton)
     }
 
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {

@@ -70,7 +70,7 @@ final class MainViewController: UIViewController {
         let isOn = TextEffectManager.shared.isDictionaryFunctionActive
         if titleBar.isDictionaryButtonOn != isOn {
             titleBar.isDictionaryButtonOn = isOn
-            TextEffectManager.shared.applyEffect(isOn, on: view)
+            TextEffectManager.shared.applyEffectSubviews(isOn, on: view)
         }
     }
 }
@@ -84,7 +84,7 @@ extension MainViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         let isDictionaryOn = TextEffectManager.shared.isDictionaryFunctionActive
-        TextEffectManager.shared.applyEffect(!isDictionaryOn, on: view)
+        TextEffectManager.shared.applyEffectSubviews(!isDictionaryOn, on: view)
     }
 }
 

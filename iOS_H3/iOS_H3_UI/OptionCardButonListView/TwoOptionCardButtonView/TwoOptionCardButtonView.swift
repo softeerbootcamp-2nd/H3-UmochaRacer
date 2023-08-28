@@ -78,7 +78,7 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     private func applyTextEffectIfNeeded() {
         let isOn = TextEffectManager.shared.isDictionaryFunctionActive
-        TextEffectManager.shared.applyEffect(isOn, on: self)
+        TextEffectManager.shared.applyEffectSubviews(isOn, on: self)
     }
 }
 

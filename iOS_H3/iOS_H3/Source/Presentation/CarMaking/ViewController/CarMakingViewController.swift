@@ -171,7 +171,7 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
         let isOn = TextEffectManager.shared.isDictionaryFunctionActive
-        TextEffectManager.shared.applyEffect(!isOn, on: self.view)
+        TextEffectManager.shared.applyEffectSubviews(!isOn, on: self.view)
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
