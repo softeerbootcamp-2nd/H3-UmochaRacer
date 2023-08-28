@@ -115,12 +115,6 @@ extension CarMakingViewController {
 
                 self?.carMakingContentView.updateEstimateCell(options: optionInfo)
 
-                if let view = self?.view {
-                    if output.isDictionaryFeatureEnabled.value {
-                        self?.textEffectManager.applyEffect(false, on: view)
-                        self?.textEffectManager.applyEffect(true, on: view)
-                    }
-                }
             }
             .store(in: &cancellables)
 
