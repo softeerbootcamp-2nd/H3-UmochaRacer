@@ -65,6 +65,10 @@ final class OptionCardCell: UICollectionViewCell {
 
     func configure(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
         optionCardButton.update(carMakingMode: carMakingMode, cardInfo: info, step: step)
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        if isOn {
+            TextEffectManager.shared.applyEffectSubviews(isOn, on: optionCardButton)
+        }
     }
 
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
@@ -100,7 +104,7 @@ extension OptionCardCell {
 
     private func initOptionCardButton() {
         optionCardButton.isSelected = false
-        optionCardButton.setColor(nil)
+        optionCardButton.setColor(url: nil)
         optionCardButton.setImage(url: nil)
         optionCardButton.showMoreInfoButton(false)
         optionCardButton.resetAnimatedView()

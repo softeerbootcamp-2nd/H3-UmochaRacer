@@ -12,6 +12,7 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
     case twoButton = 0
     case multipleButton
     case optionSelection
+    case estimate
 
     init?(sectionIndex: Int) {
         self.init(rawValue: sectionIndex)
@@ -25,6 +26,8 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
             return CarMakingMultipleOptionCell.identifier
         case .optionSelection:
             return CarMakingOptionSelectStepCell.identifier
+        case .estimate:
+            return CarMakingEstimateCell.identifier
         }
     }
 
@@ -35,7 +38,9 @@ enum PageSection: Int, CarMakingSectionType, CaseIterable {
         case .multipleButton:
             return 3..<6
         case .optionSelection:
-            return 6..<8
+            return 6..<7
+        case .estimate:
+            return 7..<9
         }
     }
 

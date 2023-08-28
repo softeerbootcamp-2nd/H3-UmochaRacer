@@ -12,7 +12,7 @@ final class TextBoxViewModel {
     private let detailedOptionUsecase: DictionaryUsecaseProtocol
     // MARK: - Input
     struct Input {
-        var viewDidLoad: PassthroughSubject<Void, Never>
+        var viewDidLoad: PassthroughSubject<String, Never>
     }
 
     // MARK: - Output
@@ -25,7 +25,7 @@ final class TextBoxViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     // MARK: - Lifecycles
-    init(usecase: DictionaryUsecaseProtocol = DictionaryOptionUsecase()) {
+    init(usecase: DictionaryUsecaseProtocol) {
         self.detailedOptionUsecase = usecase
     }
 
@@ -35,13 +35,13 @@ final class TextBoxViewModel {
         let output = Output()
 
         input.viewDidLoad
-            .flatMap { [weak self] _ -> AnyPublisher<String, Never> in
+            .flatMap { [weak self] targetString -> AnyPublisher<String, Never> in
                 guard let self = self else {
                     return Just("").eraseToAnyPublisher()
                 }
-                return self.detailedOptionUsecase.fetchDictionaryDescription(for: "powertrain")
-                    .catch { _ -> Just<String> in
-                        return Just("")
+                return self.detailedOptionUsecase.fetchDictionaryDescription(for: targetString)
+                    .catch { error -> Just<String> in
+                        return Just(error.localizedDescription)
                     }
                     .eraseToAnyPublisher()
             }

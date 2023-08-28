@@ -19,7 +19,6 @@ final class DictionaryUsecase: DictionaryUsecaseProtocol {
     func fetchDictionaryDescription(for keyword: String) -> AnyPublisher<String, Error> {
         dictionaryRepository.fetchDictionaryDescription(for: keyword)
             .map { entity in
-                print(entity)
                 return entity.description
             }
             .eraseToAnyPublisher()

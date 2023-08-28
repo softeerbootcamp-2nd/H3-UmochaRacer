@@ -12,6 +12,7 @@ protocol CarMakingContentViewDelegate: AnyObject {
     func carMakingContentView(stepDidChanged stepIndex: Int)
     func carMakingContentView(optionDidSelectedAt optionIndex: Int, in stepIndex: Int)
     func carMakingContentView(categoryDidSelected category: OptionCategoryType)
+    func carMakingContentViewEstimateCellDidShow()
 }
 
 // 섹션을 정의하기 위한 기본 인터페이스
@@ -67,6 +68,10 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     private var optionCategoryTapCancellableByIndexPath = [IndexPath: AnyCancellable]()
 
+    private var interiorColorOptions: [OptionCardInfo]?
+    private var exteriorColorOptions: [OptionCardInfo]?
+
+    private var estimateSummary: EstimateSummary?
     // MARK: - Lifecycles
 
     override init(frame: CGRect) {
@@ -85,6 +90,10 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         carMakingMode = mode
         super.init(frame: frame)
         setupViews()
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layoutIfNeeded()
     }
 
     // MARK: - Helpers
@@ -133,6 +142,41 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
             return
         }
         cell.updateSelectedOptionCountLabel(to: count)
+    }
+
+    func updateEstimateCell(with options: EstimateSummary) {
+        estimateSummary = options
+        let indexPath = Section.indexPath(for: currentStep)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CarMakingEstimateCell {
+            cell.configure(with: estimateSummary ?? options)
+        }
+    }
+
+    func updateEstimateCell(options: [OptionCardInfo]) {
+        if let firstOption = options.first {
+            if firstOption.iconImageURL != nil {
+                interiorColorOptions = options
+            } else if firstOption.color != nil {
+                exteriorColorOptions = options
+            }
+        }
+
+        let indexPath = Section.indexPath(for: currentStep)
+        if let cell = collectionView.cellForItem(at: indexPath) as? CarMakingEstimateCell {
+
+            let mergedOptions = (interiorColorOptions ?? []) + (exteriorColorOptions ?? [])
+            cell.configure(info: mergedOptions)
+        }
+    }
+
+    func estimateCellDidShow() {
+        delegate?.carMakingContentViewEstimateCellDidShow()
+    }
+
+    func updateEstimateResult(to newHeight: CGFloat) {
+        self.frame.size.height = newHeight
+        self.layoutIfNeeded()
+        self.carMakingProgressBar.isUserInteractionEnabled = false
     }
 }
 
@@ -242,25 +286,34 @@ extension CarMakingContentView {
                                 forCellWithReuseIdentifier: CarMakingMultipleOptionCell.identifier)
         collectionView.register(CarMakingOptionSelectStepCell.self,
                                 forCellWithReuseIdentifier: CarMakingOptionSelectStepCell.identifier)
+        collectionView.register(CarMakingEstimateCell.self,
+                                forCellWithReuseIdentifier: CarMakingEstimateCell.identifier)
     }
 
-     func setupCollectionViewDataSource() {
-         collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
+    func setupCollectionViewDataSource() {
+        collectionViewDataSource = UICollectionViewDiffableDataSource<Section, CarMakingStepInfo>(
             collectionView: collectionView
-         ) { [weak self] (collectionView, indexPath, carMakingStepInfo)
-                  -> UICollectionViewCell? in
-             guard let section = Section(sectionIndex: indexPath.section),
-                   let cell = collectionView.dequeueReusableCell(
+        ) { [weak self] (collectionView, indexPath, carMakingStepInfo) -> UICollectionViewCell? in
+            guard let section = Section(sectionIndex: indexPath.section),
+                  let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: section.cellIdentifiers,
                     for: indexPath
-                   ) as? CarMakingCollectionViewCell else {
-                 return CarMakingCollectionViewCell()
-             }
+                  ) as? CarMakingCollectionViewCell else {
+                return CarMakingCollectionViewCell()
+            }
 
-             cell.configure(carMakingStepInfo: carMakingStepInfo)
-             self?.subscribeCellEvent(of: cell, indexPath: indexPath)
-
-             return cell
+            if let estimateCell = cell as? CarMakingEstimateCell {
+                if let summary = self?.estimateSummary {
+                    estimateCell.configure(with: summary)
+                }
+                let mergedColorOptions = (self?.interiorColorOptions ?? []) + (self?.exteriorColorOptions ?? [])
+                estimateCell.configure(info: mergedColorOptions)
+                self?.estimateCellDidShow()
+            } else {
+                cell.configure(carMakingStepInfo: carMakingStepInfo)
+                self?.subscribeCellEvent(of: cell, indexPath: indexPath)
+            }
+            return cell
         }
     }
 

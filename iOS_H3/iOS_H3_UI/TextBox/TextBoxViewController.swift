@@ -16,19 +16,23 @@ final class TextBoxViewController: UIViewController {
     // MARK: - Properties
     private let viewModel: TextBoxViewModel
     private let tapOutsideBoxSubject = PassthroughSubject<Void, Never>()
-    private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
+    private let viewDidLoadSubject = PassthroughSubject<String, Never>()
     private var cancellables = Set<AnyCancellable>()
-    private var dictionaryTitle: String = ""
+    private let targetString: String
     var onDismiss: (() -> Void)?
 
     // MARK: - Lifecycles
-    init(viewModel: TextBoxViewModel) {
-        self.viewModel = TextBoxViewModel()
+    init(viewModel: TextBoxViewModel, targetString: String) {
+        self.viewModel = viewModel
+        self.targetString = targetString
         super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {
-        self.viewModel = TextBoxViewModel()
+        let dictionaryRepository = DictionaryRepository(networkService: NetworkService())
+        let usecase = DictionaryUsecase(dictionaryRepository: dictionaryRepository)
+        self.viewModel = TextBoxViewModel(usecase: usecase)
+        targetString = ""
         super.init(coder: coder)
     }
 
@@ -37,7 +41,7 @@ final class TextBoxViewController: UIViewController {
         self.view.backgroundColor = .clear
         setupTextBoxView()
         bind()
-        viewDidLoadSubject.send()
+        viewDidLoadSubject.send(targetString)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -53,20 +57,18 @@ final class TextBoxViewController: UIViewController {
         let output = viewModel.transform(input: input)
 
         output.description
+            .receive(on: DispatchQueue.main)
             .sink {[weak self] result in
                 self?.textBoxView.updateText(result)
-                self?.textBoxView.setTitle(self?.dictionaryTitle ?? "")
             }
             .store(in: &cancellables)
     }
 
     // MARK: - Helpers
-    func setTitle(title: String) {
-        self.dictionaryTitle = "\(title)이 뭔가요?"
-    }
 
     private func setupTextBoxView() {
         textBoxView = TextBoxView()
+        textBoxView.setTitle("\(targetString)이 뭔가요?")
         view.addSubview(textBoxView)
         textBoxView.translatesAutoresizingMaskIntoConstraints = false
 

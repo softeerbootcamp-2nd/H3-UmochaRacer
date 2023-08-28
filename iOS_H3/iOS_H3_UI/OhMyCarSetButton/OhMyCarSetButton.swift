@@ -128,3 +128,12 @@ extension OhMyCarSetButton {
         }
     }
 }
+
+extension OhMyCarSetButton {
+    func updateColorType(_ colorType: ColorType) {
+        self.colorType = colorType
+        backgroundColor = colorType.backgroundColor
+        setTitleColor(colorType.titleColor, for: .normal)
+        layer.borderWidth = colorType.hasBorder ? 1 : 0
+    }
+}
