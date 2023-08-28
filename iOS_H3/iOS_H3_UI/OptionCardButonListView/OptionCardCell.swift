@@ -100,7 +100,7 @@ extension OptionCardCell {
 
     private func initOptionCardButton() {
         optionCardButton.isSelected = false
-        optionCardButton.setColor(nil)
+        optionCardButton.setColor(url: nil)
         optionCardButton.setImage(url: nil)
         optionCardButton.showMoreInfoButton(false)
         optionCardButton.resetAnimatedView()
