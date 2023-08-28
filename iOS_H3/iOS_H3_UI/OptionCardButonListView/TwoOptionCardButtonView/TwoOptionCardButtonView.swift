@@ -61,7 +61,6 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         optionCardButtons.enumerated().forEach { (index, _) in
             if cardInfos.count <= index { return }
-            print("확인", cardInfos[index])
             configureOptionCard(at: index, with: cardInfos[index], step: step)
         }
     }
