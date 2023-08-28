@@ -21,7 +21,7 @@ final class TwoOptionCardButtonViewController: UIViewController {
         let view = TwoOptionCardButtonView(carMakingMode: .guideMode)
         view.configureOptionCard(
             at: 0,
-            with: CarMakingContentMockData.mockOption[0][0]
+            with: CarMakingContentMockData.mockOption[0][0], step: .powertrain
         )
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -30,14 +30,14 @@ final class TwoOptionCardButtonViewController: UIViewController {
     private let twoOptionCardButtonViewWithData: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.configure(with: CarMakingContentMockData.mockOption[0])
+        view.configure(with: CarMakingContentMockData.mockOption[0], step: .powertrain)
         return view
     }()
 
     private let moreInfoVersionView: TwoOptionCardButtonView = {
         let view = TwoOptionCardButtonView(carMakingMode: .selfMode)
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.configure(with: CarMakingContentMockData.mockOption[0])
+        view.configure(with: CarMakingContentMockData.mockOption[0], step: .powertrain)
         return view
     }()
 

@@ -89,16 +89,17 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
 
     // MARK: - Helpers
 
-    func moveNextStep(feedbackTitle: String, feedbackDescription: String) {
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         guard currentStep < CarMakingStep.allCases.count - 1 else { return }
         let indexPath = Section.indexPath(for: currentStep)
         if let cell = collectionView.cellForItem(at: indexPath) as? CarMakingCollectionViewCell {
-            cell.playFeedbackAnimation(title: feedbackTitle,
-                                       description: feedbackDescription,
-                                       completion: {[weak self] in
-                self?.currentStep += 1
-            })
+            cell.playFeedbackAnimation(with: feedbackComment, completion: completion)
         }
+    }
+
+    func moveNextStep() {
+        guard currentStep < CarMakingStep.allCases.count - 1 else { return }
+        currentStep += 1
     }
 
     func movePrevStep() {
@@ -115,15 +116,15 @@ class CarMakingContentView<Section: CarMakingSectionType>: UIView, UICollectionV
         guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingCollectionViewCell else {
             return
         }
-        cell.update(optionInfoArray: info)
+        cell.update(optionInfoArray: info, step: CarMakingStep(rawValue: currentStep) ?? .powertrain)
     }
 
-    func updateOptionCardForCategory(with info: [OptionCardInfo]) {
+    func updateOptionCardForCategory(with info: [OptionCardInfo], step: CarMakingStep) {
         let indexPathOfCurrentStep = Section.indexPath(for: currentStep)
         guard let cell = collectionView.cellForItem(at: indexPathOfCurrentStep) as? CarMakingOptionSelectStepCell else {
             return
         }
-        cell.configure(optionInfoArray: info)
+        cell.configure(optionInfoArray: info, step: step)
     }
 
     func updateSelectedOptionCountLabel(to count: Int) {

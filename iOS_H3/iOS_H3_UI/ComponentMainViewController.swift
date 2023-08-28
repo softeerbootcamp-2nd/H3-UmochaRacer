@@ -107,14 +107,6 @@ class ComponentMainViewController: UIViewController {
         return button
     }()
 
-    lazy private var noImageDetailViewButton: UIButton = {
-        let button = UIButton()
-        button.setTitle("noImageDetailView 보기", for: .normal)
-        button.setTitleColor(.blue, for: .normal)
-        button.addTarget(self, action: #selector(didTapNoImageDetailViewButton), for: .touchUpInside)
-        return button
-    }()
-
     lazy private var imageDetailViewButton: UIButton = {
         let button = UIButton()
         button.setTitle("imageDetailView 보기", for: .normal)
@@ -128,6 +120,14 @@ class ComponentMainViewController: UIViewController {
         button.setTitle("textBox 보기", for: .normal)
         button.setTitleColor(.blue, for: .normal)
         button.addTarget(self, action: #selector(didTapTextBoxButton), for: .touchUpInside)
+        return button
+    }()
+
+    lazy private var trimListBarButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("TrimListBar 보기", for: .normal)
+        button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(didTapTrimListBarButton), for: .touchUpInside)
         return button
     }()
 
@@ -174,9 +174,9 @@ class ComponentMainViewController: UIViewController {
         stackView.addArrangedSubview(carMakingContentViewButton)
         stackView.addArrangedSubview(optionCategoryTabbarButton)
         stackView.addArrangedSubview(optionListModeButton)
-        stackView.addArrangedSubview(noImageDetailViewButton)
         stackView.addArrangedSubview(imageDetailViewButton)
         stackView.addArrangedSubview(textBoxButton)
+        stackView.addArrangedSubview(trimListBarButton)
 
         let buttons = [
             titleBarButton,
@@ -189,9 +189,9 @@ class ComponentMainViewController: UIViewController {
             carMakingContentViewButton,
             optionCategoryTabbarButton,
             optionListModeButton,
-            noImageDetailViewButton,
             imageDetailViewButton,
-            textBoxButton
+            textBoxButton,
+            trimListBarButton
         ]
         for button in buttons {
             button.heightAnchor.constraint(equalToConstant: Constants.buttonHeight).isActive = true
@@ -249,20 +249,19 @@ class ComponentMainViewController: UIViewController {
         self.present(viewController, animated: false)
     }
 
-    @objc func didTapNoImageDetailViewButton() {
-        let viewController = NoImageDetailPopupViewController(viewModel: DetailPopupViewModel())
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: false)
-    }
-
     @objc func didTapImageDetailViewButton() {
-        let viewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel())
-        viewController.modalPresentationStyle = .overFullScreen
-        self.present(viewController, animated: false)
+
     }
 
     @objc func didTapTextBoxButton() {
-        let viewController = TextBoxViewController()
+        let viewController = TextBoxViewController(viewModel: TextBoxViewModel())
+
+        self.present(viewController, animated: false)
+    }
+
+    @objc func didTapTrimListBarButton() {
+        let viewController = TrimListBarViewController()
+
         self.present(viewController, animated: false)
     }
 }

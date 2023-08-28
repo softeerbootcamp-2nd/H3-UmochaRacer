@@ -39,8 +39,9 @@ class ModeChangeCheckPopupViewController: UIViewController {
 
     // MARK: - Helpers
     @IBAction func didTapChangeButton(_ sender: UIButton) {
+        let presentingViewController = presentingViewController
         self.dismiss(animated: false) {
-            if let navigationController = self.presentingViewController as? UINavigationController {
+            if let navigationController = presentingViewController as? UINavigationController {
                 navigationController.popViewController(animated: false)
             }
         }

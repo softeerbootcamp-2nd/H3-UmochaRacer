@@ -72,38 +72,38 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
     override init(frame: CGRect) {
         carMakingMode = .selfMode
         super.init(frame: frame)
-        setupViews()
+        setupViews(step: .powertrain)
     }
 
     required init?(coder: NSCoder) {
         carMakingMode = .selfMode
         super.init(coder: coder)
-        setupViews()
+        setupViews(step: .powertrain)
     }
 
-    init(frame: CGRect = .zero, carMakingMode: CarMakingMode) {
+    init(frame: CGRect = .zero, carMakingMode: CarMakingMode, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
         super.init(frame: frame)
-        setupViews()
+        setupViews(step: step)
     }
 
     // MARK: - Helpers
 
-    func configure(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         updateSnapshot(item: cardInfos)
     }
 
-    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         cardInfos.enumerated().forEach { (index, info) in
             let indexPath = IndexPath(row: index, section: 0)
             guard let cell = collectionView.cellForItem(at: indexPath) as? OptionCardCell else {
                 return
             }
-            cell.configure(carMakingMode: carMakingMode, info: info)
+            cell.configure(carMakingMode: carMakingMode, info: info, step: step)
         }
     }
 
-    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         var animationsCompletedCount = 0
 
@@ -112,7 +112,7 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
                 continue
             }
 
-            cell.playFeedbackAnimation(feedbackTitle: feedbackTitle, feedbackDescription: feedbackDescription) {
+            cell.playFeedbackAnimation(with: feedbackComment) {
                 animationsCompletedCount += 1
 
                 if animationsCompletedCount == visibleIndexPaths.count {
@@ -130,9 +130,9 @@ final class OptionListModeView: UIView, OptionCardButtonListViewable {
 // MARK: - Setup
 
 extension OptionListModeView {
-    private func setupViews() {
+    private func setupViews(step: CarMakingStep) {
         addSubviews()
-        setupCollectionView()
+        setupCollectionView(step: step)
         setupConstraints()
     }
 
@@ -142,13 +142,13 @@ extension OptionListModeView {
         containerView.addSubview(imageModeButton)
     }
 
-    private func setupCollectionView() {
+    private func setupCollectionView(step: CarMakingStep) {
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: createCollectionViewLayout())
         containerView.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         registerCollectionViewCell()
-        setupCollectionViewDataSource()
+        setupCollectionViewDataSource(step: step)
         setupSnapshot()
     }
 
@@ -173,7 +173,7 @@ extension OptionListModeView {
         collectionView.register(OptionCardCell.self, forCellWithReuseIdentifier: OptionCardCell.identifier)
     }
 
-    private func setupCollectionViewDataSource() {
+    private func setupCollectionViewDataSource(step: CarMakingStep) {
         dataSource = CollectionViewDiffableDataSource(
             collectionView: collectionView
         ) { [weak self] (collectionView, indexPath, item) in
@@ -185,7 +185,7 @@ extension OptionListModeView {
                 return OptionCardCell()
             }
 
-            cell.configure(carMakingMode: carMakingMode, info: item)
+            cell.configure(carMakingMode: carMakingMode, info: item, step: step)
 
             buttonTapCancellableByIndex[indexPath.row] = cell.buttonTapSubject
                 .sink { [weak self] in

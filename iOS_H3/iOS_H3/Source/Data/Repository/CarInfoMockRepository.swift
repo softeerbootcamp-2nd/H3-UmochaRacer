@@ -15,7 +15,7 @@ final class CarInfoMockRepository: CarInfoRepositoryProtocol {
         step: CarMakingStep
     ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         let stepIndex = step.rawValue
-        let optionInfoArray = CarMakingMockData.mockOption[stepIndex]
+        let optionInfoArray = CarMakingMockRepositoryData.mockOption[stepIndex]
         let stepInfo = CarMakingStepInfoEntity(step: step, optionCardInfoArray: optionInfoArray)
         return Just(stepInfo).setFailureType(to: CarInfoRepositoryError.self).eraseToAnyPublisher()
     }
@@ -67,9 +67,17 @@ final class CarInfoMockRepository: CarInfoRepositoryProtocol {
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError> {
         fetchCarMakingStepInfo(for: CarInfoEndpoint.singleExteriorColor(optionId: optionId), step: .externalColor)
     }
+
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<FeedbackCommentEntity, Error> {
+        Just(
+            FeedbackCommentEntity(comment: "디젤 엔진은 효율이 좋아요! 효율을 중시한다면, 탁월한 선택입니다.")
+        )
+        .setFailureType(to: Error.self)
+        .eraseToAnyPublisher()
+    }
 }
 
-struct CarMakingMockData {
+struct CarMakingMockRepositoryData {
     static let mockURL = [
         "https://cdn.autotribune.co.kr/news/photo/202101/4849_30727_3533.jpg",
         // swiftlint:disable:next line_length
