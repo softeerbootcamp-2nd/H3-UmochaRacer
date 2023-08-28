@@ -5,11 +5,8 @@ import com.example.backend.domain.sale.mapper.SelectionRatioRowMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -19,13 +16,10 @@ public class TagRatioTemplateRepository {
 
     public List<Long> findRelatedTagListWithOption(Long tagId, String category, Long optionId) {
         String query = String.format("SELECT tag_id FROM TAG_%s WHERE %s_id = %d AND tag_id = %d",
-                                            category.toUpperCase(), category, optionId, tagId);
-        return jdbcTemplate.query(query, new RowMapper<Long>() {
-            @Override
-            public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getLong("tag_id");
-            }
-        });
+                category.toUpperCase(), category, optionId, tagId);
+        return jdbcTemplate.query(query, (rs, n) ->
+                rs.getLong("tag_id")
+        );
     }
 
     @Cacheable(cacheNames = "TagSelectionCount")
@@ -54,12 +48,12 @@ public class TagRatioTemplateRepository {
     public List<RatioSummary> findAdditionalOptionCount(Long tagId, String category, Long optionId) {
         String category_id = category + "_id";
         String query = "SELECT * FROM (SELECT so." + category_id + " AS id, COUNT(*) AS select_count FROM MODEL m \n" +
-                        "INNER JOIN SALES s ON s.model_id = m.id \n" +
-                        "INNER JOIN SALES_OPTIONS so ON s.id = so.sales_id \n" +
-                        " WHERE m.trim_id = 1 AND \n" +
-                        tagId + " IN (s.tag1, s.tag2, s.tag3) \n" +
-                        "GROUP BY so." + category_id + " WITH ROLLUP) AS count_table \n" +
-                        "WHERE id = " + optionId + " OR id IS NULL";
+                "INNER JOIN SALES s ON s.model_id = m.id \n" +
+                "INNER JOIN SALES_OPTIONS so ON s.id = so.sales_id \n" +
+                " WHERE m.trim_id = 1 AND \n" +
+                tagId + " IN (s.tag1, s.tag2, s.tag3) \n" +
+                "GROUP BY so." + category_id + " WITH ROLLUP) AS count_table \n" +
+                "WHERE id = " + optionId + " OR id IS NULL";
 
         return jdbcTemplate.query(query, new SelectionRatioRowMapper());
     }
