@@ -189,11 +189,15 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        navigationController?.popViewController(animated: true)
+        let exitPopupViewController = ExitPopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "title 버튼 클릭 액션 구현 필요")
+        let modeChangePopupViewController = ModeChangePopupViewController(currentMode: self.mode)
+        modeChangePopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(modeChangePopupViewController, animated: false)
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
@@ -201,7 +205,9 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "모드변경 버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ModelChangePopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 }
 
