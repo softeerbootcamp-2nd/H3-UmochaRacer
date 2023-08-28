@@ -43,9 +43,6 @@
 		47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
 		47342E652A9BB24800A1FCBE /* DetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */; };
 		47342E662A9BB25900A1FCBE /* DetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */; };
-
-		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
-		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */; };
 		47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */; };
 		47342E6D2A9C620700A1FCBE /* DictionaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */; };
@@ -322,9 +319,6 @@
 
 		47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryOptionUsecase.swift; sourceTree = "<group>"; };
 		47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOptionEntity.swift; sourceTree = "<group>"; };
-
-		47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
-
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
 		4741C3672A9678EE009FD883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
