@@ -255,7 +255,7 @@ class ComponentMainViewController: UIViewController {
 
     @objc func didTapTextBoxButton() {
 //        let viewController = TextBoxViewController()
-        self.present(viewController, animated: false)
+//        self.present(viewController, animated: false)
     }
 
     @objc func didTapTrimListBarButton() {
