@@ -63,11 +63,11 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
             if cardInfos.count <= index { return }
             configureOptionCard(at: index, with: cardInfos[index], step: step)
         }
+        applyTextEffectIfNeeded()
     }
 
     func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         configure(with: cardInfos, step: step)
-        applyTextEffectIfNeeded()
     }
 
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
