@@ -41,8 +41,7 @@ final class TextBoxViewModel {
                 }
                 return self.detailedOptionUsecase.fetchDictionaryDescription(for: targetString)
                     .catch { error -> Just<String> in
-                        print(error)
-                        return Just(targetString)
+                        return Just(error.localizedDescription)
                     }
                     .eraseToAnyPublisher()
             }
