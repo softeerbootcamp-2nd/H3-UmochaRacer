@@ -28,7 +28,7 @@ class CarMakingEstimateCell: CarMakingCollectionViewCell {
     // swiftlint:disable:next line_length
     private var exteriorOption = OptionCardInfo(id: 1, title: URString(fullText: "어비스 블랙펄"), subTitle: URString(fullText: ""), priceString: "0원", bannerImageURL: URL(string: "https://h3cardb.s3.ap-northeast-2.amazonaws.com/exterior_color/%E1%84%8B%E1%85%A5%E1%84%87%E1%85%B5%E1%84%89%E1%85%B3+%E1%84%87%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A2%E1%86%A8+%E1%84%91%E1%85%A5%E1%86%AF+%E1%84%8E%E1%85%A1%E1%84%85%E1%85%A3%E1%86%BC.png"))
     // swiftlint:disable:next line_length
-    private var interiorOption = OptionCardInfo(id: 1, title: URString(fullText: "어비스 블랙펄"), subTitle: URString(fullText: ""), priceString: "0원", bannerImageURL: URL(string:     "https://h3cardb.s3.ap-northeast-2.amazonaws.com/interior_color/%E1%84%82%E1%85%A2%E1%84%8C%E1%85%A1%E1%86%BC_%E1%84%8F%E1%85%AF%E1%86%AF%E1%84%90%E1%85%B5%E1%86%BC%E1%84%8E%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%A7%E1%86%AB_%E1%84%87%E1%85%B3%E1%86%AF%EB%9E%99_%E1%84%8E%E1%85%A1.png"))
+    private var interiorOption = OptionCardInfo(id: 1, title: URString(fullText: "어비스 블랙펄"), subTitle: URString(fullText: ""), priceString: "0원", bannerImageURL: URL(string: "https://h3cardb.s3.ap-northeast-2.amazonaws.com/interior_color/%E1%84%82%E1%85%A2%E1%84%8C%E1%85%A1%E1%86%BC_%E1%84%8F%E1%85%AF%E1%86%AF%E1%84%90%E1%85%B5%E1%86%BC%E1%84%8E%E1%85%A5%E1%86%AB%E1%84%8B%E1%85%A7%E1%86%AB_%E1%84%87%E1%85%B3%E1%86%AF%EB%9E%99_%E1%84%8E%E1%85%A1.png"))
 
     private lazy var optionCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -60,10 +60,10 @@ class CarMakingEstimateCell: CarMakingCollectionViewCell {
 
     func configure(info: [OptionCardInfo]) {
         for option in info {
-            if let _ = option.color {
+            if option.color != nil {
                 self.exteriorOption = option
             }
-            if let _ = option.iconImageURL {
+            if option.iconImageURL != nil {
                 self.interiorOption = option
             }
         }
@@ -200,7 +200,7 @@ class CarMakingEstimateCell: CarMakingCollectionViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            saveButton.topAnchor.constraint(equalTo: testDriveButton.bottomAnchor,constant: 9),
+            saveButton.topAnchor.constraint(equalTo: testDriveButton.bottomAnchor, constant: 9),
             saveButton.trailingAnchor.constraint(equalTo: buttonContainerView.trailingAnchor, constant: -16),
             saveButton.heightAnchor.constraint(equalToConstant: 50)
         ])
