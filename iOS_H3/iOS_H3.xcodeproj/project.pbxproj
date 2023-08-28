@@ -227,6 +227,15 @@
 		5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */; };
+		5FFE54022A9A562900DAC4C8 /* ExitPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */; };
+		5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */; };
+		5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */; };
+		5FFE54082A9A617D00DAC4C8 /* ModelChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */; };
+		5FFE540C2A9A644900DAC4C8 /* ModeChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */; };
+		5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */; };
+		5FFE540F2A9A663900DAC4C8 /* ModeChangeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */; };
+		5FFE54132A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */; };
+		5FFE54142A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -415,6 +424,15 @@
 		5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlignedLabel.swift; sourceTree = "<group>"; };
 		5F99F0622A85171600C38555 /* CarMakingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentView.swift; sourceTree = "<group>"; };
 		5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentViewController.swift; sourceTree = "<group>"; };
+		5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitPopupViewController.swift; sourceTree = "<group>"; };
+		5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPopupViewController.xib; sourceTree = "<group>"; };
+		5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelChangePopupViewController.swift; sourceTree = "<group>"; };
+		5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelChangePopupViewController.xib; sourceTree = "<group>"; };
+		5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangePopupViewController.swift; sourceTree = "<group>"; };
+		5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChangePopupViewController.xib; sourceTree = "<group>"; };
+		5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeButton.swift; sourceTree = "<group>"; };
+		5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModeChangeCheckPopupViewController.swift; sourceTree = "<group>"; };
+		5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModeChangeCheckPopupViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -557,6 +575,7 @@
 		478B26772A78FC5C00598902 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				5FFE53FE2A9A554C00DAC4C8 /* Popup */,
 				5F3E670E2A95CD9B002BF48A /* Detail */,
 				479B09002A9351B600AA10A0 /* Model */,
 				5F448A6C2A91FBD0005D04FF /* OptionDetail */,
@@ -1025,6 +1044,54 @@
 			path = CarMakingContentView;
 			sourceTree = "<group>";
 		};
+		5FFE53FE2A9A554C00DAC4C8 /* Popup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54092A9A643100DAC4C8 /* ModeChangePopup */,
+				5FFE54042A9A616200DAC4C8 /* ModelChangePopup */,
+				5FFE53FF2A9A560000DAC4C8 /* ExitPopup */,
+			);
+			path = Popup;
+			sourceTree = "<group>";
+		};
+		5FFE53FF2A9A560000DAC4C8 /* ExitPopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */,
+				5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */,
+			);
+			path = ExitPopup;
+			sourceTree = "<group>";
+		};
+		5FFE54042A9A616200DAC4C8 /* ModelChangePopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */,
+				5FFE54062A9A617D00DAC4C8 /* ModelChangePopupViewController.xib */,
+			);
+			path = ModelChangePopup;
+			sourceTree = "<group>";
+		};
+		5FFE54092A9A643100DAC4C8 /* ModeChangePopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54102A9A74CB00DAC4C8 /* ModeChangeCheckPopup */,
+				5FFE540A2A9A644900DAC4C8 /* ModeChangePopupViewController.swift */,
+				5FFE540B2A9A644900DAC4C8 /* ModeChangePopupViewController.xib */,
+				5FFE540E2A9A663900DAC4C8 /* ModeChangeButton.swift */,
+			);
+			path = ModeChangePopup;
+			sourceTree = "<group>";
+		};
+		5FFE54102A9A74CB00DAC4C8 /* ModeChangeCheckPopup */ = {
+			isa = PBXGroup;
+			children = (
+				5FFE54112A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift */,
+				5FFE54122A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib */,
+			);
+			path = ModeChangeCheckPopup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1229,12 +1296,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				47CB8CB52A79EDB3004B24AD /* HyundaiSansTextKROTFMedium.otf in Resources */,
+				5FFE540D2A9A644900DAC4C8 /* ModeChangePopupViewController.xib in Resources */,
 				5F5E21132A78DD21003C1185 /* .swiftlint.yml in Resources */,
+				5FFE54142A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.xib in Resources */,
+				5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */,
 				5F1E30BD2A9240C5004D229F /* ImageDetailPopupViewController.xib in Resources */,
 				5F00FC012A777BDF0055A4FA /* LaunchScreen.storyboard in Resources */,
 				47CB8CB12A79ECD4004B24AD /* HyundaiSansHeadKRMedium.ttf in Resources */,
 				5F00FBFE2A777BDF0055A4FA /* Assets.xcassets in Resources */,
 				47CB8CB72A79EDE9004B24AD /* HyundaiSansTextKROTFRegular.otf in Resources */,
+				5FFE54082A9A617D00DAC4C8 /* ModelChangePopupViewController.xib in Resources */,
 				4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */,
 				47CB8CB32A79ECE0004B24AD /* HyundaiSansHeadKRRegular.ttf in Resources */,
 			);
@@ -1360,6 +1431,7 @@
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
 				477620C52A7B80B900D60B59 /* UILabel+.swift in Sources */,
 				4733098D2A8B9EF200906FFB /* CarMakingViewModel.swift in Sources */,
+				5FFE540F2A9A663900DAC4C8 /* ModeChangeButton.swift in Sources */,
 				5F6A82F42A887B0B0025D5A4 /* OptionCategoryTabBar.swift in Sources */,
 				5F2116E52A8EE45B008FC7D2 /* APIResponse.swift in Sources */,
 				5F8EBC4A2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
@@ -1381,6 +1453,7 @@
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
+				5FFE54132A9A74F000DAC4C8 /* ModeChangeCheckPopupViewController.swift in Sources */,
 				471917CC2A7FB11600B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				479B09042A935F7B00AA10A0 /* CarMakingStepInfo.swift in Sources */,
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
@@ -1395,6 +1468,7 @@
 				4762D4652A9256A4007F312D /* EstimateSummaryHeaderView.swift in Sources */,
 				5F4834AC2A8CF59700AFECF3 /* SelfModeUsecaseProtocol.swift in Sources */,
 				5F5891D92A92D9D600ACFFAD /* DetailPopupViewModel.swift in Sources */,
+				5FFE54022A9A562900DAC4C8 /* ExitPopupViewController.swift in Sources */,
 				479023B32A8AA18600DECB70 /* EndPoint.swift in Sources */,
 				5F496DFF2A9447EB0024E5B8 /* TextEffectManager.swift in Sources */,
 				476913A72A97AD9500C9C352 /* DictionaryDescription.swift in Sources */,
@@ -1409,6 +1483,7 @@
 				479B09132A9528EC00AA10A0 /* CommentEndpoint.swift in Sources */,
 				471917FC2A83338D00B67D54 /* URColor.swift in Sources */,
 				479023B12A8AA18600DECB70 /* NetworkError.swift in Sources */,
+				5FFE540C2A9A644900DAC4C8 /* ModeChangePopupViewController.swift in Sources */,
 				5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */,
 				479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
@@ -1430,6 +1505,7 @@
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
 				479B09242A95D19700AA10A0 /* TrimListBar.swift in Sources */,
 				5F496DFC2A9447990024E5B8 /* DictionaryString.swift in Sources */,
+				5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */,
 				5F5AE0C62A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

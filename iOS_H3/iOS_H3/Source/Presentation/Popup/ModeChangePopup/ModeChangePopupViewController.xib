@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModeChangePopupViewController" customModule="iOS_H3" customModuleProvider="target">
+            <connections>
+                <outlet property="guideModeButton" destination="V5W-1V-bp5" id="GQ3-eL-0xp"/>
+                <outlet property="popupTitleLabel" destination="6bl-A9-4F8" id="Zv4-Dr-rLE"/>
+                <outlet property="selfModeButton" destination="oAB-WB-Z0p" id="A65-ac-VF9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HSd-A2-CNN">
+                    <rect key="frame" x="16" y="240.66666666666663" width="361" height="371"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tools_fill_img" translatesAutoresizingMaskIntoConstraints="NO" id="1pJ-S4-I1r">
+                            <rect key="frame" x="162.66666666666666" y="26.000000000000028" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="36" id="BCd-gT-EXQ"/>
+                                <constraint firstAttribute="width" constant="36" id="fyq-Fd-svd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내 차 만들기 방식 변경하기" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6bl-A9-4F8">
+                            <rect key="frame" x="53" y="70.000000000000028" width="255" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oAB-WB-Z0p" customClass="ModeChangeButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="21" y="111.00000000000003" width="319" height="116"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="116" id="QAR-qI-4Kb"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5W-1V-bp5" customClass="ModeChangeButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="21" y="235" width="319" height="116"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="116" id="IJ7-Wh-blv"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="V5W-1V-bp5" firstAttribute="leading" secondItem="HSd-A2-CNN" secondAttribute="leading" constant="21" id="4g0-3E-rG1"/>
+                        <constraint firstAttribute="bottom" secondItem="V5W-1V-bp5" secondAttribute="bottom" constant="20" id="5aQ-z7-k1D"/>
+                        <constraint firstAttribute="trailing" secondItem="6bl-A9-4F8" secondAttribute="trailing" constant="53" id="C9O-yn-uaP"/>
+                        <constraint firstItem="1pJ-S4-I1r" firstAttribute="top" secondItem="HSd-A2-CNN" secondAttribute="top" constant="26" id="OlW-OP-EWP"/>
+                        <constraint firstItem="1pJ-S4-I1r" firstAttribute="centerX" secondItem="HSd-A2-CNN" secondAttribute="centerX" id="PgI-Ut-xDA"/>
+                        <constraint firstAttribute="trailing" secondItem="oAB-WB-Z0p" secondAttribute="trailing" constant="21" id="Pxr-2W-jhQ"/>
+                        <constraint firstItem="oAB-WB-Z0p" firstAttribute="leading" secondItem="HSd-A2-CNN" secondAttribute="leading" constant="21" id="Wff-iE-Nsl"/>
+                        <constraint firstItem="oAB-WB-Z0p" firstAttribute="top" secondItem="6bl-A9-4F8" secondAttribute="bottom" constant="20" id="Zig-9y-mo0"/>
+                        <constraint firstAttribute="trailing" secondItem="V5W-1V-bp5" secondAttribute="trailing" constant="21" id="dGb-H9-Hg9"/>
+                        <constraint firstItem="6bl-A9-4F8" firstAttribute="top" secondItem="1pJ-S4-I1r" secondAttribute="bottom" constant="8" id="kwZ-Wq-Tax"/>
+                        <constraint firstItem="6bl-A9-4F8" firstAttribute="leading" secondItem="HSd-A2-CNN" secondAttribute="leading" constant="53" id="sI8-CF-Cys"/>
+                        <constraint firstItem="V5W-1V-bp5" firstAttribute="top" secondItem="oAB-WB-Z0p" secondAttribute="bottom" constant="8" id="va7-Fl-Dd3"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70369412251655628" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="HSd-A2-CNN" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="9mU-9S-V8h"/>
+                <constraint firstItem="HSd-A2-CNN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="TTR-KN-B8t"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HSd-A2-CNN" secondAttribute="trailing" constant="16" id="yLS-UV-4lS"/>
+            </constraints>
+            <point key="canvasLocation" x="-54.198473282442748" y="-11.267605633802818"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="tools_fill_img" width="36" height="36"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

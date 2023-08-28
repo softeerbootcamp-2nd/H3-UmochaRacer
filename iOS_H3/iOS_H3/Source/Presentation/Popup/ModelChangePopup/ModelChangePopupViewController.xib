@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ModelChangePopupViewController" customModule="iOS_H3" customModuleProvider="target">
+            <connections>
+                <outlet property="cancelButton" destination="unP-gN-2t6" id="HOG-u0-mNe"/>
+                <outlet property="changeButton" destination="4pB-ev-jXy" id="Xj1-ci-C1L"/>
+                <outlet property="popupDescriptionLabel" destination="t4i-PI-G3t" id="JyD-7n-KpD"/>
+                <outlet property="popupTitleLabel" destination="xoe-vH-e39" id="tk9-kX-W9N"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gwq-4x-TFh">
+                    <rect key="frame" x="16" y="309.66666666666669" width="361" height="233.00000000000006"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="exit_popup_img" translatesAutoresizingMaskIntoConstraints="NO" id="BCf-Ic-mmF">
+                            <rect key="frame" x="162.66666666666666" y="26" width="36" height="36"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="36" id="60d-xo-JYC"/>
+                                <constraint firstAttribute="height" constant="36" id="gZh-sw-NPh"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모델을 변경하시겠어요?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xoe-vH-e39">
+                            <rect key="frame" x="53" y="70" width="255" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4i-PI-G3t">
+                            <rect key="frame" x="59" y="103" width="243" height="42"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="42" id="eIL-3z-2G1"/>
+                            </constraints>
+                            <string key="text">모델을 변경하면 선택할 수 있는 옵션이 바뀌어요! 
+자금 변경하면 선택사항은 저장되지 않아요.</string>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4pB-ev-jXy" customClass="OhMyCarSetButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="18" y="169" width="158.66666666666666" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="c83-Cb-ILM"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <connections>
+                                <action selector="didTapChangeButton:" destination="-1" eventType="touchUpInside" id="1oo-0w-Lch"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="unP-gN-2t6" customClass="OhMyCarSetButton" customModule="iOS_H3" customModuleProvider="target">
+                            <rect key="frame" x="184.66666666666663" y="169" width="158.33333333333337" height="46"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="46" id="eYf-QD-wpy"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <connections>
+                                <action selector="didTapCancelButton:" destination="-1" eventType="touchUpInside" id="Bht-oe-Czr"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="t4i-PI-G3t" firstAttribute="leading" secondItem="Gwq-4x-TFh" secondAttribute="leading" constant="59" id="05Z-hG-ILy"/>
+                        <constraint firstItem="4pB-ev-jXy" firstAttribute="top" secondItem="t4i-PI-G3t" secondAttribute="bottom" constant="24" id="2zn-Lx-E8B"/>
+                        <constraint firstItem="unP-gN-2t6" firstAttribute="top" secondItem="t4i-PI-G3t" secondAttribute="bottom" constant="24" id="3eQ-8c-Hnw"/>
+                        <constraint firstItem="xoe-vH-e39" firstAttribute="top" secondItem="BCf-Ic-mmF" secondAttribute="bottom" constant="8" id="4nn-cH-WU2"/>
+                        <constraint firstItem="4pB-ev-jXy" firstAttribute="leading" secondItem="Gwq-4x-TFh" secondAttribute="leading" constant="18" id="DRb-oP-DS1"/>
+                        <constraint firstItem="unP-gN-2t6" firstAttribute="width" secondItem="4pB-ev-jXy" secondAttribute="width" id="HJH-PE-HNd"/>
+                        <constraint firstAttribute="trailing" secondItem="t4i-PI-G3t" secondAttribute="trailing" constant="59" id="HfJ-lJ-OTl"/>
+                        <constraint firstItem="BCf-Ic-mmF" firstAttribute="centerX" secondItem="Gwq-4x-TFh" secondAttribute="centerX" id="JGe-T2-WUq"/>
+                        <constraint firstItem="BCf-Ic-mmF" firstAttribute="top" secondItem="Gwq-4x-TFh" secondAttribute="top" constant="26" id="P5V-m6-KQC"/>
+                        <constraint firstItem="unP-gN-2t6" firstAttribute="leading" secondItem="4pB-ev-jXy" secondAttribute="trailing" constant="8" id="RAd-2e-nll"/>
+                        <constraint firstItem="t4i-PI-G3t" firstAttribute="top" secondItem="xoe-vH-e39" secondAttribute="bottom" constant="12" id="SPi-Kx-1JU"/>
+                        <constraint firstAttribute="trailing" secondItem="unP-gN-2t6" secondAttribute="trailing" constant="18" id="Ufw-3g-kFm"/>
+                        <constraint firstAttribute="trailing" secondItem="xoe-vH-e39" secondAttribute="trailing" constant="53" id="WlZ-rU-XkE"/>
+                        <constraint firstAttribute="bottom" secondItem="unP-gN-2t6" secondAttribute="bottom" constant="18" id="nmr-t2-1Vt"/>
+                        <constraint firstItem="xoe-vH-e39" firstAttribute="leading" secondItem="Gwq-4x-TFh" secondAttribute="leading" constant="53" id="q5Q-4b-G5C"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="6"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.70434085264900659" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Gwq-4x-TFh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="Aov-4Z-l2C"/>
+                <constraint firstItem="Gwq-4x-TFh" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="G1H-k7-1Ah"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Gwq-4x-TFh" secondAttribute="trailing" constant="16" id="yOS-ez-oQC"/>
+            </constraints>
+            <point key="canvasLocation" x="-77" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="exit_popup_img" width="36" height="36"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
