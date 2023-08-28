@@ -45,6 +45,9 @@ final class CarMakingViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
+    private var carMakingContentViewBottomConstraint: NSLayoutConstraint?
+    private var bottomModalViewHeightConstraint: NSLayoutConstraint?
+
     // MARK: - Lifecycles
 
     init(mode: CarMakingMode, viewModel: CarMakingViewModel) {
@@ -95,6 +98,7 @@ extension CarMakingViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] summary in
                 self?.updateBottomModalView(with: summary)
+                self?.carMakingContentView.updateEstimateCell(with: summary)
             }
             .store(in: &cancellables)
 
@@ -108,6 +112,15 @@ extension CarMakingViewController {
         output.optionInfoDidUpdated
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
+
+                self?.carMakingContentView.updateEstimateCell(options: optionInfo)
+
+                if let view = self?.view {
+                    if output.isDictionaryFeatureEnabled.value {
+                        self?.textEffectManager.applyEffect(false, on: view)
+                        self?.textEffectManager.applyEffect(true, on: view)
+                    }
+                }
             }
             .store(in: &cancellables)
 
@@ -214,6 +227,13 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
     func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
         optionCategoryDidChanged.send(category)
     }
+
+    func carMakingContentViewEstimateCellDidShow() {
+        bottomModalView.isHidden = true
+        bottomModalViewHeightConstraint?.constant = 0
+        carMakingContentViewBottomConstraint?.constant = 0
+        carMakingContentView.updateEstimateResult(to: 500)
+    }
 }
 
 // MARK: - BottomModalView Delegate
@@ -294,22 +314,27 @@ extension CarMakingViewController {
     }
 
     private func setupContentViewConstraints() {
+        carMakingContentViewBottomConstraint = carMakingContentView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            constant: -Constants.bottomModalViewHeight
+        )
+
         NSLayoutConstraint.activate([
             carMakingContentView.topAnchor.constraint(equalTo: titleBar.bottomAnchor),
             carMakingContentView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
             carMakingContentView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
-            carMakingContentView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -Constants.bottomModalViewHeight
-            )
+            carMakingContentViewBottomConstraint!
         ])
     }
 
     private func setupBottomModalViewConstraints() {
+        bottomModalViewHeightConstraint = bottomModalView.heightAnchor
+            .constraint(equalToConstant: Constants.bottomModalViewHeight)
         NSLayoutConstraint.activate([
             bottomModalView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
             bottomModalView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
-            bottomModalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            bottomModalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            bottomModalViewHeightConstraint!
         ])
     }
 }

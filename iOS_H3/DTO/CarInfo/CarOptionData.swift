@@ -50,7 +50,7 @@ extension CarOptionData {
 
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
         let iconImageURL = URL(string: self.iconSrc ?? "")
-        let color = self.colorCode.flatMap { URColor(hex: $0) }
+        let color = URL(string: self.colorCode ?? "")
 
         return OptionCardInfoEntity(
             id: id,

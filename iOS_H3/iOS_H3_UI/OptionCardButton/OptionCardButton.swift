@@ -109,11 +109,12 @@ class OptionCardButton: UIButton {
         return imageView
     }()
 
-    private let colorView: UIView = {
-        let view = UIView()
+    private let colorView: UIImageView = {
+        let view = UIImageView()
         view.backgroundColor = .black
         view.isUserInteractionEnabled = false
         view.layer.cornerRadius = 30
+        view.clipsToBounds = true
         view.isHidden = true
         return view
     }()
@@ -154,7 +155,7 @@ class OptionCardButton: UIButton {
          optionSubTitle: String = "옵션 서브 타이틀",
          price: String = "+ 0원",
          hasMoreInfo: Bool = false,
-         color: URColor? = nil,
+         color: URL? = nil,
          image: URL? = nil
     ) {
         self.carMakingMode = mode
@@ -165,7 +166,7 @@ class OptionCardButton: UIButton {
         showMoreInfoButton(hasMoreInfo)
         setupViews()
         addMoreInfoButtonTarget()
-        setColor(color)
+        setColor(url: color)
         setImage(url: image)
     }
 
@@ -185,17 +186,17 @@ class OptionCardButton: UIButton {
             self.optionInfo = cardInfo
             showMoreInfoButton(cardInfo.hasMoreInfo)
             isSelected = cardInfo.isSelected
-            setColor(cardInfo.color)
+            setColor(url: cardInfo.color)
             setImage(url: cardInfo.iconImageURL)
         }
 
         updateButtonUI()
     }
 
-    func setColor(_ color: URColor?) {
-        colorView.isHidden = color == nil ? true: false
-        if let color {
-            colorView.backgroundColor = UIColor(urColor: color)
+    func setColor(url: URL?) {
+        colorView.isHidden = url == nil ? true: false
+        if let url {
+            colorView.loadCachedImage(of: url)
         }
     }
 
