@@ -29,8 +29,6 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({children}) => {
   const [activeModal, setActiveModal] = useState<ModalType>(null);
   if (isVisible) {
     window.removeEventListener('beforeunload', preventClose);
-  } else {
-    window.addEventListener('beforeunload', preventClose);
   }
   function openModal(type: ModalType) {
     closeModal();
@@ -41,6 +39,7 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({children}) => {
   function closeModal() {
     setIsVisible(false);
     setActiveModal(null);
+    window.addEventListener('beforeunload', preventClose);
   }
 
   return (
