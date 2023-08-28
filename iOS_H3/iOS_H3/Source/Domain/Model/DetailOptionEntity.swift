@@ -8,15 +8,8 @@
 import Foundation
 import Combine
 
-// struct DetailInfoEntity {
-//    let title: String
-//    let subTitle: String
-//    let description: String
-//    let additionalInfo: String
-//    let imageURL: URL?
-// }
 
-enum MockDetailOptionToEntityError: LocalizedError {
+enum DetailOptionToEntityError: LocalizedError {
     case missingTitle
     case missingDescription
 
@@ -30,25 +23,25 @@ enum MockDetailOptionToEntityError: LocalizedError {
     }
 }
 
-struct MockDetailOptionData: Decodable {
+struct DetailOptionData: Decodable {
     let title: String?
     let description: String?
     let info: String?
     let imageSrc: String?
 }
 
-extension MockDetailOptionData {
-    func toDomain() throws -> MockDetailOptionEntity {
+extension DetailOptionData {
+    func toDomain() throws -> DetailOptionEntity {
 
         guard let title = self.title else {
-            throw MockDetailOptionToEntityError.missingTitle
+            throw DetailOptionToEntityError.missingTitle
         }
 
         guard let description = self.description else {
-            throw MockDetailOptionToEntityError.missingDescription
+            throw DetailOptionToEntityError.missingDescription
         }
 
-        return MockDetailOptionEntity(
+        return DetailOptionEntity(
             title: title,
             description: description,
             info: self.info,
@@ -57,14 +50,14 @@ extension MockDetailOptionData {
     }
 }
 
-struct MockDetailOptionEntity {
+struct DetailOptionEntity {
     let title: String
     let description: String
     let info: String?
     let imageSrc: String?
 }
 
-extension MockDetailOptionEntity {
+extension DetailOptionEntity {
     func toPresentation() -> DetailOptionInfo {
 
         let titleUR = title.toURString()
@@ -117,26 +110,26 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
         self.networkService = networkService
     }
 
-    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> {
+    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> {
         return fetchDetailInfo(endpoint: .powertrain(id: id))
     }
 
-    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> {
+    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> {
         return fetchDetailInfo(endpoint: .drivingSystem(id: id))
     }
 
-    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> {
+    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> {
         return fetchDetailInfo(endpoint: .bodyType(id: id))
     }
 
-    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> {
+    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> {
         return fetchDetailInfo(endpoint: .wheel(id: id))
     }
 
-    func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[MockDetailOptionEntity], MockDetailRepositoryError> {
+    func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], MockDetailRepositoryError> {
         return networkService.request(MockDetailEndPoint.additionalOption(id: id))
-            .flatMap { (result: Result<APIResponse<[MockDetailOptionData]>, Error>)
-                -> AnyPublisher<[MockDetailOptionEntity], MockDetailRepositoryError> in
+            .flatMap { (result: Result<APIResponse<[DetailOptionData]>, Error>)
+                -> AnyPublisher<[DetailOptionEntity], MockDetailRepositoryError> in
 
                 switch result {
                 case .success(let data):
@@ -145,18 +138,18 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
                         return Just(detailOptionEntities)
                             .setFailureType(to: MockDetailRepositoryError.self)
                             .eraseToAnyPublisher()
-                    } catch let error as MockDetailOptionToEntityError {
-                        return Fail(outputType: [MockDetailOptionEntity].self,
+                    } catch let error as DetailOptionToEntityError {
+                        return Fail(outputType: [DetailOptionEntity].self,
                                     failure: MockDetailRepositoryError.conversionError(error))
                         .eraseToAnyPublisher()
                     } catch {
-                        return Fail(outputType: [MockDetailOptionEntity].self,
+                        return Fail(outputType: [DetailOptionEntity].self,
                                     failure: MockDetailRepositoryError.networkError(error))
                         .eraseToAnyPublisher()
                     }
                 case .failure(let error):
 
-                    return Fail(outputType: [MockDetailOptionEntity].self,
+                    return Fail(outputType: [DetailOptionEntity].self,
                                 failure: MockDetailRepositoryError.networkError(error))
                     .eraseToAnyPublisher()
                 }
@@ -165,10 +158,10 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
     }
 
     private func fetchDetailInfo(endpoint: MockDetailEndPoint)
-    -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> {
+    -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> {
         networkService.request(endpoint)
-            .flatMap { (result: Result<APIResponse<MockDetailOptionData>, Error>)
-                -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError> in
+            .flatMap { (result: Result<APIResponse<DetailOptionData>, Error>)
+                -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError> in
                 switch result {
                 case .success(let data):
                     do {
@@ -177,17 +170,17 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
                         return Just(detailOptionEntities)
                             .setFailureType(to: MockDetailRepositoryError.self)
                             .eraseToAnyPublisher()
-                    } catch let error as MockDetailOptionToEntityError {
-                        return Fail(outputType: MockDetailOptionEntity.self,
+                    } catch let error as DetailOptionToEntityError {
+                        return Fail(outputType: DetailOptionEntity.self,
                                     failure: MockDetailRepositoryError.conversionError(error))
                         .eraseToAnyPublisher()
                     } catch {
-                        return Fail(outputType: MockDetailOptionEntity.self,
+                        return Fail(outputType: DetailOptionEntity.self,
                                     failure: MockDetailRepositoryError.networkError(error))
                         .eraseToAnyPublisher()
                     }
                 case .failure(let error):
-                    return Fail(outputType: MockDetailOptionEntity.self,
+                    return Fail(outputType: DetailOptionEntity.self,
                                 failure: MockDetailRepositoryError.networkError(error))
                     .eraseToAnyPublisher()
                 }
@@ -198,7 +191,7 @@ class MockDetailRepository: MockDetailRepositoryProtocol {
 
 enum MockDetailRepositoryError: LocalizedError {
     case networkError(Error)
-    case conversionError(MockDetailOptionToEntityError)
+    case conversionError(DetailOptionToEntityError)
     var errorDescription: String? {
         switch self {
         case .networkError(let error):
@@ -210,15 +203,15 @@ enum MockDetailRepositoryError: LocalizedError {
 }
 
 protocol MockDetailRepositoryProtocol {
-    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError>
+    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError>
 
-    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError>
+    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError>
 
-    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError>
+    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError>
 
-    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError>
+    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, MockDetailRepositoryError>
 
-    func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[MockDetailOptionEntity], MockDetailRepositoryError>
+    func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], MockDetailRepositoryError>
 }
 enum MockDetailEndPoint: Endpoint {
     case powertrain(id: Int)
