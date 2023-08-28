@@ -14,6 +14,7 @@ import DetailSelectedBox from '@/component/common/DetailSelectedBox';
 import {getCategory} from '@/component/util/getCategory';
 import {useImageSrcDispatch} from '@/provider/tempImageProvider';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
+import {textParse} from '@/component/common/textParse';
 interface DetailData {
   title: string;
   description: string;
@@ -110,6 +111,7 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
     );
     if (matchIdRatio) setRate(matchIdRatio.selectionRatio);
   }, [ratioList]);
+
   return (
     <Wrapper onClick={onClick} $selected={selected} $isGiude={showGuide}>
       <Container>
@@ -130,7 +132,7 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
                 ? `나와 비슷한 ${data.saleRate}%가 선택한`
                 : `구매자의 ${rate}%가 선택했어요!`}
             </Text1>
-            <Text2 className="black">{data.name}</Text2>
+            <Text2 className="black">{textParse(data.name)}</Text2>
           </TextBox>
           {data.iconSrc ? (
             <MiddleImg $url={data.iconSrc} $selected={selected}></MiddleImg>
