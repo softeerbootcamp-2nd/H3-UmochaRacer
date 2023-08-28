@@ -61,7 +61,6 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
   const handleSelectComplete = () => {
     setIsSaved(true);
     if (option !== 6) {
-      console.log(option);
       if (tempOption) {
         const updatedTempOption = {
           ...tempOption,
