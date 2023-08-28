@@ -38,10 +38,14 @@
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
-		47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
-		47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
 		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
+		47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */; };
+		47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */; };
+		47342E6D2A9C620700A1FCBE /* DictionaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */; };
+		47342E6E2A9C620E00A1FCBE /* DictionaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */; };
+		47342E6F2A9C621900A1FCBE /* DictionaryDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476913A62A97AD9500C9C352 /* DictionaryDescription.swift */; };
+		47342E702A9C622300A1FCBE /* DictionaryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */; };
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		4741C3662A964A59009FD883 /* CarMakingStepInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */; };
@@ -303,7 +307,6 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewModel.swift; sourceTree = "<group>"; };
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
-		47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryOptionUsecase.swift; sourceTree = "<group>"; };
 		47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
@@ -683,7 +686,6 @@
 			isa = PBXGroup;
 			children = (
 				478B26812A78FD3400598902 /* Protocol */,
-				47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */,
 				5F64B55C2A9070F300B5AE08 /* SelfModeUsecase.swift */,
 				479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */,
 				5F5132CD2A98EC7B00C01C70 /* DetailPopupUsecase.swift */,
@@ -1479,7 +1481,6 @@
 				476913A72A97AD9500C9C352 /* DictionaryDescription.swift in Sources */,
 				5F1E30BB2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917CA2A7FA02000B67D54 /* CarMakingStep.swift in Sources */,
-				47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				5F5132CE2A98EC7B00C01C70 /* DetailPopupUsecase.swift in Sources */,
 				5F6603EC2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F00FBF72A777BDE0055A4FA /* SceneDelegate.swift in Sources */,
@@ -1537,6 +1538,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4D33B32A8751E500942517 /* UIImageView+.swift in Sources */,
+				47342E6D2A9C620700A1FCBE /* DictionaryUsecase.swift in Sources */,
 				5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */,
 				471917EA2A82369E00B67D54 /* CarMakingStep.swift in Sources */,
 				479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */,
@@ -1551,6 +1553,7 @@
 				479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */,
 				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */,
+				47342E6F2A9C621900A1FCBE /* DictionaryDescription.swift in Sources */,
 				5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */,
 				479B090D2A94889300AA10A0 /* URString.swift in Sources */,
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
@@ -1567,16 +1570,17 @@
 				5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
 				47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */,
-				47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
+				47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */,
 				479B090C2A94886C00AA10A0 /* String+.swift in Sources */,
 				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 				4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */,
+				47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */,
 				5F47E0E12A9B45260076D7AD /* APIResponse.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
@@ -1588,6 +1592,7 @@
 				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
 				5F47E0E22A9B46870076D7AD /* DetailPopupUsecase.swift in Sources */,
+				47342E6E2A9C620E00A1FCBE /* DictionaryRepositoryProtocol.swift in Sources */,
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F1E30BC2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				5F4B43DE2A9BB63700E89C23 /* CarMakingEstimateCell.swift in Sources */,
@@ -1605,6 +1610,7 @@
 				5F47E0E82A9B46E90076D7AD /* URLRequest+.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F93C1312A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
+				47342E702A9C622300A1FCBE /* DictionaryEndpoint.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
 				5F39EF422A81B7A3004B0C97 /* OptionMotionView.swift in Sources */,
 				5F1E30B82A923FC6004D229F /* PagingControlView.swift in Sources */,
