@@ -7,6 +7,7 @@ import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
 import {postFetchData} from '@/api/postFetchData';
 import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
 
 interface Url {
   [key: string]: string;
@@ -87,9 +88,7 @@ function GuideContent() {
   const [complete, setComplete] = useState(false);
   const {dataObject} = useGuideFlowState();
   const {addOption} = useContext(SelectedOptionContext);
-  const {setSelectedAdditionalOption} = useContext(
-    SelectedAdditionalOptionsContext,
-  );
+  const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
 
   const getGuideData = async () => {
     if (dataObject.options) {
@@ -104,7 +103,7 @@ function GuideContent() {
       const guideId = await postFetchData('/guide', requestBody);
       const guideDataArr = await getGiudeOption(guideId);
       setGiudeOption(guideDataArr.slice(0, -1), addOption);
-      setSelectedAdditionalOption(guideDataArr[guideDataArr.length - 1]);
+      setAdditionalOptions(guideDataArr[guideDataArr.length - 1]);
     }
   };
 

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import styled from 'styled-components';
 import OptionImage from './left/OptionImage';
 import OptionInfo from './right/OptionInfo';
@@ -58,6 +58,7 @@ export const preventClose = (e: BeforeUnloadEvent) => {
   e.preventDefault();
   e.returnValue = '나갈거임?';
 };
+
 function Content() {
   useEffect(() => {
     (() => {
@@ -68,22 +69,20 @@ function Content() {
       window.removeEventListener('beforeunload', preventClose);
     };
   }, []);
-  const [selectedIndex, setIndex] = useState<number>(0);
-  const {option} = useContext(OptionContext);
-  const {setTempOption} = useContext(TempOptionContext);
-  // const [cardData, setcardData] = useState<cardData[]>([]);
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
+  const [selectedIndex, setIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const {option} = useContext(OptionContext);
+  const optionRef = useRef<number>(option);
   const {selectedOptions} = useContext(SelectedOptionContext);
   const {showGuide, dataObject} = useGuideFlowState();
-  const {setAdditionalOptions} = useContext(TempAdditionalOptionsContext);
-  const {selectedAdditionalOption} = useContext(
-    SelectedAdditionalOptionsContext,
-  );
-  const updateTempOption = (index: number) => {
-    if (selectedIndex === index) return;
+  const {setTempOption} = useContext(TempOptionContext);
 
+  let propsIndex: number = 0;
+
+  const updateTempOption = (index: number) => {
     if (option !== 6) {
       const selectedCardData = cardDataList[option][index];
       if (selectedCardData) {
@@ -101,7 +100,6 @@ function Content() {
     }
   };
   const setNewIndex = (nextIndex: number) => {
-    // if (nextIndex === selectedIndex) return;
     updateTempOption(nextIndex);
     setIndex(nextIndex);
   };
@@ -199,43 +197,30 @@ function Content() {
 
         const newAdditionalOptionList = results[6] as cardData[][];
         setAddOptionList(newAdditionalOptionList);
-
-        // if (option !== 7) {
-        //   setcardData(sortCardArr[option]);
-        // }
       } else {
         const newCardDataList = results.slice(0, 6) as cardData[][];
         const newAdditionalOptionList = results[6] as cardData[][];
 
         setCardDataList(newCardDataList);
         setAddOptionList(newAdditionalOptionList);
-        // setcardData(newCardDataList[option]);
       }
       setIsLoading(true);
     };
 
     fetchAllData();
   }, []);
-  useEffect(() => {
-    if (option === 7) return;
-    if (!cardDataList[option]) return;
-    if (option !== 6) {
-      const currentKey = keyMapping[option];
-      const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
-      if (foundOption) {
-        const targetIndex = cardDataList[option].findIndex(
-          (card) => card.id === foundOption.id,
-        );
-        if (targetIndex > -1) {
-          setNewIndex(targetIndex);
-        }
-      } else {
-        setNewIndex(0);
-      }
-      // setcardData(cardDataList[option]);
-    }
-    // setAdditionalOptions(selectedAdditionalOption);
-  }, [option]);
+
+  if (optionRef.current !== option && option < 6) {
+    const currentKey = keyMapping[option];
+    const foundOption = selectedOptions.find((opt) => opt.key === currentKey);
+    const targetIndex = cardDataList[option].findIndex(
+      (card) => card.id === foundOption?.id,
+    );
+    propsIndex = targetIndex;
+    optionRef.current = option;
+  } else {
+    propsIndex = selectedIndex;
+  }
 
   return (
     <Wrapper>
@@ -248,12 +233,12 @@ function Content() {
                 <OptionImage
                   key={option}
                   cardData={cardDataList[option]}
-                  selectedIndex={selectedIndex}
+                  selectedIndex={propsIndex}
                 />
                 <OptionInfo
                   cardData={cardDataList[option]}
                   setNewIndex={(index: number) => setNewIndex(index)}
-                  selectedIndex={selectedIndex}
+                  selectedIndex={propsIndex}
                 />
               </>
             ) : (

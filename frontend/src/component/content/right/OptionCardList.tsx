@@ -1,10 +1,4 @@
-import React, {
-  useEffect,
-  useContext,
-  useRef,
-  useState,
-  useCallback,
-} from 'react';
+import React, {useEffect, useContext, useRef, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
 import OptionCard from './card/OptionCard';
 import {cardDataType} from '../contentInterface';

@@ -111,6 +111,7 @@ function OptionCard({selected, onClick, data, isSaved, ratioList}: CardProps) {
     );
     if (matchIdRatio) setRate(matchIdRatio.selectionRatio);
   }, [ratioList]);
+
   return (
     <Wrapper onClick={onClick} $selected={selected} $isGiude={showGuide}>
       <Container>
