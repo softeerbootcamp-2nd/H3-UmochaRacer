@@ -13,7 +13,7 @@ public class SummaryMapper {
     private SummaryMapper() {
     }
 
-    public List<RatioSummaryResponse> map(List<RatioSummary> dto) {
+    public List<RatioSummaryResponse> map(List<RatioSummary> dto) throws IndexOutOfBoundsException {
         int size = dto.size();
         int totalCount = dto.get(size-1).getSelectionCount();
         return IntStream.range(0, size-1)

@@ -36,8 +36,13 @@ public class SelectionRatioWithSimilarUsersServiceImpl implements SelectionRatio
     }
 
     private List<RatioSummaryResponse> getSortedRatioSummaryResponses(List<RatioSummary> summaries) {
-        List<RatioSummaryResponse> result = summaryMapper.map(summaries);
-        Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
+        List<RatioSummaryResponse> result;
+        try {
+            result = summaryMapper.map(summaries);
+            Collections.sort(result, (o1, o2) -> o2.getSelectionRatio() - o1.getSelectionRatio());
+        } catch (IndexOutOfBoundsException e) {
+            result = Collections.emptyList();
+        }
         return result;
     }
 }
