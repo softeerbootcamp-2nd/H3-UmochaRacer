@@ -2,7 +2,6 @@
 
 ### **처음부터 끝까지, 당신의 차를 위한 오마카세 (Oh! My Car Set)**
 
-
 <p align="center"><img width=200 src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/97653343/018081b6-63e5-433f-afaf-95fc6e822818"></p>
 
 <p align="center">🚘
@@ -58,22 +57,32 @@
 
 ### <b>셀프모드</b>
 직접 옵션을 골라 나만의 차를 완성하는 셀프 모드
+- 현대 자동차 **팰리세이드 르블랑을 커스텀**
+- 부품 옵션의 **자세한 정보**와 옵션 선택에 대한 **코멘트**를 제공
+- 부품 옵션의 **판매량** 제공
+
+<img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
 
 ### <b>가이드모드</b>
-연령과 성별, 태그에 맞춰 옵션을 추천해주는 가이드 모드
+자동차 구매가 생소하신가요? 저희가 만들어드리겠습니다!
+- 선택한 나이, 성별, 나의 키워드를 바탕으로 옵션 추천
+- '나와 유사한 사용자의 선택률' 제공
+
+<img src = "https://im3.ezgif.com/tmp/ezgif-3-e29cc98608.gif">
 
 ### <b>백카사전</b>
-- 생소한 자동차 용어를 설명해주는 백카사전
-- 화면 우측 상단에 백카사전 아이콘을 클릭하면 백카사전 On모드 전환
+생소한 **자동차 용어를 설명**해주는 백카사전
+- 화면 우측 상단에 백카사전 아이콘을 클릭하면 백카사전 On/Off 전환
 - 어려운 단어에 하이라이팅
 - 하이라이팅 된 단어를 클릭하면 
-<img width="1279" alt="스크린샷 2023-08-28 오후 4 15 37" src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/97653343/2081b2d2-3b06-4150-915d-0489724fbdbd">
+<img width="1279" alt="스크린샷 2023-08-28 오후 4 15 37" src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
 <br/>
+
+<br>
+<br>
 
 ## 데모 영상
 [![H3 데모 영상 유튜브 링크](https://img.youtube.com/vi/mN9wjPd5lsA/0.jpg)](https://www.youtube.com/watch?v=mN9wjPd5lsA&ab_channel=%EA%B9%80%EC%A0%95%ED%9B%88)
-
-
 
 <br/>
 
@@ -99,12 +108,12 @@
 <img src="https://img.shields.io/badge/spring data jdbc-6DB33F?style=flat&logo=spring&logoColor=white">
 <img src="https://img.shields.io/badge/s3-569A31?style=flat&logo=amazons3&logoColor=white">
 <img src="https://img.shields.io/badge/ec2-FF9900?style=flat&logo=amazonec2&logoColor=white">
+<img src="https://img.shields.io/badge/code deploy-00AA12?style=flat&lo&logoColor=white">
 <img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white">
 <img src="https://img.shields.io/badge/redis-DC382D?style=flat&logo=redis&logoColor=white">
 <img src="https://img.shields.io/badge/java-007396?style=flat&logo=java&logoColor=white">
 <img src="https://img.shields.io/badge/docker-2496ED?style=flat&logo=docker&logoColor=white">
 <img src="https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white">
-<img src="https://img.shields.io/badge/code deploy-00AA12?style=flat&lo&logoColor=white">
 <img src="https://img.shields.io/badge/github actions-2088FF?style=flat&logo=githubactions&logoColor=white">
 <img src="https://img.shields.io/badge/swagger-85EA2D?style=flat&logo=swagger&logoColor=black">
 <br/>
@@ -132,8 +141,3 @@
 [기술 포스트](https://www.notion.so/994c1ced0e9948cfb266d82a588996bc?pvs=4)
 
 [트러블 슈팅](https://www.notion.so/2eac0487e6964295b20550e19f96f40a?pvs=4)
-
-## 📕 Template
-
-
-
