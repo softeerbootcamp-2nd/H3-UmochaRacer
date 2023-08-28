@@ -131,7 +131,7 @@ struct CarMakingMockRepositoryData {
             subTitle: "구매자의 88%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[4],
-            color: URColor(red: 0, green: 0, blue: 0)),
+            color: mockURL[4]),
          OptionCardInfoEntity.init(
             id: 7,
             title: "LK-99 3.8",
