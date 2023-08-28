@@ -152,7 +152,7 @@ function Content() {
 
     return sortedCardDataArray;
   };
-  console.log('ASFD');
+
   useEffect(() => {
     const fetchAllData = async () => {
       const results = await Promise.all(

@@ -23,7 +23,7 @@ function Progress() {
   ];
   const {selectedOptions} = useContext(SelectedOptionContext);
   const nextStep = () => {
-    setOption(option + 1);
+    setOption(7);
     setIsWarning(true);
   };
   const handleOptionClick = (index: number) => {
