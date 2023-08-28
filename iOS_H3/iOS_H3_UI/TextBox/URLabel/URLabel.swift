@@ -172,11 +172,14 @@ class URLabel: UILabel {
 
     private func showTextBox(for range: NSRange) {
         guard let viewController = self.findViewController() else { return }
-        let selectedText = (text! as NSString).substring(with: range)
+        let targetRange = range.lowerBound+1..<range.upperBound
+        let selectedText = (text! as NSString).substring(with: NSRange(targetRange))
 
-        let textBoxViewController = TextBoxViewController(viewModel: TextBoxViewModel())
+        let dictionaryRepository = DictionaryRepository(networkService: NetworkService())
+        let usecase = DictionaryUsecase(dictionaryRepository: dictionaryRepository)
+        let textBoxViewModel = TextBoxViewModel(usecase: usecase)
+        let textBoxViewController = TextBoxViewController(viewModel: textBoxViewModel, targetString: selectedText)
         textBoxViewController.modalPresentationStyle = .overCurrentContext
-        textBoxViewController.setTitle(title: selectedText)
         textBoxViewController.onDismiss = { [weak self] in
             self?.selectedRange = nil
             self?.revertHighlightForSelection(from: range)
