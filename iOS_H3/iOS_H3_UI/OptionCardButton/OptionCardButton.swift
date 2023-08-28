@@ -8,7 +8,11 @@
 import UIKit
 
 protocol OptionCardButtonDelegate: AnyObject {
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton)
+    func optionCardButtonMoreInfoButtonDidTap(
+        _ optionCardButton: OptionCardButton,
+        option: OptionCardInfo,
+        step: CarMakingStep
+    )
 }
 
 class OptionCardButton: UIButton {
@@ -59,8 +63,8 @@ class OptionCardButton: UIButton {
         label.textColor = Colors.coolGrey3
         return label
     }()
-    private let optionTitleLabel: UILabel = {
-        let label = UILabel()
+    private let optionTitleLabel: URLabel = {
+        let label = URLabel()
         label.isUserInteractionEnabled = false
         label.font = Fonts.mediumTitle2
         label.setupLineHeight(FontLineHeights.mediumTitle2)
@@ -105,16 +109,19 @@ class OptionCardButton: UIButton {
         return imageView
     }()
 
-    private let colorView: UIView = {
-        let view = UIView()
+    private let colorView: UIImageView = {
+        let view = UIImageView()
         view.backgroundColor = .black
         view.isUserInteractionEnabled = false
         view.layer.cornerRadius = 30
+        view.clipsToBounds = true
         view.isHidden = true
         return view
     }()
 
     private var carMakingMode: CarMakingMode
+    private var step: CarMakingStep = .powertrain
+    private var optionInfo: OptionCardInfo?
 
     weak var delegate: OptionCardButtonDelegate?
 
@@ -132,20 +139,23 @@ class OptionCardButton: UIButton {
         setupViews()
     }
 
-    init(carMakingMode: CarMakingMode, info: OptionCardInfo) {
+    init(carMakingMode: CarMakingMode, info: OptionCardInfo, step: CarMakingStep) {
         self.carMakingMode = carMakingMode
+        self.optionInfo = info
+        self.step = step
         super.init(frame: .zero)
         setupViews()
-        update(carMakingMode: carMakingMode, cardInfo: info)
+        update(carMakingMode: carMakingMode, cardInfo: info, step: step)
         addMoreInfoButtonTarget()
     }
 
-    init(mode: CarMakingMode,
+    init(
+         mode: CarMakingMode,
          optionTitle: String = "옵션 타이틀",
          optionSubTitle: String = "옵션 서브 타이틀",
          price: String = "+ 0원",
          hasMoreInfo: Bool = false,
-         color: URColor? = nil,
+         color: URL? = nil,
          image: URL? = nil
     ) {
         self.carMakingMode = mode
@@ -156,33 +166,37 @@ class OptionCardButton: UIButton {
         showMoreInfoButton(hasMoreInfo)
         setupViews()
         addMoreInfoButtonTarget()
-        setColor(color)
+        setColor(url: color)
         setImage(url: image)
     }
 
     // MARK: - Helpers
-    func update(carMakingMode: CarMakingMode? = nil, cardInfo: OptionCardInfo? = nil) {
+    func update(carMakingMode: CarMakingMode? = nil,
+                cardInfo: OptionCardInfo? = nil,
+                step: CarMakingStep) {
         if let carMakingMode = carMakingMode {
             self.carMakingMode = carMakingMode
         }
-
+        self.step = step
         if let cardInfo = cardInfo {
+            optionTitleLabel.urString = cardInfo.title
             self.optionTitleLabel.text = cardInfo.title.fullText
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString
+            self.optionInfo = cardInfo
             showMoreInfoButton(cardInfo.hasMoreInfo)
             isSelected = cardInfo.isSelected
-            setColor(cardInfo.color)
+            setColor(url: cardInfo.color)
             setImage(url: cardInfo.iconImageURL)
         }
 
         updateButtonUI()
     }
 
-    func setColor(_ color: URColor?) {
-        colorView.isHidden = color == nil ? true: false
-        if let color {
-            colorView.backgroundColor = UIColor(urColor: color)
+    func setColor(url: URL?) {
+        colorView.isHidden = url == nil ? true: false
+        if let url {
+            colorView.loadCachedImage(of: url)
         }
     }
 
@@ -213,10 +227,8 @@ class OptionCardButton: UIButton {
         moreInfoButton.isHidden = !isShow
     }
 
-    func animateButton(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        animatedView.showWithAnimation(feedbackTitle: feedbackTitle,
-                                       feedbackDescription: feedbackDescription,
-                                       completion: completion)
+    func animateButton(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        animatedView.showWithAnimation(with: feedbackComment, completion: completion)
     }
 
     func resetAnimatedView() {
@@ -389,6 +401,8 @@ extension OptionCardButton {
 
     @objc
     private func moreInfoButtonTapped() {
-        delegate?.optionCardButtonMoreInfoButtonDidTap(self)
+        if let optionInfo = optionInfo {
+            delegate?.optionCardButtonMoreInfoButtonDidTap(self, option: optionInfo, step: self.step)
+        }
     }
 }

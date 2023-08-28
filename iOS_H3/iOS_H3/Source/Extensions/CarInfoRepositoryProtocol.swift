@@ -10,7 +10,8 @@ import Combine
 
 enum CarInfoRepositoryError: LocalizedError {
     case networkError(Error)
-    case conversionError(CarOptionToEntityError)
+    case conversionError(Error)
+    case notExistCommentEndpoint(step: CarMakingStep)
 
     var errorDescription: String? {
         switch self {
@@ -18,6 +19,8 @@ enum CarInfoRepositoryError: LocalizedError {
             return "[CarInfoRepositoryError] 네트워크 오류: \(error.localizedDescription)"
         case .conversionError(let error):
             return "[CarInfoRepositoryError] 변환 오류: \(error.localizedDescription)"
+        case .notExistCommentEndpoint(let step):
+            return "[CarInfoRepositoryError] \(step.title) 단계에 대한 CommentEndpoint가 존재하지 않습니다."
         }
     }
 }
@@ -36,7 +39,11 @@ protocol CarInfoRepositoryProtocol {
 
     func fetchWheel() -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
-    func fetchAdditionalOption(category: String) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
+    func fetchAdditionalOption(
+        category: OptionCategoryType
+    ) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
 
     func fetchSingleExteriorColor(optionId: Int) -> AnyPublisher<CarMakingStepInfoEntity, CarInfoRepositoryError>
+
+    func fetchFeedbackComment(step: CarMakingStep, optionID: Int) -> AnyPublisher<FeedbackCommentEntity, Error>
 }

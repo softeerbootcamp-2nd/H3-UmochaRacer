@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "main_leBlanc.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

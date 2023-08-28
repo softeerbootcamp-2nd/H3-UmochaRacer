@@ -8,7 +8,7 @@
 import Foundation
 
 enum OptionCategoryType: Int, CaseIterable {
-    case system = 1
+    case system
     case temperatureManagement
     case externalDevice
     case internalDevice

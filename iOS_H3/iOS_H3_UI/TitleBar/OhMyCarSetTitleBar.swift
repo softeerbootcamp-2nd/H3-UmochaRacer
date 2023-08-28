@@ -33,7 +33,13 @@ class OhMyCarSetTitleBar: UIView {
     }
 
     weak var delegate: OhMyCarSetTitleBarDelegate?
-    var isDictionaryButtonOn: Bool = false
+    private var buttons: [String: UIButton] = [:]
+    var isDictionaryButtonOn: Bool = false {
+        didSet {
+            let buttonImage = isDictionaryButtonOn ? "dictionary_on_img" : "dictionary_off_img"
+            buttons["dictionary"]?.setImage(UIImage(named: buttonImage), for: .normal)
+        }
+    }
 
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -164,6 +170,7 @@ class OhMyCarSetTitleBar: UIView {
         let button = UIButton()
         button.setImage(UIImage(named: "dictionary_off_img"), for: .normal)
         button.addTarget(self, action: #selector(dictionaryButtonTapped), for: .touchUpInside)
+        buttons["dictionary"] = button
         return button
     }
 
@@ -184,8 +191,6 @@ class OhMyCarSetTitleBar: UIView {
 
     @objc private func dictionaryButtonTapped(_ sender: UIButton) {
         isDictionaryButtonOn.toggle()
-        let buttonImage = isDictionaryButtonOn ? "dictionary_on_img" : "dictionary_off_img"
-        sender.setImage(UIImage(named: buttonImage), for: .normal)
         delegate?.titleBarDictionaryButtonPressed?(self)
     }
 

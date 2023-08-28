@@ -48,7 +48,7 @@ extension String {
             let targetWord = string[targetWordIndexRange]
 
             let startIntIndex = match.range.lowerBound
-            let targetWordRangeExceptForTag = startIntIndex..<startIntIndex + targetWord.count
+            let targetWordRangeExceptForTag = startIntIndex..<startIntIndex + targetWord.count + 1
             ranges.append(targetWordRangeExceptForTag)
 
             let startIndexOfReplaced = string.index(string.startIndex, offsetBy: match.range.lowerBound)
@@ -57,5 +57,11 @@ extension String {
         }
         return URString(fullText: string, cardbRange: ranges)
 
+    }
+
+    func convertPriceStringToInt() -> Int? {
+        let nonNumberSet = CharacterSet.decimalDigits.inverted
+        let numberString = self.components(separatedBy: nonNumberSet).joined()
+        return Int(numberString)
     }
 }
