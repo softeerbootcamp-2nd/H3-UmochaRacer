@@ -226,6 +226,7 @@ extension CarMakingViewController {
     private func setupTitleBar() {
         let titleBarType: OhMyCarSetTitleBar.NavigationBarType = (mode == .selfMode) ? .selfMode : .guideMode
         titleBar = OhMyCarSetTitleBar(type: titleBarType)
+        titleBar.isDictionaryButtonOn = TextEffectManager.shared.isDictionaryFunctionActive
         titleBar.delegate = self
         titleBar.translatesAutoresizingMaskIntoConstraints = false
     }
