@@ -112,7 +112,7 @@
 
 <div align="center">
 <img align="center" src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
-<img align="center" width = "250" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+<img align="center" width = "250" src = "https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/68235938/1a0bddcf-5231-460a-b0d0-3083b2e2d573">
 
 </div>
 
@@ -136,7 +136,8 @@
 
 <div align="center">
 <img align="center"src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
-<img align="center" width="250" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+<img align="center" width="250" src = "https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/68235938/a20222a2-aa05-4445-9673-d1ab41c9ed57">
+
 </div>
 
 <br/>
