@@ -93,6 +93,11 @@ class CarMakingCollectionViewCell: UICollectionViewCell {
 
     func configure(urString: URString?) {
         self.descriptionLabel.urString = urString
+
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        if isOn {
+            TextEffectManager.shared.applyEffect(isOn, on: descriptionLabel)
+        }
     }
 
     func configure(bannerImageURL: URL?) {
