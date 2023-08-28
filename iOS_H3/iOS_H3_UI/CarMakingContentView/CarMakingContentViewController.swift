@@ -108,6 +108,9 @@ extension CarMakingContentViewController: CarMakingContentViewDelegate {
     func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
         carMakingContentView.updateOptionCard(with: CarMakingContentMockData.mockOption[category.rawValue - 1])
     }
+
+    func carMakingContentViewEstimateCellDidShow() {
+    }
 }
 
 // Mock Data
@@ -161,7 +164,7 @@ struct CarMakingContentMockData {
                                  subTitle: URString(fullText: "구매자의 88%가 선택한"),
                                  priceString: "+ 3,456,789원",
                                  bannerImageURL: mockURL[4],
-                                 color: URColor(red: 0, green: 0, blue: 0),
+                                 color: nil,
                                  isSelected: true),
              OptionCardInfo.init(id: 7,
                                  title: URString(fullText: "LK-99 3.8"),

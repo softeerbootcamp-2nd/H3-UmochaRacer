@@ -32,7 +32,6 @@ class OptionCardButtonViewController: UIViewController {
     // 셀프모드 외장 색상 버튼
     lazy var guideModeOuterColorButton: OptionCardButton = {
         let button = OptionCardButton(mode: .guideMode)
-        
         if let url = URL(string: "https://github.com/") {
             button.setColor(url: url)
         }
