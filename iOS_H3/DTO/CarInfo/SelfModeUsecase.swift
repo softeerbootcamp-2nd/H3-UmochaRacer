@@ -221,7 +221,6 @@ class SelfModeUsecase: SelfModeUsecaseProtocol {
         return Just(updatedSummary).eraseToAnyPublisher()
     }
 
-
     func fetchFeedbackComment(step: CarMakingStep) -> AnyPublisher<FeedbackComment?, Error> {
         if step == .optionSelection || step == .makingEstimate {
             return Just(nil).setFailureType(to: Error.self).eraseToAnyPublisher()
