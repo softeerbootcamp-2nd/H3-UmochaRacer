@@ -50,30 +50,36 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     // MARK: - Helpers
 
     /// index에 해당하는 옵션 카드의 view를 업데이트
-    func configureOptionCard(at index: Int, with cardInfo: OptionCardInfo) {
+    func configureOptionCard(at index: Int,
+                             with cardInfo: OptionCardInfo,
+                             step: CarMakingStep) {
         if !isValidateIndex(index) { return }
-        optionCardButtons[index].update(cardInfo: cardInfo)
+        optionCardButtons[index].update(cardInfo: cardInfo, step: step)
     }
 
     /// 카드 info에 따라 모든 옵션 카드의 view를 업데이트
-    func configure(with cardInfos: [OptionCardInfo]) {
+    func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         optionCardButtons.enumerated().forEach { (index, _) in
             if cardInfos.count <= index { return }
-            configureOptionCard(at: index, with: cardInfos[index])
+            configureOptionCard(at: index, with: cardInfos[index], step: step)
+        }
+        applyTextEffectIfNeeded()
+    }
+
+    func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
+        configure(with: cardInfos, step: step)
+    }
+
+    func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        for button in optionCardButtons where button.isSelected {
+            button.animateButton(with: feedbackComment, completion: completion)
         }
     }
 
-    func reloadOptionCards(with cardInfos: [OptionCardInfo]) {
-        configure(with: cardInfos)
-    }
-
-    func playFeedbackAnimation(feedbackTitle: String, feedbackDescription: String, completion: (() -> Void)? = nil) {
-        for button in optionCardButtons where button.isSelected {
-            button.animateButton(
-                feedbackTitle: feedbackTitle,
-                feedbackDescription: feedbackDescription,
-                completion: completion
-            )
+    private func applyTextEffectIfNeeded() {
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        if isOn {
+            TextEffectManager.shared.applyEffectSubviews(isOn, on: self)
         }
     }
 }
@@ -81,8 +87,14 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 // MARK: - OptionCardButton Delegate
 
 extension TwoOptionCardButtonView: OptionCardButtonDelegate {
-
-    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton) {
+    func optionCardButtonMoreInfoButtonDidTap(_ optionCardButton: OptionCardButton,
+                                              option: OptionCardInfo,
+                                              step: CarMakingStep) {
+        let detailViewController = ImageDetailPopupViewController(viewModel: DetailPopupViewModel(),
+                                                                  info: option, carMakingStep: step)
+        detailViewController.modalPresentationStyle = .overFullScreen
+        self.findViewController()?.present(detailViewController,
+                                           animated: false)
     }
 }
 

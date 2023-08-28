@@ -28,15 +28,14 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
     private let listModeButton = UIButton()
 
-    private let listModeView = OptionListModeView(carMakingMode: .selfMode)
+    private let listModeView = OptionListModeView(carMakingMode: .selfMode, step: .powertrain)
 
     private let categoryTabBar = OptionCategoryTabBar()
 
     // MARK: - Properties
 
     private var currentOptionInfo = [OptionCardInfo]()
-
-    private var currentCategory = OptionCategoryType.system
+    private var step: CarMakingStep = .powertrain
 
     var optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
 
@@ -60,39 +59,41 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
         super.prepareForReuse()
         listModeView.isHidden = true
         currentOptionInfo = []
-        currentCategory = OptionCategoryType.system
         optionCategoryTapSubject = PassthroughSubject<OptionCategoryType, Never>()
     }
 
     // MARK: - Helpers
 
-    override func configure(optionInfoArray: [OptionCardInfo]) {
-        super.configure(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
-        listModeView.configure(with: optionInfoArray)
+    override func configure(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
+        super.configure(optionInfoArray: optionInfoArray, step: step)
+        listModeView.configure(with: optionInfoArray, step: step)
+        currentOptionInfo = optionInfoArray
+        self.step = step
+        if !optionInfoArray.isEmpty {
+            guard let listView = optionButtonListView as? MultiOptionCardButtonView else { return }
+            listView.showFirstOptionCard()
+        }
+    }
+
+    override func update(optionInfoArray: [OptionCardInfo], step: CarMakingStep) {
+        self.step = step
+        super.update(optionInfoArray: optionInfoArray, step: step)
+        listModeView.reloadOptionCards(with: optionInfoArray, step: step)
         currentOptionInfo = optionInfoArray
     }
 
-    override func update(optionInfoArray: [OptionCardInfo]) {
-        super.update(optionInfoArray: optionInfoArray)
-        updateSelectedOptionCountLabel(optionInfoArray: optionInfoArray)
-        listModeView.reloadOptionCards(with: optionInfoArray)
-        currentOptionInfo = optionInfoArray
+    override func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
+        super.playFeedbackAnimation(with: feedbackComment, completion: completion)
+        listModeView.playFeedbackAnimation(with: feedbackComment)
     }
 
-    override func playFeedbackAnimation(title: String, description: String, completion: (() -> Void)? = nil) {
-        super.playFeedbackAnimation(title: title, description: description, completion: completion)
-        listModeView.playFeedbackAnimation(feedbackTitle: title, feedbackDescription: description)
+    func updateSelectedOptionCountLabel(to count: Int) {
+        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(count)"
     }
 
-    private func updateSelectedOptionCountLabel(optionInfoArray: [OptionCardInfo]) {
-        let selectedOptionCount = optionInfoArray.filter { $0.isSelected }.count
-        selectedOptionCountLabel.text = "\(Constants.prefixOfOptionCountLabel) \(selectedOptionCount)"
-    }
-
-    private func showListModeView(isHidden: Bool) {
+    private func showListModeView(isHidden: Bool, step: CarMakingStep) {
         if isHidden {
-            super.configure(optionInfoArray: currentOptionInfo)
+            super.configure(optionInfoArray: currentOptionInfo, step: step)
         }
         UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: { [weak self] in
             self?.listModeView.isHidden = isHidden
@@ -104,7 +105,7 @@ final class CarMakingOptionSelectStepCell: CarMakingCollectionViewCell {
 
 extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
     func optionListModeViewDidTapImageModeButton(with optionListModeView: OptionListModeView) {
-        showListModeView(isHidden: true)
+        showListModeView(isHidden: true, step: self.step)
     }
 }
 
@@ -112,14 +113,10 @@ extension CarMakingOptionSelectStepCell: OptionListModeViewDelegate {
 
 extension CarMakingOptionSelectStepCell: OptionCategoryTabBarDelegate {
     func tabBarButtonDidTapped(didSelectItemAt index: Int) {
-        guard let category = OptionCategoryType(rawValue: index + 1) else {
+        guard let category = OptionCategoryType(rawValue: index) else {
             return
         }
-
-        if currentCategory != category {
-            currentCategory = category
-            optionCategoryTapSubject.send(category)
-        }
+        optionCategoryTapSubject.send(category)
     }
 }
 
@@ -168,7 +165,7 @@ extension CarMakingOptionSelectStepCell {
 
     @objc
     private func listModeButtonDidTap() {
-        showListModeView(isHidden: false)
+        showListModeView(isHidden: false, step: self.step)
     }
 
     private func addSubviews() {

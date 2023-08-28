@@ -16,7 +16,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
-        window?.rootViewController = CarMakingViewController(mode: .selfMode, viewModel: CarMakingViewModel(selfModeUsecase: SelfModeUsecase(carInfoRepository: CarInfoRepository(networkService: NetworkService()), introRepsitory: IntroRepository(networkService: NetworkService()))))
+        let navigationController = UINavigationController(rootViewController: MainViewController())
+        navigationController.isNavigationBarHidden = true
+        window?.rootViewController = navigationController
         window?.makeKeyAndVisible()
     }
 

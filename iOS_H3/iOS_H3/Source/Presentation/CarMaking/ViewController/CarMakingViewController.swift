@@ -35,9 +35,17 @@ final class CarMakingViewController: UIViewController {
 
     private let optionDidSelected = PassthroughSubject<(step: CarMakingStep, optionIndex: Int), Never>()
 
-    private let optionCategoryDidChanged = PassthroughSubject<OptionCategoryType, Never>()
+    private let optionCategoryDidChanged = CurrentValueSubject<OptionCategoryType, Never>(.system)
+
+    private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
+
+    private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
+
+    private var isBlockedNextButton = false
 
     private var cancellables = Set<AnyCancellable>()
+
+    private var carMakingContentViewBottomConstraint: NSLayoutConstraint?
 
     // MARK: - Lifecycles
 
@@ -79,7 +87,9 @@ extension CarMakingViewController {
             viewDidLoad: viewDidLoadSubject,
             carMakingStepDidChanged: stepDidChanged,
             optionDidSelected: optionDidSelected,
-            optionCategoryDidChanged: optionCategoryDidChanged
+            optionCategoryDidChanged: optionCategoryDidChanged,
+            dictionaryButtonPressed: dictionaryButtonPressed,
+            nextButtonDidTapped: nextButtonDidTapped
         )
         let output = viewModel.transform(input)
 
@@ -87,6 +97,7 @@ extension CarMakingViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] summary in
                 self?.updateBottomModalView(with: summary)
+                self?.carMakingContentView.updateEstimateCell(with: summary)
             }
             .store(in: &cancellables)
 
@@ -100,6 +111,41 @@ extension CarMakingViewController {
         output.optionInfoDidUpdated
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
+
+                self?.carMakingContentView.updateEstimateCell(options: optionInfo)
+
+            }
+            .store(in: &cancellables)
+
+        output.optionInfoForCategory
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] optionInfo in
+                self?.carMakingContentView.updateOptionCardForCategory(
+                    with: optionInfo,
+                    step: self?.stepDidChanged.value ?? .powertrain
+                )
+            }
+            .store(in: &cancellables)
+
+        output.numberOfSelectedAdditionalOption
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] selectedOptionCount in
+                self?.carMakingContentView.updateSelectedOptionCountLabel(to: selectedOptionCount)
+            }
+            .store(in: &cancellables)
+
+        output.feedbackComment
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] feedbackComment in
+                guard let feedbackComment else {
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                    return
+                }
+                self?.carMakingContentView.playFeedbackAnimation(with: feedbackComment) { [weak self] in
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                }
             }
             .store(in: &cancellables)
 
@@ -111,7 +157,6 @@ extension CarMakingViewController {
     }
 
     private func updateBottomModalView(with estimateData: EstimateSummary) {
-        // 총 견적금액 계산해서 bottomModalView.updateEstimatePrice(price) 호출
         bottomModalView.updateEstimateSummary(estimateData)
     }
 
@@ -133,19 +178,26 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ExitPopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "title 버튼 클릭 액션 구현 필요")
+        let modeChangePopupViewController = ModeChangePopupViewController(currentMode: self.mode)
+        modeChangePopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(modeChangePopupViewController, animated: false)
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "백카사전 버튼 클릭 액션 구현 필요")
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffectSubviews(!isOn, on: self.view)
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "모드변경 버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ModelChangePopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 }
 
@@ -168,6 +220,12 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
     func carMakingContentView(categoryDidSelected category: OptionCategoryType) {
         optionCategoryDidChanged.send(category)
     }
+
+    func carMakingContentViewEstimateCellDidShow() {
+        bottomModalView.isHidden = true
+        carMakingContentViewBottomConstraint?.constant = 0
+        carMakingContentView.updateEstimateResult(to: 500)
+    }
 }
 
 // MARK: - BottomModalView Delegate
@@ -179,9 +237,10 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-
-        carMakingContentView.moveNextStep(feedbackTitle: viewModel.feedbackTitle,
-                                          feedbackDescription: viewModel.feedbackDescription)
+        if !isBlockedNextButton {
+            nextButtonDidTapped.send(())
+            isBlockedNextButton = true
+        }
     }
 }
 
@@ -198,6 +257,7 @@ extension CarMakingViewController {
     private func setupTitleBar() {
         let titleBarType: OhMyCarSetTitleBar.NavigationBarType = (mode == .selfMode) ? .selfMode : .guideMode
         titleBar = OhMyCarSetTitleBar(type: titleBarType)
+        titleBar.isDictionaryButtonOn = TextEffectManager.shared.isDictionaryFunctionActive
         titleBar.delegate = self
         titleBar.translatesAutoresizingMaskIntoConstraints = false
     }
@@ -246,14 +306,16 @@ extension CarMakingViewController {
     }
 
     private func setupContentViewConstraints() {
+        carMakingContentViewBottomConstraint = carMakingContentView.bottomAnchor.constraint(
+            equalTo: view.safeAreaLayoutGuide.bottomAnchor,
+            constant: -Constants.bottomModalViewHeight
+        )
+
         NSLayoutConstraint.activate([
             carMakingContentView.topAnchor.constraint(equalTo: titleBar.bottomAnchor),
             carMakingContentView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
             carMakingContentView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
-            carMakingContentView.bottomAnchor.constraint(
-                equalTo: view.safeAreaLayoutGuide.bottomAnchor,
-                constant: -Constants.bottomModalViewHeight
-            )
+            carMakingContentViewBottomConstraint!
         ])
     }
 

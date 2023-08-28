@@ -55,6 +55,7 @@ function SelectedOptionCardList({
   const {additionOptions, setAdditionalOptions, removeOption} = useContext(
     TempAdditionalOptionsContext,
   );
+
   const [ratioList, setRatioList] = useState<SelectionRatioProps[]>([]);
   const ulRef = useRef<HTMLUListElement>(null);
 

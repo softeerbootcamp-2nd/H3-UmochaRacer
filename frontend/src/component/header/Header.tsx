@@ -14,7 +14,7 @@ function Header() {
   );
 }
 
-export default Header;
+export default React.memo(Header);
 const Wrapper = styled.div`
   width: 100%;
   height: 85px;

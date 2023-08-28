@@ -50,14 +50,15 @@ extension CarOptionData {
 
         let bannerImageURL = URL(string: self.imageSrc ?? "")!
         let iconImageURL = URL(string: self.iconSrc ?? "")
-        let color = self.colorCode.flatMap { URColor(hex: $0) }
+        let color = URL(string: self.colorCode ?? "")
 
         return OptionCardInfoEntity(
-            title: self.name ?? "",
+            id: id,
+            title: name,
             subTitle: self.label ?? "",
             priceString: String.priceStringWithPlus(from: price ?? 0),
-            bannerImageURL: bannerImageURL, // 옵셔널로 처리
-            iconImageURL: iconImageURL, // 옵셔널로 처리
+            bannerImageURL: bannerImageURL,
+            iconImageURL: iconImageURL,
             color: color,
             hasMoreInfo: false
         )
