@@ -8,14 +8,14 @@
 import Combine
 
 final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
-    private let detailRepository: MockDetailRepositoryProtocol
-    private var details: MockDetailOptionEntity = MockDetailOptionEntity(title: "",
+    private let detailRepository: DetailRepositoryProtocol
+    private var details: DetailOptionEntity = DetailOptionEntity(title: "",
                                                                          description: "",
                                                                          info: nil,
                                                                          imageSrc: nil)
     private var cancellables = Set<AnyCancellable>()
 
-    init(repository: MockDetailRepositoryProtocol = MockDetailRepository(networkService: NetworkService())) {
+    init(repository: DetailRepositoryProtocol = DetailRepository(networkService: NetworkService())) {
         self.detailRepository = repository
     }
 
@@ -40,7 +40,7 @@ final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
 
     private func publisherForStep(_ step: CarMakingStep,
                                   id: Int )
-    -> AnyPublisher<MockDetailOptionEntity, MockDetailRepositoryError>? {
+    -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>? {
         switch step {
         case .powertrain:
             return detailRepository.fetchPowertrainDetailInfo(id: id)
@@ -55,7 +55,7 @@ final class DetailPopupUsecase: DetailPopupUsecaseProtocol {
         }
     }
 
-    private func convertToDetailUsecaseError(from error: MockDetailRepositoryError) -> DetailUsecaseError {
+    private func convertToDetailUsecaseError(from error: DetailRepositoryError) -> DetailUsecaseError {
         switch error {
         case .networkError:
             return .networkError(error: error)
