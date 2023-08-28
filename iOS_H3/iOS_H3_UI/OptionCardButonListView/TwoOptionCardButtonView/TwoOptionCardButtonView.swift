@@ -68,12 +68,18 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
 
     func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         configure(with: cardInfos, step: step)
+        applyTextEffectIfNeeded()
     }
 
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         for button in optionCardButtons where button.isSelected {
             button.animateButton(with: feedbackComment, completion: completion)
         }
+    }
+
+    private func applyTextEffectIfNeeded() {
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffect(isOn, on: self)
     }
 }
 
