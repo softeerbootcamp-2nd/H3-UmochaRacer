@@ -112,7 +112,7 @@
 
 <img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
 <br />
-<img width = "200px;" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+<img width = "250" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
 
 <br>
 
@@ -132,7 +132,7 @@
 - 하이라이팅 된 단어를 클릭하면 
 
 <img src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
-<img width="200px;" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+<img width="250" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
 
 <br/>
 
