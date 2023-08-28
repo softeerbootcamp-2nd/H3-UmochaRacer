@@ -29,9 +29,8 @@ final class CarMakingViewModel {
         var optionInfoDidUpdated = PassthroughSubject<[OptionCardInfo], Never>()
         var optionInfoForCategory = PassthroughSubject<[OptionCardInfo], Never>()
         var numberOfSelectedAdditionalOption = PassthroughSubject<Int, Never>()
-        var feedbackComment = PassthroughSubject<FeedbackComment, Never>()
+        var feedbackComment = PassthroughSubject<FeedbackComment?, Never>()
         var showIndicator = PassthroughSubject<Bool, Never>()
-        var isDictionaryFeatureEnabled = CurrentValueSubject<Bool, Never>(false)
     }
 
     // MARK: - Properties
@@ -39,9 +38,6 @@ final class CarMakingViewModel {
     private var cancellables = Set<AnyCancellable>()
 
     private let selfModeUsecase: SelfModeUsecaseProtocol
-
-    var feedbackTitle: String = ""
-    var feedbackDescription: String = ""
 
     // MARK: - Lifecycles
 
@@ -67,7 +63,6 @@ final class CarMakingViewModel {
                     category: input.optionCategoryDidChanged.value,
                     output: output.currentStepInfo
                 )
-                output.isDictionaryFeatureEnabled.send(false)
             }
             .store(in: &cancellables)
 
@@ -79,10 +74,13 @@ final class CarMakingViewModel {
                         of: optionIndex,
                         category: input.optionCategoryDidChanged.value,
                         updatedOptionInfoOutput: output.optionInfoDidUpdated,
-                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption
+                        selectedOptionCountOutput: output.numberOfSelectedAdditionalOption,
+                        estimateSummaryOutput: output.estimateSummary
                     )
                 } else {
-                    selectOption(of: optionIndex, in: step, updatedOptionInfoOutput: output.optionInfoDidUpdated)
+                    selectOption(of: optionIndex, in: step,
+                                 updatedOptionInfoOutput: output.optionInfoDidUpdated,
+                                 estimateSummaryOutput: output.estimateSummary)
                 }
             }
             .store(in: &cancellables)
@@ -90,13 +88,6 @@ final class CarMakingViewModel {
         input.optionCategoryDidChanged
             .sink { [weak self] newCategory in
                 self?.fetchOptionSelectionStepInfo(for: newCategory, to: output.optionInfoForCategory)
-            }
-            .store(in: &cancellables)
-
-        input.dictionaryButtonPressed
-            .sink { _ in
-                let currentValue = output.isDictionaryFeatureEnabled.value
-                output.isDictionaryFeatureEnabled.send(!currentValue)
             }
             .store(in: &cancellables)
 
@@ -141,20 +132,37 @@ final class CarMakingViewModel {
     private func selectOption(
         of optionIndex: Int,
         in step: CarMakingStep,
-        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>
+        updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
+        estimateSummaryOutput: PassthroughSubject<EstimateSummary, Never>
     ) {
-        updatedOptionInfoOutput.send(selfModeUsecase.selectOption(of: optionIndex, in: step))
+        let selectedOptions = selfModeUsecase.selectOption(of: optionIndex, in: step)
+        updatedOptionInfoOutput.send(selectedOptions)
+        if let selectedOption = selectedOptions.first(where: { $0.isSelected }) {
+            updateEstimateSummary(step: step, selectedOption: selectedOption)
+                .sink { updatedEstimate in
+                    estimateSummaryOutput.send(updatedEstimate)
+                }
+                .store(in: &cancellables)
+        }
     }
 
     private func selectOptionSelectionStepOption(
         of optionIndex: Int,
         category: OptionCategoryType,
         updatedOptionInfoOutput: PassthroughSubject<[OptionCardInfo], Never>,
-        selectedOptionCountOutput: PassthroughSubject<Int, Never>
+        selectedOptionCountOutput: PassthroughSubject<Int, Never>,
+        estimateSummaryOutput: PassthroughSubject<EstimateSummary, Never>
     ) {
         let (infos, selectedOptionCount) = selfModeUsecase.selectAdditionalOption(of: optionIndex, in: category)
         updatedOptionInfoOutput.send(infos)
         selectedOptionCountOutput.send(selectedOptionCount)
+        let recentlyChangedOption = infos[optionIndex]
+
+        updateEstimateSummary(step: .optionSelection, selectedOption: recentlyChangedOption)
+            .sink { updatedEstimate in
+                estimateSummaryOutput.send(updatedEstimate)
+            }
+            .store(in: &cancellables)
     }
 
     private func fetchOptionSelectionStepInfo(
@@ -178,7 +186,7 @@ final class CarMakingViewModel {
 
     private func fetchFeedbackComment(
         for step: CarMakingStep,
-        to feedbackCommentSubject: PassthroughSubject<FeedbackComment, Never>
+        to feedbackCommentSubject: PassthroughSubject<FeedbackComment?, Never>
     ) {
         selfModeUsecase.fetchFeedbackComment(step: step)
             .catch { _ in Just(FeedbackComment(title: "", subTitle: "")).eraseToAnyPublisher() }

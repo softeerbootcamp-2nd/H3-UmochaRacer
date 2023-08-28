@@ -20,12 +20,22 @@ class TextEffectManager {
 
     func applyEffect(_ isOn: Bool, on view: UIView) {
         isDictionaryFunctionActive = isOn
+
+        if let label = view as? URLabel, let dictionaryStr = label.urString {
+            observeLabel(label)
+            label.setURString(dictionaryStr, isOn: isOn)
+        }
+    }
+
+    func applyEffectSubviews(_ isOn: Bool, on view: UIView) {
+        isDictionaryFunctionActive = isOn
+
         for subview in view.subviews {
             if let label = subview as? URLabel, let dictionaryStr = label.urString {
                 observeLabel(label)
                 label.setURString(dictionaryStr, isOn: isOn)
             } else {
-                applyEffect(isOn, on: subview)
+                applyEffectSubviews(isOn, on: subview)
             }
         }
     }

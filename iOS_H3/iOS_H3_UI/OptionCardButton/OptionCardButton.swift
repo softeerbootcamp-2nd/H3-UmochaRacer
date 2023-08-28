@@ -179,6 +179,7 @@ class OptionCardButton: UIButton {
         }
         self.step = step
         if let cardInfo = cardInfo {
+            optionTitleLabel.urString = cardInfo.title
             self.optionTitleLabel.text = cardInfo.title.fullText
             self.optionSubTitleLabel.text = cardInfo.subTitle.fullText
             self.priceLabel.text = cardInfo.priceString

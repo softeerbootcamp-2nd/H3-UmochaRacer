@@ -61,9 +61,9 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func configure(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
         optionCardButtons.enumerated().forEach { (index, _) in
             if cardInfos.count <= index { return }
-            print("확인", cardInfos[index])
             configureOptionCard(at: index, with: cardInfos[index], step: step)
         }
+        applyTextEffectIfNeeded()
     }
 
     func reloadOptionCards(with cardInfos: [OptionCardInfo], step: CarMakingStep) {
@@ -73,6 +73,13 @@ final class TwoOptionCardButtonView: UIView, OptionCardButtonListViewable {
     func playFeedbackAnimation(with feedbackComment: FeedbackComment, completion: (() -> Void)? = nil) {
         for button in optionCardButtons where button.isSelected {
             button.animateButton(with: feedbackComment, completion: completion)
+        }
+    }
+
+    private func applyTextEffectIfNeeded() {
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        if isOn {
+            TextEffectManager.shared.applyEffectSubviews(isOn, on: self)
         }
     }
 }

@@ -145,10 +145,6 @@ class OhMyCarSetTitleBar: UIView {
         }
     }
 
-    func resetDictionary() {
-        isDictionaryButtonOn = false
-    }
-
     private func createBackButton() -> UIButton {
         let button = UIButton()
         button.setImage(UIImage(named: "arrow_left_img"), for: .normal)
@@ -195,8 +191,6 @@ class OhMyCarSetTitleBar: UIView {
 
     @objc private func dictionaryButtonTapped(_ sender: UIButton) {
         isDictionaryButtonOn.toggle()
-//        let buttonImage = isDictionaryButtonOn ? "dictionary_on_img" : "dictionary_off_img"
-//        sender.setImage(UIImage(named: buttonImage), for: .normal)
         delegate?.titleBarDictionaryButtonPressed?(self)
     }
 

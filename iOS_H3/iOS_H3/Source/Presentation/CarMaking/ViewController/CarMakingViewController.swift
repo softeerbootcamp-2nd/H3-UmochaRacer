@@ -29,8 +29,6 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
-    private let textEffectManager = TextEffectManager.shared
-
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
@@ -42,6 +40,8 @@ final class CarMakingViewController: UIViewController {
     private var dictionaryButtonPressed = PassthroughSubject<Void, Never>()
 
     private let nextButtonDidTapped = PassthroughSubject<Void, Never>()
+
+    private var isBlockedNextButton = false
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -105,7 +105,6 @@ extension CarMakingViewController {
         output.currentStepInfo
             .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
-                self?.titleBar.resetDictionary()
                 self?.updateCurrentStepInfo(with: info)
             }
             .store(in: &cancellables)
@@ -113,6 +112,7 @@ extension CarMakingViewController {
         output.optionInfoDidUpdated
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
+
                 self?.carMakingContentView.updateEstimateCell(options: optionInfo)
 
                 if let view = self?.view {
@@ -144,21 +144,21 @@ extension CarMakingViewController {
         output.feedbackComment
             .receive(on: DispatchQueue.main)
             .sink { [weak self] feedbackComment in
-                self?.carMakingContentView.moveNextStep(with: feedbackComment)
+                guard let feedbackComment else {
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                    return
+                }
+                self?.carMakingContentView.playFeedbackAnimation(with: feedbackComment) { [weak self] in
+                    self?.carMakingContentView.moveNextStep()
+                    self?.isBlockedNextButton = false
+                }
             }
             .store(in: &cancellables)
 
         output.showIndicator
             .sink { [weak self] showIndicator in
                 self?.showIndicator(showIndicator)
-            }
-            .store(in: &cancellables)
-
-        output.isDictionaryFeatureEnabled
-            .sink { [weak self] isEnabled in
-                if let view = self?.view {
-                    self?.textEffectManager.applyEffect(isEnabled, on: view)
-                }
             }
             .store(in: &cancellables)
     }
@@ -185,19 +185,26 @@ extension CarMakingViewController {
 extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
 
     func titleBarBackButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        navigationController?.popViewController(animated: true)
+        let exitPopupViewController = ExitPopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 
     func titleBarTitleButtonTapped(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "title 버튼 클릭 액션 구현 필요")
+        let modeChangePopupViewController = ModeChangePopupViewController(currentMode: self.mode)
+        modeChangePopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(modeChangePopupViewController, animated: false)
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        dictionaryButtonPressed.send(())
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffectSubviews(!isOn, on: self.view)
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        print("[CarMakingViewController]", #function, "모드변경 버튼 클릭 액션 구현 필요")
+        let exitPopupViewController = ModelChangePopupViewController()
+        exitPopupViewController.modalPresentationStyle = .overFullScreen
+        self.present(exitPopupViewController, animated: false)
     }
 }
 
@@ -238,7 +245,10 @@ extension CarMakingViewController: BottomModalViewDelegate {
     }
 
     func bottomModalViewCompletionButtonDidTapped(_ bottomModalView: BottomModalView) {
-        nextButtonDidTapped.send(())
+        if !isBlockedNextButton {
+            nextButtonDidTapped.send(())
+            isBlockedNextButton = true
+        }
     }
 }
 
@@ -255,6 +265,7 @@ extension CarMakingViewController {
     private func setupTitleBar() {
         let titleBarType: OhMyCarSetTitleBar.NavigationBarType = (mode == .selfMode) ? .selfMode : .guideMode
         titleBar = OhMyCarSetTitleBar(type: titleBarType)
+        titleBar.isDictionaryButtonOn = TextEffectManager.shared.isDictionaryFunctionActive
         titleBar.delegate = self
         titleBar.translatesAutoresizingMaskIntoConstraints = false
     }
