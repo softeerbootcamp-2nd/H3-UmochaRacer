@@ -22,6 +22,7 @@
 [기획 및 디자인 링크](https://www.figma.com/file/aTK27d8JGjSAp8qttQSwgy/Oh%2C-my-car-set_Handoff?type=design&node-id=0-1&mode=design&t=dQfXEfryUoqLUiNQ-0)
 
 <br>
+
 ## 👦 팀원 소개
 <table style="border: 0.5px solid gray">
  <tr>
@@ -54,23 +55,27 @@
 
 ### iOS
 
+<div style="display:flex;">
 <img src="https://img.shields.io/badge/swift-F05138?style=flat&logo=swift&logoColor=white">
 <img src="https://img.shields.io/badge/uikit-2396F3?style=flat&logo=uikit&logoColor=white">
 <img src="https://img.shields.io/badge/combine-F05138?style=flat&logo=swift&logoColor=white">
 <img src="https://img.shields.io/badge/MVVM-F05138?style=flat&logo=swift&logoColor=white">
 <img src="https://img.shields.io/badge/CleanArchitectu-F05138?style=flat&logo=swift&logoColor=white">
-
+</div>
 
 ### FE
+<div style="display:flex;">
 <img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white">
 <img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white">
  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
 <img src="https://img.shields.io/badge/Styled Components-DB7093?style=flat&logo=styledcomponents&logoColor=white">
 <img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat&logo=prettier&logoColor=white">
 <img src="https://img.shields.io/badge/Eslint-4B32C3?style=flat&logo=eslint&logoColor=white">
+</div>
 
 ### BE
 
+<div style="display:flex;">
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/spring data jdbc-6DB33F?style=flat&logo=spring&logoColor=white">
 <img src="https://img.shields.io/badge/s3-569A31?style=flat&logo=amazons3&logoColor=white">
@@ -83,6 +88,8 @@
 <img src="https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white">
 <img src="https://img.shields.io/badge/github actions-2088FF?style=flat&logo=githubactions&logoColor=white">
 <img src="https://img.shields.io/badge/swagger-85EA2D?style=flat&logo=swagger&logoColor=black">
+</div>
+
 <br/>
 <br/>
 
@@ -104,8 +111,8 @@
 - 부품 옵션의 **판매량** 제공
 
 <img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
-
-<img width = "393px" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+<br />
+<img width = "200px;" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
 
 <br>
 
@@ -125,7 +132,7 @@
 - 하이라이팅 된 단어를 클릭하면 
 
 <img src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
-<img width="393px;" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+<img width="200px;" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
 
 <br/>
 
