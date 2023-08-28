@@ -2,7 +2,7 @@
 //  DetailRepositoryProtocol.swift
 //  iOS_H3
 //
-//  Created by KoJeongMin  on 2023/08/23.
+//  Created by KoJeongMin  on 2023/08/28.
 //
 
 import Combine
@@ -11,7 +11,6 @@ import Foundation
 enum DetailRepositoryError: LocalizedError {
     case networkError(Error)
     case conversionError(DetailOptionToEntityError)
-
     var errorDescription: String? {
         switch self {
         case .networkError(let error):
@@ -23,14 +22,13 @@ enum DetailRepositoryError: LocalizedError {
 }
 
 protocol DetailRepositoryProtocol {
-    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+    func fetchPowertrainDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>
 
-    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+    func fetchDrivingSystemDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>
 
-    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+    func fetchBodyTypeDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>
 
-    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
+    func fetchWheelDetailInfo(id: Int) -> AnyPublisher<DetailOptionEntity, DetailRepositoryError>
 
     func fetchAdditionalOptionDetailInfo(id: Int) -> AnyPublisher<[DetailOptionEntity], DetailRepositoryError>
-
 }

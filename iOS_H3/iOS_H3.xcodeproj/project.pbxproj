@@ -38,6 +38,12 @@
 		4733098E2A8BB59B00906FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F6203712A7BC59600D09531 /* Assets.xcassets */; };
 		473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
+
+		47342E622A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
+		47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */; };
+		47342E652A9BB24800A1FCBE /* DetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */; };
+		47342E662A9BB25900A1FCBE /* DetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */; };
+
 		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */; };
@@ -46,6 +52,7 @@
 		47342E6E2A9C620E00A1FCBE /* DictionaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */; };
 		47342E6F2A9C621900A1FCBE /* DictionaryDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476913A62A97AD9500C9C352 /* DictionaryDescription.swift */; };
 		47342E702A9C622300A1FCBE /* DictionaryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */; };
+
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		4741C3662A964A59009FD883 /* CarMakingStepInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */; };
@@ -149,9 +156,6 @@
 		5F3E67112A95CDBF002BF48A /* TextBoxViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */; };
 		5F3E67142A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
 		5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */; };
-		5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */; };
-		5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */; };
-		5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */; };
 		5F3E67262A95FB36002BF48A /* DetailOptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F3E67252A95FB36002BF48A /* DetailOptionData.swift */; };
 		5F448A672A91D000005D04FF /* IntroEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A662A91D000005D04FF /* IntroEndpoint.swift */; };
 		5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */; };
@@ -233,6 +237,14 @@
 		5F99F0632A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0622A85171600C38555 /* CarMakingContentView.swift */; };
 		5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */; };
+		5FD507A02A9C6B67003137CD /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD5079F2A9C6B67003137CD /* DetailEndPoint.swift */; };
+		5FD507A12A9C6B81003137CD /* DetailEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD5079F2A9C6B67003137CD /* DetailEndPoint.swift */; };
+		5FD507A32A9C6BB7003137CD /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507A22A9C6BB7003137CD /* DetailRepositoryProtocol.swift */; };
+		5FD507A42A9C6BB7003137CD /* DetailRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507A22A9C6BB7003137CD /* DetailRepositoryProtocol.swift */; };
+		5FD507A62A9C6C07003137CD /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507A52A9C6C07003137CD /* DetailRepository.swift */; };
+		5FD507A72A9C6C07003137CD /* DetailRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507A52A9C6C07003137CD /* DetailRepository.swift */; };
+		5FD507AF2A9C6DBB003137CD /* DetailInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507AE2A9C6DBB003137CD /* DetailInfoData.swift */; };
+		5FD507B02A9C6DBB003137CD /* DetailInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FD507AE2A9C6DBB003137CD /* DetailInfoData.swift */; };
 		5FFE54022A9A562900DAC4C8 /* ExitPopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */; };
 		5FFE54032A9A562900DAC4C8 /* ExitPopupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */; };
 		5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */; };
@@ -307,7 +319,12 @@
 		4719180A2A83651500B67D54 /* MultiOptionCardButtonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiOptionCardButtonViewController.swift; sourceTree = "<group>"; };
 		4733098C2A8B9EF200906FFB /* CarMakingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingViewModel.swift; sourceTree = "<group>"; };
 		473309972A8C695B00906FFB /* EstimateSummary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateSummary.swift; sourceTree = "<group>"; };
+
+		47342E612A9BB1FC00A1FCBE /* DictionaryOptionUsecase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryOptionUsecase.swift; sourceTree = "<group>"; };
+		47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOptionEntity.swift; sourceTree = "<group>"; };
+
 		47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDetailOptionEntity.swift; sourceTree = "<group>"; };
+
 		473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingOptionSelectStepCell.swift; sourceTree = "<group>"; };
 		4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingStepInfoEntity.swift; sourceTree = "<group>"; };
 		4741C3672A9678EE009FD883 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -380,9 +397,6 @@
 		5F3E60BC2A9678B900BB5FCE /* DetailOptionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailOptionInfo.swift; sourceTree = "<group>"; };
 		5F3E67102A95CDBF002BF48A /* TextBoxViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextBoxViewModel.swift; sourceTree = "<group>"; };
 		5F3E67132A95CE59002BF48A /* DictionaryUsecaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryUsecaseProtocol.swift; path = iOS_H3/Source/Presentation/Detail/ViewModel/DictionaryUsecaseProtocol.swift; sourceTree = SOURCE_ROOT; };
-		5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepository.swift; path = iOS_H3/Source/DetailRepository.swift; sourceTree = SOURCE_ROOT; };
-		5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailRepositoryProtocol.swift; path = iOS_H3/Source/DetailRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
-		5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEndPoint.swift; sourceTree = "<group>"; };
 		5F3E67252A95FB36002BF48A /* DetailOptionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DetailOptionData.swift; path = DTO/Detail/DetailOptionData.swift; sourceTree = SOURCE_ROOT; };
 		5F448A662A91D000005D04FF /* IntroEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroEndpoint.swift; sourceTree = "<group>"; };
 		5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = IntroRepositoryProtocol.swift; path = iOS_H3/Source/Network/IntroRepositoryProtocol.swift; sourceTree = SOURCE_ROOT; };
@@ -430,6 +444,10 @@
 		5F93C12F2A949E7D00EBC9B0 /* TopAlignedLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopAlignedLabel.swift; sourceTree = "<group>"; };
 		5F99F0622A85171600C38555 /* CarMakingContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentView.swift; sourceTree = "<group>"; };
 		5F99F0652A851F4700C38555 /* CarMakingContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarMakingContentViewController.swift; sourceTree = "<group>"; };
+		5FD5079F2A9C6B67003137CD /* DetailEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailEndPoint.swift; sourceTree = "<group>"; };
+		5FD507A22A9C6BB7003137CD /* DetailRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRepositoryProtocol.swift; sourceTree = "<group>"; };
+		5FD507A52A9C6C07003137CD /* DetailRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRepository.swift; sourceTree = "<group>"; };
+		5FD507AE2A9C6DBB003137CD /* DetailInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInfoData.swift; sourceTree = "<group>"; };
 		5FFE54002A9A562900DAC4C8 /* ExitPopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitPopupViewController.swift; sourceTree = "<group>"; };
 		5FFE54012A9A562900DAC4C8 /* ExitPopupViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExitPopupViewController.xib; sourceTree = "<group>"; };
 		5FFE54052A9A617D00DAC4C8 /* ModelChangePopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelChangePopupViewController.swift; sourceTree = "<group>"; };
@@ -650,6 +668,7 @@
 				5F448A6A2A91D664005D04FF /* IntroRepository.swift */,
 				479B09102A94A5BC00AA10A0 /* CarInfoMockRepository.swift */,
 				4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */,
+				5FD507A52A9C6C07003137CD /* DetailRepository.swift */,
 			);
 			path = Repository;
 			sourceTree = "<group>";
@@ -666,6 +685,7 @@
 			children = (
 				5F60E4A92A8B403600531462 /* CarInfo */,
 				4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */,
+				5FD507AE2A9C6DBB003137CD /* DetailInfoData.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -673,11 +693,10 @@
 		478B267F2A78FD2400598902 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
-				5F3E671F2A95F6A3002BF48A /* DetailRepository.swift */,
-				5F3E67212A95F703002BF48A /* DetailRepositoryProtocol.swift */,
 				5F60E4A72A8B401500531462 /* CarInfoRepositoryProtocol.swift */,
 				5F448A682A91D2D8005D04FF /* IntroRepositoryProtocol.swift */,
 				4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */,
+				5FD507A22A9C6BB7003137CD /* DetailRepositoryProtocol.swift */,
 			);
 			path = Protocol;
 			sourceTree = "<group>";
@@ -708,7 +727,7 @@
 			children = (
 				471917FB2A83338D00B67D54 /* URColor.swift */,
 				473309972A8C695B00906FFB /* EstimateSummary.swift */,
-				47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */,
+				47342E642A9BB24800A1FCBE /* DetailOptionEntity.swift */,
 				4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */,
 				476913A62A97AD9500C9C352 /* DictionaryDescription.swift */,
 				4741C3692A968407009FD883 /* OptionCardInfoEntity.swift */,
@@ -770,7 +789,7 @@
 				5F448A662A91D000005D04FF /* IntroEndpoint.swift */,
 				4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */,
 				479B09122A9528EC00AA10A0 /* CommentEndpoint.swift */,
-				5F3E67232A95F7ED002BF48A /* DetailEndPoint.swift */,
+				5FD5079F2A9C6B67003137CD /* DetailEndPoint.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1405,7 +1424,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5F3E67222A95F703002BF48A /* DetailRepositoryProtocol.swift in Sources */,
 				5F4D33B22A8751E500942517 /* UIImageView+.swift in Sources */,
 				479DDB602A97CE3F0022846F /* DictionaryUsecase.swift in Sources */,
 				479023BC2A8B4BE600DECB70 /* CarMakingViewController.swift in Sources */,
@@ -1432,6 +1450,7 @@
 				4741C36A2A968407009FD883 /* OptionCardInfoEntity.swift in Sources */,
 				4700964B2A87964B003711F2 /* EstimateSummaryView.swift in Sources */,
 				479B091B2A95357A00AA10A0 /* FeedbackComment.swift in Sources */,
+				5FD507A32A9C6BB7003137CD /* DetailRepositoryProtocol.swift in Sources */,
 				5F448A6B2A91D664005D04FF /* IntroRepository.swift in Sources */,
 				5F60E4BB2A8B43FD00531462 /* CarInfoRepository.swift in Sources */,
 				479023B62A8B231200DECB70 /* URL+.swift in Sources */,
@@ -1449,7 +1468,6 @@
 				477620F52A7BECC400D60B59 /* OhMyCarSetButton.swift in Sources */,
 				5F496E0B2A948E8B0024E5B8 /* TextBoxView.swift in Sources */,
 				473309982A8C695B00906FFB /* EstimateSummary.swift in Sources */,
-				5F3E67242A95F7ED002BF48A /* DetailEndPoint.swift in Sources */,
 				471917FF2A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				5F3B50B92A79EDA900158E96 /* Colors.swift in Sources */,
 				5F3E60BD2A9678B900BB5FCE /* DetailOptionInfo.swift in Sources */,
@@ -1457,6 +1475,7 @@
 				5F93C1302A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
 				4741C36E2A977BB9009FD883 /* DictionaryEndpoint.swift in Sources */,
 				4762D45D2A920A99007F312D /* EstimateSummaryCell.swift in Sources */,
+				5FD507A02A9C6B67003137CD /* DetailEndPoint.swift in Sources */,
 				471917C42A7EA5A700B67D54 /* CarMakingProgressBar.swift in Sources */,
 				5F496E032A9448D10024E5B8 /* URLabel.swift in Sources */,
 				5F371BB12A88B99800E6CFCD /* OptionCategoryType.swift in Sources */,
@@ -1466,6 +1485,7 @@
 				471917C82A7F8CD500B67D54 /* CarMakingProgressBarViewController.swift in Sources */,
 				4741C3722A977FA4009FD883 /* DictionaryRepositoryProtocol.swift in Sources */,
 				4741C3682A9678EE009FD883 /* MainViewController.swift in Sources */,
+				5FD507A62A9C6C07003137CD /* DetailRepository.swift in Sources */,
 				471918052A834D8600B67D54 /* OptionCardCell.swift in Sources */,
 				5F60E4BF2A8B4DE700531462 /* ConstantKey.swift in Sources */,
 				5F00FBF52A777BDE0055A4FA /* AppDelegate.swift in Sources */,
@@ -1493,7 +1513,6 @@
 				5F448A692A91D2D8005D04FF /* IntroRepositoryProtocol.swift in Sources */,
 				479B09112A94A5BC00AA10A0 /* CarInfoMockRepository.swift in Sources */,
 				5F2593E22A7FCA16001B2D84 /* OptionCardButtonViewController.swift in Sources */,
-				5F3E67202A95F6A3002BF48A /* DetailRepository.swift in Sources */,
 				5F2593E02A7FBCFE001B2D84 /* OptionMotionView.swift in Sources */,
 				479023AF2A8AA18600DECB70 /* NetworkService.swift in Sources */,
 				479B09192A95326700AA10A0 /* FeedbackCommentEntity.swift in Sources */,
@@ -1501,7 +1520,7 @@
 				5F60E4BD2A8B469C00531462 /* CarInfoEndpoint.swift in Sources */,
 				5F4D33B52A8758FF00942517 /* PageSection.swift in Sources */,
 				5F4DB0EF2A89A6C200E905A7 /* UIView+.swift in Sources */,
-				47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */,
+				47342E652A9BB24800A1FCBE /* DetailOptionEntity.swift in Sources */,
 				479023BE2A8B4D8B00DECB70 /* CarMakingMode.swift in Sources */,
 				5F64B55D2A9070F300B5AE08 /* SelfModeUsecase.swift in Sources */,
 				5F3E670D2A959983002BF48A /* TextBoxViewController.swift in Sources */,
@@ -1509,6 +1528,7 @@
 				5F5891DB2A92DB1C00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
 				5F3B50BB2A79EDE900158E96 /* UIColor+.swift in Sources */,
 				470096472A87630A003711F2 /* BottomModalView.swift in Sources */,
+				5FD507AF2A9C6DBB003137CD /* DetailInfoData.swift in Sources */,
 				479B09242A95D19700AA10A0 /* TrimListBar.swift in Sources */,
 				5F496DFC2A9447990024E5B8 /* DictionaryString.swift in Sources */,
 				5FFE54072A9A617D00DAC4C8 /* ModelChangePopupViewController.swift in Sources */,
@@ -1569,24 +1589,37 @@
 				5F47E0EA2A9B47490076D7AD /* ConstantKey.swift in Sources */,
 				5F3E67152A95CE59002BF48A /* DictionaryUsecaseProtocol.swift in Sources */,
 				5F371BAF2A88B7D700E6CFCD /* OptionCategoryTabbarViewController.swift in Sources */,
-				47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */,
+
+				47342E662A9BB25900A1FCBE /* DetailOptionEntity.swift in Sources */,
+				47342E632A9BB22400A1FCBE /* DictionaryOptionUsecase.swift in Sources */,
+
 				471918002A8339B100B67D54 /* MultiOptionCardButtonView.swift in Sources */,
 				470096462A876305003711F2 /* BottomModalViewController.swift in Sources */,
 				5F99F0662A851F4700C38555 /* CarMakingContentViewController.swift in Sources */,
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
+
+				5FD507A42A9C6BB7003137CD /* DetailRepositoryProtocol.swift in Sources */,
+				479B090C2A94886C00AA10A0 /* String+.swift in Sources */,
+				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
+				4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */,
+				5FD507B02A9C6DBB003137CD /* DetailInfoData.swift in Sources */,
+				5FD507A12A9C6B81003137CD /* DetailEndPoint.swift in Sources */,
+
 				47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */,
 				479B090C2A94886C00AA10A0 /* String+.swift in Sources */,
 				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 				4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */,
 				47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */,
+
 				5F47E0E12A9B45260076D7AD /* APIResponse.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
 				5F5891DF2A92E06100ACFFAD /* DetailPopupViewModel.swift in Sources */,
 				5F4D33B62A8758FF00942517 /* PageSection.swift in Sources */,
 				473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */,
+				5FD507A72A9C6C07003137CD /* DetailRepository.swift in Sources */,
 				5F5891E02A92E06A00ACFFAD /* DetailPopupUsecaseProtocol.swift in Sources */,
 				5F49755D2A811AAF008FFFE5 /* Colors.swift in Sources */,
 				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
