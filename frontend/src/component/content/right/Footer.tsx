@@ -67,6 +67,7 @@ function Footer({onClick, isOpen, setIsSaved}: props) {
           userSelect: true,
         };
         addOption(updatedTempOption);
+        console.log(updatedTempOption);
       }
       document.body.style.pointerEvents = 'none';
       setTimeout(() => {

@@ -12,8 +12,7 @@ import Spinner from '../common/Spinner';
 import SelectedOptionContent from './SelectedOptionContent';
 import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {postFetchData} from '@/api/postFetchData';
-import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
-import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
+
 type cardData = {
   id: number;
   name: string;

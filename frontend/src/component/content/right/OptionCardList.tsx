@@ -54,6 +54,7 @@ function OptionCardList({
   const [ratioList, setRatioList] = useState<SelectionRatioProps[]>([]);
 
   const handleItemClick = (index: number) => {
+    if (selectedIndex === index) return;
     setNewIndex(index);
   };
 

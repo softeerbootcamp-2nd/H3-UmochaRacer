@@ -6,7 +6,6 @@ import {useGuideFlowState} from '@/provider/guideFlowProvider';
 import {fetchData} from '@/api/fetchData';
 import {SelectedOptionContext, Option} from '@/provider/selectedOptionProvider';
 import {postFetchData} from '@/api/postFetchData';
-import {SelectedAdditionalOptionsContext} from '@/provider/additionalOptionProvider';
 import {TempAdditionalOptionsContext} from '@/provider/tempAdditionalOptionProvider';
 
 interface Url {

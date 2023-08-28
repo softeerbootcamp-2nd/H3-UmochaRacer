@@ -67,7 +67,7 @@ function EstimateContent() {
       </Button>
     );
   });
-
+  console.log(selectedAdditionalOption);
   return (
     <Wrapper>
       <Top></Top>
