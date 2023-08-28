@@ -82,10 +82,10 @@ function Content() {
     SelectedAdditionalOptionsContext,
   );
   const updateTempOption = (index: number) => {
-    if (cardData !== cardDataList[option]) return;
+    if (selectedIndex === index) return;
 
     if (option !== 6) {
-      const selectedCardData = cardData[index];
+      const selectedCardData = cardDataList[option][index];
       if (selectedCardData) {
         const tempOpt: Option = {
           key: keyMapping[option],
@@ -152,7 +152,7 @@ function Content() {
 
     return sortedCardDataArray;
   };
-
+  console.log('ASFD');
   useEffect(() => {
     const fetchAllData = async () => {
       const results = await Promise.all(
@@ -209,7 +209,7 @@ function Content() {
 
         setCardDataList(newCardDataList);
         setAddOptionList(newAdditionalOptionList);
-        setcardData(newCardDataList[option]);
+        // setcardData(newCardDataList[option]);
       }
       setIsLoading(true);
     };
@@ -232,10 +232,10 @@ function Content() {
       } else {
         setNewIndex(0);
       }
-      setcardData(cardDataList[option]);
+      // setcardData(cardDataList[option]);
     }
-    setAdditionalOptions(selectedAdditionalOption);
-  }, [option, cardDataList, cardData]);
+    // setAdditionalOptions(selectedAdditionalOption);
+  }, [option]);
 
   return (
     <Wrapper>
@@ -251,7 +251,7 @@ function Content() {
                   selectedIndex={selectedIndex}
                 />
                 <OptionInfo
-                  cardData={cardData}
+                  cardData={cardDataList[option]}
                   setNewIndex={(index: number) => setNewIndex(index)}
                   selectedIndex={selectedIndex}
                 />
