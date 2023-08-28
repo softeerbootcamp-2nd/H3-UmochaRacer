@@ -28,9 +28,9 @@ class ExitPopupViewController: UIViewController {
 
     // MARK: - Helpers
     @IBAction func didTapExitButton(_ sender: UIButton) {
-        // 팝업 뷰 컨트롤러를 dismiss 하고 나서 popViewController를 호출
+        let presentingViewController = presentingViewController
         self.dismiss(animated: true) {
-            if let navigationController = self.presentingViewController as? UINavigationController {
+            if let navigationController = presentingViewController as? UINavigationController {
                 navigationController.popViewController(animated: true)
             }
         }
