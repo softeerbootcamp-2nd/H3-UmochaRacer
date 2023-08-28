@@ -110,9 +110,12 @@
 - 부품 옵션의 **자세한 정보**와 옵션 선택에 대한 **코멘트**를 제공
 - 부품 옵션의 **판매량** 제공
 
-<img src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
-<br />
-<img width = "250" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+<div align="center">
+<img align="center" src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
+<img align="center" width = "250" src = "https://im3.ezgif.com/tmp/ezgif-3-cb671eeb40.gif">
+
+</div>
+
 
 <br>
 
@@ -131,8 +134,10 @@
 - 어려운 단어에 하이라이팅
 - 하이라이팅 된 단어를 클릭하면 
 
-<img src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
-<img width="250" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+<div align="center">
+<img align="center"src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
+<img align="center" width="250" src = "https://im3.ezgif.com/tmp/ezgif-3-6265fc830a.gif">
+</div>
 
 <br/>
 
