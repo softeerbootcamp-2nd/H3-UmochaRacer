@@ -1,12 +1,16 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import styled from 'styled-components';
 import {flexCenter} from '@/style/common';
 import OptionItem from './OptionItem';
 import ProgressBar from './ProgressBar';
 import {colors} from '@/style/theme';
 import {OptionContext} from '@/provider/optionProvider';
+import {SelectedOptionContext} from '@/provider/selectedOptionProvider';
+import Warning from '../common/Warning';
 function Progress() {
   const {option, setOption} = useContext(OptionContext);
+  const [isWarning, setIsWarning] = useState<boolean>(true);
+  const [warningText, setWarningText] = useState<string>('');
   const menuItems = [
     '파워트레인',
     '구동 방식',
@@ -17,8 +21,23 @@ function Progress() {
     '옵션 선택',
     '견적 내기',
   ];
+  const {selectedOptions} = useContext(SelectedOptionContext);
+  const nextStep = () => {
+    setOption(option + 1);
+    setIsWarning(true);
+  };
   const handleOptionClick = (index: number) => {
-    setOption(index);
+    if (index === 7) {
+      const notSelectedOptions = selectedOptions.filter(
+        (option) => option.userSelect !== true,
+      );
+      if (notSelectedOptions.length > 0) {
+        setIsWarning(false);
+        setWarningText(notSelectedOptions.map((item) => item.key).join(','));
+      }
+    } else {
+      setOption(index);
+    }
   };
   const menuItemController = () => {
     return menuItems.map((menuItem: string, index: number) => (
@@ -34,6 +53,9 @@ function Progress() {
 
   return (
     <>
+      {!isWarning && (
+        <Warning text={warningText} onPopup={setIsWarning} onNext={nextStep} />
+      )}
       <Wrapper>
         <OptionItemWrapper>
           {menuItemController()}
