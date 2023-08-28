@@ -82,8 +82,6 @@ function Content() {
     SelectedAdditionalOptionsContext,
   );
   const updateTempOption = (index: number) => {
-    if (selectedIndex === index) return;
-
     if (option !== 6) {
       const selectedCardData = cardDataList[option][index];
       if (selectedCardData) {
@@ -227,15 +225,18 @@ function Content() {
           (card) => card.id === foundOption.id,
         );
         if (targetIndex > -1) {
+          console.log(targetIndex);
           setNewIndex(targetIndex);
+          console.log('T1');
         }
       } else {
         setNewIndex(0);
+        console.log('T2');
       }
       // setcardData(cardDataList[option]);
     }
     // setAdditionalOptions(selectedAdditionalOption);
-  }, [option]);
+  }, [option, cardDataList]);
 
   return (
     <Wrapper>
