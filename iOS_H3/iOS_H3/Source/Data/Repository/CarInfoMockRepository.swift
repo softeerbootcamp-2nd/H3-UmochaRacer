@@ -91,13 +91,13 @@ struct CarMakingMockRepositoryData {
     static var mockOption = [
         [OptionCardInfoEntity.init(
             id: 0,
-            title: "디젤 2.2",
+            title: "<cardb>디젤</cardb> 2.2",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[0]),
          OptionCardInfoEntity.init(
             id: 1,
-            title: "가솔린 3.8",
+            title: "<cardb>가솔린</cardb> 3.8",
             subTitle: "구매자의 37%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[1])],
@@ -127,14 +127,14 @@ struct CarMakingMockRepositoryData {
             bannerImageURL: mockURL[3])],
         [OptionCardInfoEntity.init(
             id: 6,
-            title: "크리미 화이트 펄",
+            title: "<cardb>크리미</cardb> 화이트 펄",
             subTitle: "구매자의 88%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[4],
             color: URColor(red: 0, green: 0, blue: 0)),
          OptionCardInfoEntity.init(
             id: 7,
-            title: "LK-99 3.8",
+            title: "<cardb>LK-99</cardb> 3.8",
             subTitle: "구매자의 12%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[0])],
@@ -166,13 +166,13 @@ struct CarMakingMockRepositoryData {
             bannerImageURL: mockURL[4])],
         [OptionCardInfoEntity.init(
             id: 12,
-            title: "가솔린 3.8",
+            title: "<cardb>가솔린</cardb> 3.8",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[3]),
          OptionCardInfoEntity.init(
             id: 13,
-            title: "가솔린 3.8",
+            title: "<cardb>가솔린</cardb> 3.8",
             subTitle: "구매자의 63%가 선택한",
             priceString: "+ 3,456,789원",
             bannerImageURL: mockURL[0])],
