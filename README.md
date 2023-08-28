@@ -1,11 +1,23 @@
-# 📖 현대 소프티어 부트캠프 3조 UmochaRacer
-<table>
- <tr>
-    <td>프로젝트 기간</td>
-    <td>2023년 7월 31일 ~ 2023년 8월 30일</td>
-  </tr>
-</table>
-<br/>
+# <div style="display:flex;"><img width=30 src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/97653343/018081b6-63e5-433f-afaf-95fc6e822818"></p>&nbsp; 현대 소프티어 부트캠프 3조 UmochaRacer</div>
+
+### **처음부터 끝까지, 당신의 차를 위한 오마카세 (Oh! My Car Set)**
+
+
+<p align="center"><img width=200 src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/97653343/018081b6-63e5-433f-afaf-95fc6e822818"></p>
+
+<p align="center">🚘
+<a href="http://umocha-racer.team/"> umocha-racer.team </a>
+🚘</p>
+
+
+> 현대자동차 소프티어 부트캠프 2기<br>
+> 프로젝트 기간 2023.07.31~2023.08.30
+
+<br>
+
+## 📖 프로젝트 소개
+현대 자동차의 내차만들기 전반적인 과정 속에서, 사용자의 옆을 지키며 모르는게 있으면 알려주고, **최적의 구성으로 가이드**해주는 길잡이의 역할을 하며 사용자 맞춤 경험 제공을 통해 ‘내 차 만들기'의 이탈률을 줄이고자 기획했습니다.
+<br><br>
 
 ## 👦 팀원 소개
 <table style="border: 0.5px solid gray">
@@ -35,62 +47,83 @@
 <br/>
 
 
-## 🔍 협업 전략
+## 🧱 System Architecture
+![Alt text](https://user-images.githubusercontent.com/75351686/263621613-8b4c3096-31ae-4f21-94ab-963c0482823d.png)
 
-### **Git Flow**
 
-1. 새로운 기능 추가 시 `develop` 브랜치에서 `feature` 브랜치 생성 (`main` 아님)
-2. 작업 완료 시, `feature` 에서 `develop` 브랜치로 PR
-3. Version을 출시할 때는 `main` 브랜치에 버전 태그를 추가
 
-### Branch Convention
 
-**Branch Category**
+## ⭐️ 핵심 기능
+![핵심 기능](https://user-images.githubusercontent.com/75351686/263622046-716e37b3-b333-4baf-bdfc-d7a5c078aac0.png)
 
-- main: 제품으로 출시될 수 있는 브랜치
-- develop : 다음 출시 버전을 개발하는 브랜치
-- feature : 기능을 개발하는 브랜치
-    - 네이밍 : feature/파트/{feature name}
-    - ex. feature/ios/login
-    - ex. feature/frontend/login
-    - 해당 기능 구현 시 PR 후 브랜치 제거
-    - 중간 중간 PR 보내기
+### <b>셀프모드</b>
+직접 옵션을 골라 나만의 차를 완성하는 셀프 모드
 
-<details>
-<summary><h2>🐷 그라운드룰</h2></summary>
+### <b>가이드모드</b>
+연령과 성별, 태그에 맞춰 옵션을 추천해주는 가이드 모드
 
-- 욕하지 않기
-- 지각하지 않기.
-- 스프린트로 진행하기(1주일 단위)
-- 회의 내용은 노션에 기록
-- 칭찬과 격려하기
-- 질문할때 한번쯤은 구글링 해보고 질문하기
-- 에러 있을 때 최대한 예쁘게 말하기
+### <b>백카사전</b>
+- 생소한 자동차 용어를 설명해주는 백카사전
+- 화면 우측 상단에 백카사전 아이콘을 클릭하면 백카사전 On모드 전환
+- 어려운 단어에 하이라이팅
+- 하이라이팅 된 단어를 클릭하면 
+<img width="1279" alt="스크린샷 2023-08-28 오후 4 15 37" src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/97653343/2081b2d2-3b06-4150-915d-0489724fbdbd">
+<br/>
 
-- 스크럼은 오전 10시에 시작한다.
-    - 팀의 진행 상태를 공유한다.
-        - 파트별 전날 한거, 오늘 할거.
-    - 컨디션을 공유한다.
+## 데모 영상
+[![H3 데모 영상 유튜브 링크](https://img.youtube.com/vi/mN9wjPd5lsA/0.jpg)](https://www.youtube.com/watch?v=mN9wjPd5lsA&ab_channel=%EA%B9%80%EC%A0%95%ED%9B%88)
 
-- 회고 방식
-    - 5F 회고
-        - Facts : 사실. 무슨 일이 있었는가?
-        - Feeling : 느낀 점, 감정. 어떤 느낌이 들었는가?
-        - Finding : 배운 점, 인사이트. 어떤 것을 기억하고 싶은가?
-        - Future Action : 향후 액션 아이템. 앞으로 무엇을 할 것인지?
-        - Feedback : 피드백. Future Action에서 정한 액션 아이템을 실행하고 어던 피드백을 받았는가?
 
-</details>
+
+<br/>
+
+## 🛠️ 기술 스택
+
+### iOS
+
+<img src="https://img.shields.io/badge/swift-F05138?style=flat&logo=swift&logoColor=white">
+<img src="https://img.shields.io/badge/uikit-2396F3?style=flat&logo=uikit&logoColor=white">
+<img src="https://img.shields.io/badge/combine-F05138?style=flat&logo=swift&logoColor=white">
+
+### FE
+<img src="https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white">
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat&logo=React&logoColor=white">
+ <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Styled Components-DB7093?style=flat&logo=styledcomponents&logoColor=white">
+<img src="https://img.shields.io/badge/Prettier-F7B93E?style=flat&logo=prettier&logoColor=white">
+<img src="https://img.shields.io/badge/Eslint-4B32C3?style=flat&logo=eslint&logoColor=white">
+
+### BE
+
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=flat&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/spring data jdbc-6DB33F?style=flat&logo=spring&logoColor=white">
+<img src="https://img.shields.io/badge/s3-569A31?style=flat&logo=amazons3&logoColor=white">
+<img src="https://img.shields.io/badge/ec2-FF9900?style=flat&logo=amazonec2&logoColor=white">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=flat&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/redis-DC382D?style=flat&logo=redis&logoColor=white">
+<img src="https://img.shields.io/badge/java-007396?style=flat&logo=java&logoColor=white">
+<img src="https://img.shields.io/badge/docker-2496ED?style=flat&logo=docker&logoColor=white">
+<img src="https://img.shields.io/badge/nginx-009639?style=flat&logo=nginx&logoColor=white">
+<img src="https://img.shields.io/badge/code deploy-00AA12?style=flat&lo&logoColor=white">
+<img src="https://img.shields.io/badge/github actions-2088FF?style=flat&logo=githubactions&logoColor=white">
+<img src="https://img.shields.io/badge/swagger-85EA2D?style=flat&logo=swagger&logoColor=black">
+<br/>
+<br/>
 
 ## 📖 Wiki
 
 [Wiki 링크](https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/wiki)
 
+
+## 🧚 BackLog
+
+[백로그](https://www.notion.so/c1da1c14138a4ed49d61c288c015305d?pvs=4)
+
 ## 👩‍🎨 기획 및 디자인
 
 [기획 및 디자인 링크](https://www.figma.com/file/aTK27d8JGjSAp8qttQSwgy/Oh%2C-my-car-set_Handoff?type=design&node-id=0-1&mode=design&t=dQfXEfryUoqLUiNQ-0)
 
-## 👨‍💻 회의록
+## 👨‍💻 스크럼, 회의, 회고록
 
 [노션 회의록](https://coral-mice-402.notion.site/a723fd11e9a04cc6ae582012c8381e70?v=0dbfc16570224d7e8f0cf5d77c053e4d&pvs=4)
 
@@ -102,57 +135,5 @@
 
 ## 📕 Template
 
-### commit 컨벤션
 
-
-| 태그     | 설명                                                             |
-|----------|------------------------------------------------------------------|
-| feat     | 새로운 기능을 추가                                               |
-| fix      | 버그 수정 및 기능 수정                                           |
-| design   | CSS, 스타일 등 사용자 UI 디자인                                  |
-| rename   | 변수명, 함수명 수정                                              |
-| remove   | 파일을 삭제하는 작업만 수행한 경우                                 |
-| comment  | 필요한 주석 추가 및 변경                                          |
-| hotfix   | 급하게 치명적인 버그를 고쳐야 하는 경우                           |
-| docs     | 문서 수정                                                        |
-| chore    | 빌드 업무 수정, 패키지 매니저 수정, 패키지 관리자 구성 등 업데이트, Production Code 변경 없음 |
-
-- commit 형식 : `Tag: Commit Message (#Issue Number)` 
-- ex) `feat: 로그인 기능 구현 (#1)`
-
-<br/>
-
-### PR 작성법
-
-```
-## PR 작성 전 체크 리스트
-- PR 제목: `[파트이름] 구현사항 어쩌구 저쩌구` (예: `[FE] Login page UI 구현` )
-- PR 작성 후 충돌이 안 나는지 확인, merge후 branch 삭제
-- 고민사항은 공유하기
-- 위 사항 확인 후 내용 지우기~~
-
-## 🔖 관련 이슈
-- `#1` ( #이슈번호 )
-
-## 📝 구현 사항
-- 한 것들 적기
-
-## 📌 하고싶은 말
-- 같은 파트원에게 하고싶은 말
-```
-
-### Issue 작성법
-
-```
-## 🤖 title
-
-## 💭 detail  
-- [ ]
-- [ ]
-
-## reference (optional)
-
-## ⏰ 예상 소요 기간  
-8시간
-```
 
