@@ -94,6 +94,12 @@
 
 [노션 회의록](https://coral-mice-402.notion.site/a723fd11e9a04cc6ae582012c8381e70?v=0dbfc16570224d7e8f0cf5d77c053e4d&pvs=4)
 
+## 🛠️ 기술 포스트 및 트러블 슈팅
+
+[기술 포스트](https://www.notion.so/994c1ced0e9948cfb266d82a588996bc?pvs=4)
+
+[트러블 슈팅](https://www.notion.so/2eac0487e6964295b20550e19f96f40a?pvs=4)
+
 ## 📕 Template
 
 ### commit 컨벤션
