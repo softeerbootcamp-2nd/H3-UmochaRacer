@@ -46,7 +46,6 @@ final class CarMakingViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private var carMakingContentViewBottomConstraint: NSLayoutConstraint?
-    private var bottomModalViewHeightConstraint: NSLayoutConstraint?
 
     // MARK: - Lifecycles
 
@@ -224,7 +223,6 @@ extension CarMakingViewController: CarMakingContentViewDelegate {
 
     func carMakingContentViewEstimateCellDidShow() {
         bottomModalView.isHidden = true
-        bottomModalViewHeightConstraint?.constant = 0
         carMakingContentViewBottomConstraint?.constant = 0
         carMakingContentView.updateEstimateResult(to: 500)
     }
@@ -322,13 +320,10 @@ extension CarMakingViewController {
     }
 
     private func setupBottomModalViewConstraints() {
-        bottomModalViewHeightConstraint = bottomModalView.heightAnchor
-            .constraint(equalToConstant: Constants.bottomModalViewHeight)
         NSLayoutConstraint.activate([
             bottomModalView.leadingAnchor.constraint(equalTo: titleBar.leadingAnchor),
             bottomModalView.trailingAnchor.constraint(equalTo: titleBar.trailingAnchor),
-            bottomModalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            bottomModalViewHeightConstraint!
+            bottomModalView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
 }
