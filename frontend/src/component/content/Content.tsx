@@ -71,7 +71,7 @@ function Content() {
   const [selectedIndex, setIndex] = useState<number>(0);
   const {option} = useContext(OptionContext);
   const {setTempOption} = useContext(TempOptionContext);
-  const [cardData, setcardData] = useState<cardData[]>([]);
+  // const [cardData, setcardData] = useState<cardData[]>([]);
   const [cardDataList, setCardDataList] = useState<cardData[][]>([]);
   const [additionalOptionList, setAddOptionList] = useState<cardData[][]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -200,9 +200,9 @@ function Content() {
         const newAdditionalOptionList = results[6] as cardData[][];
         setAddOptionList(newAdditionalOptionList);
 
-        if (option !== 7) {
-          setcardData(sortCardArr[option]);
-        }
+        // if (option !== 7) {
+        //   setcardData(sortCardArr[option]);
+        // }
       } else {
         const newCardDataList = results.slice(0, 6) as cardData[][];
         const newAdditionalOptionList = results[6] as cardData[][];
