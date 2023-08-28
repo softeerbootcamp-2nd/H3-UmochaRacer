@@ -40,6 +40,12 @@
 		473309992A8C841600906FFB /* EstimateSummary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473309972A8C695B00906FFB /* EstimateSummary.swift */; };
 		47342E652A9BB24800A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
 		47342E662A9BB25900A1FCBE /* MockDetailOptionEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47342E642A9BB24800A1FCBE /* MockDetailOptionEntity.swift */; };
+		47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36F2A977F9E009FD883 /* DictionaryRepository.swift */; };
+		47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3732A978162009FD883 /* DictionaryDescriptionData.swift */; };
+		47342E6D2A9C620700A1FCBE /* DictionaryUsecase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 479DDB5F2A97CE3F0022846F /* DictionaryUsecase.swift */; };
+		47342E6E2A9C620E00A1FCBE /* DictionaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3712A977FA4009FD883 /* DictionaryRepositoryProtocol.swift */; };
+		47342E6F2A9C621900A1FCBE /* DictionaryDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476913A62A97AD9500C9C352 /* DictionaryDescription.swift */; };
+		47342E702A9C622300A1FCBE /* DictionaryEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C36D2A977BB9009FD883 /* DictionaryEndpoint.swift */; };
 		473A83392A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		473A833A2A8F6C6F00C4EED9 /* CarMakingOptionSelectStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 473A83382A8F63EA00C4EED9 /* CarMakingOptionSelectStepCell.swift */; };
 		4741C3662A964A59009FD883 /* CarMakingStepInfoEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4741C3652A964A59009FD883 /* CarMakingStepInfoEntity.swift */; };
@@ -1527,6 +1533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5F4D33B32A8751E500942517 /* UIImageView+.swift in Sources */,
+				47342E6D2A9C620700A1FCBE /* DictionaryUsecase.swift in Sources */,
 				5F99F0642A85171600C38555 /* CarMakingContentView.swift in Sources */,
 				471917EA2A82369E00B67D54 /* CarMakingStep.swift in Sources */,
 				479B09272A95E06000AA10A0 /* TrimListBarViewController.swift in Sources */,
@@ -1541,6 +1548,7 @@
 				479B090F2A9488B500AA10A0 /* OptionCardInfo.swift in Sources */,
 				471917E72A82367200B67D54 /* CarMakingProgressBarSpacingView.swift in Sources */,
 				4762D45C2A920A95007F312D /* EstimateSummaryCell.swift in Sources */,
+				47342E6F2A9C621900A1FCBE /* DictionaryDescription.swift in Sources */,
 				5F39EF412A81B7A1004B0C97 /* TagListView.swift in Sources */,
 				479B090D2A94889300AA10A0 /* URString.swift in Sources */,
 				5F39EF452A81B8E7004B0C97 /* OhMyCarSetButtonViewController.swift in Sources */,
@@ -1563,9 +1571,11 @@
 				471917E82A82367400B67D54 /* CarMakingProgressBarButton.swift in Sources */,
 				5F6203692A7BC59500D09531 /* AppDelegate.swift in Sources */,
 				5F49755A2A811A5C008FFFE5 /* OhMyCarSetTitleBarViewController.swift in Sources */,
+				47342E6B2A9C61FB00A1FCBE /* DictionaryRepository.swift in Sources */,
 				479B090C2A94886C00AA10A0 /* String+.swift in Sources */,
 				5F5AE0C72A8C5FA9007A0E3C /* OptionListModeView.swift in Sources */,
 				4762D45F2A9219DC007F312D /* CarMakingCategory.swift in Sources */,
+				47342E6C2A9C620200A1FCBE /* DictionaryDescriptionData.swift in Sources */,
 				5F47E0E12A9B45260076D7AD /* APIResponse.swift in Sources */,
 				5F4D33B02A87519600942517 /* ImageCacheManager.swift in Sources */,
 				479023BF2A8B4E0500DECB70 /* CarMakingMode.swift in Sources */,
@@ -1577,6 +1587,7 @@
 				473309992A8C841600906FFB /* EstimateSummary.swift in Sources */,
 				5F39EF462A81B8E9004B0C97 /* OhMyCarSetButton.swift in Sources */,
 				5F47E0E22A9B46870076D7AD /* DetailPopupUsecase.swift in Sources */,
+				47342E6E2A9C620E00A1FCBE /* DictionaryRepositoryProtocol.swift in Sources */,
 				5F6603ED2A837F96000E393D /* CarMakingTwoOptionCell.swift in Sources */,
 				5F1E30BC2A9240C5004D229F /* ImageDetailPopupViewController.swift in Sources */,
 				471917E62A82367000B67D54 /* CarMakingProgressBar.swift in Sources */,
@@ -1593,6 +1604,7 @@
 				5F47E0E82A9B46E90076D7AD /* URLRequest+.swift in Sources */,
 				5F8EBC4B2A81203C00C885CE /* OhMyCarSetTitleBar.swift in Sources */,
 				5F93C1312A949E7D00EBC9B0 /* TopAlignedLabel.swift in Sources */,
+				47342E702A9C622300A1FCBE /* DictionaryEndpoint.swift in Sources */,
 				5F39EF432A81B7A5004B0C97 /* OptionCardButtonViewController.swift in Sources */,
 				5F39EF422A81B7A3004B0C97 /* OptionMotionView.swift in Sources */,
 				5F1E30B82A923FC6004D229F /* PagingControlView.swift in Sources */,
