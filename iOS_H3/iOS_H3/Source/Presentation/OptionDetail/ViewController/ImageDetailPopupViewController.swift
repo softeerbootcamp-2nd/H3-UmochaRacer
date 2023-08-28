@@ -169,7 +169,7 @@ class ImageDetailPopupViewController: UIViewController {
 
     private func applyDictionaryEffectIfNeeded(view: UIView) {
         guard textEffectManager.isDictionaryFunctionActive else { return }
-        textEffectManager.applyEffect(true, on: view)
+        textEffectManager.applyEffectSubviews(true, on: view)
     }
 }
 

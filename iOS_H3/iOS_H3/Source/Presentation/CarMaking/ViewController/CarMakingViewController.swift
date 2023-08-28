@@ -29,8 +29,6 @@ final class CarMakingViewController: UIViewController {
 
     private let viewModel: CarMakingViewModel
 
-    private let textEffectManager = TextEffectManager.shared
-
     private let viewDidLoadSubject = PassthroughSubject<Void, Never>()
 
     private let stepDidChanged = CurrentValueSubject<CarMakingStep, Never>(.powertrain)
@@ -103,7 +101,6 @@ extension CarMakingViewController {
         output.currentStepInfo
             .receive(on: DispatchQueue.main)
             .sink { [weak self] info in
-                self?.titleBar.resetDictionary()
                 self?.updateCurrentStepInfo(with: info)
             }
             .store(in: &cancellables)
@@ -111,12 +108,6 @@ extension CarMakingViewController {
         output.optionInfoDidUpdated
             .sink { [weak self] optionInfo in
                 self?.carMakingContentView.updateOptionCard(with: optionInfo)
-                if let view = self?.view {
-                    if output.isDictionaryFeatureEnabled.value {
-                        self?.textEffectManager.applyEffect(false, on: view)
-                        self?.textEffectManager.applyEffect(true, on: view)
-                    }
-                }
             }
             .store(in: &cancellables)
 
@@ -157,14 +148,6 @@ extension CarMakingViewController {
                 self?.showIndicator(showIndicator)
             }
             .store(in: &cancellables)
-
-        output.isDictionaryFeatureEnabled
-            .sink { [weak self] isEnabled in
-                if let view = self?.view {
-                    self?.textEffectManager.applyEffect(isEnabled, on: view)
-                }
-            }
-            .store(in: &cancellables)
     }
 
     private func updateBottomModalView(with estimateData: EstimateSummary) {
@@ -201,7 +184,8 @@ extension CarMakingViewController: OhMyCarSetTitleBarDelegate {
     }
 
     func titleBarDictionaryButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
-        dictionaryButtonPressed.send(())
+        let isOn = TextEffectManager.shared.isDictionaryFunctionActive
+        TextEffectManager.shared.applyEffectSubviews(!isOn, on: self.view)
     }
 
     func titleBarChangeModelButtonPressed(_ titleBar: OhMyCarSetTitleBar) {
@@ -261,6 +245,7 @@ extension CarMakingViewController {
     private func setupTitleBar() {
         let titleBarType: OhMyCarSetTitleBar.NavigationBarType = (mode == .selfMode) ? .selfMode : .guideMode
         titleBar = OhMyCarSetTitleBar(type: titleBarType)
+        titleBar.isDictionaryButtonOn = TextEffectManager.shared.isDictionaryFunctionActive
         titleBar.delegate = self
         titleBar.translatesAutoresizingMaskIntoConstraints = false
     }
