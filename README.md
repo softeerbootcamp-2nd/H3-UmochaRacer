@@ -111,7 +111,7 @@
 - 부품 옵션의 **판매량** 제공
 
 <div align="center">
-<img align="center" src ="https://im3.ezgif.com/tmp/ezgif-3-61cf710840.gif">
+<img align="center" src ="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/15906101/9517dc95-1773-47c0-a03b-51e02c89bdd1">
 <img align="center" width = "250" src = "https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/68235938/1a0bddcf-5231-460a-b0d0-3083b2e2d573">
 
 </div>
@@ -124,7 +124,7 @@
 - 선택한 나이, 성별, 나의 키워드를 바탕으로 옵션 추천
 - '나와 유사한 사용자의 선택률' 제공
 
-<img src = "https://im3.ezgif.com/tmp/ezgif-3-e29cc98608.gif">
+<img src = "https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/15906101/347a51a9-be0c-4357-bd89-5ca2e7a28807">
 
 <br>
 
@@ -135,7 +135,7 @@
 - 하이라이팅 된 단어를 클릭하면 
 
 <div align="center">
-<img align="center"src="https://im3.ezgif.com/tmp/ezgif-3-b0d29b1c1a.gif">
+<img align="center" src="https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/15906101/a2b600c7-372e-4bc0-829a-bee55f6e8500">
 <img align="center" width="250" src = "https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/assets/68235938/a20222a2-aa05-4445-9673-d1ab41c9ed57">
 
 </div>
