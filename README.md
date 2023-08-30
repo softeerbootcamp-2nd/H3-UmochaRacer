@@ -161,12 +161,6 @@
 
 ## 🧚 BackLog
 
-[백로그](https://www.notion.so/c1da1c14138a4ed49d61c288c015305d?pvs=4)
+[백로그](https://coral-mice-402.notion.site/c1da1c14138a4ed49d61c288c015305d?pvs=4)
 
-
-## 🛠️ 기술 포스트 및 트러블 슈팅
-
-[기술 포스트](https://www.notion.so/994c1ced0e9948cfb266d82a588996bc?pvs=4)
-
-[트러블 슈팅](https://www.notion.so/2eac0487e6964295b20550e19f96f40a?pvs=4)
 
