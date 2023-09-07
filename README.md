@@ -10,7 +10,8 @@
 
 
 > 현대자동차 소프티어 부트캠프 2기<br>
-> 프로젝트 기간 2023.07.31~2023.08.30
+> 프로젝트 기간 2023.07.31~2023.08.30 <br>
+> [팀 Notion 링크](https://coral-mice-402.notion.site/H3-f83542bb814f4dc9adc71f64497f05b1?pvs=4)
 
 <br>
 
@@ -150,9 +151,19 @@
 
 <br/>
 
+## ERD
+![테이블](https://user-images.githubusercontent.com/75351686/266264533-a853e022-fb2a-4b40-8030-e4a9d5976ba1.png)
+
+[데이터베이스 자세히 보기](https://dbdiagram.io/d/64d0a59e02bd1c4a5e58ebef)
+
 ## 📖 Wiki
 
 [Wiki 링크](https://github.com/softeerbootcamp-2nd/H3-UmochaRacer/wiki)
+
+ <a href="https://www.notion.so/API-Docs-ed74f1260d0c420487951ca77f419665?pvs=4"> API Docs </a>
+
+ <a href="http://umocha-racer.team:8082/swagger-ui/index.html"> Swagger </a>
+
 
 
 ## 👨‍💻 스크럼, 회의, 회고록
